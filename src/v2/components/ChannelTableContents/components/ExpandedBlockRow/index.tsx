@@ -44,7 +44,7 @@ const MetadataFoldContainer = styled(Box)`
   height: 100%;
 `
 
-export type ExpandedBlockRowProps = {
+export interface ExpandedBlockRowProps {
   block: ChannelTableContentsSet_channel_blokks
   columnLength: number
   onMinimize: () => void

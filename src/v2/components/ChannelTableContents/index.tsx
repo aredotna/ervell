@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react'
-import { Column, Row, useExpanded, useSortBy, useTable } from 'react-table'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
+import { Column, Row, useExpanded, useTable } from 'react-table'
 
 import {
   ChannelTableContentsSet,
@@ -32,7 +32,6 @@ import {
 } from './components/TableComponents'
 
 import { TableData } from './lib/types'
-import { mapSort } from './lib/mapSort'
 import { FIRST_COLUMN_WIDTH } from './lib/constants'
 
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
@@ -41,10 +40,23 @@ interface ChannelTableQueryProps {
   id: string
 }
 
-const devSetSort = () => {}
-const devSetDirection = () => {}
+enum ColumnIds {
+  content = 'content',
+  title = 'title',
+  addedAt = 'addedAt',
+  author = 'author',
+  connections = 'connections',
+  test = 'test',
+}
+
+const columnIdsToSorts: { [key in ColumnIds]?: Sorts } = {
+  [ColumnIds.addedAt]: Sorts.CREATED_AT,
+}
 
 export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
+  const [sort, setSort] = useState<Sorts>(Sorts.CREATED_AT)
+  const [direction, setDirection] = useState<SortDirection>(SortDirection.DESC)
+
   const {
     blocks,
     getPage,
@@ -56,6 +68,8 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
     ChannelTableContentsSetVariables
   >({
     channelQuery: CHANNEL_TABLE_CONTENTS_QUERY,
+    direction,
+    sort,
     channelId: id,
     per: 25,
   })
@@ -74,8 +88,10 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
     <ChannelTableContents
       contentCount={contentCount}
       blocks={blocks}
-      setSort={devSetSort}
-      setDirection={devSetDirection}
+      sort={sort}
+      setSort={setSort}
+      direction={direction}
+      setDirection={setDirection}
       onItemIntersected={onItemIntersected}
     />
   )
@@ -84,15 +100,19 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
 interface ChannelTableContentsProps {
   blocks: Array<ChannelTableContentsSet_channel_blokks | null>
   contentCount: number
-  setSort: (value: Sorts | null) => void
-  setDirection: (value: SortDirection | null) => void
+  sort: Sorts
+  setSort: (value: Sorts) => void
+  direction: SortDirection
+  setDirection: (value: SortDirection) => void
   onItemIntersected: (index: number) => void
 }
 
 export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   blocks,
   contentCount,
+  sort,
   setSort,
+  direction,
   setDirection,
   onItemIntersected,
 }) => {
@@ -106,10 +126,22 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   }, [blocks, contentCount])
 
   const tableColumns = useMemo<Array<Column<TableData>>>(() => {
+    /**
+     * This function doesn't have any runtime value,
+     * but we're using the advanced control of
+     * generic types available to us in functions
+     * to assert that every Cell component is
+     * correctly typed to match the return value
+     * of its column's accessor function.
+     *
+     * This is only called once, so the overhead
+     * is very low for the safety it provides.
+     */
     function guard<
       T extends Column<TableData> & {
         Cell: React.FC<{ value: any }>
         accessor?: (row: TableData) => React.ComponentProps<T['Cell']>['value']
+        id: ColumnIds
       }
     >(columns: Array<T>) {
       return columns
@@ -118,23 +150,21 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     return guard([
       {
         Header: 'Content',
-        id: 'content',
+        id: ColumnIds.content,
         accessor: block => block,
         Cell: ContentCell,
         width: FIRST_COLUMN_WIDTH,
-        disableSortBy: true,
       },
       {
         Header: 'Title',
-        id: 'title',
+        id: ColumnIds.title,
         Cell: PotentiallyEditableBlockCell,
         accessor: block => ({ block, attr: 'title' } as const),
         width: '40%',
-        disableSortBy: true,
       },
       {
         Header: 'Added at',
-        id: 'added at',
+        id: ColumnIds.addedAt,
         accessor: block =>
           '__typename' in block && block?.connection?.created_at,
         Cell: StandardCell,
@@ -142,15 +172,14 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
       },
       {
         Header: 'Author',
-        id: 'author',
+        id: ColumnIds.author,
         accessor: block => '__typename' in block && block?.user?.name,
         Cell: StandardCell,
         maxWidth: 200,
-        disableSortBy: true,
       },
       {
         Header: 'Connections',
-        id: 'connections',
+        id: ColumnIds.connections,
         accessor: block => {
           if ('isNull' in block) {
             return null
@@ -162,11 +191,10 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         },
         Cell: StandardCell,
         width: 200,
-        disableSortBy: true,
       },
       {
         Header: '',
-        id: 'id',
+        id: ColumnIds.test,
         Cell: StandardCell,
         width: 70,
       },
@@ -204,33 +232,18 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     rows,
     prepareRow,
     columns,
-    state,
   } = useTable<TableData>(
     {
       data: tableData,
       columns: tableColumns,
       autoResetExpanded: false,
-      autoResetSortBy: true,
-      manualSortBy: true,
       getRowId: getRowId,
       initialState: {
         expanded: initialExpandedStateRef.current,
       },
     },
-    useSortBy,
     useExpanded
   )
-
-  useEffect(() => {
-    if (state.sortBy.length > 0) {
-      const [{ id, desc }] = state.sortBy
-      setSort(mapSort(id))
-      setDirection(desc ? SortDirection.DESC : SortDirection.ASC)
-    } else {
-      setDirection(null)
-      setSort(null)
-    }
-  }, [state, setDirection, setSort])
 
   const intersectionObserverCallback = useCallback<
     (itemIndex: number) => (entries: IntersectionObserverEntry[]) => void
@@ -260,34 +273,42 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           return (
             <HeaderRow key={headerGroupKey} {...headerGroupProps}>
               {headerGroup.headers.map(column => {
-                const sortState = column.isSorted
-                  ? column.isSortedDesc
-                    ? 'down'
-                    : 'up'
-                  : 'off'
+                const columnSortType: Sorts | undefined =
+                  columnIdsToSorts[column.id]
+
+                let sortArrowState: 'off' | 'up' | 'down' | undefined
+                if (columnSortType) {
+                  if (columnSortType === sort) {
+                    sortArrowState =
+                      direction === SortDirection.ASC ? 'up' : 'down'
+                  } else {
+                    sortArrowState = 'off'
+                  }
+                }
+
                 const {
                   key: headerKey,
                   ...headerProps
                 } = column.getHeaderProps()
+
                 return (
                   <TH key={headerKey} width={column.width} {...headerProps}>
                     <Box display="flex" flexDirection="row" alignItems="center">
                       <Text f={1} mr={5}>
                         {column.render('Header')}
                       </Text>
-                      {column.canSort && (
+
+                      {columnSortType && sortArrowState && (
                         <SortArrows
-                          state={sortState}
-                          onDown={() =>
-                            column.isSortedDesc
-                              ? column.clearSortBy()
-                              : column.toggleSortBy(true)
-                          }
-                          onUp={() =>
-                            column.isSorted
-                              ? column.clearSortBy()
-                              : column.toggleSortBy()
-                          }
+                          state={sortArrowState}
+                          onDown={() => {
+                            setSort(columnSortType)
+                            setDirection(SortDirection.DESC)
+                          }}
+                          onUp={() => {
+                            setSort(columnSortType)
+                            setDirection(SortDirection.ASC)
+                          }}
                         />
                       )}
                     </Box>
