@@ -116,6 +116,9 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   setDirection,
   onItemIntersected,
 }) => {
+  /**
+   * Build the table rows
+   */
   const tableData = useMemo<Array<TableData>>(() => {
     const data: Array<TableData> = []
     for (let i = 0; i < contentCount; i++) {
@@ -127,7 +130,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
 
   const tableColumns = useMemo<Array<Column<TableData>>>(() => {
     /**
-     * This function doesn't have any runtime value,
+     * This function doesn't have any runtime purpose,
      * but we're using the advanced control of
      * generic types available to us in functions
      * to assert that every Cell component is
