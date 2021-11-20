@@ -50,6 +50,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
     getPage,
     getPageFromIndex,
     hasQueriedPage,
+    contentCount,
   } = usePaginatedBlocks<
     ChannelTableContentsSet,
     ChannelTableContentsSetVariables
@@ -71,6 +72,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
 
   return (
     <ChannelTableContents
+      contentCount={contentCount}
       blocks={blocks}
       setSort={devSetSort}
       setDirection={devSetDirection}
@@ -81,6 +83,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
 
 interface ChannelTableContentsProps {
   blocks: Array<ChannelTableContentsSet_channel_blokks | null>
+  contentCount: number
   setSort: (value: Sorts | null) => void
   setDirection: (value: SortDirection | null) => void
   onItemIntersected: (index: number) => void
@@ -88,15 +91,19 @@ interface ChannelTableContentsProps {
 
 export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   blocks,
+  contentCount,
   setSort,
   setDirection,
   onItemIntersected,
 }) => {
   const tableData = useMemo<Array<TableData>>(() => {
-    return blocks.map(block => {
-      return block ?? { isNull: true }
-    })
-  }, [blocks])
+    const data: Array<TableData> = []
+    for (let i = 0; i < contentCount; i++) {
+      const block = blocks[i]
+      data.push(block ?? { isNull: true })
+    }
+    return data
+  }, [blocks, contentCount])
 
   const tableColumns = useMemo<Array<Column<TableData>>>(() => {
     function guard<
