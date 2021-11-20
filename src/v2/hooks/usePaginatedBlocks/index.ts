@@ -103,7 +103,7 @@ type Block<ChannelQueryData extends RequiredChannelQueryData> =
   | null
 
 /**
- * A type that asserts the channel chery and block query have
+ * A type that asserts the channel query and block query have
  * a matching blokk shape
  */
 interface MatchingBlockQueryData<

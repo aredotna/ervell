@@ -49,6 +49,11 @@ enum ColumnIds {
   test = 'test',
 }
 
+/**
+ * If we want to allow a column to be sortable,
+ * add the column's ID to this object with the Sorts
+ * value it should control
+ */
 const columnIdsToSorts: { [key in ColumnIds]?: Sorts } = {
   [ColumnIds.addedAt]: Sorts.CREATED_AT,
 }
