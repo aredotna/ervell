@@ -54,7 +54,7 @@ const SortableGridItemWithGridItemRef = forwardRef<
 
 interface Props {
   channel: any
-  connectable: ChannelContentsConnectableData
+  connectable: ChannelContentsConnectableData | null
   index: number
   context: any[]
   onRemove: ({ id, type }: { id: number; type: string }) => any

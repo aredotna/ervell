@@ -1,28 +1,44 @@
-import { DocumentNode, Reference, StoreObject, useQuery } from '@apollo/client'
+import {
+  DocumentNode,
+  isReference,
+  Reference,
+  StoreObject,
+  useQuery,
+} from '@apollo/client'
 import { Modifier } from '@apollo/client/cache/core/types/common'
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useMemo } from 'react'
 
 import { ChannelContentsConnectable } from '__generated__/ChannelContentsConnectable'
 import {
   moveConnectableMutationVariables,
   moveConnectableMutation as moveConnectableMutationData,
 } from '__generated__/moveConnectableMutation'
-import { BaseConnectableTypeEnum, SortDirection, Sorts } from '__generated__/globalTypes'
+import {
+  BaseConnectableTypeEnum,
+  SortDirection,
+  Sorts,
+} from '__generated__/globalTypes'
+import {
+  ChannelContentCount,
+  ChannelContentCountVariables,
+} from '__generated__/ChannelContentCount'
 
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
 import { getConnectableType } from 'v2/util/getConnectableType'
 
+import { CHANNEL_CONTENT_COUNT } from './ChannelContentCount'
+
 /**
  * The minimum required shape for the channel query
  */
-type RequiredChannelQueryData = {
+interface RequiredChannelQueryData {
   channel: null | {
     __typename: 'Channel'
     id: number
     blokks: null | Array<{
       __typename: ChannelContentsConnectable['__typename']
       id: number
-    }>
+    } | null>
     counts: null | {
       __typename: 'ChannelCounts'
       contents: number | null
@@ -35,7 +51,7 @@ type RequiredChannelQueryData = {
 /**
  * The minimum required shape for the channel query variables
  */
-type RequiredChannelQueryVariables = {
+interface RequiredChannelQueryVariables {
   id: string
   page: number
   per: number
@@ -46,7 +62,7 @@ type RequiredChannelQueryVariables = {
 /**
  * The minimum required shape for the block query
  */
-type RequiredBlockQueryData = {
+interface RequiredBlockQueryData {
   blokk: null | {
     __typename: ChannelContentsConnectable['__typename']
     id: number
@@ -56,14 +72,14 @@ type RequiredBlockQueryData = {
 /**
  * The minimum required shape for the block query variables
  */
-type RequiredBlockQueryVariables = {
+interface RequiredBlockQueryVariables {
   id: string
 }
 
 /**
  * The base arguments for usePaginatedBlocks
  */
-type UsePaginatedBlocksBaseArgs = {
+interface UsePaginatedBlocksBaseArgs {
   channelId: string
   channelQuery: DocumentNode
   per: number
@@ -75,17 +91,34 @@ type UsePaginatedBlocksBaseArgs = {
 /**
  * The full arguments for usePaginatedBlocks
  */
-type UsePaginatedBlocksArgs = UsePaginatedBlocksBaseArgs & {
+interface UsePaginatedBlocksArgs extends UsePaginatedBlocksBaseArgs {
   blockquery: DocumentNode
+}
+
+/**
+ * The contents of the blokks field
+ */
+type Block<ChannelQueryData extends RequiredChannelQueryData> =
+  | NonNullable<NonNullable<ChannelQueryData['channel']>['blokks']>[number]
+  | null
+
+/**
+ * A type that asserts the channel query and block query have
+ * a matching blokk shape
+ */
+interface MatchingBlockQueryData<
+  ChannelQueryData extends RequiredChannelQueryData
+> extends RequiredBlockQueryData {
+  blokk: Block<ChannelQueryData> | null
 }
 
 /**
  * The base return type for usePaginatedBlocks
  */
-type UsePaginatedBlocksBaseApi<
+interface UsePaginatedBlocksBaseApi<
   ChannelQueryData extends RequiredChannelQueryData
-> = {
-  blocks: ChannelQueryData['channel']['blokks']
+> {
+  blocks: Array<Block<ChannelQueryData>>
   contentCount: number
   getPage: (pageNumber: number) => void
   hasQueriedPage: (pageNumber: number) => boolean
@@ -93,15 +126,15 @@ type UsePaginatedBlocksBaseApi<
   removeBlock: (args: { id: number; type: string }) => void
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
   addBlock: () => void
-  getBlocksFromCache: () => ChannelQueryData['channel']['blokks']
+  getBlocksFromCache: () => Array<Block<ChannelQueryData>>
 }
 
 /**
  * The full return type for usePaginatedBlocks
  */
-type UsePaginatedBlocksApi<
+interface UsePaginatedBlocksApi<
   ChannelQueryData extends RequiredChannelQueryData
-> = UsePaginatedBlocksBaseApi<ChannelQueryData> & {
+> extends UsePaginatedBlocksBaseApi<ChannelQueryData> {
   updateBlock: (args: {
     id: string
     type: BaseConnectableTypeEnum | false
@@ -128,7 +161,7 @@ export function usePaginatedBlocks<
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ChannelQueryVariables extends RequiredChannelQueryVariables,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  BlockQueryData extends RequiredBlockQueryData,
+  BlockQueryData extends MatchingBlockQueryData<ChannelQueryData>,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   BlockQueryVariables extends RequiredBlockQueryVariables
 >(unsafeArgs: UsePaginatedBlocksArgs): UsePaginatedBlocksApi<ChannelQueryData>
@@ -141,24 +174,52 @@ export function usePaginatedBlocks<
 export function usePaginatedBlocks<
   ChannelQueryData extends RequiredChannelQueryData,
   ChannelQueryVariables extends RequiredChannelQueryVariables,
-  BlockQueryData extends RequiredBlockQueryData,
+  BlockQueryData extends MatchingBlockQueryData<ChannelQueryData>,
   BlockQueryVariables extends RequiredBlockQueryVariables
->(
-  unsafeArgs: UsePaginatedBlocksBaseArgs & Partial<UsePaginatedBlocksArgs>
-): UsePaginatedBlocksBaseApi<ChannelQueryData> &
+>({
+  channelQuery,
+  channelId,
+  per,
+  sort,
+  direction,
+  ssr,
+  blockquery,
+}: UsePaginatedBlocksBaseArgs &
+  Partial<UsePaginatedBlocksArgs>): UsePaginatedBlocksBaseApi<
+  ChannelQueryData
+> &
   Partial<UsePaginatedBlocksApi<ChannelQueryData>> {
   // =============================
   // "Private" fields of this hook
   // =============================
 
   /**
-   * This hook doesn't support updating the initially passed-in args in any way.
-   * So to make that clear we are creating a ref of the initial argsObject and
-   * only accessing the args this way. This will assert that the args won't
-   * change from under us, while also making it so that we don't needs to pass
-   * any of these values into dependency arrays for useCallback, useEffect, etc.
+   * A set that keeps track of which pages have already been queried for
    */
-  const args = useRef(unsafeArgs)
+  const queriedPageNumbersRef = useRef(new Set<number>())
+
+  /**
+   * A variable that stores all the identifiable information of
+   * to the current query. If any of this data changes, reset
+   * the queriedPageNumbersRef.
+   */
+  const channelQueryData: {
+    query: DocumentNode
+    variables: ChannelQueryVariables
+  } = useMemo(() => {
+    queriedPageNumbersRef.current = new Set()
+
+    return {
+      query: channelQuery,
+      variables: {
+        id: channelId,
+        page: 1,
+        per: per,
+        sort: sort,
+        direction: direction,
+      } as ChannelQueryVariables,
+    }
+  }, [channelId, channelQuery, direction, per, sort])
 
   /**
    * The current blocks that we have for a channel
@@ -166,15 +227,9 @@ export function usePaginatedBlocks<
   const { data: unsafeData, fetchMore, client } = useQuery<
     ChannelQueryData,
     ChannelQueryVariables
-  >(args.current.channelQuery, {
-    variables: {
-      id: args.current.channelId,
-      page: 1,
-      per: args.current.per,
-      sort: args.current.sort,
-      direction: args.current.direction,
-    } as ChannelQueryVariables,
-    ssr: args.current.ssr,
+  >(channelQueryData.query, {
+    variables: channelQueryData.variables,
+    ssr: ssr,
     context: { queryDeduplication: false },
   })
 
@@ -183,16 +238,12 @@ export function usePaginatedBlocks<
    * you want to use this data in a memoized function without re-memoizing
    * every time the query data changes (which happens a lot)
    */
-  const getQueryFromCache: () => ChannelQueryData = useCallback(() => {
+  const getQueryFromCache: () => ChannelQueryData | null = useCallback(() => {
     return client.readQuery<ChannelQueryData, ChannelQueryVariables>({
-      query: args.current.channelQuery,
-      variables: {
-        id: args.current.channelId,
-        page: 1,
-        per: args.current.per,
-      } as ChannelQueryVariables,
+      query: channelQueryData.query,
+      variables: channelQueryData.variables,
     })
-  }, [client])
+  }, [client, channelQueryData])
 
   /**
    * A function that allows you to directly modify the channel's "blokks"
@@ -201,10 +252,12 @@ export function usePaginatedBlocks<
    */
   const updateCache: (
     updater: (args: {
-      blockArgs: Parameters<Modifier<Array<StoreObject | Reference>>>
+      blockArgs: Parameters<
+        Modifier<null | Array<StoreObject | Reference | null>>
+      >
       prevCount: number
     }) => {
-      newBlocks?: Array<StoreObject | Reference>
+      newBlocks?: Array<StoreObject | Reference | null>
       newCount?: number
     } | null
   ) => void = useCallback(
@@ -212,13 +265,13 @@ export function usePaginatedBlocks<
       // The normalized cache name of the channel
       const id = client.cache.identify({
         __typename: 'Channel',
-        id: args.current.channelId,
+        id: channelId,
       })
 
       // Read the current contentCount of the channel instead
       // of passing it in as a useCallback dependency to reduce
       // re renders
-      const prevCount = getQueryFromCache().channel?.counts?.contents ?? 0
+      const prevCount = getQueryFromCache()?.channel?.counts?.contents ?? 0
 
       // Values we'll be saving during the first cache.modify call
       let newBlocks: Array<any>
@@ -260,13 +313,8 @@ export function usePaginatedBlocks<
         },
       })
     },
-    [client.cache, getQueryFromCache]
+    [channelId, client.cache, getQueryFromCache]
   )
-
-  /**
-   * A set that keeps track of which pages have already been queried for
-   */
-  const queriedPageNumbersRef = useRef(new Set<number>())
 
   /**
    * A helper function to re-query for pages that have already been
@@ -299,12 +347,20 @@ export function usePaginatedBlocks<
     unsafeData?.channel?.blokks ?? []
 
   /**
-   * The total number of blocks that a channel has. Note that this
+   * The total number of blocks/channels that a channel has. Note that this
    * could be different than the current length of the "blocks" array
    * due to not downloading all the block information from a channel
    */
   const contentCount: UsePaginatedBlocksApi<ChannelQueryData>['contentCount'] =
-    unsafeData?.channel?.counts?.contents ?? 0
+    useQuery<ChannelContentCount, ChannelContentCountVariables>(
+      CHANNEL_CONTENT_COUNT,
+      {
+        fetchPolicy: 'cache-only',
+        variables: {
+          id: channelId,
+        },
+      }
+    )?.data?.channel?.counts?.contents ?? 0
 
   /**
    * Gets block data from a given page
@@ -338,9 +394,12 @@ export function usePaginatedBlocks<
    */
   const getPageFromIndex: UsePaginatedBlocksApi<
     ChannelQueryData
-  >['getPageFromIndex'] = useCallback(index => {
-    return Math.floor(index / args.current.per) + 1
-  }, [])
+  >['getPageFromIndex'] = useCallback(
+    index => {
+      return Math.floor(index / per) + 1
+    },
+    [per]
+  )
 
   /**
    * Removes a block from a channel ONLY on the frontend. Does not do any
@@ -351,6 +410,11 @@ export function usePaginatedBlocks<
   >['removeBlock'] = useCallback(
     ({ id, type }) => {
       updateCache(({ blockArgs: [prevBlocks, { readField }], prevCount }) => {
+        // Early exit if there aren't any blocks in the cache yet
+        if (!prevBlocks) {
+          return null
+        }
+
         // Find the block in the blocks array
         const blockIndex = prevBlocks.findIndex(
           block =>
@@ -394,6 +458,11 @@ export function usePaginatedBlocks<
   >['moveBlock'] = useCallback(
     ({ oldIndex, newIndex }) => {
       updateCache(({ blockArgs: [prevBlocks, { readField }], prevCount }) => {
+        // Early exit if there aren't any blocks in the cache yet
+        if (!prevBlocks) {
+          return null
+        }
+
         // Moving to the "bottom". Convert a -1 newIndex value to a
         // synonymous "count - 1" value that the mutation can understand
         if (newIndex === -1) {
@@ -422,7 +491,7 @@ export function usePaginatedBlocks<
         >({
           mutation: moveConnectableMutation,
           variables: {
-            channel_id: args.current.channelId,
+            channel_id: channelId,
             connectable: {
               id: id.toString(),
               type: getConnectableType(
@@ -443,7 +512,7 @@ export function usePaginatedBlocks<
         return { newBlocks }
       })
     },
-    [client, updateCache]
+    [channelId, client, updateCache]
   )
 
   /**
@@ -456,7 +525,7 @@ export function usePaginatedBlocks<
   >['getBlocksFromCache'] = useCallback(() => {
     const cachedQuery = getQueryFromCache()
 
-    return cachedQuery?.channel?.blokks || []
+    return cachedQuery?.channel?.blokks ?? []
   }, [getQueryFromCache])
 
   /**
@@ -466,18 +535,20 @@ export function usePaginatedBlocks<
     ChannelQueryData
   >['updateBlock'] = useCallback(
     async ({ id, type }) => {
-      if (!args.current.blockquery) {
+      if (!blockquery) {
         return
       }
 
       // No need to update a channel block, just return early
-      if (type === BaseConnectableTypeEnum.CHANNEL) return null
+      if (type === BaseConnectableTypeEnum.CHANNEL) {
+        return
+      }
 
       // Refetch the block
       let block: BlockQueryData['blokk'] | null = null
       try {
         const result = await client.query<BlockQueryData, BlockQueryVariables>({
-          query: args.current.blockquery,
+          query: blockquery,
           variables: {
             id: id.toString(),
           } as BlockQueryVariables,
@@ -496,6 +567,16 @@ export function usePaginatedBlocks<
 
       // Update the cache to replace the previous block with the new block
       updateCache(({ blockArgs: [prevBlocks, { readField, toReference }] }) => {
+        // Early exit if there aren't any blocks in the cache yet
+        if (!prevBlocks) {
+          return null
+        }
+
+        // Early exit if we can't find a block
+        if (!block) {
+          return null
+        }
+
         // Find the block in the blocks array
         const blockIndex = prevBlocks.findIndex(b => {
           return b && readField('id', b) === parseInt(id)
@@ -506,11 +587,17 @@ export function usePaginatedBlocks<
           return null
         }
 
+        // Get the block reference
+        const blockRef = toReference(block)
+
+        // Early exit if block ref can't be found
+        if (!isReference(blockRef)) {
+          return null
+        }
+
         // Build the new blocks array
         const newBlocks = prevBlocks.map((prevBlock, i) =>
-          i === blockIndex
-            ? toReference(client.cache.identify(block))
-            : prevBlock
+          i === blockIndex ? blockRef : prevBlock
         )
 
         return {
@@ -518,7 +605,7 @@ export function usePaginatedBlocks<
         }
       })
     },
-    [updateCache, client]
+    [blockquery, updateCache, client]
   )
 
   /**
@@ -529,10 +616,10 @@ export function usePaginatedBlocks<
   >['addBlock'] = useCallback(() => {
     queriedPageNumbersRef.current = new Set()
     client.refetchQueries({
-      include: [args.current.channelQuery],
+      include: [channelQuery],
       optimistic: true,
     })
-  }, [client])
+  }, [channelQuery, client])
 
   // ==============================
   // Build and return the final api
