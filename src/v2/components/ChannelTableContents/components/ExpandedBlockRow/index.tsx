@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { ChannelTableContentsSet_channel_blokks } from '__generated__/ChannelTableContentsSet'
-import { FIRST_COLUMN_WIDTH } from '../..'
 import { ExpandedBlockRowContents } from './components/ExpandedBlockRowContents'
 import { ExpandedBlockMetadata } from './components/ExpandedBlockMetadata'
 import { FullBlockMetadataFoldWithQuery } from 'v2/components/FullBlock/components/FullBlockMetadataFold'
 import Box from 'v2/components/UI/Box'
 import { ActionButtons } from '../ActionButtons'
+import { FIRST_COLUMN_WIDTH } from '../../lib/constants'
 
 const Row = styled.tr`
   border-color: transparent;
@@ -44,38 +44,39 @@ const MetadataFoldContainer = styled(Box)`
   height: 100%;
 `
 
-interface ExpandedBlockRowProps {
+export interface ExpandedBlockRowProps {
   block: ChannelTableContentsSet_channel_blokks
   columnLength: number
-  onMinimize?: () => void
+  onMinimize: () => void
 }
 
-export const ExpandedBlockRow: React.FC<ExpandedBlockRowProps> = ({
-  block,
-  columnLength,
-  onMinimize,
-  ...rest
-}) => {
-  return (
-    <Row {...rest}>
-      <TD width={FIRST_COLUMN_WIDTH}>
-        <ExpandedBlockRowContents block={block} />
-      </TD>
-      <TD colSpan={columnLength - 4}>
-        <ExpandedBlockMetadata block={block} />
-      </TD>
-      <TD colSpan={3}>
-        <ButtonContainer>
-          <ActionButtons isExpanded={true} canDelete onMinimize={onMinimize} />
-        </ButtonContainer>
-        <MetadataFoldContainer>
-          <Box p={4} mt={7}>
-            <FullBlockMetadataFoldWithQuery id={block.id.toString()} />
-          </Box>
-        </MetadataFoldContainer>
-      </TD>
-    </Row>
-  )
-}
+export const ExpandedBlockRow = forwardRef<HTMLElement, ExpandedBlockRowProps>(
+  ({ block, columnLength, onMinimize, ...rest }, ref) => {
+    return (
+      <Row {...rest} ref={ref}>
+        <TD width={FIRST_COLUMN_WIDTH}>
+          <ExpandedBlockRowContents block={block} />
+        </TD>
+        <TD colSpan={columnLength - 4}>
+          <ExpandedBlockMetadata block={block} />
+        </TD>
+        <TD colSpan={3}>
+          <ButtonContainer>
+            <ActionButtons
+              isExpanded={true}
+              canDelete
+              onMinimize={onMinimize}
+            />
+          </ButtonContainer>
+          <MetadataFoldContainer>
+            <Box p={4} mt={7}>
+              <FullBlockMetadataFoldWithQuery id={block.id.toString()} />
+            </Box>
+          </MetadataFoldContainer>
+        </TD>
+      </Row>
+    )
+  }
+)
 
 export default ExpandedBlockRow

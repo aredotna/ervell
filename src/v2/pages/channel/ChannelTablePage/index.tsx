@@ -53,7 +53,7 @@ export const ChannelTablePage: React.FC<ChannelTablePageProps> = ({
   })
 
   let pageJsx: React.ReactNode | null = null
-  if (loading) {
+  if (loading || !data?.channel) {
     pageJsx = <LoadingPage />
   } else if (error) {
     pageJsx = <ErrorAlert isReloadable>{error.message}</ErrorAlert>

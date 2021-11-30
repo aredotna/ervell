@@ -12,6 +12,7 @@ import {
   VerifyEditableBlock,
   VerifyEditableBlockVariables,
 } from '__generated__/VerifyEditableBlock'
+import { TableData } from '../../lib/types'
 import updateBlockCellMutation from './mutations/updateBlockCell'
 import verifyEditableQuery from './query/verifyEditable'
 
@@ -47,12 +48,20 @@ const EditableInput = styled.input`
   border: 0;
 `
 
-export const PotentiallyEditableBlockCell = ({
-  value: { block },
-  attr = 'title',
+export const PotentiallyEditableBlockCell: React.FC<{
+  value: { block: TableData; attr: 'title' }
+}> = ({ value: { block, attr } }) => {
+  if ('isNull' in block) {
+    return null
+  }
+
+  return <PotentiallyEditableBlockCellNonNull value={{ block, attr }} />
+}
+
+const PotentiallyEditableBlockCellNonNull = ({
+  value: { block, attr = 'title' },
 }: {
-  value: { block: ChannelTableContentsSet_channel_blokks }
-  attr: 'title'
+  value: { block: ChannelTableContentsSet_channel_blokks; attr: 'title' }
 }): JSX.Element => {
   const value = block[attr]
   const [mode, setMode] = useState<EditableCellMode>('resting')
