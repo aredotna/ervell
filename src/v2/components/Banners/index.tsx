@@ -131,7 +131,7 @@ export const CreateChannel = props => {
   const modal = new Modal(NewChannelForm, {})
 
   return (
-    <DeepBlueBanner steps={'1/3'} {...props}>
+    <DeepBlueBanner steps={'1/3'} isCloseable={false} {...props}>
       <Box>Create your first channel to start adding content</Box>
 
       <DeepBlueButton onClick={() => modal.open()}>
@@ -145,7 +145,7 @@ export const CreateConnections = props => {
   const { data } = useQuery<GetFirstChannel>(GET_FIRST_CHANNEL)
 
   return (
-    <DeepBlueBanner steps={'2/3'} {...props}>
+    <DeepBlueBanner steps={'2/3'} isCloseable={false} {...props}>
       <Box>
         Get started by adding text, images, links or files to your first channel
       </Box>
