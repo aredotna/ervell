@@ -49,7 +49,7 @@ export const Banner: React.FC<BannerProps & BoxProps> = ({
   banner,
   onClose,
   iconName,
-  isCloseable,
+  isCloseable = true,
   color,
   children,
   steps,
