@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { HeaderGroup } from 'react-table'
 import styled from 'styled-components'
 
@@ -11,6 +11,7 @@ import { TableAddButton } from './components/AddButton'
 import { ColumnIds, columnIdsToSorts } from '../..'
 import { SortDirection, Sorts } from '__generated__/globalTypes'
 import { TableData } from '../../lib/types'
+import { ChannelPage_channel } from '__generated__/ChannelPage'
 
 export const TD = styled.td`
   color: ${x => x.theme.colors.gray.bold};
@@ -20,8 +21,9 @@ export const TD = styled.td`
   height: 30px;
   line-height: 0;
   padding: 0;
-  width: ${x => x.width};
-  max-width: ${x => x.maxWidth || 0};
+  min-width: ${x => x.width}px;
+  width: ${x => x.width}px;
+  max-width: ${x => x.maxWidth || 0}px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -41,14 +43,14 @@ const TH = styled(TD)`
   font-weight: bold;
   padding: ${x => x.theme.space[2]} ${x => x.theme.space[4]};
   vertical-align: middle;
+  background: ${x => x.theme.colors.background};
   position: sticky;
   top: ${constants.headerHeight};
-  background: ${x => x.theme.colors.background};
   z-index: 1;
 `
 
 const SettingsAddTH = styled(TH)`
-  width: 60px;
+  min-width: 60px;
   padding: 0;
   overflow: visible;
   vertical-align: top;
@@ -57,20 +59,23 @@ const SettingsAddTH = styled(TH)`
 
 interface ChannelTableHeaderProps {
   headerGroups: HeaderGroup<TableData>[]
+  channel: ChannelPage_channel
   sort: Sorts
   setSort: (value: Sorts) => void
   direction: SortDirection
   setDirection: (value: SortDirection) => void
+  addBlock: () => void
 }
 
 export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
   headerGroups,
+  channel,
   sort,
   setSort,
   setDirection,
   direction,
+  addBlock,
 }) => {
-  const [, setMode] = useState<'resting' | 'add'>('resting')
   const headerRef = useRef<HTMLTableSectionElement>()
 
   return (
@@ -84,14 +89,19 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
         return (
           <HeaderRow key={headerGroupKey} {...headerGroupProps}>
             {headerGroup.headers.map(column => {
-              if (column.Header.toString() === ColumnIds.addSettings) {
+              if (
+                column.Header.toString() === ColumnIds.addSettings &&
+                channel.can.add_to &&
+                channel.can.add_to_as_premium
+              ) {
                 return (
-                  <SettingsAddTH
-                    display="flex"
-                    flexDirection="row"
-                    alignItems="center"
-                  >
-                    <TableAddButton onClick={() => setMode('add')} />
+                  <SettingsAddTH width="60px">
+                    {/* <Box width="100px" /> */}
+                    <TableAddButton
+                      channelId={channel.id}
+                      ref={headerRef}
+                      addBlock={addBlock}
+                    />
                   </SettingsAddTH>
                 )
               }

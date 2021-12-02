@@ -1,16 +1,18 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { Column, Row, useExpanded, useTable } from 'react-table'
-import styled from 'styled-components'
 
 import {
   ChannelTableContentsSet,
   ChannelTableContentsSetVariables,
   ChannelTableContentsSet_channel_blokks,
 } from '__generated__/ChannelTableContentsSet'
-import { SortDirection, Sorts } from '__generated__/globalTypes'
+import {
+  BaseConnectableTypeEnum,
+  SortDirection,
+  Sorts,
+} from '__generated__/globalTypes'
 
 import Box from 'v2/components/UI/Box'
-import Text from 'v2/components/UI/Text'
 
 import { IntersectionObserverBox } from 'v2/components/UI/IntersectionObserverBox'
 import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
@@ -24,17 +26,24 @@ import ExpandedChannelRow from './components/ExpandedChannelRow'
 import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBlockCell'
 import { StandardCell } from './components/StandardCell'
 import { Table, TR, TD } from './components/TableComponents'
+import ChannelTableHeader from './components/ChannelTableHeader'
 
 import { TableData } from './lib/types'
 import { FIRST_COLUMN_WIDTH } from './lib/constants'
+import { parsePayload, PusherPayload, usePusher } from 'v2/hooks/usePusher'
+import { getConnectableType } from 'v2/util/getConnectableType'
 
+import { ChannelPage_channel } from '__generated__/ChannelPage'
+import {
+  ConnectableTableBlokk,
+  ConnectableTableBlokkVariables,
+} from '__generated__/ConnectableTableBlokk'
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
-import ChannelTableHeader from './components/ChannelTableHeader'
-import constants from 'v2/styles/constants'
-import { Sticky } from '../UI/Sticky'
+import CONNECTABLE_TABLE_BLOKK_QUERY from './queries/TableConnectableBlokk'
 
 interface ChannelTableQueryProps {
   id: string
+  channel: ChannelPage_channel
 }
 
 export enum ColumnIds {
@@ -59,7 +68,7 @@ export const STANDARD_HEADERS = [
     id: ColumnIds.title,
     Cell: PotentiallyEditableBlockCell,
     accessor: block => ({ block, attr: 'title' } as const),
-    width: '40%',
+    width: '30%',
   },
   {
     Header: 'Added at',
@@ -94,7 +103,7 @@ export const STANDARD_HEADERS = [
     Header: ColumnIds.addSettings,
     id: ColumnIds.addSettings,
     Cell: StandardCell,
-    width: 70,
+    width: '70px',
   },
 ]
 
@@ -107,7 +116,10 @@ export const columnIdsToSorts: { [key in ColumnIds]?: Sorts } = {
   [ColumnIds.addedAt]: Sorts.CREATED_AT,
 }
 
-export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
+export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
+  id,
+  channel,
+}) => {
   const [sort, setSort] = useState<Sorts>(Sorts.CREATED_AT)
   const [direction, setDirection] = useState<SortDirection>(SortDirection.DESC)
 
@@ -117,15 +129,21 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
     getPageFromIndex,
     hasQueriedPage,
     contentCount,
+    addBlock,
+    updateBlock,
+    getBlocksFromCache,
   } = usePaginatedBlocks<
     ChannelTableContentsSet,
-    ChannelTableContentsSetVariables
+    ChannelTableContentsSetVariables,
+    ConnectableTableBlokk,
+    ConnectableTableBlokkVariables
   >({
     channelQuery: CHANNEL_TABLE_CONTENTS_QUERY,
     direction,
     sort,
     channelId: id,
     per: 25,
+    blockquery: CONNECTABLE_TABLE_BLOKK_QUERY,
   })
 
   const onItemIntersected = useCallback(
@@ -142,39 +160,48 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
     <ChannelTableContents
       contentCount={contentCount}
       blocks={blocks}
+      channel={channel}
       sort={sort}
       setSort={setSort}
       direction={direction}
       setDirection={setDirection}
       onItemIntersected={onItemIntersected}
+      addBlock={addBlock}
+      updateBlock={updateBlock}
+      getBlocksFromCache={getBlocksFromCache}
     />
   )
 }
 
 interface ChannelTableContentsProps {
   blocks: Array<ChannelTableContentsSet_channel_blokks | null>
+  channel: ChannelPage_channel
   contentCount: number
   sort: Sorts
   setSort: (value: Sorts) => void
   direction: SortDirection
   setDirection: (value: SortDirection) => void
   onItemIntersected: (index: number) => void
+  addBlock: () => void
+  updateBlock: (args: {
+    id: string
+    type: BaseConnectableTypeEnum | false
+  }) => Promise<void>
+  getBlocksFromCache: () => ChannelTableContentsSet_channel_blokks[]
 }
-
-const AddRow = styled(Box)`
-  width: 100%;
-  height: 38px;
-  background: green;
-`
 
 export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   blocks,
+  channel,
   contentCount,
   sort,
   setSort,
   direction,
   setDirection,
   onItemIntersected,
+  addBlock,
+  updateBlock,
+  getBlocksFromCache,
 }) => {
   /**
    * Build the table rows
@@ -269,6 +296,49 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     [onItemIntersected]
   )
 
+  const updateConnectable = useCallback(
+    ({ id, type }: PusherPayload) => {
+      updateBlock({ id, type })
+    },
+    [updateBlock]
+  )
+
+  const createdConnectable = useCallback(
+    ({ id, type }: PusherPayload) => {
+      //
+      // This method can be called in a few different cases:
+      // - When a block is added via add block either by you or from another person (via pusher)
+      // - When a block is connected into the channel from another person
+      // - AND when a block in the current channel is connected into another channel
+      // We need to first check if the block already exists in this channel,
+      // if it does, do nothing. Otherwise, proceed.
+      //
+      const cacheBlocks = getBlocksFromCache()
+
+      const blockIndex = cacheBlocks.findIndex(
+        block =>
+          block &&
+          block.id === parseInt(id) &&
+          getConnectableType(block.__typename) === type
+      )
+
+      // If the block already exists, early return
+      if (blockIndex > 0) return
+
+      // Otherwise proceed.
+      addBlock()
+    },
+    [getBlocksFromCache, addBlock]
+  )
+
+  usePusher({
+    channelId: channel.id,
+    shouldSubscribe: !!channel?.can?.add_to,
+    onCreated: createdConnectable,
+    onUpdated: updateConnectable,
+    parsePayload: parsePayload,
+  })
+
   const intersectionObserverOptions = useMemo<IntersectionObserverInit>(
     () => ({ rootMargin: '200px' }),
     []
@@ -280,9 +350,11 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         <ChannelTableHeader
           headerGroups={headerGroups}
           sort={sort}
+          channel={channel}
           direction={direction}
           setSort={setSort}
           setDirection={setDirection}
+          addBlock={addBlock}
         />
         <tbody {...getTableBodyProps()}>
           {rows.map(row => {
