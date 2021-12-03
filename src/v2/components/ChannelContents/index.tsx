@@ -15,7 +15,7 @@ import {
 import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import AddBlock from 'v2/components/AddBlock'
-import { usePusher } from 'v2/hooks/usePusher'
+import { parsePayload, PusherPayload, usePusher } from 'v2/hooks/usePusher'
 import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
 import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
 import { getConnectableType } from 'v2/util/getConnectableType'
@@ -34,28 +34,6 @@ interface Props {
 
 interface ExtendedProps extends Props {
   isSpiderRequesting: boolean
-}
-
-type PusherPayload = {
-  id: string
-  type: BaseConnectableTypeEnum | false
-}
-
-const parsePayload = (payload: any): PusherPayload => {
-  let type: BaseConnectableTypeEnum | false = false
-  switch (payload.base_class.toUpperCase()) {
-    case 'BLOCK':
-      type = BaseConnectableTypeEnum.BLOCK
-      break
-    case 'CHANNEL':
-      type = BaseConnectableTypeEnum.CHANNEL
-      break
-  }
-
-  return {
-    id: payload.id.toString(),
-    type: type,
-  }
 }
 
 const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(

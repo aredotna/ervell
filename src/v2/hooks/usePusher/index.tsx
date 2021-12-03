@@ -3,6 +3,7 @@ import Pusher, { Channel } from 'pusher-js'
 import sharify from 'sharify'
 
 import { initPusherClient } from 'v2/util/initPusherClient'
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
 export function normalizePayloads(payloads) {
   return [
@@ -16,6 +17,28 @@ interface PusherHook {
   onCreated?: (payload: any) => any
   onUpdated?: (payload: any) => any
   parsePayload?: (payload: any) => any
+}
+
+export type PusherPayload = {
+  id: string
+  type: BaseConnectableTypeEnum | false
+}
+
+export const parsePayload = (payload: any): PusherPayload => {
+  let type: BaseConnectableTypeEnum | false = false
+  switch (payload.base_class.toUpperCase()) {
+    case 'BLOCK':
+      type = BaseConnectableTypeEnum.BLOCK
+      break
+    case 'CHANNEL':
+      type = BaseConnectableTypeEnum.CHANNEL
+      break
+  }
+
+  return {
+    id: payload.id.toString(),
+    type: type,
+  }
 }
 
 const emptyFn = () => {}

@@ -8,6 +8,10 @@ export const Table = styled.table`
   border-spacing: 0 ${x => x.theme.space[4]};
   margin-bottom: ${x => x.theme.space[7]};
   table-layout: fixed;
+
+  colgroup {
+    display: table-column;
+  }
 `
 
 export const TD = styled.td`
@@ -18,8 +22,8 @@ export const TD = styled.td`
   height: 30px;
   line-height: 0;
   padding: 0;
-  width: ${x => x.width};
-  max-width: ${x => x.maxWidth || 0};
+  width: ${x => x.width}px;
+  max-width: ${x => x.maxWidth || 0}px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

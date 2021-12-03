@@ -63,7 +63,10 @@ export const ChannelTablePage: React.FC<ChannelTablePageProps> = ({
         <ChannelPageMetaTags channel={data.channel} />
         <ChannelMetadata channel={data.channel} />
 
-        <ChannelTableQuery id={data.channel.id.toString()} />
+        <ChannelTableQuery
+          channel={data.channel}
+          id={data.channel.id.toString()}
+        />
       </>
     )
   }

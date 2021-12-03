@@ -13379,6 +13379,11 @@ mississippi@^3.0.0:
     stream-each "^1.1.0"
     through2 "^2.0.0"
 
+mitt@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/mitt/-/mitt-2.1.0.tgz#f740577c23176c6205b121b2973514eade1b2230"
+  integrity sha512-ILj2TpLiysu2wkBbWjAmww7TkZb65aiQO+DkVdUTBpBXq+MHYiETENkKFMtsJZX1Lf4pe4QOrTSjIfUwN5lRdg==
+
 mixin-deep@^1.2.0:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/mixin-deep/-/mixin-deep-1.3.2.tgz#1120b43dc359a785dce65b55b82e257ccf479566"
@@ -15676,6 +15681,14 @@ react-modal@^3.8.1:
     prop-types "^15.5.10"
     react-lifecycles-compat "^3.0.0"
     warning "^3.0.0"
+
+react-on-sticky@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/react-on-sticky/-/react-on-sticky-0.0.9.tgz#3b5862b75ed79d4e879fa21d9b0d3b3ae32d14f4"
+  integrity sha512-lchOlxe5r4Sm4+y0JXZ5WESlASPHlAfR/+cqbM0KalHY5u2tdJpNN/Npnis1U0DFGTOzW6BUYGHjMOW9ASQQzA==
+  dependencies:
+    uid "^1.0.0"
+    mitt "^2.1.0"
 
 react-outside-click-handler@^1.2.2:
   version "1.2.2"
@@ -18727,6 +18740,11 @@ uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
   integrity sha1-bgkk1r2mta/jSeOabWMoUKD4grc=
+
+uid@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/uid/-/uid-1.0.0.tgz#40a64108ebdf765b3945c286b77c83c168687170"
+  integrity sha512-DYp36HDIRECMW0xmeyGSDSheURMbL7gy4DqINDUW5OSw7cot0pNRNvEtEji9nk1XVDZN/0lJ7myxacoTeU9oow==
 
 ultron@~1.1.0:
   version "1.1.1"
