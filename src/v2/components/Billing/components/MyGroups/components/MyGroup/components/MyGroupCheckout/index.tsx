@@ -42,9 +42,7 @@ export const MyGroupCheckout: React.FC<MyGroupCheckoutProps> = ({
   onSubscribed,
   onError,
 }) => {
-  if (!me) return null
-
-  const { customer } = me
+  const customer = me?.customer
 
   const [mode, setMode] = useState<'resting' | 'processing'>('resting')
   const [couponCode, setCouponCode] = useState<string | null>(null)
