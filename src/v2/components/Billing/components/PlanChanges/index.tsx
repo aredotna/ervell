@@ -86,11 +86,13 @@ const PlanChanges: React.FC<PlanChangesProps> = ({
     )
   }
 
-  if (data.me.customer.is_canceled) {
+  if (data.me?.customer.is_canceled) {
     return (
       <Box position="relative" {...rest}>
         {/* <ErrorAlert>{error.message}</ErrorAlert> */}
-        <Text f={2}>Subscription ends on {data.me.customer.current_period_end_at}</Text>
+        <Text f={2}>
+          Subscription ends on {data.me.customer.current_period_end_at}
+        </Text>
       </Box>
     )
   }
@@ -104,13 +106,14 @@ const PlanChanges: React.FC<PlanChangesProps> = ({
     <Box position="relative" {...rest}>
       <Text f={2}>
         {invoice?.total >= 0
-          ? `You will be charged $${(invoice?.total / 100).toFixed(2)} ${invoice.next_payment_attempt_at
-            ? `on ${invoice.next_payment_attempt_at}`
-            : ''
-          }`
+          ? `You will be charged $${(invoice?.total / 100).toFixed(2)} ${
+              invoice.next_payment_attempt_at
+                ? `on ${invoice.next_payment_attempt_at}`
+                : ''
+            }`
           : `Your account will be credited $${Math.abs(
-            invoice?.total / 100
-          ).toFixed(2)}`}
+              invoice?.total / 100
+            ).toFixed(2)}`}
       </Text>
     </Box>
   )
