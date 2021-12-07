@@ -97,7 +97,7 @@ export const STANDARD_HEADERS = [
         : block.counts?.connected_to_channels
     },
     Cell: StandardCell,
-    width: 200,
+    maxWidth: 200,
   },
   {
     Header: ColumnIds.addSettings,
