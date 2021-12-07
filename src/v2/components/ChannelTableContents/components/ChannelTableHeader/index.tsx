@@ -21,9 +21,9 @@ export const TD = styled.td`
   height: 30px;
   line-height: 0;
   padding: 0;
-  min-width: ${x => x.width}px;
-  width: ${x => x.width}px;
-  max-width: ${x => x.maxWidth || 0}px;
+  min-width: ${x => x.width};
+  width: ${x => x.width};
+  max-width: ${x => x.width};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
