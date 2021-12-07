@@ -33,6 +33,8 @@ const TD = styled.td`
   }
 `
 
+const ContentTD = styled(TD)``
+
 const ButtonContainer = styled(Box)`
   position: absolute;
   top: 0;
@@ -54,9 +56,11 @@ export const ExpandedBlockRow = forwardRef<HTMLElement, ExpandedBlockRowProps>(
   ({ block, columnLength, onMinimize, ...rest }, ref) => {
     return (
       <Row {...rest} ref={ref}>
-        <TD width={FIRST_COLUMN_WIDTH}>
-          <ExpandedBlockRowContents block={block} />
-        </TD>
+        <ContentTD width={FIRST_COLUMN_WIDTH}>
+          <Box borderRight="1px solid" borderRightColor="gray.hint">
+            <ExpandedBlockRowContents block={block} />
+          </Box>
+        </ContentTD>
         <TD colSpan={columnLength - 4}>
           <ExpandedBlockMetadata block={block} />
         </TD>

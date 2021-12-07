@@ -47,7 +47,7 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
 
       {block?.description && (
         <Text
-          f={3}
+          f={2}
           lineHeight={2}
           color="gray.block"
           dangerouslySetInnerHTML={{ __html: block?.description }}
