@@ -49,6 +49,14 @@ const TH = styled(TD)`
   z-index: 1;
 `
 
+const THInner = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+`
+
 const SettingsAddTH = styled(TH)`
   min-width: 60px;
   padding: 0;
@@ -123,8 +131,8 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
 
               return (
                 <TH key={headerKey} width={column.width} {...headerProps}>
-                  <Box display="flex" flexDirection="row" alignItems="center">
-                    <Text f={1} mr={5}>
+                  <THInner>
+                    <Text f={1} lineHeight={1.5} mr={5}>
                       {column.render('Header')}
                     </Text>
 
@@ -141,7 +149,10 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
                         }}
                       />
                     )}
-                  </Box>
+
+                    {/* For the sake of positioning */}
+                    {!columnSortType && <Box />}
+                  </THInner>
                 </TH>
               )
             })}
