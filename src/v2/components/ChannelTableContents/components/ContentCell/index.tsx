@@ -8,6 +8,7 @@ import { TableData } from '../../lib/types'
 
 const TextContainer = styled(Box).attrs({
   px: 5,
+  color: 'gray.bold',
 })`
   width: 420px;
 `
@@ -27,6 +28,7 @@ const Img = styled.img`
 const Source = styled(Text).attrs({
   f: 1,
   overFlowEllipsis: true,
+  color: 'gray.bold',
 })`
   text-align: left;
 `
@@ -68,6 +70,7 @@ export const ContentCell = ({
           <Text
             f={1}
             dangerouslySetInnerHTML={{ __html: content.content }}
+            color="gray.bold"
             overflowEllipsis
           />
         </TextContainer>

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Text from 'v2/components/UI/Text'
 
 import constants from 'v2/styles/constants'
 
@@ -51,6 +52,11 @@ export const TR = styled.tr`
   &:hover ${TD} {
     border-top-color: ${x => x.theme.colors.gray.regular};
     border-bottom-color: ${x => x.theme.colors.gray.regular};
+    color: ${x => x.theme.colors.gray.bold} !important;
+  }
+
+  &:hover ${TD} ${Text} {
+    color: ${x => x.theme.colors.gray.extraBold} !important;
   }
 
   &:hover ${TD}:first-child {

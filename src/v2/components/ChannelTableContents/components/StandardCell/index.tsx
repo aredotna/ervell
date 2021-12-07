@@ -11,7 +11,10 @@ interface StandardCellProps {
   color?: string
 }
 
-export const StandardCell: React.FC<StandardCellProps> = ({ value, color }) => {
+export const StandardCell: React.FC<StandardCellProps> = ({
+  value,
+  color = 'gray.semiBold',
+}) => {
   return (
     <Inner>
       <Text f={1} color={color} overflowEllipsis>
