@@ -40,6 +40,10 @@ const ContentContainer = styled(Box)`
   border-right: 1px solid ${x => x.theme.colors.gray.hint};
 `
 
+const MetadataContainer = styled(Box).attrs({
+  p: 5,
+})``
+
 const ButtonContainer = styled(Box)`
   position: absolute;
   top: 0;
@@ -67,7 +71,9 @@ export const ExpandedBlockRow = forwardRef<HTMLElement, ExpandedBlockRowProps>(
           </ContentContainer>
         </ContentTD>
         <TD colSpan={columnLength - 4}>
-          <ExpandedBlockMetadata block={block} />
+          <MetadataContainer>
+            <ExpandedBlockMetadata block={block} />
+          </MetadataContainer>
         </TD>
         <TD colSpan={3}>
           <ButtonContainer>
@@ -78,7 +84,7 @@ export const ExpandedBlockRow = forwardRef<HTMLElement, ExpandedBlockRowProps>(
             />
           </ButtonContainer>
           <MetadataFoldContainer>
-            <Box p={4} mt={7}>
+            <Box p={5} mt={7}>
               <FullBlockMetadataFoldWithQuery id={block.id.toString()} />
             </Box>
           </MetadataFoldContainer>
