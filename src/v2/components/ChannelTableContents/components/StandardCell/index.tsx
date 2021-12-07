@@ -15,11 +15,16 @@ export const StandardCell: React.FC<StandardCellProps> = ({
   value,
   color = 'gray.semiBold',
 }) => {
+  if (!value) return null
+
   return (
     <Inner>
-      <Text f={1} color={color} overflowEllipsis>
-        {value}
-      </Text>
+      <Text
+        f={1}
+        color={color}
+        overflowEllipsis
+        dangerouslySetInnerHTML={{ __html: value }}
+      />
     </Inner>
   )
 }

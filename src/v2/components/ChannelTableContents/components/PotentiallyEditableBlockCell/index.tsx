@@ -1,7 +1,14 @@
 import { useLazyQuery, useMutation } from '@apollo/client'
 import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
+
+import Icons from 'v2/components/UI/Icons'
 import Text from 'v2/components/UI/Text'
+import { Input } from 'v2/components/UI/Inputs'
+
+import { TableData } from '../../lib/types'
+import updateBlockCellMutation from './mutations/updateBlockCell'
+import verifyEditableQuery from './query/verifyEditable'
 
 import { ChannelTableContentsSet_channel_blokks } from '__generated__/ChannelTableContentsSet'
 import {
@@ -12,9 +19,7 @@ import {
   VerifyEditableBlock,
   VerifyEditableBlockVariables,
 } from '__generated__/VerifyEditableBlock'
-import { TableData } from '../../lib/types'
-import updateBlockCellMutation from './mutations/updateBlockCell'
-import verifyEditableQuery from './query/verifyEditable'
+import Box from 'v2/components/UI/Box'
 
 type EditableCellMode =
   | 'resting'
@@ -23,12 +28,25 @@ type EditableCellMode =
   | 'editing'
   | 'saving'
 
+const EditIcon = styled(Icons).attrs({
+  name: 'Pencil',
+  size: '0.75rem',
+  color: 'gray.base',
+  mr: 4,
+})`
+  cursor: pointer;
+
+  &:hover {
+    color: ${x => x.theme.colors.gray.bold};
+  }
+`
+
 const Inner = styled.div<{ mode: EditableCellMode }>`
   width: 100%;
   height: 100%;
   padding: ${x => x.theme.space[3]};
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 
   ${x =>
@@ -39,13 +57,33 @@ const Inner = styled.div<{ mode: EditableCellMode }>`
       background-color: ${x.theme.colors.gray.hint};
     }
   `}
+
+  ${x =>
+    x.mode === 'editing' &&
+    `
+      padding: 0;
+    `}
+
+  ${EditIcon} {
+    display: none;
+  }
+
+  &:hover ${EditIcon} {
+    display: block;
+  }
 `
 
-const EditableInput = styled.input`
+const EditableInput = styled(Input)`
   width: 100%;
   height: 100%;
   background-color: ${x => x.theme.colors.gray.hint};
-  border: 0;
+  border: 0 transparent;
+  font-size: ${x => x.theme.fontSizes[1]};
+  padding: ${x => x.theme.space[3]};
+
+  &:focus {
+    border: 0 transparent;
+  }
 `
 
 export const PotentiallyEditableBlockCell: React.FC<{
@@ -122,23 +160,30 @@ const PotentiallyEditableBlockCellNonNull = ({
 
   if (mode === 'editing') {
     return (
-      <Inner onClick={handleOnClick}>
+      <Inner onClick={handleOnClick} mode={mode}>
         <EditableInput
           defaultValue={value}
           onChange={onChange}
           onKeyDown={handleKeyDown}
           onBlur={saveValue}
           autoFocus
+          width="100%"
+          height="100%"
         />
+        <Box />
       </Inner>
     )
   }
 
   return (
-    <Inner onMouseOver={handleOnHover} onClick={handleOnClick} mode={mode}>
+    <Inner onMouseOver={handleOnHover} mode={mode}>
       <Text f={1} overflowEllipsis>
         {attribute}
       </Text>
+
+      <Box />
+
+      {mode === 'editable' && <EditIcon onClick={handleOnClick} />}
     </Inner>
   )
 }

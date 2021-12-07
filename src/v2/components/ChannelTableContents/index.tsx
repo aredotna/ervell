@@ -75,14 +75,14 @@ export const STANDARD_HEADERS = [
     id: ColumnIds.addedAt,
     accessor: block => '__typename' in block && block?.connection?.created_at,
     Cell: StandardCell,
-    maxWidth: 200,
+    width: '200px',
   },
   {
     Header: 'Author',
     id: ColumnIds.author,
     accessor: block => '__typename' in block && block?.user?.name,
     Cell: StandardCell,
-    maxWidth: 200,
+    width: '200px',
   },
   {
     Header: 'Connections',
@@ -97,7 +97,7 @@ export const STANDARD_HEADERS = [
         : block.counts?.connected_to_channels
     },
     Cell: StandardCell,
-    maxWidth: 200,
+    width: '200px',
   },
   {
     Header: ColumnIds.addSettings,

@@ -23,8 +23,8 @@ export const TD = styled.td`
   height: 30px;
   line-height: 0;
   padding: 0;
-  width: ${x => x.width}px;
-  max-width: ${x => x.maxWidth || 0}px;
+  width: ${x => x.width};
+  max-width: ${x => x.width || `0px`};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -56,7 +56,7 @@ export const TR = styled.tr`
   }
 
   &:hover ${TD} ${Text} {
-    color: ${x => x.theme.colors.gray.extraBold} !important;
+    color: ${x => x.theme.colors.gray.extraold} !important;
   }
 
   &:hover ${TD}:first-child {
