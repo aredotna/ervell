@@ -18,11 +18,13 @@ const TD = styled.td`
   border-bottom: 1px solid ${x => x.theme.colors.gray.block};
   font-size: ${x => x.theme.fontSizesIndexed.sx};
   height: 450px;
+  max-height: 450px;
   line-height: 0;
   padding: 0;
   width: ${x => x.width};
   vertical-align: top;
   position: relative;
+  overflow: scroll;
 
   &:first-child {
     border-left: 1px solid ${x => x.theme.colors.gray.block};
@@ -42,7 +44,10 @@ const ContentContainer = styled(Box)`
 
 const MetadataContainer = styled(Box).attrs({
   p: 5,
-})``
+})`
+  height: 100%;
+  overflow: scroll;
+`
 
 const ButtonContainer = styled(Box)`
   position: absolute;

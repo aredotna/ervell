@@ -105,7 +105,7 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
           )}
         </Text>
         {block?.__typename !== 'PendingBlock' && (
-          <>
+          <Box mt={6}>
             <Header mt={4} mb={4}>
               Actions
             </Header>
@@ -118,7 +118,7 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
                 hideLinkMode
               />
             </Text>
-          </>
+          </Box>
         )}
       </Box>
     </Box>

@@ -50,15 +50,6 @@ const Inner = styled.div<{ mode: EditableCellMode }>`
   align-items: center;
 
   ${x =>
-    x.mode === 'editable' &&
-    `
-    cursor: text;
-    &:hover {
-      background-color: ${x.theme.colors.gray.hint};
-    }
-  `}
-
-  ${x =>
     x.mode === 'editing' &&
     `
       padding: 0;
