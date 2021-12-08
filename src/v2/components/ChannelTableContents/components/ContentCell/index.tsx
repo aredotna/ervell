@@ -8,6 +8,7 @@ import { TableData } from '../../lib/types'
 
 const TextContainer = styled(Box).attrs({
   px: 5,
+  color: 'gray.bold',
 })`
   width: 420px;
 `
@@ -27,6 +28,7 @@ const Img = styled.img`
 const Source = styled(Text).attrs({
   f: 1,
   overFlowEllipsis: true,
+  color: 'gray.bold',
 })`
   text-align: left;
 `
@@ -53,8 +55,11 @@ export const ContentCell = ({
               <Source>{content.source.provider_url}</Source>
               <Icons
                 name="Link"
-                size="0.5rem"
+                size="0.6rem"
                 color="gray.regular"
+                mt={2}
+                mb={2}
+                mr={2}
                 ml={3}
                 flexShrink={0}
               />
@@ -68,6 +73,7 @@ export const ContentCell = ({
           <Text
             f={1}
             dangerouslySetInnerHTML={{ __html: content.content }}
+            color="gray.bold"
             overflowEllipsis
           />
         </TextContainer>

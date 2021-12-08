@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Text from 'v2/components/UI/Text'
 
 import constants from 'v2/styles/constants'
 
@@ -22,8 +23,8 @@ export const TD = styled.td`
   height: 30px;
   line-height: 0;
   padding: 0;
-  width: ${x => x.width}px;
-  max-width: ${x => x.maxWidth || 0}px;
+  width: ${x => x.width};
+  max-width: ${x => x.width || `0px`};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -51,6 +52,11 @@ export const TR = styled.tr`
   &:hover ${TD} {
     border-top-color: ${x => x.theme.colors.gray.regular};
     border-bottom-color: ${x => x.theme.colors.gray.regular};
+    color: ${x => x.theme.colors.gray.bold} !important;
+  }
+
+  &:hover ${TD} ${Text} {
+    color: ${x => x.theme.colors.gray.extraold} !important;
   }
 
   &:hover ${TD}:first-child {

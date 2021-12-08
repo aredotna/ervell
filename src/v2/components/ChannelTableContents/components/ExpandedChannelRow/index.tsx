@@ -24,12 +24,14 @@ const TD = styled.td`
   border-top: 1px solid ${x => x.theme.colors.gray.block};
   border-bottom: 1px solid ${x => x.theme.colors.gray.block};
   font-size: ${x => x.theme.fontSizesIndexed.sx};
-  height: 450px;
+  height: 850px;
+  max-height: 850px;
   line-height: 0;
   padding: 0;
   width: ${x => x.width};
   vertical-align: top;
   position: relative;
+  overflow: scroll;
 
   &:first-child {
     border-left: 1px solid ${x => x.theme.colors.gray.block};
@@ -38,6 +40,10 @@ const TD = styled.td`
   &:last-child {
     border-right: 1px solid ${x => x.theme.colors.gray.block};
   }
+`
+
+const MetadataContainer = styled(Box)`
+  height: 850px;
 `
 
 const Cell = styled(TD)`
@@ -88,13 +94,19 @@ export const ExpandedChannelRow = forwardRef<
         </Box>
       </Cell>
       <Cell visibility={channel.visibility} colSpan={3}>
-        <ButtonContainer>
-          <ActionButtons isExpanded={true} canDelete onMinimize={onMinimize} />
-        </ButtonContainer>
-        <FullChannelMetadataPane
-          id={channel.id.toString()}
-          connection={channel.connection}
-        />
+        <MetadataContainer>
+          <ButtonContainer>
+            <ActionButtons
+              isExpanded={true}
+              canDelete
+              onMinimize={onMinimize}
+            />
+          </ButtonContainer>
+          <FullChannelMetadataPane
+            id={channel.id.toString()}
+            connection={channel.connection}
+          />
+        </MetadataContainer>
       </Cell>
     </Row>
   )

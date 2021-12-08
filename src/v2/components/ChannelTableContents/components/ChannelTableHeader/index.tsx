@@ -21,9 +21,9 @@ export const TD = styled.td`
   height: 30px;
   line-height: 0;
   padding: 0;
-  min-width: ${x => x.width}px;
-  width: ${x => x.width}px;
-  max-width: ${x => x.maxWidth || 0}px;
+  min-width: ${x => x.width};
+  width: ${x => x.width};
+  max-width: ${x => x.width};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -47,6 +47,14 @@ const TH = styled(TD)`
   position: sticky;
   top: ${constants.headerHeight};
   z-index: 1;
+`
+
+const THInner = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 `
 
 const SettingsAddTH = styled(TH)`
@@ -123,8 +131,8 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
 
               return (
                 <TH key={headerKey} width={column.width} {...headerProps}>
-                  <Box display="flex" flexDirection="row" alignItems="center">
-                    <Text f={1} mr={5}>
+                  <THInner>
+                    <Text f={1} lineHeight={1.5} mr={5}>
                       {column.render('Header')}
                     </Text>
 
@@ -141,7 +149,10 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
                         }}
                       />
                     )}
-                  </Box>
+
+                    {/* For the sake of positioning */}
+                    {!columnSortType && <Box />}
+                  </THInner>
                 </TH>
               )
             })}

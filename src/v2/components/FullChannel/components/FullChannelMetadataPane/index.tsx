@@ -33,14 +33,16 @@ export const FullChannelMetadataPane: React.FC<FullChannelMetadataPaneProps> = (
   return (
     <MetadataContainer>
       {data?.channel?.description && (
-        <Text
-          f={3}
-          lineHeight={2}
-          dangerouslySetInnerHTML={{ __html: data?.channel?.description }}
-          breakWord
-          boldLinks
-          hoverLinks={{ color: 'gray.bold' }}
-        />
+        <Box mb={6}>
+          <Text
+            f={2}
+            lineHeight={2}
+            dangerouslySetInnerHTML={{ __html: data?.channel?.description }}
+            breakWord
+            boldLinks
+            hoverLinks={{ color: 'gray.bold' }}
+          />
+        </Box>
       )}
 
       <Box mb={8}>
