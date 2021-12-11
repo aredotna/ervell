@@ -8,6 +8,7 @@ import {
 } from '__generated__/ChannelTableContentsSet'
 import {
   BaseConnectableTypeEnum,
+  ConnectableTypeEnum,
   SortDirection,
   Sorts,
 } from '__generated__/globalTypes'
@@ -103,7 +104,7 @@ export const STANDARD_HEADERS = [
     Header: ColumnIds.addSettings,
     id: ColumnIds.addSettings,
     Cell: StandardCell,
-    width: '70px',
+    width: '100px',
   },
 ]
 
@@ -122,6 +123,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
 }) => {
   const [sort, setSort] = useState<Sorts>(Sorts.CREATED_AT)
   const [direction, setDirection] = useState<SortDirection>(SortDirection.DESC)
+  const [type, setType] = useState<ConnectableTypeEnum | null>(null)
 
   const {
     blocks,
@@ -142,6 +144,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     direction,
     sort,
     channelId: id,
+    type,
     per: 25,
     blockquery: CONNECTABLE_TABLE_BLOKK_QUERY,
   })
@@ -165,6 +168,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
       setSort={setSort}
       direction={direction}
       setDirection={setDirection}
+      setType={setType}
       onItemIntersected={onItemIntersected}
       addBlock={addBlock}
       updateBlock={updateBlock}
@@ -181,6 +185,7 @@ interface ChannelTableContentsProps {
   setSort: (value: Sorts) => void
   direction: SortDirection
   setDirection: (value: SortDirection) => void
+  setType: (value: ConnectableTypeEnum) => void
   onItemIntersected: (index: number) => void
   addBlock: () => void
   updateBlock: (args: {
@@ -198,6 +203,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   setSort,
   direction,
   setDirection,
+  setType,
   onItemIntersected,
   addBlock,
   updateBlock,
@@ -354,6 +360,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           direction={direction}
           setSort={setSort}
           setDirection={setDirection}
+          setType={setType}
           addBlock={addBlock}
         />
         <tbody {...getTableBodyProps()}>

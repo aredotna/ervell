@@ -7,9 +7,13 @@ import Text from 'v2/components/UI/Text'
 import SortArrows from 'v2/components/UI/SortArrows'
 
 import constants from 'v2/styles/constants'
-import { TableAddButton } from './components/AddButton'
+import { TableAddButton } from './components/FilterAndAddButton'
 import { ColumnIds, columnIdsToSorts } from '../..'
-import { SortDirection, Sorts } from '__generated__/globalTypes'
+import {
+  ConnectableTypeEnum,
+  SortDirection,
+  Sorts,
+} from '__generated__/globalTypes'
 import { TableData } from '../../lib/types'
 import { ChannelPage_channel } from '__generated__/ChannelPage'
 
@@ -58,7 +62,7 @@ const THInner = styled(Box)`
 `
 
 const SettingsAddTH = styled(TH)`
-  min-width: 60px;
+  min-width: 100px;
   padding: 0;
   overflow: visible;
   vertical-align: top;
@@ -72,6 +76,7 @@ interface ChannelTableHeaderProps {
   setSort: (value: Sorts) => void
   direction: SortDirection
   setDirection: (value: SortDirection) => void
+  setType: (value: ConnectableTypeEnum) => void
   addBlock: () => void
 }
 
@@ -81,6 +86,7 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
   sort,
   setSort,
   setDirection,
+  setType,
   direction,
   addBlock,
 }) => {
@@ -103,12 +109,13 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
                 channel.can.add_to_as_premium
               ) {
                 return (
-                  <SettingsAddTH width="60px">
+                  <SettingsAddTH width="103px">
                     {/* <Box width="100px" /> */}
                     <TableAddButton
                       channelId={channel.id}
                       ref={headerRef}
                       addBlock={addBlock}
+                      setType={setType}
                     />
                   </SettingsAddTH>
                 )
