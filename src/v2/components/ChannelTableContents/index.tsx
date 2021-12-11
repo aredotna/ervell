@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useReducer, useRef } from 'react'
 import { Column, Row, useExpanded, useTable } from 'react-table'
 
 import {
@@ -6,11 +6,7 @@ import {
   ChannelTableContentsSetVariables,
   ChannelTableContentsSet_channel_blokks,
 } from '__generated__/ChannelTableContentsSet'
-import {
-  BaseConnectableTypeEnum,
-  SortDirection,
-  Sorts,
-} from '__generated__/globalTypes'
+import { BaseConnectableTypeEnum, Sorts } from '__generated__/globalTypes'
 
 import Box from 'v2/components/UI/Box'
 
@@ -28,7 +24,7 @@ import { StandardCell } from './components/StandardCell'
 import { Table, TR, TD } from './components/TableComponents'
 import ChannelTableHeader from './components/ChannelTableHeader'
 
-import { TableData } from './lib/types'
+import { SortAndSortDir, TableData } from './lib/types'
 import { FIRST_COLUMN_WIDTH } from './lib/constants'
 import { parsePayload, PusherPayload, usePusher } from 'v2/hooks/usePusher'
 import { getConnectableType } from 'v2/util/getConnectableType'
@@ -55,57 +51,92 @@ export enum ColumnIds {
   addSettings = 'addSettings',
 }
 
-export const STANDARD_HEADERS = [
-  {
-    Header: 'Content',
-    id: ColumnIds.content,
-    accessor: block => block,
-    Cell: ContentCell,
-    width: FIRST_COLUMN_WIDTH,
-  },
-  {
-    Header: 'Title',
-    id: ColumnIds.title,
-    Cell: PotentiallyEditableBlockCell,
-    accessor: block => ({ block, attr: 'title' } as const),
-    width: '30%',
-  },
-  {
-    Header: 'Added at',
-    id: ColumnIds.addedAt,
-    accessor: block => '__typename' in block && block?.connection?.created_at,
-    Cell: StandardCell,
-    width: '200px',
-  },
-  {
-    Header: 'Author',
-    id: ColumnIds.author,
-    accessor: block => '__typename' in block && block?.user?.name,
-    Cell: StandardCell,
-    width: '200px',
-  },
-  {
-    Header: 'Connections',
-    id: ColumnIds.connections,
-    accessor: block => {
-      if ('isNull' in block) {
-        return null
-      }
-
-      return block.counts?.__typename === 'BlockCounts'
-        ? block.counts.public_channels
-        : block.counts?.connected_to_channels
+export const STANDARD_HEADERS =
+  /**
+   * This function doesn't have any runtime purpose,
+   * but we're using the advanced control of
+   * generic types available to us in functions
+   * to assert that every Cell component is
+   * correctly typed to match the return value
+   * of its column's accessor function.
+   *
+   * This is only called once, so the overhead
+   * is very low for the safety it provides.
+   */
+  (function guard<
+    T extends Column<TableData> & {
+      Cell: React.FC<{ value: any }>
+      accessor?: (row: TableData) => React.ComponentProps<T['Cell']>['value']
+      id: ColumnIds
+    }
+  >(columns: Array<T>): Array<Column<TableData>> {
+    return columns
+  })([
+    {
+      Header: 'Content',
+      id: ColumnIds.content,
+      accessor: block => block,
+      Cell: ContentCell,
+      width: FIRST_COLUMN_WIDTH,
     },
-    Cell: StandardCell,
-    width: '200px',
-  },
-  {
-    Header: ColumnIds.addSettings,
-    id: ColumnIds.addSettings,
-    Cell: StandardCell,
-    width: '70px',
-  },
-]
+    {
+      Header: 'Title',
+      id: ColumnIds.title,
+      Cell: PotentiallyEditableBlockCell,
+      accessor: block => ({ block, attr: 'title' } as const),
+      width: '30%',
+    },
+    {
+      Header: 'Added at',
+      id: ColumnIds.addedAt,
+      accessor: block => '__typename' in block && block?.connection?.created_at,
+      Cell: StandardCell,
+      width: '200px',
+    },
+    {
+      Header: 'Author',
+      id: ColumnIds.author,
+      accessor: block => '__typename' in block && block?.user?.name,
+      Cell: StandardCell,
+      width: '200px',
+    },
+    {
+      Header: 'Connections',
+      id: ColumnIds.connections,
+      accessor: block => {
+        if ('isNull' in block) {
+          return null
+        }
+
+        return block.counts?.__typename === 'BlockCounts'
+          ? block.counts.public_channels
+          : block.counts?.connected_to_channels
+      },
+      Cell: StandardCell,
+      width: '200px',
+    },
+    {
+      Header: ColumnIds.addSettings,
+      id: ColumnIds.addSettings,
+      Cell: StandardCell,
+      width: '70px',
+    },
+  ])
+
+const sortAndSortDirReducer: React.Reducer<
+  SortAndSortDir | null,
+  SortAndSortDir
+> = (prevState, action) => {
+  if (
+    prevState &&
+    prevState.sort === action.sort &&
+    prevState.dir === action.dir
+  ) {
+    return null
+  }
+
+  return action
+}
 
 /**
  * If we want to allow a column to be sortable,
@@ -120,8 +151,10 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
   id,
   channel,
 }) => {
-  const [sort, setSort] = useState<Sorts>(Sorts.CREATED_AT)
-  const [direction, setDirection] = useState<SortDirection>(SortDirection.DESC)
+  const [sortAndSortDir, setSortAndSortDir] = useReducer(
+    sortAndSortDirReducer,
+    null
+  )
 
   const {
     blocks,
@@ -139,8 +172,8 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     ConnectableTableBlokkVariables
   >({
     channelQuery: CHANNEL_TABLE_CONTENTS_QUERY,
-    direction,
-    sort,
+    direction: sortAndSortDir?.dir,
+    sort: sortAndSortDir?.sort,
     channelId: id,
     per: 25,
     blockquery: CONNECTABLE_TABLE_BLOKK_QUERY,
@@ -161,10 +194,8 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
       contentCount={contentCount}
       blocks={blocks}
       channel={channel}
-      sort={sort}
-      setSort={setSort}
-      direction={direction}
-      setDirection={setDirection}
+      sortAndSortDir={sortAndSortDir}
+      setSortAndSortDir={setSortAndSortDir}
       onItemIntersected={onItemIntersected}
       addBlock={addBlock}
       updateBlock={updateBlock}
@@ -177,27 +208,23 @@ interface ChannelTableContentsProps {
   blocks: Array<ChannelTableContentsSet_channel_blokks | null>
   channel: ChannelPage_channel
   contentCount: number
-  sort: Sorts
-  setSort: (value: Sorts) => void
-  direction: SortDirection
-  setDirection: (value: SortDirection) => void
+  sortAndSortDir: SortAndSortDir | null
+  setSortAndSortDir: React.Dispatch<SortAndSortDir>
   onItemIntersected: (index: number) => void
   addBlock: () => void
   updateBlock: (args: {
     id: string
     type: BaseConnectableTypeEnum | false
   }) => Promise<void>
-  getBlocksFromCache: () => ChannelTableContentsSet_channel_blokks[]
+  getBlocksFromCache: () => Array<ChannelTableContentsSet_channel_blokks | null> | null
 }
 
 export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   blocks,
   channel,
   contentCount,
-  sort,
-  setSort,
-  direction,
-  setDirection,
+  sortAndSortDir,
+  setSortAndSortDir,
   onItemIntersected,
   addBlock,
   updateBlock,
@@ -216,28 +243,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   }, [blocks, contentCount])
 
   const tableColumns = useMemo<Array<Column<TableData>>>(() => {
-    /**
-     * This function doesn't have any runtime purpose,
-     * but we're using the advanced control of
-     * generic types available to us in functions
-     * to assert that every Cell component is
-     * correctly typed to match the return value
-     * of its column's accessor function.
-     *
-     * This is only called once, so the overhead
-     * is very low for the safety it provides.
-     */
-    function guard<
-      T extends Column<TableData> & {
-        Cell: React.FC<{ value: any }>
-        accessor?: (row: TableData) => React.ComponentProps<T['Cell']>['value']
-        id: ColumnIds
-      }
-    >(columns: Array<T>) {
-      return columns
-    }
-
-    return guard(STANDARD_HEADERS)
+    return STANDARD_HEADERS
   }, [])
 
   const getRowId = useCallback(
@@ -315,6 +321,8 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
       //
       const cacheBlocks = getBlocksFromCache()
 
+      if (!cacheBlocks) return
+
       const blockIndex = cacheBlocks.findIndex(
         block =>
           block &&
@@ -349,11 +357,9 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
       <Table {...getTableProps()}>
         <ChannelTableHeader
           headerGroups={headerGroups}
-          sort={sort}
           channel={channel}
-          direction={direction}
-          setSort={setSort}
-          setDirection={setDirection}
+          sortAndSortDir={sortAndSortDir}
+          setSortAndSortDir={setSortAndSortDir}
           addBlock={addBlock}
         />
         <tbody {...getTableBodyProps()}>

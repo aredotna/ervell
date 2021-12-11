@@ -1,4 +1,5 @@
 import { ChannelTableContentsSet_channel_blokks } from '__generated__/ChannelTableContentsSet'
+import { SortDirection, Sorts } from '__generated__/globalTypes'
 
 /**
  * A small augmentation over a simple array of blocks.
@@ -8,3 +9,8 @@ import { ChannelTableContentsSet_channel_blokks } from '__generated__/ChannelTab
 export type TableData =
   | ChannelTableContentsSet_channel_blokks
   | { isNull: true }
+
+export type SortAndSortDir = {
+  sort: Sorts
+  dir: SortDirection
+}
