@@ -6,7 +6,11 @@ import {
   ChannelTableContentsSetVariables,
   ChannelTableContentsSet_channel_blokks,
 } from '__generated__/ChannelTableContentsSet'
-import { BaseConnectableTypeEnum, Sorts } from '__generated__/globalTypes'
+import {
+  BaseConnectableTypeEnum,
+  SortDirection,
+  Sorts,
+} from '__generated__/globalTypes'
 
 import Box from 'v2/components/UI/Box'
 
@@ -123,16 +127,15 @@ export const STANDARD_HEADERS =
     },
   ])
 
-const sortAndSortDirReducer: React.Reducer<
-  SortAndSortDir | null,
-  SortAndSortDir
-> = (prevState, action) => {
-  if (
-    prevState &&
-    prevState.sort === action.sort &&
-    prevState.dir === action.dir
-  ) {
-    return null
+const sortAndSortDirReducer: React.Reducer<SortAndSortDir, SortAndSortDir> = (
+  prevState,
+  action
+) => {
+  if (prevState.sort === action.sort && prevState.dir === action.dir) {
+    return {
+      sort: Sorts.POSITION,
+      dir: SortDirection.DESC,
+    }
   }
 
   return action
@@ -153,7 +156,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
 }) => {
   const [sortAndSortDir, setSortAndSortDir] = useReducer(
     sortAndSortDirReducer,
-    null
+    { sort: Sorts.POSITION, dir: SortDirection.DESC }
   )
 
   const {
@@ -172,8 +175,8 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     ConnectableTableBlokkVariables
   >({
     channelQuery: CHANNEL_TABLE_CONTENTS_QUERY,
-    direction: sortAndSortDir?.dir,
-    sort: sortAndSortDir?.sort,
+    direction: sortAndSortDir.dir,
+    sort: sortAndSortDir.sort,
     channelId: id,
     per: 25,
     blockquery: CONNECTABLE_TABLE_BLOKK_QUERY,
@@ -208,7 +211,7 @@ interface ChannelTableContentsProps {
   blocks: Array<ChannelTableContentsSet_channel_blokks | null>
   channel: ChannelPage_channel
   contentCount: number
-  sortAndSortDir: SortAndSortDir | null
+  sortAndSortDir: SortAndSortDir
   setSortAndSortDir: React.Dispatch<SortAndSortDir>
   onItemIntersected: (index: number) => void
   addBlock: () => void

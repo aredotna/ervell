@@ -68,7 +68,7 @@ const SettingsAddTH = styled(TH)`
 interface ChannelTableHeaderProps {
   headerGroups: HeaderGroup<TableData>[]
   channel: ChannelPage_channel
-  sortAndSortDir: SortAndSortDir | null
+  sortAndSortDir: SortAndSortDir
   setSortAndSortDir: React.Dispatch<SortAndSortDir>
   addBlock: () => void
 }
@@ -115,7 +115,7 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
 
               let sortArrowState: 'off' | 'up' | 'down' | undefined
               if (columnSortType) {
-                if (sortAndSortDir && columnSortType === sortAndSortDir.sort) {
+                if (columnSortType === sortAndSortDir.sort) {
                   sortArrowState =
                     sortAndSortDir.dir === SortDirection.ASC ? 'up' : 'down'
                 } else {
