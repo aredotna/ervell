@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 import { debounce, isEmpty } from 'underscore'
+import { capitalize } from 'lodash'
 
 import { SearchInput } from '../FilterContainer'
 import {
@@ -97,7 +98,7 @@ const TypeFilter: React.FC<TypeFilterProps> = ({ id, setType }) => {
         onBlur={handleBlur}
         onChange={handleChange}
         placeholder={'Select content type'}
-        value={selectedType}
+        value={selectedType && `Type: ${capitalize(selectedType)}`}
       />
       {mode == 'focused' && <TypeList id={id} handleSelect={handleSelect} />}
     </SearchContainer>

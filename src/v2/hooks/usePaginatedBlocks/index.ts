@@ -132,6 +132,7 @@ interface UsePaginatedBlocksBaseApi<
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
   addBlock: () => void
   getBlocksFromCache: () => Array<Block<ChannelQueryData>>
+  loading: boolean
 }
 
 /**
@@ -233,7 +234,7 @@ export function usePaginatedBlocks<
   /**
    * The current blocks that we have for a channel
    */
-  const { data: unsafeData, fetchMore, client } = useQuery<
+  const { data: unsafeData, fetchMore, client, loading } = useQuery<
     ChannelQueryData,
     ChannelQueryVariables
   >(channelQueryData.query, {
@@ -361,19 +362,17 @@ export function usePaginatedBlocks<
    * due to not downloading all the block information from a channel
    */
 
-  const { data, loading, error } = useQuery<
-    ChannelContentCount,
-    ChannelContentCountVariables
-  >(CHANNEL_CONTENT_COUNT, {
-    fetchPolicy: 'cache-and-network',
-    variables: {
-      id: channelId,
-      type: type,
-      user_id: user_id,
-    },
-  })
-
-  console.log({ data, loading, error })
+  const { data } = useQuery<ChannelContentCount, ChannelContentCountVariables>(
+    CHANNEL_CONTENT_COUNT,
+    {
+      fetchPolicy: 'cache-only',
+      variables: {
+        id: channelId,
+        type: type,
+        user_id: user_id,
+      },
+    }
+  )
 
   const contentCount: UsePaginatedBlocksApi<ChannelQueryData>['contentCount'] =
     data?.channel?.counts?.contents ?? 0
@@ -652,6 +651,7 @@ export function usePaginatedBlocks<
     addBlock,
     updateBlock,
     getBlocksFromCache,
+    loading,
   }
 
   return api

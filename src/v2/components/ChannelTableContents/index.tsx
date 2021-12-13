@@ -15,18 +15,12 @@ import {
 
 import Box from 'v2/components/UI/Box'
 
-import { IntersectionObserverBox } from 'v2/components/UI/IntersectionObserverBox'
 import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
 
-import { ChannelRow } from './components/ChannelRow'
 import { ContentCell } from './components/ContentCell'
-import ExpandedBlockRow, {
-  ExpandedBlockRowProps,
-} from './components/ExpandedBlockRow'
-import ExpandedChannelRow from './components/ExpandedChannelRow'
 import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBlockCell'
 import { StandardCell } from './components/StandardCell'
-import { Table, TR, TD } from './components/TableComponents'
+import { Table } from './components/TableComponents'
 import ChannelTableHeader from './components/ChannelTableHeader'
 
 import { TableData } from './lib/types'
@@ -41,6 +35,8 @@ import {
 } from '__generated__/ConnectableTableBlokk'
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import CONNECTABLE_TABLE_BLOKK_QUERY from './queries/TableConnectableBlokk'
+import { ChannelTableBody } from './components/ChannelTableBody'
+import LoadingRow from './components/LoadingRow'
 
 interface ChannelTableQueryProps {
   id: string
@@ -134,6 +130,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     addBlock,
     updateBlock,
     getBlocksFromCache,
+    loading,
   } = usePaginatedBlocks<
     ChannelTableContentsSet,
     ChannelTableContentsSetVariables,
@@ -166,6 +163,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
       channel={channel}
       sort={sort}
       setSort={setSort}
+      loading={loading}
       direction={direction}
       setDirection={setDirection}
       setType={setType}
@@ -188,6 +186,7 @@ interface ChannelTableContentsProps {
   setType: (value: ConnectableTypeEnum) => void
   onItemIntersected: (index: number) => void
   addBlock: () => void
+  loading: boolean
   updateBlock: (args: {
     id: string
     type: BaseConnectableTypeEnum | false
@@ -208,6 +207,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   addBlock,
   updateBlock,
   getBlocksFromCache,
+  loading,
 }) => {
   /**
    * Build the table rows
@@ -364,89 +364,17 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           addBlock={addBlock}
         />
         <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
-            prepareRow(row)
+          {loading && <LoadingRow columnLength={STANDARD_HEADERS.length} />}
 
-            const { key: rowKey, ...rowProps } = row.getRowProps()
-            const sharedIntersectionObserverBoxProps = {
-              key: rowKey,
-              id: row.index,
-              callback: intersectionObserverCallback,
-              options: intersectionObserverOptions,
-            }
-
-            if ('__typename' in row.original) {
-              if (row.isExpanded && row.original.__typename !== 'Channel') {
-                const componentProps: ExpandedBlockRowProps = {
-                  block: row.original,
-                  columnLength: columns.length,
-                  ...rowProps,
-                  onMinimize: () => row.toggleRowExpanded(false),
-                }
-                return (
-                  <IntersectionObserverBox
-                    {...sharedIntersectionObserverBoxProps}
-                    Component={ExpandedBlockRow}
-                    componentProps={componentProps}
-                  />
-                )
-              }
-
-              if (row.isExpanded && row.original.__typename === 'Channel') {
-                return (
-                  <IntersectionObserverBox
-                    {...sharedIntersectionObserverBoxProps}
-                    Component={ExpandedChannelRow}
-                    componentProps={{
-                      channel: row.original,
-                      columnLength: columns.length,
-                      ...rowProps,
-                      onMinimize: () => row.toggleRowExpanded(false),
-                    }}
-                  />
-                )
-              }
-
-              if (row.original.__typename === 'Channel') {
-                return (
-                  <IntersectionObserverBox
-                    {...sharedIntersectionObserverBoxProps}
-                    Component={ChannelRow}
-                    componentProps={{
-                      channel: row.original,
-                      ...rowProps,
-                      onClick: () => row.toggleRowExpanded(true),
-                    }}
-                  />
-                )
-              }
-            }
-
-            return (
-              <IntersectionObserverBox
-                {...sharedIntersectionObserverBoxProps}
-                key={rowKey}
-                Component={TR}
-                componentProps={{
-                  ...rowProps,
-                  onClick: () => row.toggleRowExpanded(true),
-                  children: row.cells.map(cell => {
-                    const { key: cellKey, ...cellProps } = cell.getCellProps()
-                    return (
-                      <TD
-                        key={cellKey}
-                        width={cell.column.width}
-                        maxWidth={cell.column.maxWidth}
-                        {...cellProps}
-                      >
-                        {cell.render('Cell')}
-                      </TD>
-                    )
-                  }),
-                }}
-              />
-            )
-          })}
+          {!loading && (
+            <ChannelTableBody
+              rows={rows}
+              prepareRow={prepareRow}
+              intersectionObserverCallback={intersectionObserverCallback}
+              columns={columns}
+              intersectionObserverOptions={intersectionObserverOptions}
+            />
+          )}
         </tbody>
       </Table>
     </Box>

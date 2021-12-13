@@ -15,7 +15,7 @@ export default gql`
       __typename
       id
       counts {
-        contents
+        contents(type: $type, user_id: $user_id)
         blocks
         channels
       }
