@@ -2,7 +2,6 @@ import React, { useCallback, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 import { debounce, isEmpty } from 'underscore'
-import { capitalize } from 'lodash'
 
 import { SearchInput } from '../FilterContainer'
 import Box from 'v2/components/UI/Box'
@@ -10,12 +9,12 @@ import { ItemContainer } from '../FilterComponents'
 import Text from 'v2/components/UI/Text'
 import { inputPadding } from 'v2/components/UI/Inputs'
 
+import channelConnectorsQuery from './queries/channelConnectors'
 import {
-  ChannelTableTypes,
-  ChannelTableTypesVariables,
-} from '__generated__/ChannelTableTypes'
-import channelTypesQuery from './queries/channelTypes'
-import { ConnectableTypeEnum } from '__generated__/globalTypes'
+  ChannelTableConnectors,
+  ChannelTableConnectorsVariables,
+  ChannelTableConnectors_channel_connectors,
+} from '__generated__/ChannelTableConnectors'
 
 const SearchContainer = styled.div`
   position: relative;
@@ -59,23 +58,24 @@ const Item = styled(ItemContainer)`
   text-transform: capitalize;
 `
 
-interface TypeListProps {
+interface UserListProps {
   id: string | number
-  handleSelect: (value: string) => void
+  handleSelect: (value: ChannelTableConnectors_channel_connectors) => void
+  query?: string
 }
 
-const TypeList: React.FC<TypeListProps> = ({ id, handleSelect }) => {
-  const { data } = useQuery<ChannelTableTypes, ChannelTableTypesVariables>(
-    channelTypesQuery,
-    { variables: { id: id.toString() } }
-  )
+const UserList: React.FC<UserListProps> = ({ id, handleSelect, query }) => {
+  const { data } = useQuery<
+    ChannelTableConnectors,
+    ChannelTableConnectorsVariables
+  >(channelConnectorsQuery, { variables: { id: id.toString(), q: query } })
 
   return (
     <ResultContainer>
-      {data?.channel?.types.map(type => {
+      {data?.channel?.connectors.map(c => {
         return (
-          <Item onClick={() => handleSelect(type)}>
-            <Text f={1}>{type.toLowerCase()}</Text>
+          <Item onClick={() => handleSelect(c)}>
+            <Text f={1}>{c.name}</Text>
           </Item>
         )
       })}
@@ -83,17 +83,18 @@ const TypeList: React.FC<TypeListProps> = ({ id, handleSelect }) => {
   )
 }
 
-interface TypeFilterProps {
+interface UserFilterProps {
   id: string | number
-  setType: (value: ConnectableTypeEnum) => void
+  setUser: (value: ChannelTableConnectors_channel_connectors) => void
 }
 
-const TypeFilter: React.FC<TypeFilterProps> = ({ id, setType }) => {
+const UserFilter: React.FC<UserFilterProps> = ({ id, setUser }) => {
   const [, setDebouncedQuery] = useState<string>('')
   const [mode, setMode] = useState<'active' | 'focused' | 'resting'>('resting')
-  const [selectedType, setSelectedType] = useState<ConnectableTypeEnum | null>(
-    null
-  )
+  const [
+    selectedUser,
+    setSelectedUser,
+  ] = useState<ChannelTableConnectors_channel_connectors | null>(null)
 
   const inputRef = useRef(null)
   const debounceQuery = debounce(debouncedQuery => {
@@ -114,40 +115,42 @@ const TypeFilter: React.FC<TypeFilterProps> = ({ id, setType }) => {
     // setMode('resting')
   }, [setMode])
 
-  const handleSelect = useCallback(type => {
-    setSelectedType(type)
-    setType(type)
+  const handleSelect = useCallback(user => {
+    setSelectedUser(user)
+    setUser(user)
     setMode('resting')
   }, [])
 
   const removeType = useCallback(() => {
-    setType(null)
-    setSelectedType(null)
+    setUser(null)
+    setSelectedUser(null)
     setMode('resting')
-  }, [setSelectedType, setType, setMode])
+  }, [setSelectedUser, setUser, setMode])
 
   return (
     <SearchContainer>
       <InputContainer>
         <SearchInput
           ref={inputRef}
-          key={selectedType}
+          key={selectedUser?.id}
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
-          placeholder={'Select content type'}
-          value={selectedType ? `Type: ${capitalize(selectedType)}` : null}
+          placeholder={'Select person'}
+          value={selectedUser ? `Person: ${selectedUser.name}` : null}
         />
-        {selectedType && (
+        {selectedUser && (
           <Close onClick={removeType}>
             &nbsp;
             <span>&times;</span>
           </Close>
         )}
       </InputContainer>
-      {mode == 'focused' && <TypeList id={id} handleSelect={handleSelect} />}
+      {mode == 'focused' && (
+        <UserList id={id} query={debounceQuery} handleSelect={handleSelect} />
+      )}
     </SearchContainer>
   )
 }
 
-export default TypeFilter
+export default UserFilter

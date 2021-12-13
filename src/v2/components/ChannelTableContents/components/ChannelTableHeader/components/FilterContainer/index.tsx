@@ -8,6 +8,8 @@ import Icon from 'v2/components/UI/Icons'
 import Text from 'v2/components/UI/Text'
 import TypeFilter from '../TypeFilter'
 import { ConnectableTypeEnum } from '__generated__/globalTypes'
+import UserFilter from '../UserFilter'
+import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 
 const Outer = styled(BorderedBox).attrs({
   bg: 'gray.hint',
@@ -32,11 +34,13 @@ export const SearchInput = styled(Input).attrs({
 interface FilterContainerProps {
   id: string | number
   setType: (value: ConnectableTypeEnum) => void
+  setUser: (value: ChannelTableConnectors_channel_connectors) => void
 }
 
 export const FilterContainer: React.FC<FilterContainerProps> = ({
   id,
   setType,
+  setUser,
 }) => {
   return (
     <Outer>
@@ -46,7 +50,7 @@ export const FilterContainer: React.FC<FilterContainerProps> = ({
           <Text f="1">Filter by</Text>
         </Box>
         <TypeFilter id={id} setType={setType} />
-        <SearchInput placeholder={'Select connecting person'} />
+        <UserFilter id={id} setUser={setUser} />
       </Inner>
     </Outer>
   )

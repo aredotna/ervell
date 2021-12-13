@@ -16,6 +16,7 @@ import {
 } from '__generated__/globalTypes'
 import { TableData } from '../../lib/types'
 import { ChannelPage_channel } from '__generated__/ChannelPage'
+import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 
 export const TD = styled.td`
   color: ${x => x.theme.colors.gray.bold};
@@ -77,6 +78,7 @@ interface ChannelTableHeaderProps {
   direction: SortDirection
   setDirection: (value: SortDirection) => void
   setType: (value: ConnectableTypeEnum) => void
+  setUser: (value: ChannelTableConnectors_channel_connectors) => void
   addBlock: () => void
 }
 
@@ -87,6 +89,7 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
   setSort,
   setDirection,
   setType,
+  setUser,
   direction,
   addBlock,
 }) => {
@@ -116,6 +119,7 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
                       ref={headerRef}
                       addBlock={addBlock}
                       setType={setType}
+                      setUser={setUser}
                     />
                   </SettingsAddTH>
                 )

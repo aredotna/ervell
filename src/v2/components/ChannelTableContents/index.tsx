@@ -37,6 +37,7 @@ import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import CONNECTABLE_TABLE_BLOKK_QUERY from './queries/TableConnectableBlokk'
 import { ChannelTableBody } from './components/ChannelTableBody'
 import LoadingRow from './components/LoadingRow'
+import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 
 interface ChannelTableQueryProps {
   id: string
@@ -120,6 +121,21 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
   const [sort, setSort] = useState<Sorts>(Sorts.CREATED_AT)
   const [direction, setDirection] = useState<SortDirection>(SortDirection.DESC)
   const [type, setType] = useState<ConnectableTypeEnum | null>(null)
+  const [
+    user,
+    setUser,
+  ] = useState<ChannelTableConnectors_channel_connectors | null>(null)
+
+  console.log({
+    channelQuery: CHANNEL_TABLE_CONTENTS_QUERY,
+    direction,
+    sort,
+    channelId: id,
+    type,
+    user_id: user?.id.toString(),
+    per: 25,
+    blockquery: CONNECTABLE_TABLE_BLOKK_QUERY,
+  })
 
   const {
     blocks,
@@ -142,6 +158,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     sort,
     channelId: id,
     type,
+    user_id: user?.id.toString(),
     per: 25,
     blockquery: CONNECTABLE_TABLE_BLOKK_QUERY,
   })
@@ -167,6 +184,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
       direction={direction}
       setDirection={setDirection}
       setType={setType}
+      setUser={setUser}
       onItemIntersected={onItemIntersected}
       addBlock={addBlock}
       updateBlock={updateBlock}
@@ -184,6 +202,7 @@ interface ChannelTableContentsProps {
   direction: SortDirection
   setDirection: (value: SortDirection) => void
   setType: (value: ConnectableTypeEnum) => void
+  setUser: (value: ChannelTableConnectors_channel_connectors) => void
   onItemIntersected: (index: number) => void
   addBlock: () => void
   loading: boolean
@@ -203,6 +222,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   direction,
   setDirection,
   setType,
+  setUser,
   onItemIntersected,
   addBlock,
   updateBlock,
@@ -361,6 +381,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           setSort={setSort}
           setDirection={setDirection}
           setType={setType}
+          setUser={setUser}
           addBlock={addBlock}
         />
         <tbody {...getTableBodyProps()}>

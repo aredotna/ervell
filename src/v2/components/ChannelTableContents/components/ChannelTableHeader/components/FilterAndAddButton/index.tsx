@@ -23,6 +23,7 @@ import {
 } from '__generated__/tableCreateAddBlockMutation'
 import Filter from '../FilterContainer'
 import { ConnectableTypeEnum } from '__generated__/globalTypes'
+import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 
 const AddButton = styled(GenericButton).attrs({
   bg: 'gray.light',
@@ -171,13 +172,14 @@ interface TableAddButtonProps {
   channelId: number
   addBlock: () => void
   setType: (value: ConnectableTypeEnum) => void
+  setUser: (value: ChannelTableConnectors_channel_connectors) => void
 }
 
 export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps & {
   ref?: React.Ref<HTMLElement>
 }> = React.forwardRef(
   (
-    { channelId, addBlock, setType },
+    { channelId, addBlock, setType, setUser },
     forwardedRef: React.MutableRefObject<HTMLInputElement | null> | null
   ) => {
     const ref = useRef<HTMLElement>()
@@ -326,7 +328,11 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
                       offsetY={5}
                       onClose={() => setFilterMode('resting')}
                     >
-                      <Filter id={channelId} setType={setType} />
+                      <Filter
+                        id={channelId}
+                        setType={setType}
+                        setUser={setUser}
+                      />
                     </Overlay>
                   )}
               </Box>

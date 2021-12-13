@@ -59,7 +59,7 @@ interface RequiredChannelQueryVariables {
   sort?: Sorts | null
   direction?: SortDirection | null
   type?: ConnectableTypeEnum | null
-  user_id?: string
+  user_id?: string | null
 }
 
 /**
@@ -229,7 +229,7 @@ export function usePaginatedBlocks<
         user_id: user_id,
       } as ChannelQueryVariables,
     }
-  }, [channelId, channelQuery, direction, per, sort, type])
+  }, [channelId, channelQuery, direction, per, sort, type, user_id])
 
   /**
    * The current blocks that we have for a channel
