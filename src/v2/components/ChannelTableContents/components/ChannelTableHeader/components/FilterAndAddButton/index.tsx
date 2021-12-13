@@ -110,14 +110,14 @@ const AddFieldContainer = styled(Box)`
   position: absolute;
   background-color: ${({ theme }) => theme.colors.gray.hint};
   top: 0;
-  right: 60px;
+  right: ${({ offsetWidth }) => `${offsetWidth}px`};
   height: 100%;
   padding: ${constants.space[5]};
   justify-content: flex-start;
   line-height: 1;
   align-items: center;
-  width: ${({ containerWidth, buttonWidth }) =>
-    `${containerWidth - buttonWidth - 2}px`};
+  width: ${({ containerWidth, offsetWidth }) =>
+    `${containerWidth - offsetWidth - 2}px`};
   display: ${({ mode }) => (mode == 'resting' ? 'none' : 'flex')};
 `
 
@@ -131,7 +131,7 @@ type FilterButtonState =
 
 interface TableAddButtonInnerProps {
   containerWidth: number
-  buttonWidth: number
+  offsetWidth: number
   mode: AddButtonState
   channelId: number
   openUploadDialog: () => void
@@ -142,7 +142,7 @@ interface TableAddButtonInnerProps {
 
 const TableAddButtonInner: React.FC<TableAddButtonInnerProps> = ({
   containerWidth,
-  buttonWidth,
+  offsetWidth,
   mode,
   openUploadDialog,
   handleOnChange,
@@ -153,7 +153,7 @@ const TableAddButtonInner: React.FC<TableAddButtonInnerProps> = ({
     <AddFieldContainer
       mode={mode}
       containerWidth={containerWidth}
-      buttonWidth={buttonWidth}
+      offsetWidth={offsetWidth}
     >
       {value.length == 0 && (
         <Message p={6}>
@@ -182,16 +182,20 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
     { channelId, addBlock, setType, setUser },
     forwardedRef: React.MutableRefObject<HTMLInputElement | null> | null
   ) => {
-    const ref = useRef<HTMLElement>()
+    const buttonContainerRef = useRef<HTMLElement>()
     const filterRef = useRef<HTMLElement>()
     const [value, setValue] = useState<string>('')
 
     const { width: containerWidth } = useWidthOf({ ref: forwardedRef })
-    const { width: buttonWidth } = useWidthOf({ ref })
+    const { width: buttonContainerWidth } = useWidthOf({
+      ref: buttonContainerRef,
+    })
 
     const [mode, setMode] = useState<AddButtonState>('resting')
     const [filterMode, setFilterMode] = useState<FilterButtonState>('resting')
     const [uploaderKey, setUploaderKey] = useState<number>(new Date().getTime())
+
+    console.log({ containerWidth, buttonContainerWidth })
 
     const [createBlock] = useMutation<
       tableCreateAddBlockMutation,
@@ -299,7 +303,7 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
     }, [setUploaderKey])
 
     return (
-      <Container ref={ref}>
+      <Container ref={buttonContainerRef}>
         <AddBlockPasteUploader
           createBlock={createBlock}
           channelId={channelId}
@@ -317,7 +321,7 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
                 <FilterButton f={1} onClick={handleFilterClick}>
                   <Icon name="Filters" size="1rem" />
                 </FilterButton>
-                {ref.current &&
+                {filterRef.current &&
                   (filterMode == 'open' || filterMode === 'activeAndOpen') && (
                     <Overlay
                       alignToY="bottom"
@@ -358,7 +362,7 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
                 channelId={channelId}
                 mode={mode}
                 containerWidth={containerWidth}
-                buttonWidth={buttonWidth}
+                offsetWidth={buttonContainerWidth}
               />
             </>
           )}
