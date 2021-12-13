@@ -74,7 +74,7 @@ const UserList: React.FC<UserListProps> = ({ id, handleSelect, query }) => {
     <ResultContainer>
       {data?.channel?.connectors.map(c => {
         return (
-          <Item onClick={() => handleSelect(c)}>
+          <Item onClick={() => handleSelect(c)} key={c.id}>
             <Text f={1}>{c.name}</Text>
           </Item>
         )

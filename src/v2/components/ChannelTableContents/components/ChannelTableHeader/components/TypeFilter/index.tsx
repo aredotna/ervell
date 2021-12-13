@@ -74,7 +74,7 @@ const TypeList: React.FC<TypeListProps> = ({ id, handleSelect }) => {
     <ResultContainer>
       {data?.channel?.types.map(type => {
         return (
-          <Item onClick={() => handleSelect(type)}>
+          <Item onClick={() => handleSelect(type)} key={type}>
             <Text f={1}>{type.toLowerCase()}</Text>
           </Item>
         )
