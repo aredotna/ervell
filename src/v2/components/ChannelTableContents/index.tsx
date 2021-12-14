@@ -125,18 +125,6 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     user,
     setUser,
   ] = useState<ChannelTableConnectors_channel_connectors | null>(null)
-
-  console.log({
-    channelQuery: CHANNEL_TABLE_CONTENTS_QUERY,
-    direction,
-    sort,
-    channelId: id,
-    type,
-    user_id: user?.id.toString(),
-    per: 25,
-    blockquery: CONNECTABLE_TABLE_BLOKK_QUERY,
-  })
-
   const {
     blocks,
     getPage,

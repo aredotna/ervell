@@ -36,8 +36,6 @@ export function Sticky({
     return () => observer.unobserve(cachedRef)
   }, [ref])
 
-  console.log({ stuck })
-
   return (
     <div style={inlineStyles} className={classes} ref={ref}>
       {children}
