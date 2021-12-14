@@ -15,6 +15,7 @@ import {
 } from '__generated__/moveConnectableMutation'
 import {
   BaseConnectableTypeEnum,
+  ConnectableTypeEnum,
   SortDirection,
   Sorts,
 } from '__generated__/globalTypes'
@@ -57,6 +58,8 @@ interface RequiredChannelQueryVariables {
   per: number
   sort?: Sorts | null
   direction?: SortDirection | null
+  type?: ConnectableTypeEnum | null
+  user_id?: string | null
 }
 
 /**
@@ -85,6 +88,8 @@ interface UsePaginatedBlocksBaseArgs {
   per: number
   sort?: Sorts | null
   direction?: SortDirection | null
+  type?: ConnectableTypeEnum | null
+  user_id?: string | null
   ssr?: boolean
 }
 
@@ -127,6 +132,7 @@ interface UsePaginatedBlocksBaseApi<
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
   addBlock: () => void
   getBlocksFromCache: () => Array<Block<ChannelQueryData>>
+  loading: boolean
 }
 
 /**
@@ -183,6 +189,8 @@ export function usePaginatedBlocks<
   sort,
   direction,
   ssr,
+  type,
+  user_id,
   blockquery,
 }: UsePaginatedBlocksBaseArgs &
   Partial<UsePaginatedBlocksArgs>): UsePaginatedBlocksBaseApi<
@@ -217,14 +225,16 @@ export function usePaginatedBlocks<
         per: per,
         sort: sort,
         direction: direction,
+        type: type,
+        user_id: user_id,
       } as ChannelQueryVariables,
     }
-  }, [channelId, channelQuery, direction, per, sort])
+  }, [channelId, channelQuery, direction, per, sort, type, user_id])
 
   /**
    * The current blocks that we have for a channel
    */
-  const { data: unsafeData, fetchMore, client } = useQuery<
+  const { data: unsafeData, fetchMore, client, loading } = useQuery<
     ChannelQueryData,
     ChannelQueryVariables
   >(channelQueryData.query, {
@@ -351,16 +361,21 @@ export function usePaginatedBlocks<
    * could be different than the current length of the "blocks" array
    * due to not downloading all the block information from a channel
    */
+
+  const { data } = useQuery<ChannelContentCount, ChannelContentCountVariables>(
+    CHANNEL_CONTENT_COUNT,
+    {
+      fetchPolicy: 'cache-only',
+      variables: {
+        id: channelId,
+        type: type,
+        user_id: user_id,
+      },
+    }
+  )
+
   const contentCount: UsePaginatedBlocksApi<ChannelQueryData>['contentCount'] =
-    useQuery<ChannelContentCount, ChannelContentCountVariables>(
-      CHANNEL_CONTENT_COUNT,
-      {
-        fetchPolicy: 'cache-only',
-        variables: {
-          id: channelId,
-        },
-      }
-    )?.data?.channel?.counts?.contents ?? 0
+    data?.channel?.counts?.contents ?? 0
 
   /**
    * Gets block data from a given page
@@ -636,6 +651,7 @@ export function usePaginatedBlocks<
     addBlock,
     updateBlock,
     getBlocksFromCache,
+    loading,
   }
 
   return api

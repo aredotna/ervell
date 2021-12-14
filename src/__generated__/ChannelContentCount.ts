@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { ConnectableTypeEnum } from "./globalTypes";
+
 // ====================================================
 // GraphQL query operation: ChannelContentCount
 // ====================================================
@@ -27,4 +29,6 @@ export interface ChannelContentCount {
 
 export interface ChannelContentCountVariables {
   id: string;
+  type?: ConnectableTypeEnum | null;
+  user_id?: string | null;
 }

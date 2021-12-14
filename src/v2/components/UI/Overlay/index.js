@@ -108,7 +108,7 @@ export default class Overlay extends PureComponent {
       }
     }
 
-    this.debouncedPositionOverlay = debounce(this.positionOverlay, 100)
+    this.debouncedPositionOverlay = debounce(this.positionOverlay, 50)
 
     window.addEventListener('resize', this.debouncedPositionOverlay)
     document.body.addEventListener('mousewheel', this.debouncedPositionOverlay)
