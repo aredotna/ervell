@@ -195,8 +195,6 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
     const [filterMode, setFilterMode] = useState<FilterButtonState>('resting')
     const [uploaderKey, setUploaderKey] = useState<number>(new Date().getTime())
 
-    console.log({ containerWidth, buttonContainerWidth })
-
     const [createBlock] = useMutation<
       tableCreateAddBlockMutation,
       tableCreateAddBlockMutationVariables
