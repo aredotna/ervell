@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react'
-import { Column, Row, useExpanded, useTable } from 'react-table'
+import { Column, useExpanded, useTable } from 'react-table'
 
 import {
   ChannelTableContentsSet,
