@@ -266,18 +266,10 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     return guard(STANDARD_HEADERS)
   }, [])
 
-  const getRowId = useCallback(
-    (
-      row: TableData,
-      index: number,
-      parent?: Row<TableData> | undefined
-    ): string => {
-      const parentId = parent?.id ?? 'noParent'
-      const rowId = '__typename' in row ? row.id.toString() : `nullRow${index}`
-      return `${parentId},${rowId}`
-    },
-    []
-  )
+  const getRowId = useCallback((row: TableData, index: number): string => {
+    const rowId = '__typename' in row ? row.id.toString() : `nullRow${index}`
+    return `${rowId}`
+  }, [])
 
   const initialExpandedStateRef = useRef<Record<string, boolean> | undefined>()
   if (!initialExpandedStateRef.current) {
