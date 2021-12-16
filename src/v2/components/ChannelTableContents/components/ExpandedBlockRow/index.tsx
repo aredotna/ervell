@@ -18,11 +18,13 @@ const TD = styled.td`
   border-bottom: 1px solid ${x => x.theme.colors.gray.block};
   font-size: ${x => x.theme.fontSizesIndexed.sx};
   height: 450px;
+  max-height: 450px;
   line-height: 0;
   padding: 0;
   width: ${x => x.width};
   vertical-align: top;
   position: relative;
+  overflow: scroll;
 
   &:first-child {
     border-left: 1px solid ${x => x.theme.colors.gray.block};
@@ -31,6 +33,20 @@ const TD = styled.td`
   &:last-child {
     border-right: 1px solid ${x => x.theme.colors.gray.block};
   }
+`
+
+const ContentTD = styled(TD)``
+
+const ContentContainer = styled(Box)`
+  height: 100%;
+  border-right: 1px solid ${x => x.theme.colors.gray.hint};
+`
+
+const MetadataContainer = styled(Box).attrs({
+  p: 5,
+})`
+  height: 100%;
+  overflow: scroll;
 `
 
 const ButtonContainer = styled(Box)`
@@ -54,11 +70,15 @@ export const ExpandedBlockRow = forwardRef<HTMLElement, ExpandedBlockRowProps>(
   ({ block, columnLength, onMinimize, ...rest }, ref) => {
     return (
       <Row {...rest} ref={ref}>
-        <TD width={FIRST_COLUMN_WIDTH}>
-          <ExpandedBlockRowContents block={block} />
-        </TD>
+        <ContentTD width={FIRST_COLUMN_WIDTH}>
+          <ContentContainer>
+            <ExpandedBlockRowContents block={block} />
+          </ContentContainer>
+        </ContentTD>
         <TD colSpan={columnLength - 4}>
-          <ExpandedBlockMetadata block={block} />
+          <MetadataContainer>
+            <ExpandedBlockMetadata block={block} />
+          </MetadataContainer>
         </TD>
         <TD colSpan={3}>
           <ButtonContainer>
@@ -69,7 +89,7 @@ export const ExpandedBlockRow = forwardRef<HTMLElement, ExpandedBlockRowProps>(
             />
           </ButtonContainer>
           <MetadataFoldContainer>
-            <Box p={4} mt={7}>
+            <Box p={5} mt={7}>
               <FullBlockMetadataFoldWithQuery id={block.id.toString()} />
             </Box>
           </MetadataFoldContainer>

@@ -10,7 +10,17 @@ import Box from 'v2/components/UI/Box'
 import TextInput from 'v2/components/UI/Inputs/components/TextInput'
 import ErrorMessage from 'v2/components/UI/Inputs/components/ErrorMessage'
 
-const SPACE_MARGIN_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my']
+const SPACE_MARGIN_PROPS_KEYS = [
+  'm',
+  'mt',
+  'mr',
+  'mb',
+  'ml',
+  'mx',
+  'my',
+  'width',
+  'height',
+]
 
 // TODO: Needs to be configured to accept a tag
 // so that other input types can have errors

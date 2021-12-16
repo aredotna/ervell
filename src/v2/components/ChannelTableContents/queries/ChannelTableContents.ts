@@ -8,16 +8,25 @@ export default gql`
     $per: Int!
     $sort: Sorts
     $direction: SortDirection
+    $type: ConnectableTypeEnum
+    $user_id: ID
   ) {
     channel(id: $id) {
       __typename
       id
       counts {
-        contents
+        contents(type: $type, user_id: $user_id)
         blocks
         channels
       }
-      blokks(page: $page, per: $per, sort_by: $sort, direction: $direction) {
+      blokks(
+        page: $page
+        per: $per
+        sort_by: $sort
+        direction: $direction
+        type: $type
+        user_id: $user_id
+      ) {
         ...ChannelTableContentsConnectable
       }
     }
