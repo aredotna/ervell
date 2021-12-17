@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { Sorts, SortDirection } from "./globalTypes";
+import { Sorts, SortDirection, ConnectableTypeEnum } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: ChannelTableContentsSet
@@ -384,4 +384,6 @@ export interface ChannelTableContentsSetVariables {
   per: number;
   sort?: Sorts | null;
   direction?: SortDirection | null;
+  type?: ConnectableTypeEnum | null;
+  user_id?: string | null;
 }

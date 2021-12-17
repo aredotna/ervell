@@ -40,6 +40,7 @@ import Apple from 'v2/components/UI/Icons/Apple.svg'
 import Android from 'v2/components/UI/Icons/Android.svg'
 import Hamburger from 'v2/components/UI/Icons/Hamburger.svg'
 import Minimize from 'v2/components/UI/Icons/Minimize.svg'
+import Filters from 'v2/components/UI/Icons/Filters.svg'
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -77,6 +78,7 @@ export const COMPONENTS = {
   Android: <Android />,
   Hamburger: <Hamburger />,
   Minimize: <Minimize />,
+  Filters: <Filters />,
 }
 
 export const ICON_NAMES = Object.keys(COMPONENTS)

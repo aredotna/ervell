@@ -1,5 +1,12 @@
-import React, { useCallback, useMemo, useReducer, useRef } from 'react'
-import { Column, Row, useExpanded, useTable } from 'react-table'
+import React, {
+  useCallback,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+} from 'react'
+import { Column, useExpanded, useTable } from 'react-table'
+import { SortEndHandler } from 'react-sortable-hoc'
 
 import {
   ChannelTableContentsSet,
@@ -8,28 +15,24 @@ import {
 } from '__generated__/ChannelTableContentsSet'
 import {
   BaseConnectableTypeEnum,
+  ConnectableTypeEnum,
   SortDirection,
   Sorts,
 } from '__generated__/globalTypes'
 import { ChannelPage_channel } from '__generated__/ChannelPage'
+import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 
 import Box from 'v2/components/UI/Box'
-import { IntersectionObserverBox } from 'v2/components/UI/IntersectionObserverBox'
 import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
 
-import { ChannelRow } from './components/ChannelRow'
 import { ContentCell } from './components/ContentCell'
-import ExpandedBlockRow, {
-  ExpandedBlockRowProps,
-} from './components/ExpandedBlockRow'
-import ExpandedChannelRow from './components/ExpandedChannelRow'
 import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBlockCell'
 import { StandardCell } from './components/StandardCell'
-import { Table, TR, TD } from './components/TableComponents'
+import { Table } from './components/TableComponents'
 import ChannelTableHeader from './components/ChannelTableHeader'
 import { SettingsCell } from './components/SettingsCell'
-import { SortableTableContainer } from './components/SortableTableContainer'
-import { SortableTableItem } from './components/SortableTableItem'
+import { ChannelTableBody } from './components/ChannelTableBody'
+import LoadingRow from './components/LoadingRow'
 
 import { ColumnIds, SortAndSortDir, TableData } from './lib/types'
 import { FIRST_COLUMN_WIDTH } from './lib/constants'
@@ -42,7 +45,6 @@ import {
 } from '__generated__/ConnectableTableBlokk'
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import CONNECTABLE_TABLE_BLOKK_QUERY from './queries/TableConnectableBlokk'
-import { SortEndHandler } from 'react-sortable-hoc'
 
 interface ChannelTableQueryProps {
   id: string
@@ -98,7 +100,7 @@ export const STANDARD_HEADERS: Array<Column<TableData>> = [
     id: ColumnIds.addSettings,
     accessor: block => ('__typename' in block ? block?.id : null),
     Cell: SettingsCell,
-    width: '70px',
+    width: '100px',
   },
 ]
 
@@ -124,7 +126,11 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     sortAndSortDirReducer,
     { sort: Sorts.POSITION, dir: SortDirection.DESC }
   )
-
+  const [type, setType] = useState<ConnectableTypeEnum | null>(null)
+  const [
+    user,
+    setUser,
+  ] = useState<ChannelTableConnectors_channel_connectors | null>(null)
   const {
     blocks,
     getPage,
@@ -135,6 +141,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     updateBlock,
     getBlocksFromCache,
     moveBlock,
+    loading,
   } = usePaginatedBlocks<
     ChannelTableContentsSet,
     ChannelTableContentsSetVariables,
@@ -145,6 +152,8 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     direction: sortAndSortDir.dir,
     sort: sortAndSortDir.sort,
     channelId: id,
+    type,
+    user_id: user?.id.toString(),
     per: 25,
     blockquery: CONNECTABLE_TABLE_BLOKK_QUERY,
   })
@@ -166,6 +175,9 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
       channel={channel}
       sortAndSortDir={sortAndSortDir}
       setSortAndSortDir={setSortAndSortDir}
+      loading={loading}
+      setType={setType}
+      setUser={setUser}
       onItemIntersected={onItemIntersected}
       addBlock={addBlock}
       updateBlock={updateBlock}
@@ -181,8 +193,11 @@ interface ChannelTableContentsProps {
   contentCount: number
   sortAndSortDir: SortAndSortDir
   setSortAndSortDir: React.Dispatch<SortAndSortDir>
+  setType: (value: ConnectableTypeEnum) => void
+  setUser: (value: ChannelTableConnectors_channel_connectors) => void
   onItemIntersected: (index: number) => void
   addBlock: () => void
+  loading: boolean
   updateBlock: (args: {
     id: string
     type: BaseConnectableTypeEnum | false
@@ -197,11 +212,14 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   contentCount,
   sortAndSortDir,
   setSortAndSortDir,
+  setType,
+  setUser,
   onItemIntersected,
   addBlock,
   updateBlock,
   getBlocksFromCache,
   moveBlock,
+  loading,
 }) => {
   /**
    * Build the table rows
@@ -219,18 +237,10 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     return STANDARD_HEADERS
   }, [])
 
-  const getRowId = useCallback(
-    (
-      row: TableData,
-      index: number,
-      parent?: Row<TableData> | undefined
-    ): string => {
-      const parentId = parent?.id ?? 'noParent'
-      const rowId = '__typename' in row ? row.id.toString() : `nullRow${index}`
-      return `${parentId},${rowId}`
-    },
-    []
-  )
+  const getRowId = useCallback((row: TableData, index: number): string => {
+    const rowId = '__typename' in row ? row.id.toString() : `nullRow${index}`
+    return `${rowId}`
+  }, [])
 
   const initialExpandedStateRef = useRef<Record<string, boolean> | undefined>()
   if (!initialExpandedStateRef.current) {
@@ -334,154 +344,34 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     [moveBlock, sortAndSortDir.sort]
   )
 
+  console.log(onSortEnd)
+
   return (
     <Box>
       <Table {...getTableProps()}>
         <ChannelTableHeader
           headerGroups={headerGroups}
           channel={channel}
-          sortAndSortDir={sortAndSortDir}
           setSortAndSortDir={setSortAndSortDir}
+          sortAndSortDir={sortAndSortDir}
+          setType={setType}
+          setUser={setUser}
           addBlock={addBlock}
         />
-        <SortableTableContainer
-          transitionDuration={0}
-          distance={1}
-          useDragHandle
-          axis="y"
-          useWindowAsScrollContainer
-          onSortEnd={onSortEnd}
-        >
-          <tbody {...getTableBodyProps()}>
-            {rows.map(row => {
-              prepareRow(row)
+        <tbody {...getTableBodyProps()}>
+          {loading && <LoadingRow columnLength={STANDARD_HEADERS.length} />}
 
-              const { key: rowKey, ...rowProps } = row.getRowProps()
-              const sharedIntersectionObserverBoxProps = {
-                id: row.index,
-                callback: intersectionObserverCallback,
-                options: intersectionObserverOptions,
-              }
-
-              let tableItemContent: JSX.Element | null = null
-              if (
-                row.isExpanded &&
-                '__typename' in row.original &&
-                row.original.__typename !== 'Channel'
-              ) {
-                /**
-                 * If the row is an expanded connectable
-                 */
-
-                const componentProps: ExpandedBlockRowProps = {
-                  block: row.original,
-                  columnLength: columns.length,
-                  ...rowProps,
-                  onMinimize: () => row.toggleRowExpanded(false),
-                }
-                tableItemContent = (
-                  <IntersectionObserverBox
-                    {...sharedIntersectionObserverBoxProps}
-                    Component={ExpandedBlockRow}
-                    componentProps={componentProps}
-                  />
-                )
-              } else if (
-                row.isExpanded &&
-                '__typename' in row.original &&
-                row.original.__typename === 'Channel'
-              ) {
-                /**
-                 * If the row is an expanded channel
-                 */
-
-                tableItemContent = (
-                  <IntersectionObserverBox
-                    {...sharedIntersectionObserverBoxProps}
-                    Component={ExpandedChannelRow}
-                    componentProps={{
-                      channel: row.original,
-                      columnLength: columns.length,
-                      ...rowProps,
-                      onMinimize: () => row.toggleRowExpanded(false),
-                    }}
-                  />
-                )
-              } else if (
-                '__typename' in row.original &&
-                row.original.__typename === 'Channel'
-              ) {
-                /**
-                 * If the row is a channel
-                 */
-
-                tableItemContent = (
-                  <IntersectionObserverBox
-                    {...sharedIntersectionObserverBoxProps}
-                    Component={ChannelRow}
-                    componentProps={{
-                      channel: row.original,
-                      ...rowProps,
-                      onClick: () => row.toggleRowExpanded(true),
-                    }}
-                  />
-                )
-              } else {
-                /**
-                 * If the row is a connectable or null
-                 */
-
-                tableItemContent = (
-                  <IntersectionObserverBox
-                    {...sharedIntersectionObserverBoxProps}
-                    Component={TR}
-                    componentProps={{
-                      ...rowProps,
-                      onClick: () => row.toggleRowExpanded(true),
-                      children: row.cells.map(cell => {
-                        const {
-                          key: cellKey,
-                          ...cellProps
-                        } = cell.getCellProps()
-                        return (
-                          <TD
-                            key={cellKey}
-                            width={cell.column.width}
-                            maxWidth={cell.column.maxWidth}
-                            {...cellProps}
-                          >
-                            {cell.render('Cell')}
-                          </TD>
-                        )
-                      }),
-                    }}
-                  />
-                )
-              }
-
-              const isRowMovable =
-                sortAndSortDir.sort === Sorts.POSITION && !row.isExpanded
-
-              return (
-                <SortableTableItem
-                  /**
-                   * There's an issue between react-sortable-hoc
-                   * and react-table where clicking and dragging
-                   * after a row is expanded doesn't work. Changing
-                   * the key every time a row's expanded state changes
-                   * forces the row to re render and allows dragging to
-                   * work again
-                   */
-                  key={`${rowKey}.${row.isExpanded}`}
-                  index={row.index}
-                  disabled={!isRowMovable}
-                >
-                  {tableItemContent}
-                </SortableTableItem>
-              )
-            })}
-          </tbody>
-        </SortableTableContainer>
+          {!loading && (
+            <ChannelTableBody
+              rows={rows}
+              prepareRow={prepareRow}
+              intersectionObserverCallback={intersectionObserverCallback}
+              columns={columns}
+              intersectionObserverOptions={intersectionObserverOptions}
+              sortAndSortDir={sortAndSortDir}
+            />
+          )}
+        </tbody>
       </Table>
     </Box>
   )

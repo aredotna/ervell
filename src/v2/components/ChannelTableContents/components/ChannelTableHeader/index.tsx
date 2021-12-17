@@ -7,10 +7,15 @@ import Text from 'v2/components/UI/Text'
 import SortArrows from 'v2/components/UI/SortArrows'
 
 import constants from 'v2/styles/constants'
-import { TableAddButton } from './components/AddButton'
-import { SortDirection, Sorts } from '__generated__/globalTypes'
+import { TableAddButton } from './components/FilterAndAddButton'
+import {
+  ConnectableTypeEnum,
+  SortDirection,
+  Sorts,
+} from '__generated__/globalTypes'
 import { ColumnIds, SortAndSortDir, TableData } from '../../lib/types'
 import { ChannelPage_channel } from '__generated__/ChannelPage'
+import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 import { columnIdsToSorts } from '../../lib/constants'
 
 export const TD = styled.td`
@@ -58,7 +63,7 @@ const THInner = styled(Box)`
 `
 
 const SettingsAddTH = styled(TH)`
-  min-width: 60px;
+  min-width: 100px;
   padding: 0;
   overflow: visible;
   vertical-align: top;
@@ -70,6 +75,8 @@ interface ChannelTableHeaderProps {
   channel: ChannelPage_channel
   sortAndSortDir: SortAndSortDir
   setSortAndSortDir: React.Dispatch<SortAndSortDir>
+  setType: (value: ConnectableTypeEnum) => void
+  setUser: (value: ChannelTableConnectors_channel_connectors) => void
   addBlock: () => void
 }
 
@@ -78,6 +85,8 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
   channel,
   sortAndSortDir,
   setSortAndSortDir,
+  setType,
+  setUser,
   addBlock,
 }) => {
   const headerRef = useRef<HTMLTableSectionElement>(null)
@@ -99,12 +108,14 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
                 channel.can.add_to_as_premium
               ) {
                 return (
-                  <SettingsAddTH width="60px">
+                  <SettingsAddTH width="103px">
                     {/* <Box width="100px" /> */}
                     <TableAddButton
                       channelId={channel.id}
                       ref={headerRef}
                       addBlock={addBlock}
+                      setType={setType}
+                      setUser={setUser}
                     />
                   </SettingsAddTH>
                 )
