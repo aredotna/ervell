@@ -8,10 +8,10 @@ import SortArrows from 'v2/components/UI/SortArrows'
 
 import constants from 'v2/styles/constants'
 import { TableAddButton } from './components/AddButton'
-import { ColumnIds, columnIdsToSorts } from '../..'
 import { SortDirection, Sorts } from '__generated__/globalTypes'
-import { SortAndSortDir, TableData } from '../../lib/types'
+import { ColumnIds, SortAndSortDir, TableData } from '../../lib/types'
 import { ChannelPage_channel } from '__generated__/ChannelPage'
+import { columnIdsToSorts } from '../../lib/constants'
 
 export const TD = styled.td`
   color: ${x => x.theme.colors.gray.bold};

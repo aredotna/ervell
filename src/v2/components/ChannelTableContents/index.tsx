@@ -11,9 +11,9 @@ import {
   SortDirection,
   Sorts,
 } from '__generated__/globalTypes'
+import { ChannelPage_channel } from '__generated__/ChannelPage'
 
 import Box from 'v2/components/UI/Box'
-
 import { IntersectionObserverBox } from 'v2/components/UI/IntersectionObserverBox'
 import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
 
@@ -27,13 +27,15 @@ import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBl
 import { StandardCell } from './components/StandardCell'
 import { Table, TR, TD } from './components/TableComponents'
 import ChannelTableHeader from './components/ChannelTableHeader'
+import { SettingsCell } from './components/SettingsCell'
+import { SortableTableContainer } from './components/SortableTableContainer'
+import { SortableTableItem } from './components/SortableTableItem'
 
-import { SortAndSortDir, TableData } from './lib/types'
+import { ColumnIds, SortAndSortDir, TableData } from './lib/types'
 import { FIRST_COLUMN_WIDTH } from './lib/constants'
 import { parsePayload, PusherPayload, usePusher } from 'v2/hooks/usePusher'
 import { getConnectableType } from 'v2/util/getConnectableType'
 
-import { ChannelPage_channel } from '__generated__/ChannelPage'
 import {
   ConnectableTableBlokk,
   ConnectableTableBlokkVariables,
@@ -46,86 +48,58 @@ interface ChannelTableQueryProps {
   channel: ChannelPage_channel
 }
 
-export enum ColumnIds {
-  content = 'content',
-  title = 'title',
-  addedAt = 'addedAt',
-  author = 'author',
-  connections = 'connections',
-  addSettings = 'addSettings',
-}
+export const STANDARD_HEADERS: Array<Column<TableData>> = [
+  {
+    Header: 'Content',
+    id: ColumnIds.content,
+    accessor: block => block,
+    Cell: ContentCell,
+    width: FIRST_COLUMN_WIDTH,
+  },
+  {
+    Header: 'Title',
+    id: ColumnIds.title,
+    Cell: PotentiallyEditableBlockCell,
+    accessor: block => ({ block, attr: 'title' } as const),
+    width: '30%',
+  },
+  {
+    Header: 'Added at',
+    id: ColumnIds.addedAt,
+    accessor: block => '__typename' in block && block?.connection?.created_at,
+    Cell: StandardCell,
+    width: '200px',
+  },
+  {
+    Header: 'Author',
+    id: ColumnIds.author,
+    accessor: block => '__typename' in block && block?.user?.name,
+    Cell: StandardCell,
+    width: '200px',
+  },
+  {
+    Header: 'Connections',
+    id: ColumnIds.connections,
+    accessor: block => {
+      if ('isNull' in block) {
+        return null
+      }
 
-export const STANDARD_HEADERS =
-  /**
-   * This function doesn't have any runtime purpose,
-   * but we're using the advanced control of
-   * generic types available to us in functions
-   * to assert that every Cell component is
-   * correctly typed to match the return value
-   * of its column's accessor function.
-   *
-   * This is only called once, so the overhead
-   * is very low for the safety it provides.
-   */
-  (function guard<
-    T extends Column<TableData> & {
-      Cell: React.FC<{ value: any }>
-      accessor?: (row: TableData) => React.ComponentProps<T['Cell']>['value']
-      id: ColumnIds
-    }
-  >(columns: Array<T>): Array<Column<TableData>> {
-    return columns
-  })([
-    {
-      Header: 'Content',
-      id: ColumnIds.content,
-      accessor: block => block,
-      Cell: ContentCell,
-      width: FIRST_COLUMN_WIDTH,
+      return block.counts?.__typename === 'BlockCounts'
+        ? block.counts.public_channels
+        : block.counts?.connected_to_channels
     },
-    {
-      Header: 'Title',
-      id: ColumnIds.title,
-      Cell: PotentiallyEditableBlockCell,
-      accessor: block => ({ block, attr: 'title' } as const),
-      width: '30%',
-    },
-    {
-      Header: 'Added at',
-      id: ColumnIds.addedAt,
-      accessor: block => '__typename' in block && block?.connection?.created_at,
-      Cell: StandardCell,
-      width: '200px',
-    },
-    {
-      Header: 'Author',
-      id: ColumnIds.author,
-      accessor: block => '__typename' in block && block?.user?.name,
-      Cell: StandardCell,
-      width: '200px',
-    },
-    {
-      Header: 'Connections',
-      id: ColumnIds.connections,
-      accessor: block => {
-        if ('isNull' in block) {
-          return null
-        }
-
-        return block.counts?.__typename === 'BlockCounts'
-          ? block.counts.public_channels
-          : block.counts?.connected_to_channels
-      },
-      Cell: StandardCell,
-      width: '200px',
-    },
-    {
-      Header: ColumnIds.addSettings,
-      id: ColumnIds.addSettings,
-      Cell: StandardCell,
-      width: '70px',
-    },
-  ])
+    Cell: StandardCell,
+    width: '200px',
+  },
+  {
+    Header: ColumnIds.addSettings,
+    id: ColumnIds.addSettings,
+    accessor: block => ('__typename' in block ? block?.id : null),
+    Cell: SettingsCell,
+    width: '70px',
+  },
+]
 
 const sortAndSortDirReducer: React.Reducer<SortAndSortDir, SortAndSortDir> = (
   prevState,
@@ -139,15 +113,6 @@ const sortAndSortDirReducer: React.Reducer<SortAndSortDir, SortAndSortDir> = (
   }
 
   return action
-}
-
-/**
- * If we want to allow a column to be sortable,
- * add the column's ID to this object with the Sorts
- * value it should control
- */
-export const columnIdsToSorts: { [key in ColumnIds]?: Sorts } = {
-  [ColumnIds.addedAt]: Sorts.CREATED_AT,
 }
 
 export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
@@ -365,37 +330,57 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           setSortAndSortDir={setSortAndSortDir}
           addBlock={addBlock}
         />
-        <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
-            prepareRow(row)
+        <SortableTableContainer
+          transitionDuration={0}
+          distance={1}
+          useDragHandle
+          axis="y"
+          useWindowAsScrollContainer
+        >
+          <tbody {...getTableBodyProps()}>
+            {rows.map(row => {
+              prepareRow(row)
 
-            const { key: rowKey, ...rowProps } = row.getRowProps()
-            const sharedIntersectionObserverBoxProps = {
-              key: rowKey,
-              id: row.index,
-              callback: intersectionObserverCallback,
-              options: intersectionObserverOptions,
-            }
+              const { key: rowKey, ...rowProps } = row.getRowProps()
+              const sharedIntersectionObserverBoxProps = {
+                id: row.index,
+                callback: intersectionObserverCallback,
+                options: intersectionObserverOptions,
+              }
 
-            if ('__typename' in row.original) {
-              if (row.isExpanded && row.original.__typename !== 'Channel') {
+              let tableItemContent: JSX.Element | null = null
+              if (
+                row.isExpanded &&
+                '__typename' in row.original &&
+                row.original.__typename !== 'Channel'
+              ) {
+                /**
+                 * If the row is an expanded connectable
+                 */
+
                 const componentProps: ExpandedBlockRowProps = {
                   block: row.original,
                   columnLength: columns.length,
                   ...rowProps,
                   onMinimize: () => row.toggleRowExpanded(false),
                 }
-                return (
+                tableItemContent = (
                   <IntersectionObserverBox
                     {...sharedIntersectionObserverBoxProps}
                     Component={ExpandedBlockRow}
                     componentProps={componentProps}
                   />
                 )
-              }
+              } else if (
+                row.isExpanded &&
+                '__typename' in row.original &&
+                row.original.__typename === 'Channel'
+              ) {
+                /**
+                 * If the row is an expanded channel
+                 */
 
-              if (row.isExpanded && row.original.__typename === 'Channel') {
-                return (
+                tableItemContent = (
                   <IntersectionObserverBox
                     {...sharedIntersectionObserverBoxProps}
                     Component={ExpandedChannelRow}
@@ -407,10 +392,15 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
                     }}
                   />
                 )
-              }
+              } else if (
+                '__typename' in row.original &&
+                row.original.__typename === 'Channel'
+              ) {
+                /**
+                 * If the row is a channel
+                 */
 
-              if (row.original.__typename === 'Channel') {
-                return (
+                tableItemContent = (
                   <IntersectionObserverBox
                     {...sharedIntersectionObserverBoxProps}
                     Component={ChannelRow}
@@ -421,35 +411,62 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
                     }}
                   />
                 )
-              }
-            }
+              } else {
+                /**
+                 * If the row is a connectable or null
+                 */
 
-            return (
-              <IntersectionObserverBox
-                {...sharedIntersectionObserverBoxProps}
-                key={rowKey}
-                Component={TR}
-                componentProps={{
-                  ...rowProps,
-                  onClick: () => row.toggleRowExpanded(true),
-                  children: row.cells.map(cell => {
-                    const { key: cellKey, ...cellProps } = cell.getCellProps()
-                    return (
-                      <TD
-                        key={cellKey}
-                        width={cell.column.width}
-                        maxWidth={cell.column.maxWidth}
-                        {...cellProps}
-                      >
-                        {cell.render('Cell')}
-                      </TD>
-                    )
-                  }),
-                }}
-              />
-            )
-          })}
-        </tbody>
+                tableItemContent = (
+                  <IntersectionObserverBox
+                    {...sharedIntersectionObserverBoxProps}
+                    Component={TR}
+                    componentProps={{
+                      ...rowProps,
+                      onClick: () => row.toggleRowExpanded(true),
+                      children: row.cells.map(cell => {
+                        const {
+                          key: cellKey,
+                          ...cellProps
+                        } = cell.getCellProps()
+                        return (
+                          <TD
+                            key={cellKey}
+                            width={cell.column.width}
+                            maxWidth={cell.column.maxWidth}
+                            {...cellProps}
+                          >
+                            {cell.render('Cell')}
+                          </TD>
+                        )
+                      }),
+                    }}
+                  />
+                )
+              }
+
+              const isRowMovable =
+                sortAndSortDir.sort === Sorts.POSITION && !row.isExpanded
+
+              return (
+                <SortableTableItem
+                  /**
+                   * There's an issue between react-sortable-hoc
+                   * and react-table where clicking and dragging
+                   * after a row is expanded doesn't work. Changing
+                   * the key every time a row's expanded state changes
+                   * forces the row to re render and allows dragging to
+                   * work again
+                   */
+                  key={`${rowKey}.${row.isExpanded}`}
+                  index={row.index}
+                  disabled={!isRowMovable}
+                >
+                  {tableItemContent}
+                </SortableTableItem>
+              )
+            })}
+          </tbody>
+        </SortableTableContainer>
       </Table>
     </Box>
   )
