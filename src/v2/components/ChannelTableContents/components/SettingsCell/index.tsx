@@ -19,6 +19,5 @@ interface SettingsCellProps {
 }
 
 export const SettingsCell: React.FC<SettingsCellProps> = ({ value }) => {
-  // const handleDrag = useCallback(() => {}, [])
   return <Cell>{value && <Drag />}</Cell>
 }

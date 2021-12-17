@@ -42,6 +42,7 @@ import {
 } from '__generated__/ConnectableTableBlokk'
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import CONNECTABLE_TABLE_BLOKK_QUERY from './queries/TableConnectableBlokk'
+import { SortEndHandler } from 'react-sortable-hoc'
 
 interface ChannelTableQueryProps {
   id: string
@@ -133,6 +134,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     addBlock,
     updateBlock,
     getBlocksFromCache,
+    moveBlock,
   } = usePaginatedBlocks<
     ChannelTableContentsSet,
     ChannelTableContentsSetVariables,
@@ -168,6 +170,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
       addBlock={addBlock}
       updateBlock={updateBlock}
       getBlocksFromCache={getBlocksFromCache}
+      moveBlock={moveBlock}
     />
   )
 }
@@ -185,6 +188,7 @@ interface ChannelTableContentsProps {
     type: BaseConnectableTypeEnum | false
   }) => Promise<void>
   getBlocksFromCache: () => Array<ChannelTableContentsSet_channel_blokks | null> | null
+  moveBlock: (args: { oldIndex: number; newIndex: number }) => void
 }
 
 export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
@@ -197,6 +201,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   addBlock,
   updateBlock,
   getBlocksFromCache,
+  moveBlock,
 }) => {
   /**
    * Build the table rows
@@ -320,6 +325,15 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     []
   )
 
+  const onSortEnd = useCallback<SortEndHandler>(
+    ({ oldIndex, newIndex }) => {
+      if (sortAndSortDir.sort === Sorts.POSITION) {
+        moveBlock({ oldIndex, newIndex })
+      }
+    },
+    [moveBlock, sortAndSortDir.sort]
+  )
+
   return (
     <Box>
       <Table {...getTableProps()}>
@@ -336,6 +350,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           useDragHandle
           axis="y"
           useWindowAsScrollContainer
+          onSortEnd={onSortEnd}
         >
           <tbody {...getTableBodyProps()}>
             {rows.map(row => {
