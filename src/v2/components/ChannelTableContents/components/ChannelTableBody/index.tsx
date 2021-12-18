@@ -8,7 +8,6 @@ import { SortAndSortDir, TableData } from '../../lib/types'
 import { ChannelRow } from '../ChannelRow'
 import ExpandedBlockRow, { ExpandedBlockRowProps } from '../ExpandedBlockRow'
 import ExpandedChannelRow from '../ExpandedChannelRow'
-import { SortableTableContainer } from '../SortableTableContainer'
 import { TD, TR } from '../TableComponents'
 import { SortableTableItem } from '../SortableTableItem'
 
@@ -32,13 +31,7 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
   sortAndSortDir,
 }) => {
   return (
-    <SortableTableContainer
-      transitionDuration={0}
-      distance={1}
-      useDragHandle
-      axis="y"
-      useWindowAsScrollContainer
-    >
+    <>
       {rows.map(row => {
         prepareRow(row)
 
@@ -163,6 +156,6 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
           </SortableTableItem>
         )
       })}
-    </SortableTableContainer>
+    </>
   )
 }

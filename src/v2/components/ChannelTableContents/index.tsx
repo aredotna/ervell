@@ -33,6 +33,7 @@ import ChannelTableHeader from './components/ChannelTableHeader'
 import { SettingsCell } from './components/SettingsCell'
 import { ChannelTableBody } from './components/ChannelTableBody'
 import LoadingRow from './components/LoadingRow'
+import { SortableTableContainer } from './components/SortableTableContainer'
 
 import { ColumnIds, SortAndSortDir, TableData } from './lib/types'
 import { FIRST_COLUMN_WIDTH } from './lib/constants'
@@ -338,13 +339,12 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   const onSortEnd = useCallback<SortEndHandler>(
     ({ oldIndex, newIndex }) => {
       if (sortAndSortDir.sort === Sorts.POSITION) {
+        console.log('wtf')
         moveBlock({ oldIndex, newIndex })
       }
     },
     [moveBlock, sortAndSortDir.sort]
   )
-
-  console.log(onSortEnd)
 
   return (
     <Box>
@@ -358,20 +358,35 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           setUser={setUser}
           addBlock={addBlock}
         />
-        <tbody {...getTableBodyProps()}>
-          {loading && <LoadingRow columnLength={STANDARD_HEADERS.length} />}
 
-          {!loading && (
-            <ChannelTableBody
-              rows={rows}
-              prepareRow={prepareRow}
-              intersectionObserverCallback={intersectionObserverCallback}
-              columns={columns}
-              intersectionObserverOptions={intersectionObserverOptions}
-              sortAndSortDir={sortAndSortDir}
-            />
-          )}
-        </tbody>
+        {loading && (
+          <tbody {...getTableBodyProps()}>
+            <LoadingRow columnLength={STANDARD_HEADERS.length} />
+          </tbody>
+        )}
+
+        {!loading && (
+          <SortableTableContainer
+            transitionDuration={0}
+            distance={1}
+            useDragHandle
+            axis="y"
+            useWindowAsScrollContainer
+            onSortEnd={onSortEnd}
+          >
+            <tbody {...getTableBodyProps()}>
+              <ChannelTableBody
+                key={`${sortAndSortDir.sort}.${sortAndSortDir.dir}`}
+                rows={rows}
+                prepareRow={prepareRow}
+                intersectionObserverCallback={intersectionObserverCallback}
+                columns={columns}
+                intersectionObserverOptions={intersectionObserverOptions}
+                sortAndSortDir={sortAndSortDir}
+              />
+            </tbody>
+          </SortableTableContainer>
+        )}
       </Table>
     </Box>
   )
