@@ -339,7 +339,6 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   const onSortEnd = useCallback<SortEndHandler>(
     ({ oldIndex, newIndex }) => {
       if (sortAndSortDir.sort === Sorts.POSITION) {
-        console.log('wtf')
         moveBlock({ oldIndex, newIndex })
       }
     },
