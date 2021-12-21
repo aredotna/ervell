@@ -1,11 +1,4 @@
-import {
-  DocumentNode,
-  isReference,
-  Reference,
-  StoreObject,
-  useQuery,
-} from '@apollo/client'
-import { Modifier } from '@apollo/client/cache/core/types/common'
+import { DocumentNode, Reference, StoreObject, useQuery } from '@apollo/client'
 import { useRef, useCallback, useMemo } from 'react'
 
 import { ChannelContentsConnectable } from '__generated__/ChannelContentsConnectable'
@@ -262,9 +255,7 @@ export function usePaginatedBlocks<
    */
   const updateCache: (
     updater: (args: {
-      blockArgs: Parameters<
-        Modifier<null | Array<StoreObject | Reference | null>>
-      >
+      prevBlocks: Array<Block<ChannelQueryData>> | null
       prevCount: number
     }) => {
       newBlocks?: Array<StoreObject | Reference | null>
@@ -272,58 +263,38 @@ export function usePaginatedBlocks<
     } | null
   ) => void = useCallback(
     updater => {
-      // The normalized cache name of the channel
-      const id = client.cache.identify({
-        __typename: 'Channel',
-        id: channelId,
-      })
-
-      // Read the current contentCount of the channel instead
-      // of passing it in as a useCallback dependency to reduce
-      // re renders
-      const prevCount = getQueryFromCache()?.channel?.counts?.contents ?? 0
-
-      // Values we'll be saving during the first cache.modify call
-      let newBlocks: Array<any>
-      let newCount = 0
-
-      // This is a dry run of the cache modification that sets the
-      // newBlocks and blockLengthDiff. We need to do a dry run
-      // Because the updated counts.contents value requires knowing
-      // both the previous and next values of blokks
-      client.cache.modify({
-        id: id,
-        fields: {
-          blokks(b, options) {
-            const res = updater({
-              blockArgs: [b, options],
-              prevCount: prevCount,
-            })
-            newBlocks = res?.newBlocks ?? b
-            newCount = res?.newCount ?? prevCount
-
-            return b
-          },
+      client.cache.updateQuery<ChannelQueryData, ChannelQueryVariables>(
+        {
+          query: channelQueryData.query,
+          variables: channelQueryData.variables,
         },
-      })
+        data => {
+          const prevBlocks = data?.channel?.blokks ?? null
+          const prevCount = data?.channel?.counts?.contents ?? 0
 
-      // Do the actual modification of blokks and counts
-      client.cache.modify({
-        id: id,
-        fields: {
-          blokks(b) {
-            return newBlocks || b
-          },
-          counts(countsCache) {
-            return {
-              ...countsCache,
-              contents: newCount,
-            }
-          },
-        },
-      })
+          const newValues = updater({ prevBlocks, prevCount })
+
+          if (!newValues) {
+            return null
+          }
+
+          const result: ChannelQueryData = {
+            ...data,
+            channel: {
+              ...data?.channel,
+              counts: {
+                ...data?.channel?.counts,
+                contents: newValues.newCount ?? prevCount,
+              },
+              blokks: newValues.newBlocks ?? prevBlocks,
+            },
+          } as ChannelQueryData
+
+          return result
+        }
+      )
     },
-    [channelId, client.cache, getQueryFromCache]
+    [channelQueryData, client.cache]
   )
 
   /**
@@ -424,7 +395,7 @@ export function usePaginatedBlocks<
     ChannelQueryData
   >['removeBlock'] = useCallback(
     ({ id, type }) => {
-      updateCache(({ blockArgs: [prevBlocks, { readField }], prevCount }) => {
+      updateCache(({ prevBlocks, prevCount }) => {
         // Early exit if there aren't any blocks in the cache yet
         if (!prevBlocks) {
           return null
@@ -432,10 +403,7 @@ export function usePaginatedBlocks<
 
         // Find the block in the blocks array
         const blockIndex = prevBlocks.findIndex(
-          block =>
-            block &&
-            readField('id', block) === id &&
-            readField('__typename', block) === type
+          block => block && block.id === id && block.__typename === type
         )
 
         // Early exit if the block can't be found
@@ -472,7 +440,7 @@ export function usePaginatedBlocks<
     ChannelQueryData
   >['moveBlock'] = useCallback(
     ({ oldIndex, newIndex }) => {
-      updateCache(({ blockArgs: [prevBlocks, { readField }], prevCount }) => {
+      updateCache(({ prevBlocks, prevCount }) => {
         // Early exit if there aren't any blocks in the cache yet
         if (!prevBlocks) {
           return null
@@ -493,8 +461,8 @@ export function usePaginatedBlocks<
 
         // Get the id and typename from the cache. Early exit if we
         // cant read any of those values
-        const id = readField('id', block) || undefined
-        const typename = readField('__typename', block) || undefined
+        const id = block.id || undefined
+        const typename = block.__typename || undefined
         if (id === undefined || typename === undefined) {
           return null
         }
@@ -581,7 +549,7 @@ export function usePaginatedBlocks<
       }
 
       // Update the cache to replace the previous block with the new block
-      updateCache(({ blockArgs: [prevBlocks, { readField, toReference }] }) => {
+      updateCache(({ prevBlocks }) => {
         // Early exit if there aren't any blocks in the cache yet
         if (!prevBlocks) {
           return null
@@ -594,7 +562,7 @@ export function usePaginatedBlocks<
 
         // Find the block in the blocks array
         const blockIndex = prevBlocks.findIndex(b => {
-          return b && readField('id', b) === parseInt(id)
+          return b && b.id === parseInt(id, 10)
         })
 
         // Early exit if the block can't be found
@@ -602,17 +570,9 @@ export function usePaginatedBlocks<
           return null
         }
 
-        // Get the block reference
-        const blockRef = toReference(block)
-
-        // Early exit if block ref can't be found
-        if (!isReference(blockRef)) {
-          return null
-        }
-
         // Build the new blocks array
         const newBlocks = prevBlocks.map((prevBlock, i) =>
-          i === blockIndex ? blockRef : prevBlock
+          i === blockIndex ? block : prevBlock
         )
 
         return {

@@ -1,5 +1,12 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react'
+import React, {
+  useCallback,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+} from 'react'
 import { Column, useExpanded, useTable } from 'react-table'
+import { SortEndHandler } from 'react-sortable-hoc'
 
 import {
   ChannelTableContentsSet,
@@ -12,9 +19,10 @@ import {
   SortDirection,
   Sorts,
 } from '__generated__/globalTypes'
+import { ChannelPage_channel } from '__generated__/ChannelPage'
+import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 
 import Box from 'v2/components/UI/Box'
-
 import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
 
 import { ContentCell } from './components/ContentCell'
@@ -22,38 +30,29 @@ import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBl
 import { StandardCell } from './components/StandardCell'
 import { Table } from './components/TableComponents'
 import ChannelTableHeader from './components/ChannelTableHeader'
+import { SettingsCell } from './components/SettingsCell'
+import { ChannelTableBody } from './components/ChannelTableBody'
+import LoadingRow from './components/LoadingRow'
+import { SortableTableContainer } from './components/SortableTableContainer'
 
-import { TableData } from './lib/types'
+import { ColumnIds, SortAndSortDir, TableData } from './lib/types'
 import { FIRST_COLUMN_WIDTH } from './lib/constants'
 import { parsePayload, PusherPayload, usePusher } from 'v2/hooks/usePusher'
 import { getConnectableType } from 'v2/util/getConnectableType'
 
-import { ChannelPage_channel } from '__generated__/ChannelPage'
 import {
   ConnectableTableBlokk,
   ConnectableTableBlokkVariables,
 } from '__generated__/ConnectableTableBlokk'
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import CONNECTABLE_TABLE_BLOKK_QUERY from './queries/TableConnectableBlokk'
-import { ChannelTableBody } from './components/ChannelTableBody'
-import LoadingRow from './components/LoadingRow'
-import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 
 interface ChannelTableQueryProps {
   id: string
   channel: ChannelPage_channel
 }
 
-export enum ColumnIds {
-  content = 'content',
-  title = 'title',
-  addedAt = 'addedAt',
-  author = 'author',
-  connections = 'connections',
-  addSettings = 'addSettings',
-}
-
-export const STANDARD_HEADERS = [
+export const STANDARD_HEADERS: Array<Column<TableData>> = [
   {
     Header: 'Content',
     id: ColumnIds.content,
@@ -100,26 +99,34 @@ export const STANDARD_HEADERS = [
   {
     Header: ColumnIds.addSettings,
     id: ColumnIds.addSettings,
-    Cell: StandardCell,
+    accessor: block => ('__typename' in block ? block?.id : null),
+    Cell: SettingsCell,
     width: '100px',
   },
 ]
 
-/**
- * If we want to allow a column to be sortable,
- * add the column's ID to this object with the Sorts
- * value it should control
- */
-export const columnIdsToSorts: { [key in ColumnIds]?: Sorts } = {
-  [ColumnIds.addedAt]: Sorts.CREATED_AT,
+const sortAndSortDirReducer: React.Reducer<SortAndSortDir, SortAndSortDir> = (
+  prevState,
+  action
+) => {
+  if (prevState.sort === action.sort && prevState.dir === action.dir) {
+    return {
+      sort: Sorts.POSITION,
+      dir: SortDirection.DESC,
+    }
+  }
+
+  return action
 }
 
 export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
   id,
   channel,
 }) => {
-  const [sort, setSort] = useState<Sorts>(Sorts.CREATED_AT)
-  const [direction, setDirection] = useState<SortDirection>(SortDirection.DESC)
+  const [sortAndSortDir, setSortAndSortDir] = useReducer(
+    sortAndSortDirReducer,
+    { sort: Sorts.POSITION, dir: SortDirection.DESC }
+  )
   const [type, setType] = useState<ConnectableTypeEnum | null>(null)
   const [
     user,
@@ -134,6 +141,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     addBlock,
     updateBlock,
     getBlocksFromCache,
+    moveBlock,
     loading,
   } = usePaginatedBlocks<
     ChannelTableContentsSet,
@@ -142,8 +150,8 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     ConnectableTableBlokkVariables
   >({
     channelQuery: CHANNEL_TABLE_CONTENTS_QUERY,
-    direction,
-    sort,
+    direction: sortAndSortDir.dir,
+    sort: sortAndSortDir.sort,
     channelId: id,
     type,
     user_id: user?.id.toString(),
@@ -166,17 +174,16 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
       contentCount={contentCount}
       blocks={blocks}
       channel={channel}
-      sort={sort}
-      setSort={setSort}
+      sortAndSortDir={sortAndSortDir}
+      setSortAndSortDir={setSortAndSortDir}
       loading={loading}
-      direction={direction}
-      setDirection={setDirection}
       setType={setType}
       setUser={setUser}
       onItemIntersected={onItemIntersected}
       addBlock={addBlock}
       updateBlock={updateBlock}
       getBlocksFromCache={getBlocksFromCache}
+      moveBlock={moveBlock}
     />
   )
 }
@@ -185,10 +192,8 @@ interface ChannelTableContentsProps {
   blocks: Array<ChannelTableContentsSet_channel_blokks | null>
   channel: ChannelPage_channel
   contentCount: number
-  sort: Sorts
-  setSort: (value: Sorts) => void
-  direction: SortDirection
-  setDirection: (value: SortDirection) => void
+  sortAndSortDir: SortAndSortDir
+  setSortAndSortDir: React.Dispatch<SortAndSortDir>
   setType: (value: ConnectableTypeEnum) => void
   setUser: (value: ChannelTableConnectors_channel_connectors) => void
   onItemIntersected: (index: number) => void
@@ -198,23 +203,23 @@ interface ChannelTableContentsProps {
     id: string
     type: BaseConnectableTypeEnum | false
   }) => Promise<void>
-  getBlocksFromCache: () => ChannelTableContentsSet_channel_blokks[]
+  getBlocksFromCache: () => Array<ChannelTableContentsSet_channel_blokks | null> | null
+  moveBlock: (args: { oldIndex: number; newIndex: number }) => void
 }
 
 export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   blocks,
   channel,
   contentCount,
-  sort,
-  setSort,
-  direction,
-  setDirection,
+  sortAndSortDir,
+  setSortAndSortDir,
   setType,
   setUser,
   onItemIntersected,
   addBlock,
   updateBlock,
   getBlocksFromCache,
+  moveBlock,
   loading,
 }) => {
   /**
@@ -230,28 +235,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   }, [blocks, contentCount])
 
   const tableColumns = useMemo<Array<Column<TableData>>>(() => {
-    /**
-     * This function doesn't have any runtime purpose,
-     * but we're using the advanced control of
-     * generic types available to us in functions
-     * to assert that every Cell component is
-     * correctly typed to match the return value
-     * of its column's accessor function.
-     *
-     * This is only called once, so the overhead
-     * is very low for the safety it provides.
-     */
-    function guard<
-      T extends Column<TableData> & {
-        Cell: React.FC<{ value: any }>
-        accessor?: (row: TableData) => React.ComponentProps<T['Cell']>['value']
-        id: ColumnIds
-      }
-    >(columns: Array<T>) {
-      return columns
-    }
-
-    return guard(STANDARD_HEADERS)
+    return STANDARD_HEADERS
   }, [])
 
   const getRowId = useCallback((row: TableData, index: number): string => {
@@ -321,6 +305,8 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
       //
       const cacheBlocks = getBlocksFromCache()
 
+      if (!cacheBlocks) return
+
       const blockIndex = cacheBlocks.findIndex(
         block =>
           block &&
@@ -350,33 +336,56 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     []
   )
 
+  const onSortEnd = useCallback<SortEndHandler>(
+    ({ oldIndex, newIndex }) => {
+      if (sortAndSortDir.sort === Sorts.POSITION) {
+        moveBlock({ oldIndex, newIndex })
+      }
+    },
+    [moveBlock, sortAndSortDir.sort]
+  )
+
   return (
     <Box>
       <Table {...getTableProps()}>
         <ChannelTableHeader
           headerGroups={headerGroups}
-          sort={sort}
           channel={channel}
-          direction={direction}
-          setSort={setSort}
-          setDirection={setDirection}
+          setSortAndSortDir={setSortAndSortDir}
+          sortAndSortDir={sortAndSortDir}
           setType={setType}
           setUser={setUser}
           addBlock={addBlock}
         />
-        <tbody {...getTableBodyProps()}>
-          {loading && <LoadingRow columnLength={STANDARD_HEADERS.length} />}
 
-          {!loading && (
-            <ChannelTableBody
-              rows={rows}
-              prepareRow={prepareRow}
-              intersectionObserverCallback={intersectionObserverCallback}
-              columns={columns}
-              intersectionObserverOptions={intersectionObserverOptions}
-            />
-          )}
-        </tbody>
+        {loading && (
+          <tbody {...getTableBodyProps()}>
+            <LoadingRow columnLength={STANDARD_HEADERS.length} />
+          </tbody>
+        )}
+
+        {!loading && (
+          <SortableTableContainer
+            transitionDuration={0}
+            distance={1}
+            useDragHandle
+            axis="y"
+            useWindowAsScrollContainer
+            onSortEnd={onSortEnd}
+          >
+            <tbody {...getTableBodyProps()}>
+              <ChannelTableBody
+                key={`${sortAndSortDir.sort}.${sortAndSortDir.dir}`}
+                rows={rows}
+                prepareRow={prepareRow}
+                intersectionObserverCallback={intersectionObserverCallback}
+                columns={columns}
+                intersectionObserverOptions={intersectionObserverOptions}
+                sortAndSortDir={sortAndSortDir}
+              />
+            </tbody>
+          </SortableTableContainer>
+        )}
       </Table>
     </Box>
   )

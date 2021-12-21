@@ -8,15 +8,15 @@ import SortArrows from 'v2/components/UI/SortArrows'
 
 import constants from 'v2/styles/constants'
 import { TableAddButton } from './components/FilterAndAddButton'
-import { ColumnIds, columnIdsToSorts } from '../..'
 import {
   ConnectableTypeEnum,
   SortDirection,
   Sorts,
 } from '__generated__/globalTypes'
-import { TableData } from '../../lib/types'
+import { ColumnIds, SortAndSortDir, TableData } from '../../lib/types'
 import { ChannelPage_channel } from '__generated__/ChannelPage'
 import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
+import { columnIdsToSorts } from '../../lib/constants'
 
 export const TD = styled.td`
   color: ${x => x.theme.colors.gray.bold};
@@ -73,10 +73,8 @@ const SettingsAddTH = styled(TH)`
 interface ChannelTableHeaderProps {
   headerGroups: HeaderGroup<TableData>[]
   channel: ChannelPage_channel
-  sort: Sorts
-  setSort: (value: Sorts) => void
-  direction: SortDirection
-  setDirection: (value: SortDirection) => void
+  sortAndSortDir: SortAndSortDir
+  setSortAndSortDir: React.Dispatch<SortAndSortDir>
   setType: (value: ConnectableTypeEnum) => void
   setUser: (value: ChannelTableConnectors_channel_connectors) => void
   addBlock: () => void
@@ -85,15 +83,13 @@ interface ChannelTableHeaderProps {
 export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
   headerGroups,
   channel,
-  sort,
-  setSort,
-  setDirection,
+  sortAndSortDir,
+  setSortAndSortDir,
   setType,
   setUser,
-  direction,
   addBlock,
 }) => {
-  const headerRef = useRef<HTMLTableSectionElement>()
+  const headerRef = useRef<HTMLTableSectionElement>(null)
 
   return (
     <thead ref={headerRef}>
@@ -107,8 +103,8 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
           <HeaderRow key={headerGroupKey} {...headerGroupProps}>
             {headerGroup.headers.map(column => {
               if (
-                column.Header.toString() === ColumnIds.addSettings &&
-                channel.can.add_to &&
+                column.Header?.toString() === ColumnIds.addSettings &&
+                channel.can?.add_to &&
                 channel.can.add_to_as_premium
               ) {
                 return (
@@ -130,9 +126,9 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
 
               let sortArrowState: 'off' | 'up' | 'down' | undefined
               if (columnSortType) {
-                if (columnSortType === sort) {
+                if (columnSortType === sortAndSortDir.sort) {
                   sortArrowState =
-                    direction === SortDirection.ASC ? 'up' : 'down'
+                    sortAndSortDir.dir === SortDirection.ASC ? 'up' : 'down'
                 } else {
                   sortArrowState = 'off'
                 }
@@ -151,12 +147,16 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
                       <SortArrows
                         state={sortArrowState}
                         onDown={() => {
-                          setSort(columnSortType)
-                          setDirection(SortDirection.DESC)
+                          setSortAndSortDir({
+                            sort: columnSortType,
+                            dir: SortDirection.DESC,
+                          })
                         }}
                         onUp={() => {
-                          setSort(columnSortType)
-                          setDirection(SortDirection.ASC)
+                          setSortAndSortDir({
+                            sort: columnSortType,
+                            dir: SortDirection.ASC,
+                          })
                         }}
                       />
                     )}
