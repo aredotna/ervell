@@ -64,7 +64,7 @@ export const STANDARD_HEADERS: Array<Column<TableData>> = [
     Header: 'Title',
     id: ColumnIds.title,
     Cell: PotentiallyEditableBlockCell,
-    accessor: block => ({ block, attr: 'title' } as const),
+    accessor: block => ({ block, attr: 'title' }),
     width: '30%',
   },
   {

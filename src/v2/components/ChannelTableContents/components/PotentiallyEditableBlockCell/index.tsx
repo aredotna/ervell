@@ -1,14 +1,15 @@
-import { useLazyQuery, useMutation } from '@apollo/client'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
+import { useLazyQuery, useMutation } from '@apollo/client'
 
 import Icons from 'v2/components/UI/Icons'
 import Text from 'v2/components/UI/Text'
 import { Input } from 'v2/components/UI/Inputs'
+import Box from 'v2/components/UI/Box'
 
-import { TableData } from '../../lib/types'
-import updateBlockCellMutation from './mutations/updateBlockCell'
-import verifyEditableQuery from './query/verifyEditable'
+import { TableData } from 'v2/components/ChannelTableContents/lib/types'
+import updateBlockCellMutation from 'v2/components/ChannelTableContents/components/PotentiallyEditableBlockCell/mutations/updateBlockCell'
+import verifyEditableQuery from 'v2/components/ChannelTableContents/components/PotentiallyEditableBlockCell/query/verifyEditable'
 
 import { ChannelTableContentsSet_channel_blokks } from '__generated__/ChannelTableContentsSet'
 import {
@@ -19,7 +20,6 @@ import {
   VerifyEditableBlock,
   VerifyEditableBlockVariables,
 } from '__generated__/VerifyEditableBlock'
-import Box from 'v2/components/UI/Box'
 
 type EditableCellMode =
   | 'resting'
@@ -80,6 +80,7 @@ const EditableInput = styled(Input)`
 export const PotentiallyEditableBlockCell: React.FC<{
   value: { block: TableData; attr: 'title' }
 }> = ({ value: { block, attr } }) => {
+  console.log({ block, attr }, "'isNull' in block", 'isNull' in block)
   if ('isNull' in block) {
     return null
   }
@@ -99,7 +100,10 @@ const PotentiallyEditableBlockCellNonNull = ({
   const [verifyEditable, { data, loading }] = useLazyQuery<
     VerifyEditableBlock,
     VerifyEditableBlockVariables
-  >(verifyEditableQuery, { variables: { id: block.id?.toString() } })
+  >(verifyEditableQuery, {
+    variables: { id: block.id?.toString() },
+    ssr: false,
+  })
 
   const [updateBlockCell] = useMutation<
     updateBlockCellMutationType,
