@@ -123,11 +123,9 @@ export const SettingsCell: React.FC<SettingsCellProps> = ({
 
   const valueIsNull = !value || 'isNull' in value
 
-  console.log({ channel, valueIsNull })
-
   return (
     <Cell>
-      {value && (
+      {value && channel.can.update && (
         <>
           <Container>
             {!valueIsNull && (
