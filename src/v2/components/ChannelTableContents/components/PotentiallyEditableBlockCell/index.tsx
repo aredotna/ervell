@@ -80,7 +80,6 @@ const EditableInput = styled(Input)`
 export const PotentiallyEditableBlockCell: React.FC<{
   value: { block: TableData; attr: 'title' }
 }> = ({ value: { block, attr } }) => {
-  console.log({ block, attr }, "'isNull' in block", 'isNull' in block)
   if ('isNull' in block) {
     return null
   }

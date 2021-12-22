@@ -45,7 +45,6 @@ export interface SharedChannelPage_channel_can {
   add_to: boolean | null;
   reorder_connections: boolean | null;
   add_to_as_premium: boolean | null;
-  remove_connections: boolean | null;
 }
 
 export interface SharedChannelPage_channel_user {

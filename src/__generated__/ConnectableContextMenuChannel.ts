@@ -9,8 +9,7 @@
 
 export interface ConnectableContextMenuChannel_can {
   __typename: "ChannelCan";
-  remove_connections: boolean | null;
-  reorder_connections: boolean | null;
+  update: boolean | null;
 }
 
 export interface ConnectableContextMenuChannel {

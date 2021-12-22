@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react'
 import { Column, useExpanded, useTable } from 'react-table'
-import { SortEndHandler } from 'react-sortable-hoc'
+import { SortEndHandler, SortStartHandler } from 'react-sortable-hoc'
 
 import {
   ChannelTableContentsSet,
@@ -99,7 +99,7 @@ export const STANDARD_HEADERS: Array<Column<TableData>> = [
   {
     Header: ColumnIds.addSettings,
     id: ColumnIds.addSettings,
-    accessor: block => ('__typename' in block ? block?.id : null),
+    accessor: block => ('__typename' in block ? block : null),
     Cell: SettingsCell,
     width: '100px',
   },
@@ -142,6 +142,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     updateBlock,
     getBlocksFromCache,
     moveBlock,
+    removeBlock,
     loading,
   } = usePaginatedBlocks<
     ChannelTableContentsSet,
@@ -184,6 +185,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
       updateBlock={updateBlock}
       getBlocksFromCache={getBlocksFromCache}
       moveBlock={moveBlock}
+      removeBlock={removeBlock}
     />
   )
 }
@@ -205,6 +207,7 @@ interface ChannelTableContentsProps {
   }) => Promise<void>
   getBlocksFromCache: () => Array<ChannelTableContentsSet_channel_blokks | null> | null
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
+  removeBlock: (args: { id: number; type: string }) => void
 }
 
 export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
@@ -220,6 +223,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   updateBlock,
   getBlocksFromCache,
   moveBlock,
+  removeBlock,
   loading,
 }) => {
   /**
@@ -345,6 +349,14 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     [moveBlock, sortAndSortDir.sort]
   )
 
+  const onSortStart = useCallback<SortStartHandler>(({ node, helper }: any) => {
+    node.childNodes.forEach((td: HTMLTableCellElement, index: number) => {
+      helper.childNodes[index].style.width = `${td.offsetWidth}px !important`
+    })
+  }, [])
+
+  const tableRef = useRef<HTMLTableSectionElement>()
+
   return (
     <Box>
       <Table {...getTableProps()}>
@@ -369,19 +381,26 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
             transitionDuration={0}
             distance={1}
             useDragHandle
+            helperClass="dragging"
             axis="y"
+            lockAxis="y"
             useWindowAsScrollContainer
+            helperContainer={tableRef.current}
             onSortEnd={onSortEnd}
+            onSortStart={onSortStart}
           >
-            <tbody {...getTableBodyProps()}>
+            <tbody {...getTableBodyProps()} ref={tableRef}>
               <ChannelTableBody
                 key={`${sortAndSortDir.sort}.${sortAndSortDir.dir}`}
                 rows={rows}
                 prepareRow={prepareRow}
+                channel={channel}
                 intersectionObserverCallback={intersectionObserverCallback}
                 columns={columns}
                 intersectionObserverOptions={intersectionObserverOptions}
                 sortAndSortDir={sortAndSortDir}
+                moveBlock={moveBlock}
+                removeBlock={removeBlock}
               />
             </tbody>
           </SortableTableContainer>

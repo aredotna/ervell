@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 import { channelTableContentsConnectableFragment } from '../fragments/TableConnectableBlokk'
+import { connectableContextMenuChannelFragment } from 'v2/components/ConnectableContextMenu/fragments/connectableContextMenu'
 
 export default gql`
   query ChannelTableContentsSet(
@@ -19,6 +20,7 @@ export default gql`
         blocks
         channels
       }
+      ...ConnectableContextMenuChannel
       blokks(
         page: $page
         per: $per
@@ -32,4 +34,5 @@ export default gql`
     }
   }
   ${channelTableContentsConnectableFragment}
+  ${connectableContextMenuChannelFragment}
 `

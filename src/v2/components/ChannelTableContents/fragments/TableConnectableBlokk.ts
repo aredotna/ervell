@@ -1,8 +1,11 @@
 import { gql } from '@apollo/client'
+import { connectableContextMenuConnectableFragment } from 'v2/components/ConnectableContextMenu/fragments/connectableContextMenu'
 
 export const channelTableContentsConnectableFragment = gql`
   fragment ChannelTableContentsConnectable on Konnectable {
     __typename
+
+    ...ConnectableContextMenuConnectable
 
     ... on Model {
       id
@@ -90,4 +93,5 @@ export const channelTableContentsConnectableFragment = gql`
       }
     }
   }
+  ${connectableContextMenuConnectableFragment}
 `
