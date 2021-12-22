@@ -10,6 +10,7 @@ import ExpandedBlockRow, { ExpandedBlockRowProps } from '../ExpandedBlockRow'
 import ExpandedChannelRow from '../ExpandedChannelRow'
 import { TD, TR } from '../TableComponents'
 import { SortableTableItem } from '../SortableTableItem'
+import { ChannelPage_channel } from '__generated__/ChannelPage'
 
 interface TableBodyProps {
   rows: Row<TableData>[]
@@ -20,6 +21,9 @@ interface TableBodyProps {
   intersectionObserverOptions: IntersectionObserverInit
   columns: ColumnInstance<TableData>[]
   sortAndSortDir: SortAndSortDir
+  removeBlock: (args: { id: number; type: string }) => void
+  moveBlock: (args: { oldIndex: number; newIndex: number }) => void
+  channel: ChannelPage_channel
 }
 
 export const ChannelTableBody: React.FC<TableBodyProps> = ({
@@ -29,6 +33,9 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
   intersectionObserverOptions,
   columns,
   sortAndSortDir,
+  removeBlock,
+  moveBlock,
+  channel,
 }) => {
   return (
     <>
@@ -119,6 +126,14 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
                 onClick: () => row.toggleRowExpanded(true),
                 children: row.cells.map(cell => {
                   const { key: cellKey, ...cellProps } = cell.getCellProps()
+                  const extraProps = cellKey.toString().includes('addSettings')
+                    ? {
+                        removeBlock,
+                        channel,
+                        moveBlock,
+                        index: row.index,
+                      }
+                    : {}
                   return (
                     <TD
                       key={cellKey}
@@ -126,7 +141,7 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
                       maxWidth={cell.column.maxWidth}
                       {...cellProps}
                     >
-                      {cell.render('Cell')}
+                      {cell.render('Cell', extraProps)}
                     </TD>
                   )
                 }),

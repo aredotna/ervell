@@ -25,9 +25,6 @@ export function Sticky({
     const cachedRef = ref.current
     const observer = new IntersectionObserver(
       ([e]) => {
-        console.log({
-          'e.intersectionRatio': e.intersectionRatio,
-        })
         return setStuck(e.intersectionRatio < 1)
       },
       { threshold: [1], rootMargin: '40px' }

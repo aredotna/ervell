@@ -12,7 +12,7 @@ export interface ChannelContents_can {
   add_to: boolean | null;
   reorder_connections: boolean | null;
   add_to_as_premium: boolean | null;
-  remove_connections: boolean | null;
+  update: boolean | null;
 }
 
 export interface ChannelContents_counts {

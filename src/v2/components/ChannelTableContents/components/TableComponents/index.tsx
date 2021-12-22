@@ -19,8 +19,9 @@ export const TD = styled.td`
   color: ${x => x.theme.colors.gray.bold};
   border: 1px solid ${x => x.theme.colors.gray.light};
   border-right: none;
+  background: ${x => x.theme.colors.background};
   font-size: ${x => x.theme.fontSizesIndexed.sx};
-  height: 30px;
+  height: 30px !important;
   line-height: 0;
   padding: 0;
   width: ${x => x.width};
@@ -48,6 +49,13 @@ export const TH = styled(TD)`
 
 export const TR = styled.tr`
   cursor: zoom-in;
+  background: ${x => x.theme.colors.background};
+  height: 30px !important;
+
+  .dragging {
+    display: table !important;
+    table-layout: fixed !important;
+  }
 
   &:hover ${TD} {
     border-top-color: ${x => x.theme.colors.gray.regular};

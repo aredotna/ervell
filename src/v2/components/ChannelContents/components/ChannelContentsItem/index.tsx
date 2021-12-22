@@ -143,6 +143,7 @@ export const ChannelContentsItem: React.FC<Props> = memo(
                 connectable={connectable}
                 onRemove={onRemove}
                 onChangePosition={handleChangePosition}
+                bg="background"
               />
             </>
           )}
