@@ -85,14 +85,15 @@ const TypeList: React.FC<TypeListProps> = ({ id, handleSelect }) => {
 
 interface TypeFilterProps {
   id: string | number
+  type?: ConnectableTypeEnum
   setType: (value: ConnectableTypeEnum) => void
 }
 
-const TypeFilter: React.FC<TypeFilterProps> = ({ id, setType }) => {
+const TypeFilter: React.FC<TypeFilterProps> = ({ id, setType, type }) => {
   const [, setDebouncedQuery] = useState<string>('')
   const [mode, setMode] = useState<'active' | 'focused' | 'resting'>('resting')
   const [selectedType, setSelectedType] = useState<ConnectableTypeEnum | null>(
-    null
+    type
   )
 
   const inputRef = useRef(null)

@@ -85,16 +85,17 @@ const UserList: React.FC<UserListProps> = ({ id, handleSelect, query }) => {
 
 interface UserFilterProps {
   id: string | number
+  user?: ChannelTableConnectors_channel_connectors
   setUser: (value: ChannelTableConnectors_channel_connectors) => void
 }
 
-const UserFilter: React.FC<UserFilterProps> = ({ id, setUser }) => {
+const UserFilter: React.FC<UserFilterProps> = ({ id, setUser, user }) => {
   const [, setDebouncedQuery] = useState<string>('')
   const [mode, setMode] = useState<'active' | 'focused' | 'resting'>('resting')
   const [
     selectedUser,
     setSelectedUser,
-  ] = useState<ChannelTableConnectors_channel_connectors | null>(null)
+  ] = useState<ChannelTableConnectors_channel_connectors | null>(user)
 
   const inputRef = useRef(null)
   const debounceQuery = debounce(debouncedQuery => {

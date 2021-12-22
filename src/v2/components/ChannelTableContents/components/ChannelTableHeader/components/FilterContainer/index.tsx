@@ -33,12 +33,16 @@ export const SearchInput = styled(Input).attrs({
 
 interface FilterContainerProps {
   id: string | number
+  type?: ConnectableTypeEnum
+  user?: ChannelTableConnectors_channel_connectors
   setType: (value: ConnectableTypeEnum) => void
   setUser: (value: ChannelTableConnectors_channel_connectors) => void
 }
 
 export const FilterContainer: React.FC<FilterContainerProps> = ({
   id,
+  type,
+  user,
   setType,
   setUser,
 }) => {
@@ -49,8 +53,8 @@ export const FilterContainer: React.FC<FilterContainerProps> = ({
           <Icon name="Filters" size="0.7rem" mr={3} />
           <Text f="1">Filter by</Text>
         </Box>
-        <TypeFilter id={id} setType={setType} />
-        <UserFilter id={id} setUser={setUser} />
+        <TypeFilter id={id} type={type} setType={setType} />
+        <UserFilter id={id} user={user} setUser={setUser} />
       </Inner>
     </Outer>
   )
