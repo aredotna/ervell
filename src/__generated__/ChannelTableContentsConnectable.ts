@@ -32,6 +32,7 @@ export interface ChannelTableContentsConnectable_Attachment_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelTableContentsConnectable_Attachment_source {
@@ -94,6 +95,7 @@ export interface ChannelTableContentsConnectable_Embed_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelTableContentsConnectable_Embed_source {
@@ -156,6 +158,7 @@ export interface ChannelTableContentsConnectable_Image_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelTableContentsConnectable_Image_source {
@@ -218,6 +221,7 @@ export interface ChannelTableContentsConnectable_Link_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelTableContentsConnectable_Link_source {
@@ -279,6 +283,7 @@ export interface ChannelTableContentsConnectable_PendingBlock_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelTableContentsConnectable_PendingBlock_counts {
@@ -332,6 +337,7 @@ export interface ChannelTableContentsConnectable_Text_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelTableContentsConnectable_Text_source {

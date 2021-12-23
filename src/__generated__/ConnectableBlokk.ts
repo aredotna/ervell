@@ -45,6 +45,7 @@ export interface ConnectableBlokk_blokk_Attachment_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ConnectableBlokk_blokk_Attachment {
@@ -106,6 +107,7 @@ export interface ConnectableBlokk_blokk_Embed_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ConnectableBlokk_blokk_Embed {
@@ -172,6 +174,7 @@ export interface ConnectableBlokk_blokk_Image_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ConnectableBlokk_blokk_Image {
@@ -234,6 +237,7 @@ export interface ConnectableBlokk_blokk_Link_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ConnectableBlokk_blokk_Link {
@@ -295,6 +299,7 @@ export interface ConnectableBlokk_blokk_PendingBlock_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ConnectableBlokk_blokk_PendingBlock {
@@ -351,6 +356,7 @@ export interface ConnectableBlokk_blokk_Text_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ConnectableBlokk_blokk_Text {

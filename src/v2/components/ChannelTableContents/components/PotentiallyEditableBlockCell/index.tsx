@@ -93,25 +93,16 @@ const PotentiallyEditableBlockCellNonNull = ({
   value: { block: ChannelTableContentsSet_channel_blokks; attr: 'title' }
 }): JSX.Element => {
   const value = block[attr]
-  const [mode, setMode] = useState<EditableCellMode>('resting')
+  const editable = block.__typename !== 'Channel' && block.can.manage
+  const [mode, setMode] = useState<EditableCellMode>(
+    editable ? 'editable' : 'resting'
+  )
   const [attribute, setAttribute] = useState<string>(value)
-
-  const [verifyEditable, { data, loading }] = useLazyQuery<
-    VerifyEditableBlock,
-    VerifyEditableBlockVariables
-  >(verifyEditableQuery, {
-    variables: { id: block.id?.toString() },
-    ssr: false,
-  })
 
   const [updateBlockCell] = useMutation<
     updateBlockCellMutationType,
     updateBlockCellMutationVariables
   >(updateBlockCellMutation)
-
-  const handleOnHover = useCallback(() => {
-    verifyEditable()
-  }, [verifyEditable])
 
   const handleOnClick = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
@@ -142,16 +133,6 @@ const PotentiallyEditableBlockCellNonNull = ({
     }
   }
 
-  useEffect(() => {
-    if (loading) {
-      setMode('checking')
-    }
-
-    if (data && data.blokk.__typename !== 'Channel') {
-      setMode(data.blokk.can.manage ? 'editable' : 'resting')
-    }
-  }, [data, loading])
-
   if (mode === 'editing') {
     return (
       <Inner onClick={handleOnClick} mode={mode}>
@@ -170,7 +151,7 @@ const PotentiallyEditableBlockCellNonNull = ({
   }
 
   return (
-    <Inner onMouseOver={handleOnHover} mode={mode}>
+    <Inner mode={mode}>
       <Text f={1} overflowEllipsis>
         {attribute}
       </Text>

@@ -37,6 +37,7 @@ export interface ConnectableTableBlokk_blokk_Attachment_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ConnectableTableBlokk_blokk_Attachment_source {
@@ -99,6 +100,7 @@ export interface ConnectableTableBlokk_blokk_Embed_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ConnectableTableBlokk_blokk_Embed_source {
@@ -161,6 +163,7 @@ export interface ConnectableTableBlokk_blokk_Image_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ConnectableTableBlokk_blokk_Image_source {
@@ -223,6 +226,7 @@ export interface ConnectableTableBlokk_blokk_Link_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ConnectableTableBlokk_blokk_Link_source {
@@ -284,6 +288,7 @@ export interface ConnectableTableBlokk_blokk_PendingBlock_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ConnectableTableBlokk_blokk_PendingBlock_counts {
@@ -337,6 +342,7 @@ export interface ConnectableTableBlokk_blokk_Text_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ConnectableTableBlokk_blokk_Text_source {

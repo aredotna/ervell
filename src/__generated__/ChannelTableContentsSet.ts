@@ -51,6 +51,7 @@ export interface ChannelTableContentsSet_channel_blokks_Attachment_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Attachment_source {
@@ -113,6 +114,7 @@ export interface ChannelTableContentsSet_channel_blokks_Embed_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Embed_source {
@@ -175,6 +177,7 @@ export interface ChannelTableContentsSet_channel_blokks_Image_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Image_source {
@@ -237,6 +240,7 @@ export interface ChannelTableContentsSet_channel_blokks_Link_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Link_source {
@@ -298,6 +302,7 @@ export interface ChannelTableContentsSet_channel_blokks_PendingBlock_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_PendingBlock_counts {
@@ -351,6 +356,7 @@ export interface ChannelTableContentsSet_channel_blokks_Text_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Text_source {
