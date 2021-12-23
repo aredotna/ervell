@@ -17,6 +17,7 @@ export default gql`
       ... on ConnectableInterface {
         title
         description(format: HTML)
+        href
         user {
           __typename
           id

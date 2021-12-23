@@ -11,6 +11,7 @@ import { FullBlock as Block } from '__generated__/FullBlock'
 import { LinkViewMode, OnLinkViewModeChange } from 'v2/components/FullBlock'
 
 import { FullBlockSwitchViewMode } from './components/FullBlockSwitchViewMode'
+import { Link } from 'react-router-dom'
 
 const Container = styled(Box)`
   display: flex;
@@ -42,6 +43,7 @@ interface FullBlockActionsProps {
   linkViewMode: LinkViewMode
   onLinkViewModeChange: OnLinkViewModeChange
   hideLinkMode?: boolean
+  showOpenFullBlock?: boolean
 }
 
 const FullBlockActions: React.FC<FullBlockActionsProps> = ({
@@ -49,6 +51,7 @@ const FullBlockActions: React.FC<FullBlockActionsProps> = ({
   linkViewMode,
   onLinkViewModeChange,
   hideLinkMode = false,
+  showOpenFullBlock = false,
 }) => {
   if (block?.__typename === 'Channel') {
     return null
@@ -65,6 +68,14 @@ const FullBlockActions: React.FC<FullBlockActionsProps> = ({
   const imageUpdatedAt =
     (block?.__typename === 'Link' || block?.__typename === 'Attachment') &&
     block?.image_updated_at
+
+  const toParams = {
+    pathname: block?.href,
+    state: {
+      background: JSON.stringify(location),
+      context: [],
+    },
+  }
 
   return (
     <Container>
@@ -89,6 +100,10 @@ const FullBlockActions: React.FC<FullBlockActionsProps> = ({
           <>
             <FullBlockChangeThumbnail block={block} />
           </>
+        )}
+
+        {showOpenFullBlock && block?.href && (
+          <Link to={toParams}>Open in lightbox</Link>
         )}
 
         <FullBlockShare connectable={block} />
