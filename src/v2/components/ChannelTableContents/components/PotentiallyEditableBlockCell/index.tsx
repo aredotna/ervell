@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 
 import Icons from 'v2/components/UI/Icons'
 import Text from 'v2/components/UI/Text'
@@ -9,17 +9,12 @@ import Box from 'v2/components/UI/Box'
 
 import { TableData } from 'v2/components/ChannelTableContents/lib/types'
 import updateBlockCellMutation from 'v2/components/ChannelTableContents/components/PotentiallyEditableBlockCell/mutations/updateBlockCell'
-import verifyEditableQuery from 'v2/components/ChannelTableContents/components/PotentiallyEditableBlockCell/query/verifyEditable'
 
 import { ChannelTableContentsSet_channel_blokks } from '__generated__/ChannelTableContentsSet'
 import {
   updateBlockCellMutation as updateBlockCellMutationType,
   updateBlockCellMutationVariables,
 } from '__generated__/updateBlockCellMutation'
-import {
-  VerifyEditableBlock,
-  VerifyEditableBlockVariables,
-} from '__generated__/VerifyEditableBlock'
 
 type EditableCellMode =
   | 'resting'
@@ -152,9 +147,11 @@ const PotentiallyEditableBlockCellNonNull = ({
 
   return (
     <Inner mode={mode}>
-      <Text f={1} overflowEllipsis>
-        {attribute}
-      </Text>
+      <Text
+        f={1}
+        overflowEllipsis
+        dangerouslySetInnerHTML={{ __html: attribute }}
+      />
 
       <Box />
 
