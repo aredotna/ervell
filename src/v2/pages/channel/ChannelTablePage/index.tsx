@@ -47,8 +47,6 @@ export const ChannelTablePage: React.FC<ChannelTablePageProps> = ({
     }
   }, [fromOnboarding])
 
-  console.log({ view })
-
   const { data, loading, error } = useQuery<
     ChannelPageData,
     ChannelPageVariables
