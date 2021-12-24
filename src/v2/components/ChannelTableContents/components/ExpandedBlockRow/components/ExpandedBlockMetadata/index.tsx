@@ -116,6 +116,7 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
                 linkViewMode={'screenshot'}
                 onLinkViewModeChange={() => null}
                 hideLinkMode
+                showOpenFullBlock
               />
             </Text>
           </Box>

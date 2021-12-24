@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 
 import Icons from 'v2/components/UI/Icons'
 import Text from 'v2/components/UI/Text'
@@ -9,17 +9,12 @@ import Box from 'v2/components/UI/Box'
 
 import { TableData } from 'v2/components/ChannelTableContents/lib/types'
 import updateBlockCellMutation from 'v2/components/ChannelTableContents/components/PotentiallyEditableBlockCell/mutations/updateBlockCell'
-import verifyEditableQuery from 'v2/components/ChannelTableContents/components/PotentiallyEditableBlockCell/query/verifyEditable'
 
 import { ChannelTableContentsSet_channel_blokks } from '__generated__/ChannelTableContentsSet'
 import {
   updateBlockCellMutation as updateBlockCellMutationType,
   updateBlockCellMutationVariables,
 } from '__generated__/updateBlockCellMutation'
-import {
-  VerifyEditableBlock,
-  VerifyEditableBlockVariables,
-} from '__generated__/VerifyEditableBlock'
 
 type EditableCellMode =
   | 'resting'
@@ -93,25 +88,16 @@ const PotentiallyEditableBlockCellNonNull = ({
   value: { block: ChannelTableContentsSet_channel_blokks; attr: 'title' }
 }): JSX.Element => {
   const value = block[attr]
-  const [mode, setMode] = useState<EditableCellMode>('resting')
+  const editable = block.__typename !== 'Channel' && block.can.manage
+  const [mode, setMode] = useState<EditableCellMode>(
+    editable ? 'editable' : 'resting'
+  )
   const [attribute, setAttribute] = useState<string>(value)
-
-  const [verifyEditable, { data, loading }] = useLazyQuery<
-    VerifyEditableBlock,
-    VerifyEditableBlockVariables
-  >(verifyEditableQuery, {
-    variables: { id: block.id?.toString() },
-    ssr: false,
-  })
 
   const [updateBlockCell] = useMutation<
     updateBlockCellMutationType,
     updateBlockCellMutationVariables
   >(updateBlockCellMutation)
-
-  const handleOnHover = useCallback(() => {
-    verifyEditable()
-  }, [verifyEditable])
 
   const handleOnClick = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
@@ -142,16 +128,6 @@ const PotentiallyEditableBlockCellNonNull = ({
     }
   }
 
-  useEffect(() => {
-    if (loading) {
-      setMode('checking')
-    }
-
-    if (data && data.blokk.__typename !== 'Channel') {
-      setMode(data.blokk.can.manage ? 'editable' : 'resting')
-    }
-  }, [data, loading])
-
   if (mode === 'editing') {
     return (
       <Inner onClick={handleOnClick} mode={mode}>
@@ -170,10 +146,12 @@ const PotentiallyEditableBlockCellNonNull = ({
   }
 
   return (
-    <Inner onMouseOver={handleOnHover} mode={mode}>
-      <Text f={1} overflowEllipsis>
-        {attribute}
-      </Text>
+    <Inner mode={mode}>
+      <Text
+        f={1}
+        overflowEllipsis
+        dangerouslySetInnerHTML={{ __html: attribute }}
+      />
 
       <Box />
 

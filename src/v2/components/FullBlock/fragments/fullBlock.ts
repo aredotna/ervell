@@ -11,6 +11,7 @@ export default gql`
     }
     ... on ConnectableInterface {
       title
+      href
     }
     ...FullBlockContentPane
     ...FullBlockMetadataPane

@@ -178,6 +178,8 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
       sortAndSortDir={sortAndSortDir}
       setSortAndSortDir={setSortAndSortDir}
       loading={loading}
+      type={type}
+      user={user}
       setType={setType}
       setUser={setUser}
       onItemIntersected={onItemIntersected}
@@ -196,6 +198,8 @@ interface ChannelTableContentsProps {
   contentCount: number
   sortAndSortDir: SortAndSortDir
   setSortAndSortDir: React.Dispatch<SortAndSortDir>
+  type?: ConnectableTypeEnum
+  user?: ChannelTableConnectors_channel_connectors
   setType: (value: ConnectableTypeEnum) => void
   setUser: (value: ChannelTableConnectors_channel_connectors) => void
   onItemIntersected: (index: number) => void
@@ -216,6 +220,8 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   contentCount,
   sortAndSortDir,
   setSortAndSortDir,
+  type,
+  user,
   setType,
   setUser,
   onItemIntersected,
@@ -365,6 +371,8 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           channel={channel}
           setSortAndSortDir={setSortAndSortDir}
           sortAndSortDir={sortAndSortDir}
+          type={type}
+          user={user}
           setType={setType}
           setUser={setUser}
           addBlock={addBlock}

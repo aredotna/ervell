@@ -27,6 +27,7 @@ export interface BlockPage_block_Channel {
   meta_description: string | null;
   canonical: string | null;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -72,6 +73,7 @@ export interface BlockPage_block_Attachment {
   is_nsfw: boolean | null;
   meta_image: string | null;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -125,6 +127,7 @@ export interface BlockPage_block_Embed {
   is_nsfw: boolean | null;
   meta_image: string | null;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -174,6 +177,7 @@ export interface BlockPage_block_Image {
   is_nsfw: boolean | null;
   meta_image: string | null;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -227,6 +231,7 @@ export interface BlockPage_block_Link {
   is_nsfw: boolean | null;
   meta_image: string | null;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -276,6 +281,7 @@ export interface BlockPage_block_PendingBlock {
   canonical: string | null;
   is_nsfw: boolean | null;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -321,6 +327,7 @@ export interface BlockPage_block_Text {
   canonical: string | null;
   is_nsfw: boolean | null;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;

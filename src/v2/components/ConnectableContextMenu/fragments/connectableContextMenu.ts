@@ -20,6 +20,7 @@ export const connectableContextMenuConnectableFragment = gql`
       can {
         mute
         remove: manage
+        manage
       }
     }
 

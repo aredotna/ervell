@@ -75,6 +75,8 @@ interface ChannelTableHeaderProps {
   channel: ChannelPage_channel
   sortAndSortDir: SortAndSortDir
   setSortAndSortDir: React.Dispatch<SortAndSortDir>
+  type?: ConnectableTypeEnum
+  user?: ChannelTableConnectors_channel_connectors
   setType: (value: ConnectableTypeEnum) => void
   setUser: (value: ChannelTableConnectors_channel_connectors) => void
   addBlock: () => void
@@ -85,6 +87,8 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
   channel,
   sortAndSortDir,
   setSortAndSortDir,
+  type,
+  user,
   setType,
   setUser,
   addBlock,
@@ -114,6 +118,8 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
                       channelId={channel.id}
                       ref={headerRef}
                       addBlock={addBlock}
+                      type={type}
+                      user={user}
                       setType={setType}
                       setUser={setUser}
                     />
