@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useLocation } from 'react-router'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -53,6 +54,7 @@ const FullBlockActions: React.FC<FullBlockActionsProps> = ({
   hideLinkMode = false,
   showOpenFullBlock = false,
 }) => {
+  const location = useLocation()
   if (block?.__typename === 'Channel') {
     return null
   }
@@ -69,7 +71,7 @@ const FullBlockActions: React.FC<FullBlockActionsProps> = ({
     (block?.__typename === 'Link' || block?.__typename === 'Attachment') &&
     block?.image_updated_at
 
-  const toParams = {
+  const toParams = location && {
     pathname: block?.href,
     state: {
       background: JSON.stringify(location),
