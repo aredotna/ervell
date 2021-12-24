@@ -24,6 +24,7 @@ export interface updateBlockCellMutation_update_block_block_Channel {
   __typename: "Channel";
   id: number;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -64,6 +65,7 @@ export interface updateBlockCellMutation_update_block_block_Image {
   __typename: "Image";
   id: number;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -110,6 +112,7 @@ export interface updateBlockCellMutation_update_block_block_Text {
   __typename: "Text";
   id: number;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -156,6 +159,7 @@ export interface updateBlockCellMutation_update_block_block_Link {
   __typename: "Link";
   id: number;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -201,6 +205,7 @@ export interface updateBlockCellMutation_update_block_block_Attachment {
   __typename: "Attachment";
   id: number;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -249,6 +254,7 @@ export interface updateBlockCellMutation_update_block_block_Embed {
   __typename: "Embed";
   id: number;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -293,6 +299,7 @@ export interface updateBlockCellMutation_update_block_block_PendingBlock {
   __typename: "PendingBlock";
   id: number;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;

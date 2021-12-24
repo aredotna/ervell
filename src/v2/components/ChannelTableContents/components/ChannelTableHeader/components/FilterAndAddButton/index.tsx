@@ -171,6 +171,8 @@ const TableAddButtonInner: React.FC<TableAddButtonInnerProps> = ({
 interface TableAddButtonProps {
   channelId: number
   addBlock: () => void
+  type?: ConnectableTypeEnum
+  user?: ChannelTableConnectors_channel_connectors
   setType: (value: ConnectableTypeEnum) => void
   setUser: (value: ChannelTableConnectors_channel_connectors) => void
 }
@@ -179,7 +181,7 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
   ref?: React.Ref<HTMLElement>
 }> = React.forwardRef(
   (
-    { channelId, addBlock, setType, setUser },
+    { channelId, addBlock, setType, setUser, type, user },
     forwardedRef: React.MutableRefObject<HTMLInputElement | null> | null
   ) => {
     const buttonContainerRef = useRef<HTMLElement>()
@@ -332,6 +334,8 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
                     >
                       <Filter
                         id={channelId}
+                        type={type}
+                        user={user}
                         setType={setType}
                         setUser={setUser}
                       />

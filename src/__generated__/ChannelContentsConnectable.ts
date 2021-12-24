@@ -45,6 +45,7 @@ export interface ChannelContentsConnectable_Attachment_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelContentsConnectable_Attachment {
@@ -106,6 +107,7 @@ export interface ChannelContentsConnectable_Embed_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelContentsConnectable_Embed {
@@ -172,6 +174,7 @@ export interface ChannelContentsConnectable_Image_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelContentsConnectable_Image {
@@ -234,6 +237,7 @@ export interface ChannelContentsConnectable_Link_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelContentsConnectable_Link {
@@ -295,6 +299,7 @@ export interface ChannelContentsConnectable_PendingBlock_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelContentsConnectable_PendingBlock {
@@ -351,6 +356,7 @@ export interface ChannelContentsConnectable_Text_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
+  manage: boolean | null;
 }
 
 export interface ChannelContentsConnectable_Text {

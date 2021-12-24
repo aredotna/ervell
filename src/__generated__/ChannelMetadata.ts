@@ -138,4 +138,5 @@ export interface ChannelMetadata {
   collaborators: ChannelMetadata_collaborators[] | null;
   connected_to_channels: ChannelMetadata_connected_to_channels[] | null;
   share: ChannelMetadata_share | null;
+  slug: string;
 }

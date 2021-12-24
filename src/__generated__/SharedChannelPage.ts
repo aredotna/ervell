@@ -45,7 +45,6 @@ export interface SharedChannelPage_channel_can {
   add_to: boolean | null;
   reorder_connections: boolean | null;
   add_to_as_premium: boolean | null;
-  remove_connections: boolean | null;
 }
 
 export interface SharedChannelPage_channel_user {
@@ -144,6 +143,7 @@ export interface SharedChannelPage_channel {
   collaborators: SharedChannelPage_channel_collaborators[] | null;
   connected_to_channels: SharedChannelPage_channel_connected_to_channels[] | null;
   share: SharedChannelPage_channel_share | null;
+  slug: string;
   meta_title: string;
   meta_description: string | null;
   canonical: string | null;

@@ -5,8 +5,7 @@ export const connectableContextMenuChannelFragment = gql`
     __typename
     id
     can {
-      remove_connections: update
-      reorder_connections: update
+      update
     }
   }
 `
@@ -21,6 +20,7 @@ export const connectableContextMenuConnectableFragment = gql`
       can {
         mute
         remove: manage
+        manage
       }
     }
 

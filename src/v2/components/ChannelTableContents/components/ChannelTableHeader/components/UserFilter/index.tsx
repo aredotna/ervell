@@ -85,21 +85,25 @@ const UserList: React.FC<UserListProps> = ({ id, handleSelect, query }) => {
 
 interface UserFilterProps {
   id: string | number
+  user?: ChannelTableConnectors_channel_connectors
   setUser: (value: ChannelTableConnectors_channel_connectors) => void
 }
 
-const UserFilter: React.FC<UserFilterProps> = ({ id, setUser }) => {
-  const [, setDebouncedQuery] = useState<string>('')
+const UserFilter: React.FC<UserFilterProps> = ({ id, setUser, user }) => {
+  const [query, setDebouncedQuery] = useState<string>(null)
   const [mode, setMode] = useState<'active' | 'focused' | 'resting'>('resting')
   const [
     selectedUser,
     setSelectedUser,
-  ] = useState<ChannelTableConnectors_channel_connectors | null>(null)
+  ] = useState<ChannelTableConnectors_channel_connectors | null>(user)
 
   const inputRef = useRef(null)
-  const debounceQuery = debounce(debouncedQuery => {
-    setDebouncedQuery(debouncedQuery)
-  }, 200)
+  const debounceQuery = useCallback(
+    debounce(debouncedQuery => {
+      setDebouncedQuery(debouncedQuery)
+    }, 200),
+    [setDebouncedQuery]
+  )
 
   const handleChange = ({ target: { value: query } }) => {
     const mode = isEmpty(query) ? 'resting' : 'active'
@@ -124,8 +128,9 @@ const UserFilter: React.FC<UserFilterProps> = ({ id, setUser }) => {
   const removeType = useCallback(() => {
     setUser(null)
     setSelectedUser(null)
+    // setDebouncedQuery(null)
     setMode('resting')
-  }, [setSelectedUser, setUser, setMode])
+  }, [setSelectedUser, setUser, setMode, setDebouncedQuery])
 
   return (
     <SearchContainer>
@@ -146,8 +151,8 @@ const UserFilter: React.FC<UserFilterProps> = ({ id, setUser }) => {
           </Close>
         )}
       </InputContainer>
-      {mode == 'focused' && (
-        <UserList id={id} query={debounceQuery} handleSelect={handleSelect} />
+      {(mode === 'focused' || mode === 'active') && (
+        <UserList id={id} query={query} handleSelect={handleSelect} />
       )}
     </SearchContainer>
   )

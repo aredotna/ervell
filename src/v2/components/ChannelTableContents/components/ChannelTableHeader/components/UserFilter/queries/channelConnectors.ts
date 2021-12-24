@@ -5,7 +5,7 @@ export default gql`
     channel(id: $id) {
       __typename
       id
-      connectors(q: $q) {
+      connectors(q: $q, per: 6) {
         id
         name
       }

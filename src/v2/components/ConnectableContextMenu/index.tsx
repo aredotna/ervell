@@ -7,6 +7,7 @@ import { ContextMenu } from 'v2/components/ContextMenu'
 import { ConnectableContextMenuRemoveConnection } from 'v2/components/ConnectableContextMenu/components/ConnectableContextMenuRemoveConnection'
 import { ConnectableContextMenuMuteBlock } from 'v2/components/ConnectableContextMenu/components/ConnectableContextMenuMuteBlock'
 import { ConnectableContextMenuReorderConnections } from 'v2/components/ConnectableContextMenu/components/ConnectableContextMenuReorderConnections'
+import { BoxProps } from '../UI/Box'
 
 interface Props {
   channel: ConnectableContextMenuChannelData
@@ -15,7 +16,7 @@ interface Props {
   onChangePosition: (newIndex: number) => void
 }
 
-export const ConnectableContextMenu: React.FC<Props> = ({
+export const ConnectableContextMenu: React.FC<Props & BoxProps> = ({
   channel,
   connectable,
   onRemove,
@@ -31,15 +32,15 @@ export const ConnectableContextMenu: React.FC<Props> = ({
     connectable.source.url
 
   const isDisplayable =
-    channel.can.remove_connections ||
+    channel.can.update ||
     sourceUrl ||
     findOriginalUrl ||
     connectable.can.mute ||
-    channel.can.reorder_connections ||
+    channel.can.update ||
     connectable.connection.can.destroy
 
   const canRemove =
-    channel.can.remove_connections ||
+    channel.can.update ||
     (connectable.__typename !== 'Channel' && connectable.can.remove) ||
     connectable.connection.can.destroy
 
@@ -75,7 +76,7 @@ export const ConnectableContextMenu: React.FC<Props> = ({
         />
       )}
 
-      {channel.can.reorder_connections && (
+      {channel.can.update && (
         <ConnectableContextMenuReorderConnections
           onChangePosition={onChangePosition}
         />

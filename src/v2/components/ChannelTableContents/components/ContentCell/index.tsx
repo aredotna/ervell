@@ -19,10 +19,15 @@ const Wrapper = styled(Box).attrs({
   alignItems: 'center',
 })``
 
-const Img = styled.img`
+const Img = styled.div`
   width: 30px;
   height: 30px;
   margin-right: ${x => x.theme.space[4]};
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url(${props => props.src});
+  image-rendering: smooth;
 `
 
 const Source = styled(Text).attrs({

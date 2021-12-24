@@ -140,6 +140,7 @@ export interface createOnboardingChannelMutation_create_channel_channel {
   collaborators: createOnboardingChannelMutation_create_channel_channel_collaborators[] | null;
   connected_to_channels: createOnboardingChannelMutation_create_channel_channel_connected_to_channels[] | null;
   share: createOnboardingChannelMutation_create_channel_channel_share | null;
+  slug: string;
 }
 
 export interface createOnboardingChannelMutation_create_channel {

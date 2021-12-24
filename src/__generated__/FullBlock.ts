@@ -24,6 +24,7 @@ export interface FullBlock_Channel {
   __typename: "Channel";
   id: number;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -64,6 +65,7 @@ export interface FullBlock_Image {
   __typename: "Image";
   id: number;
   title: string;
+  href: string | null;
   thumb_url: string | null;
   image_url: string | null;
   original_image_url: string | null;
@@ -110,6 +112,7 @@ export interface FullBlock_Text {
   __typename: "Text";
   id: number;
   title: string;
+  href: string | null;
   content: string;
   can: FullBlock_Text_can | null;
   created_at_unix_time: string | null;
@@ -156,6 +159,7 @@ export interface FullBlock_Link {
   __typename: "Link";
   id: number;
   title: string;
+  href: string | null;
   source_url: string | null;
   image_url: string | null;
   image_updated_at: string | null;
@@ -201,6 +205,7 @@ export interface FullBlock_Attachment {
   __typename: "Attachment";
   id: number;
   title: string;
+  href: string | null;
   file_extension: string | null;
   file_url: string | null;
   file_size: string | null;
@@ -249,6 +254,7 @@ export interface FullBlock_Embed {
   __typename: "Embed";
   id: number;
   title: string;
+  href: string | null;
   embed_html: string | null;
   embed_width: number | null;
   embed_height: number | null;
@@ -293,6 +299,7 @@ export interface FullBlock_PendingBlock {
   __typename: "PendingBlock";
   id: number;
   title: string;
+  href: string | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;

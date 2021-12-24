@@ -30,6 +30,7 @@ export interface ExpandedBlockMetadata_block_Channel {
   updated_at_timestamp: string | null;
   title: string;
   description: string | null;
+  href: string | null;
   user: ExpandedBlockMetadata_block_Channel_user | null;
   source: ExpandedBlockMetadata_block_Channel_source | null;
   shareable_href: string | null;
@@ -70,6 +71,7 @@ export interface ExpandedBlockMetadata_block_Attachment {
   updated_at_timestamp: string | null;
   title: string;
   description: string | null;
+  href: string | null;
   user: ExpandedBlockMetadata_block_Attachment_user | null;
   can: ExpandedBlockMetadata_block_Attachment_can | null;
   source: ExpandedBlockMetadata_block_Attachment_source | null;
@@ -111,6 +113,7 @@ export interface ExpandedBlockMetadata_block_Image {
   updated_at_timestamp: string | null;
   title: string;
   description: string | null;
+  href: string | null;
   user: ExpandedBlockMetadata_block_Image_user | null;
   can: ExpandedBlockMetadata_block_Image_can | null;
   thumb_url: string | null;
@@ -157,6 +160,7 @@ export interface ExpandedBlockMetadata_block_Text {
   updated_at_timestamp: string | null;
   title: string;
   description: string | null;
+  href: string | null;
   user: ExpandedBlockMetadata_block_Text_user | null;
   can: ExpandedBlockMetadata_block_Text_can | null;
   content: string;
