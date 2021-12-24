@@ -32,11 +32,13 @@ const Dialog = styled(ModalDialog).attrs({
 interface ChannelTablePageProps {
   id: string
   fromOnboarding?: boolean
+  view?: 'grid' | 'table'
 }
 
 export const ChannelTablePage: React.FC<ChannelTablePageProps> = ({
   id,
   fromOnboarding,
+  view,
 }) => {
   useEffect(() => {
     if (fromOnboarding) {
@@ -61,7 +63,7 @@ export const ChannelTablePage: React.FC<ChannelTablePageProps> = ({
     pageJsx = (
       <>
         <ChannelPageMetaTags channel={data.channel} />
-        <ChannelMetadata channel={data.channel} />
+        <ChannelMetadata channel={data.channel} view={view} />
 
         <ChannelTableQuery
           channel={data.channel}

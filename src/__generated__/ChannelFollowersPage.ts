@@ -139,6 +139,7 @@ export interface ChannelFollowersPage_channel {
   collaborators: ChannelFollowersPage_channel_collaborators[] | null;
   connected_to_channels: ChannelFollowersPage_channel_connected_to_channels[] | null;
   share: ChannelFollowersPage_channel_share | null;
+  slug: string;
   meta_title: string;
   meta_description: string | null;
   canonical: string | null;

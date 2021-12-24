@@ -37,11 +37,16 @@ const Dialog = styled(ModalDialog).attrs({
 interface ChannelPageProps {
   id: string
   fromOnboarding?: boolean
+  view?: 'grid' | 'table'
 }
 
 const isClientSide = typeof window !== 'undefined'
 
-const ChannelPage: React.FC<ChannelPageProps> = ({ id, fromOnboarding }) => {
+const ChannelPage: React.FC<ChannelPageProps> = ({
+  id,
+  fromOnboarding,
+  view,
+}) => {
   const { data, loading, error } = useQuery<
     ChannelPageData,
     ChannelPageVariables
@@ -63,7 +68,7 @@ const ChannelPage: React.FC<ChannelPageProps> = ({ id, fromOnboarding }) => {
     <>
       <ChannelPageMetaTags channel={channel} />
 
-      <ChannelMetadata channel={channel} />
+      <ChannelMetadata channel={channel} view={view} />
 
       <ChannelContentsFilter channel={channel} />
 
@@ -87,6 +92,7 @@ const ChannelPage: React.FC<ChannelPageProps> = ({ id, fromOnboarding }) => {
 const ChannelPageWrapper: React.FC<ChannelPageProps> = ({
   id,
   fromOnboarding,
+  view,
 }) => {
   useEffect(() => {
     if (fromOnboarding) {
@@ -98,7 +104,7 @@ const ChannelPageWrapper: React.FC<ChannelPageProps> = ({
   return (
     <TopBarLayout noBanner={fromOnboarding}>
       <Constrain>
-        <ChannelPage id={id} fromOnboarding={fromOnboarding} />
+        <ChannelPage id={id} view={view} fromOnboarding={fromOnboarding} />
       </Constrain>
     </TopBarLayout>
   )
