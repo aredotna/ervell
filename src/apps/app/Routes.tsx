@@ -11,8 +11,7 @@ import SearchPage from 'v2/pages/search/SearchPage'
 // Profile
 import ProfilePage from '../../v2/pages/profile/ProfilePage'
 // Channel
-import ChannelPage from '../../v2/pages/channel/ChannelPage'
-import ChannelTablePage from '../../v2/pages/channel/ChannelTablePage'
+import ChannelPageWrapper from 'v2/pages/channel/ChannelPageWrapper'
 import SharedChannelPage from '../../v2/pages/channel/SharedChannelPage'
 import ChannelFollowersPage from '../../v2/pages/channel/ChannelFollowersPage'
 import EmbeddedChannelPage from '../../v2/pages/channel/EmbeddedChannelPage'
@@ -33,7 +32,6 @@ import { BlogIndex } from 'v2/pages/blog/BlogIndex'
 import { BlogPost } from 'v2/pages/blog/BlogPost'
 import { ConfirmationPage } from 'v2/pages/confirmation/ConfirmationPage'
 import { ExpiredConfirmationPage } from 'v2/pages/confirmation/ExpiredConfirmationPage'
-import isDev from 'v2/util/isDev'
 import useLoginStatus from 'v2/hooks/useLoginStatus'
 import HomePage from 'v2/pages/home/HomePage'
 import { AboutPage } from 'v2/pages/about/AboutPage'
@@ -192,34 +190,12 @@ export const Routes = () => {
           ))}
         />
 
-        {isDev && (
-          <Route
-            exact
-            path="/:user_id/:id/table"
-            render={parseRoute(({ params, query }) => {
-              return (
-                <ChannelTablePage
-                  id={params.id}
-                  key={params.id}
-                  fromOnboarding={query.fromOnboarding}
-                />
-              )
-            })}
-          />
-        )}
-
         {/* Channel */}
         <Route
           exact
-          path="/:user_id/:id"
+          path="/:user_id/:id/:view(table|grid)?"
           render={parseRoute(({ params, query }) => {
-            return (
-              <ChannelPage
-                id={params.id}
-                key={params.id}
-                fromOnboarding={query.fromOnboarding}
-              />
-            )
+            return <ChannelPageWrapper params={params} query={query} />
           })}
         />
       </Switch>

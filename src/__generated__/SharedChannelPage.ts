@@ -143,6 +143,7 @@ export interface SharedChannelPage_channel {
   collaborators: SharedChannelPage_channel_collaborators[] | null;
   connected_to_channels: SharedChannelPage_channel_connected_to_channels[] | null;
   share: SharedChannelPage_channel_share | null;
+  slug: string;
   meta_title: string;
   meta_description: string | null;
   canonical: string | null;

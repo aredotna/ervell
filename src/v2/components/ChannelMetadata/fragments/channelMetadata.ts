@@ -15,6 +15,7 @@ export default gql`
     ...CollaboratorsList
     ...ChannelMetadataConnections
     ...ChannelShareButton
+    slug
   }
 
   ${channelBreadcrumbFragment}

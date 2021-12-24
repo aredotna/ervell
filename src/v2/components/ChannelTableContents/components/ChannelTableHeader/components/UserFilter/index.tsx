@@ -90,7 +90,7 @@ interface UserFilterProps {
 }
 
 const UserFilter: React.FC<UserFilterProps> = ({ id, setUser, user }) => {
-  const [query, setDebouncedQuery] = useState<string>('')
+  const [query, setDebouncedQuery] = useState<string>(null)
   const [mode, setMode] = useState<'active' | 'focused' | 'resting'>('resting')
   const [
     selectedUser,

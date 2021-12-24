@@ -144,6 +144,7 @@ export interface ChannelPage_channel {
   collaborators: ChannelPage_channel_collaborators[] | null;
   connected_to_channels: ChannelPage_channel_connected_to_channels[] | null;
   share: ChannelPage_channel_share | null;
+  slug: string;
   meta_title: string;
   meta_description: string | null;
   canonical: string | null;

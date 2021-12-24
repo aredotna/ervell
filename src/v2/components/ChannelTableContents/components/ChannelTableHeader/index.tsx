@@ -142,6 +142,17 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
 
               const { key: headerKey, ...headerProps } = column.getHeaderProps()
 
+              if (
+                column.Header?.toString() === ColumnIds.addSettings &&
+                !channel.can?.add_to
+              ) {
+                return (
+                  <TH key={headerKey} width={column.width} {...headerProps}>
+                    <THInner></THInner>
+                  </TH>
+                )
+              }
+
               return (
                 <TH key={headerKey} width={column.width} {...headerProps}>
                   <THInner>
