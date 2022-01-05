@@ -142,6 +142,10 @@ export function getCache({
             keyArgs: everythingExcept('page', 'per'),
             merge: paginationWithPageAndPer,
           },
+          search: {
+            keyArgs: everythingExcept('page', 'per'),
+            merge: paginationWithPageAndPer,
+          },
         },
       },
 
@@ -152,6 +156,15 @@ export function getCache({
             merge: paginationWithPageAndPer,
           },
           blokks: {
+            keyArgs: everythingExcept('page', 'per'),
+            merge: paginationWithPageAndPer,
+          },
+        },
+      },
+
+      User: {
+        fields: {
+          contents: {
             keyArgs: everythingExcept('page', 'per'),
             merge: paginationWithPageAndPer,
           },
