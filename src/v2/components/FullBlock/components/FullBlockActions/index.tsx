@@ -33,10 +33,17 @@ const Inner = styled(Box)`
   > a {
     display: block;
   }
+
+  > a:hover {
+    color: ${({ theme }) => theme.colors.gray.bold};
+  }
 `
 
 const Mute = styled(MuteButton)`
   cursor: pointer;
+  &:hover {
+    color: ${({ theme }) => theme.colors.gray.bold};
+  }
 `
 
 interface FullBlockActionsProps {

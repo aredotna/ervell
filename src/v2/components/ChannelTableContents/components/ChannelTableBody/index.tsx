@@ -126,7 +126,8 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
                 onClick: () => row.toggleRowExpanded(true),
                 children: row.cells.map(cell => {
                   const { key: cellKey, ...cellProps } = cell.getCellProps()
-                  const extraProps = cellKey.toString().includes('addSettings')
+                  const isSettings = cellKey.toString().includes('addSettings')
+                  const extraProps = isSettings
                     ? {
                         removeBlock,
                         channel,
@@ -139,6 +140,7 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
                       key={cellKey}
                       width={cell.column.width}
                       maxWidth={cell.column.maxWidth}
+                      bg={isSettings ? 'gray.hint' : 'background'}
                       {...cellProps}
                     >
                       {cell.render('Cell', extraProps)}

@@ -25,8 +25,6 @@ export const ChannelMetadata: React.FC<ChannelMetadataProps> = ({
 }) => {
   const me = useSerializedMe()
 
-  console.log({ view })
-
   return (
     <HeaderMetadataContainer
       breadcrumb={<ChannelBreadcrumb channel={channel} />}
@@ -53,7 +51,7 @@ export const ChannelMetadata: React.FC<ChannelMetadataProps> = ({
             </Pocket>
           )}
 
-          {me.is_supporter && (
+          {(me.is_supporter || me.is_lifetime_premium) && (
             <Pocket title="View">
               <ChannelMetadataView channel={channel} view={view} />
             </Pocket>
