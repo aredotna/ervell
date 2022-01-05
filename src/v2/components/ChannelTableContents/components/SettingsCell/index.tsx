@@ -21,27 +21,35 @@ const Cell = styled.div`
   display: flex;
   flex-direction: row;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.gray.light};
+  background-color: ${({ theme }) => theme.colors.gray.hint};
+  line-height: 100%;
+  align-items: center;
 `
 
 const Container = styled(Box)`
   position: relative;
   width: 38px;
-  background-color: ${({ theme }) => theme.colors.gray.light};
+  background-color: ${({ theme }) => theme.colors.gray.hint};
   display: flex;
   justify-content: center;
   align-items: center;
+`
+
+const Separator = styled(Box)`
+  height: 19px;
+  width: 1px;
+  background-color: ${({ theme }) => theme.colors.gray.light};
 `
 
 const Button = styled(GenericButton).attrs({
   bg: 'gray.hint',
 })`
   border-radius: 0px;
-  height: 100%;
+  height: 100% !important;
   width: 38px;
   border: 0px solid transparent;
   padding: 0;
-  background-color: ${({ theme }) => theme.colors.gray.light};
+  background-color: ${({ theme }) => theme.colors.gray.hint};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -134,14 +142,15 @@ export const SettingsCell: React.FC<SettingsCellProps> = ({
                 connectable={value}
                 onRemove={removeBlock}
                 onChangePosition={handleChangePosition}
-                bg="gray.light"
+                bg="gray.hint"
                 position="static"
-                height="1rem !important"
+                height="100% !important"
                 width="1rem !important"
+                zIndex={0}
               />
             )}
           </Container>
-
+          <Separator />
           <Button onClick={onRemoveBlock} disabled={mode === 'deleting'}>
             {mode == 'deleting' ? (
               <LoadingIndicator f={1} />
@@ -149,6 +158,7 @@ export const SettingsCell: React.FC<SettingsCellProps> = ({
               <Icon name="Garbage" size="1rem" color="gray.medium" />
             )}
           </Button>
+          <Separator />
           <Drag>
             <Icon name="EnterFullscreen" size="0.75rem" color="gray.medium" />
           </Drag>

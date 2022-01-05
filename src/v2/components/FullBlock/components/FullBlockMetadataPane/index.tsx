@@ -123,7 +123,12 @@ export default class FullBlockMetadataPane extends PureComponent<
         <Header mt={4} mb={5}></Header>
 
         <Box mb={8}>
-          <Text f={1} lineHeight={2} color="gray.medium">
+          <Text
+            f={1}
+            lineHeight={2}
+            color="gray.medium"
+            hoverLinks={{ color: 'gray.bold' }}
+          >
             <time
               dateTime={block.created_at_timestamp}
               title={block.created_at_timestamp}

@@ -50,7 +50,7 @@ export const FilterContainer: React.FC<FilterContainerProps> = ({
     <Outer>
       <Inner>
         <Box display="flex" flexDirection="row" mb={5}>
-          <Icon name="Filters" size="0.7rem" mr={3} />
+          <Icon name="Filters" size="0.9rem" mr={3} />
           <Text f="1">Filter by</Text>
         </Box>
         <TypeFilter id={id} type={type} setType={setType} />

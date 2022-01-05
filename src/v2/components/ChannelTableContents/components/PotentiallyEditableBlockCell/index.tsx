@@ -30,6 +30,8 @@ const EditIcon = styled(Icons).attrs({
   mr: 4,
 })`
   cursor: pointer;
+  position: absolute;
+  right: 0;
 
   &:hover {
     color: ${x => x.theme.colors.gray.bold};
@@ -39,24 +41,17 @@ const EditIcon = styled(Icons).attrs({
 const Inner = styled.div<{ mode: EditableCellMode }>`
   width: 100%;
   height: 100%;
-  padding: ${x => x.theme.space[3]};
+  padding-left: ${x => x.theme.space[3]};
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
   ${x =>
     x.mode === 'editing' &&
     `
       padding: 0;
     `}
-
-  ${EditIcon} {
-    display: none;
-  }
-
-  &:hover ${EditIcon} {
-    display: block;
-  }
 `
 
 const EditableInput = styled(Input)`
@@ -151,6 +146,7 @@ const PotentiallyEditableBlockCellNonNull = ({
         f={1}
         overflowEllipsis
         dangerouslySetInnerHTML={{ __html: attribute }}
+        pr={mode === 'editable' ? 7 : 0}
       />
 
       <Box />

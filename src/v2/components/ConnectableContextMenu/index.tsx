@@ -14,6 +14,7 @@ interface Props {
   connectable: ConnectableContextMenuConnectableData
   onRemove: ({ id, type }: { id: number; type: string }) => any
   onChangePosition: (newIndex: number) => void
+  zIndex?: number
 }
 
 export const ConnectableContextMenu: React.FC<Props & BoxProps> = ({
@@ -21,6 +22,7 @@ export const ConnectableContextMenu: React.FC<Props & BoxProps> = ({
   connectable,
   onRemove,
   onChangePosition,
+  zIndex = 1,
   ...rest
 }) => {
   const findOriginalUrl =
@@ -47,7 +49,13 @@ export const ConnectableContextMenu: React.FC<Props & BoxProps> = ({
   if (!isDisplayable) return null
 
   return (
-    <ContextMenu position="absolute" top={8} right={8} zIndex={1} {...rest}>
+    <ContextMenu
+      position="absolute"
+      top={8}
+      right={8}
+      zIndex={zIndex}
+      {...rest}
+    >
       {canRemove && (
         <ConnectableContextMenuRemoveConnection
           channelId={channel.id}

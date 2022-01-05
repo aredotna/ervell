@@ -116,7 +116,7 @@ const UserFilter: React.FC<UserFilterProps> = ({ id, setUser, user }) => {
   }, [setMode])
 
   const handleBlur = useCallback(() => {
-    // setMode('resting')
+    setTimeout(() => setMode('resting'), 200)
   }, [setMode])
 
   const handleSelect = useCallback(user => {
@@ -141,7 +141,7 @@ const UserFilter: React.FC<UserFilterProps> = ({ id, setUser, user }) => {
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
-          placeholder={'Select person'}
+          placeholder={'Select connecting person'}
           value={selectedUser ? `Person: ${selectedUser.name}` : null}
         />
         {selectedUser && (
