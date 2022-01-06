@@ -112,7 +112,7 @@ const TypeFilter: React.FC<TypeFilterProps> = ({ id, setType, type }) => {
   }, [setMode])
 
   const handleBlur = useCallback(() => {
-    // setMode('resting')
+    setTimeout(() => setMode('resting'), 200)
   }, [setMode])
 
   const handleSelect = useCallback(type => {

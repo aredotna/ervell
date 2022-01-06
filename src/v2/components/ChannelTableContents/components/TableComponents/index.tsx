@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { bgColor } from 'styled-system'
 import Text from 'v2/components/UI/Text'
 
 import constants from 'v2/styles/constants'
@@ -16,10 +17,10 @@ export const Table = styled.table`
 `
 
 export const TD = styled.td`
+  ${bgColor}
   color: ${x => x.theme.colors.gray.bold};
   border: 1px solid ${x => x.theme.colors.gray.light};
   border-right: none;
-  background: ${x => x.theme.colors.background};
   font-size: ${x => x.theme.fontSizesIndexed.sx};
   height: 30px !important;
   line-height: 0;
@@ -45,6 +46,7 @@ export const TH = styled(TD)`
   top: ${constants.headerHeight};
   background: ${x => x.theme.colors.background};
   z-index: 1;
+  cursor: default;
 `
 
 export const TR = styled.tr`

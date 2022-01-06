@@ -72,14 +72,14 @@ export const STANDARD_HEADERS: Array<Column<TableData>> = [
     id: ColumnIds.addedAt,
     accessor: block => '__typename' in block && block?.connection?.created_at,
     Cell: StandardCell,
-    width: '200px',
+    width: '150px',
   },
   {
     Header: 'Author',
     id: ColumnIds.author,
     accessor: block => '__typename' in block && block?.user?.name,
     Cell: StandardCell,
-    width: '200px',
+    width: '125px',
   },
   {
     Header: 'Connections',
@@ -94,7 +94,7 @@ export const STANDARD_HEADERS: Array<Column<TableData>> = [
         : block.counts?.connected_to_channels
     },
     Cell: StandardCell,
-    width: '200px',
+    width: '125px',
   },
   {
     Header: ColumnIds.addSettings,
@@ -128,10 +128,26 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     { sort: Sorts.POSITION, dir: SortDirection.DESC }
   )
   const [type, setType] = useState<ConnectableTypeEnum | null>(null)
+
+  const handleSetType = useCallback(
+    (type: ConnectableTypeEnum | null) => {
+      setType(type)
+    },
+    [setType]
+  )
+
   const [
     user,
     setUser,
   ] = useState<ChannelTableConnectors_channel_connectors | null>(null)
+
+  const handleSetUser = useCallback(
+    (user: ChannelTableConnectors_channel_connectors | null) => {
+      setUser(user)
+    },
+    [setUser]
+  )
+
   const {
     blocks,
     getPage,
@@ -180,8 +196,8 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
       loading={loading}
       type={type}
       user={user}
-      setType={setType}
-      setUser={setUser}
+      setType={handleSetType}
+      setUser={handleSetUser}
       onItemIntersected={onItemIntersected}
       addBlock={addBlock}
       updateBlock={updateBlock}

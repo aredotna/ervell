@@ -41,7 +41,7 @@ export const TD = styled.td`
 export const TR = styled.tr``
 
 const HeaderRow = styled(TR)`
-  cursor: text;
+  cursor: default;
 `
 
 const TH = styled(TD)`
@@ -66,8 +66,8 @@ const SettingsAddTH = styled(TH)`
   min-width: 100px;
   padding: 0;
   overflow: visible;
-  vertical-align: top;
-  line-height: 0;
+  vertical-align: middle;
+  background-color: ${props => props.theme.colors.gray.hint};
 `
 
 interface ChannelTableHeaderProps {

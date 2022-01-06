@@ -26,16 +26,17 @@ import { ConnectableTypeEnum } from '__generated__/globalTypes'
 import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 
 const AddButton = styled(GenericButton).attrs({
-  bg: 'gray.light',
+  bg: 'gray.hint',
 })`
   border-radius: 0px;
-  height: 100%;
+  height: 30px;
   width: 60px;
   border: 0px solid transparent;
   padding: 0;
   border-left: 1px solid ${x => x.theme.colors.gray.light};
   &:hover {
     border: 0px solid transparent !important;
+    border-left: 1px solid ${x => x.theme.colors.gray.light} !important;
   }
 `
 
@@ -44,14 +45,14 @@ const Middle = styled(Box).attrs({
 })`
   width: 10px;
   height: 110%;
-  transform: translateY(-1px);
+  transform: translateY(-1px) scaleY(1.4);
 `
 
 const FilterButton = styled(GenericButton).attrs({
   bg: 'gray.hint',
 })`
   border-radius: 0px;
-  height: 100%;
+  height: 30px;
   width: 36px;
   border: 0px solid transparent;
   padding: 0;
@@ -104,6 +105,9 @@ const Container = styled(Box)`
   text-align: right;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  transform: translateZ(1px);
+  background-color: ${props => props.theme.colors.gray.hint};
 `
 
 const AddFieldContainer = styled(Box)`
@@ -206,18 +210,7 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
     // On filter button press
     //
     const handleFilterClick = useCallback(() => {
-      if (filterMode == 'open') {
-        return setFilterMode('resting')
-      }
-      if (filterMode === 'activeAndOpen') {
-        return setFilterMode('active')
-      }
-      if (filterMode === 'active') {
-        return setFilterMode('activeAndOpen')
-      }
-      if (filterMode === 'resting') {
-        return setFilterMode('open')
-      }
+      filterMode == 'open' ? setFilterMode('resting') : setFilterMode('open')
     }, [setFilterMode, filterMode])
 
     //
@@ -244,6 +237,12 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
         })
       }
     }, [setMode, mode, value])
+
+    const handleClose = useCallback(() => {
+      setTimeout(() => {
+        setFilterMode('resting')
+      }, 100)
+    }, [setFilterMode])
 
     //
     // On input change
@@ -330,7 +329,7 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
                       anchorX="right"
                       targetEl={() => filterRef.current}
                       offsetY={5}
-                      onClose={() => setFilterMode('resting')}
+                      onClose={handleClose}
                     >
                       <Filter
                         id={channelId}
