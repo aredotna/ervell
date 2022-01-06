@@ -22,7 +22,7 @@ export interface CustomerPlanChanges_me_customer_invoice {
   /**
    * Can be `null` in cases where there is a manually sent invoice
    */
-  next_payment_attempt_at: string;
+  next_payment_attempt_at: string | null;
 }
 
 export interface CustomerPlanChanges_me_customer {

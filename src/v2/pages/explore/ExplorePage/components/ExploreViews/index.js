@@ -3,28 +3,36 @@ import PropTypes from 'prop-types'
 
 import ExploreContents from 'v2/components/ExploreContents'
 
-const All = ({ sort, fetchPolicy }) => (
-  <ExploreContents type="ALL" sort={sort} fetchPolicy={fetchPolicy} />
+const All = ({ sort, fetchPolicy, timestamp }) => (
+  <ExploreContents
+    type="ALL"
+    sort={sort}
+    fetchPolicy={fetchPolicy}
+    timestamp={timestamp}
+  />
 )
 
 All.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+  timestamp: PropTypes.string,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
 }
 
-const Blocks = ({ sort, fetchPolicy, block_filter }) => (
+const Blocks = ({ sort, fetchPolicy, blockFilter, timestamp }) => (
   <ExploreContents
     type="CONNECTABLE"
     sort={sort}
     fetchPolicy={fetchPolicy}
-    block_filter={block_filter}
+    blockFilter={blockFilter}
+    timestamp={timestamp}
   />
 )
 
 Blocks.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
-  block_filter: PropTypes.oneOf([
+  timestamp: PropTypes.string,
+  blockFilter: PropTypes.oneOf([
     'IMAGE',
     'EMBED',
     'TEXT',
@@ -33,12 +41,18 @@ Blocks.propTypes = {
   ]),
 }
 
-const Channels = ({ sort, fetchPolicy }) => (
-  <ExploreContents type="CHANNEL" sort={sort} fetchPolicy={fetchPolicy} />
+const Channels = ({ sort, fetchPolicy, timestamp }) => (
+  <ExploreContents
+    type="CHANNEL"
+    sort={sort}
+    fetchPolicy={fetchPolicy}
+    timestamp={timestamp}
+  />
 )
 
 Channels.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+  timestamp: PropTypes.string,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
 }
 
@@ -74,7 +88,7 @@ class ExploreViews extends Component {
 
   render() {
     const { fetchPolicy } = this.state
-    const { view, sort, block_filter } = this.props
+    const { view, sort, block_filter, timestamp } = this.props
 
     switch (view) {
       case 'all':
@@ -86,7 +100,8 @@ class ExploreViews extends Component {
           <Blocks
             sort={sort}
             fetchPolicy={fetchPolicy}
-            block_filter={block_filter}
+            blockFilter={block_filter}
+            timestamp={timestamp}
           />
         )
       default:

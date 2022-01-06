@@ -82,7 +82,7 @@ export interface ApplyCouponToSubscription_apply_coupon_to_subscription_upcoming
   /**
    * Can be `null` in cases where there is a manually sent invoice
    */
-  next_payment_attempt_at: string;
+  next_payment_attempt_at: string | null;
 }
 
 export interface ApplyCouponToSubscription_apply_coupon_to_subscription_upcoming_customer {
