@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Query } from '@apollo/client/react/components'
 
 import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
@@ -18,12 +18,14 @@ interface ExplorePageProps {
   view: 'all' | 'channels' | 'blocks'
   sort: 'UPDATED_AT' | 'RANDOM'
   block_filter: 'IMAGE' | 'EMBED' | 'TEXT' | 'ATTACHMENT' | 'LINK'
+  timestamp?: string
 }
 
 export const ExplorePage: React.FC<ExplorePageProps> = ({
   view,
   sort,
   block_filter,
+  timestamp,
 }) => {
   return (
     <ErrorBoundary>
@@ -37,7 +39,12 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
             block_filter={block_filter}
           />
 
-          <ExploreViews view={view} sort={sort} block_filter={block_filter} />
+          <ExploreViews
+            view={view}
+            sort={sort}
+            block_filter={block_filter}
+            timestamp={timestamp}
+          />
           <MobileOrChildren>
             <BottomBanner banner="LOGGED_OUT_EXPLORE" />
           </MobileOrChildren>
@@ -56,6 +63,12 @@ const setValid = (value, validValues, defaultValue) => {
 }
 
 export default ({ params, query }) => {
+  const [timestamp, setTimestamp] = useState(null)
+
+  useEffect(() => {
+    setTimestamp(new Date().toISOString())
+  }, [setTimestamp])
+
   return (
     <Query query={exploreUiStateQuery} fetchPolicy="network-only">
       {props => {
@@ -74,8 +87,15 @@ export default ({ params, query }) => {
           query.block_filter || (cookies && cookies.block_filter) || null
         const block_filter = setValid(filter, VALID_FILTERS, null)
 
+        const extraProps = timestamp ? { timestamp } : {}
+
         return (
-          <ExplorePage view={view} sort={sort} block_filter={block_filter} />
+          <ExplorePage
+            view={view}
+            sort={sort}
+            block_filter={block_filter}
+            {...extraProps}
+          />
         )
       }}
     </Query>

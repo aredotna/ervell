@@ -368,4 +368,5 @@ export interface ExploreContentsVariables {
   sort?: SearchSorts | null;
   seed?: number | null;
   block_filter?: BlockFilterEnum | null;
+  timestamp?: any | null;
 }

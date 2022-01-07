@@ -10,6 +10,7 @@ export default gql`
     $sort: SearchSorts
     $seed: Int
     $block_filter: BlockFilterEnum
+    $timestamp: DateTime
   ) {
     contents: exxplore(
       type: $type
@@ -18,6 +19,7 @@ export default gql`
       sort_by: $sort
       seed: $seed
       block_filter: $block_filter
+      timestamp: $timestamp
     ) {
       ...KonnectableCell
     }
