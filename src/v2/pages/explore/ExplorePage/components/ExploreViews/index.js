@@ -92,9 +92,17 @@ class ExploreViews extends Component {
 
     switch (view) {
       case 'all':
-        return <All sort={sort} fetchPolicy={fetchPolicy} />
+        return (
+          <All sort={sort} fetchPolicy={fetchPolicy} timestamp={timestamp} />
+        )
       case 'channels':
-        return <Channels sort={sort} fetchPolicy={fetchPolicy} />
+        return (
+          <Channels
+            sort={sort}
+            fetchPolicy={fetchPolicy}
+            timestamp={timestamp}
+          />
+        )
       case 'blocks':
         return (
           <Blocks
