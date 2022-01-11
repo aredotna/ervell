@@ -23,7 +23,7 @@ export const ChannelMetadataView: React.FC<ChannelMetadataConnectionsProps> = ({
         name="view"
         value="grid"
         prefix={`Channel.${channel.slug}`}
-        to={`${channel.href}`}
+        to={`${channel.href}/grid`}
         isActive={isViewActive('grid')}
       >
         Grid

@@ -145,8 +145,9 @@ export const SettingsCell: React.FC<SettingsCellProps> = ({
                 bg="gray.hint"
                 position="static"
                 height="100% !important"
-                width="1rem !important"
+                width="100% !important"
                 zIndex={0}
+                borderRadius="0 !important"
               />
             )}
           </Container>
