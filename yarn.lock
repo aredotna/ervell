@@ -8798,9 +8798,9 @@ eyes@0.1.x:
   resolved "https://registry.yarnpkg.com/eyes/-/eyes-0.1.8.tgz#62cf120234c683785d902348a800ef3e0cc20bc0"
   integrity sha1-Ys8SAjTGg3hdkCNIqADvPgzCC8A=
 
-"ezel-assets@git://github.com/arenahq/ezel-assets.git":
+"ezel-assets@https://github.com/arenahq/ezel-assets.git":
   version "1.0.2"
-  resolved "git://github.com/arenahq/ezel-assets.git#e17e3f4af1cde1f6d83f198afd0877cad3e5d92e"
+  resolved "https://github.com/arenahq/ezel-assets.git#e17e3f4af1cde1f6d83f198afd0877cad3e5d92e"
   dependencies:
     async "^1.5.0"
     uglify-js "^2.6.2"
