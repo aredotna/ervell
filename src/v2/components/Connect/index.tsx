@@ -84,7 +84,7 @@ export const Connect: React.FC<ConnectProps & BoxProps> = ({
     <Container {...rest}>
       {mode === 'resting' && (
         <GenericButton onClick={openConnect} f={f}>
-          <ConnectPadding>{label}</ConnectPadding>
+          <ConnectPadding dangerouslySetInnerHTML={{ __html: label }} />
         </GenericButton>
       )}
 

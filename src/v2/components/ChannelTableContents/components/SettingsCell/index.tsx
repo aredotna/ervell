@@ -21,7 +21,7 @@ const Cell = styled.div`
 
 const Container = styled(Box)`
   position: relative;
-  width: 37px;
+  width: 36px;
   background-color: ${({ theme }) => theme.colors.gray.hint};
   display: flex;
   justify-content: center;
