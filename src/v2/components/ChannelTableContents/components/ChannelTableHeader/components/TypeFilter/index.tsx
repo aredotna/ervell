@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 import { debounce, isEmpty } from 'underscore'
@@ -62,17 +62,32 @@ const Item = styled(ItemContainer)`
 interface TypeListProps {
   id: string | number
   handleSelect: (value: string) => void
+  query?: string
 }
 
-const TypeList: React.FC<TypeListProps> = ({ id, handleSelect }) => {
+const TypeList: React.FC<TypeListProps> = ({ id, handleSelect, query }) => {
   const { data } = useQuery<ChannelTableTypes, ChannelTableTypesVariables>(
     channelTypesQuery,
     { variables: { id: id.toString() } }
   )
 
+  const [matches, setMatches] = useState<ConnectableTypeEnum[] | null>(null)
+
+  useEffect(() => {
+    const items = query
+      ? data?.channel?.types.filter(element => {
+          if (element.toLowerCase().includes(query)) {
+            return true
+          }
+        })
+      : data?.channel?.types
+
+    setMatches(items)
+  }, [query, data, setMatches])
+
   return (
     <ResultContainer>
-      {data?.channel?.types.map(type => {
+      {matches?.map(type => {
         return (
           <Item onClick={() => handleSelect(type)} key={type}>
             <Text f={1}>{type.toLowerCase()}</Text>
@@ -90,17 +105,19 @@ interface TypeFilterProps {
 }
 
 const TypeFilter: React.FC<TypeFilterProps> = ({ id, setType, type }) => {
-  const [, setDebouncedQuery] = useState<string>('')
+  const [query, setDebouncedQuery] = useState<string>('')
   const [mode, setMode] = useState<'active' | 'focused' | 'resting'>('resting')
   const [selectedType, setSelectedType] = useState<ConnectableTypeEnum | null>(
     type
   )
 
   const inputRef = useRef(null)
-  const debounceQuery = debounce(debouncedQuery => {
-    setDebouncedQuery(debouncedQuery)
-  }, 200)
-
+  const debounceQuery = useCallback(
+    debounce(debouncedQuery => {
+      setDebouncedQuery(debouncedQuery)
+    }, 200),
+    [setDebouncedQuery]
+  )
   const handleChange = ({ target: { value: query } }) => {
     const mode = isEmpty(query) ? 'resting' : 'active'
     setMode(mode)
@@ -146,7 +163,9 @@ const TypeFilter: React.FC<TypeFilterProps> = ({ id, setType, type }) => {
           </Close>
         )}
       </InputContainer>
-      {mode == 'focused' && <TypeList id={id} handleSelect={handleSelect} />}
+      {(mode === 'focused' || mode === 'active') && (
+        <TypeList id={id} query={query} handleSelect={handleSelect} />
+      )}
     </SearchContainer>
   )
 }
