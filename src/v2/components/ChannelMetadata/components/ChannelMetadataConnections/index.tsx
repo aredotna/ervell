@@ -9,6 +9,7 @@ import { ChannelMetadataConnections as Channel } from '__generated__/ChannelMeta
 
 import Connect from 'v2/components/Connect'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
 const Actions = styled.div`
   div + & {
@@ -47,8 +48,8 @@ export const ChannelMetadataConnections: React.FC<ChannelMetadataConnectionsProp
       {channel.can.connect && (
         <Actions>
           <Connect
-            id={channel.id}
-            type="CHANNEL"
+            id={channel.id.toString()}
+            type={BaseConnectableTypeEnum.CHANNEL}
             refetchQueries={[
               {
                 query: channelMetadataQuery,

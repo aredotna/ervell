@@ -12,6 +12,7 @@ import {
   FullChannelMetadataFoldVariables,
 } from '__generated__/FullChannelMetadataFold'
 import fullChannelMetadataFold from './queries/fullChannelMetadataFold'
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
 const Header = ({ children: title, ...rest }) => (
   <Box
@@ -64,7 +65,13 @@ export const FullChannelMetadataFold: React.FC<FullChannelMetadataFoldProps> = (
             />
           )
         })}
-      <Connect id={id} type="CHANNEL" my={6} f={3} textAlign="center" />
+      <Connect
+        id={id}
+        type={BaseConnectableTypeEnum.CHANNEL}
+        my={6}
+        f={3}
+        textAlign="center"
+      />
     </Box>
   )
 }

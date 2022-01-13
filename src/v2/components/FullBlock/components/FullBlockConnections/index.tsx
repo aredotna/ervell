@@ -19,6 +19,7 @@ import {
   FullBlockConnectionsQueryVariables,
 } from '__generated__/FullBlockConnectionsQuery'
 import { useQuery } from '@apollo/client'
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
 interface FullBlockConnectionsProps {
   id: string
@@ -190,7 +191,7 @@ export const FullBlockConnections: React.FC<FullBlockConnectionsProps> = ({
 
       <Connect
         id={id}
-        type="BLOCK"
+        type={BaseConnectableTypeEnum.BLOCK}
         my={6}
         f={3}
         textAlign="center"
