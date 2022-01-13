@@ -23,8 +23,9 @@ export const TD = styled.td`
   border: 1px solid ${x => x.theme.colors.gray.light};
   border-right: none;
   font-size: ${x => x.theme.fontSizesIndexed.sx};
-  height: 30px;
-  line-height: 0;
+  height: 100%;
+  max-height: 30px;
+  line-height: 30px;
   padding: 0;
   min-width: ${x => x.width};
   width: ${x => x.width};
@@ -32,6 +33,7 @@ export const TD = styled.td`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: table-cell;
 
   &:nth-last-of-type(1) {
     border-right: 1px solid ${x => x.theme.colors.gray.light};
@@ -60,6 +62,7 @@ const THInner = styled(Box)`
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
 `
 
 const SettingsAddTH = styled(TH)`

@@ -1,21 +1,14 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import { SortableHandle } from 'react-sortable-hoc'
 import styled from 'styled-components'
 
 import Icon from 'v2/components/UI/Icons'
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import GenericButton from 'v2/components/UI/GenericButton'
 import { TableData } from '../../lib/types'
-import { getConnectableType } from 'v2/util/getConnectableType'
-import { useMutation } from '@apollo/client'
-import {
-  RemoveTableConnectionMutation,
-  RemoveTableConnectionMutationVariables,
-} from '__generated__/RemoveTableConnectionMutation'
-import { removeConnectionMutation } from './mutations/removeConnection'
 import { ConnectableContextMenu } from 'v2/components/ConnectableContextMenu'
 import { ChannelTablePage_channel } from '__generated__/ChannelTablePage'
 import Box from 'v2/components/UI/Box'
+import { DeleteButton } from './components/ConnectButton'
 
 const Cell = styled.div`
   display: flex;
@@ -28,7 +21,7 @@ const Cell = styled.div`
 
 const Container = styled(Box)`
   position: relative;
-  width: 38px;
+  width: 37px;
   background-color: ${({ theme }) => theme.colors.gray.hint};
   display: flex;
   justify-content: center;
@@ -41,7 +34,7 @@ const Separator = styled(Box)`
   background-color: ${({ theme }) => theme.colors.gray.light};
 `
 
-const Button = styled(GenericButton).attrs({
+export const Button = styled(GenericButton).attrs({
   bg: 'gray.hint',
 })`
   border-radius: 0px;
@@ -80,8 +73,7 @@ interface SettingsCellProps {
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
 }
 
-type SettingsMode = 'resting' | 'deleting' | 'menu'
-type Ev = React.MouseEvent<HTMLElement>
+export type Ev = React.MouseEvent<HTMLElement>
 
 export const SettingsCell: React.FC<SettingsCellProps> = ({
   value,
@@ -90,35 +82,6 @@ export const SettingsCell: React.FC<SettingsCellProps> = ({
   channel,
   index,
 }) => {
-  const [mode, setMode] = useState<SettingsMode>('resting')
-
-  const [removeConnection] = useMutation<
-    RemoveTableConnectionMutation,
-    RemoveTableConnectionMutationVariables
-  >(removeConnectionMutation)
-
-  const onRemoveBlock = useCallback(
-    (e: Ev) => {
-      e.preventDefault()
-      e.stopPropagation()
-
-      if (!value || 'isNull' in value) return null
-
-      setMode('deleting')
-
-      removeConnection({
-        variables: {
-          channelId: channel.id.toString(),
-          connectableType: getConnectableType(value.__typename),
-          connectableId: value.id.toString(),
-        },
-      }).then(() => {
-        removeBlock({ id: value.id, type: value.__typename })
-      })
-    },
-    [removeBlock, removeConnection]
-  )
-
   const handleChangePosition = useCallback(
     (newIndex: number) => {
       moveBlock({
@@ -152,13 +115,7 @@ export const SettingsCell: React.FC<SettingsCellProps> = ({
             )}
           </Container>
           <Separator />
-          <Button onClick={onRemoveBlock} disabled={mode === 'deleting'}>
-            {mode == 'deleting' ? (
-              <LoadingIndicator f={1} />
-            ) : (
-              <Icon name="Garbage" size="1rem" color="gray.medium" />
-            )}
-          </Button>
+          <DeleteButton channel={channel} removeBlock={removeBlock} />
           <Separator />
           <Drag>
             <Icon name="EnterFullscreen" size="0.75rem" color="gray.medium" />
