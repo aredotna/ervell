@@ -48,6 +48,7 @@ export const Button = styled(GenericButton).attrs({
   justify-content: center;
   align-items: center;
   position: relative;
+  color: ${({ theme }) => theme.colors.gray.medium};
 
   &:hover {
     border: 0px solid transparent !important;
