@@ -1,111 +1,90 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { useMutation } from '@apollo/client'
 
-import { TableData } from 'v2/components/ChannelTableContents/lib/types'
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
-import Icon from 'v2/components/UI/Icons'
+import { BoxProps } from 'v2/components/UI/Box'
+import { ConnectionSelection } from 'v2/components/ConnectionSelection'
 import Overlay from 'v2/components/UI/Overlay'
+import BorderedBox from 'v2/components/UI/BorderedBox'
 
-import { Button, Ev } from '../..'
-import { getConnectableType } from 'v2/util/getConnectableType'
+import useLoginStatus from 'v2/hooks/useLoginStatus'
 
-import {
-  RemoveTableConnectionMutation,
-  RemoveTableConnectionMutationVariables,
-} from '__generated__/RemoveTableConnectionMutation'
-import { removeConnectionMutation } from '../../mutations/removeConnection'
-import { ChannelTablePage_channel } from '__generated__/ChannelTablePage'
-import Box from 'v2/components/UI/Box'
-import Text from 'v2/components/UI/Text'
-
-interface DeleteButtonProps {
-  channel: ChannelTablePage_channel
-  value?: TableData
-  removeBlock: (args: { id: number; type: string }) => void
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
+import { Button } from '../..'
+interface ConnectProps {
+  id: string | number
+  type: BaseConnectableTypeEnum
+  label?: string
+  f?: number
+  refetchQueries?: any
 }
 
-type DeleteButtonMode = 'resting' | 'deleting' | 'open'
-
-export const DeleteButton: React.FC<DeleteButtonProps> = ({
-  value,
-  channel,
-  removeBlock,
+export const ConnectButton: React.FC<ConnectProps & BoxProps> = ({
+  id,
+  type,
+  f = 1,
+  label = '&rarr;',
+  refetchQueries = [],
+  ...rest
 }) => {
-  const [mode, setMode] = useState<DeleteButtonMode>('resting')
-
-  const [removeConnection] = useMutation<
-    RemoveTableConnectionMutation,
-    RemoveTableConnectionMutationVariables
-  >(removeConnectionMutation)
-
+  const [mode, setMode] = useState<'resting' | 'active'>('resting')
   const targetEl = useRef(null)
+  const { isLoggedIn } = useLoginStatus()
 
-  const openMenu = useCallback(e => {
-    e.preventDefault()
-    e.stopPropagation()
-    setMode('open')
-  }, [])
+  const openConnect = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isLoggedIn) {
+        window.location.href = `/sign_up?redirect-to=${window.location.pathname}`
+        return null
+      }
 
-  const closeMenu = useCallback(e => {
+      e.preventDefault()
+      e.stopPropagation()
+
+      setMode('active')
+    },
+    [setMode]
+  )
+
+  const handleClose = useCallback((e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
     setMode('resting')
   }, [])
 
-  const onRemoveBlock = useCallback(
-    (e: Ev) => {
-      e.preventDefault()
-      e.stopPropagation()
-
-      if (!value || 'isNull' in value) return null
-
-      setMode('deleting')
-
-      removeConnection({
-        variables: {
-          channelId: channel.id.toString(),
-          connectableType: getConnectableType(value.__typename),
-          connectableId: value.id.toString(),
-        },
-      }).then(() => {
-        removeBlock({ id: value.id, type: value.__typename })
-      })
-    },
-    [removeBlock, removeConnection]
-  )
-
   return (
-    <Button
-      onClick={{ open: closeMenu, resting: openMenu }[mode]}
-      disabled={mode === 'deleting'}
-      ref={targetEl}
-    >
-      {mode == 'deleting' ? (
-        <LoadingIndicator f={1} />
-      ) : (
+    <>
+      <Button
+        ref={targetEl}
+        onClick={{ active: handleClose, resting: openConnect }[mode]}
+        {...rest}
+      >
+        {mode == 'active' ? <span>&times;</span> : <span>&rarr;</span>}
+      </Button>
+
+      {mode === 'active' && (
         <>
-          <Icon name="Garbage" size="1rem" color="gray.medium" />
-          {mode == 'open' && (
-            <Overlay
-              onClose={closeMenu}
-              targetEl={() => targetEl.current}
-              alignToY="bottom"
-              alignToX="right"
-              anchorY="top"
-              anchorX="right"
-              offsetY={5}
-              offsetX={0}
-              disableTarget
-            >
-              <Box p={5} bg={'state.alert'}>
-                <Text f={1} color={'gray.block'}>
-                  Remove Connection?
-                </Text>
-              </Box>
-            </Overlay>
-          )}
+          <Overlay
+            onClose={handleClose}
+            targetEl={() => targetEl.current}
+            alignToY="bottom"
+            alignToX="right"
+            anchorY="top"
+            anchorX="right"
+            offsetY={5}
+            offsetX={0}
+            disableTarget
+          >
+            <BorderedBox p={4} width="300px">
+              <ConnectionSelection
+                id={id}
+                type={type}
+                refetchQueries={refetchQueries}
+              />
+            </BorderedBox>
+          </Overlay>
         </>
       )}
-    </Button>
+    </>
   )
 }
+
+export default ConnectButton

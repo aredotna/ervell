@@ -6,8 +6,9 @@ import GenericButton from 'v2/components/UI/GenericButton'
 import { ConnectionSelection } from 'v2/components/ConnectionSelection'
 
 import { inputPadding } from 'v2/components/UI/Inputs'
-import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 import useLoginStatus from 'v2/hooks/useLoginStatus'
+
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
 const Container = styled(Box)`
   position: relative;
@@ -67,16 +68,24 @@ export const Connect: React.FC<ConnectProps & BoxProps> = ({
   const [mode, setMode] = useState<'resting' | 'active'>('resting')
   const { isLoggedIn } = useLoginStatus()
 
-  const openConnect = useCallback(() => {
-    if (!isLoggedIn) {
-      window.location.href = `/sign_up?redirect-to=${window.location.pathname}`
-      return null
-    }
+  const openConnect = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isLoggedIn) {
+        window.location.href = `/sign_up?redirect-to=${window.location.pathname}`
+        return null
+      }
 
-    setMode('active')
-  }, [setMode])
+      e.preventDefault()
+      e.stopPropagation()
 
-  const handleClose = useCallback(() => {
+      setMode('active')
+    },
+    [setMode]
+  )
+
+  const handleClose = useCallback((e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
     setMode('resting')
   }, [])
 

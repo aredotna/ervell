@@ -8,7 +8,8 @@ import { TableData } from '../../lib/types'
 import { ConnectableContextMenu } from 'v2/components/ConnectableContextMenu'
 import { ChannelTablePage_channel } from '__generated__/ChannelTablePage'
 import Box from 'v2/components/UI/Box'
-import { DeleteButton } from './components/ConnectButton'
+import { ConnectButton } from './components/ConnectButton'
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
 const Cell = styled.div`
   display: flex;
@@ -39,7 +40,7 @@ export const Button = styled(GenericButton).attrs({
 })`
   border-radius: 0px;
   height: 100% !important;
-  width: 38px;
+  width: 37px;
   border: 0px solid transparent;
   padding: 0;
   background-color: ${({ theme }) => theme.colors.gray.hint};
@@ -115,7 +116,12 @@ export const SettingsCell: React.FC<SettingsCellProps> = ({
             )}
           </Container>
           <Separator />
-          <DeleteButton channel={channel} removeBlock={removeBlock} />
+          {!valueIsNull && (
+            <ConnectButton
+              id={value.id.toString()}
+              type={BaseConnectableTypeEnum.BLOCK}
+            />
+          )}
           <Separator />
           <Drag>
             <Icon name="EnterFullscreen" size="0.75rem" color="gray.medium" />
