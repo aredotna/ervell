@@ -44,7 +44,7 @@ const Middle = styled(Box).attrs({
   bg: 'white',
 })`
   width: 10px;
-  height: 110%;
+  height: 32px;
   transform: translateY(-1px) scaleY(1.4);
 `
 

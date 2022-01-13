@@ -10,6 +10,8 @@ import { FIRST_COLUMN_WIDTH } from '../../lib/constants'
 
 const Row = styled.tr`
   border-color: transparent;
+  height: 450px;
+  max-height: 450px;
 `
 
 const TD = styled.td`
@@ -25,6 +27,7 @@ const TD = styled.td`
   vertical-align: top;
   position: relative;
   overflow: scroll;
+  display: table-cell;
 
   &:first-child {
     border-left: 1px solid ${x => x.theme.colors.gray.block};
@@ -39,6 +42,8 @@ const ContentTD = styled(TD)``
 
 const ContentContainer = styled(Box)`
   height: 100%;
+  max-height: 450px;
+  overflow: hidden;
   border-right: 1px solid ${x => x.theme.colors.gray.hint};
 `
 
@@ -46,6 +51,7 @@ const MetadataContainer = styled(Box).attrs({
   p: 5,
 })`
   height: 100%;
+  max-height: 450px;
   overflow: scroll;
 `
 
@@ -58,6 +64,7 @@ const ButtonContainer = styled(Box)`
 const MetadataFoldContainer = styled(Box)`
   overflow: scroll;
   height: 100%;
+  max-height: 450px;
 `
 
 export interface ExpandedBlockRowProps {

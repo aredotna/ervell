@@ -1,10 +1,26 @@
 import React from 'react'
+import styled from 'styled-components'
+
+import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
+import Text from 'v2/components/UI/Text'
 
 import { ChannelMetadata as Channel } from '__generated__/ChannelMetadata'
 
-import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
-
 type ChannelViewType = 'table' | 'grid'
+
+const BetaBadge = styled(Text).attrs({
+  f: 0,
+})`
+  display: inline-block;
+  color: ${props => props.theme.colors.gray.regular} !important;
+  font-weight: normal;
+  margin-left: 0.5em;
+
+  &:before {
+    content: '•';
+    margin-right: 0.5em;
+  }
+`
 
 interface ChannelMetadataConnectionsProps {
   channel: Channel
@@ -23,7 +39,7 @@ export const ChannelMetadataView: React.FC<ChannelMetadataConnectionsProps> = ({
         name="view"
         value="grid"
         prefix={`Channel.${channel.slug}`}
-        to={`${channel.href}`}
+        to={`${channel.href}/grid`}
         isActive={isViewActive('grid')}
       >
         Grid
@@ -36,6 +52,7 @@ export const ChannelMetadataView: React.FC<ChannelMetadataConnectionsProps> = ({
         isActive={isViewActive('table')}
       >
         Table
+        <BetaBadge>BETA</BetaBadge>
       </CookieLinkUnlessCurrent>
     </div>
   )

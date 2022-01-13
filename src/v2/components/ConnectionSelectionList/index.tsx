@@ -109,9 +109,17 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
   }
 
   return (
-    <Container mode={mode} isOutlined={isOutlined}>
+    <Container
+      mode={mode}
+      isOutlined={isOutlined}
+      onClick={e => e.stopPropagation()}
+    >
       <SearchContainer>
-        <SearchInput onChange={handleChange} ref={inputRef} />
+        <SearchInput
+          onClick={e => e.stopPropagation()}
+          onChange={handleChange}
+          ref={inputRef}
+        />
       </SearchContainer>
       {mode === 'resting' && (
         <>

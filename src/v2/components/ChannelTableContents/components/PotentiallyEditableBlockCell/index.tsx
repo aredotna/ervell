@@ -33,8 +33,8 @@ const EditIcon = styled(Icons).attrs({
   position: absolute;
   right: 0;
 
-  &:hover {
-    color: ${x => x.theme.colors.gray.bold};
+  &:hover svg {
+    fill: ${x => x.theme.colors.gray.block};
   }
 `
 
