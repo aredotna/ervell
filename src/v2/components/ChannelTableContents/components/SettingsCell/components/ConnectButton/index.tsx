@@ -12,16 +12,12 @@ import { Button } from '../..'
 interface ConnectProps {
   id: string | number
   type: BaseConnectableTypeEnum
-  label?: string
-  f?: number
   refetchQueries?: any
 }
 
 export const ConnectButton: React.FC<ConnectProps & BoxProps> = ({
   id,
   type,
-  f = 1,
-  label = '&rarr;',
   refetchQueries = [],
   ...rest
 }) => {
