@@ -1,3 +1,4 @@
+import { debounce } from 'lodash'
 import { useState, useEffect } from 'react'
 
 function getWindowDimensions(hasWindow) {
@@ -18,9 +19,9 @@ export default function useWindowDimensions() {
 
   useEffect(() => {
     if (hasWindow) {
-      const handleResize = () => {
+      const handleResize = debounce(() => {
         setWindowDimensions(getWindowDimensions(hasWindow))
-      }
+      }, 100)
 
       window.addEventListener('resize', handleResize)
       return () => window.removeEventListener('resize', handleResize)

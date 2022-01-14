@@ -46,6 +46,7 @@ import {
 } from '__generated__/ConnectableTableBlokk'
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import CONNECTABLE_TABLE_BLOKK_QUERY from './queries/TableConnectableBlokk'
+import useWindowDimensions from 'v2/hooks/useWindowDimensions'
 
 interface ChannelTableQueryProps {
   id: string
@@ -65,14 +66,14 @@ export const STANDARD_HEADERS: Array<Column<TableData>> = [
     id: ColumnIds.title,
     Cell: PotentiallyEditableBlockCell,
     accessor: block => ({ block, attr: 'title' }),
-    width: '30%',
+    width: '25%',
   },
   {
     Header: 'Added at',
     id: ColumnIds.addedAt,
     accessor: block => '__typename' in block && block?.connection?.created_at,
     Cell: StandardCell,
-    width: '150px',
+    width: '125px',
   },
   {
     Header: 'Author',
@@ -103,6 +104,21 @@ export const STANDARD_HEADERS: Array<Column<TableData>> = [
     Cell: SettingsCell,
     width: '100px',
   },
+]
+
+const MEDIUM_BREAKPOINT_HEADERS = [
+  ColumnIds.content,
+  ColumnIds.title,
+  ColumnIds.addedAt,
+  ColumnIds.author,
+  ColumnIds.addSettings,
+]
+
+const SMALL_BREAKPOINT_HEADERS = [
+  ColumnIds.content,
+  ColumnIds.title,
+  ColumnIds.author,
+  ColumnIds.addSettings,
 ]
 
 const sortAndSortDirReducer: React.Reducer<SortAndSortDir, SortAndSortDir> = (
@@ -260,9 +276,31 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     return data
   }, [blocks, contentCount])
 
+  const { width } = useWindowDimensions()
+
   const tableColumns = useMemo<Array<Column<TableData>>>(() => {
-    return STANDARD_HEADERS
-  }, [])
+    if (width > 1024) {
+      return STANDARD_HEADERS
+    }
+
+    if (width <= 1024 && width >= 690) {
+      const headers = STANDARD_HEADERS.filter(header => {
+        return MEDIUM_BREAKPOINT_HEADERS.map(h => h.toString()).includes(
+          header.id
+        )
+      })
+      return headers
+    }
+
+    if (width < 690) {
+      const headers = STANDARD_HEADERS.filter(header => {
+        return SMALL_BREAKPOINT_HEADERS.map(h => h.toString()).includes(
+          header.id
+        )
+      })
+      return headers
+    }
+  }, [width])
 
   const getRowId = useCallback((row: TableData, index: number): string => {
     const rowId = '__typename' in row ? row.id.toString() : `nullRow${index}`
