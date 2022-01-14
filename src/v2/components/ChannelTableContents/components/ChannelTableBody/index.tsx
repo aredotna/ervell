@@ -38,8 +38,9 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
   channel,
 }) => {
   const renderRow = useCallback(
-    row => {
+    (row: Row<TableData>) => {
       prepareRow(row)
+
       const { key: rowKey, ...rowProps } = row.getRowProps()
       const sharedIntersectionObserverBoxProps = {
         id: row.index,
@@ -47,9 +48,11 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
         options: intersectionObserverOptions,
       }
 
+      const expanded = row.isExpanded // || (!('isNull' in row.original) && row.original.connection.selected)
+
       let tableItemContent: JSX.Element | null = null
       if (
-        row.isExpanded &&
+        expanded &&
         '__typename' in row.original &&
         row.original.__typename !== 'Channel'
       ) {
@@ -71,7 +74,7 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
           />
         )
       } else if (
-        row.isExpanded &&
+        expanded &&
         '__typename' in row.original &&
         row.original.__typename === 'Channel'
       ) {
@@ -150,8 +153,7 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
         )
       }
 
-      const isRowMovable =
-        sortAndSortDir.sort === Sorts.POSITION && !row.isExpanded
+      const isRowMovable = sortAndSortDir.sort === Sorts.POSITION && !expanded
 
       return (
         <SortableTableItem
@@ -163,7 +165,7 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
            * forces the row to re render and allows dragging to
            * work again
            */
-          key={`${rowKey}.${row.isExpanded}`}
+          key={`${rowKey}.${expanded}`}
           index={row.index}
           disabled={!isRowMovable}
         >
