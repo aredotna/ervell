@@ -7,7 +7,7 @@ import { SortDirection, Sorts } from '__generated__/globalTypes'
  * values, we swap in an object object { isNull: true }
  */
 export type TableData =
-  | ChannelTableContentsSet_channel_blokks
+  | (ChannelTableContentsSet_channel_blokks & { expanded?: boolean })
   | { isNull: true }
 
 export type SortAndSortDir = {

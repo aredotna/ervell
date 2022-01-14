@@ -153,10 +153,15 @@ export const SelectableChannel: React.FC<SelectableChannelProps> = ({
     setSelected(isSelected)
   }, [isSelected])
 
-  const toggleSelection = useCallback(() => {
-    setSelected(!selected)
-    onSelection(!selected, channel)
-  }, [channel, onSelection, selected])
+  const toggleSelection = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+      setSelected(!selected)
+      onSelection(!selected, channel)
+    },
+    [channel, onSelection, selected]
+  )
 
   const {
     owner,

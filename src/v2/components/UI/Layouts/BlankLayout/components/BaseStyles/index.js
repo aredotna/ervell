@@ -8,6 +8,9 @@ export default createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     font-family: ${props => props.theme.fonts.sans};
     background-color: ${props => props.theme.colors.background};
+
+    // Fix for a phantom horizontal scroll
+    overflow-x: hidden;
   }
 
   a {
