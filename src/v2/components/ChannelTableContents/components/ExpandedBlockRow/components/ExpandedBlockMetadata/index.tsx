@@ -16,6 +16,7 @@ import {
 } from '__generated__/ExpandedBlockMetadata'
 import { FullBlock } from '__generated__/FullBlock'
 import { ToggleConnectionExpanded } from 'v2/components/ToggleConnectionExpanded'
+import { SansSerifText } from 'v2/components/UI/SansSerifText'
 
 interface ExpandedBlockMetadataProps {
   block: ChannelTableContentsSet_channel_blokks
@@ -46,14 +47,10 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
       </Text>
 
       {block?.description && (
-        <Text
-          f={2}
-          lineHeight={2}
-          color="gray.block"
-          dangerouslySetInnerHTML={{ __html: block?.description }}
-          breakWord
-          boldLinks
-          hoverLinks={{ color: 'gray.bold' }}
+        <SansSerifText
+          isSmall
+          color={'gray.bold'}
+          dangerouslySetInnerHTML={{ __html: block.description }}
         />
       )}
 
