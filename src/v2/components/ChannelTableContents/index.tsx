@@ -271,7 +271,9 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     const data: Array<TableData> = []
     for (let i = 0; i < contentCount; i++) {
       const block = blocks[i]
-      data.push(block ?? { isNull: true })
+      data.push(
+        { ...block, expanded: block?.connection?.selected } ?? { isNull: true }
+      )
     }
     return data
   }, [blocks, contentCount])
@@ -279,6 +281,10 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   const { width } = useWindowDimensions()
 
   const tableColumns = useMemo<Array<Column<TableData>>>(() => {
+    if (!width) {
+      return STANDARD_HEADERS
+    }
+
     if (width > 1024) {
       return STANDARD_HEADERS
     }
@@ -300,6 +306,8 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
       })
       return headers
     }
+
+    return STANDARD_HEADERS
   }, [width])
 
   const getRowId = useCallback((row: TableData, index: number): string => {
@@ -307,16 +315,20 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     return `${rowId}`
   }, [])
 
-  const initialExpandedStateRef = useRef<Record<string, boolean> | undefined>()
-  if (!initialExpandedStateRef.current) {
-    const initialState = {}
+  const initialExpandedState = useMemo(() => {
+    if (!tableData.length) {
+      return {}
+    }
+
+    const newState = {}
     tableData.forEach(row => {
       if ('__typename' in row && row.connection) {
-        initialState[row.id.toString()] = row.connection.selected
+        newState[row.id.toString()] = row.connection.selected
       }
     })
-    initialExpandedStateRef.current = initialState
-  }
+
+    return newState
+  }, [tableData])
 
   const {
     getTableProps,
@@ -332,7 +344,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
       autoResetExpanded: false,
       getRowId: getRowId,
       initialState: {
-        expanded: initialExpandedStateRef.current,
+        expanded: initialExpandedState,
       },
     },
     useExpanded
