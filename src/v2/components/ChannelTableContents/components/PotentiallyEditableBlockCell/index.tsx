@@ -83,7 +83,7 @@ const PotentiallyEditableBlockCellNonNull = ({
   value: { block: ChannelTableContentsSet_channel_blokks; attr: 'title' }
 }): JSX.Element => {
   const value = block[attr]
-  const editable = block.__typename !== 'Channel' && block.can.manage
+  const editable = block.__typename !== 'Channel' && block?.can?.manage
   const [mode, setMode] = useState<EditableCellMode>(
     editable ? 'editable' : 'resting'
   )
