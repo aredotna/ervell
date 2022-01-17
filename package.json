@@ -144,7 +144,7 @@
     "jquery": "*",
     "jquery.finger": "*",
     "lodash.flowright": "^3.5.0",
-    "marked": "^0.3.18",
+    "marked": "^4.0.10",
     "moment": "^2.22.2",
     "morgan": "^1.9.1",
     "mousetrap": "^1.6.1",
