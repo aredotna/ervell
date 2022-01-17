@@ -43,9 +43,9 @@ const AddButton = styled(GenericButton).attrs({
 const Middle = styled(Box).attrs({
   bg: 'white',
 })`
-  width: 10px;
-  height: 110%;
-  transform: translateY(-1px) scaleY(1.4);
+  width: ${({ width }) => (width ? `${width}px` : '10px')};
+  height: 32px;
+  transform: translateY(-1px) scaleY(1.2);
 `
 
 const FilterButton = styled(GenericButton).attrs({
@@ -190,12 +190,21 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
   ) => {
     const buttonContainerRef = useRef<HTMLElement>()
     const filterRef = useRef<HTMLElement>()
+    const addButtonRef = useRef<HTMLElement>()
+    const filterButtonRef = useRef<HTMLElement>()
     const [value, setValue] = useState<string>('')
 
     const { width: containerWidth } = useWidthOf({ ref: forwardedRef })
     const { width: buttonContainerWidth } = useWidthOf({
       ref: buttonContainerRef,
     })
+
+    const { width: addButtonWidth } = useWidthOf({ ref: addButtonRef })
+    const { width: filterButtonWidth } = useWidthOf({
+      ref: filterButtonRef,
+    })
+    const middleSectionWidth =
+      buttonContainerWidth - addButtonWidth - filterButtonWidth
 
     const [mode, setMode] = useState<AddButtonState>('resting')
     const [filterMode, setFilterMode] = useState<FilterButtonState>('resting')
@@ -317,7 +326,11 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
           {({ openUploadDialog }) => (
             <>
               <Box position="relative" ref={filterRef}>
-                <FilterButton f={1} onClick={handleFilterClick}>
+                <FilterButton
+                  f={1}
+                  onClick={handleFilterClick}
+                  ref={filterButtonRef}
+                >
                   <Icon name="Filters" size="1rem" />
                 </FilterButton>
                 {filterRef.current &&
@@ -341,8 +354,8 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
                     </Overlay>
                   )}
               </Box>
-              <Middle />
-              <AddButton onClick={handleOnClick} f={1}>
+              <Middle width={middleSectionWidth} />
+              <AddButton onClick={handleOnClick} f={1} ref={addButtonRef}>
                 {
                   {
                     resting: 'Add +',

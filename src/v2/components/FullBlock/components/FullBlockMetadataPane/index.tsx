@@ -19,6 +19,7 @@ import { truncate } from 'v2/components/UI/Truncate'
 
 import { FullBlock as Block } from '__generated__/FullBlock'
 import { LinkViewMode, OnLinkViewModeChange } from 'v2/components/FullBlock'
+import { SansSerifText } from 'v2/components/UI/SansSerifText'
 
 interface FullBlockMetadataPaneProps extends SpaceProps {
   block: Block
@@ -87,13 +88,10 @@ export default class FullBlockMetadataPane extends PureComponent<
         </Text>
 
         {block.description && (
-          <Text
-            f={3}
-            lineHeight={2}
+          <SansSerifText
+            isSmall
+            color={'gray.bold'}
             dangerouslySetInnerHTML={{ __html: block.description }}
-            breakWord
-            boldLinks
-            hoverLinks={{ color: 'gray.bold' }}
             onClick={event => {
               // If clicking an A tag in the description don't open edit box and
               // instead defer to outbound link.

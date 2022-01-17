@@ -6,7 +6,6 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import SortArrows from 'v2/components/UI/SortArrows'
 
-import constants from 'v2/styles/constants'
 import { TableAddButton } from './components/FilterAndAddButton'
 import {
   ConnectableTypeEnum,
@@ -23,8 +22,9 @@ export const TD = styled.td`
   border: 1px solid ${x => x.theme.colors.gray.light};
   border-right: none;
   font-size: ${x => x.theme.fontSizesIndexed.sx};
-  height: 30px;
-  line-height: 0;
+  height: 32px;
+  max-height: 30px;
+  line-height: 30px;
   padding: 0;
   min-width: ${x => x.width};
   width: ${x => x.width};
@@ -32,6 +32,7 @@ export const TD = styled.td`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: table-cell;
 
   &:nth-last-of-type(1) {
     border-right: 1px solid ${x => x.theme.colors.gray.light};
@@ -46,20 +47,21 @@ const HeaderRow = styled(TR)`
 
 const TH = styled(TD)`
   font-weight: bold;
-  padding: ${x => x.theme.space[2]} ${x => x.theme.space[4]};
   vertical-align: middle;
   background: ${x => x.theme.colors.background};
   position: sticky;
-  top: ${constants.headerHeight};
+  top: 64px;
   z-index: 1;
 `
 
 const THInner = styled(Box)`
   display: flex;
   flex-direction: row;
+  padding: ${x => x.theme.space[2]} ${x => x.theme.space[4]};
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
 `
 
 const SettingsAddTH = styled(TH)`

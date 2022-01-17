@@ -15,7 +15,8 @@ import expandedBlockRowContents from './queries/expandedBlockRowContents'
 
 const TextContainer = styled.div`
   padding: ${x => x.theme.space[4]};
-  height: 100%;
+  max-height: 450px;
+  overflow-x: scroll;
 `
 
 const ImageContainer = styled.div`

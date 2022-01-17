@@ -51,20 +51,6 @@ const Header = styled(Link)`
   `}
 `
 
-const BetaBadge = styled(Text).attrs({
-  f: 0,
-})`
-  display: inline-block;
-  color: ${props => props.theme.colors.gray.regular} !important;
-  font-weight: normal;
-  margin-left: 0.5em;
-
-  &:before {
-    content: '•';
-    margin-right: 0.5em;
-  }
-`
-
 const Container = styled.div`
   margin-left: ${props => props.theme.space[3]};
   max-height: 30vmin;
@@ -130,7 +116,6 @@ class MyGroupLinks extends Component {
           is_my_groups_dropdown_hidden={is_my_groups_dropdown_hidden}
         >
           Groups
-          <BetaBadge>BETA</BetaBadge>
         </Header>
 
         {!is_my_groups_dropdown_hidden && (
