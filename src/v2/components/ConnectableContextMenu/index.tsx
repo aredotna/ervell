@@ -39,12 +39,12 @@ export const ConnectableContextMenu: React.FC<Props & BoxProps> = ({
     findOriginalUrl ||
     connectable.can.mute ||
     channel.can.update ||
-    connectable.connection.can.destroy
+    connectable.connection?.can?.destroy
 
   const canRemove =
     channel.can.update ||
     (connectable.__typename !== 'Channel' && connectable.can.remove) ||
-    connectable.connection.can.destroy
+    connectable.connection?.can?.destroy
 
   if (!isDisplayable) return null
 
