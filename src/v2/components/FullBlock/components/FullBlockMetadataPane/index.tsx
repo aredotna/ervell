@@ -59,7 +59,7 @@ export default class FullBlockMetadataPane extends PureComponent<
   get canManage() {
     // FIXME: Property 'can' does not exist on type 'FullBlock_Channel'.
     // @ts-ignore
-    return this.props.block.can.manage
+    return this.props.block.can?.manage
   }
 
   render() {

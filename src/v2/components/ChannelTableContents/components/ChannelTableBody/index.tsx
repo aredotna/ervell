@@ -8,9 +8,9 @@ import { SortAndSortDir, TableData } from '../../lib/types'
 import { ChannelRow } from '../ChannelRow'
 import ExpandedBlockRow, { ExpandedBlockRowProps } from '../ExpandedBlockRow'
 import ExpandedChannelRow from '../ExpandedChannelRow'
-import { TD, TR } from '../TableComponents'
 import { SortableTableItem } from '../SortableTableItem'
 import { ChannelPage_channel } from '__generated__/ChannelPage'
+import { StandardRow } from '../StandardRow'
 
 interface TableBodyProps {
   rows: Row<TableData>[]
@@ -50,6 +50,9 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
 
       const expanded = row.isExpanded // || (!('isNull' in row.original) && row.original.connection.selected)
 
+      const onMinimize = () => row.toggleRowExpanded(false)
+      const onExpand = () => row.toggleRowExpanded(true)
+
       let tableItemContent: JSX.Element | null = null
       if (
         expanded &&
@@ -64,7 +67,7 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
           block: row.original,
           columnLength: columns.length,
           ...rowProps,
-          onMinimize: () => row.toggleRowExpanded(false),
+          onMinimize,
         }
         tableItemContent = (
           <IntersectionObserverBox
@@ -90,7 +93,7 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
               channel: row.original,
               columnLength: columns.length,
               ...rowProps,
-              onMinimize: () => row.toggleRowExpanded(false),
+              onMinimize,
             }}
           />
         )
@@ -109,7 +112,7 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
             componentProps={{
               channel: row.original,
               ...rowProps,
-              onClick: () => row.toggleRowExpanded(true),
+              onClick: onExpand,
             }}
           />
         )
@@ -121,33 +124,14 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
         tableItemContent = (
           <IntersectionObserverBox
             {...sharedIntersectionObserverBoxProps}
-            Component={TR}
+            Component={StandardRow}
             componentProps={{
               ...rowProps,
-              onClick: () => row.toggleRowExpanded(true),
-              children: row.cells.map(cell => {
-                const { key: cellKey, ...cellProps } = cell.getCellProps()
-                const isSettings = cellKey.toString().includes('addSettings')
-                const extraProps = isSettings
-                  ? {
-                      removeBlock,
-                      channel,
-                      moveBlock,
-                      index: row.index,
-                    }
-                  : {}
-                return (
-                  <TD
-                    key={cellKey}
-                    width={cell.column.width}
-                    maxWidth={cell.column.maxWidth}
-                    bg={isSettings ? 'gray.hint' : 'background'}
-                    {...cellProps}
-                  >
-                    {cell.render('Cell', extraProps)}
-                  </TD>
-                )
-              }),
+              row,
+              expanded,
+              channel,
+              moveBlock,
+              removeBlock,
             }}
           />
         )
