@@ -73,6 +73,7 @@ interface SettingsCellProps {
   channel: ChannelTablePage_channel
   removeBlock: (args: { id: number; type: string }) => void
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
+  onClickConnect?: (mode: 'resting' | 'active') => void
 }
 
 export type Ev = React.MouseEvent<HTMLElement>
@@ -83,6 +84,7 @@ export const SettingsCell: React.FC<SettingsCellProps> = ({
   moveBlock,
   channel,
   index,
+  onClickConnect,
 }) => {
   const handleChangePosition = useCallback(
     (newIndex: number) => {
@@ -121,6 +123,7 @@ export const SettingsCell: React.FC<SettingsCellProps> = ({
             <ConnectButton
               id={value.id.toString()}
               type={BaseConnectableTypeEnum.BLOCK}
+              onClickConnect={onClickConnect}
             />
           )}
           <Separator />

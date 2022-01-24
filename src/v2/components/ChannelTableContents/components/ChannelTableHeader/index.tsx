@@ -114,7 +114,7 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
                 channel.can.add_to_as_premium
               ) {
                 return (
-                  <SettingsAddTH width="103px">
+                  <SettingsAddTH width="103px" key={column.Header?.toString()}>
                     {/* <Box width="100px" /> */}
                     <TableAddButton
                       channelId={channel.id}
