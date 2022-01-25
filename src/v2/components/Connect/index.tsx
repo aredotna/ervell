@@ -13,12 +13,10 @@ import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 const Container = styled(Box)`
   position: relative;
   font-size: ${props => props.theme.fontSizesIndexed.xs};
-  z-index: 1;
 `
 
 const Fieldset = styled.div`
   position: relative;
-  z-index: 1;
 `
 
 const Close = styled.a.attrs({
