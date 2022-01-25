@@ -144,7 +144,7 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
       <SortableGrid
         axis="xy"
         useWindowAsScrollContainer
-        transitionDuration={0}
+        transitionDuration={100}
         onSortEnd={moveBlock}
         wrapChildren={false}
         distance={1}

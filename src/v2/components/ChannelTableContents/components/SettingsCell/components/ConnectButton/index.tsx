@@ -12,6 +12,7 @@ import { Button } from '../..'
 interface ConnectProps {
   id: string | number
   type: BaseConnectableTypeEnum
+  onClickConnect?: (mode: 'resting' | 'active') => void
   refetchQueries?: any
 }
 
@@ -19,6 +20,7 @@ export const ConnectButton: React.FC<ConnectProps & BoxProps> = ({
   id,
   type,
   refetchQueries = [],
+  onClickConnect,
   ...rest
 }) => {
   const [mode, setMode] = useState<'resting' | 'active'>('resting')
@@ -36,6 +38,7 @@ export const ConnectButton: React.FC<ConnectProps & BoxProps> = ({
       e.stopPropagation()
 
       setMode('active')
+      onClickConnect('active')
     },
     [setMode]
   )
@@ -44,6 +47,7 @@ export const ConnectButton: React.FC<ConnectProps & BoxProps> = ({
     e.preventDefault()
     e.stopPropagation()
     setMode('resting')
+    onClickConnect('resting')
   }, [])
 
   return (

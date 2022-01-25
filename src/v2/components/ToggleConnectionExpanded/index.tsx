@@ -32,7 +32,7 @@ export const ToggleConnectionExpanded: React.FC<ToggleConnectionExpandedProps> =
     GetConnectionSelectionVariables
   >(getConnectionSelection, {
     variables: { id: connection?.id.toString() },
-    skip: !connection?.can.manage,
+    skip: !connection?.can?.manage,
   })
 
   const [toggleExpanded] = useMutation<
