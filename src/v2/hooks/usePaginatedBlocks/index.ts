@@ -562,8 +562,6 @@ export function usePaginatedBlocks<
     ChannelQueryData
   >['updateBlock'] = useCallback(
     async ({ id, type }) => {
-      console.log('updateBlock', { id, type })
-
       if (!blockquery) {
         return
       }
@@ -586,7 +584,6 @@ export function usePaginatedBlocks<
 
         block = result.data.blokk
       } catch {
-        console.log('cannot find block', { block })
         // do nothing
       }
 
@@ -654,8 +651,6 @@ export function usePaginatedBlocks<
   // ==============================
   // Build and return the final api
   // ==============================
-
-  console.log('now blocks looks like', { blocks })
 
   const api: UsePaginatedBlocksApi<ChannelQueryData> = {
     blocks,

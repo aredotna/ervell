@@ -18,7 +18,6 @@ export const StandardRow = forwardRef<HTMLElement, StandardRowProps>(
 
     const onClick = useCallback(
       (e: React.MouseEvent) => {
-        console.log('onClick', { mode })
         if (mode === 'active') {
           e.stopPropagation()
           e.preventDefault()
