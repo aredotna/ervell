@@ -33,6 +33,7 @@ export const StandardRow = forwardRef<HTMLElement, StandardRowProps>(
     const cells = row.cells.map(cell => {
       const { key: cellKey, ...cellProps } = cell.getCellProps()
       const isSettings = cellKey.toString().includes('addSettings')
+      const isTitle = cellKey.toString().includes('title')
       const extraProps = isSettings
         ? {
             removeBlock,
@@ -49,6 +50,7 @@ export const StandardRow = forwardRef<HTMLElement, StandardRowProps>(
           width={cell.column.width}
           maxWidth={cell.column.maxWidth}
           bg={isSettings ? 'gray.hint' : 'background'}
+          scope={isTitle && 'row'}
           {...cellProps}
         >
           {cell.render('Cell', extraProps)}
