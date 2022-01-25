@@ -1,10 +1,13 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { blend } from 'chroma-js'
 import { themeGet } from 'styled-system'
 import { ChannelTableContentsSet_channel_blokks_Channel } from '__generated__/ChannelTableContentsSet'
 import { StandardCell } from '../StandardCell'
 import { lighten } from 'v2/styles/functions'
+import { TableData } from '../../lib/types'
+import { Row as RowType } from 'react-table'
+import { ChannelPage_channel } from '__generated__/ChannelPage'
 
 const TD = styled.td`
   color: ${x => x.theme.colors.gray.bold};
@@ -15,6 +18,7 @@ const TD = styled.td`
   line-height: 0;
   padding: 0;
   width: ${x => x.width};
+  user-select: none;
 
   &:last-child {
     border-right: 1px solid;
@@ -67,37 +71,87 @@ const Row = styled.tr`
 `
 
 interface ChannelRowProps {
-  channel: ChannelTableContentsSet_channel_blokks_Channel
+  connectableChannel: ChannelTableContentsSet_channel_blokks_Channel
+  row: RowType<TableData>
+  expanded: boolean
+  removeBlock: (args: { id: number; type: string }) => void
+  moveBlock: (args: { oldIndex: number; newIndex: number }) => void
+  channel: ChannelPage_channel
   onClick: () => void
+  isRowMovable?: boolean
 }
 
 export const ChannelRow = forwardRef<HTMLElement, ChannelRowProps>(
-  ({ channel, onClick }, ref) => {
+  (
+    { connectableChannel, moveBlock, removeBlock, row, channel, isRowMovable },
+    ref
+  ) => {
+    const [mode, setMode] = useState<'resting' | 'active'>('resting')
+
+    const cell = row.cells.find(cell => {
+      const { key: cellKey } = cell.getCellProps()
+      return cellKey.toString().includes('addSettings')
+    })
+
+    const onRowClick = useCallback(
+      (e: React.MouseEvent) => {
+        if (mode === 'active') {
+          e.stopPropagation()
+          e.preventDefault()
+          return
+        }
+
+        row.toggleRowExpanded(true)
+      },
+      [mode]
+    )
+
+    const settingsProps = {
+      removeBlock,
+      channel,
+      moveBlock,
+      onClickConnect: setMode,
+      index: row.index,
+      isRowMovable,
+    }
+
     return (
-      <Row ref={ref} visibility={channel.visibility} onClick={onClick}>
-        <Cell visibility={channel.visibility} colSpan={2}>
+      <Row
+        ref={ref}
+        visibility={connectableChannel.visibility}
+        onClick={onRowClick}
+      >
+        <Cell visibility={connectableChannel.visibility} colSpan={2}>
           <StandardCell
-            value={`${channel.title} – ${channel.counts.contents} blocks`}
-            color={`channel.${channel.visibility}`}
+            value={`${connectableChannel.title} – ${connectableChannel.counts.contents} blocks`}
+            color={`channel.${connectableChannel.visibility}`}
           />
         </Cell>
-        <Cell visibility={channel.visibility}>
+        <Cell visibility={connectableChannel.visibility}>
           <StandardCell
-            value={channel.updated_at}
-            color={`channel.${channel.visibility}`}
+            value={connectableChannel.updated_at}
+            color={`channel.${connectableChannel.visibility}`}
           />
         </Cell>
-        <Cell visibility={channel.visibility}>
+        <Cell visibility={connectableChannel.visibility}>
           <StandardCell
-            value={channel.user.name}
-            color={`channel.${channel.visibility}`}
+            value={connectableChannel.user.name}
+            color={`channel.${connectableChannel.visibility}`}
           />
         </Cell>
-        <Cell visibility={channel.visibility} colSpan={2}>
+        <Cell visibility={connectableChannel.visibility}>
           <StandardCell
-            value={channel.counts.connected_to_channels}
-            color={`channel.${channel.visibility}`}
+            value={connectableChannel.counts.connected_to_channels}
+            color={`channel.${connectableChannel.visibility}`}
           />
+        </Cell>
+        <Cell
+          key={cell.getCellProps().key}
+          width={cell.column.width}
+          maxWidth={cell.column.maxWidth}
+          visibility={connectableChannel.visibility}
+        >
+          {cell.render('Cell', settingsProps)}
         </Cell>
       </Row>
     )

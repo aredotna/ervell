@@ -118,8 +118,13 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
             {...sharedIntersectionObserverBoxProps}
             Component={ChannelRow}
             componentProps={{
-              channel: row.original,
+              row,
+              channel,
+              connectableChannel: row.original,
+              expanded,
               isRowMovable,
+              moveBlock,
+              removeBlock,
               ...rowProps,
               onClick: onExpand,
             }}
