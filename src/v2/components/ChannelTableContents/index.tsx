@@ -421,9 +421,21 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     [moveBlock, sortAndSortDir.sort]
   )
 
-  const onSortStart = useCallback<SortStartHandler>(({ node, helper }: any) => {
+  const onSortStart = useCallback<SortStartHandler>((sort: any, event: any) => {
+    event.preventDefault()
+
+    const { node, helper } = sort
+
     node.childNodes.forEach((td: HTMLTableCellElement, index: number) => {
-      helper.childNodes[index].style.width = `${td.offsetWidth}px !important`
+      const cs = getComputedStyle(td)
+      const br = td.getBoundingClientRect()
+      const width =
+        br.width +
+        parseFloat(cs.getPropertyValue('margin-left')) +
+        parseFloat(cs.getPropertyValue('margin-right')) +
+        parseFloat(cs.getPropertyValue('border-right-width')) +
+        parseFloat(cs.getPropertyValue('border-left-width'))
+      helper.childNodes[index].style.width = `${width}px`
     })
   }, [])
 

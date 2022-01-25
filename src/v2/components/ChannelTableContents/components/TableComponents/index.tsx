@@ -31,6 +31,7 @@ export const TD = styled.td`
   text-overflow: ellipsis;
   white-space: nowrap;
   display: table-cell;
+  user-select: none;
 
   &:last-child {
     border-right: 1px solid ${x => x.theme.colors.gray.light};
