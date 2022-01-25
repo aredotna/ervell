@@ -59,8 +59,20 @@ export const Button = styled(GenericButton).attrs({
   }
 `
 
-const Drag = SortableHandle(styled(Button)`
+const Drag = SortableHandle<{ isRowMovable: boolean }>(styled(Button)`
   cursor: grab;
+
+  ${props => {
+    if (!props.isRowMovable) {
+      return `
+        cursor: default;
+
+        &:hover svg {
+          fill: ${props.theme.colors.gray.light} !important;
+        }
+      `
+    }
+  }}
 
   ${Icon} svg {
     transform: rotate(45deg);
@@ -74,6 +86,7 @@ interface SettingsCellProps {
   removeBlock: (args: { id: number; type: string }) => void
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
   onClickConnect?: (mode: 'resting' | 'active') => void
+  isRowMovable?: boolean
 }
 
 export type Ev = React.MouseEvent<HTMLElement>
@@ -85,6 +98,7 @@ export const SettingsCell: React.FC<SettingsCellProps> = ({
   channel,
   index,
   onClickConnect,
+  isRowMovable,
 }) => {
   const handleChangePosition = useCallback(
     (newIndex: number) => {
@@ -127,8 +141,12 @@ export const SettingsCell: React.FC<SettingsCellProps> = ({
             />
           )}
           <Separator />
-          <Drag>
-            <Icon name="EnterFullscreen" size="0.75rem" color="gray.medium" />
+          <Drag isRowMovable={isRowMovable}>
+            <Icon
+              name="EnterFullscreen"
+              size="0.75rem"
+              color={isRowMovable ? 'gray.medium' : 'gray.light'}
+            />
           </Drag>
         </>
       )}

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { ColumnInstance, Row } from 'react-table'
 
-import { Sorts } from '__generated__/globalTypes'
+import { ConnectableTypeEnum, Sorts } from '__generated__/globalTypes'
 
 import { IntersectionObserverBox } from 'v2/components/UI/IntersectionObserverBox'
 import { SortAndSortDir, TableData } from '../../lib/types'
@@ -11,6 +11,7 @@ import ExpandedChannelRow from '../ExpandedChannelRow'
 import { SortableTableItem } from '../SortableTableItem'
 import { ChannelPage_channel } from '__generated__/ChannelPage'
 import { StandardRow } from '../StandardRow'
+import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 
 interface TableBodyProps {
   rows: Row<TableData>[]
@@ -21,6 +22,8 @@ interface TableBodyProps {
   intersectionObserverOptions: IntersectionObserverInit
   columns: ColumnInstance<TableData>[]
   sortAndSortDir: SortAndSortDir
+  type?: ConnectableTypeEnum
+  user?: ChannelTableConnectors_channel_connectors
   removeBlock: (args: { id: number; type: string }) => void
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
   channel: ChannelPage_channel
@@ -36,19 +39,24 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
   removeBlock,
   moveBlock,
   channel,
+  type,
+  user,
 }) => {
   const renderRow = useCallback(
     (row: Row<TableData>) => {
       prepareRow(row)
 
       const { key: rowKey, ...rowProps } = row.getRowProps()
+      const expanded = row.isExpanded // || (!('isNull' in row.original) && row.original.connection.selected)
+
+      const isRowMovable =
+        sortAndSortDir.sort === Sorts.POSITION && !expanded && !type && !user
+
       const sharedIntersectionObserverBoxProps = {
         id: row.index,
         callback: intersectionObserverCallback,
         options: intersectionObserverOptions,
       }
-
-      const expanded = row.isExpanded // || (!('isNull' in row.original) && row.original.connection.selected)
 
       const onMinimize = () => row.toggleRowExpanded(false)
       const onExpand = () => row.toggleRowExpanded(true)
@@ -111,6 +119,7 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
             Component={ChannelRow}
             componentProps={{
               channel: row.original,
+              isRowMovable,
               ...rowProps,
               onClick: onExpand,
             }}
@@ -132,12 +141,11 @@ export const ChannelTableBody: React.FC<TableBodyProps> = ({
               channel,
               moveBlock,
               removeBlock,
+              isRowMovable,
             }}
           />
         )
       }
-
-      const isRowMovable = sortAndSortDir.sort === Sorts.POSITION && !expanded
 
       return (
         <SortableTableItem

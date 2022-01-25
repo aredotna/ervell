@@ -487,6 +487,8 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
                 sortAndSortDir={sortAndSortDir}
                 moveBlock={moveBlock}
                 removeBlock={removeBlock}
+                type={type}
+                user={user}
               />
             </tbody>
           </SortableTableContainer>

@@ -10,10 +10,11 @@ interface StandardRowProps {
   removeBlock: (args: { id: number; type: string }) => void
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
   channel: ChannelPage_channel
+  isRowMovable?: boolean
 }
 
 export const StandardRow = forwardRef<HTMLElement, StandardRowProps>(
-  ({ row, removeBlock, moveBlock, channel, ...rest }, ref) => {
+  ({ row, removeBlock, moveBlock, channel, isRowMovable, ...rest }, ref) => {
     const [mode, setMode] = useState<'resting' | 'active'>('resting')
 
     const onClick = useCallback(
@@ -39,6 +40,7 @@ export const StandardRow = forwardRef<HTMLElement, StandardRowProps>(
             moveBlock,
             onClickConnect: setMode,
             index: row.index,
+            isRowMovable,
           }
         : {}
       return (
