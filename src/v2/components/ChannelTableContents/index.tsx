@@ -144,8 +144,6 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
   type: typeParam,
   user: userParam,
 }) => {
-  console.log({ typeParam })
-
   const [sortAndSortDir, setSortAndSortDir] = useReducer(
     sortAndSortDirReducer,
     { sort: Sorts.POSITION, dir: SortDirection.DESC }
@@ -158,10 +156,12 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
   const [
     user,
     setUser,
-  ] = useState<ChannelTableConnectors_channel_connectors | null>(null)
+  ] = useState<ChannelTableConnectors_channel_connectors | null>(userParam)
   useEffect(() => {
     setUser(userParam)
   }, [userParam])
+
+  console.log({ type, user_id: user?.id.toString() })
 
   const {
     blocks,
