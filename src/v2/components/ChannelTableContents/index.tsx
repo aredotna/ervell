@@ -160,9 +160,6 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
   useEffect(() => {
     setUser(userParam)
   }, [userParam])
-
-  console.log({ type, user_id: user?.id.toString() })
-
   const {
     blocks,
     getPage,
