@@ -195,6 +195,7 @@ export const Routes = () => {
           exact
           path="/:user_id/:id/:view(table|grid)?"
           render={parseRoute(({ params, query }) => {
+            console.log({ params })
             return <ChannelPageWrapper params={params} query={query} />
           })}
         />

@@ -1,6 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { useMutation } from '@apollo/client'
+import { useHistory, useLocation } from 'react-router'
 
 import { useWidthOf } from 'v2/hooks/useCurrentWidth'
 import DropZoneUploader from 'v2/components/UI/DropZoneUploader'
@@ -24,6 +25,7 @@ import {
 import Filter from '../FilterContainer'
 import { ConnectableTypeEnum } from '__generated__/globalTypes'
 import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
+import { updateParams } from 'v2/util/updateParams'
 
 const AddButton = styled(GenericButton).attrs({
   bg: 'gray.hint',
@@ -177,15 +179,13 @@ interface TableAddButtonProps {
   addBlock: () => void
   type?: ConnectableTypeEnum
   user?: ChannelTableConnectors_channel_connectors
-  setType: (value: ConnectableTypeEnum) => void
-  setUser: (value: ChannelTableConnectors_channel_connectors) => void
 }
 
 export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps & {
   ref?: React.Ref<HTMLElement>
 }> = React.forwardRef(
   (
-    { channelId, addBlock, setType, setUser, type, user },
+    { channelId, addBlock, type, user },
     forwardedRef: React.MutableRefObject<HTMLInputElement | null> | null
   ) => {
     const buttonContainerRef = useRef<HTMLElement>()
@@ -209,6 +209,27 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
     const [mode, setMode] = useState<AddButtonState>('resting')
     const [filterMode, setFilterMode] = useState<FilterButtonState>('resting')
     const [uploaderKey, setUploaderKey] = useState<number>(new Date().getTime())
+
+    const location = useLocation()
+    const history = useHistory()
+
+    const handleSetType = useCallback(
+      (type: ConnectableTypeEnum) => {
+        const queryParams = updateParams(location, { type })
+        return history.push(`${location.pathname}?${queryParams}`)
+      },
+      [history, location]
+    )
+
+    const handleSetUser = useCallback(
+      (user: ChannelTableConnectors_channel_connectors) => {
+        const queryParams = updateParams(location, {
+          user: user ? JSON.stringify(user) : null,
+        })
+        return history.push(`${location.pathname}?${queryParams}`)
+      },
+      [history, location]
+    )
 
     const [createBlock] = useMutation<
       tableCreateAddBlockMutation,
@@ -348,8 +369,8 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
                         id={channelId}
                         type={type}
                         user={user}
-                        setType={setType}
-                        setUser={setUser}
+                        setType={handleSetType}
+                        setUser={handleSetUser}
                       />
                     </Overlay>
                   )}

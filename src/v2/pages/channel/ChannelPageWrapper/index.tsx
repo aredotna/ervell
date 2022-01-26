@@ -27,6 +27,8 @@ export default ({ params, query }) => {
   }
 
   const view = params.view || cookies.view || 'grid'
+  const type = query.type || null
+  const user = query.user ? JSON.parse(query.user) : null
   const fromOnboarding = query.fromOnboarding
 
   if (view === 'table' && (is_supporter || is_lifetime_premium)) {
@@ -34,6 +36,8 @@ export default ({ params, query }) => {
       <ChannelTablePage
         id={params.id}
         view={view}
+        type={type}
+        user={user}
         fromOnboarding={fromOnboarding}
       />
     )
