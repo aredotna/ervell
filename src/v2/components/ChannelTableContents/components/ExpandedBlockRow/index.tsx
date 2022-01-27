@@ -38,6 +38,15 @@ const TD = styled.td`
   }
 `
 
+const CollapseArea = styled(Box)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  cursor: pointer;
+`
+
 const ContentTD = styled(TD)``
 
 const ContentContainer = styled(Box)`
@@ -59,6 +68,7 @@ const ButtonContainer = styled(Box)`
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 1;
 `
 
 const MetadataFoldContainer = styled(Box)`
@@ -78,16 +88,19 @@ export const ExpandedBlockRow = forwardRef<HTMLElement, ExpandedBlockRowProps>(
     return (
       <Row {...rest} ref={ref}>
         <ContentTD width={FIRST_COLUMN_WIDTH}>
+          <CollapseArea onClick={onMinimize} />
           <ContentContainer>
             <ExpandedBlockRowContents block={block} />
           </ContentContainer>
         </ContentTD>
         <TD colSpan={columnLength - 4}>
+          <CollapseArea onClick={onMinimize} />
           <MetadataContainer>
             <ExpandedBlockMetadata block={block} />
           </MetadataContainer>
         </TD>
         <TD colSpan={3}>
+          <CollapseArea onClick={onMinimize} />
           <ButtonContainer>
             <ActionButtons
               isExpanded={true}

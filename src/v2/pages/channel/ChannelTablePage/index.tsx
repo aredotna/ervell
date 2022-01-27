@@ -21,6 +21,8 @@ import Modal from 'v2/components/UI/Modal'
 import ModalDialog from 'v2/components/UI/ModalDialog'
 import IntroduceChannel from 'v2/components/Onboarding/components/Channels/components/IntroduceChannel'
 import { ChannelTableQuery } from 'v2/components/ChannelTableContents'
+import { ConnectableTypeEnum } from '__generated__/globalTypes'
+import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 // import Box from 'v2/components/UI/Box'
 
 const Dialog = styled(ModalDialog).attrs({
@@ -34,12 +36,16 @@ interface ChannelTablePageProps {
   id: string
   fromOnboarding?: boolean
   view?: 'grid' | 'table'
+  type?: ConnectableTypeEnum
+  user?: ChannelTableConnectors_channel_connectors
 }
 
 export const ChannelTablePage: React.FC<ChannelTablePageProps> = ({
   id,
   fromOnboarding,
   view,
+  type,
+  user,
 }) => {
   useEffect(() => {
     if (fromOnboarding) {
@@ -69,6 +75,8 @@ export const ChannelTablePage: React.FC<ChannelTablePageProps> = ({
         <ChannelTableQuery
           channel={data.channel}
           id={data.channel.id.toString()}
+          type={type}
+          user={user}
         />
       </>
     )
@@ -76,7 +84,6 @@ export const ChannelTablePage: React.FC<ChannelTablePageProps> = ({
 
   return (
     <TopBarLayout>
-      {/* <Box mx={6}>{pageJsx}</Box> */}
       <Constrain>{pageJsx}</Constrain>
     </TopBarLayout>
   )

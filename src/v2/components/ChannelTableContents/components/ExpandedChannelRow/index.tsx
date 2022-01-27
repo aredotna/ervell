@@ -19,6 +19,15 @@ const ButtonContainer = styled(Box)`
   right: 0;
 `
 
+const CollapseArea = styled(Box)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  cursor: pointer;
+`
+
 const TD = styled.td`
   color: ${x => x.theme.colors.gray.bold};
   border-top: 1px solid ${x => x.theme.colors.gray.block};
@@ -84,6 +93,7 @@ export const ExpandedChannelRow = forwardRef<
   return (
     <Row ref={ref}>
       <Cell visibility={channel.visibility} colSpan={columnLength - 3}>
+        <CollapseArea onClick={onMinimize} />
         <Box p={4}>
           <Text color={`channel.${channel.visibility}`} f={5}>
             {channel.title}
@@ -94,6 +104,7 @@ export const ExpandedChannelRow = forwardRef<
         </Box>
       </Cell>
       <Cell visibility={channel.visibility} colSpan={3}>
+        <CollapseArea onClick={onMinimize} />
         <MetadataContainer>
           <ButtonContainer>
             <ActionButtons

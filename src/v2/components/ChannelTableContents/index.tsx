@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  useEffect,
   useMemo,
   useReducer,
   useRef,
@@ -51,6 +52,8 @@ import useWindowDimensions from 'v2/hooks/useWindowDimensions'
 interface ChannelTableQueryProps {
   id: string
   channel: ChannelPage_channel
+  type?: ConnectableTypeEnum
+  user?: ChannelTableConnectors_channel_connectors
 }
 
 export const STANDARD_HEADERS: Array<Column<TableData>> = [
@@ -138,32 +141,25 @@ const sortAndSortDirReducer: React.Reducer<SortAndSortDir, SortAndSortDir> = (
 export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
   id,
   channel,
+  type: typeParam,
+  user: userParam,
 }) => {
   const [sortAndSortDir, setSortAndSortDir] = useReducer(
     sortAndSortDirReducer,
     { sort: Sorts.POSITION, dir: SortDirection.DESC }
   )
-  const [type, setType] = useState<ConnectableTypeEnum | null>(null)
-
-  const handleSetType = useCallback(
-    (type: ConnectableTypeEnum | null) => {
-      setType(type)
-    },
-    [setType]
-  )
+  const [type, setType] = useState<ConnectableTypeEnum | null>(typeParam)
+  useEffect(() => {
+    setType(typeParam)
+  }, [typeParam, setType])
 
   const [
     user,
     setUser,
-  ] = useState<ChannelTableConnectors_channel_connectors | null>(null)
-
-  const handleSetUser = useCallback(
-    (user: ChannelTableConnectors_channel_connectors | null) => {
-      setUser(user)
-    },
-    [setUser]
-  )
-
+  ] = useState<ChannelTableConnectors_channel_connectors | null>(userParam)
+  useEffect(() => {
+    setUser(userParam)
+  }, [userParam])
   const {
     blocks,
     getPage,
@@ -212,8 +208,6 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
       loading={loading}
       type={type}
       user={user}
-      setType={handleSetType}
-      setUser={handleSetUser}
       onItemIntersected={onItemIntersected}
       addBlock={addBlock}
       updateBlock={updateBlock}
@@ -232,8 +226,6 @@ interface ChannelTableContentsProps {
   setSortAndSortDir: React.Dispatch<SortAndSortDir>
   type?: ConnectableTypeEnum
   user?: ChannelTableConnectors_channel_connectors
-  setType: (value: ConnectableTypeEnum) => void
-  setUser: (value: ChannelTableConnectors_channel_connectors) => void
   onItemIntersected: (index: number) => void
   addBlock: () => void
   loading: boolean
@@ -254,8 +246,6 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   setSortAndSortDir,
   type,
   user,
-  setType,
-  setUser,
   onItemIntersected,
   addBlock,
   updateBlock,
@@ -421,9 +411,21 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     [moveBlock, sortAndSortDir.sort]
   )
 
-  const onSortStart = useCallback<SortStartHandler>(({ node, helper }: any) => {
+  const onSortStart = useCallback<SortStartHandler>((sort: any, event: any) => {
+    event.preventDefault()
+
+    const { node, helper } = sort
+
     node.childNodes.forEach((td: HTMLTableCellElement, index: number) => {
-      helper.childNodes[index].style.width = `${td.offsetWidth}px !important`
+      const cs = getComputedStyle(td)
+      const br = td.getBoundingClientRect()
+      const width =
+        br.width +
+        parseFloat(cs.getPropertyValue('margin-left')) +
+        parseFloat(cs.getPropertyValue('margin-right')) +
+        parseFloat(cs.getPropertyValue('border-right-width')) +
+        parseFloat(cs.getPropertyValue('border-left-width'))
+      helper.childNodes[index].style.width = `${width}px`
     })
   }, [])
 
@@ -439,8 +441,6 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           sortAndSortDir={sortAndSortDir}
           type={type}
           user={user}
-          setType={setType}
-          setUser={setUser}
           addBlock={addBlock}
         />
 
@@ -475,6 +475,8 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
                 sortAndSortDir={sortAndSortDir}
                 moveBlock={moveBlock}
                 removeBlock={removeBlock}
+                type={type}
+                user={user}
               />
             </tbody>
           </SortableTableContainer>
