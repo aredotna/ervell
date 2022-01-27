@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { HeaderGroup } from 'react-table'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -17,7 +17,7 @@ import { ChannelPage_channel } from '__generated__/ChannelPage'
 import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 import { columnIdsToSorts } from '../../lib/constants'
 
-export const TD = styled.td`
+export const TDMixin = css`
   color: ${x => x.theme.colors.gray.bold};
   border: 1px solid ${x => x.theme.colors.gray.light};
   border-right: none;
@@ -33,6 +33,7 @@ export const TD = styled.td`
   text-overflow: ellipsis;
   white-space: nowrap;
   display: table-cell;
+  user-select: none;
 
   &:nth-last-of-type(1) {
     border-right: 1px solid ${x => x.theme.colors.gray.light};
@@ -45,7 +46,10 @@ const HeaderRow = styled(TR)`
   cursor: default;
 `
 
-const TH = styled(TD)`
+const TH = styled.th.attrs({
+  scope: 'col',
+})`
+  ${TDMixin}
   font-weight: bold;
   vertical-align: middle;
   background: ${x => x.theme.colors.background};
@@ -79,8 +83,6 @@ interface ChannelTableHeaderProps {
   setSortAndSortDir: React.Dispatch<SortAndSortDir>
   type?: ConnectableTypeEnum
   user?: ChannelTableConnectors_channel_connectors
-  setType: (value: ConnectableTypeEnum) => void
-  setUser: (value: ChannelTableConnectors_channel_connectors) => void
   addBlock: () => void
 }
 
@@ -91,8 +93,6 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
   setSortAndSortDir,
   type,
   user,
-  setType,
-  setUser,
   addBlock,
 }) => {
   const headerRef = useRef<HTMLTableSectionElement>(null)
@@ -122,8 +122,6 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
                       addBlock={addBlock}
                       type={type}
                       user={user}
-                      setType={setType}
-                      setUser={setUser}
                     />
                   </SettingsAddTH>
                 )

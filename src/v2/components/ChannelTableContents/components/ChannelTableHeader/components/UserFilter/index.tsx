@@ -15,6 +15,7 @@ import {
   ChannelTableConnectorsVariables,
   ChannelTableConnectors_channel_connectors,
 } from '__generated__/ChannelTableConnectors'
+import { DownArrow } from 'v2/components/UI/SortArrows'
 
 const SearchContainer = styled.div`
   position: relative;
@@ -46,6 +47,18 @@ const Close = styled.a.attrs({
     transform: translate(-50%, -50%);
     font-size: ${props => props.theme.fontSizesIndexed.lg};
   }
+`
+
+const ArrowContainer = styled(Box)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: ${inputPadding};
+  padding-right ${({ theme }) => theme.space[3]};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const ResultContainer = styled(Box).attrs({
@@ -144,6 +157,11 @@ const UserFilter: React.FC<UserFilterProps> = ({ id, setUser, user }) => {
           placeholder={'Select connecting person'}
           value={selectedUser ? `Person: ${selectedUser.name}` : null}
         />
+        {!selectedUser && (
+          <ArrowContainer>
+            <DownArrow />
+          </ArrowContainer>
+        )}
         {selectedUser && (
           <Close onClick={removeType}>
             &nbsp;

@@ -10,10 +10,11 @@ interface StandardRowProps {
   removeBlock: (args: { id: number; type: string }) => void
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
   channel: ChannelPage_channel
+  isRowMovable?: boolean
 }
 
 export const StandardRow = forwardRef<HTMLElement, StandardRowProps>(
-  ({ row, removeBlock, moveBlock, channel, ...rest }, ref) => {
+  ({ row, removeBlock, moveBlock, channel, isRowMovable, ...rest }, ref) => {
     const [mode, setMode] = useState<'resting' | 'active'>('resting')
 
     const onClick = useCallback(
@@ -32,6 +33,7 @@ export const StandardRow = forwardRef<HTMLElement, StandardRowProps>(
     const cells = row.cells.map(cell => {
       const { key: cellKey, ...cellProps } = cell.getCellProps()
       const isSettings = cellKey.toString().includes('addSettings')
+      const isTitle = cellKey.toString().includes('title')
       const extraProps = isSettings
         ? {
             removeBlock,
@@ -39,6 +41,7 @@ export const StandardRow = forwardRef<HTMLElement, StandardRowProps>(
             moveBlock,
             onClickConnect: setMode,
             index: row.index,
+            isRowMovable,
           }
         : {}
       return (
@@ -47,6 +50,7 @@ export const StandardRow = forwardRef<HTMLElement, StandardRowProps>(
           width={cell.column.width}
           maxWidth={cell.column.maxWidth}
           bg={isSettings ? 'gray.hint' : 'background'}
+          scope={isTitle && 'row'}
           {...cellProps}
         >
           {cell.render('Cell', extraProps)}

@@ -32,6 +32,8 @@ const IconContainer = styled(Box)`
 `
 
 const StyledArrow = styled(ArrowPath)`
+  fill: ${({ theme }) => themeGet(`colors.gray.light`, 'inherit')({ theme })};
+
   ${({ selected }) => {
     if (selected) {
       return `
@@ -41,12 +43,12 @@ const StyledArrow = styled(ArrowPath)`
   }}
 `
 
-const UpArrow = styled(StyledArrow)`
+export const UpArrow = styled(StyledArrow)`
   transform-origin: center;
   transform: rotate(180deg) translateX(1px);
 `
 
-const DownArrow = styled(StyledArrow)``
+export const DownArrow = styled(StyledArrow)``
 
 interface SortArrowsProps {
   state?: 'up' | 'down' | 'off'
