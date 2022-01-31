@@ -2,12 +2,15 @@ import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { blend } from 'chroma-js'
 import { themeGet } from 'styled-system'
-import { ChannelTableContentsSet_channel_blokks_Channel } from '__generated__/ChannelTableContentsSet'
 import Text from 'v2/components/UI/Text'
 import Box from 'v2/components/UI/Box'
-import { ExpandedChannelRowContents } from './ExpandedChannelRowContents'
+import { truncate } from 'v2/components/UI/Truncate'
 import { FullChannelMetadataPane } from 'v2/components/FullChannel/components/FullChannelMetadataPane'
+
+import { ExpandedChannelRowContents } from './ExpandedChannelRowContents'
 import { ActionButtons } from '../ActionButtons'
+
+import { ChannelTableContentsSet_channel_blokks_Channel } from '__generated__/ChannelTableContentsSet'
 
 const Row = styled.tr`
   border-color: transparent;
@@ -95,9 +98,13 @@ export const ExpandedChannelRow = forwardRef<
       <Cell visibility={channel.visibility} colSpan={columnLength - 3}>
         <CollapseArea onClick={onMinimize} />
         <Box p={4}>
-          <Text color={`channel.${channel.visibility}`} f={5}>
-            {channel.title}
-          </Text>
+          <Text
+            color={`channel.${channel.visibility}`}
+            f={5}
+            dangerouslySetInnerHTML={{
+              __html: unescape(truncate(channel.title, 90)),
+            }}
+          />
         </Box>
         <Box>
           <ExpandedChannelRowContents id={channel.id} />

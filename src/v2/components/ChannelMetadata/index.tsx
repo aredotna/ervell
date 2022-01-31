@@ -10,7 +10,6 @@ import { ChannelMetadataConnections } from 'v2/components/ChannelMetadata/compon
 import ChannelMetadataActions from 'v2/components/ChannelMetadata/components/ChannelMetadataActions'
 import { ExpandableContext } from 'v2/components/UI/ExpandableSet'
 import { ChannelMetadata as Channel } from '__generated__/ChannelMetadata'
-import useSerializedMe from 'v2/hooks/useSerializedMe'
 import { ChannelMetadataView } from './components/ChannelMetadataView'
 
 interface ChannelMetadataProps {
@@ -23,8 +22,6 @@ export const ChannelMetadata: React.FC<ChannelMetadataProps> = ({
   view,
   ...rest
 }) => {
-  const me = useSerializedMe()
-
   return (
     <HeaderMetadataContainer
       breadcrumb={<ChannelBreadcrumb channel={channel} />}
@@ -50,12 +47,9 @@ export const ChannelMetadata: React.FC<ChannelMetadataProps> = ({
               <ChannelMetadataConnections channel={channel} />
             </Pocket>
           )}
-
-          {(me.is_supporter || me.is_lifetime_premium) && (
-            <Pocket title="View">
-              <ChannelMetadataView channel={channel} view={view} />
-            </Pocket>
-          )}
+          <Pocket title="View">
+            <ChannelMetadataView channel={channel} view={view} />
+          </Pocket>
         </Grid>
       </ExpandableContext>
     </HeaderMetadataContainer>

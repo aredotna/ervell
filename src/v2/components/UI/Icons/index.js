@@ -13,6 +13,7 @@ import Clipboard from 'v2/components/UI/Icons/Clipboard.svg'
 import Exclaim from 'v2/components/UI/Icons/Exclaim.svg'
 import Info from 'v2/components/UI/Icons/Info.svg'
 import Question from 'v2/components/UI/Icons/Question.svg'
+import QuestionCircle from 'v2/components/UI/Icons/QuestionCircle.svg'
 import Cog from 'v2/components/UI/Icons/Cog.svg'
 import CreditCard from 'v2/components/UI/Icons/CreditCard.svg'
 import Follow from 'v2/components/UI/Icons/Follow.svg'
@@ -51,6 +52,7 @@ export const COMPONENTS = {
   Exclaim: <Exclaim />,
   Info: <Info />,
   Question: <Question />,
+  QuestionCircle: <QuestionCircle />,
   Cog: <Cog />,
   CreditCard: <CreditCard />,
   Follow: <Follow />,
