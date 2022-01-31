@@ -143,7 +143,10 @@ const PricingTable: React.FC = () => {
             Unlimited public and private blocks
           </Feature>
           <Feature fontWeight="bold">
-            Reader mode for links and articles
+            Extract content for links and articles
+          </Feature>
+          <Feature fontWeight="bold">
+            Table / spreadsheet view for channels
           </Feature>
           <Feature fontWeight="bold">Hide from search engines</Feature>
           <Feature fontWeight="bold">Priority support</Feature>
