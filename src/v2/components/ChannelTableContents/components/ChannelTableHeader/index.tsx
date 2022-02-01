@@ -73,7 +73,14 @@ const SettingsAddTH = styled(TH)`
   padding: 0;
   overflow: visible;
   vertical-align: middle;
-  background-color: ${props => props.theme.colors.gray.hint};
+  background-color: ${props =>
+    props.canAdd ? props.theme.colors.gray.hint : props.theme.colors.white};
+
+  ${props =>
+    !props.canAdd &&
+    `
+    border-right: 1px solid transparent !important;
+  `}
 `
 
 interface ChannelTableHeaderProps {
@@ -108,16 +115,12 @@ export const ChannelTableHeader: React.FC<ChannelTableHeaderProps> = ({
         return (
           <HeaderRow key={headerGroupKey} {...headerGroupProps}>
             {headerGroup.headers.map(column => {
-              if (
-                column.Header?.toString() === ColumnIds.addSettings &&
-                channel.can?.add_to &&
-                channel.can.add_to_as_premium
-              ) {
+              if (column.Header?.toString() === ColumnIds.addSettings) {
                 return (
                   <SettingsAddTH width="103px" key={column.Header?.toString()}>
-                    {/* <Box width="100px" /> */}
                     <TableAddButton
                       channelId={channel.id}
+                      channel={channel}
                       ref={headerRef}
                       addBlock={addBlock}
                       type={type}

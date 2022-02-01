@@ -26,6 +26,7 @@ import Filter from '../FilterContainer'
 import { ConnectableTypeEnum } from '__generated__/globalTypes'
 import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 import { updateParams } from 'v2/util/updateParams'
+import { ChannelPage_channel } from '__generated__/ChannelPage'
 
 const AddButton = styled(GenericButton).attrs({
   bg: 'gray.hint',
@@ -112,6 +113,18 @@ const Container = styled(Box)`
   background-color: ${props => props.theme.colors.gray.hint};
 `
 
+const WhiteContainer = styled(Container)`
+  background-color: ${props => props.theme.colors.white};
+`
+
+const WhiteSpacer = styled(Box).attrs({
+  bg: 'white',
+})`
+  height: 32px;
+  width: 100%;
+  transform: translateY(-1px) scaleY(1.2);
+`
+
 const AddFieldContainer = styled(Box)`
   position: absolute;
   background-color: ${({ theme }) => theme.colors.gray.hint};
@@ -179,13 +192,14 @@ interface TableAddButtonProps {
   addBlock: () => void
   type?: ConnectableTypeEnum
   user?: ChannelTableConnectors_channel_connectors
+  channel: ChannelPage_channel
 }
 
 export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps & {
   ref?: React.Ref<HTMLElement>
 }> = React.forwardRef(
   (
-    { channelId, addBlock, type, user },
+    { channelId, addBlock, type, user, channel },
     forwardedRef: React.MutableRefObject<HTMLInputElement | null> | null
   ) => {
     const buttonContainerRef = useRef<HTMLElement>()
@@ -331,6 +345,43 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
       setUploaderKey(new Date().getTime())
     }, [setUploaderKey])
 
+    if (!channel.can.add_to) {
+      return (
+        <WhiteContainer>
+          <Box position="relative" ref={filterRef}>
+            <FilterButton
+              f={1}
+              onClick={handleFilterClick}
+              ref={filterButtonRef}
+            >
+              <Icon name="Filters" size="1rem" />
+            </FilterButton>
+            {filterRef.current &&
+              (filterMode == 'open' || filterMode === 'activeAndOpen') && (
+                <Overlay
+                  alignToY="bottom"
+                  alignToX="right"
+                  anchorY="top"
+                  anchorX="right"
+                  targetEl={() => filterRef.current}
+                  offsetY={5}
+                  onClose={handleClose}
+                >
+                  <Filter
+                    id={channelId}
+                    type={type}
+                    user={user}
+                    setType={handleSetType}
+                    setUser={handleSetUser}
+                  />
+                </Overlay>
+              )}
+          </Box>
+          <WhiteSpacer />
+        </WhiteContainer>
+      )
+    }
+
     return (
       <Container ref={buttonContainerRef}>
         <AddBlockPasteUploader
@@ -376,6 +427,7 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
                   )}
               </Box>
               <Middle width={middleSectionWidth} />
+
               <AddButton onClick={handleOnClick} f={1} ref={addButtonRef}>
                 {
                   {
