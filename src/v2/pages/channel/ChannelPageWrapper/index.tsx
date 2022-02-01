@@ -20,7 +20,7 @@ export default ({ params, query }) => {
     }
   )
 
-  const { is_supporter, is_lifetime_premium } = useSerializedMe()
+  const { is_premium } = useSerializedMe()
 
   const cookies = (data && data.cookies) || {
     view: 'grid',
@@ -31,7 +31,7 @@ export default ({ params, query }) => {
   const user = query.user ? JSON.parse(query.user) : null
   const fromOnboarding = query.fromOnboarding
 
-  if (view === 'table' && (is_supporter || is_lifetime_premium)) {
+  if (view === 'table' && is_premium) {
     return (
       <ChannelTablePage
         id={params.id}
