@@ -9,7 +9,7 @@ export default gql`
     id
     name
     ...UserAvatar
-    groups(page: 1, per: 25) {
+    groups(page: 1, per: 100) {
       __typename
       id
       name
