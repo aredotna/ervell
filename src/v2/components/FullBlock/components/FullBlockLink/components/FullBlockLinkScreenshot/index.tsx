@@ -34,6 +34,8 @@ const Url = styled(Text).attrs({
   f: 2,
   font: 'mono',
   color: 'gray.semiBold',
+  overflowEllipsis: true,
+  breakWord: true,
 })`
   overflow: hidden;
   text-overflow: ellipsis;
@@ -42,6 +44,7 @@ const Url = styled(Text).attrs({
 
 const Container = styled(Box)`
   overflow: hidden;
+  max-width: 60vw;
 `
 
 export const FullBlockLinkScreenshot: React.FC<FullBlockLinkProps> = ({
