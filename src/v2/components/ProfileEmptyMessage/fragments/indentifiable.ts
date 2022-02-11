@@ -5,11 +5,13 @@ export default gql`
     ... on Group {
       __typename
       id
+      name
     }
 
     ... on User {
       __typename
       id
+      name
     }
   }
 `

@@ -144,11 +144,7 @@ export default ({ params, query }) => {
 
   const view = params.view || cookies.view || 'channels'
   const sort = setValid(query.sort || cookies.sort, VALID_SORTS, 'UPDATED_AT')
-  const indexFilter = setValid(
-    query.filter || cookies.filter,
-    VALID_INDEX_FILTERS,
-    'OWN'
-  )
+  const indexFilter = setValid(query.filter, VALID_INDEX_FILTERS, 'OWN')
 
   const blockFilter = setValid(
     query.type || cookies.type,
