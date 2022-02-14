@@ -16,6 +16,7 @@ import {
   ExploreContents as ExploreContentsQuery,
   ExploreContentsVariables,
 } from '__generated__/ExploreContents'
+import useIsSpiderRequesting from 'v2/hooks/useIsSpiderRequesting'
 
 interface ExploreContentsProps {
   type?: SearchType
@@ -45,7 +46,7 @@ export const ExploreContents: React.FC<ExploreContentsProps> = ({
     hasMore: true,
   })
 
-  console.log({ seed })
+  const isSpiderRequesting = useIsSpiderRequesting()
 
   const { per, hasMore, page } = state
 
@@ -62,6 +63,7 @@ export const ExploreContents: React.FC<ExploreContentsProps> = ({
       block_filter: blockFilter,
       timestamp: timestamp,
     },
+    ssr: isSpiderRequesting,
   })
 
   const loadMore = useCallback(() => {
