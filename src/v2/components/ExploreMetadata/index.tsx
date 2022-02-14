@@ -6,11 +6,12 @@ import { ExploreBreadcrumb } from 'v2/components/ExploreMetadata/components/Expl
 import ExploreMetadataView from 'v2/components/ExploreMetadata/components/ExploreMetadataView'
 import ExploreMetadataSort from 'v2/components/ExploreMetadata/components/ExploreMetadataSort'
 import ExploreMetdataBlockFilter from 'v2/components/ExploreMetadata/components/ExploreMetadataBlockFilter'
+import { BlockFilterEnum, SearchSorts } from '__generated__/globalTypes'
 
 export interface ExploreMetadataProps {
   view: 'all' | 'channels' | 'blocks'
-  sort: 'UPDATED_AT' | 'RANDOM'
-  block_filter?: 'IMAGE' | 'EMBED' | 'TEXT' | 'ATTACHMENT' | 'LINK'
+  sort: SearchSorts
+  block_filter?: BlockFilterEnum
 }
 
 class ExploreMetadata extends PureComponent<ExploreMetadataProps> {

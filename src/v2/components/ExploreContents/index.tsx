@@ -21,8 +21,8 @@ interface ExploreContentsProps {
   type?: SearchType
   sort: SearchSorts
   fetchPolicy: FetchPolicy
-  seed: number
-  blockFilter: BlockFilterEnum
+  seed?: number
+  blockFilter?: BlockFilterEnum
   timestamp: string
 }
 
@@ -44,6 +44,8 @@ export const ExploreContents: React.FC<ExploreContentsProps> = ({
     per: 12,
     hasMore: true,
   })
+
+  console.log({ seed })
 
   const { per, hasMore, page } = state
 
