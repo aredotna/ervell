@@ -13,11 +13,13 @@ import { MobileOrChildren } from 'v2/components/MobileBanner'
 import Title from 'v2/components/UI/Head/components/Title'
 
 import exploreUiStateQuery from 'v2/pages/explore/ExplorePage/queries/exploreUiState'
+import { BlockFilterEnum, SearchSorts } from '__generated__/globalTypes'
 
 interface ExplorePageProps {
   view: 'all' | 'channels' | 'blocks'
-  sort: 'UPDATED_AT' | 'RANDOM'
-  block_filter: 'IMAGE' | 'EMBED' | 'TEXT' | 'ATTACHMENT' | 'LINK'
+  sort: SearchSorts
+  block_filter: BlockFilterEnum
+  seed?: number
   timestamp?: string
 }
 
@@ -26,6 +28,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
   sort,
   block_filter,
   timestamp,
+  seed,
 }) => {
   return (
     <ErrorBoundary>
@@ -42,7 +45,8 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
           <ExploreViews
             view={view}
             sort={sort}
-            block_filter={block_filter}
+            blockFilter={block_filter}
+            seed={seed}
             timestamp={timestamp}
           />
           <MobileOrChildren>
@@ -64,10 +68,12 @@ const setValid = (value, validValues, defaultValue) => {
 
 export default ({ params, query }) => {
   const [timestamp, setTimestamp] = useState(null)
+  const [seed, setSeed] = useState<number>(null)
 
   useEffect(() => {
     setTimestamp(new Date().toISOString())
-  }, [setTimestamp])
+    setSeed(Math.floor(Math.random() * 100000))
+  }, [setTimestamp, setSeed])
 
   return (
     <Query query={exploreUiStateQuery} fetchPolicy="network-only">
@@ -93,7 +99,8 @@ export default ({ params, query }) => {
           <ExplorePage
             view={view}
             sort={sort}
-            block_filter={block_filter}
+            block_filter={block_filter as BlockFilterEnum}
+            seed={seed}
             {...extraProps}
           />
         )
