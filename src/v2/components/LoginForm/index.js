@@ -101,7 +101,7 @@ export default class LoginForm extends Component {
     return axios
       .post(
         '/me/sign_in',
-        { email, password },
+        { email: email.toLowerCase(), password },
         {
           headers: {
             // Sets `req.xhr` in Express
