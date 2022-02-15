@@ -41,7 +41,7 @@ class ForgotPasswordForm extends Component {
 
     return this.props
       .requestPasswordReset({
-        variables: { email },
+        variables: { email: email.toLowerCase() },
       })
       .then(() => {
         this.setState({ mode: 'success' })
