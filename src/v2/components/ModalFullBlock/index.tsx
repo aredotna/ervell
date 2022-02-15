@@ -131,7 +131,9 @@ export const ModalFullBlock: React.FC<ModalFullBlockProps> = ({ id, ids }) => {
   const background = location.state && JSON.parse(location.state.background)
 
   const onClose = useCallback(() => {
-    history.push(background.pathname, { preventScroll: true })
+    history.push(`${background.pathname}${background.search}`, {
+      preventScroll: true,
+    })
   }, [background, history])
 
   //
