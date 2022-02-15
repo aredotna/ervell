@@ -274,7 +274,7 @@
     "sass-loader": "10.1.1",
     "should": "*",
     "sinon": "*",
-    "source-map-support": "^0.5.12",
+    "source-map-support": "^0.5.21",
     "storybook-react-router": "^1.0.5",
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5",
