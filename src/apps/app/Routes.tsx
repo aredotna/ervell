@@ -211,9 +211,10 @@ export const Routes = () => {
                 context
                   .filter(
                     k =>
-                      k.__typename !== 'Channel' &&
-                      k.__typename !== 'Group' &&
-                      k.__typename !== 'User'
+                      k?.__typename !== 'Channel' &&
+                      k?.__typename !== 'Group' &&
+                      k?.__typename !== 'User' &&
+                      !!k?.id
                   )
                   .map(k => k.id)
               ),
