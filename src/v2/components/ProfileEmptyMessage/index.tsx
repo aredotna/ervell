@@ -123,11 +123,13 @@ export const ProfileEmptyMessage: React.FC<ProfileEmptyMessageProps> = ({
       {/* Profile is not associated with the current user */}
       {!isMine && identifiable.__typename == 'User' && (
         <div>
-          <Box>
-            {isOwn
-              ? `${identifiable.name} doesn&#39;t have any public content yet.`
-              : `${identifiable.name} is not collaborating with anyone yet.`}
-          </Box>
+          <Box
+            dangerouslySetInnerHTML={{
+              __html: isOwn
+                ? `${identifiable.name} doesn&#39;t have any public content yet.`
+                : `${identifiable.name} is not collaborating with anyone yet.`,
+            }}
+          />
           <Box mt={5}>Follow them to get updates in your feed.</Box>
         </div>
       )}
