@@ -90,7 +90,6 @@ export const MyGroup: React.FC<MyGroupProps> = ({ me, group, ...rest }) => {
 
   const addUser = useCallback(
     user => {
-      console.log({ user, users: [...upgradeableUsers, user] })
       return setState({
         upgradeableUsers: [...upgradeableUsers, user],
       })
@@ -104,8 +103,6 @@ export const MyGroup: React.FC<MyGroupProps> = ({ me, group, ...rest }) => {
       const nextUpgradeableUsers = upgradeableUsers.filter(
         upgradeableUser => upgradeableUser.id !== user.id
       )
-
-      console.log({ nextUpgradeableUsers })
 
       return setState({ upgradeableUsers: nextUpgradeableUsers })
     },
