@@ -4,7 +4,7 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import Icons from 'v2/components/UI/Icons'
 
-import { TableData } from '../../lib/types'
+import { TableData } from '../../../ChannelTableContents/lib/types'
 
 const TextContainer = styled(Box).attrs({
   px: 5,

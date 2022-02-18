@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback, useState } from 'react'
 import { Row } from 'react-table'
 import { ChannelPage_channel } from '__generated__/ChannelPage'
-import { TableData } from '../../lib/types'
+import { TableData } from '../../../ChannelTableContents/lib/types'
 import { TD, TR } from '../TableComponents'
 
 interface StandardRowProps {

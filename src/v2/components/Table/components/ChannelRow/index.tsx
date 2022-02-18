@@ -5,7 +5,7 @@ import { themeGet } from 'styled-system'
 import { ChannelTableContentsSet_channel_blokks_Channel } from '__generated__/ChannelTableContentsSet'
 import { StandardCell } from '../StandardCell'
 import { lighten } from 'v2/styles/functions'
-import { TableData } from '../../lib/types'
+import { TableData } from '../../../ChannelTableContents/lib/types'
 import { Row as RowType } from 'react-table'
 import { ChannelPage_channel } from '__generated__/ChannelPage'
 

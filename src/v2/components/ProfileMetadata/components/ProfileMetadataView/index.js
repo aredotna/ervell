@@ -56,6 +56,16 @@ export default class ProfileMetadataView extends Component {
 
         <CookieLinkUnlessCurrent
           name="view"
+          value="table"
+          prefix="Profile"
+          to={`${href}/table`}
+          isActive={this.isViewActive('table')}
+        >
+          Table
+        </CookieLinkUnlessCurrent>
+
+        <CookieLinkUnlessCurrent
+          name="view"
           value="index"
           prefix="Profile"
           to={`${href}/index`}

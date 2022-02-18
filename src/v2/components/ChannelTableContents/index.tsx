@@ -26,14 +26,14 @@ import { ChannelTableConnectors_channel_connectors } from '__generated__/Channel
 import Box from 'v2/components/UI/Box'
 import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
 
-import { ContentCell } from './components/ContentCell'
+import { ContentCell } from '../Table/components/ContentCell'
 import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBlockCell'
-import { StandardCell } from './components/StandardCell'
-import { Table } from './components/TableComponents'
+import { StandardCell } from '../Table/components/StandardCell'
+import { Table } from '../Table/components/TableComponents'
 import ChannelTableHeader from './components/ChannelTableHeader'
 import { SettingsCell } from './components/SettingsCell'
 import { ChannelTableBody } from './components/ChannelTableBody'
-import LoadingRow from './components/LoadingRow'
+import LoadingRow from '../Table/components/LoadingRow'
 import { SortableTableContainer } from './components/SortableTableContainer'
 
 import { ColumnIds, SortAndSortDir, TableData } from './lib/types'

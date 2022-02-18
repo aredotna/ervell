@@ -5,12 +5,12 @@ import { ConnectableTypeEnum, Sorts } from '__generated__/globalTypes'
 
 import { IntersectionObserverBox } from 'v2/components/UI/IntersectionObserverBox'
 import { SortAndSortDir, TableData } from '../../lib/types'
-import { ChannelRow } from '../ChannelRow'
+import { ChannelRow } from '../../../Table/components/ChannelRow'
 import ExpandedBlockRow, { ExpandedBlockRowProps } from '../ExpandedBlockRow'
 import ExpandedChannelRow from '../ExpandedChannelRow'
 import { SortableTableItem } from '../SortableTableItem'
 import { ChannelPage_channel } from '__generated__/ChannelPage'
-import { StandardRow } from '../StandardRow'
+import { StandardRow } from '../../../Table/components/StandardRow'
 import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 
 interface TableBodyProps {
