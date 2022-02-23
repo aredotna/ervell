@@ -5,8 +5,9 @@ import { ExpandedBlockRowContents } from './components/ExpandedBlockRowContents'
 import { ExpandedBlockMetadata } from './components/ExpandedBlockMetadata'
 import { FullBlockMetadataFoldWithQuery } from 'v2/components/FullBlock/components/FullBlockMetadataFold'
 import Box from 'v2/components/UI/Box'
-import { ActionButtons } from '../ActionButtons'
+import { ActionButtons } from '../ExpandedActionButtons'
 import { FIRST_COLUMN_WIDTH } from '../../lib/constants'
+import { ProfileTableContents_user_contents } from '__generated__/ProfileTableContents'
 
 const Row = styled.tr`
   border-color: transparent;
@@ -78,7 +79,9 @@ const MetadataFoldContainer = styled(Box)`
 `
 
 export interface ExpandedBlockRowProps {
-  block: ChannelTableContentsSet_channel_blokks
+  block:
+    | ChannelTableContentsSet_channel_blokks
+    | ProfileTableContents_user_contents
   columnLength: number
   onMinimize: () => void
 }

@@ -1,11 +1,8 @@
 import { gql } from '@apollo/client'
-import { connectableContextMenuConnectableFragment } from 'v2/components/ConnectableContextMenu/fragments/connectableContextMenu'
 
 export const channelTableContentsConnectableFragment = gql`
   fragment ChannelTableContentsConnectable on Konnectable {
     __typename
-
-    ...ConnectableContextMenuConnectable
 
     ... on Model {
       id
@@ -34,9 +31,6 @@ export const channelTableContentsConnectableFragment = gql`
     ... on Attachment {
       file_url
       image_url(size: THUMB)
-      created_at
-      file_url
-      image_url
       source {
         url
         provider_url
@@ -71,9 +65,6 @@ export const channelTableContentsConnectableFragment = gql`
     ... on Text {
       content(format: MARKDOWN)
       html: content(format: HTML)
-      source {
-        url
-      }
     }
 
     ... on ConnectableInterface {
@@ -81,13 +72,14 @@ export const channelTableContentsConnectableFragment = gql`
       user {
         name
       }
-      connection {
+      connection @include(if: $includeConnection) {
         __typename
         position
         selected
         id
         created_at(relative: true)
         can {
+          update
           manage
         }
         user {
@@ -96,5 +88,4 @@ export const channelTableContentsConnectableFragment = gql`
       }
     }
   }
-  ${connectableContextMenuConnectableFragment}
 `

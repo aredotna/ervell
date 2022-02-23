@@ -1,11 +1,8 @@
 import { gql } from '@apollo/client'
-import { connectableContextMenuConnectableFragment } from 'v2/components/ConnectableContextMenu/fragments/connectableContextMenu'
 
-export const profileTableRowFragment = gql`
-  fragment ProfileTableRow on Konnectable {
+export const expandedBlockRowFragment = gql`
+  fragment ExpandedBlockRow on Konnectable {
     __typename
-
-    ...ConnectableContextMenuConnectable
 
     ... on Model {
       id
@@ -17,15 +14,6 @@ export const profileTableRowFragment = gql`
       }
     }
 
-    ... on Channel {
-      visibility
-      title
-      counts {
-        connected_to_channels
-        contents
-      }
-    }
-
     ... on Model {
       created_at(relative: true)
       updated_at(relative: true)
@@ -34,9 +22,6 @@ export const profileTableRowFragment = gql`
     ... on Attachment {
       file_url
       image_url(size: THUMB)
-      created_at
-      file_url
-      image_url
       source {
         url
         provider_url
@@ -80,5 +65,4 @@ export const profileTableRowFragment = gql`
       }
     }
   }
-  ${connectableContextMenuConnectableFragment}
 `

@@ -1,23 +1,38 @@
-import React from 'react'
-import { Column } from 'react-table'
+import React, { useCallback, useMemo, useReducer } from 'react'
+import { Column, useExpanded, useTable } from 'react-table'
 import { useQuery } from '@apollo/client'
+import InfiniteScroll from 'react-infinite-scroller'
+import styled from 'styled-components'
 
-import Box from '../UI/Box'
-import { ColumnIds } from './lib/types'
+import Box from 'v2/components/UI/Box'
+import { ColumnIds, SortAndSortDir } from './lib/types'
 import { FIRST_COLUMN_WIDTH } from './lib/constants'
-import { TableData } from '../ChannelTableContents/lib/types'
 
-import { ContentCell } from '../Table/components/ContentCell'
-import { StandardCell } from '../Table/components/StandardCell'
-import { Table } from '../Table/components/TableComponents'
-import { PotentiallyEditableBlockCell } from '../ChannelTableContents/components/PotentiallyEditableBlockCell'
+import { ContentCell } from 'v2/components/Table/components/ContentCell'
+import { StandardCell } from 'v2/components/Table/components/StandardCell'
+import { Table } from 'v2/components/Table/components/TableComponents'
+import { PotentiallyEditableBlockCell } from 'v2/components/ChannelTableContents/components/PotentiallyEditableBlockCell'
 
 import profileTableContentsQuery from './queries/profileTableContents'
-import { ConnectableTypeEnum, SearchSorts } from '__generated__/globalTypes'
+import {
+  ConnectableTypeEnum,
+  SearchSorts,
+  SortDirection,
+  Sorts,
+} from '__generated__/globalTypes'
 import {
   ProfileTableContents,
   ProfileTableContentsVariables,
+  ProfileTableContents_user,
+  ProfileTableContents_user_contents,
 } from '__generated__/ProfileTableContents'
+import useWindowDimensions from 'v2/hooks/useWindowDimensions'
+import { ProfileTableHeader } from './components/ProfileTableHeader'
+import LoadingRow from 'v2/components/Table/components/LoadingRow'
+import { ProfileTableBody } from './components/ProfileTableBody'
+import { TableData } from 'v2/components/Table/lib/constants'
+import { SettingsCell } from '../ChannelTableContents/components/SettingsCell'
+import useMergeState from 'v2/hooks/useMergeState'
 
 export const STANDARD_HEADERS: Array<Column<TableData>> = [
   {
@@ -35,9 +50,9 @@ export const STANDARD_HEADERS: Array<Column<TableData>> = [
     width: '25%',
   },
   {
-    Header: 'Added at',
+    Header: 'Created at',
     id: ColumnIds.addedAt,
-    accessor: block => '__typename' in block && block?.connection?.created_at,
+    accessor: block => '__typename' in block && block?.created_at,
     Cell: StandardCell,
     width: '125px',
   },
@@ -63,25 +78,230 @@ export const STANDARD_HEADERS: Array<Column<TableData>> = [
     Cell: StandardCell,
     width: '125px',
   },
+  {
+    Header: ColumnIds.addSettings,
+    id: ColumnIds.addSettings,
+    accessor: block => ('__typename' in block ? block : null),
+    Cell: SettingsCell,
+    width: '100px',
+  },
 ]
 
-interface ProfileTableContentsProps {
+const MEDIUM_BREAKPOINT_HEADERS = [
+  ColumnIds.content,
+  ColumnIds.title,
+  ColumnIds.addedAt,
+  ColumnIds.author,
+]
+
+const SMALL_BREAKPOINT_HEADERS = [
+  ColumnIds.content,
+  ColumnIds.title,
+  ColumnIds.author,
+]
+
+const InfiniteContainer = styled(InfiniteScroll)``
+
+const sortAndSortDirReducer: React.Reducer<SortAndSortDir, SortAndSortDir> = (
+  prevState,
+  action
+) => {
+  if (prevState.sort === action.sort && prevState.dir === action.dir) {
+    return {
+      sort: Sorts.POSITION,
+      dir: SortDirection.DESC,
+    }
+  }
+
+  return action
+}
+
+interface ProfileTableProps {
+  loading: boolean
+  blocks: ProfileTableContents_user_contents[]
+  profile: ProfileTableContents_user
+  loadMore: () => void
+  hasMore: boolean
+}
+
+interface ProfileState {
+  page: number
+  per: number
+  hasMore: boolean
+}
+
+export const ProfileTable: React.FC<ProfileTableProps> = ({
+  loading,
+  blocks,
+  profile,
+  loadMore,
+  hasMore,
+}) => {
+  const [sortAndSortDir, setSortAndSortDir] = useReducer(
+    sortAndSortDirReducer,
+    { sort: Sorts.POSITION, dir: SortDirection.DESC }
+  )
+
+  const tableData = useMemo<Array<TableData>>(() => {
+    const data: Array<TableData> = []
+    for (let i = 0; i < blocks?.length; i++) {
+      const block = blocks[i]
+      data.push({ ...block } ?? { isNull: true })
+    }
+    return data
+  }, [blocks, blocks?.length])
+
+  const { width } = useWindowDimensions()
+
+  const tableColumns = useMemo<Array<Column<TableData>>>(() => {
+    if (!width) {
+      return STANDARD_HEADERS
+    }
+
+    if (width > 1024) {
+      return STANDARD_HEADERS
+    }
+
+    if (width <= 1024 && width >= 690) {
+      const headers = STANDARD_HEADERS.filter(header => {
+        return MEDIUM_BREAKPOINT_HEADERS.map(h => h.toString()).includes(
+          header.id
+        )
+      })
+      return headers
+    }
+
+    if (width < 690) {
+      const headers = STANDARD_HEADERS.filter(header => {
+        return SMALL_BREAKPOINT_HEADERS.map(h => h.toString()).includes(
+          header.id
+        )
+      })
+      return headers
+    }
+
+    return STANDARD_HEADERS
+  }, [width])
+
+  const getRowId = useCallback((row: TableData, index: number): string => {
+    const rowId = '__typename' in row ? row.id.toString() : `nullRow${index}`
+    return `${rowId}`
+  }, [])
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    columns,
+  } = useTable<TableData>(
+    {
+      data: tableData,
+      columns: tableColumns,
+      autoResetExpanded: false,
+      getRowId: getRowId,
+    },
+    useExpanded
+  )
+
+  return (
+    <Box>
+      <Table {...getTableProps()}>
+        <ProfileTableHeader
+          headerGroups={headerGroups}
+          profile={profile}
+          sortAndSortDir={sortAndSortDir}
+          setSortAndSortDir={setSortAndSortDir}
+        />
+
+        {loading && (
+          <tbody {...getTableBodyProps()}>
+            <LoadingRow columnLength={STANDARD_HEADERS.length} />
+          </tbody>
+        )}
+
+        {!loading && (
+          <InfiniteContainer
+            initialLoad={false}
+            loadMore={loadMore}
+            element={'tbody'}
+            hasMore={hasMore}
+            loader={<LoadingRow columnLength={STANDARD_HEADERS.length} />}
+          >
+            <ProfileTableBody
+              rows={rows}
+              columns={columns}
+              prepareRow={prepareRow}
+            />
+          </InfiniteContainer>
+        )}
+      </Table>
+    </Box>
+  )
+}
+
+interface ProfileTableQueryProps {
   id: string
   sort?: SearchSorts
   type?: ConnectableTypeEnum
 }
 
-export const ProfileTable: React.FC<ProfileTableContentsProps> = ({
+const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({
   id,
   sort,
   type,
 }) => {
-  const { data, loading, error } = useQuery<
+  const [state, setState] = useMergeState<ProfileState>({
+    page: 1,
+    per: 12,
+    hasMore: true,
+  })
+
+  const { per, page, hasMore } = state
+
+  const { data, loading, fetchMore } = useQuery<
     ProfileTableContents,
     ProfileTableContentsVariables
-  >(profileTableContentsQuery, { variables: { id, sort, type } })
+  >(profileTableContentsQuery, {
+    variables: {
+      id,
+      sort,
+      type,
+      page,
+      per,
+      includeConnection: false,
+    },
+  })
 
-  return <Box>ProfileTable</Box>
+  const loadMore = useCallback(() => {
+    fetchMore({
+      variables: { page: page + 1 },
+    }).then(({ errors, data }) => {
+      const {
+        user: {
+          contents: { length },
+        },
+      } = data
+
+      const hasMore = !errors && length > 0 && length >= per
+
+      setState({
+        page: page + 1,
+        hasMore,
+      })
+    })
+  }, [fetchMore, state, setState])
+
+  return (
+    <ProfileTable
+      loading={loading}
+      blocks={data?.user?.contents}
+      profile={data?.user}
+      loadMore={loadMore}
+      hasMore={hasMore}
+    />
+  )
 }
 
-export default ProfileTable
+export default ProfileTableQuery

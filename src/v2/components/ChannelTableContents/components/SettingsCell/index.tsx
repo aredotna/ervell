@@ -4,12 +4,12 @@ import styled from 'styled-components'
 
 import Icon from 'v2/components/UI/Icons'
 import GenericButton from 'v2/components/UI/GenericButton'
-import { TableData } from '../../lib/types'
 import { ConnectableContextMenu } from 'v2/components/ConnectableContextMenu'
 import { ChannelTablePage_channel } from '__generated__/ChannelTablePage'
 import Box from 'v2/components/UI/Box'
 import { ConnectButton } from './components/ConnectButton'
 import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
+import { TableData } from 'v2/components/Table/lib/constants'
 
 const Cell = styled.div`
   display: flex;
@@ -114,7 +114,7 @@ export const SettingsCell: React.FC<SettingsCellProps> = ({
 
   return (
     <Cell>
-      {value && channel.can.update && (
+      {value && channel?.can.update && (
         <>
           <Container>
             {!valueIsNull && (

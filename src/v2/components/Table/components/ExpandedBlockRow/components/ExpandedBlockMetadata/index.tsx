@@ -17,9 +17,12 @@ import {
 import { FullBlock } from '__generated__/FullBlock'
 import { ToggleConnectionExpanded } from 'v2/components/ToggleConnectionExpanded'
 import { SansSerifText } from 'v2/components/UI/SansSerifText'
+import { ProfileTableContents_user_contents } from '__generated__/ProfileTableContents'
 
 interface ExpandedBlockMetadataProps {
-  block: ChannelTableContentsSet_channel_blokks
+  block:
+    | ChannelTableContentsSet_channel_blokks
+    | ProfileTableContents_user_contents
 }
 
 export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
@@ -107,7 +110,9 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
               Actions
             </Header>
             <Text my={6} f={1} fontWeight="bold" lineHeight={2}>
-              <ToggleConnectionExpanded connection={existing.connection} />
+              {'connection' in existing && (
+                <ToggleConnectionExpanded connection={existing.connection} />
+              )}
               <FullBlockActions
                 block={block as FullBlock}
                 linkViewMode={'screenshot'}

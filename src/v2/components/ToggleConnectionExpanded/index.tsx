@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client'
 import React from 'react'
 import styled from 'styled-components'
-import { ChannelTableContentsSet_channel_blokks_Channel_connection as ConnectionType } from '__generated__/ChannelTableContentsSet'
+import { TableRow_blokk_Attachment_connection as ConnectionType } from '__generated__/TableRow'
 import {
   GetConnectionSelection,
   GetConnectionSelectionVariables,
@@ -10,7 +10,7 @@ import {
   ToggleConnectionExpandedMutation,
   ToggleConnectionExpandedMutationVariables,
 } from '__generated__/ToggleConnectionExpandedMutation'
-import expandedBlockRowContents from '../ChannelTableContents/components/ExpandedBlockRow/components/ExpandedBlockRowContents/queries/expandedBlockRowContents'
+import expandedBlockRowContents from '../Table/components/ExpandedBlockRow/components/ExpandedBlockRowContents/queries/expandedBlockRowContents'
 import toggleConnectionExpanded from './mutations/toggleConnectionExpanded'
 import getConnectionSelection from './queries/getConnectionSelection'
 

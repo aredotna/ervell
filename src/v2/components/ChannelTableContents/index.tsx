@@ -74,7 +74,10 @@ export const STANDARD_HEADERS: Array<Column<TableData>> = [
   {
     Header: 'Added at',
     id: ColumnIds.addedAt,
-    accessor: block => '__typename' in block && block?.connection?.created_at,
+    accessor: block =>
+      '__typename' in block &&
+      'connection' in block &&
+      block?.connection?.created_at,
     Cell: StandardCell,
     width: '125px',
   },
@@ -186,6 +189,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     user_id: user?.id.toString(),
     per: 25,
     blockquery: CONNECTABLE_TABLE_BLOKK_QUERY,
+    includeConnection: true,
   })
 
   const onItemIntersected = useCallback(
@@ -262,7 +266,11 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     for (let i = 0; i < contentCount; i++) {
       const block = blocks[i]
       data.push(
-        { ...block, expanded: block?.connection?.selected } ?? { isNull: true }
+        {
+          ...block,
+          expanded:
+            block && 'connection' in block && block?.connection?.selected,
+        } ?? { isNull: true }
       )
     }
     return data
@@ -313,7 +321,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     const newState = {}
     tableData.forEach(row => {
       if ('__typename' in row && row.connection) {
-        newState[row.id.toString()] = row.connection.selected
+        newState[row.id.toString()] = row.connection?.selected
       }
     })
 

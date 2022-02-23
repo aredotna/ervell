@@ -1,13 +1,15 @@
 import React, { forwardRef, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { blend } from 'chroma-js'
+import { Row as RowType } from 'react-table'
 import { themeGet } from 'styled-system'
-import { ChannelTableContentsSet_channel_blokks_Channel } from '__generated__/ChannelTableContentsSet'
+
 import { StandardCell } from '../StandardCell'
 import { lighten } from 'v2/styles/functions'
-import { TableData } from '../../../ChannelTableContents/lib/types'
-import { Row as RowType } from 'react-table'
+import { TableData } from '../../lib/constants'
+
 import { ChannelPage_channel } from '__generated__/ChannelPage'
+import { TableRow_blokk_Channel } from '__generated__/TableRow'
 
 const TD = styled.td`
   color: ${x => x.theme.colors.gray.bold};
@@ -71,19 +73,19 @@ const Row = styled.tr`
 `
 
 interface ChannelRowProps {
-  connectableChannel: ChannelTableContentsSet_channel_blokks_Channel
+  connectableChannel: TableRow_blokk_Channel
   row: RowType<TableData>
   expanded: boolean
-  removeBlock: (args: { id: number; type: string }) => void
-  moveBlock: (args: { oldIndex: number; newIndex: number }) => void
-  channel: ChannelPage_channel
+  removeBlock?: (args: { id: number; type: string }) => void
+  moveBlock?: (args: { oldIndex: number; newIndex: number }) => void
+  channel?: ChannelPage_channel
   onClick: () => void
   isRowMovable?: boolean
 }
 
 export const ChannelRow = forwardRef<HTMLElement, ChannelRowProps>(
   (
-    { connectableChannel, moveBlock, removeBlock, row, channel, isRowMovable },
+    { connectableChannel, row, removeBlock, channel, moveBlock, isRowMovable },
     ref
   ) => {
     const [mode, setMode] = useState<'resting' | 'active'>('resting')

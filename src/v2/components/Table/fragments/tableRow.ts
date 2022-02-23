@@ -1,42 +1,51 @@
 import { gql } from '@apollo/client'
-import { connectableContextMenuConnectableFragment } from 'v2/components/ConnectableContextMenu/fragments/connectableContextMenu'
 
-export const channelTableContentsConnectableFragment = gql`
-  fragment ChannelTableContentsConnectable on Konnectable {
+export const tableRowFragment = gql`
+  fragment TableRowFragment on Konnectable {
     __typename
-
-    ...ConnectableContextMenuConnectable
 
     ... on Model {
       id
+
+      created_at(relative: true)
+      updated_at(relative: true)
+    }
+
+    ... on PendingBlock {
+      href
     }
 
     ... on Block {
       counts {
         public_channels
       }
+      can {
+        remove: manage
+        manage
+        mute
+      }
     }
 
     ... on Channel {
       visibility
       title
+      href
       counts {
         connected_to_channels
         contents
       }
-    }
-
-    ... on Model {
-      created_at(relative: true)
-      updated_at(relative: true)
+      can {
+        update: manage
+        manage
+        mute
+      }
     }
 
     ... on Attachment {
       file_url
       image_url(size: THUMB)
-      created_at
       file_url
-      image_url
+      href
       source {
         url
         provider_url
@@ -46,6 +55,7 @@ export const channelTableContentsConnectableFragment = gql`
     ... on Embed {
       embed_html
       image_url(size: THUMB)
+      href
       source {
         url
         provider_url
@@ -54,6 +64,7 @@ export const channelTableContentsConnectableFragment = gql`
 
     ... on Link {
       image_url(size: THUMB)
+      href
       source {
         url
         provider_url
@@ -62,6 +73,8 @@ export const channelTableContentsConnectableFragment = gql`
 
     ... on Image {
       image_url(size: THUMB)
+      href
+      find_original_url
       source {
         url
         provider_url
@@ -71,6 +84,8 @@ export const channelTableContentsConnectableFragment = gql`
     ... on Text {
       content(format: MARKDOWN)
       html: content(format: HTML)
+      find_original_url
+      href
       source {
         url
       }
@@ -81,20 +96,18 @@ export const channelTableContentsConnectableFragment = gql`
       user {
         name
       }
-      connection {
+
+      connection @include(if: $includeConnection) {
         __typename
-        position
-        selected
         id
         created_at(relative: true)
+        selected
         can {
           manage
-        }
-        user {
-          name
+          remove: manage
+          destroy
         }
       }
     }
   }
-  ${connectableContextMenuConnectableFragment}
 `

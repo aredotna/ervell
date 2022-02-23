@@ -8,9 +8,10 @@ import { truncate } from 'v2/components/UI/Truncate'
 import { FullChannelMetadataPane } from 'v2/components/FullChannel/components/FullChannelMetadataPane'
 
 import { ExpandedChannelRowContents } from './ExpandedChannelRowContents'
-import { ActionButtons } from '../ActionButtons'
+import { ActionButtons } from '../ExpandedActionButtons'
 
 import { ChannelTableContentsSet_channel_blokks_Channel } from '__generated__/ChannelTableContentsSet'
+import { ProfileTableContents_user_contents_Channel } from '__generated__/ProfileTableContents'
 
 const Row = styled.tr`
   border-color: transparent;
@@ -84,7 +85,9 @@ const Cell = styled(TD)`
 `
 
 interface ExpandedChannelRowProps {
-  channel: ChannelTableContentsSet_channel_blokks_Channel
+  channel:
+    | ChannelTableContentsSet_channel_blokks_Channel
+    | ProfileTableContents_user_contents_Channel
   columnLength: number
   onMinimize: () => void
 }
@@ -120,9 +123,10 @@ export const ExpandedChannelRow = forwardRef<
               onMinimize={onMinimize}
             />
           </ButtonContainer>
+
           <FullChannelMetadataPane
             id={channel.id.toString()}
-            connection={channel.connection}
+            connection={'connection' in channel && channel.connection}
           />
         </MetadataContainer>
       </Cell>

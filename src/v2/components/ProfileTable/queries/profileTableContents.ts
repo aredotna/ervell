@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-import profileContentsFragment from 'v2/components/ProfileContents/fragments/profileContents'
+import profileTableContentsFragment from 'v2/components/ProfileTable/fragments/profileTableContents'
 
 export default gql`
   query ProfileTableContents(
@@ -11,13 +11,12 @@ export default gql`
     $sort: SearchSorts
     $q: String
     $seed: Int
+    $includeConnection: Boolean!
   ) {
-    identity(id: $id) {
-      identifiable {
-        __typename
-        ...ProfileContents
-      }
+    user(id: $id) {
+      __typename
+      ...ProfileTableContentsFragment
     }
   }
-  ${profileContentsFragment}
+  ${profileTableContentsFragment}
 `

@@ -1,15 +1,14 @@
 import React, { forwardRef, useCallback, useState } from 'react'
 import { Row } from 'react-table'
 import { ChannelPage_channel } from '__generated__/ChannelPage'
-import { TableData } from '../../../ChannelTableContents/lib/types'
+import { TableData } from '../../lib/constants'
 import { TD, TR } from '../TableComponents'
-
 interface StandardRowProps {
   row: Row<TableData>
   expanded: boolean
-  removeBlock: (args: { id: number; type: string }) => void
-  moveBlock: (args: { oldIndex: number; newIndex: number }) => void
-  channel: ChannelPage_channel
+  removeBlock?: (args: { id: number; type: string }) => void
+  moveBlock?: (args: { oldIndex: number; newIndex: number }) => void
+  channel?: ChannelPage_channel
   isRowMovable?: boolean
 }
 

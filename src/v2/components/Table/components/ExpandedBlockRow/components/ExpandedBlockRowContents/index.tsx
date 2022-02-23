@@ -11,6 +11,7 @@ import {
   ExpandedBlockRowContents as ExpandedBlockRowContentsType,
   ExpandedBlockRowContentsVariables,
 } from '__generated__/ExpandedBlockRowContents'
+import { ProfileTableContents_user_contents } from '__generated__/ProfileTableContents'
 import expandedBlockRowContents from './queries/expandedBlockRowContents'
 
 const TextContainer = styled.div`
@@ -35,7 +36,9 @@ const Image = styled.img`
 `
 
 interface ExpandedBlockRowContentsProps {
-  block: ChannelTableContentsSet_channel_blokks
+  block:
+    | ChannelTableContentsSet_channel_blokks
+    | ProfileTableContents_user_contents
 }
 
 export const ExpandedBlockRowContents: React.FC<ExpandedBlockRowContentsProps> = ({

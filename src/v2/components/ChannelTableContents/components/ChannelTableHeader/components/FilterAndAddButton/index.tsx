@@ -188,11 +188,11 @@ const TableAddButtonInner: React.FC<TableAddButtonInnerProps> = ({
 }
 
 interface TableAddButtonProps {
-  channelId: number
-  addBlock: () => void
+  channelId?: number
+  addBlock?: () => void
   type?: ConnectableTypeEnum
   user?: ChannelTableConnectors_channel_connectors
-  channel: ChannelPage_channel
+  channel?: ChannelPage_channel
 }
 
 export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps & {
@@ -345,7 +345,7 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
       setUploaderKey(new Date().getTime())
     }, [setUploaderKey])
 
-    if (!channel.can.add_to) {
+    if (!channel || !channel?.can.add_to) {
       return (
         <WhiteContainer>
           <Box position="relative" ref={filterRef}>

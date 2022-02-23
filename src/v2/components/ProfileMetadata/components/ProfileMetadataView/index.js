@@ -43,26 +43,27 @@ export default class ProfileMetadataView extends Component {
         </CookieLinkUnlessCurrent>
 
         {__typename === 'User' && (
-          <CookieLinkUnlessCurrent
-            name="view"
-            prefix="Profile"
-            value="blocks"
-            to={`${href}/blocks?sort=${sort}`}
-            isActive={this.isViewActive('blocks')}
-          >
-            Blocks
-          </CookieLinkUnlessCurrent>
+          <>
+            <CookieLinkUnlessCurrent
+              name="view"
+              prefix="Profile"
+              value="blocks"
+              to={`${href}/blocks?sort=${sort}`}
+              isActive={this.isViewActive('blocks')}
+            >
+              Blocks
+            </CookieLinkUnlessCurrent>
+            <CookieLinkUnlessCurrent
+              name="view"
+              value="table"
+              prefix="Profile"
+              to={`${href}/table`}
+              isActive={this.isViewActive('table')}
+            >
+              Table
+            </CookieLinkUnlessCurrent>
+          </>
         )}
-
-        <CookieLinkUnlessCurrent
-          name="view"
-          value="table"
-          prefix="Profile"
-          to={`${href}/table`}
-          isActive={this.isViewActive('table')}
-        >
-          Table
-        </CookieLinkUnlessCurrent>
 
         <CookieLinkUnlessCurrent
           name="view"

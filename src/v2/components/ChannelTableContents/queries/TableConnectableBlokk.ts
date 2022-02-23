@@ -1,13 +1,12 @@
 import { gql } from '@apollo/client'
-
-import { channelTableContentsConnectableFragment } from '../fragments/TableConnectableBlokk'
+import { tableRowFragment } from 'v2/components/Table/fragments/tableRow'
 
 export default gql`
-  query ConnectableTableBlokk($id: ID!) {
+  query ConnectableTableBlokk($id: ID!, $includeConnection: Boolean!) {
     blokk(id: $id) {
       __typename
-      ...ChannelTableContentsConnectable
+      ...TableRowFragment
     }
   }
-  ${channelTableContentsConnectableFragment}
+  ${tableRowFragment}
 `
