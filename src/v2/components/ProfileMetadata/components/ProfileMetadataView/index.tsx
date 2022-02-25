@@ -50,7 +50,7 @@ export const ProfileMetadataView: React.FC<ProfileMetadataViewProps> = ({
   const { __typename, href } = identifiable
   const me = useSerializedMe()
 
-  const tableLink = me.is_premium ? '?view=table' : '/pricing'
+  const tableLink = me.is_premium ? `${href}/table` : '/pricing'
 
   return (
     <Pocket title="View">

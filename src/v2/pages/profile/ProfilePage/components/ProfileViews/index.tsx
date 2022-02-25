@@ -22,6 +22,7 @@ import {
 } from '__generated__/ProfilePageIdentifiable'
 import { ProfileViewTypes } from '../..'
 import ProfileTable from 'v2/components/ProfileTable'
+import useSerializedMe from 'v2/hooks/useSerializedMe'
 
 interface AllProps {
   id: string
@@ -194,6 +195,8 @@ const ProfileViews: React.FC<ProfileViewsProps> = ({
   const [renderedView, setRenderedView] = useState<ProfileViewTypes>(view)
   const [fetchPolicy, setFetchPolicy] = useState<FetchPolicy>('cache-first')
 
+  const { is_premium } = useSerializedMe()
+
   useEffect(() => {
     if (view != renderedView) {
       setRenderedView(view)
@@ -239,11 +242,22 @@ const ProfileViews: React.FC<ProfileViewsProps> = ({
         <Following id={id} followType={followType} fetchPolicy={fetchPolicy} />
       )
     case 'table':
+      if (is_premium) {
+        return (
+          <Table
+            id={id}
+            sort={sort as SearchSorts}
+            type={type}
+            identifiable={identifiable}
+            fetchPolicy={fetchPolicy}
+          />
+        )
+      }
+
       return (
-        <Table
+        <All
           id={id}
           sort={sort as SearchSorts}
-          type={type}
           identifiable={identifiable}
           fetchPolicy={fetchPolicy}
         />
