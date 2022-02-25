@@ -1,20 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { useQuery } from '@apollo/client'
 import { debounce, isEmpty } from 'underscore'
 import { capitalize } from 'lodash'
 
-import { SearchInput } from 'v2/components/Table/components/FilterContainer'
+import { SearchInput } from '../FilterContainer'
 import Box from 'v2/components/UI/Box'
 import { ItemContainer } from 'v2/components/Table/components/FilterComponents'
 import Text from 'v2/components/UI/Text'
 import { inputPadding } from 'v2/components/UI/Inputs'
 
-import {
-  ChannelTableTypes,
-  ChannelTableTypesVariables,
-} from '__generated__/ChannelTableTypes'
-import channelTypesQuery from './queries/channelTypes'
 import { ConnectableTypeEnum } from '__generated__/globalTypes'
 import { DownArrow } from 'v2/components/UI/SortArrows'
 
@@ -73,30 +67,27 @@ const Item = styled(ItemContainer)`
 `
 
 interface TypeListProps {
-  id: string | number
   handleSelect: (value: string) => void
   query?: string
 }
 
-const TypeList: React.FC<TypeListProps> = ({ id, handleSelect, query }) => {
-  const { data } = useQuery<ChannelTableTypes, ChannelTableTypesVariables>(
-    channelTypesQuery,
-    { variables: { id: id.toString() } }
-  )
-
+const TypeList: React.FC<TypeListProps> = ({ handleSelect, query }) => {
   const [matches, setMatches] = useState<ConnectableTypeEnum[] | null>(null)
+  const allTypes = Object.keys(ConnectableTypeEnum).map(item => {
+    return isNaN(Number(item)) ? ConnectableTypeEnum[item] : null
+  })
 
   useEffect(() => {
     const items = query
-      ? data?.channel?.types.filter(element => {
+      ? allTypes.filter(element => {
           if (element.toLowerCase().includes(query)) {
             return true
           }
         })
-      : data?.channel?.types
+      : allTypes
 
     setMatches(items)
-  }, [query, data, setMatches])
+  }, [query, setMatches])
 
   return (
     <ResultContainer>
@@ -112,12 +103,11 @@ const TypeList: React.FC<TypeListProps> = ({ id, handleSelect, query }) => {
 }
 
 interface TypeFilterProps {
-  id: string | number
   type?: ConnectableTypeEnum
   setType: (value: ConnectableTypeEnum) => void
 }
 
-const TypeFilter: React.FC<TypeFilterProps> = ({ id, setType, type }) => {
+const TypeFilter: React.FC<TypeFilterProps> = ({ setType, type }) => {
   const [query, setDebouncedQuery] = useState<string>('')
   const [mode, setMode] = useState<'active' | 'focused' | 'resting'>('resting')
   const [selectedType, setSelectedType] = useState<ConnectableTypeEnum | null>(
@@ -182,7 +172,7 @@ const TypeFilter: React.FC<TypeFilterProps> = ({ id, setType, type }) => {
         )}
       </InputContainer>
       {(mode === 'focused' || mode === 'active') && (
-        <TypeList id={id} query={query} handleSelect={handleSelect} />
+        <TypeList query={query} handleSelect={handleSelect} />
       )}
     </SearchContainer>
   )

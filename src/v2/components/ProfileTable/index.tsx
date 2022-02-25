@@ -246,6 +246,8 @@ interface ProfileTableQueryProps {
 }
 
 const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({ id, type }) => {
+  console.log({ type })
+
   const [sortAndSortDir, setSortAndSortDir] = useReducer(
     sortAndSortDirReducer,
     { sort: SearchSorts.UPDATED_AT, dir: SortDirection.DESC }

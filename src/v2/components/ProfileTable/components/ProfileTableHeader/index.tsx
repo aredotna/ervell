@@ -12,7 +12,6 @@ import {
   SortDirection,
 } from '__generated__/globalTypes'
 import { ColumnIds, SortAndSortDir } from '../../lib/types'
-import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 import { columnIdsToSorts } from '../../lib/constants'
 import { ProfileTableContents_user } from '__generated__/ProfileTableContents'
 import { TableData } from 'v2/components/Table/lib/constants'
@@ -90,7 +89,6 @@ interface ProfileTableHeaderProps {
   sortAndSortDir: SortAndSortDir
   setSortAndSortDir: React.Dispatch<SortAndSortDir>
   type?: ConnectableTypeEnum
-  user?: ChannelTableConnectors_channel_connectors
 }
 
 export const ProfileTableHeader: React.FC<ProfileTableHeaderProps> = ({
@@ -99,7 +97,6 @@ export const ProfileTableHeader: React.FC<ProfileTableHeaderProps> = ({
   sortAndSortDir,
   setSortAndSortDir,
   type,
-  user,
 }) => {
   const headerRef = useRef<HTMLTableSectionElement>(null)
 
@@ -117,7 +114,7 @@ export const ProfileTableHeader: React.FC<ProfileTableHeaderProps> = ({
               if (column.Header?.toString() === ColumnIds.addSettings) {
                 return (
                   <SettingsAddTH width="103px" key={column.Header?.toString()}>
-                    <ProfileFilter type={type} user={user} />
+                    <ProfileFilter type={type} />
                   </SettingsAddTH>
                 )
               }

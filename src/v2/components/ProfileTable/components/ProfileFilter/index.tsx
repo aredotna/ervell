@@ -7,11 +7,9 @@ import GenericButton from 'v2/components/UI/GenericButton'
 import Icon from 'v2/components/UI/Icons'
 import Overlay from 'v2/components/UI/Overlay'
 
-import Filter from 'v2/components/Table/components/FilterContainer'
+import Filter from 'v2/components/ProfileTable/components/ProfileFilter/components/FilterContainer'
 import { ConnectableTypeEnum } from '__generated__/globalTypes'
-import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 import { updateParams } from 'v2/util/updateParams'
-import { ChannelPage_channel } from '__generated__/ChannelPage'
 
 const FilterButton = styled(GenericButton).attrs({
   bg: 'gray.hint',
@@ -65,13 +63,11 @@ interface ProfileFilterProps {
   channelId?: number
   addBlock?: () => void
   type?: ConnectableTypeEnum
-  user?: ChannelTableConnectors_channel_connectors
-  channel?: ChannelPage_channel
 }
 
 export const ProfileFilter: React.ForwardRefExoticComponent<ProfileFilterProps & {
   ref?: React.Ref<HTMLElement>
-}> = React.forwardRef(({ channelId, type, user }) => {
+}> = React.forwardRef(({ channelId, type }) => {
   const filterRef = useRef<HTMLElement>()
   const filterButtonRef = useRef<HTMLElement>()
 
@@ -88,19 +84,6 @@ export const ProfileFilter: React.ForwardRefExoticComponent<ProfileFilterProps &
     [history, location]
   )
 
-  const handleSetUser = useCallback(
-    (user: ChannelTableConnectors_channel_connectors) => {
-      const queryParams = updateParams(location, {
-        user: user ? JSON.stringify(user) : null,
-      })
-      return history.push(`${location.pathname}?${queryParams}`)
-    },
-    [history, location]
-  )
-
-  //
-  // On filter button press
-  //
   const handleFilterClick = useCallback(() => {
     filterMode == 'open' ? setFilterMode('resting') : setFilterMode('open')
   }, [setFilterMode, filterMode])
@@ -128,13 +111,7 @@ export const ProfileFilter: React.ForwardRefExoticComponent<ProfileFilterProps &
               offsetY={5}
               onClose={handleClose}
             >
-              <Filter
-                id={channelId}
-                type={type}
-                user={user}
-                setType={handleSetType}
-                setUser={handleSetUser}
-              />
+              <Filter id={channelId} type={type} setType={handleSetType} />
             </Overlay>
           )}
       </Box>

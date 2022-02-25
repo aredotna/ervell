@@ -140,6 +140,7 @@ const VALID_BLOCK_FILTERS = [
   'EMBED',
   'ATTACHMENT',
   'LINK',
+  'CHANNEL',
 ]
 const VALID_FOLLOW_TYPES = ['CHANNEL', 'USER', 'GROUP']
 
@@ -168,6 +169,8 @@ export default ({ params, query }) => {
     VALID_BLOCK_FILTERS,
     'BLOCK'
   )
+
+  console.log({ blockFilter, query })
 
   const followType = setValid(query.followType, VALID_FOLLOW_TYPES, 'ALL')
 

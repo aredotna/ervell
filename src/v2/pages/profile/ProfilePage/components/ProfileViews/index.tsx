@@ -109,19 +109,20 @@ const Index: React.FC<IndexProps> = ({ id, filter, identifiable }) => (
 
 interface TableProps {
   id: string
+  type?: ConnectableTypeEnum
   sort: SearchSorts
   identifiable: ProfilePageIdentifiable
   fetchPolicy: FetchPolicy
 }
 
-const Table: React.FC<TableProps> = ({ identifiable, id }) => {
+const Table: React.FC<TableProps> = ({ identifiable, id, type }) => {
   const count =
     identifiable.__typename == 'Group'
       ? identifiable.counts.channels
       : identifiable.counts.channels + identifiable.counts.blocks
   return (
     <EmptyMessageOrComponent identifiable={identifiable} count={count}>
-      <ProfileTable id={id} />
+      <ProfileTable id={id} type={type} />
     </EmptyMessageOrComponent>
   )
 }
@@ -242,6 +243,7 @@ const ProfileViews: React.FC<ProfileViewsProps> = ({
         <Table
           id={id}
           sort={sort as SearchSorts}
+          type={type}
           identifiable={identifiable}
           fetchPolicy={fetchPolicy}
         />
