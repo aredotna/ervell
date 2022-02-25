@@ -10,7 +10,7 @@ export default gql`
       type: $type
       per: $per
       page: $page
-      direction: DESC
+      direction: $direction
       sort_by: $sort
       q: $q
       seed: $seed

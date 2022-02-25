@@ -8,15 +8,15 @@ import SortArrows from 'v2/components/UI/SortArrows'
 
 import {
   ConnectableTypeEnum,
+  SearchSorts,
   SortDirection,
-  Sorts,
 } from '__generated__/globalTypes'
 import { ColumnIds, SortAndSortDir } from '../../lib/types'
 import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 import { columnIdsToSorts } from '../../lib/constants'
 import { ProfileTableContents_user } from '__generated__/ProfileTableContents'
 import { TableData } from 'v2/components/Table/lib/constants'
-import { TableAddButton } from 'v2/components/ChannelTableContents/components/ChannelTableHeader/components/FilterAndAddButton'
+import { ProfileFilter } from '../ProfileFilter'
 
 export const TDMixin = css`
   color: ${x => x.theme.colors.gray.bold};
@@ -117,12 +117,12 @@ export const ProfileTableHeader: React.FC<ProfileTableHeaderProps> = ({
               if (column.Header?.toString() === ColumnIds.addSettings) {
                 return (
                   <SettingsAddTH width="103px" key={column.Header?.toString()}>
-                    <TableAddButton ref={headerRef} type={type} user={user} />
+                    <ProfileFilter type={type} user={user} />
                   </SettingsAddTH>
                 )
               }
 
-              const columnSortType: Sorts | undefined =
+              const columnSortType: SearchSorts | undefined =
                 columnIdsToSorts[column.id]
 
               let sortArrowState: 'off' | 'up' | 'down' | undefined

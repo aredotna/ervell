@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { ConnectableTypeEnum, SearchSorts } from "./globalTypes";
+import { ConnectableTypeEnum, SearchSorts, SortDirection } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: ProfileTableContents
@@ -369,6 +369,7 @@ export interface ProfileTableContents_user_contents_Channel_counts {
 
 export interface ProfileTableContents_user_contents_Channel_can {
   __typename: "ChannelCan";
+  update: boolean | null;
   manage: boolean | null;
   mute: boolean | null;
 }
@@ -412,6 +413,7 @@ export interface ProfileTableContentsVariables {
   page?: number | null;
   per?: number | null;
   sort?: SearchSorts | null;
+  direction?: SortDirection | null;
   q?: string | null;
   seed?: number | null;
   includeConnection: boolean;

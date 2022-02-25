@@ -90,11 +90,6 @@ export const ChannelRow = forwardRef<HTMLElement, ChannelRowProps>(
   ) => {
     const [mode, setMode] = useState<'resting' | 'active'>('resting')
 
-    const cell = row.cells.find(cell => {
-      const { key: cellKey } = cell.getCellProps()
-      return cellKey.toString().includes('addSettings')
-    })
-
     const onRowClick = useCallback(
       (e: React.MouseEvent) => {
         if (mode === 'active') {
@@ -117,44 +112,66 @@ export const ChannelRow = forwardRef<HTMLElement, ChannelRowProps>(
       isRowMovable,
     }
 
+    const cells = row.cells.map(cell => {
+      const { key: cellKey, ...cellProps } = cell.getCellProps()
+      const isSettings = cellKey.toString().includes('addSettings')
+      const isTitle = cellKey.toString().includes('title')
+      const isContent = cellKey.toString().includes('content')
+
+      if (isTitle) {
+        return (
+          <Cell
+            key={cell.getCellProps().key}
+            visibility={connectableChannel.visibility}
+            colSpan={2}
+          >
+            <StandardCell
+              value={`${connectableChannel.title} – ${connectableChannel.counts.contents} blocks`}
+              color={`channel.${connectableChannel.visibility}`}
+            />
+          </Cell>
+        )
+      }
+
+      if (isContent) {
+        return null
+      }
+
+      if (isSettings) {
+        return (
+          <Cell
+            key={cell.getCellProps().key}
+            width={cell.column.width}
+            maxWidth={cell.column.maxWidth}
+            visibility={connectableChannel.visibility}
+          >
+            {cell.render('Cell', settingsProps)}
+          </Cell>
+        )
+      }
+
+      return (
+        <Cell
+          visibility={connectableChannel.visibility}
+          key={cell.getCellProps().key}
+          width={cell.column.width}
+          maxWidth={cell.column.maxWidth}
+        >
+          {cell.render('Cell', {
+            ...cellProps,
+            color: `channel.${connectableChannel.visibility}`,
+          })}
+        </Cell>
+      )
+    })
+
     return (
       <Row
         ref={ref}
         visibility={connectableChannel.visibility}
         onClick={onRowClick}
       >
-        <Cell visibility={connectableChannel.visibility} colSpan={2}>
-          <StandardCell
-            value={`${connectableChannel.title} – ${connectableChannel.counts.contents} blocks`}
-            color={`channel.${connectableChannel.visibility}`}
-          />
-        </Cell>
-        <Cell visibility={connectableChannel.visibility}>
-          <StandardCell
-            value={connectableChannel.updated_at}
-            color={`channel.${connectableChannel.visibility}`}
-          />
-        </Cell>
-        <Cell visibility={connectableChannel.visibility}>
-          <StandardCell
-            value={connectableChannel.user.name}
-            color={`channel.${connectableChannel.visibility}`}
-          />
-        </Cell>
-        <Cell visibility={connectableChannel.visibility}>
-          <StandardCell
-            value={connectableChannel.counts.connected_to_channels}
-            color={`channel.${connectableChannel.visibility}`}
-          />
-        </Cell>
-        <Cell
-          key={cell.getCellProps().key}
-          width={cell.column.width}
-          maxWidth={cell.column.maxWidth}
-          visibility={connectableChannel.visibility}
-        >
-          {cell.render('Cell', settingsProps)}
-        </Cell>
+        {cells}
       </Row>
     )
   }

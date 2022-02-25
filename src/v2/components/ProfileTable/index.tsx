@@ -18,7 +18,6 @@ import {
   ConnectableTypeEnum,
   SearchSorts,
   SortDirection,
-  Sorts,
 } from '__generated__/globalTypes'
 import {
   ProfileTableContents,
@@ -50,16 +49,16 @@ export const STANDARD_HEADERS: Array<Column<TableData>> = [
     width: '25%',
   },
   {
-    Header: 'Created at',
-    id: ColumnIds.addedAt,
-    accessor: block => '__typename' in block && block?.created_at,
+    Header: 'Updated at',
+    id: ColumnIds.updatedAt,
+    accessor: block => '__typename' in block && block?.updated_at,
     Cell: StandardCell,
     width: '125px',
   },
   {
-    Header: 'Author',
-    id: ColumnIds.author,
-    accessor: block => '__typename' in block && block?.user?.name,
+    Header: 'Created at',
+    id: ColumnIds.createdAt,
+    accessor: block => '__typename' in block && block?.created_at,
     Cell: StandardCell,
     width: '125px',
   },
@@ -90,14 +89,14 @@ export const STANDARD_HEADERS: Array<Column<TableData>> = [
 const MEDIUM_BREAKPOINT_HEADERS = [
   ColumnIds.content,
   ColumnIds.title,
-  ColumnIds.addedAt,
-  ColumnIds.author,
+  ColumnIds.createdAt,
+  ColumnIds.updatedAt,
 ]
 
 const SMALL_BREAKPOINT_HEADERS = [
   ColumnIds.content,
   ColumnIds.title,
-  ColumnIds.author,
+  ColumnIds.createdAt,
 ]
 
 const InfiniteContainer = styled(InfiniteScroll)``
@@ -108,7 +107,7 @@ const sortAndSortDirReducer: React.Reducer<SortAndSortDir, SortAndSortDir> = (
 ) => {
   if (prevState.sort === action.sort && prevState.dir === action.dir) {
     return {
-      sort: Sorts.POSITION,
+      sort: SearchSorts.UPDATED_AT,
       dir: SortDirection.DESC,
     }
   }
@@ -122,6 +121,8 @@ interface ProfileTableProps {
   profile: ProfileTableContents_user
   loadMore: () => void
   hasMore: boolean
+  sortAndSortDir: SortAndSortDir
+  setSortAndSortDir: React.Dispatch<SortAndSortDir>
 }
 
 interface ProfileState {
@@ -136,12 +137,9 @@ export const ProfileTable: React.FC<ProfileTableProps> = ({
   profile,
   loadMore,
   hasMore,
+  setSortAndSortDir,
+  sortAndSortDir,
 }) => {
-  const [sortAndSortDir, setSortAndSortDir] = useReducer(
-    sortAndSortDirReducer,
-    { sort: Sorts.POSITION, dir: SortDirection.DESC }
-  )
-
   const tableData = useMemo<Array<TableData>>(() => {
     const data: Array<TableData> = []
     for (let i = 0; i < blocks?.length; i++) {
@@ -247,11 +245,12 @@ interface ProfileTableQueryProps {
   type?: ConnectableTypeEnum
 }
 
-const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({
-  id,
-  sort,
-  type,
-}) => {
+const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({ id, type }) => {
+  const [sortAndSortDir, setSortAndSortDir] = useReducer(
+    sortAndSortDirReducer,
+    { sort: SearchSorts.UPDATED_AT, dir: SortDirection.DESC }
+  )
+
   const [state, setState] = useMergeState<ProfileState>({
     page: 1,
     per: 12,
@@ -266,7 +265,8 @@ const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({
   >(profileTableContentsQuery, {
     variables: {
       id,
-      sort,
+      sort: sortAndSortDir.sort,
+      direction: sortAndSortDir.dir,
       type,
       page,
       per,
@@ -300,6 +300,8 @@ const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({
       profile={data?.user}
       loadMore={loadMore}
       hasMore={hasMore}
+      sortAndSortDir={sortAndSortDir}
+      setSortAndSortDir={setSortAndSortDir}
     />
   )
 }

@@ -22,7 +22,7 @@ import {
   tableCreateAddBlockMutation,
   tableCreateAddBlockMutationVariables,
 } from '__generated__/tableCreateAddBlockMutation'
-import Filter from '../FilterContainer'
+import Filter from 'v2/components/Table/components/FilterContainer'
 import { ConnectableTypeEnum } from '__generated__/globalTypes'
 import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 import { updateParams } from 'v2/util/updateParams'

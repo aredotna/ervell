@@ -79,7 +79,6 @@ export const channelTableContentsConnectableFragment = gql`
         id
         created_at(relative: true)
         can {
-          update
           manage
         }
         user {

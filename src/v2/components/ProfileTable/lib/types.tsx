@@ -1,14 +1,15 @@
-import { SortDirection, Sorts } from '__generated__/globalTypes'
+import { SearchSorts, SortDirection } from '__generated__/globalTypes'
 
 export type SortAndSortDir = {
-  sort: Sorts
+  sort: SearchSorts
   dir: SortDirection
 }
 
 export enum ColumnIds {
   content = 'content',
   title = 'title',
-  addedAt = 'addedAt',
+  updatedAt = 'updatedAt',
+  createdAt = 'createdAt',
   author = 'author',
   connections = 'connections',
   addSettings = 'addSettings',

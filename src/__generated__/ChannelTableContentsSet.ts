@@ -381,6 +381,7 @@ export interface ChannelTableContentsSet_channel_blokks_Channel_counts {
 
 export interface ChannelTableContentsSet_channel_blokks_Channel_can {
   __typename: "ChannelCan";
+  update: boolean | null;
   manage: boolean | null;
   mute: boolean | null;
 }

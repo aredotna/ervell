@@ -367,6 +367,7 @@ export interface ProfileTableContentsFragment_contents_Channel_counts {
 
 export interface ProfileTableContentsFragment_contents_Channel_can {
   __typename: "ChannelCan";
+  update: boolean | null;
   manage: boolean | null;
   mute: boolean | null;
 }

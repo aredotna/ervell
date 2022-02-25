@@ -9,6 +9,7 @@ export default gql`
     $page: Int
     $per: Int
     $sort: SearchSorts
+    $direction: SortDirection
     $q: String
     $seed: Int
     $includeConnection: Boolean!

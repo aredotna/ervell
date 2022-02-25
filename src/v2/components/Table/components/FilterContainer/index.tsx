@@ -6,9 +6,11 @@ import Box from 'v2/components/UI/Box'
 import { Input } from 'v2/components/UI/Inputs'
 import Icon from 'v2/components/UI/Icons'
 import Text from 'v2/components/UI/Text'
-import TypeFilter from '../TypeFilter'
+
+import TypeFilter from 'v2/components/ChannelTableContents/components/ChannelTableHeader/components/TypeFilter'
+import UserFilter from 'v2/components/ChannelTableContents/components/ChannelTableHeader/components/UserFilter'
+
 import { ConnectableTypeEnum } from '__generated__/globalTypes'
-import UserFilter from '../UserFilter'
 import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
 
 const Outer = styled(BorderedBox).attrs({

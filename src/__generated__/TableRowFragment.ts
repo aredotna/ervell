@@ -347,6 +347,7 @@ export interface TableRowFragment_Channel_counts {
 
 export interface TableRowFragment_Channel_can {
   __typename: "ChannelCan";
+  update: boolean | null;
   manage: boolean | null;
   mute: boolean | null;
 }
