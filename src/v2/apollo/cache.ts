@@ -168,6 +168,10 @@ export function getCache({
             keyArgs: everythingExcept('page', 'per'),
             merge: paginationWithPageAndPer,
           },
+          kontents: {
+            keyArgs: everythingExcept('page', 'per'),
+            merge: paginationWithPageAndPer,
+          },
         },
       },
 

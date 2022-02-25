@@ -50,7 +50,6 @@ export const ChannelMetadataView: React.FC<ChannelMetadataConnectionsProps> = ({
   view,
 }) => {
   const isViewActive = (v: ChannelViewType) => () => view === v
-  v => () => view === v
 
   const me = useSerializedMe()
 
@@ -95,7 +94,7 @@ export const ChannelMetadataView: React.FC<ChannelMetadataConnectionsProps> = ({
   )
 }
 
-const QuestionMarkOverlay: React.FC = () => {
+export const QuestionMarkOverlay: React.FC = () => {
   const [hoverRef, isHovered] = useHover()
   const targetEl = useRef(null)
 
@@ -123,8 +122,7 @@ const QuestionMarkOverlay: React.FC = () => {
             </Text>
             <Text f={1} m={4}>
               A spreadsheet-like view for channels. Still to come: configurable
-              columns, advanced filters, bulk-edit, and search / profile table
-              view.
+              columns, advanced filters and bulk-edit. view.
             </Text>
           </BetaMessage>
         </Overlay>

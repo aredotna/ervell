@@ -18,14 +18,31 @@ import {
   ProfilePage as ProfilePageType,
   ProfilePageVariables,
 } from '__generated__/ProfilePage'
+import {
+  ChannelsSort,
+  ConnectableTypeEnum,
+  FollowingTypeEnum,
+  IndexedChannelsTypes,
+  SearchSorts,
+} from '__generated__/globalTypes'
 
+export type ProfileViewTypes =
+  | 'all'
+  | 'channels'
+  | 'blocks'
+  | 'followers'
+  | 'following'
+  | 'feed'
+  | 'table'
+  | 'index'
+  | 'groups'
 interface ProfilePageProps {
   id: string
-  view: 'all' | 'channels' | 'blocks' | 'followers' | 'following' | 'feed'
-  sort: 'UPDATED_AT' | 'RANDOM' | 'CREATED_AT'
-  filter: 'OWN' | 'COLLABORATION'
-  type: 'BLOCK' | 'IMAGE' | 'TEXT' | 'EMBED' | 'LINK'
-  followType: 'ALL' | 'CHANNEL' | 'GROUP' | 'USER'
+  view: ProfileViewTypes
+  sort: SearchSorts | ChannelsSort
+  filter: IndexedChannelsTypes
+  type: ConnectableTypeEnum
+  followType: FollowingTypeEnum
 }
 
 const isClientSide = typeof window !== 'undefined'
@@ -77,7 +94,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
   // one isn't supported for Groups (all, blocks).
   const typedView =
     identifiable.__typename === 'Group'
-      ? { all: 'channels', blocks: 'channels' }[view] || view
+      ? { all: 'channels', blocks: 'channels', table: 'channels' }[view] || view
       : view
 
   const scheme = identifiable.__typename === 'Group' ? 'GROUP' : 'DEFAULT'
@@ -123,6 +140,7 @@ const VALID_BLOCK_FILTERS = [
   'EMBED',
   'ATTACHMENT',
   'LINK',
+  'CHANNEL',
 ]
 const VALID_FOLLOW_TYPES = ['CHANNEL', 'USER', 'GROUP']
 

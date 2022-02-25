@@ -4,9 +4,9 @@ import { useQuery } from '@apollo/client'
 import { debounce, isEmpty } from 'underscore'
 import { capitalize } from 'lodash'
 
-import { SearchInput } from '../FilterContainer'
+import { SearchInput } from 'v2/components/Table/components/FilterContainer'
 import Box from 'v2/components/UI/Box'
-import { ItemContainer } from '../FilterComponents'
+import { ItemContainer } from 'v2/components/Table/components/FilterComponents'
 import Text from 'v2/components/UI/Text'
 import { inputPadding } from 'v2/components/UI/Inputs'
 

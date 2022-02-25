@@ -159,7 +159,7 @@ export const Routes = () => {
         {/* Profile */}
         <Route
           exact
-          path="/:id/:view(all|index|blocks|channels|followers|following|groups|feed)?"
+          path="/:id/:view(all|index|blocks|channels|followers|following|groups|feed|table)?"
           render={parseRoute(({ params, query }) => (
             <ProfilePage params={params} query={query} />
           ))}
