@@ -170,8 +170,6 @@ export default ({ params, query }) => {
     'BLOCK'
   )
 
-  console.log({ blockFilter, query })
-
   const followType = setValid(query.followType, VALID_FOLLOW_TYPES, 'ALL')
 
   return (

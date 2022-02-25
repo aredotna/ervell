@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useReducer } from 'react'
+import React, { useCallback, useEffect, useMemo, useReducer } from 'react'
 import { Column, useExpanded, useTable } from 'react-table'
 import { useQuery } from '@apollo/client'
 import InfiniteScroll from 'react-infinite-scroller'
@@ -32,6 +32,7 @@ import { ProfileTableBody } from './components/ProfileTableBody'
 import { TableData } from 'v2/components/Table/lib/constants'
 import { SettingsCell } from '../ChannelTableContents/components/SettingsCell'
 import useMergeState from 'v2/hooks/useMergeState'
+import usePrevious from 'v2/hooks/usePrevious'
 
 export const STANDARD_HEADERS: Array<Column<TableData>> = [
   {
@@ -246,12 +247,14 @@ interface ProfileTableQueryProps {
 }
 
 const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({ id, type }) => {
-  console.log({ type })
+  const prevType = usePrevious(type)
 
   const [sortAndSortDir, setSortAndSortDir] = useReducer(
     sortAndSortDirReducer,
     { sort: SearchSorts.UPDATED_AT, dir: SortDirection.DESC }
   )
+
+  const prevSort = usePrevious(sortAndSortDir)
 
   const [state, setState] = useMergeState<ProfileState>({
     page: 1,
@@ -294,6 +297,15 @@ const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({ id, type }) => {
       })
     })
   }, [fetchMore, state, setState])
+
+  useEffect(() => {
+    if (type != prevType || prevSort != sortAndSortDir) {
+      setState({
+        page: 1,
+        hasMore: true,
+      })
+    }
+  }, [type, prevType, sortAndSortDir, prevSort])
 
   return (
     <ProfileTable
