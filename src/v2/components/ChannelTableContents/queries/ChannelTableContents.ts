@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
-import { channelTableContentsConnectableFragment } from '../fragments/TableConnectableBlokk'
 import { connectableContextMenuChannelFragment } from 'v2/components/ConnectableContextMenu/fragments/connectableContextMenu'
+import { tableRowFragment } from 'v2/components/Table/fragments/tableRow'
 
 export default gql`
   query ChannelTableContentsSet(
@@ -11,6 +11,7 @@ export default gql`
     $direction: SortDirection
     $type: ConnectableTypeEnum
     $user_id: ID
+    $includeConnection: Boolean!
   ) {
     channel(id: $id) {
       __typename
@@ -29,10 +30,10 @@ export default gql`
         type: $type
         user_id: $user_id
       ) {
-        ...ChannelTableContentsConnectable
+        ...TableRowFragment
       }
     }
   }
-  ${channelTableContentsConnectableFragment}
+  ${tableRowFragment}
   ${connectableContextMenuChannelFragment}
 `

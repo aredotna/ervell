@@ -71,6 +71,9 @@ export const channelTableContentsConnectableFragment = gql`
     ... on Text {
       content(format: MARKDOWN)
       html: content(format: HTML)
+      source {
+        url
+      }
     }
 
     ... on ConnectableInterface {

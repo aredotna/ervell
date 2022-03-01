@@ -60,6 +60,7 @@ interface RequiredChannelQueryVariables {
   direction?: SortDirection | null
   type?: ConnectableTypeEnum | null
   user_id?: string | null
+  includeConnection?: boolean | null
 }
 
 /**
@@ -91,6 +92,7 @@ interface UsePaginatedBlocksBaseArgs {
   type?: ConnectableTypeEnum | null
   user_id?: string | null
   ssr?: boolean
+  includeConnection?: boolean
 }
 
 /**
@@ -188,6 +190,7 @@ export function usePaginatedBlocks<
   per,
   sort,
   direction,
+  includeConnection,
   ssr,
   type,
   user_id,
@@ -227,6 +230,7 @@ export function usePaginatedBlocks<
         direction: direction,
         type: type,
         user_id: user_id,
+        includeConnection: includeConnection,
       } as ChannelQueryVariables,
     }
   }, [channelId, channelQuery, direction, per, sort, type, user_id])

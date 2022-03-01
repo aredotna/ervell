@@ -26,14 +26,14 @@ import { ChannelTableConnectors_channel_connectors } from '__generated__/Channel
 import Box from 'v2/components/UI/Box'
 import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
 
-import { ContentCell } from './components/ContentCell'
+import { ContentCell } from '../Table/components/ContentCell'
 import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBlockCell'
-import { StandardCell } from './components/StandardCell'
-import { Table } from './components/TableComponents'
+import { StandardCell } from '../Table/components/StandardCell'
+import { Table } from '../Table/components/TableComponents'
 import ChannelTableHeader from './components/ChannelTableHeader'
 import { SettingsCell } from './components/SettingsCell'
 import { ChannelTableBody } from './components/ChannelTableBody'
-import LoadingRow from './components/LoadingRow'
+import LoadingRow from '../Table/components/LoadingRow'
 import { SortableTableContainer } from './components/SortableTableContainer'
 
 import { ColumnIds, SortAndSortDir, TableData } from './lib/types'
@@ -74,7 +74,10 @@ export const STANDARD_HEADERS: Array<Column<TableData>> = [
   {
     Header: 'Added at',
     id: ColumnIds.addedAt,
-    accessor: block => '__typename' in block && block?.connection?.created_at,
+    accessor: block =>
+      '__typename' in block &&
+      'connection' in block &&
+      block?.connection?.created_at,
     Cell: StandardCell,
     width: '125px',
   },
@@ -186,6 +189,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({
     user_id: user?.id.toString(),
     per: 25,
     blockquery: CONNECTABLE_TABLE_BLOKK_QUERY,
+    includeConnection: true,
   })
 
   const onItemIntersected = useCallback(
@@ -262,7 +266,11 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     for (let i = 0; i < contentCount; i++) {
       const block = blocks[i]
       data.push(
-        { ...block, expanded: block?.connection?.selected } ?? { isNull: true }
+        {
+          ...block,
+          expanded:
+            block && 'connection' in block && block?.connection?.selected,
+        } ?? { isNull: true }
       )
     }
     return data
@@ -313,7 +321,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     const newState = {}
     tableData.forEach(row => {
       if ('__typename' in row && row.connection) {
-        newState[row.id.toString()] = row.connection.selected
+        newState[row.id.toString()] = row.connection?.selected
       }
     })
 

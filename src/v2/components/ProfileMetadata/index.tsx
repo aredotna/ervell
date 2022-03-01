@@ -14,21 +14,22 @@ import ProfileMetadataFilter from 'v2/components/ProfileMetadata/components/Prof
 import ProfileMetadataFollowingType from 'v2/components/ProfileMetadata/components/ProfileMetadataFollowingType'
 import ProfileMetadataBlockFilter from 'v2/components/ProfileMetadata/components/ProfileMetadataBlockFilter'
 import { ProfileMetadata as ProfileMetadataType } from '__generated__/ProfileMetadata'
+import {
+  ChannelsSort,
+  ConnectableTypeEnum,
+  FollowingTypeEnum,
+  IndexedChannelsTypes,
+  SearchSorts,
+} from '__generated__/globalTypes'
+import { ProfileViewTypes } from 'v2/pages/profile/ProfilePage'
 
 export interface ProfileMetadataProps {
   identifiable: ProfileMetadataType
-  view:
-    | 'all'
-    | 'channels'
-    | 'blocks'
-    | 'index'
-    | 'following'
-    | 'followers'
-    | 'feed'
-  sort: 'UPDATED_AT' | 'RANDOM' | 'CREATED_AT'
-  type?: 'BLOCK' | 'IMAGE' | 'EMBED' | 'TEXT' | 'ATTACHMENT' | 'LINK'
-  filter?: 'OWN' | 'COLLABORATION'
-  followType?: 'ALL' | 'CHANNEL' | 'GROUP' | 'USER'
+  view: ProfileViewTypes
+  sort: ChannelsSort | SearchSorts
+  type?: ConnectableTypeEnum
+  filter?: IndexedChannelsTypes
+  followType?: FollowingTypeEnum
 }
 
 export default class ProfileMetadata extends Component<ProfileMetadataProps> {
