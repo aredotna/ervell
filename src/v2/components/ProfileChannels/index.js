@@ -48,19 +48,6 @@ class ProfileChannels extends PureComponent {
 
     fetchMore({
       variables: { page: page + 1, per },
-      updateQuery: (prevResult, { fetchMoreResult }) => ({
-        ...prevResult,
-        identity: {
-          ...prevResult.identity,
-          identifiable: {
-            ...prevResult.identity.identifiable,
-            channels: [
-              ...prevResult.identity.identifiable.channels,
-              ...fetchMoreResult.identity.identifiable.channels,
-            ],
-          },
-        },
-      }),
     }).then(({ errors, data }) => {
       const {
         identity: {
