@@ -48,7 +48,7 @@ export const StandardRow = forwardRef<HTMLElement, StandardRowProps>(
           key={cellKey}
           width={cell.column.width}
           maxWidth={cell.column.maxWidth}
-          bg={isSettings ? 'gray.hint' : 'background'}
+          bg={isSettings ? 'gray.cell' : 'background'}
           scope={isTitle && 'row'}
           {...cellProps}
         >

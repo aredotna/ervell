@@ -15,7 +15,7 @@ const Cell = styled.div`
   display: flex;
   flex-direction: row;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.gray.hint};
+  background-color: ${({ theme }) => theme.colors.gray.cell};
   line-height: 100%;
   align-items: center;
 `
@@ -23,7 +23,7 @@ const Cell = styled.div`
 const Container = styled(Box)`
   position: relative;
   width: 36px;
-  background-color: ${({ theme }) => theme.colors.gray.hint};
+  background-color: ${({ theme }) => theme.colors.gray.cell};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,7 +43,7 @@ export const Button = styled(GenericButton).attrs({
   width: 37px;
   border: 0px solid transparent;
   padding: 0;
-  background-color: ${({ theme }) => theme.colors.gray.hint};
+  background-color: ${({ theme }) => theme.colors.gray.cell};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,7 +123,7 @@ export const SettingsCell: React.FC<SettingsCellProps> = ({
                 connectable={value}
                 onRemove={removeBlock}
                 onChangePosition={handleChangePosition}
-                bg="gray.hint"
+                bg="gray.cell"
                 position="static"
                 height="100% !important"
                 width="100% !important"

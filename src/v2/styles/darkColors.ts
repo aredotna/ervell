@@ -26,6 +26,7 @@ const COLORS = {
     hint: '#131313',
     block: '#D3D3D3',
     input: '#080a0b',
+    cell: 'rgb(4, 4, 4)',
   },
   utility: {
     translucent: 'rgba(0, 0, 0, 0.9)',
