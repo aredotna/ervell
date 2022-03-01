@@ -47,19 +47,6 @@ class ProfileContents extends PureComponent {
 
     fetchMore({
       variables: { page: page + 1, per },
-      updateQuery: (prevResult, { fetchMoreResult }) => ({
-        ...prevResult,
-        identity: {
-          ...prevResult.identity,
-          identifiable: {
-            ...prevResult.identity.identifiable,
-            contents: [
-              ...prevResult.identity.identifiable.contents,
-              ...fetchMoreResult.identity.identifiable.contents,
-            ],
-          },
-        },
-      }),
     }).then(({ errors, data }) => {
       const {
         identity: {
@@ -68,6 +55,7 @@ class ProfileContents extends PureComponent {
           },
         },
       } = data
+
       const hasMore = !errors && length > 0 && length >= per
 
       this.setState({
