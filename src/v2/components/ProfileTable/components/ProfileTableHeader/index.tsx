@@ -73,14 +73,7 @@ const SettingsAddTH = styled(TH)`
   padding: 0;
   overflow: visible;
   vertical-align: middle;
-  background-color: ${props =>
-    props.canAdd ? props.theme.colors.gray.hint : props.theme.colors.white};
-
-  ${props =>
-    !props.canAdd &&
-    `
-    border-right: 1px solid transparent !important;
-  `}
+  background-color: ${props => props.theme.colors.gray.cell};
 `
 
 interface ProfileTableHeaderProps {

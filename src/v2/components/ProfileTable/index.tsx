@@ -145,7 +145,9 @@ export const ProfileTable: React.FC<ProfileTableProps> = ({
     const data: Array<TableData> = []
     for (let i = 0; i < blocks?.length; i++) {
       const block = blocks[i]
-      data.push({ ...block } ?? { isNull: true })
+      if (block?.id) {
+        data.push(block)
+      }
     }
     return data
   }, [blocks, blocks?.length])

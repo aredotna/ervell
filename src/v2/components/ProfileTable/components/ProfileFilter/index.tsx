@@ -15,11 +15,12 @@ const FilterButton = styled(GenericButton).attrs({
   bg: 'gray.hint',
 })`
   border-radius: 0px;
-  height: 30px;
+  height: 100%;
   width: 36px;
   border: 0px solid transparent;
   padding: 0;
   border-right: 1px solid ${x => x.theme.colors.gray.light};
+  background: ${x => x.theme.colors.gray.cell};
   &:hover {
     border: 0px solid transparent !important;
     border-right: 1px solid ${x => x.theme.colors.gray.light} !important;
@@ -37,19 +38,11 @@ const Container = styled(Box)`
   justify-content: space-between;
   align-items: center;
   transform: translateZ(1px);
-  background-color: ${props => props.theme.colors.gray.hint};
+  background-color: ${props => props.theme.colors.gray.cell};
 `
 
 const WhiteContainer = styled(Container)`
-  background-color: ${props => props.theme.colors.white};
-`
-
-const WhiteSpacer = styled(Box).attrs({
-  bg: 'white',
-})`
-  height: 32px;
-  width: 100%;
-  transform: translateY(-1px) scaleY(1.2);
+  background-color: ${props => props.theme.colors.gray.cell};
 `
 
 type FilterButtonState =
@@ -96,7 +89,7 @@ export const ProfileFilter: React.ForwardRefExoticComponent<ProfileFilterProps &
 
   return (
     <WhiteContainer>
-      <Box position="relative" ref={filterRef}>
+      <Box position="relative" ref={filterRef} height="100%">
         <FilterButton f={1} onClick={handleFilterClick} ref={filterButtonRef}>
           <Icon name="Filters" size="1rem" />
         </FilterButton>
@@ -115,7 +108,6 @@ export const ProfileFilter: React.ForwardRefExoticComponent<ProfileFilterProps &
             </Overlay>
           )}
       </Box>
-      <WhiteSpacer />
     </WhiteContainer>
   )
 })
