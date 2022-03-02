@@ -57,20 +57,23 @@ const Blocks: React.FC<BlocksProps> = ({
   identifiable,
   fetchPolicy,
   type,
-}) => (
-  <EmptyMessageOrComponent
-    identifiable={identifiable}
-    count={identifiable.counts.blocks}
-  >
-    <ProfileContents
-      id={id}
-      type={type}
-      sort={sort}
-      fetchPolicy={fetchPolicy}
-      blockType={type}
-    />
-  </EmptyMessageOrComponent>
-)
+}) => {
+  type = type || ConnectableTypeEnum.BLOCK
+  return (
+    <EmptyMessageOrComponent
+      identifiable={identifiable}
+      count={identifiable.counts.blocks}
+    >
+      <ProfileContents
+        id={id}
+        type={type}
+        sort={sort}
+        fetchPolicy={fetchPolicy}
+        blockType={type}
+      />
+    </EmptyMessageOrComponent>
+  )
+}
 
 interface ChannelsProps {
   id: string
