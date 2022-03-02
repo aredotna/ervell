@@ -121,8 +121,8 @@ export const QuestionMarkOverlay: React.FC = () => {
               <strong>Table view (beta)</strong>
             </Text>
             <Text f={1} m={4}>
-              A spreadsheet-like view for channels. Still to come: configurable
-              columns, advanced filters and bulk-edit.
+              A spreadsheet-like view for channels and profiles. Still to come:
+              configurable columns, advanced filters and bulk-edit.
             </Text>
           </BetaMessage>
         </Overlay>
