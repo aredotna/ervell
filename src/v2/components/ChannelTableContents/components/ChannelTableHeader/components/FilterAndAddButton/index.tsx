@@ -44,7 +44,7 @@ const AddButton = styled(GenericButton).attrs({
 `
 
 const Middle = styled(Box).attrs({
-  bg: 'white',
+  bg: 'background',
 })`
   width: ${({ width }) => (width ? `${width}px` : '10px')};
   height: 32px;
@@ -114,11 +114,11 @@ const Container = styled(Box)`
 `
 
 const WhiteContainer = styled(Container)`
-  background-color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.background};
 `
 
 const WhiteSpacer = styled(Box).attrs({
-  bg: 'white',
+  bg: 'background',
 })`
   height: 32px;
   width: 100%;
