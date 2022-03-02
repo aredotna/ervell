@@ -167,7 +167,7 @@ export default ({ params, query }) => {
   const blockFilter = setValid(
     query.type || cookies.type,
     VALID_BLOCK_FILTERS,
-    'BLOCK'
+    null
   )
 
   const followType = setValid(query.followType, VALID_FOLLOW_TYPES, 'ALL')
