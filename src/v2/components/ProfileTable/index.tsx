@@ -124,6 +124,7 @@ interface ProfileTableProps {
   hasMore: boolean
   sortAndSortDir: SortAndSortDir
   setSortAndSortDir: React.Dispatch<SortAndSortDir>
+  type: ConnectableTypeEnum
 }
 
 interface ProfileState {
@@ -140,6 +141,7 @@ export const ProfileTable: React.FC<ProfileTableProps> = ({
   hasMore,
   setSortAndSortDir,
   sortAndSortDir,
+  type,
 }) => {
   const tableData = useMemo<Array<TableData>>(() => {
     const data: Array<TableData> = []
@@ -214,6 +216,7 @@ export const ProfileTable: React.FC<ProfileTableProps> = ({
           profile={profile}
           sortAndSortDir={sortAndSortDir}
           setSortAndSortDir={setSortAndSortDir}
+          type={type}
         />
 
         {loading && (
@@ -318,6 +321,7 @@ const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({ id, type }) => {
       hasMore={hasMore}
       sortAndSortDir={sortAndSortDir}
       setSortAndSortDir={setSortAndSortDir}
+      type={type}
     />
   )
 }
