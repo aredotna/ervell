@@ -168,9 +168,9 @@ export const ProfileChannels: React.FC<ProfileChannelsProps> = ({
         border={0}
       />
 
-      {loading && <BlocksLoadingIndicator />}
+      {channelLoading && <BlocksLoadingIndicator />}
 
-      {!loading && channels.length > 0 && (
+      {!channelLoading && channels.length > 0 && (
         <InfiniteScroll
           pageStart={1}
           key={q}
