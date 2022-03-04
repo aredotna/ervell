@@ -71,7 +71,7 @@ export const ProfileFilter: React.ForwardRefExoticComponent<ProfileFilterProps &
 
   const handleSetType = useCallback(
     (type: ConnectableTypeEnum) => {
-      const queryParams = updateParams(location, { type })
+      const queryParams = updateParams(location, { type }, false)
       return history.push(`${location.pathname}?${queryParams}`)
     },
     [history, location]
