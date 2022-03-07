@@ -8,6 +8,7 @@ import withStaticRouter from 'v2/hocs/WithStaticRouter'
 
 import { Routes } from './Routes'
 import ensureLoggedIn from 'lib/middleware/ensureLoggedIn'
+import createAuthenticatedService from 'apps/authentication/mutations/createAuthenticatedService'
 
 export const App = Router()
 
@@ -46,6 +47,15 @@ const resolve = [
   },
 ]
 
+const findFriendsCallback = (req, res, next) =>
+  req.apollo.client
+    .mutate({
+      mutation: createAuthenticatedService,
+      variables: req.query,
+    })
+    .then(() => res.redirect('/tools/find-friends?showModal=true'))
+    .catch(next)
+
 App.get(
   '/share/:token',
   (req, res, next) => {
@@ -62,6 +72,12 @@ App.get(
   )
   .get('/settings', ensureLoggedIn, ...resolve)
   .get('/settings/*', ensureLoggedIn, ...resolve)
+  .get(
+    '/tools/find-friends/callback',
+    apolloMiddleware,
+    ensureLoggedIn,
+    findFriendsCallback
+  )
   .get('/tools/*', ensureLoggedIn, ...resolve)
   .get('/', homePathMiddleware, ...resolve)
   .get('*', ...resolve)

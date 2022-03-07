@@ -165,7 +165,7 @@ export default ({ params, query }) => {
   const indexFilter = setValid(query.filter, VALID_INDEX_FILTERS, 'OWN')
 
   const blockFilter = setValid(
-    query.type || cookies.type,
+    query.type == undefined ? cookies.type : query.type,
     VALID_BLOCK_FILTERS,
     null
   )

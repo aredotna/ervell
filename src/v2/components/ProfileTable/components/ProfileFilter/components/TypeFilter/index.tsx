@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { debounce, isEmpty } from 'underscore'
 import { capitalize } from 'lodash'
+import Cookies from 'cookies-js'
 
 import { SearchInput } from '../FilterContainer'
 import Box from 'v2/components/UI/Box'
@@ -114,6 +115,15 @@ const TypeFilter: React.FC<TypeFilterProps> = ({ setType, type }) => {
     type
   )
 
+  const updateType = useCallback(
+    type => {
+      Cookies.set(`Profile--type`, type)
+      setType(type)
+      setSelectedType(type)
+    },
+    [setSelectedType, setType]
+  )
+
   const inputRef = useRef(null)
   const debounceQuery = useCallback(
     debounce(debouncedQuery => {
@@ -135,17 +145,18 @@ const TypeFilter: React.FC<TypeFilterProps> = ({ setType, type }) => {
     setTimeout(() => setMode('resting'), 200)
   }, [setMode])
 
-  const handleSelect = useCallback(type => {
-    setSelectedType(type)
-    setType(type)
-    setMode('resting')
-  }, [])
+  const handleSelect = useCallback(
+    type => {
+      updateType(type)
+      setMode('resting')
+    },
+    [updateType]
+  )
 
   const removeType = useCallback(() => {
-    setType(null)
-    setSelectedType(null)
+    updateType(null)
     setMode('resting')
-  }, [setSelectedType, setType, setMode])
+  }, [updateType, setMode])
 
   return (
     <SearchContainer>
