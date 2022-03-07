@@ -91,19 +91,22 @@ class NoFollowingMessage extends Component {
       data: { error, loading },
     } = this.props
 
+    const modal = mode === 'modal' && (
+      <Modal onClose={this.closeModal}>
+        <ConnectTwitter />
+      </Modal>
+    )
+
     if (error || loading || data.me.counts.following > 0) {
-      return <div />
+      return modal
     }
 
     const { mode } = this.state
 
     return (
       <Container>
-        {mode === 'modal' && (
-          <Modal onClose={this.closeModal}>
-            <ConnectTwitter />
-          </Modal>
-        )}
+        {modal}
+
         <Headline>Discover how other people are using Are.na</Headline>
 
         <ActionContainer>

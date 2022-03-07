@@ -15,6 +15,7 @@ import TwitterAuthCheckFragment from 'v2/components/Feed/components/NoFollowingM
 const {
   data: { API_URL, APP_URL },
 } = sharify
+
 const TWITTER_AUTHENTICATION_URL = `${API_URL &&
   API_URL.replace('/v2', '')}/auth/twitter?origin=${APP_URL}/tools/find-friends`
 
