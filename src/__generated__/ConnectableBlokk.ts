@@ -190,6 +190,7 @@ export interface ConnectableBlokk_blokk_Image {
   connection: ConnectableBlokk_blokk_Image_connection | null;
   source: ConnectableBlokk_blokk_Image_source | null;
   counts: ConnectableBlokk_blokk_Image_counts | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;

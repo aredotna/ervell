@@ -126,6 +126,7 @@ export interface ExpandedBlockMetadata_block_Image {
   downloadable_image: string | null;
   editable_title: string;
   editable_description: string | null;
+  editable_alt_text: string | null;
 }
 
 export interface ExpandedBlockMetadata_block_Text_user {

@@ -169,6 +169,7 @@ export interface ProfileChannels_Group_channels_blokks_Image {
   connection: ProfileChannels_Group_channels_blokks_Image_connection | null;
   source: ProfileChannels_Group_channels_blokks_Image_source | null;
   counts: ProfileChannels_Group_channels_blokks_Image_counts | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -568,6 +569,7 @@ export interface ProfileChannels_User_channels_blokks_Image {
   connection: ProfileChannels_User_channels_blokks_Image_connection | null;
   source: ProfileChannels_User_channels_blokks_Image_source | null;
   counts: ProfileChannels_User_channels_blokks_Image_counts | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;

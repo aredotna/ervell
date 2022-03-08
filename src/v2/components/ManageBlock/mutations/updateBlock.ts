@@ -8,6 +8,7 @@ export default gql`
     $title: String
     $description: String
     $content: String
+    $alt_text: String
   ) {
     update_block(
       input: {
@@ -15,6 +16,7 @@ export default gql`
         title: $title
         description: $description
         content: $content
+        alt_text: $alt_text
       }
     ) {
       block: blokk {

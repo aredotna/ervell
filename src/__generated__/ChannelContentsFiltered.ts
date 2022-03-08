@@ -149,6 +149,7 @@ export interface ChannelContentsFiltered_channel_filtered_contents_Image {
   connection: ChannelContentsFiltered_channel_filtered_contents_Image_connection | null;
   source: ChannelContentsFiltered_channel_filtered_contents_Image_source | null;
   counts: ChannelContentsFiltered_channel_filtered_contents_Image_counts | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;

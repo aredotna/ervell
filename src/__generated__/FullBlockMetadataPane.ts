@@ -120,6 +120,7 @@ export interface FullBlockMetadataPane_Image {
   id: number;
   editable_title: string;
   editable_description: string | null;
+  editable_alt_text: string | null;
 }
 
 export interface FullBlockMetadataPane_Text_user {

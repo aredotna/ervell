@@ -18,6 +18,7 @@ export interface FullBlockImage_Image {
   thumb_url: string | null;
   image_url: string | null;
   original_image_url: string | null;
+  alt_text: string | null;
 }
 
 export type FullBlockImage = FullBlockImage_Attachment | FullBlockImage_Image;

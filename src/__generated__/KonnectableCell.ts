@@ -148,6 +148,7 @@ export interface KonnectableCell_Image {
    * Returns the outer channel if we are inside of one
    */
   connection: KonnectableCell_Image_connection | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
