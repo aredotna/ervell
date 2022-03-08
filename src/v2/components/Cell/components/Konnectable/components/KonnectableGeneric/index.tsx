@@ -27,6 +27,7 @@ interface Props extends BoxProps {
   src: string
   srcs: string[]
   title?: string
+  alt_text?: string
   mode: Mode
   originalDimensions?: {
     width: number
@@ -40,6 +41,7 @@ export const KonnectableGeneric: React.FC<Props> = ({
   title = null,
   mode = Mode.RESTING,
   originalDimensions,
+  alt_text = null,
   ...rest
 }) => {
   const { width: originalWidth, height: originalHeight } =
@@ -62,7 +64,7 @@ export const KonnectableGeneric: React.FC<Props> = ({
       <KonnectableImg
         src={src}
         srcs={srcs}
-        alt={title}
+        alt={alt_text || title}
         width={width}
         height={height}
       />

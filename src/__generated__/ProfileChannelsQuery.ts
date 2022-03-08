@@ -171,6 +171,7 @@ export interface ProfileChannelsQuery_identity_identifiable_Group_channels_blokk
   connection: ProfileChannelsQuery_identity_identifiable_Group_channels_blokks_Image_connection | null;
   source: ProfileChannelsQuery_identity_identifiable_Group_channels_blokks_Image_source | null;
   counts: ProfileChannelsQuery_identity_identifiable_Group_channels_blokks_Image_counts | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -570,6 +571,7 @@ export interface ProfileChannelsQuery_identity_identifiable_User_channels_blokks
   connection: ProfileChannelsQuery_identity_identifiable_User_channels_blokks_Image_connection | null;
   source: ProfileChannelsQuery_identity_identifiable_User_channels_blokks_Image_source | null;
   counts: ProfileChannelsQuery_identity_identifiable_User_channels_blokks_Image_counts | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;

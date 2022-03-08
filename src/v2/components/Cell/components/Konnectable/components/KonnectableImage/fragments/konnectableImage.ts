@@ -5,6 +5,7 @@ export default gql`
     id
     title
     href
+    alt_text
     src: image_url(size: DISPLAY)
     src_1x: resized_image_url(
       width: 315

@@ -208,6 +208,7 @@ export interface FeedGroupObjects_objects_Image {
   counts: FeedGroupObjects_objects_Image_counts | null;
   id: number;
   title: string;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;

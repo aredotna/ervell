@@ -190,6 +190,7 @@ export interface ChannelContentsConnectable_Image {
   connection: ChannelContentsConnectable_Image_connection | null;
   source: ChannelContentsConnectable_Image_source | null;
   counts: ChannelContentsConnectable_Image_counts | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;

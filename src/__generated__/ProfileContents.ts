@@ -153,6 +153,7 @@ export interface ProfileContents_User_contents_Image {
   connection: ProfileContents_User_contents_Image_connection | null;
   source: ProfileContents_User_contents_Image_source | null;
   counts: ProfileContents_User_contents_Image_counts | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;

@@ -151,6 +151,7 @@ export interface ExploreContents_contents_Image {
   connection: ExploreContents_contents_Image_connection | null;
   source: ExploreContents_contents_Image_source | null;
   counts: ExploreContents_contents_Image_counts | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
