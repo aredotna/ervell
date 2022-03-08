@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface ManageBlock_Attachment {
-  __typename: "Attachment" | "Channel" | "Embed" | "Image" | "Link" | "PendingBlock";
+  __typename: "Attachment" | "Channel" | "Embed" | "Link" | "PendingBlock";
   id: number;
   editable_title: string;
   editable_description: string | null;
@@ -22,4 +22,12 @@ export interface ManageBlock_Text {
   editable_content: string;
 }
 
-export type ManageBlock = ManageBlock_Attachment | ManageBlock_Text;
+export interface ManageBlock_Image {
+  __typename: "Image";
+  id: number;
+  editable_title: string;
+  editable_description: string | null;
+  editable_alt_text: string | null;
+}
+
+export type ManageBlock = ManageBlock_Attachment | ManageBlock_Text | ManageBlock_Image;

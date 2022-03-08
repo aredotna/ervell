@@ -94,6 +94,15 @@ const DescriptionField = styled(Textarea).attrs({
   height: 10em;
 `
 
+const AltTextField = styled(Textarea).attrs({
+  bg: 'gray.input',
+  borderColor: 'gray.light',
+  mt: 6,
+})`
+  border-radius: ${constants.radii.subtle};
+  height: 10em;
+`
+
 interface ManageBlockProps {
   block: Block & FullBlock
   updateBlock?: (e?: any) => void
@@ -153,6 +162,7 @@ export const ManageBlock: React.FC<ManageBlockProps> = ({
   const titleRef = useRef(null)
   const contentRef = useRef(null)
   const descriptionRef = useRef(null)
+  const altTextRef = useRef(null)
 
   useEffect(() => {
     setTimeout(() => {
@@ -160,11 +170,12 @@ export const ManageBlock: React.FC<ManageBlockProps> = ({
         title: titleRef,
         description: descriptionRef,
         body: contentRef,
+        alt_text: altTextRef,
       }[autoFocus]
 
       element.current.focus()
     }, 0)
-  }, [titleRef, contentRef, descriptionRef, autoFocus])
+  }, [titleRef, contentRef, descriptionRef, altTextRef, autoFocus])
 
   const [updateBlock] = useMutation<
     updateBlockMutation,
@@ -187,6 +198,8 @@ export const ManageBlock: React.FC<ManageBlockProps> = ({
     content: block.__typename === 'Text' ? block.editable_content : undefined,
     description: block.editable_description,
     title: block.editable_title,
+    alt_text:
+      block.__typename === 'Image' ? block.editable_alt_text : undefined,
   }
 
   const { form, handleSubmit, submitting } = useForm({
@@ -197,6 +210,7 @@ export const ManageBlock: React.FC<ManageBlockProps> = ({
   const contentField = useField('content', form)
   const titleField = useField('title', form)
   const descriptionField = useField('description', form)
+  const altTextField = useField('alt_text', form)
 
   return (
     <Container layout="DEFAULT">
@@ -238,6 +252,14 @@ export const ManageBlock: React.FC<ManageBlockProps> = ({
                   placeholder="Title"
                   {...titleField.input}
                 />
+
+                {block.__typename === 'Image' && (
+                  <AltTextField
+                    ref={altTextRef}
+                    placeholder="Alt text"
+                    {...altTextField.input}
+                  />
+                )}
 
                 <DescriptionField
                   ref={descriptionRef}

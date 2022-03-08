@@ -13,5 +13,9 @@ export default gql`
     ... on Text {
       editable_content: content(format: MARKDOWN)
     }
+
+    ... on Image {
+      editable_alt_text: alt_text
+    }
   }
 `

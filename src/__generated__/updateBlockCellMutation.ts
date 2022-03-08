@@ -84,6 +84,7 @@ export interface updateBlockCellMutation_update_block_block_Image {
   can: updateBlockCellMutation_update_block_block_Image_can | null;
   find_original_url: string | null;
   downloadable_image: string | null;
+  editable_alt_text: string | null;
 }
 
 export interface updateBlockCellMutation_update_block_block_Text_user {

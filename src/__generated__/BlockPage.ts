@@ -196,6 +196,7 @@ export interface BlockPage_block_Image {
   can: BlockPage_block_Image_can | null;
   find_original_url: string | null;
   downloadable_image: string | null;
+  editable_alt_text: string | null;
 }
 
 export interface BlockPage_block_Link_user {
