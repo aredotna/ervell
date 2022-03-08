@@ -48,7 +48,11 @@ export const FullBlockImage: React.FC<FullBlockImageProps> = ({
       rel="nofollow noopener"
       p={6}
     >
-      <Image src={block.image_url} alt={block.alt_text} title={block.title} />
+      <Image
+        src={block.image_url}
+        alt={block.alt_text || block.title}
+        title={block.title}
+      />
       <ImageOverlay
         src={src}
         alt={block.alt_text}
