@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import sanitizeHtml from 'sanitize-html'
+
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import Icons from 'v2/components/UI/Icons'
@@ -47,6 +49,9 @@ export const ContentCell = ({
     return null
   }
 
+  const html =
+    content.__typename === 'Text' ? sanitizeHtml(content.content) : null
+
   switch (content.__typename) {
     case 'Attachment':
     case 'Embed':
@@ -77,7 +82,7 @@ export const ContentCell = ({
         <TextContainer length={content.content.length}>
           <Text
             f={1}
-            dangerouslySetInnerHTML={{ __html: content.content }}
+            dangerouslySetInnerHTML={{ __html: html }}
             color="gray.bold"
             overflowEllipsis
           />

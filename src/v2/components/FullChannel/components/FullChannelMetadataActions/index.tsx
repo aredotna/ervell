@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import MuteButton from 'v2/components/MuteButton'
+import FollowButton from 'v2/components/FollowButton'
 import FullBlockShare from 'v2/components/FullBlock/components/FullBlockShare'
 
 import { FullChannelMetadataActions as FullChannelMetadataActionsType } from '__generated__/FullChannelMetadataActions'
@@ -33,6 +34,10 @@ const Mute = styled(MuteButton)`
   cursor: pointer;
 `
 
+const Follow = styled(FollowButton)`
+  cursor: pointer;
+`
+
 interface FullChannelActionsProps {
   channel: FullChannelMetadataActionsType
 }
@@ -50,6 +55,9 @@ export const FullChannelMetadataActions: React.FC<FullChannelActionsProps> = ({
         <Text f={1}>
           <a href={channel.shareable_href}>Open full channel</a>
         </Text>
+        <Box>
+          {channel?.can.follow && <Follow id={channel?.id} type="CHANNEL" />}
+        </Box>
         <Box>
           {channel?.can.mute && <Mute id={channel?.id} type="CHANNEL" />}
         </Box>
