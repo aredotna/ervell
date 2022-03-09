@@ -10,6 +10,7 @@
 export interface FullChannelMetadataActions_can {
   __typename: "ChannelCan";
   mute: boolean | null;
+  follow: boolean | null;
 }
 
 export interface FullChannelMetadataActions {

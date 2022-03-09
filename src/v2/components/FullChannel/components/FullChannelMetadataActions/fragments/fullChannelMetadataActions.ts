@@ -6,8 +6,9 @@ export default gql`
     id
     can {
       mute
+      follow
     }
-    shareable_href: href
+    shareable_href: href(absolute: true)
     shareable_title: title(truncate: 40)
   }
 `
