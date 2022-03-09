@@ -49,6 +49,9 @@ export const ContentCell = ({
     return null
   }
 
+  const html =
+    content.__typename === 'Text' ? sanitizeHtml(content.content) : null
+
   switch (content.__typename) {
     case 'Attachment':
     case 'Embed':
@@ -75,7 +78,6 @@ export const ContentCell = ({
         </Wrapper>
       )
     case 'Text':
-      const html = sanitizeHtml(content.content)
       return (
         <TextContainer length={content.content.length}>
           <Text
