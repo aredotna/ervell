@@ -38,7 +38,12 @@ const All: React.FC<AllProps> = ({ id, sort, identifiable, fetchPolicy }) => {
       : identifiable.counts.channels + identifiable.counts.blocks
   return (
     <EmptyMessageOrComponent identifiable={identifiable} count={count}>
-      <ProfileContents id={id} sort={sort} fetchPolicy={fetchPolicy} />
+      <ProfileContents
+        id={id}
+        type={null}
+        sort={sort}
+        fetchPolicy={fetchPolicy}
+      />
     </EmptyMessageOrComponent>
   )
 }
@@ -69,7 +74,6 @@ const Blocks: React.FC<BlocksProps> = ({
         type={type}
         sort={sort}
         fetchPolicy={fetchPolicy}
-        blockType={type}
       />
     </EmptyMessageOrComponent>
   )
@@ -196,14 +200,13 @@ const ProfileViews: React.FC<ProfileViewsProps> = ({
   type,
 }) => {
   const [renderedView, setRenderedView] = useState<ProfileViewTypes>(view)
-  const [fetchPolicy, setFetchPolicy] = useState<FetchPolicy>('cache-first')
+  const [fetchPolicy] = useState<FetchPolicy>('cache-first')
 
   const { is_premium } = useSerializedMe()
 
   useEffect(() => {
     if (view != renderedView) {
       setRenderedView(view)
-      setFetchPolicy('network-only')
     }
   }, [view])
 
