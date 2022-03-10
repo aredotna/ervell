@@ -81,9 +81,11 @@ export interface ModalFullBlock_block_Image {
   thumb_url: string | null;
   image_url: string | null;
   original_image_url: string | null;
+  alt_text: string | null;
   can: ModalFullBlock_block_Image_can | null;
   find_original_url: string | null;
   downloadable_image: string | null;
+  editable_alt_text: string | null;
 }
 
 export interface ModalFullBlock_block_Text_user {

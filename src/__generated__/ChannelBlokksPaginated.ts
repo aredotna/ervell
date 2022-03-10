@@ -190,6 +190,7 @@ export interface ChannelBlokksPaginated_channel_blokks_Image {
   connection: ChannelBlokksPaginated_channel_blokks_Image_connection | null;
   source: ChannelBlokksPaginated_channel_blokks_Image_source | null;
   counts: ChannelBlokksPaginated_channel_blokks_Image_counts | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;

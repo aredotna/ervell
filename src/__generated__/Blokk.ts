@@ -149,6 +149,7 @@ export interface Blokk_blokk_Image {
   connection: Blokk_blokk_Image_connection | null;
   source: Blokk_blokk_Image_source | null;
   counts: Blokk_blokk_Image_counts | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;

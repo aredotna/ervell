@@ -17,6 +17,7 @@ export interface FullChannelMetadata_channel_user {
 export interface FullChannelMetadata_channel_can {
   __typename: "ChannelCan";
   mute: boolean | null;
+  follow: boolean | null;
 }
 
 export interface FullChannelMetadata_channel {

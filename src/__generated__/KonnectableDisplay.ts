@@ -154,6 +154,7 @@ export interface KonnectableDisplay_Image {
   id: number;
   title: string;
   href: string | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;

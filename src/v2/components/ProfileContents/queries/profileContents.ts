@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 import profileContentsFragment from 'v2/components/ProfileContents/fragments/profileContents'
 
 export default gql`
-  query ProfileContents(
+  query ProfileContentsQuery(
     $id: ID!
     $type: ConnectableTypeEnum
     $page: Int

@@ -416,6 +416,7 @@ export interface FeedQuery_me_feed_groups_objects_Image {
   counts: FeedQuery_me_feed_groups_objects_Image_counts | null;
   id: number;
   title: string;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;

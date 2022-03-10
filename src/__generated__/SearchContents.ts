@@ -213,6 +213,7 @@ export interface SearchContents_contents_Image {
   connection: SearchContents_contents_Image_connection | null;
   source: SearchContents_contents_Image_source | null;
   counts: SearchContents_contents_Image_counts | null;
+  alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
