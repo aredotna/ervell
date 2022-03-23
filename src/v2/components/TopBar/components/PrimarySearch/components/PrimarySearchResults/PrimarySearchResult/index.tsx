@@ -3,15 +3,15 @@ import styled from 'styled-components'
 
 import Text from 'v2/components/UI/Text'
 import GroupBadge from 'v2/components/UI/GroupBadge'
-import { ICON_OFFSET } from 'v2/components/UI/SearchInput'
 import BorderedLock from 'v2/components/UI/BorderedLock'
 
 import { overflowEllipsis } from 'v2/styles/mixins'
-import { mixin as boxMixin } from 'v2/components/UI/Box'
+import { BoxProps, mixin as boxMixin } from 'v2/components/UI/Box'
 
 import { PrimarySearchResult as PrimarySearchResultType } from '__generated__/PrimarySearchResult'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 import { AdaptibleLink } from 'v2/components/UI/AdaptibleLink'
+import { PrimarySearchIcon } from '../PrimarySearchIcon'
 
 const Label = styled(Text)`
   font-weight: bold;
@@ -25,7 +25,6 @@ const Container = styled(AdaptibleLink)`
   display: flex;
   text-decoration: none;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
 
   &:hover {
@@ -59,7 +58,6 @@ const PathContainer = styled.div`
 `
 
 Container.defaultProps = {
-  pl: ICON_OFFSET,
   pr: 6,
   py: 6,
   bg: 'gray.light',
@@ -75,13 +73,8 @@ interface PrimarySearchResultProps {
   onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
-export const PrimarySearchResult: React.FC<PrimarySearchResultProps> = ({
-  result,
-  children,
-  selected = false,
-  onClick,
-  ...rest
-}) => {
+export const PrimarySearchResult: React.FC<PrimarySearchResultProps &
+  BoxProps> = ({ result, children, selected = false, onClick, ...rest }) => {
   if (result) {
     return (
       <Container
@@ -94,6 +87,7 @@ export const PrimarySearchResult: React.FC<PrimarySearchResultProps> = ({
         selected={selected}
         {...rest}
       >
+        <PrimarySearchIcon result={result} />
         <PathContainer>
           {result.__typename === 'Channel' && result.owner && (
             <Label flex="1">

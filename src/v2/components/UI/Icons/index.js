@@ -42,6 +42,8 @@ import Android from 'v2/components/UI/Icons/Android.svg'
 import Hamburger from 'v2/components/UI/Icons/Hamburger.svg'
 import Minimize from 'v2/components/UI/Icons/Minimize.svg'
 import Filters from 'v2/components/UI/Icons/Filters.svg'
+import Profile from 'v2/components/UI/Icons/Profile.svg'
+import Channel from 'v2/components/UI/Icons/Channel.svg'
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -81,6 +83,8 @@ export const COMPONENTS = {
   Hamburger: <Hamburger />,
   Minimize: <Minimize />,
   Filters: <Filters />,
+  Profile: <Profile />,
+  Channel: <Channel />,
 }
 
 export const ICON_NAMES = Object.keys(COMPONENTS)
