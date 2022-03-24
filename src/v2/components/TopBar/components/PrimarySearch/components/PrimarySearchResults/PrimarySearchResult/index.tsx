@@ -12,6 +12,7 @@ import { PrimarySearchResult as PrimarySearchResultType } from '__generated__/Pr
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 import { AdaptibleLink } from 'v2/components/UI/AdaptibleLink'
 import { PrimarySearchIcon } from '../PrimarySearchIcon'
+import { PrimarySearchCount } from '../PrimarySearchCount'
 
 const Label = styled(Text)`
   font-weight: bold;
@@ -36,6 +37,13 @@ const Container = styled(AdaptibleLink)`
     `
     background-color: ${props.theme.colors.state.neutral};
   `}
+`
+
+const ResultContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
 `
 
 const PathContainer = styled.div`
@@ -88,41 +96,43 @@ export const PrimarySearchResult: React.FC<PrimarySearchResultProps &
         {...rest}
       >
         <PrimarySearchIcon result={result} />
-        <PathContainer>
-          {result.__typename === 'Channel' && result.owner && (
-            <Label flex="1">
-              {result.owner.name}
+        <ResultContainer>
+          <PathContainer>
+            {result.__typename === 'Channel' && result.owner && (
+              <Label flex="1">
+                {result.owner.name}
 
-              {result.owner.__typename === 'Group' && (
-                <GroupBadge f={0} visibility={result.owner.visibility} />
+                {result.owner.__typename === 'Group' && (
+                  <GroupBadge f={0} visibility={result.owner.visibility} />
+                )}
+              </Label>
+            )}
+
+            <Label
+              color={
+                result.__typename === 'Channel' && result.visibility
+                  ? `channel.${result.visibility}`
+                  : 'gray.base'
+              }
+            >
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: result.label,
+                }}
+              />
+
+              {(result.__typename === 'Channel' ||
+                result.__typename === 'Group') &&
+                result.visibility === 'private' && <BorderedLock ml={3} />}
+
+              {result.__typename === 'Group' && (
+                <GroupBadge f={0} visibility={result.visibility} />
               )}
             </Label>
-          )}
+          </PathContainer>
 
-          <Label
-            color={
-              (result.__typename === 'Channel' ||
-                result.__typename === 'Group') &&
-              result.visibility
-                ? `channel.${result.visibility}`
-                : 'gray.base'
-            }
-          >
-            <span
-              dangerouslySetInnerHTML={{
-                __html: result.label,
-              }}
-            />
-
-            {(result.__typename === 'Channel' ||
-              result.__typename === 'Group') &&
-              result.visibility === 'private' && <BorderedLock ml={3} />}
-
-            {result.__typename === 'Group' && (
-              <GroupBadge f={0} visibility={result.visibility} />
-            )}
-          </Label>
-        </PathContainer>
+          <PrimarySearchCount result={result} />
+        </ResultContainer>
       </Container>
     )
   }
