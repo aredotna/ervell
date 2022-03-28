@@ -3,15 +3,16 @@ import styled from 'styled-components'
 
 import Text from 'v2/components/UI/Text'
 import GroupBadge from 'v2/components/UI/GroupBadge'
-import { ICON_OFFSET } from 'v2/components/UI/SearchInput'
 import BorderedLock from 'v2/components/UI/BorderedLock'
 
 import { overflowEllipsis } from 'v2/styles/mixins'
-import { mixin as boxMixin } from 'v2/components/UI/Box'
+import { BoxProps, mixin as boxMixin } from 'v2/components/UI/Box'
 
 import { PrimarySearchResult as PrimarySearchResultType } from '__generated__/PrimarySearchResult'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 import { AdaptibleLink } from 'v2/components/UI/AdaptibleLink'
+import { PrimarySearchIcon } from '../PrimarySearchIcon'
+import { PrimarySearchCount } from '../PrimarySearchCount'
 
 const Label = styled(Text)`
   font-weight: bold;
@@ -25,7 +26,6 @@ const Container = styled(AdaptibleLink)`
   display: flex;
   text-decoration: none;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
 
   &:hover {
@@ -37,6 +37,13 @@ const Container = styled(AdaptibleLink)`
     `
     background-color: ${props.theme.colors.state.neutral};
   `}
+`
+
+const ResultContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
 `
 
 const PathContainer = styled.div`
@@ -59,7 +66,6 @@ const PathContainer = styled.div`
 `
 
 Container.defaultProps = {
-  pl: ICON_OFFSET,
   pr: 6,
   py: 6,
   bg: 'gray.light',
@@ -75,13 +81,8 @@ interface PrimarySearchResultProps {
   onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
-export const PrimarySearchResult: React.FC<PrimarySearchResultProps> = ({
-  result,
-  children,
-  selected = false,
-  onClick,
-  ...rest
-}) => {
+export const PrimarySearchResult: React.FC<PrimarySearchResultProps &
+  BoxProps> = ({ result, children, selected = false, onClick, ...rest }) => {
   if (result) {
     return (
       <Container
@@ -94,41 +95,44 @@ export const PrimarySearchResult: React.FC<PrimarySearchResultProps> = ({
         selected={selected}
         {...rest}
       >
-        <PathContainer>
-          {result.__typename === 'Channel' && result.owner && (
-            <Label flex="1">
-              {result.owner.name}
+        <PrimarySearchIcon result={result} />
+        <ResultContainer>
+          <PathContainer>
+            {result.__typename === 'Channel' && result.owner && (
+              <Label flex="1">
+                {result.owner.name}
 
-              {result.owner.__typename === 'Group' && (
-                <GroupBadge f={0} visibility={result.owner.visibility} />
+                {result.owner.__typename === 'Group' && (
+                  <GroupBadge f={0} visibility={result.owner.visibility} />
+                )}
+              </Label>
+            )}
+
+            <Label
+              color={
+                result.__typename === 'Channel' && result.visibility
+                  ? `channel.${result.visibility}`
+                  : 'gray.base'
+              }
+            >
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: result.label,
+                }}
+              />
+
+              {(result.__typename === 'Channel' ||
+                result.__typename === 'Group') &&
+                result.visibility === 'private' && <BorderedLock ml={3} />}
+
+              {result.__typename === 'Group' && (
+                <GroupBadge f={0} visibility={result.visibility} />
               )}
             </Label>
-          )}
+          </PathContainer>
 
-          <Label
-            color={
-              (result.__typename === 'Channel' ||
-                result.__typename === 'Group') &&
-              result.visibility
-                ? `channel.${result.visibility}`
-                : 'gray.base'
-            }
-          >
-            <span
-              dangerouslySetInnerHTML={{
-                __html: result.label,
-              }}
-            />
-
-            {(result.__typename === 'Channel' ||
-              result.__typename === 'Group') &&
-              result.visibility === 'private' && <BorderedLock ml={3} />}
-
-            {result.__typename === 'Group' && (
-              <GroupBadge f={0} visibility={result.visibility} />
-            )}
-          </Label>
-        </PathContainer>
+          <PrimarySearchCount result={result} />
+        </ResultContainer>
       </Container>
     )
   }
