@@ -5,6 +5,7 @@ export default gql`
     __typename
     id
     content(format: HTML)
+    raw: content(format: MARKDOWN)
     can {
       manage
     }

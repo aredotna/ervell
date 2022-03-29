@@ -30,6 +30,7 @@ export interface FullBlockContentPane_Text {
   __typename: "Text";
   id: number;
   content: string;
+  raw: string;
   can: FullBlockContentPane_Text_can | null;
 }
 

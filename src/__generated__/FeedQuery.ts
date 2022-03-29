@@ -514,6 +514,7 @@ export interface FeedQuery_me_feed_groups_objects_Text {
   id: number;
   title: string;
   content: string;
+  raw: string;
   updated_at: string | null;
   user: FeedQuery_me_feed_groups_objects_Text_user | null;
   /**

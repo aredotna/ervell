@@ -354,6 +354,7 @@ export interface SearchContents_contents_Text {
   source: SearchContents_contents_Text_source | null;
   counts: SearchContents_contents_Text_counts | null;
   content: string;
+  raw: string;
 }
 
 export interface SearchContents_contents_Group {

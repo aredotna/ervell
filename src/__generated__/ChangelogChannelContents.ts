@@ -22,6 +22,7 @@ export interface ChangelogChannelContents_channel_blokks_Text {
   href: string | null;
   title: string;
   content: string;
+  raw: string;
 }
 
 export type ChangelogChannelContents_channel_blokks = ChangelogChannelContents_channel_blokks_Attachment | ChangelogChannelContents_channel_blokks_Text;

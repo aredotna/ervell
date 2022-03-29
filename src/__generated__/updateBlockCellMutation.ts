@@ -128,6 +128,7 @@ export interface updateBlockCellMutation_update_block_block_Text {
   editable_title: string;
   editable_description: string | null;
   content: string;
+  raw: string;
   can: updateBlockCellMutation_update_block_block_Text_can | null;
   find_original_url: string | null;
   editable_content: string;

@@ -310,6 +310,7 @@ export interface ProfileChannelSearch_Group_channels_blokks_Text {
   source: ProfileChannelSearch_Group_channels_blokks_Text_source | null;
   counts: ProfileChannelSearch_Group_channels_blokks_Text_counts | null;
   content: string;
+  raw: string;
 }
 
 export interface ProfileChannelSearch_Group_channels_blokks_Channel_user {
@@ -714,6 +715,7 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Text {
   source: ProfileChannelSearch_User_channels_Channel_blokks_Text_source | null;
   counts: ProfileChannelSearch_User_channels_Channel_blokks_Text_counts | null;
   content: string;
+  raw: string;
 }
 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Channel_user {

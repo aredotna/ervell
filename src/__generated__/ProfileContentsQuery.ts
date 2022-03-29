@@ -296,6 +296,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Text {
   source: ProfileContentsQuery_identity_identifiable_User_contents_Text_source | null;
   counts: ProfileContentsQuery_identity_identifiable_User_contents_Text_counts | null;
   content: string;
+  raw: string;
 }
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_Channel_user {

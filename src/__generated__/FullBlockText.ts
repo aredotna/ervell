@@ -16,5 +16,6 @@ export interface FullBlockText {
   __typename: "Text";
   id: number;
   content: string;
+  raw: string;
   can: FullBlockText_can | null;
 }

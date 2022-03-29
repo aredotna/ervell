@@ -33,6 +33,7 @@ export interface BlockContent_blokk_Text {
   id: number;
   title: string;
   content: string;
+  raw: string;
   can: BlockContent_blokk_Text_can | null;
 }
 

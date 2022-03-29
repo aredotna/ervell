@@ -8,6 +8,7 @@ import FullBlockModalDialog from 'v2/components/FullBlock/components/FullBlockMo
 import { TextBoxContainer } from 'v2/components/FullBlockLayout'
 
 import { FullBlock_Text as Block } from '__generated__/FullBlock'
+import isHexColor from 'v2/util/isHexColor'
 
 interface FullBlockTextProps {
   layout: 'DEFAULT' | 'FULLSCREEN'
@@ -38,6 +39,8 @@ export const FullBlockText: React.FC<FullBlockTextProps> = ({
     setMode('resting')
   }, [setMode])
 
+  const isColor = isHexColor(block.raw)
+
   return (
     <React.Fragment>
       {mode === 'editing' && (
@@ -49,11 +52,14 @@ export const FullBlockText: React.FC<FullBlockTextProps> = ({
       <TextBoxContainer
         layout={layout}
         onClick={block.can.manage ? openModal : undefined}
+        color={isColor ? block.raw : undefined}
       >
-        <SansSerifText
-          color={{ DEFAULT: 'gray.block', FULLSCREEN: 'white' }[layout]}
-          dangerouslySetInnerHTML={{ __html: block.content }}
-        />
+        {!isColor && (
+          <SansSerifText
+            color={{ DEFAULT: 'gray.block', FULLSCREEN: 'white' }[layout]}
+            dangerouslySetInnerHTML={{ __html: block.content }}
+          />
+        )}
 
         {layout === 'FULLSCREEN' && block.title && (
           <SansSerifText>{block.title}</SansSerifText>
