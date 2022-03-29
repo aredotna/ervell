@@ -60,6 +60,7 @@ export const ProfileContents: React.FC<ProfileContentsProps> = ({
         page,
         type,
         seed,
+        q,
       },
       ssr: isSpider,
       fetchPolicy,

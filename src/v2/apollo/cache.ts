@@ -188,6 +188,15 @@ export function getCache({
         },
       },
 
+      Search: {
+        fields: {
+          contents: {
+            keyArgs: everythingExcept('page', 'per'),
+            merge: paginationWithPageAndPer,
+          },
+        },
+      },
+
       /*
        * nonNormalizedMergeableObject
        */
