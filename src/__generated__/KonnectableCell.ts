@@ -289,6 +289,7 @@ export interface KonnectableCell_Text {
    */
   connection: KonnectableCell_Text_connection | null;
   content: string;
+  raw: string;
   source: KonnectableCell_Text_source | null;
 }
 

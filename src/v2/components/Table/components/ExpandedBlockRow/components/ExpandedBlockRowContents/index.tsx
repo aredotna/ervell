@@ -1,10 +1,15 @@
 import { useQuery } from '@apollo/client'
 import React from 'react'
 import styled from 'styled-components'
+
 import { FullBlockAttachment } from 'v2/components/FullBlock/components/FullBlockAttachment'
 import FullBlockEmbed from 'v2/components/FullBlock/components/FullBlockEmbed'
 import { FullBlockLinkScreenshot } from 'v2/components/FullBlock/components/FullBlockLink/components/FullBlockLinkScreenshot'
 import { SansSerifText } from 'v2/components/UI/SansSerifText'
+import Box from 'v2/components/UI/Box'
+
+import isHexColor from 'v2/util/isHexColor'
+import expandedBlockRowContents from './queries/expandedBlockRowContents'
 
 import { ChannelTableContentsSet_channel_blokks } from '__generated__/ChannelTableContentsSet'
 import {
@@ -12,9 +17,8 @@ import {
   ExpandedBlockRowContentsVariables,
 } from '__generated__/ExpandedBlockRowContents'
 import { ProfileTableContents_user_contents } from '__generated__/ProfileTableContents'
-import expandedBlockRowContents from './queries/expandedBlockRowContents'
 
-const TextContainer = styled.div`
+const TextContainer = styled(Box)`
   padding: ${x => x.theme.space[4]};
   max-height: 450px;
   height: 100%;
@@ -50,13 +54,17 @@ export const ExpandedBlockRowContents: React.FC<ExpandedBlockRowContentsProps> =
   >(expandedBlockRowContents, { variables: { id: block.id.toString() } })
 
   if (block?.__typename === 'Text') {
+    const isColor = isHexColor(block.content)
+
     return (
-      <TextContainer>
-        <SansSerifText
-          color={'gray.block'}
-          isSmall
-          dangerouslySetInnerHTML={{ __html: block.html }}
-        />
+      <TextContainer bg={isColor ? block.content : undefined}>
+        {!isColor && (
+          <SansSerifText
+            color={'gray.block'}
+            isSmall
+            dangerouslySetInnerHTML={{ __html: block.html }}
+          />
+        )}
       </TextContainer>
     )
   }

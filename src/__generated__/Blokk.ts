@@ -290,6 +290,7 @@ export interface Blokk_blokk_Text {
   source: Blokk_blokk_Text_source | null;
   counts: Blokk_blokk_Text_counts | null;
   content: string;
+  raw: string;
 }
 
 export interface Blokk_blokk_Channel_user {

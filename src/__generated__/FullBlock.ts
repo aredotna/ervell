@@ -116,6 +116,7 @@ export interface FullBlock_Text {
   title: string;
   href: string | null;
   content: string;
+  raw: string;
   can: FullBlock_Text_can | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;

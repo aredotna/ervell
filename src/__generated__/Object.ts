@@ -306,6 +306,7 @@ export interface Object_Text {
   id: number;
   title: string;
   content: string;
+  raw: string;
   updated_at: string | null;
   user: Object_Text_user | null;
   /**

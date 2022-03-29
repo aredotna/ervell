@@ -292,6 +292,7 @@ export interface ExploreContents_contents_Text {
   source: ExploreContents_contents_Text_source | null;
   counts: ExploreContents_contents_Text_counts | null;
   content: string;
+  raw: string;
 }
 
 export interface ExploreContents_contents_Channel_user {

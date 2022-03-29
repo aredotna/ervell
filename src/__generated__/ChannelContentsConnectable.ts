@@ -374,6 +374,7 @@ export interface ChannelContentsConnectable_Text {
   source: ChannelContentsConnectable_Text_source | null;
   counts: ChannelContentsConnectable_Text_counts | null;
   content: string;
+  raw: string;
   can: ChannelContentsConnectable_Text_can | null;
 }
 

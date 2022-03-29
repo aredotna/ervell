@@ -290,6 +290,7 @@ export interface ChannelContentsFiltered_channel_filtered_contents_Text {
   source: ChannelContentsFiltered_channel_filtered_contents_Text_source | null;
   counts: ChannelContentsFiltered_channel_filtered_contents_Text_counts | null;
   content: string;
+  raw: string;
 }
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Channel_user {

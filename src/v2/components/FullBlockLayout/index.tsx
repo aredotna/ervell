@@ -54,10 +54,17 @@ export const ContentContainer = styled(Box).attrs({
 export interface TextBoxContainerProps {
   onClick?: (e: any) => void
   border?: boolean
+  color?: string
 }
 
 export const TextBoxContainer: React.FC<FullBlockLayoutProps &
-  TextBoxContainerProps> = ({ children, layout, onClick, border = true }) => {
+  TextBoxContainerProps> = ({
+  children,
+  layout,
+  onClick,
+  border = true,
+  color = null,
+}) => {
   return (
     <Box height="100%" width="100%">
       <Box
@@ -71,7 +78,7 @@ export const TextBoxContainer: React.FC<FullBlockLayoutProps &
           minHeight="100%"
           width={{ DEFAULT: '100%', FULLSCREEN: '75%' }[layout]}
           maxWidth="55em"
-          bg="background"
+          bg={color || 'background'}
           border={border && '1px solid'}
           borderColor={
             border &&

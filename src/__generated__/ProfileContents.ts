@@ -294,6 +294,7 @@ export interface ProfileContents_User_contents_Text {
   source: ProfileContents_User_contents_Text_source | null;
   counts: ProfileContents_User_contents_Text_counts | null;
   content: string;
+  raw: string;
 }
 
 export interface ProfileContents_User_contents_Channel_user {

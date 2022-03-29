@@ -514,6 +514,7 @@ export interface GroupFeedQuery_group_feed_groups_objects_Text {
   id: number;
   title: string;
   content: string;
+  raw: string;
   updated_at: string | null;
   user: GroupFeedQuery_group_feed_groups_objects_Text_user | null;
   /**

@@ -117,6 +117,7 @@ export interface KonnectableDisplay_Text {
   title: string;
   href: string | null;
   content: string;
+  raw: string;
   updated_at: string | null;
   user: KonnectableDisplay_Text_user | null;
   /**

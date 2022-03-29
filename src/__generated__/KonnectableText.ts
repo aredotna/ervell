@@ -13,4 +13,5 @@ export interface KonnectableText {
   title: string;
   href: string | null;
   content: string;
+  raw: string;
 }
