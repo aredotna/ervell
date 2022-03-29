@@ -374,6 +374,7 @@ export interface ChannelBlokksPaginated_channel_blokks_Text {
   source: ChannelBlokksPaginated_channel_blokks_Text_source | null;
   counts: ChannelBlokksPaginated_channel_blokks_Text_counts | null;
   content: string;
+  raw: string;
   can: ChannelBlokksPaginated_channel_blokks_Text_can | null;
 }
 

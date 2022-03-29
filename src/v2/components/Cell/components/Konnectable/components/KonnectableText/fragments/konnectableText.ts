@@ -6,5 +6,6 @@ export default gql`
     title
     href
     content(format: HTML)
+    raw: content(format: MARKDOWN)
   }
 `

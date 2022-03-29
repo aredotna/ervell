@@ -306,6 +306,7 @@ export interface FeedGroupObjects_objects_Text {
   id: number;
   title: string;
   content: string;
+  raw: string;
   updated_at: string | null;
   user: FeedGroupObjects_objects_Text_user | null;
   /**

@@ -7,12 +7,16 @@ import Text from 'v2/components/UI/Text'
 import Icons from 'v2/components/UI/Icons'
 
 import { TableData } from '../../../ChannelTableContents/lib/types'
+import isHexColor from 'v2/util/isHexColor'
 
 const TextContainer = styled(Box).attrs({
   px: 5,
   color: 'gray.bold',
 })`
-  width: 420px;
+  width: ${props => (props.isColor ? '100%' : '420px')};
+  height: 100%;
+  display: flex;
+  align-items: center;
 `
 
 const Wrapper = styled(Box).attrs({
@@ -52,6 +56,8 @@ export const ContentCell = ({
   const html =
     content.__typename === 'Text' ? sanitizeHtml(content.content) : null
 
+  const isColor = content.__typename === 'Text' && isHexColor(content.content)
+
   switch (content.__typename) {
     case 'Attachment':
     case 'Embed':
@@ -79,13 +85,20 @@ export const ContentCell = ({
       )
     case 'Text':
       return (
-        <TextContainer length={content.content.length}>
-          <Text
-            f={1}
-            dangerouslySetInnerHTML={{ __html: html }}
-            color="gray.bold"
-            overflowEllipsis
-          />
+        <TextContainer
+          length={content.content.length}
+          isColor={isColor}
+          bg={isColor ? content.content : 'background'}
+        >
+          {isColor && <Box width="100%" height="100%" />}
+          {!isColor && (
+            <Text
+              f={1}
+              dangerouslySetInnerHTML={{ __html: html }}
+              color="gray.bold"
+              overflowEllipsis
+            />
+          )}
         </TextContainer>
       )
     default:

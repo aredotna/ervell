@@ -19,6 +19,7 @@ export const ChangelogChannelContents = gql`
         }
         ... on Text {
           content(format: HTML)
+          raw: content(format: MARKDOWN)
         }
       }
     }

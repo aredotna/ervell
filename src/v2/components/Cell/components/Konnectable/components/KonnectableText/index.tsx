@@ -1,12 +1,15 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { KonnectableText as KonnectableTextData } from '__generated__/KonnectableText'
-
 import { Mode } from 'v2/components/Cell/components/Konnectable/types'
+import { KonnectableColor } from 'v2/components/Cell/components/Konnectable/components/KonnectableColor'
 
 import Box from 'v2/components/UI/Box'
 import { SansSerifText } from 'v2/components/UI/SansSerifText'
+
+import isHexColor from 'v2/util/isHexColor'
+
+import { KonnectableText as KonnectableTextData } from '__generated__/KonnectableText'
 
 const hoverMixin = css`
   border: 1px solid ${props => props.theme.colors.gray.semiLight};
@@ -52,10 +55,14 @@ interface Props {
 }
 
 export const KonnectableText: React.FC<Props> = ({
-  text: { content },
+  text: { content, raw },
   mode = Mode.RESTING,
   ...rest
 }) => {
+  if (isHexColor(raw)) {
+    return <KonnectableColor color={raw} {...rest} />
+  }
+
   return (
     <Container length={content.length} mode={mode} {...rest}>
       {/* We should truncate content to prevent an excess of data being needlessly returned */}

@@ -374,6 +374,7 @@ export interface ConnectableBlokk_blokk_Text {
   source: ConnectableBlokk_blokk_Text_source | null;
   counts: ConnectableBlokk_blokk_Text_counts | null;
   content: string;
+  raw: string;
   can: ConnectableBlokk_blokk_Text_can | null;
 }
 
