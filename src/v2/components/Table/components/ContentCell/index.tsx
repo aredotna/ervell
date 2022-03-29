@@ -56,6 +56,8 @@ export const ContentCell = ({
   const html =
     content.__typename === 'Text' ? sanitizeHtml(content.content) : null
 
+  const isColor = content.__typename === 'Text' && isHexColor(content.content)
+
   switch (content.__typename) {
     case 'Attachment':
     case 'Embed':
@@ -82,8 +84,6 @@ export const ContentCell = ({
         </Wrapper>
       )
     case 'Text':
-      const isColor = isHexColor(content.content)
-
       return (
         <TextContainer
           length={content.content.length}
