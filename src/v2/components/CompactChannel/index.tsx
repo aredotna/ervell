@@ -97,6 +97,7 @@ const openEditChannel = (
       client.writeFragment({
         id: `Channel:${id}`,
         fragment: compactChannel,
+        fragmentName: 'CompactChannel',
         data: null,
       })
       modal.close()
