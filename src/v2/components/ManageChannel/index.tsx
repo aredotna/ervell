@@ -304,7 +304,7 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
                 <Accordion label="Delete channel" mode="closed">
                   <Box m={7}>
                     <DeleteChannel
-                      id={channel.id}
+                      id={channel.id.toString()}
                       onDelete={onDelete}
                       refetchQueries={refetchQueries}
                     />
