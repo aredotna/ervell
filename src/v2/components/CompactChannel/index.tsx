@@ -94,7 +94,6 @@ const openEditChannel = (
     id,
     refetchQueries,
     onDelete: () => {
-      console.log({ id })
       client.writeFragment({
         id: `Channel:${id}`,
         fragment: compactChannel,
