@@ -16,6 +16,17 @@ export const baseMixin = css`
     margin-top: 0;
   }
 
+  li > p:first-child {
+    display: inline;
+    margin-bottom: 1rem;
+  }
+
+  li > p:first-child:after {
+    content: '';
+    display: block;
+    margin-bottom: 1rem;
+  }
+
   h1,
   h2,
   h3,
