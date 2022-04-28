@@ -9,6 +9,10 @@ import { MutableTypeEnum } from "./globalTypes";
 // GraphQL query operation: MuteQuery
 // ====================================================
 
+export interface MuteQuery_mutable_User {
+  __typename: "User";
+}
+
 export interface MuteQuery_mutable_Channel {
   __typename: "Channel";
   id: number;
@@ -21,7 +25,7 @@ export interface MuteQuery_mutable_Connectable {
   is_muted: boolean | null;
 }
 
-export type MuteQuery_mutable = MuteQuery_mutable_Channel | MuteQuery_mutable_Connectable;
+export type MuteQuery_mutable = MuteQuery_mutable_User | MuteQuery_mutable_Channel | MuteQuery_mutable_Connectable;
 
 export interface MuteQuery {
   /**

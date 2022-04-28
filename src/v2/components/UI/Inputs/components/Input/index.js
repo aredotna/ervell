@@ -62,6 +62,8 @@ class Input extends PureComponent {
     // While the input can still have configurable padding
     const inputProps = omit(this.props, ...SPACE_MARGIN_PROPS_KEYS)
 
+    console.log({ inputProps })
+
     return (
       <Box flex={1} {...boxProps}>
         <TextInput

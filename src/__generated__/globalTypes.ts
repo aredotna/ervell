@@ -147,6 +147,15 @@ export enum Movements {
 export enum MutableTypeEnum {
   BLOCK = "BLOCK",
   CHANNEL = "CHANNEL",
+  USER = "USER",
+}
+
+/**
+ * Newsletters that can be subscribed to
+ */
+export enum NewsletterListEnum {
+  EDITORIAL = "EDITORIAL",
+  GENERAL = "GENERAL",
 }
 
 /**
