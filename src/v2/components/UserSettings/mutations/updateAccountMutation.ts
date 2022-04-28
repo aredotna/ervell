@@ -12,6 +12,7 @@ export default gql`
     $receive_tips_emails: Boolean
     $receive_group_premium_emails: Boolean
     $receive_sunday_review_emails: Boolean
+    $receive_editorial_emails: Boolean
     $show_tour: Boolean
     $exclude_from_indexes: Boolean
     $bio: String
@@ -35,6 +36,7 @@ export default gql`
         receive_tips_emails: $receive_tips_emails
         receive_group_premium_emails: $receive_group_premium_emails
         receive_sunday_review_emails: $receive_sunday_review_emails
+        receive_editorial_emails: $receive_editorial_emails
         show_tour: $show_tour
         exclude_from_indexes: $exclude_from_indexes
         password: $password

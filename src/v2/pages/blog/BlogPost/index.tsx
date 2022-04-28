@@ -20,6 +20,7 @@ import { AboutTopBarLayout } from 'v2/components/UI/Layouts/AboutTopBarLayout'
 
 import BLOG_POST_CONTENT_QUERY from 'v2/pages/blog/BlogPost/contentfulQueries/BlogPostBySlug'
 import { BlogPostBlocks } from './components/BlogPostBlocks'
+import { NewsletterSignup } from '../BlogIndex/components/NewsletterSignup'
 
 interface BlogPostProps {
   slug: string
@@ -27,6 +28,10 @@ interface BlogPostProps {
 
 const Container = styled(Box).attrs({ mt: 10, mx: [5, 'auto'] })`
   max-width: 670px;
+`
+
+const NewsletterContainer = styled(Box).attrs({ mt: 6, mb: 10, mx: ['auto'] })`
+  max-width: 450px;
 `
 
 const PostTitle = styled(Text).attrs({
@@ -107,6 +112,9 @@ export const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
           {post.author.bio && <BlogPostAuthor author={post.author.bio.json} />}
         </Container>
         <BlogPostCTA />
+        <NewsletterContainer>
+          <NewsletterSignup />
+        </NewsletterContainer>
         <LoggedOutFooter />
       </AboutTopBarLayout>
     </ErrorBoundary>

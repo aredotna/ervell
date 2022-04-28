@@ -13,6 +13,7 @@ import Text from 'v2/components/UI/Text'
 import { BlogPreview } from 'v2/pages/blog/BlogIndex/components/BlogPreview'
 
 import BLOG_INDEX_QUERY from 'v2/pages/blog/BlogIndex/contentfulQueries/BlogIndex'
+import { NewsletterSignup } from './components/NewsletterSignup'
 
 const Headline = styled(Text).attrs({
   fontSize: 8,
@@ -26,7 +27,7 @@ const TopContainer = styled(Box).attrs({
   mb: 9,
   mx: 'auto',
 })`
-  max-width: 470px;
+  max-width: 450px;
 `
 
 const Description = styled(Text).attrs({
@@ -57,11 +58,13 @@ export const BlogIndex: React.FC = () => {
       <AboutTopBarLayout>
         <Constrain>
           <TopContainer>
-            <Headline>Are.na Blog</Headline>
+            <Headline>Are.na Editorial</Headline>
             <Description>
-              Learn about how people use Are.na to do work and pursue personal
-              projects through case studies, interviews, and highlights.
+              Essays, interviews, and other forms of writing from the Are.na
+              community.
             </Description>
+
+            <NewsletterSignup />
           </TopContainer>
 
           <BlogPostContainer>
