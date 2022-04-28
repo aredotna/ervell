@@ -7,6 +7,7 @@ import {
   borders,
   color,
   width,
+  borderRadius,
 } from 'styled-system'
 
 import { preset } from 'v2/styles/functions'
@@ -63,6 +64,7 @@ export const defaultMixin = css`
   ${preset(space, { px: 5, py: 4 })}
   ${preset(borders, { border: '1px solid' })}
   ${preset(borderColor, { borderColor: 'gray.medium' })}
+  ${preset(borderRadius, { borderRadius: 'default' })}
   ${antialiased}
 
   ::placeholder {

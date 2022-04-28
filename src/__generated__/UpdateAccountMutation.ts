@@ -50,6 +50,7 @@ export interface UpdateAccountMutationVariables {
   receive_tips_emails?: boolean | null;
   receive_group_premium_emails?: boolean | null;
   receive_sunday_review_emails?: boolean | null;
+  receive_editorial_emails?: boolean | null;
   show_tour?: boolean | null;
   exclude_from_indexes?: boolean | null;
   bio?: string | null;
