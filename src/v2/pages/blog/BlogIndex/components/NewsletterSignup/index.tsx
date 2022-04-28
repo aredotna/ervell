@@ -34,7 +34,6 @@ const Container = styled(Box).attrs({
 
 const Caption = styled(Text).attrs({
   f: 4,
-  pb: 6,
 })``
 
 const InputContainer = styled(Box).attrs({})`
@@ -84,17 +83,16 @@ const LoggedInNewsletterSignup: React.FC = () => {
 
   return (
     <Container>
-      <Caption>
-        {' '}
+      <Caption pb={data?.me?.settings.receive_editorial_emails ? 0 : 6}>
         {data?.me?.settings.receive_editorial_emails
-          ? "You're subscribed to our editorial newsletter, thank you."
+          ? "You're subscribed to our editorial newsletter."
           : 'You can also get our blog posts via email'}
       </Caption>
-      <SubmitButton onClick={onSubmit}>
-        {data?.me?.settings.receive_editorial_emails
-          ? 'Unsubscribe'
-          : 'Subscribe to our editorial newsletter'}
-      </SubmitButton>
+      {!data?.me?.settings.receive_editorial_emails && (
+        <SubmitButton onClick={onSubmit}>
+          Subscribe to our editorial newsletter
+        </SubmitButton>
+      )}
     </Container>
   )
 }
@@ -142,7 +140,7 @@ export const NewsletterSignup = () => {
 
   return (
     <Container>
-      <Caption>You can also get our blog posts via email</Caption>
+      <Caption pb={6}>You can also get our blog posts via email</Caption>
       <form onSubmit={handleSubmit}>
         <InputContainer>
           <EmailInput

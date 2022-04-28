@@ -339,6 +339,23 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                   </Field>
 
                   <Field
+                    name="receive_editorial_emails"
+                    initialValue={me.settings.receive_editorial_emails}
+                  >
+                    {props => {
+                      return (
+                        <LargeLabelledCheckbox
+                          name={props.input.name}
+                          checked={props.input.value}
+                          onChange={props.input.onChange}
+                        >
+                          Send me editorial posts when they are published
+                        </LargeLabelledCheckbox>
+                      )
+                    }}
+                  </Field>
+
+                  <Field
                     name="receive_tips_emails"
                     initialValue={me.settings.receive_tips_emails}
                   >
