@@ -16,7 +16,6 @@ import ManageGroup from 'v2/components/ManageGroup'
 import Icons from 'v2/components/UI/Icons'
 import Overlay from 'v2/components/UI/Overlay'
 import Box from 'v2/components/UI/Box'
-import Text from 'v2/components/UI/Text'
 
 import { ProfileMetadataActions as ProfileMetadataActionsType } from '__generated__/ProfileMetadataActions'
 import VerticalButtonGroup from 'v2/components/UI/VerticalButtonGroup'
