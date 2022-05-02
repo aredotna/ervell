@@ -6,37 +6,37 @@
 import { MutableTypeEnum } from "./globalTypes";
 
 // ====================================================
-// GraphQL query operation: MuteQuery
+// GraphQL query operation: ProfileIsMutedQuery
 // ====================================================
 
-export interface MuteQuery_mutable_Channel {
+export interface ProfileIsMutedQuery_mutable_Channel {
   __typename: "Channel";
   id: number;
   is_muted: boolean | null;
 }
 
-export interface MuteQuery_mutable_Connectable {
+export interface ProfileIsMutedQuery_mutable_Connectable {
   __typename: "Connectable";
   id: number;
   is_muted: boolean | null;
 }
 
-export interface MuteQuery_mutable_User {
+export interface ProfileIsMutedQuery_mutable_User {
   __typename: "User";
   id: number;
   is_muted: boolean | null;
 }
 
-export type MuteQuery_mutable = MuteQuery_mutable_Channel | MuteQuery_mutable_Connectable | MuteQuery_mutable_User;
+export type ProfileIsMutedQuery_mutable = ProfileIsMutedQuery_mutable_Channel | ProfileIsMutedQuery_mutable_Connectable | ProfileIsMutedQuery_mutable_User;
 
-export interface MuteQuery {
+export interface ProfileIsMutedQuery {
   /**
    * Interface for getting the mute status of blocks or channels
    */
-  mutable: MuteQuery_mutable | null;
+  mutable: ProfileIsMutedQuery_mutable | null;
 }
 
-export interface MuteQueryVariables {
+export interface ProfileIsMutedQueryVariables {
   id: string;
   type: MutableTypeEnum;
 }

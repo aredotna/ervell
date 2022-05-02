@@ -9,10 +9,6 @@ import { MutableTypeEnum } from "./globalTypes";
 // GraphQL mutation operation: MuteMutation
 // ====================================================
 
-export interface MuteMutation_mute_mutable_User {
-  __typename: "User";
-}
-
 export interface MuteMutation_mute_mutable_Channel {
   __typename: "Channel";
   id: number;
@@ -25,7 +21,13 @@ export interface MuteMutation_mute_mutable_Connectable {
   is_muted: boolean | null;
 }
 
-export type MuteMutation_mute_mutable = MuteMutation_mute_mutable_User | MuteMutation_mute_mutable_Channel | MuteMutation_mute_mutable_Connectable;
+export interface MuteMutation_mute_mutable_User {
+  __typename: "User";
+  id: number;
+  is_muted: boolean | null;
+}
+
+export type MuteMutation_mute_mutable = MuteMutation_mute_mutable_Channel | MuteMutation_mute_mutable_Connectable | MuteMutation_mute_mutable_User;
 
 export interface MuteMutation_mute {
   __typename: "MuteMutationPayload";
