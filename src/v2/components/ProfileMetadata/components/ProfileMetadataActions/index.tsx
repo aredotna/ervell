@@ -20,6 +20,7 @@ import Box from 'v2/components/UI/Box'
 import { ProfileMetadataActions as ProfileMetadataActionsType } from '__generated__/ProfileMetadataActions'
 import VerticalButtonGroup from 'v2/components/UI/VerticalButtonGroup'
 import { MuteProfileButton } from './components/ProfileMuteButton'
+import { ProfileRestrictButton } from './components/ProfileRestrictButton'
 
 const Button = styled(GenericButtonLink)`
   ${buttonMixin}
@@ -37,6 +38,32 @@ const MenuButton = styled(GenericButtonLink)`
   border-width: 1px !important;
 `
 
+const itemMixin = `
+  font-size: ${props => props.theme.fontSizesIndexed.xs} !important;
+  border-width: 1px !important;
+  text-align: left;
+  justify-content: flex-start;
+  ${buttonPadding}
+  height: 34px;
+  padding-top: 0;
+  padding-bottom: 0;
+`
+
+const UserMessageButton = styled(MessageButton).attrs({
+  f: 1,
+})`
+  ${buttonMixin}
+  ${itemMixin}
+`
+
+const MuteButton = styled(MuteProfileButton).attrs({ f: 1 })`
+  ${itemMixin}
+`
+
+const RestrictButton = styled(ProfileRestrictButton).attrs({ f: 1 })`
+  ${itemMixin}
+`
+
 const Inner = styled(Box)`
   width: 10em;
   display: flex;
@@ -48,34 +75,7 @@ const Inner = styled(Box)`
   height: 100%;
   text-align: left;
   border-radius: ${BUTTON_BORDER_RADIUS};
-  ${buttonColor}
-`
-
-const itemMixin = `
-  font-size: ${props => props.theme.fontSizesIndexed.xs};
-  border-width: 1px !important;
-  text-align: left;
-  justify-content: flex-start;
-  ${buttonPadding};
-  height: 34px;
-  padding-top: 0;
-  padding-bottom: 0;
-`
-
-const MenuItem = styled(Button).attrs({
-  f: 2,
-})`
-  ${itemMixin}
-`
-const UserMessageButton = styled(MessageButton).attrs({
-  f: 2,
-})`
-  ${buttonMixin}
-  ${itemMixin}
-`
-
-const MuteButton = styled(MuteProfileButton).attrs({ f: 2 })`
-  ${itemMixin}
+  ${buttonColor};
 `
 
 interface ProfileMetadataActionsProps {
@@ -224,7 +224,10 @@ export const ProfileMetadataActions: React.FC<ProfileMetadataActionsProps> = ({
           <Inner>
             <VerticalButtonGroup>
               <MuteButton id={identifiable.id.toString()} />
-              <MenuItem>Restrict Person</MenuItem>
+              <RestrictButton
+                id={identifiable.id.toString()}
+                name={identifiable.name}
+              />
               <UserMessageButton
                 id={identifiable.id}
                 type={identifiable.__typename.toUpperCase()}
