@@ -1,52 +1,37 @@
-import React, { useCallback, useRef, useState } from 'react'
-import styled from 'styled-components'
+import React, { useCallback } from 'react'
 
-import Overlay from 'v2/components/UI/Overlay'
-import Text from 'v2/components/UI/Text'
-import Box from '../UI/Box'
+import Modal from 'v2/components/UI/Modal'
+import { FlagContentModal } from './components/FlagContentModal'
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
-const Message = styled(Box).attrs({
-  border: '1px solid',
-  borderColor: 'state.premium',
-  bg: 'background',
-  p: 4,
-})`
-  border-radius: ${props => props.theme.radii.regular};
-  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-  max-width: 20em;
-`
+interface FlagContentProps {
+  id: string
+  type: BaseConnectableTypeEnum
+}
 
-export const FlagContent: React.FC = ({ ...rest }) => {
-  const [open, setOpen] = useState<boolean>(false)
-  const targetEl = useRef(null)
-  const onClick = useCallback(() => {
-    setOpen(!open)
+export const FlagContent: React.FC<FlagContentProps> = ({
+  id,
+  type,
+  ...rest
+}) => {
+  const openFlagModal = useCallback(() => {
+    const modal = new Modal(
+      FlagContentModal,
+      {
+        id,
+        type,
+        onDone: () => {
+          modal.close()
+        },
+      },
+      { height: 'auto', width: '30em' }
+    )
+    modal.open()
   }, [])
 
   return (
-    <>
-      <span onClick={onClick} ref={targetEl} role="button" {...rest}>
-        Flag
-      </span>
-      {open && (
-        <Overlay
-          onClose={() => setOpen(false)}
-          targetEl={() => targetEl.current}
-          align="right"
-          anchorX="right"
-          alignToX="right"
-          alignToY="bottom"
-          anchorY="top"
-          offsetY={5}
-          offsetX={0}
-          disableTarget
-        >
-          <Message>
-            <Text>Hello</Text>
-          </Message>
-        </Overlay>
-      )}
-    </>
+    <span onClick={openFlagModal} role="button" {...rest}>
+      Flag
+    </span>
   )
 }

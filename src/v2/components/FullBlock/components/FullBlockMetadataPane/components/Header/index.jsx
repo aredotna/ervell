@@ -13,12 +13,17 @@ const Header = ({ children: title, action = null, ...rest }) => (
     borderColor="gray.light"
     display="flex"
     justifyContent="space-between"
+    alignItems="flex-start"
     {...rest}
   >
     <Text f={2} color="gray.medium">
       {title}
     </Text>
-    {action}
+    {action && (
+      <Text f={2} color="gray.medium" fontWeight="bold">
+        {action}
+      </Text>
+    )}
   </Box>
 )
 

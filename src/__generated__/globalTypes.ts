@@ -102,6 +102,15 @@ export enum ExportFormats {
 }
 
 /**
+ * Reason for flagging a content
+ */
+export enum FlagCategoryEnum {
+  NSFW = "NSFW",
+  OFFENSIVE = "OFFENSIVE",
+  SPAM = "SPAM",
+}
+
+/**
  * Types of followable objects
  */
 export enum FollowableTypeEnum {
