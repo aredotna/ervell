@@ -35,7 +35,7 @@ export const FullBlockShare: React.FC<FullBlockShareProps> = ({
         </a>
       ) : (
         <Container mb={6}>
-          <CopyToClipboard label="Copy link" value={url} />
+          <CopyToClipboard f={1} label="Copy link" value={url} />
 
           <a
             href={`https://twitter.com/intent/tweet?original_referer=${url}&text=${text}&url=${url}&via=aredotna`}
