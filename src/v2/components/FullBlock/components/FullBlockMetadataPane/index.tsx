@@ -20,6 +20,7 @@ import { truncate } from 'v2/components/UI/Truncate'
 import { FullBlock as Block } from '__generated__/FullBlock'
 import { LinkViewMode, OnLinkViewModeChange } from 'v2/components/FullBlock'
 import { SansSerifText } from 'v2/components/UI/SansSerifText'
+import { FlagContent } from 'v2/components/FlagContent'
 
 interface FullBlockMetadataPaneProps extends SpaceProps {
   block: Block
@@ -172,7 +173,7 @@ export default class FullBlockMetadataPane extends PureComponent<
           </Text>
         </Box>
 
-        <Header mt={4} mb={4}>
+        <Header mt={4} mb={4} action={<FlagContent />}>
           Actions
         </Header>
 
