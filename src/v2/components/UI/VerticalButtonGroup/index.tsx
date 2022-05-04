@@ -45,7 +45,7 @@ const VerticalButtonGroupContainer = styled.div`
       margin-top: -${buttonBorderWidth};
     }
 
-    &:last-child {
+    &:last-child:not(:first-child) {
       margin-top: -${buttonBorderWidth};
       border-top-left-radius: 0;
       border-top-right-radius: 0;

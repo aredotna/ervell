@@ -21,7 +21,12 @@ interface FullBlockMetadataFoldProps {
   block: Block | FullBlockFold_block
 }
 
-const Header = ({ children: title, selected = false, ...rest }) => (
+const Header = ({
+  children: title,
+  selected = false,
+  action = null,
+  ...rest
+}) => (
   <Box
     mt={6}
     mb={3}
@@ -29,12 +34,14 @@ const Header = ({ children: title, selected = false, ...rest }) => (
     borderBottom="1px solid"
     borderColor={selected ? 'gray.bold' : 'gray.light'}
     flex={1}
+    justifyContent="space-between"
     style={{ cursor: 'pointer' }}
     {...rest}
   >
     <Text f={2} color={selected ? 'gray.bold' : 'gray.medium'} align="center">
       {title}
     </Text>
+    {action}
   </Box>
 )
 

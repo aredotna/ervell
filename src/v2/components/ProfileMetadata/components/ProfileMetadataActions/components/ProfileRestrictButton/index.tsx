@@ -15,13 +15,9 @@ export const ProfileRestrictButton: React.FC<ProfileRestrictButtonProps> = ({
   ...rest
 }) => {
   const openRestrictPerson = useCallback(() => {
-    const onUpdate = href => {
-      window.location = href
-    }
-
     const modal = new Modal(
       RestrictPersonModal,
-      { id, name, onUpdate },
+      { id, name },
       { height: 'auto' }
     )
     modal.open()
