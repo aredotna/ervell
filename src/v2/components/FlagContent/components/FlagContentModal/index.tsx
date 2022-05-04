@@ -95,7 +95,7 @@ const FlagContentCategory: React.FC<FlagContentCategoryProps &
 
       return setMode('confirmed')
     }
-  }, [id, type, category, mode, setMode])
+  }, [id, type, category, mode, setMode, flagContent, onDone])
 
   const categoryText = {
     [FlagCategoryEnum.SPAM]: 'Spam',
@@ -134,7 +134,7 @@ export const FlagContentModal: React.FC<FlagContentModalProps> = ({
         <a href="https://www.are.na/terms" target="_blank">
           Terms
         </a>{' '}
-        to know what's allowed.
+        to know what is allowed.
       </Copy>
       <Copy>
         If you'd like to flag this item for review, please select a category
