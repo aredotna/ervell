@@ -137,7 +137,7 @@ export const FlagContentModal: React.FC<FlagContentModalProps> = ({
         to know what is allowed.
       </Copy>
       <Copy>
-        If you'd like to flag this item for review, please select a category
+        If you would like to flag this item for review, please select a category
         below:
       </Copy>
       <Categories>
