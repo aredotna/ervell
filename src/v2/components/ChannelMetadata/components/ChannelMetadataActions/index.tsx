@@ -162,11 +162,13 @@ export const ChannelMetadataActions: React.FC<ChannelMetadataActionsProps> = ({
           <Inner>
             <VerticalButtonGroup>
               <MuteButton channel={channel} />
-              <FlagButton
-                id={channel.id}
-                type={BaseConnectableTypeEnum.CHANNEL}
-                label="Flag inappropriate"
-              />
+              {!can.update && (
+                <FlagButton
+                  id={channel.id}
+                  type={BaseConnectableTypeEnum.CHANNEL}
+                  label="Flag inappropriate"
+                />
+              )}
             </VerticalButtonGroup>
           </Inner>
         </Overlay>
