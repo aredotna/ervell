@@ -185,7 +185,11 @@ export default class FullBlockMetadataPane extends PureComponent<
         <Header
           mt={4}
           mb={4}
-          action={<Flag id={block.id} type={BaseConnectableTypeEnum.BLOCK} />}
+          action={
+            !this.canManage && (
+              <Flag id={block.id} type={BaseConnectableTypeEnum.BLOCK} />
+            )
+          }
         >
           Actions
         </Header>
