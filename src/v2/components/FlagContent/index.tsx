@@ -7,11 +7,13 @@ import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 interface FlagContentProps {
   id: string
   type: BaseConnectableTypeEnum
+  label?: string
 }
 
 export const FlagContent: React.FC<FlagContentProps> = ({
   id,
   type,
+  label = 'Flag',
   ...rest
 }) => {
   const openFlagModal = useCallback(() => {
@@ -31,7 +33,7 @@ export const FlagContent: React.FC<FlagContentProps> = ({
 
   return (
     <span onClick={openFlagModal} role="button" {...rest}>
-      Flag
+      {label}
     </span>
   )
 }

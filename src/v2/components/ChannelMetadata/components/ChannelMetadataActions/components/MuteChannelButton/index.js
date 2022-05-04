@@ -53,7 +53,7 @@ class MuteChannelButton extends Component {
     return (
       <GenericButton onClick={this.toggleMute} {...rest}>
         <Icons name={actionName} size="1rem" mr={4} color="gray.medium" />
-        {actionName}
+        {actionName} Channel
       </GenericButton>
     )
   }

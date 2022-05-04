@@ -32,6 +32,7 @@ const PremiumButton = styled(Button)`
 
 const IdentifiableFollowButton = styled(FollowButton)`
   ${buttonMixin}
+  min-height: 16px;
 `
 
 const MenuButton = styled(GenericButtonLink)`
@@ -204,7 +205,7 @@ export const ProfileMetadataActions: React.FC<ProfileMetadataActionsProps> = ({
 
         {identifiable.__typename === 'User' && identifiable.can.follow && (
           <MenuButton onClick={handleClick} ref={ref}>
-            ...
+            <Icons name="Ellipsis" color="gray.semiBold" />
           </MenuButton>
         )}
       </ButtonGroup>
