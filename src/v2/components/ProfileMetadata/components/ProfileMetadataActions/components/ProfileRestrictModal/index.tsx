@@ -59,16 +59,24 @@ export const RestrictPersonModal: React.FC<RestrictPersonModalProps> = ({
     restrictMutationVariables
   >(restrictMutation, { variables: { id } })
 
-  const onPress = useCallback(() => {
-    setMode('restricting')
-    restrictContent()
-      .then(() => {
-        setMode('confirmed')
-      })
-      .catch(() => {
-        setMode('error')
-      })
-  }, [setMode, restrictContent])
+  const onPress = useCallback(
+    e => {
+      e.preventDefault()
+      setMode('restricting')
+      restrictContent()
+        .then(() => {
+          setMode('confirmed')
+          setTimeout(() => {
+            setMode('resting')
+            window.location.href = '/'
+          }, 3000)
+        })
+        .catch(() => {
+          setMode('error')
+        })
+    },
+    [setMode, restrictContent]
+  )
 
   const onChange = useCallback(
     ({ target: { value } }) => {
