@@ -7,7 +7,6 @@ import ManageChannel from 'v2/components/ManageChannel'
 import Button, {
   mixin as buttonMixin,
   GenericButtonLink,
-  BUTTON_BORDER_RADIUS,
   buttonColor,
   buttonPadding,
 } from 'v2/components/UI/GenericButton'
@@ -42,7 +41,6 @@ const Inner = styled(Box)`
   -webkit-overflow-scrolling: touch;
   height: 100%;
   text-align: left;
-  border-radius: ${BUTTON_BORDER_RADIUS};
   ${buttonColor};
 `
 

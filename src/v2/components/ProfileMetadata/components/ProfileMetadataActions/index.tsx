@@ -5,7 +5,6 @@ import {
   GenericButtonLink,
   mixin as buttonMixin,
   buttonColor,
-  BUTTON_BORDER_RADIUS,
   buttonPadding,
 } from 'v2/components/UI/GenericButton'
 import FollowButton from 'v2/components/FollowButton'
@@ -75,7 +74,6 @@ const Inner = styled(Box)`
   -webkit-overflow-scrolling: touch;
   height: 100%;
   text-align: left;
-  border-radius: ${BUTTON_BORDER_RADIUS};
   ${buttonColor};
 `
 
