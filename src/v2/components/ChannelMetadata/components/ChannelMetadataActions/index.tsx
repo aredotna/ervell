@@ -7,7 +7,6 @@ import ManageChannel from 'v2/components/ManageChannel'
 import Button, {
   mixin as buttonMixin,
   GenericButtonLink,
-  BUTTON_BORDER_RADIUS,
   buttonColor,
   buttonPadding,
 } from 'v2/components/UI/GenericButton'
