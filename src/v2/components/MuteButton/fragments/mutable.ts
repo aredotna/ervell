@@ -11,5 +11,9 @@ export default gql`
       id
       is_muted
     }
+    ... on User {
+      id
+      is_muted
+    }
   }
 `

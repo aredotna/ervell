@@ -33,7 +33,7 @@ export default class Modal extends Component {
 
     return (
       <ModalBackdrop {...rest} onClick={onClose}>
-        <Dialog role="dialog" onClick={e => e.stopPropagation()}>
+        <Dialog role="dialog" onClick={e => e.stopPropagation()} {...rest}>
           {children}
         </Dialog>
       </ModalBackdrop>

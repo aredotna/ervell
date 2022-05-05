@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { PureComponent } from 'react'
 import { SpaceProps } from 'styled-system'
+import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -20,6 +21,15 @@ import { truncate } from 'v2/components/UI/Truncate'
 import { FullBlock as Block } from '__generated__/FullBlock'
 import { LinkViewMode, OnLinkViewModeChange } from 'v2/components/FullBlock'
 import { SansSerifText } from 'v2/components/UI/SansSerifText'
+import { FlagContent } from 'v2/components/FlagContent'
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
+
+const Flag = styled(FlagContent)`
+  cursor: pointer;
+  &:hover {
+    color: ${({ theme }) => theme.colors.gray.bold};
+  }
+`
 
 interface FullBlockMetadataPaneProps extends SpaceProps {
   block: Block
@@ -172,7 +182,15 @@ export default class FullBlockMetadataPane extends PureComponent<
           </Text>
         </Box>
 
-        <Header mt={4} mb={4}>
+        <Header
+          mt={4}
+          mb={4}
+          action={
+            !this.canManage && (
+              <Flag id={block.id} type={BaseConnectableTypeEnum.BLOCK} />
+            )
+          }
+        >
           Actions
         </Header>
 

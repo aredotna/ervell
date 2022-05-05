@@ -7,10 +7,6 @@
 // GraphQL fragment: Mutable
 // ====================================================
 
-export interface Mutable_User {
-  __typename: "User";
-}
-
 export interface Mutable_Channel {
   __typename: "Channel";
   id: number;
@@ -23,4 +19,10 @@ export interface Mutable_Connectable {
   is_muted: boolean | null;
 }
 
-export type Mutable = Mutable_User | Mutable_Channel | Mutable_Connectable;
+export interface Mutable_User {
+  __typename: "User";
+  id: number;
+  is_muted: boolean | null;
+}
+
+export type Mutable = Mutable_Channel | Mutable_Connectable | Mutable_User;

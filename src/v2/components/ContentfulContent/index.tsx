@@ -40,6 +40,16 @@ const Figcaption = styled.figcaption`
   color: ${({ theme }) => theme.colors.gray.base};
 `
 
+const Ol = styled.ol`
+  list-style-type: decimal;
+  margin-left: ${props => props.theme.space[5]};
+  color: ${({ theme }) => theme.colors.gray.base};
+`
+
+const Li = styled.li`
+  margin: ${({ theme }) => `${theme.space[7]} 0`};
+`
+
 const Blockquote = styled.blockquote`
   border-left: 2px solid ${({ theme }) => theme.colors.gray.light};
   padding-left: ${({ theme }) => theme.space[6]};
@@ -104,6 +114,8 @@ export const optionsWithEmbeds = (embedData: any, defaultFontSize: number) => {
           {children}
         </BaseText>
       ),
+      [BLOCKS.OL_LIST]: (_, children) => <Ol>{children}</Ol>,
+      [BLOCKS.LIST_ITEM]: (_, children) => <Li>{children}</Li>,
       [BLOCKS.QUOTE]: (_, children) => <Blockquote>{children}</Blockquote>,
       [BLOCKS.HR]: () => <HR />,
       [BLOCKS.PARAGRAPH]: (_, children) => {

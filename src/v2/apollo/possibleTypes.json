@@ -90,8 +90,8 @@
     "Text",
     "User"
   ],
-  "Mutable": ["Channel", "Connectable"],
-  "MutableType": ["Channel", "Connectable"],
+  "Mutable": ["Channel", "Connectable", "User"],
+  "MutableType": ["Channel", "Connectable", "User"],
   "QuickSearchResult": ["Channel", "Group", "User"],
   "SearchResult": ["Channel", "Connectable", "Group", "User"],
   "SsearchResult": [
