@@ -5,6 +5,7 @@ import apolloMiddleware from 'v2/apollo/middleware'
 import pageResolver from 'v2/components/UI/Page/resolver'
 
 import logoutMiddleware from 'apps/authentication/middleware/logout'
+import xFrameMiddleware from 'apps/authentication/middleware/xFrameOptions'
 import redirectToMiddleware from 'lib/middleware/redirect_to.coffee'
 import setRedirectToMiddleware from 'lib/middleware/setRedirectTo'
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee'
@@ -71,6 +72,7 @@ const findFriendsCallback = (req, res, next) =>
 app
   .get(
     /^\/(sign_up|log_in|forgot|register\/\w+|reset\/\w+)/,
+    xFrameMiddleware,
     setRedirectToMiddleware,
     apolloMiddleware,
     render
