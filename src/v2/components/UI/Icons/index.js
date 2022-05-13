@@ -44,6 +44,8 @@ import Minimize from 'v2/components/UI/Icons/Minimize.svg'
 import Filters from 'v2/components/UI/Icons/Filters.svg'
 import Profile from 'v2/components/UI/Icons/Profile.svg'
 import Channel from 'v2/components/UI/Icons/Channel.svg'
+import CircleFilled from 'v2/components/UI/Icons/CircleFilled.svg'
+import CircleOutline from 'v2/components/UI/Icons/CircleOutline.svg'
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -85,6 +87,8 @@ export const COMPONENTS = {
   Filters: <Filters />,
   Profile: <Profile />,
   Channel: <Channel />,
+  CircleFilled: <CircleFilled />,
+  CircleOutline: <CircleOutline />,
 }
 
 export const ICON_NAMES = Object.keys(COMPONENTS)
