@@ -283,17 +283,22 @@ export const ManageBlock: React.FC<ManageBlockProps> = ({
             </Box>
           </SidebarContainer>
         </SplitPane>
-        <Close
-          size={8}
-          py={5}
-          px={4}
-          thickness="2px"
+        <Box
+          display="flex"
           position="absolute"
           top={0}
           right={0}
           zIndex={1}
-          onClick={onDone}
-        />
+          flexDirection="row"
+          flexWrap="wrap"
+          alignItems="center"
+          justifyContent="center"
+          p={4}
+          pr={5}
+          height="46px"
+        >
+          <Close ml={5} size={'1.2em'} onClick={onDone} />
+        </Box>
       </form>
     </Container>
   )

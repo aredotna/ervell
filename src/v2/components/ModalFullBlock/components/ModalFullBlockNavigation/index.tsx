@@ -8,9 +8,7 @@ import Icons from 'v2/components/UI/Icons'
 import modalFullBlockQuery from 'v2/components/ModalFullBlock/queries/modalFullBlock'
 import { useApolloClient } from '@apollo/client'
 
-const Prev = styled(Link).attrs({
-  p: 3,
-})`
+const Prev = styled(Link)`
   svg path {
     fill: ${props => props.theme.colors.gray.semiBold};
     cursor: pointer;
