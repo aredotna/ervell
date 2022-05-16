@@ -100,13 +100,7 @@ export const Banner: React.FC<BannerProps & BoxProps> = ({
       </Box>
 
       {isCloseable && (
-        <Close
-          size={7}
-          thickness="4px"
-          color={color}
-          alignSelf="flex-start"
-          onClick={handleClose}
-        />
+        <Close size="1.2em" color={color} onClick={handleClose} />
       )}
     </Container>
   )

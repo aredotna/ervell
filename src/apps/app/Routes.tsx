@@ -221,7 +221,7 @@ export const Routes = () => {
             ].map(n => n.toFixed(0))
 
             return (
-              <Modal Dialog={ModalFullscreenDialog}>
+              <Modal Dialog={ModalFullscreenDialog} bg="utility.opaque">
                 <ModalFullBlock id={params.id} ids={ids} />
               </Modal>
             )

@@ -110,6 +110,21 @@ export const FullBlockConnections: React.FC<FullBlockConnectionsProps> = ({
 
   return (
     <Box {...rest}>
+      <Connect
+        id={id}
+        type={BaseConnectableTypeEnum.BLOCK}
+        mt={6}
+        mb={7}
+        f={3}
+        textAlign="center"
+        refetchQueries={[
+          {
+            query: fullBlockFoldQuery,
+            variables: { id, page: 1, per: 5 },
+          },
+        ]}
+      />
+
       {hasCurrentUserChannels && (
         <>
           {hasCurrentUserChannels && current_user_channels.length !== total && (
@@ -188,20 +203,6 @@ export const FullBlockConnections: React.FC<FullBlockConnectionsProps> = ({
           <FullBlockChannelsAlsoIn block={block} loading={loading} />
         </React.Fragment>
       )}
-
-      <Connect
-        id={id}
-        type={BaseConnectableTypeEnum.BLOCK}
-        my={6}
-        f={3}
-        textAlign="center"
-        refetchQueries={[
-          {
-            query: fullBlockFoldQuery,
-            variables: { id, page: 1, per: 5 },
-          },
-        ]}
-      />
     </Box>
   )
 }
