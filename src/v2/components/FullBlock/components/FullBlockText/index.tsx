@@ -56,7 +56,7 @@ export const FullBlockText: React.FC<FullBlockTextProps> = ({
       >
         {!isColor && (
           <SansSerifText
-            color={{ DEFAULT: 'gray.block', FULLSCREEN: 'white' }[layout]}
+            color={{ DEFAULT: 'gray.block', FULLSCREEN: 'gray.block' }[layout]}
             dangerouslySetInnerHTML={{ __html: block.content }}
           />
         )}

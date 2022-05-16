@@ -77,7 +77,7 @@ export default class FullBlockMetadataPane extends PureComponent<
     const { block, linkViewMode, onLinkViewModeChange, ...rest } = this.props
 
     return (
-      <MetadataContainer {...rest}>
+      <MetadataContainer {...rest} pt={10}>
         <Text
           mb={5}
           f={5}

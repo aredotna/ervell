@@ -20,7 +20,7 @@ interface FullBlockProps {
   block: Block
   context: LightboxContext
   layout: LightboxLayout
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export type LinkViewMode = 'screenshot' | 'reader'

@@ -65,7 +65,7 @@ export const FullBlockImage: React.FC<FullBlockImageProps> = ({
           mt={6}
           f={5}
           lineHeight={2}
-          color="gray.hint"
+          color="gray.regular"
           fontWeight="bold"
           textAlign="center"
         >

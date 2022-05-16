@@ -36,6 +36,8 @@ import Garbage from 'v2/components/UI/Icons/Garbage.svg'
 import Globe from 'v2/components/UI/Icons/Globe.svg'
 import UpArrow from 'v2/components/UI/Icons/UpArrow.svg'
 import DownArrow from 'v2/components/UI/Icons/DownArrow.svg'
+import ArrowNext from 'v2/components/UI/Icons/ArrowNext.svg'
+import ArrowPrev from 'v2/components/UI/Icons/ArrowPrev.svg'
 import Drag from 'v2/components/UI/Icons/Drag.svg'
 import Apple from 'v2/components/UI/Icons/Apple.svg'
 import Android from 'v2/components/UI/Icons/Android.svg'
@@ -46,6 +48,7 @@ import Profile from 'v2/components/UI/Icons/Profile.svg'
 import Channel from 'v2/components/UI/Icons/Channel.svg'
 import CircleFilled from 'v2/components/UI/Icons/CircleFilled.svg'
 import CircleOutline from 'v2/components/UI/Icons/CircleOutline.svg'
+import CloseEx from 'v2/components/UI/Icons/CloseIcon.svg'
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -79,6 +82,8 @@ export const COMPONENTS = {
   Globe: <Globe />,
   UpArrow: <UpArrow />,
   DownArrow: <DownArrow />,
+  ArrowNext: <ArrowNext />,
+  ArrowPrev: <ArrowPrev />,
   Drag: <Drag />,
   Apple: <Apple />,
   Android: <Android />,
@@ -89,6 +94,7 @@ export const COMPONENTS = {
   Channel: <Channel />,
   CircleFilled: <CircleFilled />,
   CircleOutline: <CircleOutline />,
+  Close: <CloseEx />,
 }
 
 export const ICON_NAMES = Object.keys(COMPONENTS)

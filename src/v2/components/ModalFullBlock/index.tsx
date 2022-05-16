@@ -9,7 +9,6 @@ import { BREAKPOINTS } from 'v2/styles/constants'
 
 import Box from 'v2/components/UI/Box'
 import Link from 'v2/components/UI/Link'
-import Icons from 'v2/components/UI/Icons'
 import Close from 'v2/components/UI/Close'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
@@ -23,19 +22,20 @@ import {
   ModalFullBlockVariables,
   ModalFullBlock_block,
 } from '__generated__/ModalFullBlock'
+import Text from '../UI/Text'
 
 const Fullscreen = styled(Link).attrs({
   border: '1px solid',
+  color: 'gray.medium',
 })`
   cursor: pointer;
   border-radius: ${props => props.theme.radii.subtle};
   user-select: none;
+  background: ${props => props.theme.colors.background};
+  align-self: center;
 
   &:hover {
-    border-color: ${props => props.theme.colors.gray.bold};
-    svg {
-      fill: ${props => props.theme.colors.gray.bold};
-    }
+    border-color: ${props => props.theme.colors.gray.regular};
   }
 `
 
@@ -45,8 +45,6 @@ interface ModalFullBlockInnerProps {
   error?: any
   loading?: boolean
   block?: ModalFullBlock_block
-  id: number
-  ids?: string[]
   layout: ModalFullBlockLayoutType
 }
 
@@ -54,26 +52,8 @@ const ModalFullBlockInner: React.FC<ModalFullBlockInnerProps> = ({
   loading,
   error,
   block,
-  id,
-  ids,
   layout,
 }) => {
-  const history = useHistory()
-  const { state } = useLocation()
-
-  const [currentId, setCurrentId] = useState<number>(id)
-
-  const updateId = useCallback(
-    newId => {
-      history.push({
-        pathname: `/block/${newId}`,
-        state,
-      })
-      setCurrentId(newId)
-    },
-    [history, state]
-  )
-
   if (loading) {
     return (
       <Box position="relative" width="100%" height="100%">
@@ -86,17 +66,7 @@ const ModalFullBlockInner: React.FC<ModalFullBlockInnerProps> = ({
     return <ErrorAlert>{error.message}</ErrorAlert>
   }
 
-  return (
-    <FullBlock block={block} context="MODAL" layout={layout}>
-      {ids.length > 1 && (
-        <ModalFullBlockNavigation
-          id={currentId}
-          ids={ids}
-          onChange={updateId}
-        />
-      )}
-    </FullBlock>
-  )
+  return <FullBlock block={block} context="MODAL" layout={layout} />
 }
 
 interface ModalFullBlockProps {
@@ -129,6 +99,19 @@ export const ModalFullBlock: React.FC<ModalFullBlockProps> = ({ id, ids }) => {
   const history = useHistory()
   const location = useLocation()
   const background = location.state && JSON.parse(location.state.background)
+
+  const [currentId, setCurrentId] = useState<number>(id)
+
+  const updateId = useCallback(
+    newId => {
+      history.push({
+        pathname: `/block/${newId}`,
+        state: location.state,
+      })
+      setCurrentId(newId)
+    },
+    [history, location.state]
+  )
 
   const onClose = useCallback(() => {
     history.push(`${background.pathname}${background.search}`, {
@@ -168,54 +151,54 @@ export const ModalFullBlock: React.FC<ModalFullBlockProps> = ({ id, ids }) => {
         loading={loading}
         error={error}
         block={data && data.block}
-        ids={ids}
         layout={layout}
-        id={id}
       />
       <Box
-        // Hides fullscreen button on mobile
-        display={['none', 'block', 'block']}
-        position="absolute"
-        bottom={0}
-        right={0}
-        zIndex={1}
-        p={7}
-      >
-        <Fullscreen
-          p={4}
-          onClick={toggleLayout}
-          bg={{ DEFAULT: 'background' }[layout]}
-          borderColor={
-            {
-              DEFAULT: 'gray.semiLight',
-              FULLSCREEN: 'gray.semiBold',
-            }[layout]
-          }
-        >
-          <Icons
-            size="1rem"
-            name={
-              {
-                DEFAULT: 'EnterFullscreen',
-                FULLSCREEN: 'ExitFullscreen',
-              }[layout]
-            }
-            color="gray.semiBold"
-          />
-        </Fullscreen>
-      </Box>
-
-      <Close
-        size={8}
-        py={5}
-        px={4}
-        thickness="2px"
-        onClick={onClose}
+        display="flex"
         position="absolute"
         top={0}
         right={0}
         zIndex={1}
-      />
+        flexDirection="row"
+        flexWrap="wrap"
+        alignItems="center"
+        justifyContent="center"
+        p={4}
+        pr={5}
+      >
+        <Box
+          // Hides fullscreen button on mobile
+          display={['none', 'flex', 'flex']}
+          mr={4}
+        >
+          <Fullscreen
+            py={2}
+            px={3}
+            onClick={toggleLayout}
+            bg={{ DEFAULT: 'background' }[layout]}
+            borderColor="gray.semiLight"
+          >
+            <Text f={1} color="gray.medium">
+              {
+                {
+                  DEFAULT: 'Hide sidebar',
+                  FULLSCREEN: 'Show sidebar',
+                }[layout]
+              }
+            </Text>
+          </Fullscreen>
+        </Box>
+
+        {ids.length > 1 && (
+          <ModalFullBlockNavigation
+            id={currentId.toString()}
+            ids={ids}
+            onChange={updateId}
+          />
+        )}
+
+        <Close ml={5} size={'1.2em'} onClick={onClose} />
+      </Box>
     </Box>
   )
 }

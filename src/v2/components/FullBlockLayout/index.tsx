@@ -32,7 +32,7 @@ export const SidebarContainer = styled(Box).attrs({
 export const MetadataContainer = styled(Box).attrs({
   flex: 1,
   px: 7,
-  pt: 8,
+  pt: 9,
   pb: 8,
   height: '100%',
   bg: 'background',

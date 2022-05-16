@@ -29,6 +29,7 @@ const COLORS = {
     cell: 'rgb(4, 4, 4)',
   },
   utility: {
+    opaque: 'rgba(0, 0, 0, 0.8)',
     translucent: 'rgba(0, 0, 0, 0.9)',
     semiTranslucent: 'rgba(0, 0, 0, 0.5)',
     transparent: 'rgba(0, 0, 0, 0.001)',
