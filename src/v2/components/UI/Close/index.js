@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {
-  themeGet,
   display,
   top,
   right,
@@ -10,7 +9,6 @@ import {
   left,
   position,
   space,
-  bgColor,
   alignSelf,
   zIndex,
 } from 'styled-system'
