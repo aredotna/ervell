@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -8,16 +9,18 @@ import Icon from 'v2/components/UI/Icons'
 
 import { LinkViewMode, OnLinkViewModeChange } from 'v2/components/FullBlock'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
+import { useHover } from 'v2/hooks/useHover'
 
 const LinkContainer = styled(Box)`
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   ${props =>
     props.isActive &&
     `
     svg path {
-      fill: ${x => x.theme.colors.gray.block};
+      fill: ${x => x.theme.colors.gray.block} !important;
     }
   `}
 `
@@ -45,6 +48,10 @@ const Option = styled.a`
   color: ${props => props.theme.colors.gray.regular} !important;
   display: flex !important;
   flex-direction: row;
+
+  &:hover {
+    color: ${props => props.theme.colors.gray.semiBold} !important;
+  }
 
   ${props =>
     props.disabled &&
@@ -77,14 +84,15 @@ export const FullBlockSwitchViewMode: React.FC<FullBlockSwitchViewModeProps> = (
 }) => {
   const [open, setOpen] = useState<boolean>(false)
   const { is_premium } = useSerializedMe()
+  const history = useHistory()
 
   const openReader = useCallback(() => {
     if (!is_premium) {
-      setOpen(!open)
+      history.push('/pricing')
     } else {
       onLinkViewModeChange('reader')
     }
-  }, [is_premium, setOpen, open, onLinkViewModeChange])
+  }, [is_premium, setOpen, open, onLinkViewModeChange, history])
 
   return (
     <>
@@ -93,6 +101,7 @@ export const FullBlockSwitchViewMode: React.FC<FullBlockSwitchViewModeProps> = (
           name={
             linkViewMode === 'screenshot' ? 'CircleFilled' : 'CircleOutline'
           }
+          color="gray.regular"
         />
         <Option
           onClick={() => onLinkViewModeChange('screenshot')}
@@ -104,6 +113,7 @@ export const FullBlockSwitchViewMode: React.FC<FullBlockSwitchViewModeProps> = (
       <OptionOuter>
         <Circle
           name={linkViewMode === 'reader' ? 'CircleFilled' : 'CircleOutline'}
+          color="gray.regular"
         />
         <Option
           onClick={openReader}
@@ -112,27 +122,29 @@ export const FullBlockSwitchViewMode: React.FC<FullBlockSwitchViewModeProps> = (
         >
           Reader
         </Option>
-        <QuestionMarkOverlay open={open} setOpen={setOpen} />
+        <QuestionMarkOverlay />
       </OptionOuter>
     </>
   )
 }
 
-export const QuestionMarkOverlay: React.FC<{
-  open: boolean
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
-}> = ({ open, setOpen }) => {
+export const QuestionMarkOverlay: React.FC = () => {
+  const [hoverRef, isHovered] = useHover()
   const targetEl = useRef(null)
-  const { is_premium } = useSerializedMe()
 
   return (
     <>
-      <LinkContainer onClick={() => setOpen(!open)} isActive={open} key={open}>
-        <Icon name="QuestionCircle" size="0.75rem" ml={3} />
+      <LinkContainer ref={hoverRef} isActive={isHovered}>
+        <Icon
+          name="QuestionCircle"
+          size="0.75rem"
+          ml={3}
+          color={isHovered ? 'gray.medium' : 'gray.semiLight'}
+        />
         <span ref={targetEl} />
       </LinkContainer>
 
-      {open && (
+      {isHovered && (
         <Overlay
           alignToY="bottom"
           alignToX="right"
@@ -142,7 +154,6 @@ export const QuestionMarkOverlay: React.FC<{
           offsetX={0}
           disableTarget
           targetEl={() => targetEl.current}
-          onClose={() => setOpen(false)}
         >
           <BetaMessage>
             <Text f={1} m={4}>
@@ -154,14 +165,6 @@ export const QuestionMarkOverlay: React.FC<{
               any other long read formats. Still to come: full text search,
               website archives, and offline mode.
             </Text>
-            <Text f={1} m={4}></Text>
-            {!is_premium && (
-              <Text f={1} m={4} color="state.premium">
-                <strong>
-                  <a href="/pricing">Upgrade to premium to get access</a>
-                </strong>
-              </Text>
-            )}
           </BetaMessage>
         </Overlay>
       )}
