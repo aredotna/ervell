@@ -163,8 +163,8 @@ export const ModalFullBlock: React.FC<ModalFullBlockProps> = ({ id, ids }) => {
         flexWrap="wrap"
         alignItems="center"
         justifyContent="center"
-        p={4}
-        pr={5}
+        p={5}
+        pr={6}
       >
         <Box
           // Hides fullscreen button on mobile
