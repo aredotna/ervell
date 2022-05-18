@@ -9,7 +9,7 @@ import modalFullBlockQuery from 'v2/components/ModalFullBlock/queries/modalFullB
 import { useApolloClient } from '@apollo/client'
 
 const Prev = styled(Link)`
-  width: 1.75em;
+  width: 2.75em;
   display: flex;
   align-items: center;
   justify-content: center;

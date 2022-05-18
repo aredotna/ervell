@@ -36,6 +36,7 @@ export const FullBlockAttachment: React.FC<FullBlockAttachmentProps> = ({
       display="flex"
       width="100%"
       height="100%"
+      mt={['85px', 0, 0]}
       alignItems="center"
       justifyContent="center"
       textAlign="center"
