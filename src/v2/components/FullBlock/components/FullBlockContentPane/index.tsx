@@ -43,7 +43,12 @@ export default class FullBlockContentPane extends PureComponent<
     }[block.__typename]
 
     return (
-      <Container height={['auto']} layout={layout} {...rest}>
+      <Container
+        height={['auto']}
+        type={block.__typename}
+        layout={layout}
+        {...rest}
+      >
         <Content block={block} layout={layout} />
 
         {children}

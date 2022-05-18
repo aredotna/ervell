@@ -170,10 +170,12 @@ const Container = styled(Box)<{
     }
   }
 
-  ${constants.media.mobile`
+  ${constants.media.mobile`  
     .SplitPane {
       overflow: scroll !important;
       display: block !important;
+      position: relative !important;
+      height: auto !important;
 
       .Pane1,
       .Pane2 {

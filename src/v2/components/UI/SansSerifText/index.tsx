@@ -171,6 +171,9 @@ export const mixin = css`
     font-weight: bold;
     color: ${props => props.theme.colors.gray.bold};
     text-decoration: none;
+    // for urls
+    white-space: pre-wrap;
+    word-wrap: break-word;
   }
 
   pre,
@@ -201,10 +204,11 @@ export const mixin = css`
 
   pre {
     page-break-inside: avoid;
+    white-space: pre-wrap;
     word-wrap: break-word;
     max-width: 100%;
     overflow: scroll;
-    white-space: pre-wrap;
+    
 
     code {
       background: transparent;
