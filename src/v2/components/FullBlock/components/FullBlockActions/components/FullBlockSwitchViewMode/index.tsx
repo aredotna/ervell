@@ -1,12 +1,29 @@
 import React, { useState, useRef, useCallback } from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import Overlay from 'v2/components/UI/Overlay'
+import Icon from 'v2/components/UI/Icons'
 
 import { LinkViewMode, OnLinkViewModeChange } from 'v2/components/FullBlock'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
+import { useHover } from 'v2/hooks/useHover'
+
+const LinkContainer = styled(Box)`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  ${props =>
+    props.isActive &&
+    `
+    svg path {
+      fill: ${x => x.theme.colors.gray.block} !important;
+    }
+  `}
+`
 
 const BetaMessage = styled(Box).attrs({
   border: '1px solid',
@@ -20,11 +37,20 @@ const BetaMessage = styled(Box).attrs({
   max-width: 20em;
 `
 
+const OptionOuter = styled(Box).attrs({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-start',
+})``
+
 const Option = styled.a`
   cursor: pointer;
   color: ${props => props.theme.colors.gray.regular} !important;
-  &:before {
-    content: '○ ';
+  display: flex !important;
+  flex-direction: row;
+
+  &:hover {
+    color: ${props => props.theme.colors.gray.semiBold} !important;
   }
 
   ${props =>
@@ -37,12 +63,15 @@ const Option = styled.a`
     props.selected &&
     `
     color: ${props.theme.colors.gray.semiBold} !important;
-
-    &:before {
-      content: '● ';
-    }
   `}
 `
+
+const Circle = styled(Icon).attrs({
+  size: '0.7em',
+  mr: 4,
+  color: 'gray.medium',
+  mb: '0.117em',
+})``
 
 interface FullBlockSwitchViewModeProps {
   linkViewMode: LinkViewMode
@@ -54,54 +83,73 @@ export const FullBlockSwitchViewMode: React.FC<FullBlockSwitchViewModeProps> = (
   onLinkViewModeChange,
 }) => {
   const [open, setOpen] = useState<boolean>(false)
-  const targetEl = useRef(null)
   const { is_premium } = useSerializedMe()
+  const history = useHistory()
 
   const openReader = useCallback(() => {
     if (!is_premium) {
-      setOpen(!open)
+      history.push('/pricing')
     } else {
       onLinkViewModeChange('reader')
     }
-  }, [is_premium, setOpen, open, onLinkViewModeChange])
+  }, [is_premium, setOpen, open, onLinkViewModeChange, history])
 
   return (
     <>
-      <Option
-        onClick={() => onLinkViewModeChange('screenshot')}
-        selected={linkViewMode === 'screenshot'}
-      >
-        Preview
-      </Option>
-      <Option
-        onClick={openReader}
-        selected={linkViewMode === 'reader'}
-        disabled={!is_premium}
-      >
-        Reader
-      </Option>
-      <Text
-        f={1}
-        color="gray.semiLight"
-        display="inline"
-        ref={targetEl}
-        style={{ cursor: 'pointer' }}
-        onClick={() => {
-          setOpen(!open)
-        }}
-      >
-        [?]
-      </Text>
+      <OptionOuter>
+        <Circle
+          name={
+            linkViewMode === 'screenshot' ? 'CircleFilled' : 'CircleOutline'
+          }
+          color="gray.regular"
+        />
+        <Option
+          onClick={() => onLinkViewModeChange('screenshot')}
+          selected={linkViewMode === 'screenshot'}
+        >
+          Preview
+        </Option>
+      </OptionOuter>
+      <OptionOuter>
+        <Circle
+          name={linkViewMode === 'reader' ? 'CircleFilled' : 'CircleOutline'}
+          color="gray.regular"
+        />
+        <Option
+          onClick={openReader}
+          selected={linkViewMode === 'reader'}
+          disabled={!is_premium}
+        >
+          Reader
+        </Option>
+        <QuestionMarkOverlay />
+      </OptionOuter>
+    </>
+  )
+}
 
-      {open && (
+export const QuestionMarkOverlay: React.FC = () => {
+  const [hoverRef, isHovered] = useHover()
+  const targetEl = useRef(null)
+
+  return (
+    <>
+      <LinkContainer ref={hoverRef} isActive={isHovered}>
+        <Icon
+          name="QuestionCircle"
+          size="0.75rem"
+          ml={3}
+          color={isHovered ? 'gray.medium' : 'gray.semiLight'}
+        />
+        <span ref={targetEl} />
+      </LinkContainer>
+
+      {isHovered && (
         <Overlay
-          onClose={() => {
-            setOpen(!open)
-          }}
           alignToY="bottom"
           alignToX="right"
           anchorY="top"
-          anchorX="right"
+          anchorX="left"
           offsetY={5}
           offsetX={0}
           disableTarget
@@ -109,7 +157,7 @@ export const FullBlockSwitchViewMode: React.FC<FullBlockSwitchViewModeProps> = (
         >
           <BetaMessage>
             <Text f={1} m={4}>
-              <strong>Reader mode (beta)</strong>
+              <strong>Reader mode</strong>
             </Text>
             <Text f={1} m={4}>
               Content from external websites is displayed in a stripped-down,
@@ -117,14 +165,6 @@ export const FullBlockSwitchViewMode: React.FC<FullBlockSwitchViewModeProps> = (
               any other long read formats. Still to come: full text search,
               website archives, and offline mode.
             </Text>
-            <Text f={1} m={4}></Text>
-            {!is_premium && (
-              <Text f={1} m={4} color="state.premium">
-                <strong>
-                  <a href="/pricing">Upgrade to premium to get access</a>
-                </strong>
-              </Text>
-            )}
           </BetaMessage>
         </Overlay>
       )}

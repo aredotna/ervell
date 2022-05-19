@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import Icons from 'v2/components/UI/Icons'
+import constants from 'v2/styles/constants'
 
 import { FullBlockLinkProps } from 'v2/components/FullBlock/components/FullBlockLink'
 
@@ -31,7 +32,7 @@ const Image = styled(Box)`
 `
 
 const Url = styled(Text).attrs({
-  f: 2,
+  f: [1, 2],
   font: 'mono',
   color: 'gray.semiBold',
   overflowEllipsis: true,
@@ -45,6 +46,13 @@ const Url = styled(Text).attrs({
 const Container = styled(Box)`
   overflow: hidden;
   max-width: 60vw;
+  height: 95%;
+
+  ${constants.media.mobile`
+    max-width: 90vw;
+    aspect-ratio: 4/3;
+    height: unset;
+  `}
 `
 
 export const FullBlockLinkScreenshot: React.FC<FullBlockLinkProps> = ({
@@ -52,7 +60,8 @@ export const FullBlockLinkScreenshot: React.FC<FullBlockLinkProps> = ({
 }) => {
   return (
     <Box
-      p={6}
+      px={6}
+      py={7}
       width="100%"
       height="100%"
       display="flex"
@@ -63,7 +72,6 @@ export const FullBlockLinkScreenshot: React.FC<FullBlockLinkProps> = ({
       <Container
         display="flex"
         flexDirection="column"
-        height={['95vh', '95%']}
         width="90%"
         border="1px solid"
         borderColor="gray.light"

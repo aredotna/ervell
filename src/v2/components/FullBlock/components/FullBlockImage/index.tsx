@@ -46,7 +46,8 @@ export const FullBlockImage: React.FC<FullBlockImageProps> = ({
       href={block.original_image_url}
       target="_blank"
       rel="nofollow noopener"
-      p={6}
+      px={6}
+      py={7}
     >
       <Image
         src={block.image_url}
@@ -65,7 +66,7 @@ export const FullBlockImage: React.FC<FullBlockImageProps> = ({
           mt={6}
           f={5}
           lineHeight={2}
-          color="gray.hint"
+          color="gray.regular"
           fontWeight="bold"
           textAlign="center"
         >

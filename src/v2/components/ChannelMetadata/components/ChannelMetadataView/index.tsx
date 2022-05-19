@@ -28,6 +28,7 @@ const BetaMessage = styled(Box).attrs({
 const LinkContainer = styled(Box)`
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   ${props =>
     props.isActive &&
@@ -101,7 +102,12 @@ export const QuestionMarkOverlay: React.FC = () => {
   return (
     <>
       <LinkContainer ref={hoverRef} isActive={isHovered}>
-        <Icon name="QuestionCircle" size="0.75rem" ml={3} />
+        <Icon
+          name="QuestionCircle"
+          size="0.75rem"
+          ml={3}
+          color={isHovered ? 'gray.medium' : 'gray.semiLight'}
+        />
         <span ref={targetEl} />
       </LinkContainer>
 

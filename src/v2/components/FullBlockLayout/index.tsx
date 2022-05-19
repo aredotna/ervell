@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
+import constants from 'v2/styles/constants'
 
 export type LightboxContext = 'MODAL' | 'PAGE'
 export type LightboxLayout = 'DEFAULT' | 'FULLSCREEN'
@@ -32,7 +33,7 @@ export const SidebarContainer = styled(Box).attrs({
 export const MetadataContainer = styled(Box).attrs({
   flex: 1,
   px: 7,
-  pt: 8,
+  pt: 9,
   pb: 8,
   height: '100%',
   bg: 'background',
@@ -42,13 +43,37 @@ export const MetadataContainer = styled(Box).attrs({
 export const ContentContainer = styled(Box).attrs({
   minHeight: ['75vh', 'auto', 'auto'],
   maxHeight: ['auto', 'auto', 'auto'],
-  mb: [8, 0, 0],
+  mb: [0],
+  mt: [8, 0, 0],
 })`
   position: relative;
   flex: 3;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${({ type }) => {
+    if (type === 'Text') {
+      return `
+        margin-top: 0;
+      `
+    }
+  }}
+`
+
+export const TextOutline = styled<{ border: boolean }>(Box).attrs({
+  minHeight: '100%',
+  height: ['100%', 'auto'],
+  maxWidth: ['99vw', '55em'],
+  px: 7,
+  py: 6,
+  mx: 'auto',
+  overflow: 'hidden',
+  position: 'relative',
+})`
+  ${constants.media.mobile`
+    border-color: transparent;
+  `}
 `
 
 export interface TextBoxContainerProps {
@@ -65,34 +90,28 @@ export const TextBoxContainer: React.FC<FullBlockLayoutProps &
   border = true,
   color = null,
 }) => {
+  const borderColor =
+    border && { DEFAULT: 'gray.semiLight', FULLSCREEN: 'gray.semiBold' }[layout]
+
   return (
     <Box height="100%" width="100%">
       <Box
         height={['auto', '100%']}
+        minHeight={['75vh', 'auto']}
         width="100%"
         py={9}
-        px={[3, 9]}
+        px={[0, 9]}
         overflowScrolling
       >
-        <Box
-          minHeight="100%"
+        <TextOutline
           width={{ DEFAULT: '100%', FULLSCREEN: '75%' }[layout]}
-          maxWidth="55em"
           bg={color || 'background'}
           border={border && '1px solid'}
-          borderColor={
-            border &&
-            { DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]
-          }
-          px={7}
-          py={6}
-          mx="auto"
-          overflow="hidden"
-          position="relative"
+          borderColor={borderColor}
           onClick={onClick}
         >
           {children}
-        </Box>
+        </TextOutline>
       </Box>
     </Box>
   )
