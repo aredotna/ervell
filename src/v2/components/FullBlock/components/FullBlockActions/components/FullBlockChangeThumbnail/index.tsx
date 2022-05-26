@@ -104,10 +104,12 @@ const BlockChangeThumbnail: React.FC<BlockChangeThumbnailProps> = ({
     return null
   }
 
+  console.log({ block })
+
   return (
     <div>
       {/* Just redirect to pricing page if user is not premium */}
-      {!block.can.edit_thumbnail && (
+      {block.can.potentially_edit_thumbnail && !block.can.edit_thumbnail && (
         <Link href="/pricing" target="_blank">
           Change cover image
           <Icons name="ArenaMark" ml={3} size={6} color="state.premium" />
