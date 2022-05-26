@@ -104,8 +104,6 @@ const BlockChangeThumbnail: React.FC<BlockChangeThumbnailProps> = ({
     return null
   }
 
-  console.log({ block })
-
   return (
     <div>
       {/* Just redirect to pricing page if user is not premium */}
