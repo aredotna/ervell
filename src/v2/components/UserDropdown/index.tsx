@@ -41,6 +41,7 @@ const Section = styled(Box).attrs({
 
 export const UserDropdown: React.FC = () => {
   const { data, loading, error } = useQuery<UserDropdownType>(userDropdownQuery)
+
   if (loading) {
     return (
       <Container>
