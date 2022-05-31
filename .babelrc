@@ -7,7 +7,8 @@
           "browsers": ["last 2 versions"]
         },
         "useBuiltIns": "usage",
-        "corejs": 2
+        "corejs": 2,
+        "loose": true
       }
     ],
     "@babel/preset-react",
@@ -21,7 +22,7 @@
         "root": ["./src"]
       }
     ],
-    "@babel/plugin-proposal-class-properties",
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
     "inline-react-svg",
     [
       "babel-plugin-styled-components",

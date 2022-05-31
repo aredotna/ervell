@@ -101,3 +101,5 @@ export const EducationPage: React.FC = () => {
     </AboutTopBarLayout>
   )
 }
+
+export default EducationPage

@@ -101,7 +101,7 @@ class SearchInput extends PureComponent<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (isEmpty(nextProps.query) && !isEmpty(this.state.query)) {
       this.resetState()
     }

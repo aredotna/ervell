@@ -54,7 +54,7 @@ class AvatarUploader extends PureComponent {
     progress: 0,
   }
 
-  componentWillReceiveProps({ identifiable: { avatar: nextAvatar } }) {
+  UNSAFE_componentWillReceiveProps({ identifiable: { avatar: nextAvatar } }) {
     const {
       identifiable: { avatar: currentAvatar },
       stopPolling,

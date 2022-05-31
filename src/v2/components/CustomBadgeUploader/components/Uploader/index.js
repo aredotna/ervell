@@ -70,7 +70,7 @@ class CustomBadgeUploader extends PureComponent {
     progress: 0,
   }
 
-  componentWillReceiveProps({ me: { custom_badge: nextCustomBadge } }) {
+  UNSAFE_componentWillReceiveProps({ me: { custom_badge: nextCustomBadge } }) {
     const {
       me: { custom_badge: currentCustomBadge },
       stopPolling,
