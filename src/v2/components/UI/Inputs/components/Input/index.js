@@ -46,7 +46,7 @@ class Input extends PureComponent {
     }
   }
 
-  componentWillReceiveProps({ hasError, errorMessage }) {
+  UNSAFE_componentWillReceiveProps({ hasError, errorMessage }) {
     this.setState({
       mode: hasError || errorMessage ? 'error' : 'resting',
     })
