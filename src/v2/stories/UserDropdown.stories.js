@@ -15,7 +15,7 @@ console.log({ meta }, '💍🧤🧢🐠🌞🌹')
 
 export default meta
 
-const Template = args => (
+const Template = () => (
   <Specimen>
     <UserDropdown />
   </Specimen>
