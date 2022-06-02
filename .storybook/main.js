@@ -8,5 +8,17 @@ module.exports = {
     '@storybook/addon-viewport',
     '@storybook/addon-essentials',
     'storybook-addon-apollo-client',
+    {
+      name: 'storybook-addon-turbo-build',
+      options: {
+        removeProgressPlugin: true,
+        disableSourceMap: true,
+        optimizationLevel: 2,
+      },
+    },
   ],
+  typescript: {
+    check: false,
+    reactDocgen: false,
+  },
 }

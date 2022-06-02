@@ -56,4 +56,33 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
   }
 }
 
+const mapFacets = function(type) {
+  return function(facet) {
+    return `${type}:${facet.toLowerCase()}`
+  }
+}
+
+export const stringifyVariables = (variables: AdvancedSearchVariables) => {
+  const strings = [
+    variables?.term?.facet ? `${variables?.term.facet}` : undefined,
+    variables?.where?.facets?.length
+      ? variables?.where.facets.map(mapFacets('where')).join(' ')
+      : undefined,
+    variables?.what?.facets?.length
+      ? variables?.what.facets.map(mapFacets('what')).join(' ')
+      : undefined,
+    variables?.fields?.facets?.length
+      ? variables?.fields.facets.map(mapFacets('fields')).join(' ')
+      : undefined,
+    variables?.order?.facet ? `sort:${variables?.order.facet}` : undefined,
+    variables?.order?.dir ? `dir:${variables?.order.dir}` : undefined,
+    variables?.per ? `per:${variables?.per}` : undefined,
+    variables?.page ? `page:${variables?.page}` : undefined,
+  ]
+
+  console.log({ strings })
+
+  return strings.filter(Boolean).join(' ')
+}
+
 export default tokenizeSearch
