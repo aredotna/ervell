@@ -45,6 +45,7 @@ const PrimarySearchResults: React.FC<PrimarySearchResultsProps> = ({
   }
 
   if (error) {
+    console.log({ error })
     return (
       <PrimarySearchResult pl={ICON_OFFSET}>
         <Text fontWeight="bold" color="state.alert">
