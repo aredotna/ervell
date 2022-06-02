@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
@@ -10,6 +10,7 @@ import PrimarySearchResults from 'v2/components/TopBar/components/PrimarySearch/
 
 import { overflowScrolling } from 'v2/styles/mixins'
 import { useIsOutsideMainRouter } from 'v2/hooks/useIsOutsideMainRouter'
+import { isEmpty } from 'lodash'
 
 const Container = styled(Box)`
   position: relative;
@@ -30,6 +31,7 @@ interface PrimarySearchProps {
   // inside and outside the main router.
   isOutsideMainRouter: boolean
   flex?: number
+  query?: string
 }
 
 class PrimarySearch extends PureComponent<PrimarySearchProps> {
@@ -39,6 +41,32 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
     query: '',
     cursor: null,
     href: null,
+  }
+
+  constructor(props: PrimarySearchProps) {
+    super(props)
+
+    this.state = {
+      mode: props.query && props.query !== '' ? 'blur' : 'resting',
+      debouncedQuery: props.query || '',
+      query: props.query || '',
+      cursor: null,
+      href: null,
+    }
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (isEmpty(nextProps.query) && !isEmpty(this.state.query)) {
+      this.resetState()
+    }
+
+    if (nextProps.query !== this.state.query) {
+      this.setState({ query: nextProps.query, debouncedQuery: nextProps.query })
+    }
+  }
+
+  resetState = () => {
+    this.setState({ query: '', mode: 'focus' })
   }
 
   searchInputRef = React.createRef()
@@ -80,7 +108,7 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
         break
       case 'Enter':
         if (query === '') return
-        this.setState({ query: '', debouncedQuery: '' })
+        this.setState({ mode: 'blur' })
 
         if (isOutsideMainRouter) {
           window.location.href = href
@@ -148,7 +176,7 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
           }}
         />
 
-        {query && (
+        {query && debouncedQuery && mode != 'blur' && (
           <Overlay targetEl={() => this.searchInputRef.current} fullWidth>
             <Results>
               <PrimarySearchResults
@@ -172,10 +200,14 @@ const PrimarySearchContainer: React.FC<{
 }> = ({ ...props }) => {
   const history = useHistory()
   const isOutsideMainRouter = useIsOutsideMainRouter()
+
+  const params: any = useParams()
+
   return (
     <PrimarySearch
       history={history}
       isOutsideMainRouter={isOutsideMainRouter}
+      query={params?.term}
       {...props}
     />
   )
