@@ -119,7 +119,7 @@ const BlockChangeThumbnail: React.FC<BlockChangeThumbnailProps> = ({
         <>
           <input
             type="file"
-            accept=".jpg,.jpeg,.gif,.png"
+            accept=".jpg,.jpeg,.gif,.png,.webp"
             ref={inputRef}
             style={{ display: 'none' }}
             onChange={onAddFile}
