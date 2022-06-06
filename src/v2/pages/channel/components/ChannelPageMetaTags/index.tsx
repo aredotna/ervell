@@ -21,8 +21,6 @@ export const ChannelPageMetaTags: React.FC<Props> = ({
 }) => {
   const title = [channel.meta_title, subtitle].filter(Boolean).join(' / ')
 
-  console.log({ channel })
-
   return (
     <>
       {title && <Title>{title}</Title>}
