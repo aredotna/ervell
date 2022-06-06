@@ -1,6 +1,8 @@
 import { random, name, lorem, commerce, company, internet } from 'faker'
 import { sample } from 'lodash'
 
+import userDropdownQuery from 'v2/components/UserDropdown/queries/userDropdown'
+
 const generateImage = (width, height, mode = 'any') =>
   `https://placeimg.com/${width}/${height}/${mode}`
 
@@ -27,9 +29,17 @@ const user = () => ({
   settings: {
     receive_email: sample(['none', 'notifications', 'digest']),
   },
+  is_confirmed: sample([true, false]),
+  is_premium: sample([true, false]),
+  created_at: `${random.number({ min: 1, max: 10 })} hours ago`,
+  groups: Array(random.number(20)),
+  href: `/users/${random.number({ min: 1, max: 999999 })}`,
+  is_my_groups_dropdown_hidden: sample([true, false]),
 })
 
-const Mocks = {
+export const MockObjects = {
+  String: () => lorem.word(),
+
   Sharify: () => ({
     IS_SPIDER: false,
   }),
@@ -121,5 +131,17 @@ const Mocks = {
     exp_month: '11',
   }),
 }
+
+const Mocks = [
+  {
+    request: {
+      query: userDropdownQuery,
+      variables: {},
+    },
+    result: {
+      data: MockObjects.Me(),
+    },
+  },
+]
 
 export default Mocks

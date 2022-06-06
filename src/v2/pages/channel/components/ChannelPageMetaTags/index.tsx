@@ -30,8 +30,8 @@ export const ChannelPageMetaTags: React.FC<Props> = ({
       )}
 
       <Head>
-        {(channel.owner.__typename == 'User' && !channel.owner.is_indexable) ||
-          (doNotIndex && <meta name="robots" content="none" />)}
+        {((channel.owner.__typename == 'User' && !channel.owner.is_indexable) ||
+          doNotIndex) && <meta name="robots" content="none" />}
 
         {channel.visibility !== 'private' && (
           <link

@@ -102,6 +102,18 @@ export enum ExportFormats {
 }
 
 /**
+ * defines search fields
+ */
+export enum FieldsEnum {
+  ALL = "ALL",
+  CONTENT = "CONTENT",
+  DESCRIPTION = "DESCRIPTION",
+  DOMAIN = "DOMAIN",
+  NAME = "NAME",
+  URL = "URL",
+}
+
+/**
  * Reason for flagging a content
  */
 export enum FlagCategoryEnum {
@@ -168,6 +180,14 @@ export enum NewsletterListEnum {
 }
 
 /**
+ * defines logical operation
+ */
+export enum OperationEnum {
+  AND = "AND",
+  OR = "OR",
+}
+
+/**
  * Ways to sort blocks
  */
 export enum SearchSorts {
@@ -204,6 +224,17 @@ export enum SortDirection {
 }
 
 /**
+ * Ways to sort Advanced Search results
+ */
+export enum SortOrder {
+  CONNECTIONS_COUNT = "CONNECTIONS_COUNT",
+  CREATED_AT = "CREATED_AT",
+  NAME = "NAME",
+  RANDOM = "RANDOM",
+  UPDATED_AT = "UPDATED_AT",
+}
+
+/**
  * Ways to sort blocks
  */
 export enum Sorts {
@@ -231,6 +262,35 @@ export enum SupportedPlanEnum {
   YEARLY = "YEARLY",
 }
 
+/**
+ * defines for what searched
+ */
+export enum WhatEnum {
+  ALL = "ALL",
+  ATTACHMENT = "ATTACHMENT",
+  BLOCK = "BLOCK",
+  CHANNEL = "CHANNEL",
+  GROUP = "GROUP",
+  IMAGE = "IMAGE",
+  LINK = "LINK",
+  MEDIA = "MEDIA",
+  TEXT = "TEXT",
+  USER = "USER",
+}
+
+/**
+ * defines search space
+ */
+export enum WhereEnum {
+  ALL = "ALL",
+  CHANNEL = "CHANNEL",
+  FOLLOWERS = "FOLLOWERS",
+  FOLLOWING = "FOLLOWING",
+  GROUP = "GROUP",
+  MY = "MY",
+  USER = "USER",
+}
+
 export interface ChannelMemberInput {
   id: string;
   type?: MemberTypes | null;
@@ -241,9 +301,35 @@ export interface ConnectableInput {
   type: BaseConnectableTypeEnum;
 }
 
+export interface Fields {
+  facets?: FieldsEnum[] | null;
+  op?: OperationEnum | null;
+}
+
 export interface MeFlagInput {
   name: string;
   value: boolean;
+}
+
+export interface Order {
+  facet?: SortOrder | null;
+  dir?: SortDirection | null;
+}
+
+export interface Term {
+  facet?: string | null;
+  op?: OperationEnum | null;
+}
+
+export interface What {
+  facets?: WhatEnum[] | null;
+  id?: number | null;
+  op?: OperationEnum | null;
+}
+
+export interface Where {
+  facets?: WhereEnum[] | null;
+  op?: OperationEnum | null;
 }
 
 //==============================================================

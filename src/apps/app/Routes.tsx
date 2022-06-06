@@ -206,19 +206,19 @@ export const Routes = () => {
           render={parseRoute(({ params }) => {
             const context = location.state.context
 
-            const ids = [
-              ...new Set<number>(
-                context
-                  .filter(
-                    k =>
-                      k?.__typename !== 'Channel' &&
-                      k?.__typename !== 'Group' &&
-                      k?.__typename !== 'User' &&
-                      !!k?.id
-                  )
-                  .map(k => k.id)
-              ),
-            ].map(n => n.toFixed(0))
+            const set = new Set<string>(
+              context
+                .filter(
+                  k =>
+                    k?.__typename !== 'Channel' &&
+                    k?.__typename !== 'Group' &&
+                    k?.__typename !== 'User' &&
+                    !!k?.id
+                )
+                .map(k => k.id.toString())
+            )
+
+            const ids = Array.from(set)
 
             return (
               <Modal Dialog={ModalFullscreenDialog} bg="utility.opaque">
