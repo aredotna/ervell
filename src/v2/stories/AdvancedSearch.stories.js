@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 
 import Specimen from 'v2/stories/__components__/Specimen'
 
@@ -47,9 +47,13 @@ export const WithFilter = () => {
   const initialState = { where: { facets: ['FOLLOWING'] } }
   const [state, setState] = useState(initialState)
 
-  const onChange = variables => {
-    setState(variables)
-  }
+  const onChange = useCallback(
+    variables => {
+      console.log('onChange', variables)
+      setState(variables)
+    },
+    [state]
+  )
 
   const printedState = JSON.stringify(state, null, 2)
 
@@ -57,7 +61,11 @@ export const WithFilter = () => {
     <>
       <Specimen>
         <AdvancedSearch searchState={state} onChange={onChange} />
-        <AdvancedSearchFilter searchState={state} />
+        <AdvancedSearchFilter
+          onChange={onChange}
+          searchState={state}
+          key={state}
+        />
       </Specimen>
       <pre>{printedState}</pre>
     </>

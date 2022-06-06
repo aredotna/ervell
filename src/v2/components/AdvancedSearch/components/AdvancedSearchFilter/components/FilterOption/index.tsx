@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -7,6 +7,10 @@ import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
 const FilterContainer = styled(Box).attrs({
   p: 1,
 })`
+  cursor: pointer;
+  &:hover {
+    background-color: ${props => props.theme.colors.gray.semiLight};
+  }
   ${props =>
     props.active &&
     `
@@ -50,18 +54,28 @@ const EnumLabelMap = {
 }
 
 interface FilterOptionProps {
+  field: 'where' | 'what' | 'fields'
   filter: WhereEnum | WhatEnum | FieldsEnum
   currentFilters?: WhereEnum[] | WhatEnum[] | FieldsEnum[]
+  onUpdateFilter: (
+    field: 'where' | 'what' | 'fields',
+    filter: WhereEnum | WhatEnum | FieldsEnum
+  ) => void
 }
 
 export const FilterOption: React.FC<FilterOptionProps> = ({
+  field,
   filter,
   currentFilters = [],
+  onUpdateFilter,
 }) => {
   const typedCurrentFilter: any[] = currentFilters ? currentFilters : []
   const isSelected = filter && typedCurrentFilter?.includes(filter)
+  const onClick = useCallback(() => {
+    onUpdateFilter(field, filter)
+  }, [])
   return (
-    <FilterContainer active={isSelected}>
+    <FilterContainer active={isSelected} onClick={onClick}>
       <FilterLabel active={isSelected}>{EnumLabelMap[filter]}</FilterLabel>
     </FilterContainer>
   )

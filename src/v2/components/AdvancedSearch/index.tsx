@@ -34,8 +34,10 @@ export const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
   )
 
   useEffect(() => {
-    // const query = stringifyVariables(searchState)
-    // setQuery(query)
+    if (!_query || _query == '') {
+      const query = stringifyVariables(searchState)
+      setQuery(query)
+    }
   }, [searchState, setQuery, query])
 
   return (
