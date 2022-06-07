@@ -57,12 +57,12 @@ interface BillingFormProps {
 
 interface BillingFormState {
   mode?:
-  | 'resting'
-  | 'error'
-  | 'processing'
-  | 'canceled'
-  | 'subscribed'
-  | 'card_changed'
+    | 'resting'
+    | 'error'
+    | 'processing'
+    | 'canceled'
+    | 'subscribed'
+    | 'card_changed'
   operations?: OperationsEnum[]
   planId?: SupportedPlanEnum | 'basic' | 'lifetime'
   couponCode?: string
@@ -107,13 +107,16 @@ const BillingForm: React.FC<BillingFormProps> = ({
     (customer.default_credit_card && operations.length > 0) || total === 0
 
   const doWeNeedTo = useCallback(
-    (operationName: OperationsEnum) => operations.includes(operationName),
+    (operationName: OperationsEnum) => {
+      return operations.includes(operationName)
+    },
     [operations]
   )
 
   const addOperation = useCallback(
     (operationName: OperationsEnum) => {
-      const updatedOperations = [...new Set([...operations, operationName])]
+      const set = new Set([...operations, operationName])
+      const updatedOperations = Array.from(set)
       return updatedOperations
     },
     [operations]
@@ -123,7 +126,7 @@ const BillingForm: React.FC<BillingFormProps> = ({
     operationName => {
       const set = new Set(operations)
       set.delete(operationName)
-      return [...set]
+      return Array.from(set)
     },
     [operations]
   )
@@ -176,9 +179,9 @@ const BillingForm: React.FC<BillingFormProps> = ({
       total === 0
         ? defaultVariables
         : {
-          ...defaultVariables,
-          token: customer.default_credit_card?.id,
-        }
+            ...defaultVariables,
+            token: customer.default_credit_card?.id,
+          }
 
     return subscribeToPremiumWithOptionalToken({
       variables,
@@ -232,9 +235,9 @@ const BillingForm: React.FC<BillingFormProps> = ({
       // Otherwise we are subscribing.
       const waitForCouponCode =
         doWeNeedTo('APPLY_COUPON_CODE') &&
-          // APPLY_COUPON_CODE is inclusive with swiching plans so ignore this
-          // if we are also going to change the plan up
-          !doWeNeedTo('CHANGE_PLAN_ID')
+        // APPLY_COUPON_CODE is inclusive with swiching plans so ignore this
+        // if we are also going to change the plan up
+        !doWeNeedTo('CHANGE_PLAN_ID')
           ? applyCouponToSubscription()
           : Promise.resolve(null)
 
@@ -285,15 +288,12 @@ const BillingForm: React.FC<BillingFormProps> = ({
     [handleSubmit, addOperation, setState]
   )
 
-  const handleCancelPremium = useCallback(
-    () => {
-      setState({ mode: 'processing' })
-      return cancelPremiumSubscription()
-        .then(() => resolveWithMode('canceled'))
-        .catch(handleErrors)
-    },
-    [handleSubmit, addOperation, setState]
-  )
+  const handleCancelPremium = useCallback(() => {
+    setState({ mode: 'processing' })
+    return cancelPremiumSubscription()
+      .then(() => resolveWithMode('canceled'))
+      .catch(handleErrors)
+  }, [handleSubmit, addOperation, setState])
 
   const handleCouponCode = useCallback(
     coupon_code => {
@@ -306,24 +306,21 @@ const BillingForm: React.FC<BillingFormProps> = ({
     [addOperation, removeOperation, setState]
   )
 
-  const handleReenable = useCallback(
-    () => {
-      if (customer.is_beneficiary) {
-        return setState({
-          mode: 'error',
-          errorMessage: 'Contact your group administrator',
-        })
-      }
-
-      setState({
-        planId: customer.plan.id as SupportedPlanEnum,
-        operations: addOperation('RESUBSCRIBE'),
-        mode: 'processing'
+  const handleReenable = useCallback(() => {
+    if (customer.is_beneficiary) {
+      return setState({
+        mode: 'error',
+        errorMessage: 'Contact your group administrator',
       })
-      handleSubscribeToPremium()
-    },
-    [addOperation, handleSubmit, customer, setState]
-  )
+    }
+
+    setState({
+      planId: customer.plan.id as SupportedPlanEnum,
+      operations: addOperation('RESUBSCRIBE'),
+      mode: 'processing',
+    })
+    handleSubscribeToPremium()
+  }, [addOperation, handleSubmit, customer, setState])
 
   const handlePlan = useCallback(
     plan_id => {
@@ -473,7 +470,7 @@ const BillingForm: React.FC<BillingFormProps> = ({
                 onClick={handleSubmit}
                 disabled={!customerCanSubmit}
               >
-                <Icons name="CreditCard" size="1rem" mr={4} color='gray.bold' />
+                <Icons name="CreditCard" size="1rem" mr={4} color="gray.bold" />
 
                 {{
                   'basic:monthly': 'Activate',
