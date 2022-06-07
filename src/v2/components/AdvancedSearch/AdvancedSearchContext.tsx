@@ -1,6 +1,9 @@
 import { set } from 'lodash'
 import React, { createContext, useCallback, useEffect, useReducer } from 'react'
-import tokenizeSearch, { stringifyFacet } from 'v2/util/tokenizeAdvancedSearch'
+import tokenizeSearch, {
+  stringifyFacet,
+  stringifyVariables,
+} from 'v2/util/tokenizeAdvancedSearch'
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
 
@@ -54,11 +57,12 @@ const reducer = (state: State, action: Action) => {
         variables,
         existingFacets,
       } = extractVariableFromStateAndPayload(state, action.payload)
+
       const newValue = [...existingFacets, filter as WhereEnum]
       set(variables, `${field}.facets`, newValue)
       const query = `${state.query} ${stringifyFacet(field, filter)}`
-      return { query, variables }
 
+      return { query, variables }
     case 'REMOVE_FILTER':
       const {
         field: field2,
@@ -66,11 +70,15 @@ const reducer = (state: State, action: Action) => {
         variables: variables2,
         existingFacets: existingFacets2,
       } = extractVariableFromStateAndPayload(state, action.payload)
+
       const newValue2 = existingFacets2.filter(f => f !== filter2)
       set(variables2, `${field2}.facets`, newValue2)
-      const query2 = state.query.replace(stringifyFacet(field2, filter2), '')
-      return { query: query2, variables: variables2 }
+      const query2 = state.query.replace(
+        ` ${stringifyFacet(field2, filter2)}`,
+        ''
+      )
 
+      return { query: query2, variables: variables2 }
     case 'QUERY_CHANGE':
       return {
         ...state,
@@ -107,20 +115,18 @@ export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
 
 interface AdvancedSearchContextProps {
   variables?: AdvancedSearchVariables
-  query?: string
   onVariablesChange?: (state: AdvancedSearchVariables) => void
   onQueryChange?: (query: string) => void
 }
 
 export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps> = ({
   variables,
-  query,
   onVariablesChange,
   onQueryChange,
   children,
 }) => {
   const [state, dispatch] = useReducer(reducer, {
-    query,
+    query: stringifyVariables(variables),
     variables: variables || {},
   })
 

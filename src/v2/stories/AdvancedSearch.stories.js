@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react'
 import Specimen from 'v2/stories/__components__/Specimen'
 
 import AdvancedSearch from 'v2/components/AdvancedSearch'
+import { AdvancedSearchContextProvider } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 import AdvancedSearchFilter from 'v2/components/AdvancedSearch/components/AdvancedSearchFilter'
 
 const meta = {
@@ -13,18 +14,30 @@ const meta = {
 export default meta
 
 const Template = args => {
-  const [state, setState] = useState(args.searchState)
+  const [variables, setVariables] = useState(args.variables)
+  const [query, setQuery] = useState(args.query)
 
-  const onChange = variables => {
-    setState(variables)
+  const onVariablesChange = variables => {
+    setVariables(variables)
   }
 
-  const printedState = JSON.stringify(state, null, 2)
+  const onQueryChange = query => {
+    setQuery(query)
+  }
+
+  const printedState = JSON.stringify(variables, null, 2)
 
   return (
     <>
       <Specimen>
-        <AdvancedSearch searchState={args.searchState} onChange={onChange} />
+        <AdvancedSearchContextProvider
+          query={query}
+          variables={variables}
+          onQueryChange={onQueryChange}
+          onVariablesChange={onVariablesChange}
+        >
+          <AdvancedSearch />
+        </AdvancedSearchContextProvider>
       </Specimen>
       <pre>{printedState}</pre>
     </>
@@ -32,60 +45,33 @@ const Template = args => {
 }
 
 export const Primary = Template.bind({})
+
 export const WithDefaultValues = Template.bind(
   {},
   {
-    searchState: {
+    query: `hello world`,
+    variables: {
       term: { facet: 'hello world' },
       where: { facets: ['FOLLOWING'] },
-      what: { facets: ['CHANNEL', 'IMAGE'] },
+      what: { facets: ['CHANNEL'] },
     },
   }
 )
 
-export const WithFilter = () => {
-  const initialState = { where: { facets: ['FOLLOWING'] } }
-  const [state, setState] = useState(initialState)
-
-  const onChange = useCallback(
-    variables => {
-      console.log('onChange', variables)
-      setState(variables)
-    },
-    [state]
-  )
-
-  const printedState = JSON.stringify(state, null, 2)
-
-  return (
-    <>
-      <Specimen>
-        <AdvancedSearch searchState={state} onChange={onChange} />
-        <AdvancedSearchFilter
-          onChange={onChange}
-          searchState={state}
-          key={state}
-        />
-      </Specimen>
-      <pre>{printedState}</pre>
-    </>
-  )
-}
-
-// Primary.parameters = {
-//   apolloClient: {
-//     mocks: [
-//       {
-//         request: {
-//           query: userDropdownQuery,
-//           variables: {}
-//         },
-//         result: {
-//           data: {
-//             me: MockObjects.Me()
-//           }
-//         }
-//       }
-//     ]
-//   }
-// }
+// // Primary.parameters = {
+// //   apolloClient: {
+// //     mocks: [
+// //       {
+// //         request: {
+// //           query: userDropdownQuery,
+// //           variables: {}
+// //         },
+// //         result: {
+// //           data: {
+// //             me: MockObjects.Me()
+// //           }
+// //         }
+// //       }
+// //     ]
+// //   }
+// // }

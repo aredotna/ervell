@@ -5,6 +5,7 @@ import { MockedProvider } from '@apollo/client/testing'
 import { getCache } from 'v2/apollo/cache'
 import clientTypeDefs from 'v2/apollo/localState/clientSchema.graphql'
 import INITIAL_DATA from 'v2/apollo/fragments/initialData'
+import { AdvancedSearchContextProvider } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 import { Themed } from 'v2/styles/theme'
 
 const typeDefs = gql`

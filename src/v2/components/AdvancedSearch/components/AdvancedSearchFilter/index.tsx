@@ -1,10 +1,10 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useContext } from 'react'
 import styled from 'styled-components'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 
-import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
+import { AdvancedSearchContext } from '../../AdvancedSearchContext'
 import { FilterOption } from './components/FilterOption'
 
 const FiltersContainer = styled(Box).attrs({
@@ -29,19 +29,19 @@ const CategoryLabel = styled(Text).attrs({
 
 export interface FilterProps {
   currentFilters?: WhereEnum[] | WhatEnum[] | FieldsEnum[]
-  onUpdateFilter: (
-    field: 'where' | 'what' | 'fields',
-    filter: WhereEnum | WhatEnum | FieldsEnum
+  toggleFilter: (
+    filter: WhereEnum | WhatEnum | FieldsEnum,
+    field: 'what' | 'where' | 'fields'
   ) => void
 }
 
 const WhereFilter: React.FC<FilterProps> = ({
   currentFilters,
-  onUpdateFilter,
+  toggleFilter,
 }) => {
   const updateProps = {
     field: 'where' as any,
-    onUpdateFilter,
+    toggleFilter,
   }
   return (
     <Container>
@@ -67,11 +67,11 @@ const WhereFilter: React.FC<FilterProps> = ({
 
 const WhatFilter: React.FC<FilterProps> = ({
   currentFilters,
-  onUpdateFilter,
+  toggleFilter,
 }) => {
   const updateProps = {
     field: 'what' as any,
-    onUpdateFilter,
+    toggleFilter,
   }
   return (
     <Container>
@@ -105,54 +105,41 @@ const WhatFilter: React.FC<FilterProps> = ({
   )
 }
 
-interface AdvancedSearchFilterProps {
-  onChange?: (state: AdvancedSearchVariables) => void
-  searchState: AdvancedSearchVariables
-}
+export const AdvancedSearchFilter: React.FC = () => {
+  const { state, addFilter, removeFilter } = useContext(AdvancedSearchContext)
 
-export const AdvancedSearchFilter: React.FC<AdvancedSearchFilterProps> = ({
-  onChange,
-  searchState,
-}) => {
-  const onUpdateFilter = useCallback(
+  const toggleFilter = useCallback(
     (
-      field: 'where' | 'what' | 'fields',
-      filter: WhereEnum | WhatEnum | FieldsEnum
+      filter: WhereEnum | WhatEnum | FieldsEnum,
+      field: 'what' | 'where' | 'fields'
     ) => {
-      console.log({ searchState })
-      const typedFilter: any = filter ? filter : null
-      const existingFacets = searchState[field]?.facets || []
-      const existingObject = searchState[field] || {}
-      const newValue = {
-        ...existingObject,
-        facets: [...existingFacets, typedFilter as WhereEnum],
-      }
+      const currentFilters = (state.variables[field]?.facets as any) || []
+      console.log({ state, 'state.variables': state.variables })
+
       console.log({
-        newValue,
-        existingFacets,
-        existingObject,
-        searchState,
-        'searchState[field]': searchState[field],
+        currentFilters,
+        filter,
+        field,
+        'currentFilters.includes(filter)': currentFilters.includes(filter),
+        'variables[field]': state.variables[field],
       })
-      const newState = {
-        ...searchState,
-        [field]: newValue,
-      }
-      console.log({ newState })
-      onChange && onChange(newState)
+
+      currentFilters.includes(filter)
+        ? removeFilter(field, filter)
+        : addFilter(field, filter)
     },
-    [searchState, onChange]
+    [state, state.variables, addFilter, removeFilter]
   )
 
   return (
     <FiltersContainer>
       <WhereFilter
-        onUpdateFilter={onUpdateFilter}
-        currentFilters={searchState?.where?.facets}
+        toggleFilter={toggleFilter}
+        currentFilters={state.variables?.where?.facets}
       />
       <WhatFilter
-        onUpdateFilter={onUpdateFilter}
-        currentFilters={searchState?.what?.facets}
+        toggleFilter={toggleFilter}
+        currentFilters={state.variables?.what?.facets}
       />
     </FiltersContainer>
   )

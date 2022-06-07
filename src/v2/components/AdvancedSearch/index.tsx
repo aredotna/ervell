@@ -1,48 +1,15 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 
 import SearchInput from 'v2/components/UI/SearchInput'
-import useMergeState from 'v2/hooks/useMergeState'
-import tokenizeSearch, {
-  stringifyVariables,
-} from 'v2/util/tokenizeAdvancedSearch'
+import { AdvancedSearchContext } from './AdvancedSearchContext'
+import AdvancedSearchFilter from './components/AdvancedSearchFilter'
 
-import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
-
-type State = AdvancedSearchVariables
-
-interface AdvancedSearchProps {
-  onChange?: (state: State) => void
-  searchState?: State
-  query?: string
-}
-
-export const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
-  onChange,
-  searchState,
-  query,
-}) => {
-  const [_query, setQuery] = useState<string>(query)
-  const [state] = useMergeState<State>(searchState)
-
-  const handleQuery = useCallback(
-    (value: string) => {
-      setQuery(value)
-      const variables = tokenizeSearch(value)
-      onChange && onChange(variables)
-    },
-    [state]
-  )
-
-  useEffect(() => {
-    if (!_query || _query == '') {
-      const query = stringifyVariables(searchState)
-      setQuery(query)
-    }
-  }, [searchState, setQuery, query])
-
+export const AdvancedSearch: React.FC = () => {
+  const { state, updateQuery } = useContext(AdvancedSearchContext)
   return (
     <>
-      <SearchInput query={_query} onDebouncedQueryChange={handleQuery} />
+      <SearchInput query={state.query} onDebouncedQueryChange={updateQuery} />
+      <AdvancedSearchFilter />
     </>
   )
 }

@@ -57,9 +57,9 @@ interface FilterOptionProps {
   field: 'where' | 'what' | 'fields'
   filter: WhereEnum | WhatEnum | FieldsEnum
   currentFilters?: WhereEnum[] | WhatEnum[] | FieldsEnum[]
-  onUpdateFilter: (
-    field: 'where' | 'what' | 'fields',
-    filter: WhereEnum | WhatEnum | FieldsEnum
+  toggleFilter: (
+    filter: WhereEnum | WhatEnum | FieldsEnum,
+    field: 'where' | 'what' | 'fields'
   ) => void
 }
 
@@ -67,13 +67,13 @@ export const FilterOption: React.FC<FilterOptionProps> = ({
   field,
   filter,
   currentFilters = [],
-  onUpdateFilter,
+  toggleFilter,
 }) => {
   const typedCurrentFilter: any[] = currentFilters ? currentFilters : []
   const isSelected = filter && typedCurrentFilter?.includes(filter)
   const onClick = useCallback(() => {
-    onUpdateFilter(field, filter)
-  }, [])
+    toggleFilter(filter, field)
+  }, [toggleFilter])
   return (
     <FilterContainer active={isSelected} onClick={onClick}>
       <FilterLabel active={isSelected}>{EnumLabelMap[filter]}</FilterLabel>

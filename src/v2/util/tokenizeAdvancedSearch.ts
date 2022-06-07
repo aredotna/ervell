@@ -87,8 +87,6 @@ export const stringifyVariables = (variables: AdvancedSearchVariables) => {
     variables?.page ? `page:${variables?.page}` : undefined,
   ]
 
-  console.log({ strings })
-
   return strings.filter(Boolean).join(' ')
 }
 
