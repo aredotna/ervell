@@ -56,6 +56,13 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
   }
 }
 
+export const stringifyFacet = (
+  field: 'where' | 'what' | 'fields',
+  filter: WhereEnum | WhatEnum | FieldsEnum
+) => {
+  return `${field}:${filter.toLowerCase()}`
+}
+
 const mapFacets = function(type) {
   return function(facet) {
     return `${type}:${facet.toLowerCase()}`
