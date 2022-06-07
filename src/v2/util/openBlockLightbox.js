@@ -4,9 +4,7 @@ import { ModalFullBlock } from 'v2/components/ModalFullBlock'
 
 export default ({ id, context }) => {
   // Filter out Channels, Groups, Users and duplicates; return just IDs
-  const set =
-    new Set() <
-    string >
+  const set = new Set(
     context
       .filter(
         k =>
@@ -16,6 +14,7 @@ export default ({ id, context }) => {
           !!k?.id
       )
       .map(k => k.id.toString())
+  )
 
   const ids = Array.from(set)
 
