@@ -4,18 +4,20 @@ import { ModalFullBlock } from 'v2/components/ModalFullBlock'
 
 export default ({ id, context }) => {
   // Filter out Channels, Groups, Users and duplicates; return just IDs
-  const ids = [
-    ...new Set(
-      context
-        .filter(
-          k =>
-            k.__typename !== 'Channel' &&
-            k.__typename !== 'Group' &&
-            k.__typename !== 'User'
-        )
-        .map(k => k.id)
-    ),
-  ]
+  const set =
+    new Set() <
+    string >
+    context
+      .filter(
+        k =>
+          k?.__typename !== 'Channel' &&
+          k?.__typename !== 'Group' &&
+          k?.__typename !== 'User' &&
+          !!k?.id
+      )
+      .map(k => k.id.toString())
+
+  const ids = Array.from(set)
 
   const currentTitle = document.title
   const onClose = () => {
