@@ -30,14 +30,14 @@ export const FilterLabel = styled(Text).attrs({
   `}
 `
 
-const EnumLabelMap = {
+export const EnumLabelMap = {
   [WhereEnum.ALL]: 'All Are.na',
   [WhereEnum.MY]: 'My Are.na',
   [WhereEnum.CHANNEL]: 'This channel',
   [WhereEnum.FOLLOWING]: 'My network',
   [WhatEnum.ALL]: 'All',
   [WhatEnum.ATTACHMENT]: 'Attachments',
-  [WhatEnum.BLOCK]: 'Blocks',
+  [WhatEnum.BLOCK]: 'All types',
   [WhatEnum.CHANNEL]: 'Channels',
   [WhatEnum.GROUP]: 'Groups',
   [WhatEnum.IMAGE]: 'Images',
@@ -68,6 +68,7 @@ export const FilterOption: React.FC<FilterOptionProps> = ({
   filter,
   currentFilters = [],
   toggleFilter,
+  ...rest
 }) => {
   const typedCurrentFilter: any[] = currentFilters ? currentFilters : []
   const isSelected = filter && typedCurrentFilter?.includes(filter)
@@ -75,7 +76,7 @@ export const FilterOption: React.FC<FilterOptionProps> = ({
     toggleFilter(filter, field)
   }, [toggleFilter])
   return (
-    <FilterContainer active={isSelected} onClick={onClick}>
+    <FilterContainer active={isSelected} onClick={onClick} {...rest}>
       <FilterLabel active={isSelected}>{EnumLabelMap[filter]}</FilterLabel>
     </FilterContainer>
   )

@@ -18,7 +18,7 @@ export const FieldsFilter: React.FC<FilterProps> = ({
   }
   return (
     <FilterContainer>
-      <CategoryLabel>Field</CategoryLabel>
+      <CategoryLabel>Fields</CategoryLabel>
       <FilterOption
         currentFilters={currentFilters}
         filter={FieldsEnum.ALL}

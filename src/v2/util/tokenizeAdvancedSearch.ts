@@ -63,14 +63,14 @@ export const stringifyFacet = (
   return `${field}:${filter.toLowerCase()}`
 }
 
-export const stringifyOrder = (order: SortOrder, direction: SortDirection) => {
-  return `sort:${order.toLowerCase()} dir:${direction.toLocaleLowerCase()}`
-}
-
 const mapFacets = function(type) {
   return function(facet) {
     return `${type}:${facet.toLowerCase()}`
   }
+}
+
+export const stringifyOrder = (order: SortOrder, direction: SortDirection) => {
+  return `sort:${order.toLowerCase()} dir:${direction.toLocaleLowerCase()}`
 }
 
 export const stringifyVariables = (variables: AdvancedSearchVariables) => {
