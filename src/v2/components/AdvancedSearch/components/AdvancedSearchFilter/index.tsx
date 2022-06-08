@@ -33,11 +33,16 @@ export interface FilterProps {
     filter: WhereEnum | WhatEnum | FieldsEnum,
     field: 'what' | 'where' | 'fields'
   ) => void
+  clearAndSetAll: (
+    filter: WhereEnum | WhatEnum | FieldsEnum,
+    field: 'what' | 'where' | 'fields'
+  ) => void
 }
 
 const WhereFilter: React.FC<FilterProps> = ({
   currentFilters,
   toggleFilter,
+  clearAndSetAll,
 }) => {
   const updateProps = {
     field: 'where' as any,
@@ -50,6 +55,7 @@ const WhereFilter: React.FC<FilterProps> = ({
         currentFilters={currentFilters}
         filter={WhereEnum.ALL}
         {...updateProps}
+        toggleFilter={clearAndSetAll}
       />
       <FilterOption
         currentFilters={currentFilters}
@@ -68,6 +74,7 @@ const WhereFilter: React.FC<FilterProps> = ({
 const WhatFilter: React.FC<FilterProps> = ({
   currentFilters,
   toggleFilter,
+  clearAndSetAll,
 }) => {
   const updateProps = {
     field: 'what' as any,
@@ -80,6 +87,7 @@ const WhatFilter: React.FC<FilterProps> = ({
         currentFilters={currentFilters}
         filter={WhatEnum.ALL}
         {...updateProps}
+        toggleFilter={clearAndSetAll}
       />
       <FilterOption
         currentFilters={currentFilters}
@@ -105,8 +113,52 @@ const WhatFilter: React.FC<FilterProps> = ({
   )
 }
 
+export const FieldsFilter: React.FC<FilterProps> = ({
+  currentFilters,
+  toggleFilter,
+  clearAndSetAll,
+}) => {
+  const updateProps = {
+    field: 'fields' as any,
+    toggleFilter,
+  }
+  return (
+    <Container>
+      <CategoryLabel>Field</CategoryLabel>
+      <FilterOption
+        currentFilters={currentFilters}
+        filter={FieldsEnum.ALL}
+        {...updateProps}
+        toggleFilter={clearAndSetAll}
+      />
+      <FilterOption
+        currentFilters={currentFilters}
+        filter={FieldsEnum.NAME}
+        {...updateProps}
+      />
+      <FilterOption
+        currentFilters={currentFilters}
+        filter={FieldsEnum.DESCRIPTION}
+        {...updateProps}
+      />
+      <FilterOption
+        currentFilters={currentFilters}
+        filter={FieldsEnum.DOMAIN}
+        {...updateProps}
+      />
+      <FilterOption
+        currentFilters={currentFilters}
+        filter={FieldsEnum.URL}
+        {...updateProps}
+      />
+    </Container>
+  )
+}
+
 export const AdvancedSearchFilter: React.FC = () => {
-  const { state, addFilter, removeFilter } = useContext(AdvancedSearchContext)
+  const { state, addFilter, removeFilter, setAllFilter } = useContext(
+    AdvancedSearchContext
+  )
 
   const toggleFilter = useCallback(
     (
@@ -114,16 +166,6 @@ export const AdvancedSearchFilter: React.FC = () => {
       field: 'what' | 'where' | 'fields'
     ) => {
       const currentFilters = (state.variables[field]?.facets as any) || []
-      console.log({ state, 'state.variables': state.variables })
-
-      console.log({
-        currentFilters,
-        filter,
-        field,
-        'currentFilters.includes(filter)': currentFilters.includes(filter),
-        'variables[field]': state.variables[field],
-      })
-
       currentFilters.includes(filter)
         ? removeFilter(field, filter)
         : addFilter(field, filter)
@@ -131,15 +173,32 @@ export const AdvancedSearchFilter: React.FC = () => {
     [state, state.variables, addFilter, removeFilter]
   )
 
+  const clearAndSetAll = useCallback(
+    (
+      _filter: WhereEnum | WhatEnum | FieldsEnum,
+      field: 'what' | 'where' | 'fields'
+    ) => {
+      setAllFilter(field)
+    },
+    [state, state.variables, addFilter, removeFilter]
+  )
+
   return (
     <FiltersContainer>
       <WhereFilter
+        clearAndSetAll={clearAndSetAll}
         toggleFilter={toggleFilter}
         currentFilters={state.variables?.where?.facets}
       />
       <WhatFilter
+        clearAndSetAll={clearAndSetAll}
         toggleFilter={toggleFilter}
         currentFilters={state.variables?.what?.facets}
+      />
+      <FieldsFilter
+        clearAndSetAll={clearAndSetAll}
+        toggleFilter={toggleFilter}
+        currentFilters={state.variables?.fields?.facets}
       />
     </FiltersContainer>
   )

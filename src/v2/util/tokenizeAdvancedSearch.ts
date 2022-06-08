@@ -46,7 +46,7 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
     undefined
 
   return {
-    term: { facet: searchTokens.join(' ') },
+    term: { facet: searchTokens.join(' ').trim() },
     where: whereTokens.length ? { facets: whereTokens } : undefined,
     what: whatTokens.length ? { facets: whatTokens } : undefined,
     fields: fieldsTokens.length ? { facets: fieldsTokens } : undefined,

@@ -28,12 +28,18 @@ type Action =
         filter: WhereEnum | WhatEnum | FieldsEnum
       }
     }
+  | {
+      type: 'SET_ALL'
+      payload: {
+        field: 'where' | 'what' | 'fields'
+      }
+    }
 
 const extractVariableFromStateAndPayload = (
   state: State,
   payload: {
     field: 'where' | 'what' | 'fields'
-    filter: WhereEnum | WhatEnum | FieldsEnum
+    filter?: WhereEnum | WhatEnum | FieldsEnum
   }
 ) => {
   const { field, filter } = payload
@@ -59,6 +65,12 @@ const reducer = (state: State, action: Action) => {
       } = extractVariableFromStateAndPayload(state, action.payload)
 
       const newValue = [...existingFacets, filter as WhereEnum]
+
+      // remove ALL filter if it exists
+      if (newValue.includes(FieldsEnum.ALL)) {
+        newValue.splice(newValue.indexOf(FieldsEnum.ALL), 1)
+      }
+
       set(variables, `${field}.facets`, newValue)
       const query = `${state.query} ${stringifyFacet(field, filter)}`
 
@@ -79,6 +91,20 @@ const reducer = (state: State, action: Action) => {
       )
 
       return { query: query2, variables: variables2 }
+
+    case 'SET_ALL':
+      const {
+        field: field3,
+        variables: variables3,
+      } = extractVariableFromStateAndPayload(state, action.payload)
+
+      const newValue3 = [FieldsEnum.ALL]
+      set(variables3, `${field3}.facets`, newValue3)
+      const regex = new RegExp(`(\\s)${field3}:(\\S*)`, 'gm')
+      const query3 = state.query.replace(regex, '')
+
+      return { query: query3, variables: variables3 }
+
     case 'QUERY_CHANGE':
       return {
         ...state,
@@ -99,6 +125,7 @@ interface AdvancedSearchContextType {
     field: 'where' | 'what' | 'fields',
     filter: WhereEnum | WhatEnum | FieldsEnum
   ) => void
+  setAllFilter: (field: 'where' | 'what' | 'fields') => void
   updateQuery: (query: string) => void
   state: State
 }
@@ -107,6 +134,7 @@ export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
   addFilter: () => {},
   removeFilter: () => {},
   updateQuery: () => {},
+  setAllFilter: () => {},
   state: {
     query: '',
     variables: {},
@@ -150,6 +178,10 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     []
   )
 
+  const setAllFilter = useCallback((field: 'where' | 'what' | 'fields') => {
+    dispatch({ type: 'SET_ALL', payload: { field } })
+  }, [])
+
   const updateQuery = useCallback((query: string) => {
     dispatch({ type: 'QUERY_CHANGE', payload: query })
   }, [])
@@ -168,7 +200,7 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
 
   return (
     <AdvancedSearchContext.Provider
-      value={{ state, addFilter, removeFilter, updateQuery }}
+      value={{ state, addFilter, removeFilter, updateQuery, setAllFilter }}
     >
       {children}
     </AdvancedSearchContext.Provider>
