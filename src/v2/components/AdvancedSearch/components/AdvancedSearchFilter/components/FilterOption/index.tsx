@@ -4,7 +4,7 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
 
-const FilterContainer = styled(Box).attrs({
+export const FilterContainer = styled(Box).attrs({
   p: 1,
 })`
   cursor: pointer;
@@ -18,7 +18,7 @@ const FilterContainer = styled(Box).attrs({
   `}
 `
 
-const FilterLabel = styled(Text).attrs({
+export const FilterLabel = styled(Text).attrs({
   f: 1,
   lineHeight: 1.5,
   fontWeight: 'bold',

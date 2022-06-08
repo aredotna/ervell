@@ -2,10 +2,17 @@ import { set } from 'lodash'
 import React, { createContext, useCallback, useEffect, useReducer } from 'react'
 import tokenizeSearch, {
   stringifyFacet,
+  stringifyOrder,
   stringifyVariables,
 } from 'v2/util/tokenizeAdvancedSearch'
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
-import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
+import {
+  FieldsEnum,
+  SortDirection,
+  SortOrder,
+  WhatEnum,
+  WhereEnum,
+} from '__generated__/globalTypes'
 
 interface State {
   query: string
@@ -32,6 +39,13 @@ type Action =
       type: 'SET_ALL'
       payload: {
         field: 'where' | 'what' | 'fields'
+      }
+    }
+  | {
+      type: 'SET_ORDER'
+      payload: {
+        facet: SortOrder
+        dir: SortDirection
       }
     }
 
@@ -103,7 +117,10 @@ const reducer = (state: State, action: Action) => {
       const regex = new RegExp(`(\\s)${field3}:(\\S*)`, 'gm')
       const query3 = state.query.replace(regex, '')
 
-      return { query: query3, variables: variables3 }
+      return {
+        query: `${query3} ${stringifyFacet(field3, FieldsEnum.ALL)}`,
+        variables: variables3,
+      }
 
     case 'QUERY_CHANGE':
       return {
@@ -111,6 +128,38 @@ const reducer = (state: State, action: Action) => {
         query: action.payload,
         variables: tokenizeSearch(action.payload),
       }
+
+    case 'SET_ORDER':
+      const { facet, dir } = action.payload
+
+      const variables4 = { ...state.variables }
+      let query4 = state.query
+
+      if (state.variables?.order) {
+        query4 = state.query.replace(
+          ` ${stringifyOrder(
+            state.variables.order.facet,
+            state.variables.order.dir
+          )}`,
+          ` ${stringifyOrder(facet, dir)}`
+        )
+      } else {
+        query4 = `${state.query} ${stringifyOrder(facet, dir)}`
+      }
+
+      return {
+        ...state,
+        query: query4,
+        variables: {
+          ...variables4,
+          order: {
+            ...variables4?.order,
+            facet: facet,
+            dir: dir,
+          },
+        },
+      }
+
     default:
       return state
   }
@@ -126,6 +175,7 @@ interface AdvancedSearchContextType {
     filter: WhereEnum | WhatEnum | FieldsEnum
   ) => void
   setAllFilter: (field: 'where' | 'what' | 'fields') => void
+  setOrder: (facet: SortOrder, dir: SortDirection) => void
   updateQuery: (query: string) => void
   state: State
 }
@@ -135,6 +185,7 @@ export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
   removeFilter: () => {},
   updateQuery: () => {},
   setAllFilter: () => {},
+  setOrder: () => {},
   state: {
     query: '',
     variables: {},
@@ -182,6 +233,10 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     dispatch({ type: 'SET_ALL', payload: { field } })
   }, [])
 
+  const setOrder = useCallback((facet: SortOrder, dir: SortDirection) => {
+    dispatch({ type: 'SET_ORDER', payload: { facet, dir } })
+  }, [])
+
   const updateQuery = useCallback((query: string) => {
     dispatch({ type: 'QUERY_CHANGE', payload: query })
   }, [])
@@ -200,7 +255,14 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
 
   return (
     <AdvancedSearchContext.Provider
-      value={{ state, addFilter, removeFilter, updateQuery, setAllFilter }}
+      value={{
+        state,
+        addFilter,
+        removeFilter,
+        updateQuery,
+        setAllFilter,
+        setOrder,
+      }}
     >
       {children}
     </AdvancedSearchContext.Provider>
