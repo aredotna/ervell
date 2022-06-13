@@ -2,10 +2,12 @@ import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 import {
   FieldsEnum,
   SortDirection,
-  SortOrder,
+  SortOrderEnum,
   WhatEnum,
   WhereEnum,
 } from '__generated__/globalTypes'
+
+import { pickBy } from 'lodash'
 
 export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
   const tokens = search.split(/\s+/)
@@ -33,8 +35,8 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
     .map(token => FieldsEnum[token.value.toUpperCase()])
     .filter(Boolean) as FieldsEnum[]
   const sortToken =
-    (colonTokenPairs.find(token => token.key === 'sort')?.value as SortOrder) ||
-    undefined
+    (colonTokenPairs.find(token => token.key === 'sort')
+      ?.value as SortOrderEnum) || undefined
   const directionToken =
     (colonTokenPairs.find(token => token.key === 'dir')
       ?.value as SortDirection) || undefined
@@ -45,8 +47,12 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
     parseInt(colonTokenPairs.find(token => token.key === 'page')?.value) ||
     undefined
 
-  return {
-    term: { facet: searchTokens.join(' ').trim() },
+  const term = searchTokens.join(' ').trim()
+
+  console.log({ "term === ''": term === '' })
+
+  const variables = {
+    term: term === '' ? null : { facet: term },
     where: whereTokens.length ? { facets: whereTokens } : undefined,
     what: whatTokens.length ? { facets: whatTokens } : undefined,
     fields: fieldsTokens.length ? { facets: fieldsTokens } : undefined,
@@ -54,6 +60,8 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
     per,
     page,
   }
+
+  return pickBy(variables)
 }
 
 export const stringifyFacet = (
@@ -69,7 +77,10 @@ const mapFacets = function(type) {
   }
 }
 
-export const stringifyOrder = (order: SortOrder, direction: SortDirection) => {
+export const stringifyOrder = (
+  order: SortOrderEnum,
+  direction: SortDirection
+) => {
   return `sort:${order.toLowerCase()} dir:${direction.toLocaleLowerCase()}`
 }
 

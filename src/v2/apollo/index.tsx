@@ -188,6 +188,7 @@ export const initApolloClient = ({
         IS_SPIDER: null,
         IS_OUTSIDE_MAIN_ROUTER: null,
         THEME: null,
+        ADMIN_SLUGS: null,
         ...{ ...sharifyData, CURRENT_USER: null },
       },
     },

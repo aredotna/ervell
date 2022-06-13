@@ -9,10 +9,11 @@ import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 import {
   FieldsEnum,
   SortDirection,
-  SortOrder,
+  SortOrderEnum,
   WhatEnum,
   WhereEnum,
 } from '__generated__/globalTypes'
+// import { currentBlockFilters, hasBlockFilters } from './utils/where'
 
 interface State {
   query: string
@@ -42,9 +43,12 @@ type Action =
       }
     }
   | {
+      type: 'TOGGLE_ALL_BLOCKS'
+    }
+  | {
       type: 'SET_ORDER'
       payload: {
-        facet: SortOrder
+        facet: SortOrderEnum
         dir: SortDirection
       }
     }
@@ -122,6 +126,22 @@ const reducer = (state: State, action: Action) => {
         variables: variables3,
       }
 
+    // case 'TOGGLE_ALL_BLOCKS':
+    //   const {
+    //     variables: variables4,
+    //     existingFacets: existingFacets4,
+    //   } = extractVariableFromStateAndPayload(state, { field: 'what', filter: WhatEnum.BLOCK })
+
+    //   const blockFilters = currentBlockFilters(existingFacets4 as WhatEnum[])
+    //   let newValue4: WhatEnum[] = []
+
+    //   // if there are block filters, remove them and set value to BLOCK
+    //   if (blockFilters.length > 0) {
+    //     const newValue4 = existingFacets4.filter(f => blockFilters.indexOf(f) === -1)
+    //     set(variables4, 'what.facets', newValue4)
+    //     const query4 = state.query.replace(
+    //       ` ${stringifyFacet('what', blockFilters)}`,
+
     case 'QUERY_CHANGE':
       return {
         ...state,
@@ -175,7 +195,7 @@ interface AdvancedSearchContextType {
     filter: WhereEnum | WhatEnum | FieldsEnum
   ) => void
   setAllFilter: (field: 'where' | 'what' | 'fields') => void
-  setOrder: (facet: SortOrder, dir: SortDirection) => void
+  setOrder: (facet: SortOrderEnum, dir: SortDirection) => void
   updateQuery: (query: string) => void
   state: State
 }
@@ -233,7 +253,7 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     dispatch({ type: 'SET_ALL', payload: { field } })
   }, [])
 
-  const setOrder = useCallback((facet: SortOrder, dir: SortDirection) => {
+  const setOrder = useCallback((facet: SortOrderEnum, dir: SortDirection) => {
     dispatch({ type: 'SET_ORDER', payload: { facet, dir } })
   }, [])
 

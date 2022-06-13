@@ -8,10 +8,10 @@ import {
   FilterLabel,
   FilterContainer as Container,
 } from 'v2/components/AdvancedSearch/components/AdvancedSearchFilter/components/FilterOption'
-import { Order, SortDirection, SortOrder } from '__generated__/globalTypes'
+import { Order, SortDirection, SortOrderEnum } from '__generated__/globalTypes'
 
 interface OrderOptionProps {
-  facet: SortOrder
+  facet: SortOrderEnum
   dir: SortDirection
   label: string
   currentOrder?: Order
@@ -46,7 +46,7 @@ export const Orders: React.FC = () => {
     <FilterContainer>
       <CategoryLabel>Order</CategoryLabel>
       <OrderOption
-        facet={SortOrder.NAME}
+        facet={SortOrderEnum.NAME}
         dir={SortDirection.ASC}
         label="Default"
         currentOrder={currentOrder}
@@ -54,35 +54,35 @@ export const Orders: React.FC = () => {
 
       <OrderOption
         label="Updated recently"
-        facet={SortOrder.UPDATED_AT}
+        facet={SortOrderEnum.UPDATED_AT}
         dir={SortDirection.DESC}
         currentOrder={currentOrder}
       />
 
       <OrderOption
         label="Newest first"
-        facet={SortOrder.CREATED_AT}
+        facet={SortOrderEnum.CREATED_AT}
         dir={SortDirection.DESC}
         currentOrder={currentOrder}
       />
 
       <OrderOption
         label="Oldest first"
-        facet={SortOrder.CREATED_AT}
+        facet={SortOrderEnum.CREATED_AT}
         dir={SortDirection.ASC}
         currentOrder={currentOrder}
       />
 
       <OrderOption
         label="No. of connections"
-        facet={SortOrder.CONNECTIONS_COUNT}
+        facet={SortOrderEnum.CONNECTIONS_COUNT}
         dir={SortDirection.DESC}
         currentOrder={currentOrder}
       />
 
       <OrderOption
         label="Random"
-        facet={SortOrder.RANDOM}
+        facet={SortOrderEnum.RANDOM}
         dir={SortDirection.ASC}
         currentOrder={currentOrder}
       />

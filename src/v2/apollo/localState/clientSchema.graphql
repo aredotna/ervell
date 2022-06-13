@@ -49,5 +49,6 @@ type ClientSharify {
   # // This is a temporary measure to handle cases where components can exist both
   # // inside and outside the main router.
   IS_OUTSIDE_MAIN_ROUTER: Boolean
+  ADMIN_SLUGS: [String]
   THEME: String
 }

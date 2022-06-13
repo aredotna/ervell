@@ -226,7 +226,7 @@ export enum SortDirection {
 /**
  * Ways to sort Advanced Search results
  */
-export enum SortOrder {
+export enum SortOrderEnum {
   CONNECTIONS_COUNT = "CONNECTIONS_COUNT",
   CREATED_AT = "CREATED_AT",
   NAME = "NAME",
@@ -312,7 +312,7 @@ export interface MeFlagInput {
 }
 
 export interface Order {
-  facet?: SortOrder | null;
+  facet?: SortOrderEnum | null;
   dir?: SortDirection | null;
 }
 
@@ -323,12 +323,12 @@ export interface Term {
 
 export interface What {
   facets?: WhatEnum[] | null;
-  id?: number | null;
   op?: OperationEnum | null;
 }
 
 export interface Where {
   facets?: WhereEnum[] | null;
+  id?: number[] | null;
   op?: OperationEnum | null;
 }
 

@@ -10,8 +10,11 @@ import {
   FilterOption,
   FilterLabel,
   FilterContainer as FilterOptionContainer,
-  EnumLabelMap,
 } from 'v2/components/AdvancedSearch/components/AdvancedSearchFilter/components/FilterOption'
+import {
+  currentBlockFilterLabels,
+  hasBlockFilters,
+} from 'v2/components/AdvancedSearch/utils/where'
 import Box from 'v2/components/UI/Box'
 import { WhatEnum } from '__generated__/globalTypes'
 
@@ -49,36 +52,6 @@ const Close = styled.a.attrs({
     font-size: ${props => props.theme.fontSizesIndexed.lg};
   }
 `
-
-const blockFilters = [
-  WhatEnum.IMAGE,
-  WhatEnum.LINK,
-  WhatEnum.MEDIA,
-  WhatEnum.TEXT,
-  WhatEnum.BLOCK,
-  WhatEnum.ATTACHMENT,
-]
-
-const hasBlockFilters = (currentFilters?: WhatEnum[]) => {
-  return currentFilters?.some(filter => blockFilters.includes(filter))
-}
-
-const currentBlockFilters = (currentFilters?: WhatEnum[]) => {
-  console.log({ currentFilters })
-  return currentFilters?.filter(filter => {
-    console.log('currentBlockFilters', { filter })
-    return blockFilters.includes(filter)
-  })
-}
-
-const currentBlockFilterLabels = (currentFilters?: WhatEnum[]) => {
-  return currentBlockFilters(currentFilters)
-    ?.map(filter => {
-      console.log({ filter, 'EnumLabelMap[filter]': EnumLabelMap[filter] })
-      return EnumLabelMap[filter]
-    })
-    .join(', ')
-}
 
 export const WhatFilter: React.FC<FilterProps> = ({
   currentFilters,
