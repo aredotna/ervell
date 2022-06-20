@@ -42,7 +42,7 @@ describe('tokenizeSearch', () => {
     const query = 'hello hello world'
     const tokens = tokenizeSearch(query)
     expect(tokens.term).toEqual({ facet: 'hello hello world' })
-    expect(tokens.page).toEqual(undefined)
+    expect(tokens.page).toEqual(1)
     expect(tokens.per).toEqual(undefined)
     expect(tokens.where).toEqual(undefined)
     expect(tokens.what).toEqual(undefined)
