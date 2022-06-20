@@ -225,7 +225,6 @@ export function getCache({
       MeFlags: nonNormalizedMergeableObject,
       MeSettings: nonNormalizedMergeableObject,
       Policy: nonNormalizedMergeableObject,
-      Searches: nonNormalizedMergeableObject,
       UserCan: nonNormalizedMergeableObject,
       UserCounts: nonNormalizedMergeableObject,
     },

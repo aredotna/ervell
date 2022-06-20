@@ -35,17 +35,17 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
     .map(token => FieldsEnum[token.value.toUpperCase()])
     .filter(Boolean) as FieldsEnum[]
   const sortToken =
-    (colonTokenPairs.find(token => token.key === 'sort')
-      ?.value as SortOrderEnum) || undefined
+    (colonTokenPairs
+      .find(token => token.key === 'sort')
+      ?.value?.toUpperCase() as SortOrderEnum) || undefined
   const directionToken =
-    (colonTokenPairs.find(token => token.key === 'dir')
-      ?.value as SortDirection) || undefined
+    (colonTokenPairs
+      .find(token => token.key === 'dir')
+      ?.value?.toUpperCase() as SortDirection) || undefined
   const per =
-    parseInt(colonTokenPairs.find(token => token.key === 'per')?.value) ||
-    undefined
+    parseInt(colonTokenPairs.find(token => token.key === 'per')?.value) || 24
   const page =
-    parseInt(colonTokenPairs.find(token => token.key === 'page')?.value) ||
-    undefined
+    parseInt(colonTokenPairs.find(token => token.key === 'page')?.value) || 1
 
   const term = searchTokens.join(' ').trim()
 

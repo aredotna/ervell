@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/client'
-import React, { useContext } from 'react'
+import { NetworkStatus, useQuery } from '@apollo/client'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { AdvancedSearchContext } from '../../AdvancedSearchContext'
 
 import SearchEmptyMessage from 'v2/components/SearchEmptyMessage'
@@ -16,16 +16,63 @@ import search from '../../queries/search'
 
 export const AdvancedSearchResultsGrid: React.FC = () => {
   const { state } = useContext(AdvancedSearchContext)
-  const { data, loading, error } = useQuery<
+  const [page, setPage] = useState<number>(1)
+
+  const { data, loading, error, refetch, networkStatus, fetchMore } = useQuery<
     AdvancedSearch,
     AdvancedSearchVariables
-  >(search, { variables: state.variables })
+  >(search, {
+    variables: { ...state.variables },
+  })
+
+  useEffect(() => {
+    setPage(1)
+    refetch(state.variables)
+  }, [state.variables])
+
+  const loadMore = useCallback(() => {
+    fetchMore({
+      variables: { ...state.variables, page: page + 1 },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) {
+          return prev
+        }
+        const merged = {
+          ...prev,
+          ...fetchMoreResult,
+          searches: {
+            ...prev.searches,
+            ...fetchMoreResult.searches,
+            advanced: {
+              ...prev.searches.advanced,
+              ...fetchMoreResult.searches.advanced,
+              results: [
+                ...prev.searches.advanced.results,
+                ...fetchMoreResult.searches.advanced.results,
+              ],
+            },
+          },
+        }
+        console.log({ merged })
+        return merged
+      },
+    }).then(res => {
+      console.log({ res })
+      if (res.data.searches.advanced.results.length > 0) {
+        setPage(page + 1)
+      }
+    })
+  }, [page, state.variables])
 
   if (error) {
     return <ErrorAlert>{error.message}</ErrorAlert>
   }
 
-  if (loading) {
+  if (
+    loading ||
+    networkStatus === NetworkStatus.setVariables ||
+    networkStatus === NetworkStatus.refetch
+  ) {
     return <BlocksLoadingIndicator />
   }
 
@@ -45,8 +92,8 @@ export const AdvancedSearchResultsGrid: React.FC = () => {
           threshold={800}
           initialLoad={false}
           loader={<BlocksLoadingIndicator key="loading" />}
-          // hasMore={contents.length >= per && hasMore}
-          // loadMore={this.loadMore(fetchMore)}
+          hasMore={contents.length < data.searches?.advanced.total}
+          loadMore={loadMore}
         >
           {contents.map(
             cell =>

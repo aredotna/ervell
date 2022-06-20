@@ -63,12 +63,12 @@ const extractVariableFromStateAndPayload = (
   const { field, filter } = payload
   const typedFilter: any = filter ? filter : null
   const variables = { ...state.variables }
-  const existingFacets: any = variables[field]?.facets || []
+  const existingFacet: any = variables[field]?.facets || null
   return {
     field,
     filter: typedFilter,
     variables,
-    existingFacets,
+    existingFacet,
   }
 }
 
@@ -79,18 +79,18 @@ const reducer = (state: State, action: Action) => {
         field,
         filter,
         variables,
-        existingFacets,
+        existingFacet,
       } = extractVariableFromStateAndPayload(state, action.payload)
 
-      const newValue = [...existingFacets, filter as WhereEnum]
+      console.log({ existingFacet })
 
-      // remove ALL filter if it exists
-      if (newValue.includes(FieldsEnum.ALL)) {
-        newValue.splice(newValue.indexOf(FieldsEnum.ALL), 1)
-      }
+      const newValue = filter as WhereEnum
 
       set(variables, `${field}.facets`, newValue)
-      const query = `${state.query} ${stringifyFacet(field, filter)}`
+      const regex1 = new RegExp(`(\\s)${field}:(\\S*)`, 'gm')
+      const query = existingFacet
+        ? state.query.replace(regex1, ` ${stringifyFacet(field, filter)}`)
+        : `${state.query} ${stringifyFacet(field, filter)}`
 
       return { query, variables }
     case 'REMOVE_FILTER':
@@ -98,11 +98,9 @@ const reducer = (state: State, action: Action) => {
         field: field2,
         filter: filter2,
         variables: variables2,
-        existingFacets: existingFacets2,
       } = extractVariableFromStateAndPayload(state, action.payload)
 
-      const newValue2 = existingFacets2.filter(f => f !== filter2)
-      set(variables2, `${field2}.facets`, newValue2)
+      set(variables2, `${field2}.facets`, null)
       const query2 = state.query.replace(
         ` ${stringifyFacet(field2, filter2)}`,
         ''

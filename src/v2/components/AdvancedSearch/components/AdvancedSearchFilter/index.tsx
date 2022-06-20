@@ -52,8 +52,8 @@ export const AdvancedSearchFilter: React.FC = () => {
       filter: WhereEnum | WhatEnum | FieldsEnum,
       field: 'what' | 'where' | 'fields'
     ) => {
-      const currentFilters = (state.variables[field]?.facets as any) || []
-      currentFilters.includes(filter)
+      const currentFilter = (state.variables[field]?.facets as any) || null
+      currentFilter == filter
         ? removeFilter(field, filter)
         : addFilter(field, filter)
     },

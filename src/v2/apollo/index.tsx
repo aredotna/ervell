@@ -130,6 +130,7 @@ export const initApolloClient = ({
 
   const client = new ApolloClient({
     ssrMode: !isClientSide,
+    connectToDevTools: isClientSide && process.env.NODE_ENV !== 'production',
     link: ApolloLink.split(
       operation => {
         return operation.getContext().clientName === 'contentful'
