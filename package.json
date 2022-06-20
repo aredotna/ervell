@@ -282,6 +282,7 @@
     "sinon": "*",
     "source-map-support": "^0.5.21",
     "storybook-addon-apollo-client": "^4.0.11",
+    "storybook-addon-turbo-build": "^1.1.0",
     "storybook-react-router": "^1.0.8",
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5",

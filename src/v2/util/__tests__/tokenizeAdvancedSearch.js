@@ -27,7 +27,7 @@ describe('tokenizeSearch', () => {
   it('should filter out key value pairs that do not correspond to anything', () => {
     const query = 'hello:world hello:world:world'
     const tokens = tokenizeSearch(query)
-    expect(tokens.term).toEqual({ facet: '' })
+    expect(tokens.term).toEqual(undefined)
   })
 
   it('should handle per and page values', () => {
@@ -42,8 +42,8 @@ describe('tokenizeSearch', () => {
     const query = 'hello hello world'
     const tokens = tokenizeSearch(query)
     expect(tokens.term).toEqual({ facet: 'hello hello world' })
-    expect(tokens.page).toEqual(undefined)
-    expect(tokens.per).toEqual(undefined)
+    expect(tokens.page).toEqual(1)
+    expect(tokens.per).toEqual(24)
     expect(tokens.where).toEqual(undefined)
     expect(tokens.what).toEqual(undefined)
     expect(tokens.fields).toEqual(undefined)

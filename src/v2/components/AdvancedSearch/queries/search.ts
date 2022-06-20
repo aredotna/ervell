@@ -1,5 +1,8 @@
 import { gql } from '@apollo/client'
 
+import identifiableCellFragment from 'v2/components/Cell/components/Identifiable/fragments/identifiableCell'
+import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell'
+
 export default gql`
   query AdvancedSearch(
     $term: Term
@@ -27,7 +30,13 @@ export default gql`
           fields
           order
         }
+        results {
+          ...KonnectableCell
+          ...IdentifiableCell
+        }
       }
     }
   }
+  ${konnectableCellFragment}
+  ${identifiableCellFragment}
 `

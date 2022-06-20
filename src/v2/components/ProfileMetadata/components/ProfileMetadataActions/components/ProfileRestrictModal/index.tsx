@@ -80,7 +80,6 @@ export const RestrictPersonModal: React.FC<RestrictPersonModalProps> = ({
 
   const onChange = useCallback(
     ({ target: { value } }) => {
-      console.log({ value })
       setDisabled(value != id)
     },
     [setDisabled]
