@@ -127,11 +127,15 @@ export const FlagContentModal: React.FC<FlagContentModalProps> = ({
     <Container>
       <Copy>
         Be mindful when reporting content, read our{' '}
-        <a href="https://www.are.na/community-guidelines" target="_blank">
+        <a
+          href="https://www.are.na/community-guidelines"
+          target="_blank"
+          rel="noreferrer"
+        >
           Community Guidelines
         </a>{' '}
         and{' '}
-        <a href="https://www.are.na/terms" target="_blank">
+        <a href="https://www.are.na/terms" target="_blank" rel="noreferrer">
           Terms
         </a>{' '}
         to know what is allowed.

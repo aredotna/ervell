@@ -53,6 +53,7 @@ export interface InitialAppDataFragment_sharify {
   IS_SPIDER: boolean | null;
   IS_OUTSIDE_MAIN_ROUTER: boolean | null;
   THEME: string | null;
+  ADMIN_SLUGS: (string | null)[] | null;
 }
 
 export interface InitialAppDataFragment {

@@ -11,8 +11,6 @@ const meta = {
   component: UserDropdown,
 }
 
-console.log({ meta }, '💍🧤🧢🐠🌞🌹')
-
 export default meta
 
 const Template = () => (

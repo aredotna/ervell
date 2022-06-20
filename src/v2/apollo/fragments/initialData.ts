@@ -39,6 +39,7 @@ export default gql`
       IS_SPIDER
       IS_OUTSIDE_MAIN_ROUTER
       THEME
+      ADMIN_SLUGS
     }
   }
 `

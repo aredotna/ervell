@@ -2,10 +2,12 @@ import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 import {
   FieldsEnum,
   SortDirection,
-  SortOrder,
+  SortOrderEnum,
   WhatEnum,
   WhereEnum,
 } from '__generated__/globalTypes'
+
+import { pickBy } from 'lodash'
 
 export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
   const tokens = search.split(/\s+/)
@@ -33,20 +35,22 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
     .map(token => FieldsEnum[token.value.toUpperCase()])
     .filter(Boolean) as FieldsEnum[]
   const sortToken =
-    (colonTokenPairs.find(token => token.key === 'sort')?.value as SortOrder) ||
-    undefined
+    (colonTokenPairs
+      .find(token => token.key === 'sort')
+      ?.value?.toUpperCase() as SortOrderEnum) || undefined
   const directionToken =
-    (colonTokenPairs.find(token => token.key === 'dir')
-      ?.value as SortDirection) || undefined
+    (colonTokenPairs
+      .find(token => token.key === 'dir')
+      ?.value?.toUpperCase() as SortDirection) || undefined
   const per =
-    parseInt(colonTokenPairs.find(token => token.key === 'per')?.value) ||
-    undefined
+    parseInt(colonTokenPairs.find(token => token.key === 'per')?.value) || 24
   const page =
-    parseInt(colonTokenPairs.find(token => token.key === 'page')?.value) ||
-    undefined
+    parseInt(colonTokenPairs.find(token => token.key === 'page')?.value) || 1
 
-  return {
-    term: { facet: searchTokens.join(' ') },
+  const term = searchTokens.join(' ').trim()
+
+  const variables = {
+    term: term === '' ? null : { facet: term },
     where: whereTokens.length ? { facets: whereTokens } : undefined,
     what: whatTokens.length ? { facets: whatTokens } : undefined,
     fields: fieldsTokens.length ? { facets: fieldsTokens } : undefined,
@@ -54,6 +58,49 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
     per,
     page,
   }
+
+  return pickBy(variables)
+}
+
+export const stringifyFacet = (
+  field: 'where' | 'what' | 'fields',
+  filter: WhereEnum | WhatEnum | FieldsEnum
+) => {
+  return `${field}:${filter.toLowerCase()}`
+}
+
+const mapFacets = function(type) {
+  return function(facet) {
+    return `${type}:${facet.toLowerCase()}`
+  }
+}
+
+export const stringifyOrder = (
+  order: SortOrderEnum,
+  direction: SortDirection
+) => {
+  return `sort:${order.toLowerCase()} dir:${direction.toLocaleLowerCase()}`
+}
+
+export const stringifyVariables = (variables: AdvancedSearchVariables) => {
+  const strings = [
+    variables?.term?.facet ? `${variables?.term.facet}` : undefined,
+    variables?.where?.facets?.length
+      ? variables?.where.facets.map(mapFacets('where')).join(' ')
+      : undefined,
+    variables?.what?.facets?.length
+      ? variables?.what.facets.map(mapFacets('what')).join(' ')
+      : undefined,
+    variables?.fields?.facets?.length
+      ? variables?.fields.facets.map(mapFacets('fields')).join(' ')
+      : undefined,
+    variables?.order?.facet ? `sort:${variables?.order.facet}` : undefined,
+    variables?.order?.dir ? `dir:${variables?.order.dir}` : undefined,
+    variables?.per ? `per:${variables?.per}` : undefined,
+    variables?.page ? `page:${variables?.page}` : undefined,
+  ]
+
+  return strings.filter(Boolean).join(' ')
 }
 
 export default tokenizeSearch

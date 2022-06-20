@@ -99,7 +99,6 @@ export const MyGroup: React.FC<MyGroupProps> = ({ me, group, ...rest }) => {
 
   const removeUser = useCallback(
     user => {
-      console.log('removeUser', { user })
       const nextUpgradeableUsers = upgradeableUsers.filter(
         upgradeableUser => upgradeableUser.id !== user.id
       )

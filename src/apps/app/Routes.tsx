@@ -38,9 +38,12 @@ import { AboutPage } from 'v2/pages/about/AboutPage'
 import RoadmapPage from 'v2/pages/about/RoadmapPage'
 import PricingPage from 'v2/pages/about/PricingPage'
 import { EducationPage } from 'v2/pages/about/EducationPage'
+import useIsAdmin from 'v2/hooks/useIsAdmin'
+import { Search2Page } from 'v2/pages/search2'
 
 export const Routes = () => {
   const { isLoggedIn } = useLoginStatus()
+  const isAdmin = useIsAdmin()
 
   const location = useLocation()
   const background =
@@ -97,6 +100,16 @@ export const Routes = () => {
             <SearchPage params={params} query={query} />
           ))}
         />
+
+        {isAdmin && (
+          <Route
+            exact
+            path="/search2/:term/:view?"
+            render={parseRoute(({ params }) => {
+              return <Search2Page term={params.term} />
+            })}
+          />
+        )}
 
         {/* Block */}
         <Route

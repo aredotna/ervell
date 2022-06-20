@@ -130,6 +130,7 @@ export const initApolloClient = ({
 
   const client = new ApolloClient({
     ssrMode: !isClientSide,
+    connectToDevTools: isClientSide && process.env.NODE_ENV !== 'production',
     link: ApolloLink.split(
       operation => {
         return operation.getContext().clientName === 'contentful'
@@ -188,6 +189,7 @@ export const initApolloClient = ({
         IS_SPIDER: null,
         IS_OUTSIDE_MAIN_ROUTER: null,
         THEME: null,
+        ADMIN_SLUGS: null,
         ...{ ...sharifyData, CURRENT_USER: null },
       },
     },

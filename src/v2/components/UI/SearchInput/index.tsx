@@ -105,6 +105,9 @@ class SearchInput extends PureComponent<Props, State> {
     if (isEmpty(nextProps.query) && !isEmpty(this.state.query)) {
       this.resetState()
     }
+    if (nextProps.query !== this.state.query) {
+      this.setState({ query: nextProps.query })
+    }
   }
 
   resetState = () => {
@@ -220,6 +223,7 @@ class SearchInput extends PureComponent<Props, State> {
           autoComplete="off"
           autoCapitalize="off"
           spellCheck="false"
+          value={query}
         />
       </Container>
     )
