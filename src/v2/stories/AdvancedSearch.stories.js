@@ -1,10 +1,9 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 
 import Specimen from 'v2/stories/__components__/Specimen'
 
 import AdvancedSearch from 'v2/components/AdvancedSearch'
 import { AdvancedSearchContextProvider } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
-import AdvancedSearchFilter from 'v2/components/AdvancedSearch/components/AdvancedSearchFilter'
 
 const meta = {
   title: 'AdvancedSearch',

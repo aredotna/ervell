@@ -72,110 +72,105 @@ const extractVariableFromStateAndPayload = (
   }
 }
 
+const ReducerMethodMap = {
+  ADD_FILTER: (state: State, action: any) => {
+    const {
+      field,
+      filter,
+      variables,
+      existingFacet,
+    } = extractVariableFromStateAndPayload(state, action.payload)
+    const newValue = filter as WhereEnum
+
+    set(variables, `${field}.facets`, newValue)
+    const regex = new RegExp(`(\\s)${field}:(\\S*)`, 'gm')
+    const query = existingFacet
+      ? state.query.replace(regex, ` ${stringifyFacet(field, filter)}`)
+      : `${state.query} ${stringifyFacet(field, filter)}`
+
+    return { query, variables }
+  },
+
+  REMOVE_FILTER: (state: State, action: any) => {
+    const { field, filter, variables } = extractVariableFromStateAndPayload(
+      state,
+      action.payload
+    )
+
+    set(variables, `${field}.facets`, null)
+    const query = state.query.replace(` ${stringifyFacet(field, filter)}`, '')
+
+    return { query, variables }
+  },
+
+  SET_ALL: (state: State, action: any) => {
+    const { field, variables } = extractVariableFromStateAndPayload(
+      state,
+      action.payload
+    )
+
+    const newValue = [FieldsEnum.ALL]
+    set(variables, `${field}.facets`, newValue)
+    const regex = new RegExp(`(\\s)${field}:(\\S*)`, 'gm')
+    const query = state.query.replace(regex, '')
+
+    return {
+      query: `${query} ${stringifyFacet(field, FieldsEnum.ALL)}`,
+      variables,
+    }
+  },
+
+  QUERY_CHANGE: (state: State, action: any) => {
+    return {
+      ...state,
+      query: action.payload,
+      variables: tokenizeSearch(action.payload),
+    }
+  },
+
+  SET_ORDER: (state: State, action: any) => {
+    const { facet, dir } = action.payload
+
+    const variables = { ...state.variables }
+    let query = state.query
+
+    if (state.variables?.order) {
+      query = state.query.replace(
+        ` ${stringifyOrder(
+          state.variables.order.facet,
+          state.variables.order.dir
+        )}`,
+        ` ${stringifyOrder(facet, dir)}`
+      )
+    } else {
+      query = `${state.query} ${stringifyOrder(facet, dir)}`
+    }
+
+    return {
+      ...state,
+      query,
+      variables: {
+        ...variables,
+        order: {
+          ...variables?.order,
+          facet: facet,
+          dir: dir,
+        },
+      },
+    }
+  },
+}
+
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case 'ADD_FILTER':
-      const {
-        field,
-        filter,
-        variables,
-        existingFacet,
-      } = extractVariableFromStateAndPayload(state, action.payload)
-
-      const newValue = filter as WhereEnum
-
-      set(variables, `${field}.facets`, newValue)
-      const regex1 = new RegExp(`(\\s)${field}:(\\S*)`, 'gm')
-      const query = existingFacet
-        ? state.query.replace(regex1, ` ${stringifyFacet(field, filter)}`)
-        : `${state.query} ${stringifyFacet(field, filter)}`
-
-      return { query, variables }
     case 'REMOVE_FILTER':
-      const {
-        field: field2,
-        filter: filter2,
-        variables: variables2,
-      } = extractVariableFromStateAndPayload(state, action.payload)
-
-      set(variables2, `${field2}.facets`, null)
-      const query2 = state.query.replace(
-        ` ${stringifyFacet(field2, filter2)}`,
-        ''
-      )
-
-      return { query: query2, variables: variables2 }
-
     case 'SET_ALL':
-      const {
-        field: field3,
-        variables: variables3,
-      } = extractVariableFromStateAndPayload(state, action.payload)
-
-      const newValue3 = [FieldsEnum.ALL]
-      set(variables3, `${field3}.facets`, newValue3)
-      const regex = new RegExp(`(\\s)${field3}:(\\S*)`, 'gm')
-      const query3 = state.query.replace(regex, '')
-
-      return {
-        query: `${query3} ${stringifyFacet(field3, FieldsEnum.ALL)}`,
-        variables: variables3,
-      }
-
-    // case 'TOGGLE_ALL_BLOCKS':
-    //   const {
-    //     variables: variables4,
-    //     existingFacets: existingFacets4,
-    //   } = extractVariableFromStateAndPayload(state, { field: 'what', filter: WhatEnum.BLOCK })
-
-    //   const blockFilters = currentBlockFilters(existingFacets4 as WhatEnum[])
-    //   let newValue4: WhatEnum[] = []
-
-    //   // if there are block filters, remove them and set value to BLOCK
-    //   if (blockFilters.length > 0) {
-    //     const newValue4 = existingFacets4.filter(f => blockFilters.indexOf(f) === -1)
-    //     set(variables4, 'what.facets', newValue4)
-    //     const query4 = state.query.replace(
-    //       ` ${stringifyFacet('what', blockFilters)}`,
-
     case 'QUERY_CHANGE':
-      return {
-        ...state,
-        query: action.payload,
-        variables: tokenizeSearch(action.payload),
-      }
-
     case 'SET_ORDER':
-      const { facet, dir } = action.payload
-
-      const variables4 = { ...state.variables }
-      let query4 = state.query
-
-      if (state.variables?.order) {
-        query4 = state.query.replace(
-          ` ${stringifyOrder(
-            state.variables.order.facet,
-            state.variables.order.dir
-          )}`,
-          ` ${stringifyOrder(facet, dir)}`
-        )
-      } else {
-        query4 = `${state.query} ${stringifyOrder(facet, dir)}`
-      }
-
-      return {
-        ...state,
-        query: query4,
-        variables: {
-          ...variables4,
-          order: {
-            ...variables4?.order,
-            facet: facet,
-            dir: dir,
-          },
-        },
-      }
-
+      return ReducerMethodMap[action.type](state, action)
+    case 'TOGGLE_ALL_BLOCKS':
+      return state
     default:
       return state
   }
