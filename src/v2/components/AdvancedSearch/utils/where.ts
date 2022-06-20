@@ -10,14 +10,22 @@ const blockFilters = [
   WhatEnum.ATTACHMENT,
 ]
 
-export const hasBlockFilters = (currentFilter?: WhatEnum) => {
-  return blockFilters.includes(currentFilter)
+export const hasBlockFilters = (currentFilters?: WhatEnum[]) => {
+  const currentFiltersArray = [...currentFilters]
+  return currentFiltersArray?.some(filter => blockFilters.includes(filter))
 }
 
-export const currentBlockFilters = (currentFilter?: WhatEnum) => {
-  return blockFilters.includes(currentFilter)
+export const currentBlockFilters = (currentFilters?: WhatEnum[]) => {
+  const currentFiltersArray = [...currentFilters]
+  return currentFiltersArray?.filter(filter => {
+    return blockFilters.includes(filter)
+  })
 }
 
-export const currentBlockFilterLabels = (currentFilter?: WhatEnum) => {
-  return hasBlockFilters(currentFilter) ? EnumLabelMap[currentFilter] : ''
+export const currentBlockFilterLabels = (currentFilters?: WhatEnum[]) => {
+  return currentBlockFilters(currentFilters)
+    ?.map(filter => {
+      return EnumLabelMap[filter]
+    })
+    .join(', ')
 }
