@@ -82,8 +82,6 @@ const reducer = (state: State, action: Action) => {
         existingFacet,
       } = extractVariableFromStateAndPayload(state, action.payload)
 
-      console.log({ existingFacet })
-
       const newValue = filter as WhereEnum
 
       set(variables, `${field}.facets`, newValue)

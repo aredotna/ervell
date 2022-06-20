@@ -53,11 +53,9 @@ export const AdvancedSearchResultsGrid: React.FC = () => {
             },
           },
         }
-        console.log({ merged })
         return merged
       },
     }).then(res => {
-      console.log({ res })
       if (res.data.searches.advanced.results.length > 0) {
         setPage(page + 1)
       }

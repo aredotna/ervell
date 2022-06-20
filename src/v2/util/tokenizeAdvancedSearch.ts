@@ -49,8 +49,6 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
 
   const term = searchTokens.join(' ').trim()
 
-  console.log({ "term === ''": term === '' })
-
   const variables = {
     term: term === '' ? null : { facet: term },
     where: whereTokens.length ? { facets: whereTokens } : undefined,
