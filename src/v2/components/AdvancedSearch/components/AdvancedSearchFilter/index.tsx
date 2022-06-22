@@ -60,12 +60,15 @@ export const AdvancedSearchFilter: React.FC = () => {
     [state, state.variables, addFilter, removeFilter]
   )
 
-  const clearAndSetAll = useCallback(
+  const toggleAll = useCallback(
     (
-      _filter: WhereEnum | WhatEnum | FieldsEnum,
+      filter: WhereEnum | WhatEnum | FieldsEnum,
       field: 'what' | 'where' | 'fields'
     ) => {
-      setAllFilter(field)
+      const currentFilter = (state.variables[field]?.facets as any) || null
+      currentFilter == WhereEnum.ALL
+        ? removeFilter(field, filter)
+        : setAllFilter(field)
     },
     [state, state.variables, addFilter, removeFilter]
   )
@@ -73,17 +76,17 @@ export const AdvancedSearchFilter: React.FC = () => {
   return (
     <FiltersContainer>
       <WhereFilter
-        clearAndSetAll={clearAndSetAll}
+        clearAndSetAll={toggleAll}
         toggleFilter={toggleFilter}
         currentFilters={state.variables?.where?.facets}
       />
       <WhatFilter
-        clearAndSetAll={clearAndSetAll}
+        clearAndSetAll={toggleAll}
         toggleFilter={toggleFilter}
         currentFilters={state.variables?.what?.facets}
       />
       <FieldsFilter
-        clearAndSetAll={clearAndSetAll}
+        clearAndSetAll={toggleAll}
         toggleFilter={toggleFilter}
         currentFilters={state.variables?.fields?.facets}
       />

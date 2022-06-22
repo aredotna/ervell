@@ -97,7 +97,8 @@ const ReducerMethodMap = {
       action.payload
     )
 
-    set(variables, `${field}.facets`, null)
+    set(variables, `${field}`, null)
+    delete variables[field]
     const query = state.query.replace(` ${stringifyFacet(field, filter)}`, '')
 
     return { query, variables }
