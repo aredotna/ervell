@@ -11,10 +11,12 @@ export const FieldsFilter: React.FC<FilterProps> = ({
   currentFilters,
   toggleFilter,
   clearAndSetAll,
+  currentDisabledFilters,
 }) => {
   const updateProps = {
     field: 'fields' as any,
     toggleFilter,
+    currentDisabledFilters,
   }
   return (
     <FilterContainer>

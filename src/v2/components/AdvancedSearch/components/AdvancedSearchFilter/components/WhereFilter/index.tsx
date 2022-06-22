@@ -11,10 +11,12 @@ export const WhereFilter: React.FC<FilterProps> = ({
   currentFilters,
   toggleFilter,
   clearAndSetAll,
+  currentDisabledFilters,
 }) => {
   const updateProps = {
     field: 'where' as any,
     toggleFilter,
+    currentDisabledFilters,
   }
   return (
     <FilterContainer>
