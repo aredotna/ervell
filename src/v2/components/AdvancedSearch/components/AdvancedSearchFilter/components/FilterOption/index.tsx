@@ -4,6 +4,7 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import { EnumLabelMap } from 'v2/components/AdvancedSearch/utils/labels'
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
+import { AnyFilter } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 
 export const FilterContainer = styled(Box).attrs({
   p: 1,
@@ -17,6 +18,16 @@ export const FilterContainer = styled(Box).attrs({
     `
     background-color: ${props.theme.colors.gray.light};
   `}
+
+  ${props =>
+    props.disabled &&
+    `
+    cursor: default;
+
+    &:hover {
+      background-color: transparent;
+    }
+  `}
 `
 
 export const FilterLabel = styled(Text).attrs({
@@ -29,12 +40,19 @@ export const FilterLabel = styled(Text).attrs({
     `
     color: ${props.theme.colors.gray.bold};
   `}
+
+  ${props =>
+    props.disabled &&
+    `
+    color: ${props.theme.colors.gray.semiLight};
+  `}
 `
 
 interface FilterOptionProps {
   field: 'where' | 'what' | 'fields'
   filter: WhereEnum | WhatEnum | FieldsEnum
   currentFilters?: WhereEnum[] | WhatEnum[] | FieldsEnum[]
+  currentDisabledFilters?: AnyFilter[]
   toggleFilter: (
     filter: WhereEnum | WhatEnum | FieldsEnum,
     field: 'where' | 'what' | 'fields'
@@ -45,17 +63,28 @@ export const FilterOption: React.FC<FilterOptionProps> = ({
   field,
   filter,
   currentFilters = [],
+  currentDisabledFilters,
   toggleFilter,
   ...rest
 }) => {
   const typedCurrentFilter: any[] = currentFilters ? currentFilters : []
+  const isDisabled = currentDisabledFilters?.includes(filter)
   const isSelected = filter && typedCurrentFilter?.includes(filter)
   const onClick = useCallback(() => {
-    toggleFilter(filter, field)
-  }, [toggleFilter])
+    if (!isDisabled) {
+      toggleFilter(filter, field)
+    }
+  }, [toggleFilter, currentDisabledFilters])
   return (
-    <FilterContainer active={isSelected} onClick={onClick} {...rest}>
-      <FilterLabel active={isSelected}>{EnumLabelMap[filter]}</FilterLabel>
+    <FilterContainer
+      disabled={isDisabled}
+      active={isSelected}
+      onClick={onClick}
+      {...rest}
+    >
+      <FilterLabel disabled={isDisabled} active={isSelected}>
+        {EnumLabelMap[filter]}
+      </FilterLabel>
     </FilterContainer>
   )
 }
