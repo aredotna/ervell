@@ -13,11 +13,15 @@ import {
   WhatEnum,
   WhereEnum,
 } from '__generated__/globalTypes'
+import { calculatedDisabledFilters } from './utils/filters'
 // import { currentBlockFilters, hasBlockFilters } from './utils/where'
 
-interface State {
+export type AnyFilter = WhatEnum | WhereEnum | SortOrderEnum | FieldsEnum
+
+export interface State {
   query: string
   variables: AdvancedSearchVariables
+  disabledFilters: AnyFilter[]
 }
 
 type Action =
@@ -88,7 +92,9 @@ const ReducerMethodMap = {
       ? state.query.replace(regex, ` ${stringifyFacet(field, filter)}`)
       : `${state.query} ${stringifyFacet(field, filter)}`
 
-    return { query, variables }
+    const disabledFilters = calculatedDisabledFilters(variables, query)
+
+    return { query, variables, disabledFilters }
   },
 
   REMOVE_FILTER: (state: State, action: any) => {
@@ -97,10 +103,12 @@ const ReducerMethodMap = {
       action.payload
     )
 
-    set(variables, `${field}.facets`, null)
+    set(variables, `${field}`, null)
+    delete variables[field]
     const query = state.query.replace(` ${stringifyFacet(field, filter)}`, '')
+    const disabledFilters = calculatedDisabledFilters(variables, query)
 
-    return { query, variables }
+    return { ...state, query, variables, disabledFilters }
   },
 
   SET_ALL: (state: State, action: any) => {
@@ -114,17 +122,23 @@ const ReducerMethodMap = {
     const regex = new RegExp(`(\\s)${field}:(\\S*)`, 'gm')
     const query = state.query.replace(regex, '')
 
+    const disabledFilters = calculatedDisabledFilters(variables, query)
+
     return {
+      ...state,
       query: `${query} ${stringifyFacet(field, FieldsEnum.ALL)}`,
       variables,
+      disabledFilters,
     }
   },
 
   QUERY_CHANGE: (state: State, action: any) => {
+    const variables = tokenizeSearch(action.payload)
     return {
       ...state,
       query: action.payload,
-      variables: tokenizeSearch(action.payload),
+      variables,
+      disabledFilters: calculatedDisabledFilters(variables, action.payload),
     }
   },
 
@@ -149,6 +163,7 @@ const ReducerMethodMap = {
     return {
       ...state,
       query,
+      disabledFilters: calculatedDisabledFilters(variables, query),
       variables: {
         ...variables,
         order: {
@@ -200,6 +215,7 @@ export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
   state: {
     query: '',
     variables: {},
+    disabledFilters: [],
   },
 })
 
@@ -218,6 +234,7 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
   const [state, dispatch] = useReducer(reducer, {
     query: stringifyVariables(variables),
     variables: variables || {},
+    disabledFilters: [],
   })
 
   const addFilter = useCallback(

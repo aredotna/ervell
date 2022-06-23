@@ -57,10 +57,12 @@ export const WhatFilter: React.FC<FilterProps> = ({
   currentFilters,
   toggleFilter,
   clearAndSetAll,
+  currentDisabledFilters,
 }) => {
   const updateProps = {
     field: 'what' as any,
     toggleFilter,
+    currentDisabledFilters,
   }
 
   const [mode, setMode] = useState<'resting' | 'block'>('resting')

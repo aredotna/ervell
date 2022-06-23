@@ -4,7 +4,7 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
-import { AdvancedSearchContext } from '../../AdvancedSearchContext'
+import { AdvancedSearchContext, AnyFilter } from '../../AdvancedSearchContext'
 import { FieldsFilter } from './components/FieldsFilter'
 import { Orders } from './components/Orders'
 import { WhatFilter } from './components/WhatFilter'
@@ -32,6 +32,7 @@ export const CategoryLabel = styled(Text).attrs({
 
 export interface FilterProps {
   currentFilters?: WhereEnum[] | WhatEnum[] | FieldsEnum[]
+  currentDisabledFilters?: AnyFilter[]
   toggleFilter: (
     filter: WhereEnum | WhatEnum | FieldsEnum,
     field: 'what' | 'where' | 'fields'
@@ -60,12 +61,15 @@ export const AdvancedSearchFilter: React.FC = () => {
     [state, state.variables, addFilter, removeFilter]
   )
 
-  const clearAndSetAll = useCallback(
+  const toggleAll = useCallback(
     (
-      _filter: WhereEnum | WhatEnum | FieldsEnum,
+      filter: WhereEnum | WhatEnum | FieldsEnum,
       field: 'what' | 'where' | 'fields'
     ) => {
-      setAllFilter(field)
+      const currentFilter = (state.variables[field]?.facets as any) || null
+      currentFilter == WhereEnum.ALL
+        ? removeFilter(field, filter)
+        : setAllFilter(field)
     },
     [state, state.variables, addFilter, removeFilter]
   )
@@ -73,19 +77,22 @@ export const AdvancedSearchFilter: React.FC = () => {
   return (
     <FiltersContainer>
       <WhereFilter
-        clearAndSetAll={clearAndSetAll}
+        clearAndSetAll={toggleAll}
         toggleFilter={toggleFilter}
         currentFilters={state.variables?.where?.facets}
+        currentDisabledFilters={state.disabledFilters}
       />
       <WhatFilter
-        clearAndSetAll={clearAndSetAll}
+        clearAndSetAll={toggleAll}
         toggleFilter={toggleFilter}
         currentFilters={state.variables?.what?.facets}
+        currentDisabledFilters={state.disabledFilters}
       />
       <FieldsFilter
-        clearAndSetAll={clearAndSetAll}
+        clearAndSetAll={toggleAll}
         toggleFilter={toggleFilter}
         currentFilters={state.variables?.fields?.facets}
+        currentDisabledFilters={state.disabledFilters}
       />
       <Orders />
     </FiltersContainer>
