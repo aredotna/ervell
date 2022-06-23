@@ -20,7 +20,7 @@ export default gql`
         what: $what
         fields: $fields
         order: $order
-        per_page: $per
+        per: $per
         page: $page
       ) {
         total
