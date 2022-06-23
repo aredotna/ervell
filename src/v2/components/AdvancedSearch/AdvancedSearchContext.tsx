@@ -145,7 +145,6 @@ const ReducerMethodMap = {
   SET_ORDER: (state: State, action: any) => {
     const { facet, dir } = action.payload
 
-    const variables = { ...state.variables }
     let query = state.query
 
     if (state.variables?.order) {
@@ -160,18 +159,20 @@ const ReducerMethodMap = {
       query = `${state.query} ${stringifyOrder(facet, dir)}`
     }
 
+    const variables = {
+      ...state.variables,
+      order: {
+        ...state.variables?.order,
+        facet: facet,
+        dir: dir,
+      },
+    }
+
     return {
       ...state,
       query,
       disabledFilters: calculatedDisabledFilters(variables, query),
-      variables: {
-        ...variables,
-        order: {
-          ...variables?.order,
-          facet: facet,
-          dir: dir,
-        },
-      },
+      variables,
     }
   },
 }

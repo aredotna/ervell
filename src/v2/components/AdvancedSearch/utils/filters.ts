@@ -19,6 +19,12 @@ const disabledFilterRules = {
     FieldsEnum.URL,
     SortOrderEnum.CONNECTIONS_COUNT,
   ],
+
+  // And the reverse
+  [WhatEnum.USER]: [WhereEnum.MY],
+  [FieldsEnum.DOMAIN]: [WhatEnum.CHANNEL, WhatEnum.GROUP],
+  [FieldsEnum.URL]: [WhatEnum.CHANNEL, WhatEnum.GROUP],
+  [SortOrderEnum.CONNECTIONS_COUNT]: [WhatEnum.GROUP],
 }
 
 export const allFacetsFromVariables = (
