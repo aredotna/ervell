@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import ExtensionLogin from 'extension/src/components/ExtensionLogin'
@@ -12,7 +12,7 @@ import withLoginStatus from 'v2/hocs/WithLoginStatus'
 
 const Routes = ({ isLoggedIn }) => (
   <Extension>
-    <Switch>
+    <Routes>
       {!isLoggedIn && <Route path="/" component={ExtensionLogin} />}
 
       {isLoggedIn && (
@@ -27,7 +27,7 @@ const Routes = ({ isLoggedIn }) => (
           />
         </React.Fragment>
       )}
-    </Switch>
+    </Routes>
   </Extension>
 )
 

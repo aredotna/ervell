@@ -1,6 +1,6 @@
 import sharify from 'sharify'
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import { mountWithApolloProvider } from 'v2/apollo'
 
@@ -12,7 +12,7 @@ import TransferChannelNotFoundPage from 'v2/pages/actions/TransferChannelNotFoun
 import TransferChannelAccessDeniedPage from 'v2/pages/actions/TransferChannelAccessDeniedPage'
 
 const Routes = WithStaticRouter(props => (
-  <Switch>
+  <Routes>
     <Route
       path="/actions/transfer-channel/reject/:token"
       render={() => <TransferChannelRejectedPage {...props} />}
@@ -21,7 +21,7 @@ const Routes = WithStaticRouter(props => (
       path="/actions/transfer-channel/confirm/:token"
       render={() => <TransferChannelConfirmedPage {...props} />}
     />
-  </Switch>
+  </Routes>
 ))
 
 const {

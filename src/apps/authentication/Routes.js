@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import parseRoute from 'v2/util/parseRoute'
 
@@ -12,7 +12,7 @@ import AcceptInvitationPage from 'v2/pages/authentication/AcceptInvitationPage'
 
 export default () => (
   <BlankLayout>
-    <Switch>
+    <Routes>
       <Route path="/log_in" render={() => <LoginPage />} />
 
       <Route
@@ -42,6 +42,6 @@ export default () => (
           />
         ))}
       />
-    </Switch>
+    </Routes>
   </BlankLayout>
 )
