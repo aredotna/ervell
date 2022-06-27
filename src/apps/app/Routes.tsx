@@ -48,14 +48,6 @@ export const AppRoutes = () => {
 
   const background = state && state.background && JSON.parse(state.background)
 
-  const preventScroll = state && state.preventScroll
-
-  useEffect(() => {
-    if (!background && !preventScroll) {
-      window.scrollTo(0, 0)
-    }
-  }, [location?.pathname, background, preventScroll])
-
   return (
     <>
       <Routes location={background || location}>
@@ -71,9 +63,8 @@ export const AppRoutes = () => {
         <Route path="notifications" element={<NotificationPage />} />
 
         {/* About pages */}
-        <Route path="about" element={<AboutPage />}>
-          <Route path=":page" element={<AboutPage />} />
-        </Route>
+        <Route path="about/:page" element={<AboutPage />} />
+        <Route path="about" element={<AboutPage />} />
         <Route path="roadmap" element={<RoadmapPage />} />
         <Route path="pricing" element={<PricingPage />} />
         <Route path="education" element={<EducationPage />} />
