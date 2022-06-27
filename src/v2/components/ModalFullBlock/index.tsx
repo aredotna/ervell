@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Mousetrap from 'mousetrap'
 import { debounce } from 'underscore'
@@ -96,16 +96,16 @@ export const ModalFullBlock: React.FC<ModalFullBlockProps> = ({ id, ids }) => {
   //
   // Handle route navigation, forward backward and close
   //
-  const history = useHistory()
+  const navigate = useNavigate()
   const location = useLocation()
-  const background = location.state && JSON.parse(location.state.background)
+  const state = location.state as any
+  const background = state && JSON.parse(state.background)
 
   const [currentId, setCurrentId] = useState<number>(id)
 
   const updateId = useCallback(
     newId => {
-      history.push({
-        pathname: `/block/${newId}`,
+      navigate(`/block/${newId}`, {
         state: location.state,
       })
       setCurrentId(newId)
@@ -114,8 +114,8 @@ export const ModalFullBlock: React.FC<ModalFullBlockProps> = ({ id, ids }) => {
   )
 
   const onClose = useCallback(() => {
-    history.push(`${background.pathname}${background.search}`, {
-      preventScroll: true,
+    navigate(`${background?.pathname}${background.search}`, {
+      state: { preventScroll: true },
     })
   }, [background, history])
 

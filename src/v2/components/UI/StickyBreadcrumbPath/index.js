@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import Waypoint from 'react-waypoint'
+import { Waypoint } from 'react-waypoint'
 import styled from 'styled-components'
 
 import constants from 'v2/styles/constants'

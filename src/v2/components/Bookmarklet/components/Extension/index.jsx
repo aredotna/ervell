@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'v2/hocs/WithRouter'
+
 import { find, without } from 'underscore'
 
 import PaneMessenger from 'lib/PaneMessenger'

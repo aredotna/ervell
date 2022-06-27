@@ -132,15 +132,11 @@ const CompactChannelComponent: React.FC<CompactChannelProps> = ({
     openEditChannel(channel.id, refetchQueries, client)
   }
 
-  const toParams = {
-    pathname: channel.href,
-    state: getBreadcrumbPath(channel),
-  }
-
   return (
     <Container
       as={Link}
-      to={toParams}
+      to={channel.href}
+      state={getBreadcrumbPath(channel)}
       visibility={channel.visibility}
       {...rest}
       onMouseEnter={handleMouseOver}

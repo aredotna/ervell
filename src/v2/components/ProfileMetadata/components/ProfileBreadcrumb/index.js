@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { propType } from 'v2/util/inlinedGraphqlAnywhere'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'v2/hocs/WithRouter'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -12,6 +12,7 @@ import ProfileBadge from 'v2/components/ProfileMetadata/components/ProfileBreadc
 import Badge from 'v2/components/UI/Badge'
 
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
+import { unescape } from 'lodash'
 
 const ProfileLink = styled(Link)`
   vertical-align: middle;
@@ -41,12 +42,10 @@ class ProfileBreadcrumb extends Component {
       <StickyBreadcrumbPath>
         <StickyBreadcrumbPath.Crumb>
           <ProfileLink
-            to={{
-              pathname: identifiable.href,
-              state: getBreadcrumbPath(identifiable),
-            }}
+            to={identifiable.href}
+            state={getBreadcrumbPath(identifiable)}
           >
-            {identifiable.name}
+            {unescape(identifiable.name)}
             {showBadge && identifiable.__typename === 'Group' && (
               <Badge
                 f={0}

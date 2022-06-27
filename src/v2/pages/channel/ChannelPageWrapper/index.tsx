@@ -8,10 +8,16 @@ import {
 import ChannelTablePage from '../ChannelTablePage'
 import ChannelPage from '../ChannelPage'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
+import { useParams } from 'react-router'
+import { useSearchParams } from 'react-router-dom'
+import { ConnectableTypeEnum } from '__generated__/globalTypes'
 
 const isClientSide = typeof window !== 'undefined'
 
-export default ({ params, query }) => {
+const ChannelPageWrapper: React.FC<{ view?: string }> = ({ view }) => {
+  const params = useParams()
+  const [query] = useSearchParams()
+
   const { data } = useQuery<ChannelUiState, ChannelUiStateVariables>(
     channelUiState,
     {
@@ -26,17 +32,17 @@ export default ({ params, query }) => {
     view: 'grid',
   }
 
-  const view = params.view || cookies.view || 'grid'
-  const type = query.type || null
-  const user = query.user ? JSON.parse(query.user) : null
-  const fromOnboarding = query.fromOnboarding
+  const calcView = params.view || cookies.view || 'grid'
+  const type = query.get('type') || null
+  const user = query.get('user') ? JSON.parse(query.get('user')) : null
+  const fromOnboarding = Boolean(query.get('fromOnboarding'))
 
   if (view === 'table' && is_premium) {
     return (
       <ChannelTablePage
         id={params.id}
-        view={view}
-        type={type}
+        view="table"
+        type={type as ConnectableTypeEnum}
         user={user}
         fromOnboarding={fromOnboarding}
       />
@@ -44,6 +50,12 @@ export default ({ params, query }) => {
   }
 
   return (
-    <ChannelPage id={params.id} view={view} fromOnboarding={fromOnboarding} />
+    <ChannelPage
+      id={params.id}
+      view={calcView as 'grid' | 'table'}
+      fromOnboarding={fromOnboarding}
+    />
   )
 }
+
+export default ChannelPageWrapper

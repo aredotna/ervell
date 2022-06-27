@@ -11,12 +11,12 @@ import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import ChannelMetadata from 'v2/components/ChannelMetadata'
 import { ChannelFollowers } from 'v2/components/ChannelFollowers'
 import { ChannelPageMetaTags } from 'v2/pages/channel/components/ChannelPageMetaTags'
+import { useParams } from 'react-router'
 
-interface Props {
-  id: string
-}
+export default () => {
+  const params = useParams()
+  const id = params.id
 
-export default ({ id }: Props) => {
   return (
     <TopBarLayout>
       <Constrain>

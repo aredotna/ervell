@@ -10,8 +10,9 @@ import Icons from 'v2/components/UI/Icons'
 import CenteringBox from 'v2/components/UI/CenteringBox'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import ResetPasswordForm from 'v2/components/ResetPasswordForm'
+import { useParams } from 'react-router'
 
-export default class ResetPasswordPage extends Component {
+class ResetPasswordPage extends Component {
   static propTypes = {
     reset_password_token: PropTypes.string.isRequired,
   }
@@ -65,3 +66,11 @@ export default class ResetPasswordPage extends Component {
     )
   }
 }
+
+export const ResetPasswordPageWrapper = () => {
+  const params = useParams()
+
+  return <ResetPasswordPage reset_password_token={params.token} />
+}
+
+export default ResetPasswordPageWrapper

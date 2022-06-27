@@ -75,7 +75,7 @@ export default {
     return {
       title: document.title,
       location: window.location.href,
-      page: window.location.pathname,
+      page: window.location?.pathname,
     }
   },
 

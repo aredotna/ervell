@@ -14,8 +14,11 @@ import Icons from 'v2/components/UI/Icons'
 import ChannelMetadata from 'v2/components/ChannelMetadata'
 import { ChannelContentsWithData } from 'v2/pages/channel/components/ChannelContentsWithData'
 import { ChannelPageMetaTags } from 'v2/pages/channel/components/ChannelPageMetaTags'
+import { useParams } from 'react-router'
 
-export default ({ token }) => {
+export default () => {
+  const params = useParams()
+  const token = params?.token
   return (
     <BlankTopBarLayout>
       <Constrain>

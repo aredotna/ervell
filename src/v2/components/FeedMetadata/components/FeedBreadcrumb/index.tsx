@@ -32,7 +32,7 @@ export const FeedBreadcrumb: React.FC = () => {
       <div>Feed</div>
       <Option to="/explore">Explore</Option>
       {me && (
-        <Option to={{ pathname: `/${me.slug}`, state: getBreadcrumbPath(me) }}>
+        <Option to={`/${me.slug}`} state={getBreadcrumbPath(me)}>
           Profile
         </Option>
       )}

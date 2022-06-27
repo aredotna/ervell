@@ -81,10 +81,8 @@ export default class Indentifiable extends PureComponent {
 
     return (
       <Container
-        to={{
-          pathname: identifiable.href,
-          state: getBreadcrumbPath(identifiable),
-        }}
+        to={identifiable.href}
+        state={getBreadcrumbPath(identifiable)}
         role="button"
         tabIndex={0}
         onMouseEnter={this.onMouseEnter}

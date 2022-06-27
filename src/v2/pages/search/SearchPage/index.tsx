@@ -13,6 +13,8 @@ import Head from 'v2/components/UI/Head'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 
 import searchUiStateQuery from 'v2/pages/search/SearchPage/queries/searchUiState'
+import { useParams } from 'react-router'
+import { useSearchParams } from 'react-router-dom'
 
 interface SearchPageProps {
   view: 'all' | 'channels' | 'blocks' | 'groups' | 'users'
@@ -51,7 +53,10 @@ const setValid = (value, validValues, defaultValue) => {
   return defaultValue
 }
 
-export default ({ params, query }) => {
+export default () => {
+  const params = useParams()
+  const [query] = useSearchParams()
+
   return (
     <Query query={searchUiStateQuery}>
       {props => {
@@ -62,7 +67,8 @@ export default ({ params, query }) => {
         const view = params.view || (cookies && cookies.view) || 'all'
         const term = removeDiacritics(params.term)
 
-        const filter = query.block_filter || (cookies && cookies.block_filter)
+        const filter =
+          query.get('block_filter') || (cookies && cookies.block_filter)
         const block_filter = setValid(filter, VALID_FILTERS, null)
 
         return (

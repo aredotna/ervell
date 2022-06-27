@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes as Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import parseRoute from 'v2/util/parseRoute'
@@ -20,7 +20,7 @@ const Routes = ({ isLoggedIn }) => {
 
   return (
     <Extension>
-      <Routes>
+      <Switch>
         {!isLoggedIn && (
           <Route
             path="/save/:content"
@@ -49,7 +49,7 @@ const Routes = ({ isLoggedIn }) => {
             />
           </React.Fragment>
         )}
-      </Routes>
+      </Switch>
     </Extension>
   )
 }

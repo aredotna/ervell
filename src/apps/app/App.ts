@@ -6,7 +6,7 @@ import getFirstStatusCode from 'v2/util/getFirstStatusCode'
 import pageResolver from 'v2/components/UI/Page/resolver'
 import withStaticRouter from 'v2/hocs/WithStaticRouter'
 
-import { Routes } from './Routes'
+import { AppRoutes as Routes } from './Routes'
 import ensureLoggedIn from 'lib/middleware/ensureLoggedIn'
 import createAuthenticatedService from 'apps/authentication/mutations/createAuthenticatedService'
 

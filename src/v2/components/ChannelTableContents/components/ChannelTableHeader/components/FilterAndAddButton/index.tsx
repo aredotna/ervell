@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { useMutation } from '@apollo/client'
-import { useHistory, useLocation } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 
 import { useWidthOf } from 'v2/hooks/useCurrentWidth'
 import DropZoneUploader from 'v2/components/UI/DropZoneUploader'
@@ -225,14 +225,14 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
     const [uploaderKey, setUploaderKey] = useState<number>(new Date().getTime())
 
     const location = useLocation()
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const handleSetType = useCallback(
       (type: ConnectableTypeEnum) => {
         const queryParams = updateParams(location, { type })
-        return history.push(`${location.pathname}?${queryParams}`)
+        return navigate(`${location.pathname}?${queryParams}`)
       },
-      [history, location]
+      [navigate, location]
     )
 
     const handleSetUser = useCallback(
@@ -240,9 +240,9 @@ export const TableAddButton: React.ForwardRefExoticComponent<TableAddButtonProps
         const queryParams = updateParams(location, {
           user: user ? JSON.stringify(user) : null,
         })
-        return history.push(`${location.pathname}?${queryParams}`)
+        return navigate(`${location.pathname}?${queryParams}`)
       },
-      [history, location]
+      [navigate, location]
     )
 
     const [createBlock] = useMutation<

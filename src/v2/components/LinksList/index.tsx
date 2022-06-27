@@ -11,6 +11,8 @@ const Link = styled(RouterLink)`
 
 interface Link extends LinkProps {
   label: string
+  href: string
+  state?: any
 }
 
 interface LinksListProps {
@@ -21,11 +23,12 @@ export const LinksList: React.FC<LinksListProps> = ({ links, ...rest }) => {
   return (
     <Container {...rest}>
       {links.map((link, i) => {
-        const toParams = link.href ? link.href : link
+        const href = link.href ? link.href : link
         return (
           <span key={`Link-${link.label}-${link.id}`}>
             <Link
-              to={toParams}
+              to={href}
+              state={link.state}
               length={link.label.length}
               dangerouslySetInnerHTML={{ __html: link.label }}
             />

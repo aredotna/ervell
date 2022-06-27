@@ -6,12 +6,13 @@ import Head from 'v2/components/UI/Head'
 import Title from 'v2/components/UI/Head/components/Title'
 import CenteringBox from 'v2/components/UI/CenteringBox'
 import RegistrationForm from 'v2/components/RegistrationForm'
+import { useParams } from 'react-router'
 
 const {
   data: { RECAPTCHA_SITE_KEY },
 } = sharify
 
-export default class RegistrationPage extends Component {
+class RegistrationPage extends Component {
   static propTypes = {
     selected: PropTypes.oneOf(['basic', 'premium']),
   }
@@ -56,3 +57,11 @@ export default class RegistrationPage extends Component {
     )
   }
 }
+
+export const RegistrationPageWrapper = () => {
+  const params = useParams()
+
+  return <RegistrationPage selected={params.plan} />
+}
+
+export default RegistrationPageWrapper

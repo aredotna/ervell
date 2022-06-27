@@ -33,12 +33,9 @@ const NotificationObjectLink: React.FC<NotificationObjectLinkProps> = ({
     )
   }
 
-  const toParams = obj && {
-    pathname: href,
-    state:
-      obj &&
-      (obj?.__typename == 'Channel' || obj?.__typename == 'User') &&
-      getBreadcrumbPath(obj),
+  const state = obj && {
+    ...((obj?.__typename == 'Channel' || obj?.__typename == 'User') &&
+      getBreadcrumbPath(obj)),
   }
 
   return (
@@ -49,7 +46,7 @@ const NotificationObjectLink: React.FC<NotificationObjectLinkProps> = ({
       color={__typename === 'Channel' ? `channel.${visibility}` : 'gray.base'}
       {...rest}
     >
-      <Link to={toParams}>
+      <Link to={href} state={state}>
         <span dangerouslySetInnerHTML={{ __html: truncate(title, 40) }} />
 
         {visibility === 'private' && (

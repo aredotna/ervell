@@ -13,35 +13,17 @@ import AcceptInvitationPage from 'v2/pages/authentication/AcceptInvitationPage'
 export default () => (
   <BlankLayout>
     <Routes>
-      <Route path="/log_in" render={() => <LoginPage />} />
+      <Route path="/log_in" element={<LoginPage />} />
 
-      <Route
-        path="/sign_up/:plan?"
-        render={parseRoute(({ params }) => (
-          <RegistrationPage selected={params.plan} />
-        ))}
-      />
+      <Route path="/sign_up" element={<RegistrationPage />} />
 
-      <Route path="/forgot" render={() => <ForgotPasswordPage />} />
+      <Route path="/sign_up/:plan" element={<RegistrationPage />} />
 
-      <Route
-        path="/reset/:reset_password_token"
-        render={parseRoute(({ params }) => (
-          <ResetPasswordPage
-            reset_password_token={params.reset_password_token}
-          />
-        ))}
-      />
+      <Route path="/forgot" element={<ForgotPasswordPage />} />
 
-      <Route
-        path="/register/:invitation_token"
-        render={parseRoute(({ params, query }) => (
-          <AcceptInvitationPage
-            invitation_token={params.invitation_token}
-            raw_invitation_token={query.invite_token}
-          />
-        ))}
-      />
+      <Route path="/reset/:token" element={<ResetPasswordPage />} />
+
+      <Route path="/register/:token" element={<AcceptInvitationPage />} />
     </Routes>
   </BlankLayout>
 )

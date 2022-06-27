@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { StaticRouter } from 'react-router'
+import { StaticRouter } from 'react-router-dom/server'
 
 import WithCurrentRoute from 'v2/hocs/WithCurrentRoute'
 

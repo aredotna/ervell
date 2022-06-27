@@ -12,12 +12,14 @@ import CenteringBox from 'v2/components/UI/CenteringBox'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import Text from 'v2/components/UI/Text'
 import RegistrationForm from 'v2/components/RegistrationForm'
+import { useParams } from 'react-router'
+import { useSearchParams } from 'react-router-dom'
 
 const {
   data: { RECAPTCHA_SITE_KEY },
 } = sharify
 
-export default class AcceptInvitationPage extends Component {
+class AcceptInvitationPage extends Component {
   static propTypes = {
     // `invitation_token` is used to locate the invite
     // it is a digest of `raw_invitation_token` and exists on the user record.
@@ -103,3 +105,16 @@ export default class AcceptInvitationPage extends Component {
     )
   }
 }
+
+export const AcceptInvitationPageWrapper = () => {
+  const params = useParams()
+  const [query] = useSearchParams()
+  return (
+    <AcceptInvitationPage
+      invitation_token={params.token}
+      raw_invitation_token={query.raw_invitation_token}
+    />
+  )
+}
+
+export default AcceptInvitationPageWrapper

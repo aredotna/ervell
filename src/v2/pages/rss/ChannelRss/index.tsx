@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import React from 'react'
+import { useParams } from 'react-router'
 import {
   ChannelRss as ChannelRssType,
   ChannelRssVariables,
@@ -8,11 +9,11 @@ import { RssBlock } from '../components/RssBlock'
 import RssLayout from '../components/RssLayout'
 import channelRssQuery from './queries/channelRss'
 
-interface ChannelRssProps {
-  params: { slug?: string }
-}
+interface ChannelRssProps {}
 
-const ChannelRss: React.FC<ChannelRssProps> = ({ params }) => {
+const ChannelRss: React.FC<ChannelRssProps> = () => {
+  const params = useParams()
+
   const { data } = useQuery<ChannelRssType, ChannelRssVariables>(
     channelRssQuery,
     {

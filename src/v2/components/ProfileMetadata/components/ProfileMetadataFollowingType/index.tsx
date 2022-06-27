@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import Pocket from 'v2/components/UI/Pocket'
 import LinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
 
 import { ProfileMetadataFollowingType_User } from '__generated__/ProfileMetadataFollowingType'
+import { withRouter } from 'v2/hocs/WithRouter'
 
 interface Props {
   identifiable: ProfileMetadataFollowingType_User
@@ -15,7 +15,7 @@ interface Props {
 }
 
 class ProfileMetadataFollowingType extends Component<
-  Props & RouteComponentProps
+  Props & { location: any }
 > {
   isFilterActive = followType => () => this.props.followType === followType
 

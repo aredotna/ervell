@@ -25,6 +25,8 @@ import {
   IndexedChannelsTypes,
   SearchSorts,
 } from '__generated__/globalTypes'
+import { useParams } from 'react-router'
+import { useSearchParams } from 'react-router-dom'
 
 export type ProfileViewTypes =
   | 'all'
@@ -150,7 +152,10 @@ const setValid = (value, validValues, defaultValue) => {
 }
 
 // Weird container extracted from router
-export default ({ params, query }) => {
+const ProfilePageWrapper: React.FC<{ view?: string }> = props => {
+  const params = useParams()
+  const [query] = useSearchParams()
+
   const { data } = useQuery(profileUiStateQuery, {
     fetchPolicy: isClientSide ? 'cache-only' : 'network-only',
   })
@@ -160,22 +165,28 @@ export default ({ params, query }) => {
     sort: 'UPDATED_AT',
   }
 
-  const view = params.view || cookies.view || 'channels'
+  const calcedView = props.view || cookies.view || 'channels'
   const sort = setValid(query.sort || cookies.sort, VALID_SORTS, 'UPDATED_AT')
-  const indexFilter = setValid(query.filter, VALID_INDEX_FILTERS, 'OWN')
+  const indexFilter = setValid(query.get('filter'), VALID_INDEX_FILTERS, 'OWN')
 
   const blockFilter = setValid(
-    query.type == undefined ? cookies.type : query.type,
+    query.get('type') == undefined ? cookies.type : query.get('type'),
     VALID_BLOCK_FILTERS,
     null
   )
 
-  const followType = setValid(query.followType, VALID_FOLLOW_TYPES, 'ALL')
+  const followType = setValid(
+    query.get('followType'),
+    VALID_FOLLOW_TYPES,
+    'ALL'
+  )
+
+  console.log({ calcedView, view: props.view, props })
 
   return (
     <ProfilePage
       id={params.id}
-      view={view}
+      view={calcedView}
       sort={sort}
       filter={indexFilter}
       type={blockFilter}
@@ -183,3 +194,5 @@ export default ({ params, query }) => {
     />
   )
 }
+
+export default ProfilePageWrapper

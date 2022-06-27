@@ -17,6 +17,7 @@ import {
 } from '__generated__/ResendLoggedOutConfirmationEmailMutation'
 import { ApolloError } from '@apollo/client'
 import Box from 'v2/components/UI/Box'
+import { useSearchParams } from 'react-router-dom'
 
 const Container = styled(CenteringBox)`
   flex-direction: column;
@@ -30,13 +31,12 @@ const Headline = styled(Text).attrs({
   my: 6,
 })``
 
-interface ExpiredConfirmationPageProps {
-  email: string
-}
+interface ExpiredConfirmationPageProps {}
 
-export const ExpiredConfirmationPage: React.FC<ExpiredConfirmationPageProps> = ({
-  email,
-}) => {
+export const ExpiredConfirmationPage: React.FC<ExpiredConfirmationPageProps> = () => {
+  const [query] = useSearchParams()
+  const email = query.get('email')
+
   const [state, setState] = useState<'resting' | 'sending' | 'done' | 'error'>(
     'resting'
   )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'v2/hocs/WithRouter'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'

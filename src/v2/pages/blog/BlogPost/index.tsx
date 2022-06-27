@@ -21,10 +21,9 @@ import { AboutTopBarLayout } from 'v2/components/UI/Layouts/AboutTopBarLayout'
 import BLOG_POST_CONTENT_QUERY from 'v2/pages/blog/BlogPost/contentfulQueries/BlogPostBySlug'
 import { BlogPostBlocks } from './components/BlogPostBlocks'
 import { NewsletterSignup } from '../BlogIndex/components/NewsletterSignup'
+import { useParams } from 'react-router'
 
-interface BlogPostProps {
-  slug: string
-}
+interface BlogPostProps {}
 
 const Container = styled(Box).attrs({ mt: 10, mx: [5, 'auto'] })`
   max-width: 670px;
@@ -58,7 +57,10 @@ const Meta = styled(Text).attrs({
   f: 4,
 })``
 
-export const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
+export const BlogPost: React.FC<BlogPostProps> = () => {
+  const params = useParams()
+  const slug = params?.id
+
   const { data } = useQuery(BLOG_POST_CONTENT_QUERY, {
     context: { clientName: 'contentful' },
     variables: { slug },
