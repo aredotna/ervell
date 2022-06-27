@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Route, useLocation, Routes } from 'react-router-dom'
 
 // Feed
