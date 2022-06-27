@@ -1,5 +1,5 @@
-import React from 'react'
-import { Route, useLocation, Routes } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Route, useLocation, Routes, useNavigationType } from 'react-router-dom'
 
 // Feed
 import FeedPage from 'v2/pages/feed/FeedPage'
@@ -45,8 +45,17 @@ export const AppRoutes = () => {
 
   const location = useLocation()
   const state = location.state as any
+  const type = useNavigationType()
 
   const background = state && state.background && JSON.parse(state.background)
+
+  const preventScroll = state && state.preventScroll
+
+  useEffect(() => {
+    if (!background && !preventScroll && type != 'POP') {
+      window.scrollTo(0, 0)
+    }
+  }, [location?.pathname, background, preventScroll, type])
 
   return (
     <>
