@@ -31,9 +31,7 @@ const Headline = styled(Text).attrs({
   my: 6,
 })``
 
-interface ExpiredConfirmationPageProps {}
-
-export const ExpiredConfirmationPage: React.FC<ExpiredConfirmationPageProps> = () => {
+export const ExpiredConfirmationPage: React.FC = () => {
   const [query] = useSearchParams()
   const email = query.get('email')
 

@@ -23,8 +23,6 @@ import { BlogPostBlocks } from './components/BlogPostBlocks'
 import { NewsletterSignup } from '../BlogIndex/components/NewsletterSignup'
 import { useParams } from 'react-router'
 
-interface BlogPostProps {}
-
 const Container = styled(Box).attrs({ mt: 10, mx: [5, 'auto'] })`
   max-width: 670px;
 `
@@ -57,7 +55,7 @@ const Meta = styled(Text).attrs({
   f: 4,
 })``
 
-export const BlogPost: React.FC<BlogPostProps> = () => {
+export const BlogPost: React.FC = () => {
   const params = useParams()
   const slug = params?.id
 

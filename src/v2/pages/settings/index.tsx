@@ -46,8 +46,6 @@ const PremiumLabel = styled(Label)`
   color: ${x => x.theme.colors.state.premium};
 `
 
-interface SettingsPageProps {}
-
 const UserSettingsComponent: React.FC = () => {
   return (
     <>
@@ -60,7 +58,7 @@ const UserSettingsComponent: React.FC = () => {
   )
 }
 
-const SettingsPage: React.FC<SettingsPageProps> = () => {
+const SettingsPage: React.FC = () => {
   const params = useParams()
   const paramsTab = params.tab || 'general'
 

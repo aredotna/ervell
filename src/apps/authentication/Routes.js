@@ -1,8 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import parseRoute from 'v2/util/parseRoute'
-
 import BlankLayout from 'v2/components/UI/Layouts/BlankLayout'
 import LoginPage from 'v2/pages/authentication/LoginPage'
 import RegistrationPage from 'v2/pages/authentication/RegistrationPage'

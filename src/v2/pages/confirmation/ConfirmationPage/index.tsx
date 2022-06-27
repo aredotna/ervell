@@ -21,9 +21,7 @@ const Container = styled(CenteringBox)`
   flex-direction: column;
 `
 
-interface ConfirmationPageToken {}
-
-export const ConfirmationPage: React.FC<ConfirmationPageToken> = () => {
+export const ConfirmationPage: React.FC = () => {
   const params = useParams()
   const token = params.token
 

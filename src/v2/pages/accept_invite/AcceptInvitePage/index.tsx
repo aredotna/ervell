@@ -47,9 +47,7 @@ const SmallLink = styled(Text).attrs({ f: 1 })`
   cursor: pointer;
 `
 
-interface AcceptInvitePageProps {}
-
-export const AcceptInvitePage: React.FC<AcceptInvitePageProps> = () => {
+export const AcceptInvitePage: React.FC = () => {
   const params = useParams()
   const code = params.code
 

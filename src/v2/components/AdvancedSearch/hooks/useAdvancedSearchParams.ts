@@ -1,10 +1,10 @@
 // import { useSearchParams } from "react-router-dom"
 
-export default function() {
-  // const [searchParams, setSearchParams] = useSearchParams()
+// export default function() {
+//   // const [searchParams, setSearchParams] = useSearchParams()
 
-  try {
-  } catch {
-    return false
-  }
-}
+//   try {
+//   } catch {
+//     return false
+//   }
+// }

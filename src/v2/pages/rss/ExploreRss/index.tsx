@@ -5,9 +5,7 @@ import { RssBlock } from '../components/RssBlock'
 import RssLayout from '../components/RssLayout'
 import exploreRssQuery from './queries/exploreRss'
 
-interface ExploreRssProps {}
-
-const ExploreRss: React.FC<ExploreRssProps> = () => {
+const ExploreRss: React.FC = () => {
   // const params = useParams()
   const { data } = useQuery<ExploreRssType>(exploreRssQuery)
 

@@ -14,9 +14,7 @@ import { AdvancedSearchContextProvider } from 'v2/components/AdvancedSearch/Adva
 import Box from 'v2/components/UI/Box'
 // import { useSearchParams } from 'react-router-dom'
 
-interface SearchPageProps {}
-
-export const Search2Page: React.FC<SearchPageProps> = () => {
+export const Search2Page: React.FC = () => {
   const params = useParams()
   // const [query] = useSearchParams()
 

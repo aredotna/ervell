@@ -10,7 +10,7 @@ import Extension from 'v2/components/Bookmarklet/components/Extension'
 import parseRoute from 'v2/util/parseRoute'
 import withLoginStatus from 'v2/hocs/WithLoginStatus'
 
-const Routes = ({ isLoggedIn }) => (
+const ExtRoutes = ({ isLoggedIn }) => (
   <Extension>
     <Routes>
       {!isLoggedIn && <Route path="/" component={ExtensionLogin} />}
@@ -35,4 +35,4 @@ Routes.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
 }
 
-export default withLoginStatus(Routes)
+export default withLoginStatus(ExtRoutes)

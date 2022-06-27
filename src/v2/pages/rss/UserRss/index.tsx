@@ -6,9 +6,7 @@ import { RssBlock } from '../components/RssBlock'
 import RssLayout from '../components/RssLayout'
 import channelRssQuery from './queries/userRss'
 
-interface UserRssProps {}
-
-const UserRss: React.FC<UserRssProps> = () => {
+const UserRss: React.FC = () => {
   const params = useParams()
 
   const { data } = useQuery<UserRssType, UserRssVariables>(channelRssQuery, {

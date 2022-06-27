@@ -28,9 +28,7 @@ const TabContent = styled(Box).attrs({
   pt: 8,
 })``
 
-interface ToolsPageProps {}
-
-export const ToolsPage: React.FC<ToolsPageProps> = () => {
+export const ToolsPage: React.FC = () => {
   const params = useParams()
   const tab = params?.tab || 'bookmarklet'
 
