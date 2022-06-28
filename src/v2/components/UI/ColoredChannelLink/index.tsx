@@ -7,6 +7,7 @@ interface ColoredChannelLinkProps {
   visibility?: string
   as?: any
   to?: any
+  state?: any
 }
 
 const ColoredLink = styled<{ visibility: boolean }>(Link)`
@@ -17,9 +18,10 @@ const ColoredChannelLink: React.FC<ColoredChannelLinkProps> = ({
   href,
   children,
   visibility,
+  state,
   ...rest
 }) => (
-  <ColoredLink to={href} visibility={visibility} {...rest}>
+  <ColoredLink to={href} state={state} visibility={visibility} {...rest}>
     {children}
   </ColoredLink>
 )

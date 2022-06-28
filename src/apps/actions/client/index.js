@@ -1,6 +1,6 @@
 import sharify from 'sharify'
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Route, Routes as Switch } from 'react-router-dom'
 
 import { mountWithApolloProvider } from 'v2/apollo'
 

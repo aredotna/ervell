@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import Pocket from 'v2/components/UI/Pocket'
 import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
 import { SearchMetadataProps } from 'v2/components/SearchMetadata'
+import { withRouter } from 'v2/hocs/WithRouter'
 
 class SearchMetadataFilter extends Component<
-  SearchMetadataProps & RouteComponentProps
+  SearchMetadataProps & { location: any }
 > {
   isFilterActive = filter => () => this.props.block_filter === filter
 

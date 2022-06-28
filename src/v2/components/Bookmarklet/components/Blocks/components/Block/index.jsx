@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'v2/hocs/WithRouter'
 
 import Truncate from 'v2/components/UI/Truncate'
 import Box from 'v2/components/UI/Box'

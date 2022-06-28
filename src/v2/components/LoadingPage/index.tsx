@@ -25,17 +25,19 @@ const Crumb = styled(StickyBreadcrumbPath.Crumb)`
 
 const LoadingPageBreadCrumb: React.FC = () => {
   const location = useLocation()
+  const state = location.state as any
   const breadcrumbs: Breadcrumbs =
-    location.state &&
-    location.state.breadcrumbs &&
-    JSON.parse(location.state.breadcrumbs)
+    state && state.breadcrumbs && JSON.parse(state.breadcrumbs)
 
   if (breadcrumbs) {
     return (
       <StickyBreadcrumbPath>
         {() =>
           breadcrumbs.crumbs.map((breadcrumb, index) => (
-            <Crumb key={`breadcrumb-${index}`}>{breadcrumb.label}</Crumb>
+            <Crumb
+              key={`breadcrumb-${index}`}
+              dangerouslySetInnerHTML={{ __html: breadcrumb.label }}
+            />
           ))
         }
       </StickyBreadcrumbPath>

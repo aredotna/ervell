@@ -1,4 +1,5 @@
 import React from 'react'
+import { useParams } from 'react-router'
 
 import { BlankTopBarLayout } from 'v2/components/UI/Layouts/BlankTopBarLayout'
 import Constrain from 'v2/components/UI/Constrain'
@@ -11,12 +12,12 @@ import AdvancedSearch from 'v2/components/AdvancedSearch'
 import { AdvancedSearchResultsGrid } from 'v2/components/AdvancedSearch/components/AdvancedSearchResultsGrid'
 import { AdvancedSearchContextProvider } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 import Box from 'v2/components/UI/Box'
+// import { useSearchParams } from 'react-router-dom'
 
-interface SearchPageProps {
-  term: string
-}
+export const Search2Page: React.FC = () => {
+  const params = useParams()
+  // const [query] = useSearchParams()
 
-export const Search2Page: React.FC<SearchPageProps> = ({ term }) => {
   return (
     <ErrorBoundary>
       <Title>Search2</Title>
@@ -28,7 +29,9 @@ export const Search2Page: React.FC<SearchPageProps> = ({ term }) => {
 
         <Constrain>
           <Box mt={9} />
-          <AdvancedSearchContextProvider variables={{ term: { facet: term } }}>
+          <AdvancedSearchContextProvider
+            variables={{ term: { facet: params.term } }}
+          >
             <AdvancedSearch />
 
             <Box mt={7}>

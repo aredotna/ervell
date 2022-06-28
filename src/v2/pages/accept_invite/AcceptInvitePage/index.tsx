@@ -22,6 +22,7 @@ import {
   acceptGroupInvite as AcceptGroupInviteMutation,
   acceptGroupInviteVariables as AcceptGroupInviteMutationVariables,
 } from '__generated__/acceptGroupInvite'
+import { useParams } from 'react-router'
 
 const Headline = styled(Text).attrs({
   fontSize: 8,
@@ -46,11 +47,10 @@ const SmallLink = styled(Text).attrs({ f: 1 })`
   cursor: pointer;
 `
 
-interface AcceptInvitePageProps {
-  code: string
-}
+export const AcceptInvitePage: React.FC = () => {
+  const params = useParams()
+  const code = params.code
 
-export const AcceptInvitePage: React.FC<AcceptInvitePageProps> = ({ code }) => {
   const { data, loading, error } = useQuery<
     GroupByCodeQuery,
     GroupByCodeQueryVariables

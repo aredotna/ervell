@@ -88,10 +88,8 @@ export const PrimarySearchResult: React.FC<PrimarySearchResultProps &
       <Container
         href={result.href}
         onClick={onClick}
-        to={{
-          pathname: result.href,
-          state: getBreadcrumbPath(result),
-        }}
+        to={result.href}
+        state={getBreadcrumbPath(result)}
         selected={selected}
         {...rest}
       >

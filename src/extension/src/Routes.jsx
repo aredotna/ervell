@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import ExtensionLogin from 'extension/src/components/ExtensionLogin'
@@ -10,9 +10,9 @@ import Extension from 'v2/components/Bookmarklet/components/Extension'
 import parseRoute from 'v2/util/parseRoute'
 import withLoginStatus from 'v2/hocs/WithLoginStatus'
 
-const Routes = ({ isLoggedIn }) => (
+const ExtRoutes = ({ isLoggedIn }) => (
   <Extension>
-    <Switch>
+    <Routes>
       {!isLoggedIn && <Route path="/" component={ExtensionLogin} />}
 
       {isLoggedIn && (
@@ -27,7 +27,7 @@ const Routes = ({ isLoggedIn }) => (
           />
         </React.Fragment>
       )}
-    </Switch>
+    </Routes>
   </Extension>
 )
 
@@ -35,4 +35,4 @@ Routes.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
 }
 
-export default withLoginStatus(Routes)
+export default withLoginStatus(ExtRoutes)

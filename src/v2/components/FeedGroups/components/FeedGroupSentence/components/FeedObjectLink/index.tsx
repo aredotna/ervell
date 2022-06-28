@@ -32,11 +32,9 @@ const FeedObjectLink: React.FC<FeedObjectLinkProps> = ({
   const Tag = obj?.href ? Link : Span
   const fontWeight = href ? 'bold' : 'normal'
 
-  const toParams = obj && {
-    pathname: href,
-    state:
-      (obj.__typename == 'Channel' || obj.__typename == 'User') &&
-      getBreadcrumbPath(obj),
+  const state = obj && {
+    ...((obj.__typename == 'Channel' || obj.__typename == 'User') &&
+      getBreadcrumbPath(obj)),
   }
 
   return (
@@ -48,7 +46,8 @@ const FeedObjectLink: React.FC<FeedObjectLinkProps> = ({
       {...rest}
     >
       <Tag
-        to={toParams}
+        to={href}
+        state={state}
         aria-label={`Feed link to ${title}`}
         dangerouslySetInnerHTML={{ __html: title }}
       />

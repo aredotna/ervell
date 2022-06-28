@@ -1,9 +1,8 @@
 import React from 'react'
-import { Switch, Route, useLocation } from 'react-router-dom'
+import { Routes as Switch, Route, useLocation } from 'react-router-dom'
 import ChannelRss from 'v2/pages/rss/ChannelRss'
 import ExploreRss from 'v2/pages/rss/ExploreRss'
 import UserRss from 'v2/pages/rss/UserRss'
-import parseRoute from '../../v2/util/parseRoute'
 
 export const Routes = () => {
   const location = useLocation()
@@ -11,29 +10,11 @@ export const Routes = () => {
   return (
     <>
       <Switch location={location}>
-        <Route
-          exact
-          path="/explore/feed/rss"
-          render={parseRoute(({ params }) => (
-            <ExploreRss params={params} />
-          ))}
-        />
+        <Route path="/explore/feed/rss" element={<ExploreRss />} />
 
-        <Route
-          exact
-          path="/:username/:slug/feed/rss"
-          render={parseRoute(({ params }) => (
-            <ChannelRss params={params} />
-          ))}
-        />
+        <Route path="/:username/:slug/feed/rss" element={<ChannelRss />} />
 
-        <Route
-          exact
-          path="/:username/feed/rss"
-          render={parseRoute(({ params }) => (
-            <UserRss params={params} />
-          ))}
-        />
+        <Route path="/:username/feed/rss" element={<UserRss />} />
       </Switch>
     </>
   )

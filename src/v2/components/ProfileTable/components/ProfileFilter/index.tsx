@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { useHistory, useLocation } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 
 import Box from 'v2/components/UI/Box'
 import GenericButton from 'v2/components/UI/GenericButton'
@@ -67,14 +67,14 @@ export const ProfileFilter: React.ForwardRefExoticComponent<ProfileFilterProps &
   const [filterMode, setFilterMode] = useState<FilterButtonState>('resting')
 
   const location = useLocation()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleSetType = useCallback(
     (type: ConnectableTypeEnum) => {
       const queryParams = updateParams(location, { type }, false)
-      return history.push(`${location.pathname}?${queryParams}`)
+      return navigate(`${location.pathname}?${queryParams}`)
     },
-    [history, location]
+    [location]
   )
 
   const handleFilterClick = useCallback(() => {

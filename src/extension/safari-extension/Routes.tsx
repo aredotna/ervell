@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import ExtensionLogin from 'extension/src/components/ExtensionLogin'
 import Blocks from 'v2/components/Bookmarklet/components/Blocks'
@@ -12,17 +12,17 @@ interface RoutesProps {
   isLoggedIn: boolean
 }
 
-const Routes: React.FC<RoutesProps> = ({ isLoggedIn }) => (
+const ExtensionRoutes: React.FC<RoutesProps> = ({ isLoggedIn }) => (
   <Extension>
-    <Switch>
-      {!isLoggedIn && <Route path="/" component={ExtensionLogin} />}
+    <Routes>
+      {!isLoggedIn && <Route path="/" element={ExtensionLogin} />}
 
       {isLoggedIn && (
         <React.Fragment>
-          <Route path="/edit" render={() => <EditBlock isSafari />} />
+          <Route path="/edit" element={<EditBlock isSafari />} />
           <Route
             path="/"
-            render={renderProps => {
+            element={renderProps => {
               // We manually have to check this here because the
               // initial safari extension pathname is always
               // randomized
@@ -35,8 +35,8 @@ const Routes: React.FC<RoutesProps> = ({ isLoggedIn }) => (
           />
         </React.Fragment>
       )}
-    </Switch>
+    </Routes>
   </Extension>
 )
 
-export default withLoginStatus(Routes)
+export default withLoginStatus(ExtensionRoutes)

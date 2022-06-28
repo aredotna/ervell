@@ -78,12 +78,9 @@ const FullBlockActions: React.FC<FullBlockActionsProps> = ({
     (block?.__typename === 'Link' || block?.__typename === 'Attachment') &&
     block?.image_updated_at
 
-  const toParams = location && {
-    pathname: block?.href,
-    state: {
-      background: JSON.stringify(location),
-      context: [],
-    },
+  const state = location && {
+    background: JSON.stringify(location),
+    context: [],
   }
 
   return (
@@ -112,7 +109,9 @@ const FullBlockActions: React.FC<FullBlockActionsProps> = ({
         )}
 
         {showOpenFullBlock && block?.href && (
-          <Link to={toParams}>Open in lightbox</Link>
+          <Link to={block.href} state={state}>
+            Open in lightbox
+          </Link>
         )}
 
         <FullBlockShare connectable={block} />

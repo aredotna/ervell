@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'v2/hocs/WithRouter'
 import styled from 'styled-components'
 
 import withExtensionContext from 'v2/components/Bookmarklet/components/Extension/withExtension'

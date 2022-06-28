@@ -22,6 +22,7 @@ import useIsSpiderRequesting from 'v2/hooks/useIsSpiderRequesting'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 import BLOCK_QUERY from './queries/blokk'
 import { Blokk, BlokkVariables } from '__generated__/Blokk'
+import Box from 'v2/components/UI/Box'
 
 const Container = styled(Link)`
   box-sizing: border-box;
@@ -65,7 +66,6 @@ interface Props {
 }
 
 interface InnerProps {
-  location?: any
   isSpiderRequesting: boolean
 }
 
@@ -75,12 +75,12 @@ export const KonnectableInner: React.FC<Props & InnerProps> = ({
   children,
   context,
   isSpiderRequesting,
-  location,
   onOverlay: onOverlayCallback,
   onOverlayClose: onOverlayCloseCallback,
   ...rest
 }) => {
   const [mode, setMode] = useState<Mode>(Mode.RESTING)
+  const location = useLocation()
 
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
@@ -112,27 +112,24 @@ export const KonnectableInner: React.FC<Props & InnerProps> = ({
     onOverlayCloseCallback && onOverlayCloseCallback()
   }, [onOverlayCloseCallback])
 
-  const defaultToParams = {
-    pathname: konnectable.href,
-    state:
-      konnectable.__typename === 'Channel' && getBreadcrumbPath(konnectable),
+  const defaultToState = {
+    ...(konnectable.__typename === 'Channel' && getBreadcrumbPath(konnectable)),
   }
 
-  const toParams =
+  const toState =
     konnectable.__typename === 'Channel' || isSpiderRequesting || !location
-      ? defaultToParams
+      ? defaultToState
       : {
-          ...defaultToParams,
-          state: {
-            background:
-              mode !== Mode.OVERLAY ? JSON.stringify(location) : undefined,
-            context,
-          },
+          ...defaultToState,
+          background:
+            mode !== Mode.OVERLAY ? JSON.stringify(location) : undefined,
+          context,
         }
 
   return (
     <Container
-      to={toParams}
+      to={konnectable.href}
+      state={toState}
       role="button"
       aria-label={`Link to ${konnectable.__typename}: ${konnectable.title}`}
       tabIndex={0}
@@ -178,16 +175,9 @@ export const KonnectableInner: React.FC<Props & InnerProps> = ({
 }
 
 export const Konnectable: React.FC<Props> = props => {
-  const location = useLocation()
   const isSpiderRequesting = useIsSpiderRequesting()
 
-  return (
-    <KonnectableInner
-      isSpiderRequesting={isSpiderRequesting}
-      location={location}
-      {...props}
-    />
-  )
+  return <KonnectableInner isSpiderRequesting={isSpiderRequesting} {...props} />
 }
 
 interface BlockWithQueryProps {
@@ -198,20 +188,18 @@ export const BlokkWithQuery: React.FC<BlockWithQueryProps> = ({
   id,
   ...rest
 }) => {
-  const location = useLocation()
   const { data, loading, error } = useQuery<Blokk, BlokkVariables>(
     BLOCK_QUERY,
     { variables: { id } }
   )
 
   if (loading || error) {
-    return <Container />
+    return <Box />
   }
 
   return (
     <KonnectableInner
       konnectable={data.blokk}
-      location={location}
       isPreviewable
       isSpiderRequesting={false}
       {...rest}
