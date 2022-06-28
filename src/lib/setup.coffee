@@ -57,7 +57,6 @@ ensureSSLMiddleware = require './middleware/ensure_ssl'
 viewModeMiddleware = require './middleware/view_mode'
 checkSessionMiddleware = require './middleware/check_session'
 isInverted = require '../components/night_mode/middleware'
-splitTestMiddleware = require '../components/split_test/middleware'
 { default: assetMiddleware } = require "./middleware/asset"
 { default: isSpiderMiddleware } = require './middleware/isSpider'
 { default: ensureWWWMiddleware } = require './middleware/ensureWWW'
@@ -172,7 +171,6 @@ module.exports = (app) ->
     .use arenaPassport({ CurrentUser })
     .use checkSessionMiddleware
     .use localsMiddleware
-    .use splitTestMiddleware
     .use ensureSSLMiddleware
     .use ensureWWWMiddleware
     .use isInverted

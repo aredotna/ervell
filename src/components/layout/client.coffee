@@ -13,7 +13,6 @@ Notifications = require "../../collections/notifications.coffee"
 RecentConnections = require '../../collections/recent_connections.coffee'
 CurrentUser = require '../../models/current_user.coffee'
 analytics = require '../../lib/analytics.coffee'
-setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
 initLoggedOutCTA = require '../logged_out_cta/index.coffee'
 { isTouch, isMobile } = require '../util/device.coffee'
@@ -86,7 +85,6 @@ setupAnalytics = ->
 
   analytics ga: ga
   analytics.registerCurrentUser()
-  setupSplitTests()
 
   args =
     title: document.title
