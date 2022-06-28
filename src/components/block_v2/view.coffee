@@ -3,12 +3,10 @@ Backbone = require 'backbone'
 Block = require '../../models/block.coffee'
 analytics = require '../../lib/analytics.coffee'
 FollowButtonView = require '../follow_button/client/follow_button_view.coffee'
-BlockCollectionConnectIntegrationView = require '../connect/integration/block_collection/view.coffee'
 
 module.exports = class BlockView extends Backbone.View
   events:
     'click .js-source' : 'openSource'
-    'click .js-connect' : 'openConnect'
 
   initialize: ({ @block }) -> #
 
@@ -35,28 +33,6 @@ module.exports = class BlockView extends Backbone.View
       model.url = "#{API_URL}/blocks/#{@block.id}"
 
     model
-
-  openConnect: (e) ->
-    e.preventDefault()
-    e.stopImmediatePropagation()
-
-    $target = @$('.js-connect-container')
-
-    # TODO: get a real block
-    block = @getModel()
-
-    block.fetch
-      success: =>
-        @$el.addClass 'Block--connecting'
-
-        view = new BlockCollectionConnectIntegrationView model: block
-
-        view.once 'remove', =>
-          @$el.removeClass 'Block--connecting'
-
-        $target
-          .addClass 'is-active'
-          .html view.render().$el
 
   renderFollowButton: ->
     model = @getModel()

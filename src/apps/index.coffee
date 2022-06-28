@@ -12,10 +12,6 @@ console.time('authentication')
 app.use(require('../apps/authentication'))
 console.timeEnd('authentication')
 
-console.time('getting_started')
-app.use(require('../apps/getting_started'))
-console.timeEnd('getting_started')
-
 console.time('util')
 app.use(require('../apps/util'))
 console.timeEnd('util')
@@ -23,10 +19,6 @@ console.timeEnd('util')
 console.time('about')
 app.use(require('../apps/about'))
 console.timeEnd('about')
-
-console.time('manage')
-app.use(require('../apps/manage'))
-console.timeEnd('manage')
 
 console.time('marklet')
 app.use(require('../apps/marklet'))
