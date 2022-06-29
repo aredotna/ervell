@@ -1,24 +1,27 @@
-import React from 'react'
-import {
-  BaseConnectableTypeEnum,
-  FollowableTypeEnum,
-} from '__generated__/globalTypes'
+import React, { useEffect } from 'react'
+
+export enum PageTypeEnum {
+  CHANNEL = 'CHANNEL',
+  GROUP = 'GROUP',
+  USER = 'USER',
+  BLOCK = 'BLOCK',
+}
 
 type PageType =
   | {
-      type: FollowableTypeEnum.CHANNEL
+      type: PageTypeEnum.CHANNEL
       id: string
     }
   | {
-      type: FollowableTypeEnum.GROUP
+      type: PageTypeEnum.GROUP
       id: string
     }
   | {
-      type: FollowableTypeEnum.USER
+      type: PageTypeEnum.USER
       id: string
     }
   | {
-      type: BaseConnectableTypeEnum.BLOCK
+      type: PageTypeEnum.BLOCK
     }
 
 export interface PageContextType {
@@ -26,7 +29,7 @@ export interface PageContextType {
   setPage: (page: PageType) => void
 }
 
-const PageContext = React.createContext<PageContextType>({
+export const PageContext = React.createContext<PageContextType>({
   setPage: () => {},
 })
 
@@ -39,6 +42,10 @@ export const PageContextProvider: React.FC<PageContextProviderProps> = ({
   initialPage,
 }) => {
   const [page, setPage] = React.useState<PageType>(initialPage)
+
+  useEffect(() => {
+    console.log({ page })
+  }, [page])
 
   return (
     <PageContext.Provider
