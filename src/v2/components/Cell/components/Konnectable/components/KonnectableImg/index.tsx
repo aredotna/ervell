@@ -35,8 +35,8 @@ export const KonnectableImg: React.FC<Props> = ({
 }) => (
   <Container>
     <img
-      width={width}
-      height={height}
+      width={width || null}
+      height={height || null}
       src={srcs[0]}
       srcSet={`${srcs[0]} 1x, ${srcs[1]} 2x, ${srcs[2]} 3x,`}
       alt={alt}
