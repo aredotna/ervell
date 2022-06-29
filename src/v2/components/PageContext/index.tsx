@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 export enum PageTypeEnum {
   CHANNEL = 'CHANNEL',
@@ -42,10 +42,6 @@ export const PageContextProvider: React.FC<PageContextProviderProps> = ({
   initialPage,
 }) => {
   const [page, setPage] = React.useState<PageType>(initialPage)
-
-  useEffect(() => {
-    console.log({ page })
-  }, [page])
 
   return (
     <PageContext.Provider

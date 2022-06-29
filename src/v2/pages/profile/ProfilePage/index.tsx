@@ -123,6 +123,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
           identifiable={identifiable}
           followType={followType}
           type={type}
+          scheme={scheme}
         />
 
         <MobileOrChildren>
@@ -180,8 +181,6 @@ const ProfilePageWrapper: React.FC<{ view?: string }> = props => {
     VALID_FOLLOW_TYPES,
     'ALL'
   )
-
-  console.log({ calcedView, view: props.view, props })
 
   return (
     <ProfilePage
