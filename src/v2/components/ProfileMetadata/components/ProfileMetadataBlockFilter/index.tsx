@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { stringify } from 'qs'
 
 import Pocket from 'v2/components/UI/Pocket'
 import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
 
 import { ProfileMetadataProps } from 'v2/components/ProfileMetadata'
+import { withRouter } from 'v2/hocs/WithRouter'
 
 class ProfileMetadataBlockFilter extends Component<
-  ProfileMetadataProps & RouteComponentProps
+  ProfileMetadataProps & { location: any }
 > {
   isFilterActive = filter => () => this.props.type === filter
 

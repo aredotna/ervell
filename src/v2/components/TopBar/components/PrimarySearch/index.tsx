@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
@@ -25,7 +25,7 @@ const Results = styled(Box)`
 
 interface PrimarySearchProps {
   scheme: 'DEFAULT' | 'GROUP'
-  history: any
+  navigate: any
   // TODO: Delete isOutsideMainRouter
   // This is a temporary measure to handle cases where components can exist both
   // inside and outside the main router.
@@ -100,7 +100,7 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
 
   handleKeyDown = ({ key }) => {
     const { cursor, href, query } = this.state
-    const { history, isOutsideMainRouter } = this.props
+    const { navigate, isOutsideMainRouter } = this.props
 
     switch (key) {
       case 'Escape':
@@ -115,7 +115,7 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
           break
         }
 
-        history.push(href)
+        navigate(href)
         break
       case 'ArrowDown':
         this.setState({
@@ -198,14 +198,14 @@ const PrimarySearchContainer: React.FC<{
   scheme: 'DEFAULT' | 'GROUP'
   flex?: number
 }> = ({ ...props }) => {
-  const history = useHistory()
+  const naviate = useNavigate()
   const isOutsideMainRouter = useIsOutsideMainRouter()
 
   const params: any = useParams()
 
   return (
     <PrimarySearch
-      history={history}
+      navigate={naviate}
       isOutsideMainRouter={isOutsideMainRouter}
       query={params?.term}
       {...props}

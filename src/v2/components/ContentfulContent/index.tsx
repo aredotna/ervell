@@ -44,11 +44,13 @@ const Ol = styled.ol`
   list-style-type: decimal;
   margin-left: ${props => props.theme.space[5]};
   color: ${({ theme }) => theme.colors.gray.base};
+
+  li {
+    margin: ${({ theme }) => `${theme.space[7]} 0`};
+  }
 `
 
-const Li = styled.li`
-  margin: ${({ theme }) => `${theme.space[7]} 0`};
-`
+const Li = styled.li``
 
 const Blockquote = styled.blockquote`
   border-left: 2px solid ${({ theme }) => theme.colors.gray.light};

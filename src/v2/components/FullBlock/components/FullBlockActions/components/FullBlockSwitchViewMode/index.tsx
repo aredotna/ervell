@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react'
 import styled from 'styled-components'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -84,11 +84,11 @@ export const FullBlockSwitchViewMode: React.FC<FullBlockSwitchViewModeProps> = (
 }) => {
   const [open, setOpen] = useState<boolean>(false)
   const { is_premium } = useSerializedMe()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const openReader = useCallback(() => {
     if (!is_premium) {
-      history.push('/pricing')
+      navigate('/pricing')
     } else {
       onLinkViewModeChange('reader')
     }

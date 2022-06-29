@@ -21,6 +21,7 @@ import { SettingsPage as SettingsPageQueryType } from '__generated__/SettingsPag
 
 import SettingsQuery from 'v2/pages/settings/queries/settingsPage'
 import Perks from 'v2/pages/settings/components/Perks'
+import { useParams } from 'react-router'
 
 const TabContent = styled(Box).attrs({
   flex: 1,
@@ -45,10 +46,6 @@ const PremiumLabel = styled(Label)`
   color: ${x => x.theme.colors.state.premium};
 `
 
-interface SettingsPageProps {
-  tab: 'general' | 'billing' | 'group_billing' | 'perks'
-}
-
 const UserSettingsComponent: React.FC = () => {
   return (
     <>
@@ -61,7 +58,10 @@ const UserSettingsComponent: React.FC = () => {
   )
 }
 
-const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
+const SettingsPage: React.FC = () => {
+  const params = useParams()
+  const paramsTab = params.tab || 'general'
+
   return (
     <>
       <Helmet>
@@ -81,13 +81,13 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
                 {
                   url: '/settings',
                   label: 'General',
-                  active: tab === 'general',
+                  active: paramsTab === 'general',
                   LabelComponent: null,
                 },
                 {
                   url: '/settings/billing',
                   label: 'Billing',
-                  active: tab === 'billing',
+                  active: paramsTab === 'billing',
                   LabelComponent: null,
                 },
               ]
@@ -96,7 +96,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
                 tabs.push({
                   url: '/settings/group_billing',
                   label: 'Group Billing',
-                  active: tab === 'group_billing',
+                  active: paramsTab === 'group_billing',
                   LabelComponent: null,
                 })
               }
@@ -104,7 +104,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
               tabs.push({
                 url: '/settings/perks',
                 label: 'Perks',
-                active: tab === 'perks',
+                active: paramsTab === 'perks',
                 LabelComponent: PremiumLabel,
               })
 
@@ -113,7 +113,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
                 billing: Billing,
                 group_billing: GroupBilling,
                 perks: Perks,
-              }[tab]
+              }[paramsTab]
 
               return (
                 <>

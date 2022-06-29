@@ -15,18 +15,16 @@ import {
   confirmAccountMutation,
   confirmAccountMutationVariables,
 } from '__generated__/confirmAccountMutation'
+import { useParams } from 'react-router'
 
 const Container = styled(CenteringBox)`
   flex-direction: column;
 `
 
-interface ConfirmationPageToken {
-  token: string
-}
+export const ConfirmationPage: React.FC = () => {
+  const params = useParams()
+  const token = params.token
 
-export const ConfirmationPage: React.FC<ConfirmationPageToken> = ({
-  token,
-}) => {
   const [confirmAccount] = useMutation<
     confirmAccountMutation,
     confirmAccountMutationVariables

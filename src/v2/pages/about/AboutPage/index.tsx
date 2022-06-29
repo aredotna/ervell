@@ -25,6 +25,7 @@ import { PricingFeatures } from '../PricingPage/components/PricingFeatures'
 import { EducationCTA } from './components/EducationCTA'
 import { TopMenu } from './components/TopMenu'
 import constants from 'v2/styles/constants'
+import { useParams } from 'react-router'
 
 const MaxBox = styled(Box).attrs({
   mx: 'auto',
@@ -261,7 +262,9 @@ const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
   )
 }
 
-export const AboutPage: React.FC<AboutPageProps> = ({ section }) => {
+export const AboutPage: React.FC = () => {
+  const { section } = useParams()
+
   return (
     <ScrollingProvider offset={-100}>
       <AboutPageInner section={section} />

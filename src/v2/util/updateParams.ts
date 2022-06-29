@@ -1,8 +1,7 @@
 import { stringify, parse } from 'qs'
-import { Location } from 'history'
 
 export const updateParams = (
-  location: Location<any>,
+  location: any,
   value: object,
   skipNulls?: boolean
 ): string => {

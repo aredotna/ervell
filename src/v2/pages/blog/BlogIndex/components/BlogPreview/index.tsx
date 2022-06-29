@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import moment from 'moment'
 
 import Text from 'v2/components/UI/Text'
+import { Link } from 'react-router-dom'
 
-const Post = styled.a`
+const Post = styled(Link)`
   display: block;
   height: 550px;
   width: 250px;
@@ -47,7 +48,7 @@ interface BlogPreviewProps {
 
 export const BlogPreview: React.FC<BlogPreviewProps> = ({ post }) => {
   return (
-    <Post href={`/blog/${post.slug}`} key={`post-${post.slug}`}>
+    <Post to={`/blog/${post.slug}`} key={`post-${post.slug}`}>
       {post.image && (
         <Image
           srcSet={[

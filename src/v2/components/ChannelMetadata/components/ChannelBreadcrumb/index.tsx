@@ -8,6 +8,7 @@ import BorderedLock from 'v2/components/UI/BorderedLock'
 
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 import { ChannelBreadcrumb as Channel } from '__generated__/ChannelBreadcrumb'
+import { unescape } from 'lodash'
 
 const CollaboratorCount = styled.span`
   font-weight: normal;
@@ -25,12 +26,10 @@ export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
       {({ mode }) => [
         <StickyBreadcrumbPath.Crumb key="head">
           <Link
-            to={{
-              pathname: channel.owner.href,
-              state: getBreadcrumbPath(channel.owner),
-            }}
+            to={channel.owner.href}
+            state={getBreadcrumbPath(channel.owner)}
           >
-            {channel.owner.name}
+            {unescape(channel.owner.name)}
 
             {channel.counts.collaborators > 0 && (
               <CollaboratorCount>
@@ -44,10 +43,8 @@ export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
         <StickyBreadcrumbPath.Crumb key="tail">
           <ColoredChannelLink
             as={Link}
-            to={{
-              pathname: channel.href,
-              state: getBreadcrumbPath(channel),
-            }}
+            to={channel.href}
+            state={getBreadcrumbPath(channel.owner)}
             visibility={channel.visibility}
           >
             {

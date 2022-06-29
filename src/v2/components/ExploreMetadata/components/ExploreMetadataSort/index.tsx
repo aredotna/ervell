@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { stringify } from 'qs'
 
 import Pocket from 'v2/components/UI/Pocket'
 import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
 import { ExploreMetadataProps } from 'v2/components/ExploreMetadata'
+import { withRouter } from 'v2/hocs/WithRouter'
 
 class ExploreMetadataSort extends Component<
-  ExploreMetadataProps & RouteComponentProps
+  ExploreMetadataProps & { location: any }
 > {
   isSortActive = sort => () => this.props.sort === sort
 

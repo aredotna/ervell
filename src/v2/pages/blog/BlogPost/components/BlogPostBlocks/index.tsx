@@ -55,7 +55,6 @@ export const BlogPostBlocks: React.FC<BlogPostBlocksProps> = ({ blocks }) => {
       {blocks.map(block => {
         const { text, blockUrl, sys } = block
         const blockID = blockUrl.split('/').pop()
-
         return (
           <Container key={sys.id}>
             <TextContainer>

@@ -1,15 +1,14 @@
 import { useQuery } from '@apollo/client'
 import React from 'react'
+import { useParams } from 'react-router'
 import { UserRss as UserRssType, UserRssVariables } from '__generated__/UserRss'
 import { RssBlock } from '../components/RssBlock'
 import RssLayout from '../components/RssLayout'
 import channelRssQuery from './queries/userRss'
 
-interface UserRssProps {
-  params: { username?: string }
-}
+const UserRss: React.FC = () => {
+  const params = useParams()
 
-const UserRss: React.FC<UserRssProps> = ({ params }) => {
   const { data } = useQuery<UserRssType, UserRssVariables>(channelRssQuery, {
     variables: { id: params.username },
   })

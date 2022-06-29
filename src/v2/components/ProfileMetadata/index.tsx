@@ -36,6 +36,8 @@ export default class ProfileMetadata extends Component<ProfileMetadataProps> {
   render() {
     const { identifiable, view, sort, filter, followType, type } = this.props
 
+    console.log({ view })
+
     return (
       <HeaderMetadataContainer
         pre={

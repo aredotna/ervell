@@ -17,6 +17,7 @@ import { SendInviteTab } from 'v2/pages/tools/components/SendInviteTab'
 
 import { ToolsPage as ToolsPageQueryType } from '__generated__/ToolsPage'
 import ToolsQuery from 'v2/pages/tools/queries/toolsPage'
+import { useParams } from 'react-router'
 
 const TabContent = styled(Box).attrs({
   flex: 1,
@@ -27,11 +28,10 @@ const TabContent = styled(Box).attrs({
   pt: 8,
 })``
 
-interface ToolsPageProps {
-  tab: 'bookmarklet' | 'find-friends' | 'add-via-email' | 'send-invitation'
-}
+export const ToolsPage: React.FC = () => {
+  const params = useParams()
+  const tab = params?.tab || 'bookmarklet'
 
-export const ToolsPage: React.FC<ToolsPageProps> = ({ tab }) => {
   return (
     <TopBarLayout>
       <Constrain>

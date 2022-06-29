@@ -14,6 +14,8 @@ import Title from 'v2/components/UI/Head/components/Title'
 
 import exploreUiStateQuery from 'v2/pages/explore/ExplorePage/queries/exploreUiState'
 import { BlockFilterEnum, SearchSorts } from '__generated__/globalTypes'
+import { useParams } from 'react-router'
+import { useSearchParams } from 'react-router-dom'
 
 interface ExplorePageProps {
   view: 'all' | 'channels' | 'blocks'
@@ -66,9 +68,11 @@ const setValid = (value, validValues, defaultValue) => {
   return defaultValue
 }
 
-export default ({ params, query }) => {
+export default () => {
   const [timestamp, setTimestamp] = useState(null)
   const [seed, setSeed] = useState<number>(null)
+  const params = useParams()
+  const [query] = useSearchParams()
 
   useEffect(() => {
     setTimestamp(new Date().toISOString())
@@ -84,13 +88,13 @@ export default ({ params, query }) => {
 
         const view = params.view || (cookies && cookies.view) || 'all'
         const sort = setValid(
-          query.sort || (cookies && cookies.sort),
+          query.get('sort') || (cookies && cookies.sort),
           VALID_SORTS,
           'UPDATED_AT'
         )
 
         const filter =
-          query.block_filter || (cookies && cookies.block_filter) || null
+          query.get('block_filter') || (cookies && cookies.block_filter) || null
         const block_filter = setValid(filter, VALID_FILTERS, null)
 
         const extraProps = timestamp ? { timestamp } : {}

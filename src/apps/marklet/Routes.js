@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Route, Routes as Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import parseRoute from 'v2/util/parseRoute'
