@@ -222,10 +222,10 @@ export const StronglyProposePremium = props => (
 
 export const AnnualSubmissionReminder = props => (
   <Banner bg="state.supporter" color="white" iconName="Exclaim" {...props}>
-    <Box>Submit your pitch for the 2022 Are.na Annual</Box>
+    <Box>Submit your pitch for the 2023 Are.na Annual</Box>
     <ButtonLink
       color="state.supporter"
-      href="https://www.are.na/blog/open-call-for-pitches-for-the-2022-are-na-annual"
+      href="https://www.are.na/blog/open-call-for-pitches-for-the-2023-are-na-annual"
       target="_blank"
     >
       Learn more
