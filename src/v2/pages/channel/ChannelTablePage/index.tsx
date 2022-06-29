@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import styled from 'styled-components'
 
@@ -23,6 +23,7 @@ import IntroduceChannel from 'v2/components/Onboarding/components/Channels/compo
 import { ChannelTableQuery } from 'v2/components/ChannelTableContents'
 import { ConnectableTypeEnum } from '__generated__/globalTypes'
 import { ChannelTableConnectors_channel_connectors } from '__generated__/ChannelTableConnectors'
+import { PageContext, PageTypeEnum } from 'v2/components/PageContext'
 // import Box from 'v2/components/UI/Box'
 
 const Dialog = styled(ModalDialog).attrs({
@@ -60,6 +61,15 @@ export const ChannelTablePage: React.FC<ChannelTablePageProps> = ({
   >(channelPageQuery, {
     variables: { id },
   })
+
+  const { setPage } = useContext(PageContext)
+
+  useEffect(() => {
+    setPage({
+      type: PageTypeEnum.CHANNEL,
+      id,
+    })
+  }, [])
 
   let pageJsx: React.ReactNode | null = null
   if (loading || !data?.channel) {
