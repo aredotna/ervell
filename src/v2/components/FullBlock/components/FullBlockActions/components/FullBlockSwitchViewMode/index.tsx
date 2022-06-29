@@ -92,7 +92,7 @@ export const FullBlockSwitchViewMode: React.FC<FullBlockSwitchViewModeProps> = (
     } else {
       onLinkViewModeChange('reader')
     }
-  }, [is_premium, setOpen, open, onLinkViewModeChange, history])
+  }, [is_premium, setOpen, open, onLinkViewModeChange])
 
   return (
     <>
@@ -120,7 +120,7 @@ export const FullBlockSwitchViewMode: React.FC<FullBlockSwitchViewModeProps> = (
           selected={linkViewMode === 'reader'}
           disabled={!is_premium}
         >
-          Reader
+          Full text
         </Option>
         <QuestionMarkOverlay />
       </OptionOuter>

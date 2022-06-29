@@ -110,14 +110,14 @@ export const ModalFullBlock: React.FC<ModalFullBlockProps> = ({ id, ids }) => {
       })
       setCurrentId(newId)
     },
-    [history, location.state]
+    [location.state]
   )
 
   const onClose = useCallback(() => {
     navigate(`${background?.pathname}${background.search}`, {
       state: { preventScroll: true },
     })
-  }, [background, history])
+  }, [background])
 
   //
   // Handle key binding and window resizing
