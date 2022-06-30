@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
 
 import {
@@ -26,6 +26,7 @@ import Modal from 'v2/components/UI/Modal'
 import ModalDialog from 'v2/components/UI/ModalDialog'
 import IntroduceChannel from 'v2/components/Onboarding/components/Channels/components/IntroduceChannel'
 import { useQuery } from '@apollo/client'
+import { PageContext, PageTypeEnum } from 'v2/components/PageContext'
 
 const Dialog = styled(ModalDialog).attrs({
   width: 'auto',
@@ -51,6 +52,15 @@ const ChannelPage: React.FC<ChannelPageProps> = ({
     ChannelPageData,
     ChannelPageVariables
   >(channelPageQuery, { variables: { id } })
+
+  const { setPage } = useContext(PageContext)
+
+  useEffect(() => {
+    setPage({
+      type: PageTypeEnum.CHANNEL,
+      id,
+    })
+  }, [])
 
   if (error && !isClientSide) throw error
 

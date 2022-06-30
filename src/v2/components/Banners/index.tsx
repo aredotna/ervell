@@ -305,5 +305,5 @@ export default {
   LOGGED_OUT_EXPLORE: LoggedOutExplore,
   LOGGED_OUT_PROFILE: LoggedOutProfile,
   LOGGED_OUT_CHANNEL: LoggedOutChannel,
-  ANNUAL_SUBMISSION: AnnualSubmissionReminder,
+  ANNUAL_SUBMISSION_2022: AnnualSubmissionReminder,
 }

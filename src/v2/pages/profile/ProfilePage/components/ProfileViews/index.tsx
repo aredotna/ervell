@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FetchPolicy } from '@apollo/client'
 
 import EmptyMessageOrComponent from 'v2/pages/profile/ProfilePage/components/EmptyMessageOrComponent'
@@ -23,6 +23,7 @@ import {
 import { ProfileViewTypes } from '../..'
 import ProfileTable from 'v2/components/ProfileTable'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
+import { PageContext, PageTypeEnum } from 'v2/components/PageContext'
 
 interface AllProps {
   id: string
@@ -188,6 +189,7 @@ interface ProfileViewsProps {
   identifiable: ProfilePageIdentifiable
   type: ConnectableTypeEnum
   view: ProfileViewTypes
+  scheme: 'GROUP' | 'DEFAULT'
 }
 
 const ProfileViews: React.FC<ProfileViewsProps> = ({
@@ -198,11 +200,25 @@ const ProfileViews: React.FC<ProfileViewsProps> = ({
   identifiable,
   followType,
   type,
+  scheme,
 }) => {
   const [renderedView, setRenderedView] = useState<ProfileViewTypes>(view)
   const [fetchPolicy] = useState<FetchPolicy>('cache-first')
 
   const { is_premium } = useSerializedMe()
+
+  const { setPage } = useContext(PageContext)
+  const pageType = {
+    GROUP: PageTypeEnum.GROUP,
+    DEFAULT: PageTypeEnum.USER,
+  }[scheme]
+
+  useEffect(() => {
+    setPage({
+      type: pageType,
+      id: id.toString(),
+    })
+  }, [])
 
   useEffect(() => {
     if (view != renderedView) {

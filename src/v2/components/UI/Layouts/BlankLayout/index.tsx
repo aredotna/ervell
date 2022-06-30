@@ -1,7 +1,7 @@
 // NOTE: Extend this layout when creating new layouts
 // Do not put anything here that cannot be put on any page.
 
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import LegacyDarkTheme from 'v2/components/UI/Layouts/BlankLayout/components/LegacyDarkTheme'
 import BaseStyles from 'v2/components/UI/Layouts/BlankLayout/components/BaseStyles'
@@ -10,6 +10,7 @@ import Description from 'v2/components/UI/Head/components/Description'
 import analytics from 'v2/util/analytics'
 import globalKeyboardShortcuts from 'v2/util/globalKeyboardShortcuts'
 import { useLocation } from 'react-router'
+import PageContextProvider from 'v2/components/PageContext'
 
 export const BlankLayout: React.FC = ({ children }) => {
   const location = useLocation()
@@ -28,7 +29,7 @@ export const BlankLayout: React.FC = ({ children }) => {
   }, [location])
 
   return (
-    <Fragment>
+    <PageContextProvider>
       <LegacyDarkTheme />
       <BaseStyles />
 
@@ -37,7 +38,7 @@ export const BlankLayout: React.FC = ({ children }) => {
       </Description>
 
       {children}
-    </Fragment>
+    </PageContextProvider>
   )
 }
 
