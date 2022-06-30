@@ -33,6 +33,7 @@ export const CategoryLabel = styled(Text).attrs({
 export interface FilterProps {
   currentFilters?: WhereEnum[] | WhatEnum[] | FieldsEnum[]
   currentDisabledFilters?: AnyFilter[]
+  id?: number
   toggleFilter: (
     filter: WhereEnum | WhatEnum | FieldsEnum,
     field: 'what' | 'where' | 'fields'
@@ -77,6 +78,7 @@ export const AdvancedSearchFilter: React.FC = () => {
   return (
     <FiltersContainer>
       <WhereFilter
+        id={state?.variables?.where?.id[0] || null}
         clearAndSetAll={toggleAll}
         toggleFilter={toggleFilter}
         currentFilters={state.variables?.where?.facets}

@@ -8,7 +8,7 @@
 //==============================================================
 
 export enum BannerEnum {
-  ANNUAL_SUBMISSION = "ANNUAL_SUBMISSION",
+  ANNUAL_SUBMISSION_2022 = "ANNUAL_SUBMISSION_2022",
   BOOKMARKLET = "BOOKMARKLET",
   CONFIRM = "CONFIRM",
   CREATE_CHANNEL = "CREATE_CHANNEL",
@@ -284,7 +284,6 @@ export enum WhatEnum {
 export enum WhereEnum {
   ALL = "ALL",
   CHANNEL = "CHANNEL",
-  FOLLOWERS = "FOLLOWERS",
   FOLLOWING = "FOLLOWING",
   GROUP = "GROUP",
   MY = "MY",

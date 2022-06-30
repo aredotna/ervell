@@ -2,6 +2,7 @@ import { gql } from '@apollo/client'
 
 import loadingBreadcrumbUserFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbUser'
 import loadingBreadcrumbGroupFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbGroup'
+import loadingBreadcrumbChannelFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbChannel'
 
 export default gql`
   fragment ChannelBreadcrumb on Channel {
@@ -33,4 +34,5 @@ export default gql`
   }
   ${loadingBreadcrumbUserFragment}
   ${loadingBreadcrumbGroupFragment}
+  ${loadingBreadcrumbChannelFragment}
 `

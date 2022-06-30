@@ -14,7 +14,9 @@ import ProfilePage from '../../v2/pages/profile/ProfilePage'
 import SharedChannelPage from 'v2/pages/channel/SharedChannelPage'
 import ChannelFollowersPage from 'v2/pages/channel/ChannelFollowersPage'
 import ChannelPageWrapper from 'v2/pages/channel/ChannelPageWrapper'
-import EmbeddedChannelPage from '../../v2/pages/channel/EmbeddedChannelPage'
+import EmbeddedChannelPage from 'v2/pages/channel/EmbeddedChannelPage'
+import { ChannelSearchPage } from 'v2/pages/channel/ChannelSearchPage'
+
 // Block
 import BlockPage from 'v2/pages/block'
 // Settings
@@ -161,6 +163,7 @@ export const AppRoutes = () => {
           element={<ChannelPageWrapper view="grid" />}
         />
         <Route path=":user_id/:id/embed" element={<EmbeddedChannelPage />} />
+        <Route path=":user_id/:id/search" element={<ChannelSearchPage />} />
         <Route path=":user_id/:id" element={<ChannelPageWrapper />} />
 
         {/* Share Channel */}

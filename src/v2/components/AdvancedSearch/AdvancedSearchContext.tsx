@@ -195,7 +195,8 @@ const reducer = (state: State, action: Action) => {
 interface AdvancedSearchContextType {
   addFilter: (
     field: 'where' | 'what' | 'fields',
-    filter: WhereEnum | WhatEnum | FieldsEnum
+    filter: WhereEnum | WhatEnum | FieldsEnum,
+    id?: number
   ) => void
   removeFilter: (
     field: 'where' | 'what' | 'fields',

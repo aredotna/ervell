@@ -12,6 +12,7 @@ export const WhereFilter: React.FC<FilterProps> = ({
   toggleFilter,
   clearAndSetAll,
   currentDisabledFilters,
+  id,
 }) => {
   const updateProps = {
     field: 'where' as any,
@@ -37,6 +38,13 @@ export const WhereFilter: React.FC<FilterProps> = ({
         filter={WhereEnum.FOLLOWING}
         {...updateProps}
       />
+      {id && (
+        <FilterOption
+          currentFilters={currentFilters}
+          filter={WhereEnum.CHANNEL}
+          {...updateProps}
+        />
+      )}
     </FilterContainer>
   )
 }
