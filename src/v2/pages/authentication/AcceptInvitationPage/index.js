@@ -53,6 +53,7 @@ class AcceptInvitationPage extends Component {
     const { validation_token } = this.state
     const { invitation_token, raw_invitation_token } = this.props
 
+    console.log({ invitation_token, raw_invitation_token })
     return (
       <Query query={inviteeQuery} variables={{ invitation_token }} ssr={false}>
         {({ loading, error, data }) => {
@@ -109,10 +110,11 @@ class AcceptInvitationPage extends Component {
 export const AcceptInvitationPageWrapper = () => {
   const params = useParams()
   const [query] = useSearchParams()
+
   return (
     <AcceptInvitationPage
       invitation_token={params.token}
-      raw_invitation_token={query.raw_invitation_token}
+      raw_invitation_token={query.get('invite_token')}
     />
   )
 }

@@ -142,7 +142,7 @@ class RegistrationForm extends Component {
       password_confirmation,
       receive_newsletter,
       invitation_token: raw_invitation_token,
-      validation_token,
+      validation_token: raw_invitation_token ? null : validation_token,
     })
 
     return mutation({ variables })
