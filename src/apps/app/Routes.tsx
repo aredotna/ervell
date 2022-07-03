@@ -40,6 +40,7 @@ import { EducationPage } from 'v2/pages/about/EducationPage'
 import useIsAdmin from 'v2/hooks/useIsAdmin'
 import { Search2Page } from 'v2/pages/search2'
 import { ModalBlockWrapper } from 'v2/pages/block/ModalBlockWrapper'
+import { ProfileSearchPage } from 'v2/pages/profile/ProfileSearchPage'
 
 export const AppRoutes = () => {
   const { isLoggedIn } = useLoginStatus()
@@ -147,6 +148,9 @@ export const AppRoutes = () => {
         <Route path=":id/table" element={<ProfilePage view="table" />} />
         <Route path=":id/index" element={<ProfilePage view="index" />} />
         <Route path=":id/groups" element={<ProfilePage view="groups" />} />
+
+        {isAdmin && <Route path=":id/search" element={<ProfileSearchPage />} />}
+
         <Route path=":id" element={<ProfilePage />} />
 
         {/* Channel */}
@@ -163,7 +167,9 @@ export const AppRoutes = () => {
           element={<ChannelPageWrapper view="grid" />}
         />
         <Route path=":user_id/:id/embed" element={<EmbeddedChannelPage />} />
-        <Route path=":user_id/:id/search" element={<ChannelSearchPage />} />
+        {isAdmin && (
+          <Route path=":user_id/:id/search" element={<ChannelSearchPage />} />
+        )}
         <Route path=":user_id/:id" element={<ChannelPageWrapper />} />
 
         {/* Share Channel */}
