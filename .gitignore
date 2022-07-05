@@ -12,6 +12,7 @@ dump.rdb
 /manifest.json
 yarn-error.log
 newrelic_agent.log
+.icloud
 
 # Compiled bookmarklet code
 src/apps/marklet/public
