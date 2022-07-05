@@ -13,6 +13,8 @@ import { GlobalNavElements_me as Me } from '__generated__/GlobalNavElements'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
 import IS_CONFIRMED_QUERY from './queries/isConfirmed'
 import { IsConfirmed } from '__generated__/IsConfirmed'
+import useIsAdmin from 'v2/hooks/useIsAdmin'
+import AdvancedPrimarySearchContainer from './components/AdvancedPrimarySearch'
 
 const Container = styled(Box)`
   position: relative;
@@ -68,12 +70,17 @@ export const TopBar: React.FC<TopBarProps> = ({ scheme, me, ...rest }) => {
   const serializedMe = useSerializedMe()
   const { data } = useQuery<IsConfirmed>(IS_CONFIRMED_QUERY, { ssr: false })
   const [userMode, setUserMode] = useState<'resting' | 'open'>('resting')
+  const isAdmin = useIsAdmin()
 
   const needsDot = data && !data.me?.is_confirmed
 
   return (
     <Container scheme={scheme} {...rest}>
-      <PrimarySearch flex={1} scheme={scheme} />
+      {isAdmin ? (
+        <AdvancedPrimarySearchContainer flex={1} scheme={scheme} />
+      ) : (
+        <PrimarySearch flex={1} scheme={scheme} />
+      )}
 
       {me && me.id ? (
         <React.Fragment>
