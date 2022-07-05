@@ -35,3 +35,5 @@ bench.txt
 
 # asdf version manager config
 .tool-versions
+src/v2/components/AdvancedSearch/components/AdvancedSearchFilter/components/WhatFilter/.index 2.tsx.icloud
+src/v2/components/AdvancedSearch/components/AdvancedSearchFilter/components/FieldsFilter/.index 2.tsx.icloud
