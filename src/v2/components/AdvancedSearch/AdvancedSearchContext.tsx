@@ -1,4 +1,4 @@
-import { set } from 'lodash'
+import { merge, set } from 'lodash'
 import React, { createContext, useCallback, useEffect, useReducer } from 'react'
 import tokenizeSearch, {
   stringifyFacet,
@@ -133,7 +133,8 @@ const ReducerMethodMap = {
   },
 
   QUERY_CHANGE: (state: State, action: any) => {
-    const variables = tokenizeSearch(action.payload)
+    const variables = merge(state.variables, tokenizeSearch(action.payload))
+
     return {
       ...state,
       query: action.payload,

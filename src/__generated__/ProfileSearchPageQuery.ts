@@ -41,6 +41,7 @@ export interface ProfileSearchPageQuery_identity_identifiable_Group {
   avatar: string | null;
   can: ProfileSearchPageQuery_identity_identifiable_Group_can | null;
   name: string;
+  label: string;
   href: string | null;
   visibility: string;
   /**
@@ -73,6 +74,7 @@ export interface ProfileSearchPageQuery_identity_identifiable_User_counts {
 export interface ProfileSearchPageQuery_identity_identifiable_User {
   __typename: "User";
   name: string;
+  label: string;
   href: string | null;
   badge: string | null;
   custom_badge: string | null;

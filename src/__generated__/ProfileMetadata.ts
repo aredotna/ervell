@@ -41,6 +41,7 @@ export interface ProfileMetadata_Group {
   avatar: string | null;
   can: ProfileMetadata_Group_can | null;
   name: string;
+  label: string;
   href: string | null;
   visibility: string;
   /**
@@ -73,6 +74,7 @@ export interface ProfileMetadata_User_counts {
 export interface ProfileMetadata_User {
   __typename: "User";
   name: string;
+  label: string;
   href: string | null;
   badge: string | null;
   custom_badge: string | null;

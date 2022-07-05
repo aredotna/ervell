@@ -16,6 +16,7 @@ import {
 import profileSearchPageQuery from './queries/profileSearchPageQuery'
 import ProfileSearchMetadata from './components/ProfileSearchMetadata'
 import { AdvancedSearchResultsGrid } from 'v2/components/AdvancedSearch/components/AdvancedSearchResultsGrid'
+import AdvancedSearchInput from 'v2/components/AdvancedSearch/components/AdvancedSearchInput'
 
 export const ProfileSearchPage: React.FC = () => {
   const { id } = useParams()
@@ -48,6 +49,8 @@ export const ProfileSearchPage: React.FC = () => {
       >
         <Constrain>
           <ProfileSearchMetadata identifiable={identifiable} />
+          <AdvancedSearchInput />
+
           <AdvancedSearchResultsGrid />
         </Constrain>
       </AdvancedSearchContextProvider>
