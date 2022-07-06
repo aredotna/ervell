@@ -6,12 +6,10 @@ import { useLocation } from 'react-router-dom'
 import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
 import ProfileBadge from 'v2/components/ProfileMetadata/components/ProfileBreadcrumb/components/ProfileBadge'
 import Badge from 'v2/components/UI/Badge'
-import Icons from 'v2/components/UI/Icons'
 
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 import { unescape } from 'lodash'
 import { ProfileMetadata as ProfileMetadataType } from '__generated__/ProfileMetadata'
-import useIsAdmin from 'v2/hooks/useIsAdmin'
 
 const ProfileLink = styled(Link)`
   vertical-align: middle;
@@ -29,7 +27,6 @@ export const ProfileBreadcrumb: React.FC<ProfileBreadcrumbProps> = ({
 }) => {
   const location = useLocation()
   const pathname = location.pathname
-  const isAdmin = useIsAdmin()
 
   const showBadge =
     !/follow(ers|ing)$/.test(pathname) && !/groups$/.test(pathname)
@@ -54,17 +51,6 @@ export const ProfileBreadcrumb: React.FC<ProfileBreadcrumbProps> = ({
           )}
           {showBadge && identifiable.__typename === 'User' && (
             <ProfileBadge user={identifiable} />
-          )}
-
-          {isAdmin && (
-            <Link to={`${identifiable.href}/search`}>
-              <Icons
-                width="0.5em"
-                height="1em"
-                color="gray.medium"
-                name={'MagnifyingGlass'}
-              />
-            </Link>
           )}
         </ProfileLink>
       </StickyBreadcrumbPath.Crumb>

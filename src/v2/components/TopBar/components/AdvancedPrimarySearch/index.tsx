@@ -1,16 +1,16 @@
-import React, { PureComponent } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useCallback, useContext, useRef, useState } from 'react'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
 import HomeLink from 'v2/components/TopBar/components/PrimarySearch/components/HomeLink'
-import Overlay from 'v2/components/UI/Overlay'
-import SearchInput from 'v2/components/UI/SearchInput'
-import PrimarySearchResults from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults'
+// import Overlay from 'v2/components/UI/Overlay'
+import SearchInput, { ICON_OFFSET } from 'v2/components/UI/SearchInput'
 
-import { overflowScrolling } from 'v2/styles/mixins'
-import { useIsOutsideMainRouter } from 'v2/hooks/useIsOutsideMainRouter'
-import { isEmpty } from 'lodash'
+import { PageContext, PageTypeEnum } from 'v2/components/PageContext'
+import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
+import Text from 'v2/components/UI/Text'
+import constants from 'v2/styles/constants'
+import { WhereEnum } from '__generated__/globalTypes'
 
 const Container = styled(Box)`
   position: relative;
@@ -18,198 +18,112 @@ const Container = styled(Box)`
   align-items: stretch;
 `
 
-const Results = styled(Box)`
+const ContextButtonContainer = styled(Box)`
+  position: absolute;
+  left: ${ICON_OFFSET};
+  display: flex;
+  align-items: center;
   height: 100%;
-  ${overflowScrolling}
 `
 
-interface AdvancedPrimarySearchProps {
-  scheme: 'DEFAULT' | 'GROUP'
-  navigate: any
-  // TODO: Delete isOutsideMainRouter
-  // This is a temporary measure to handle cases where components can exist both
-  // inside and outside the main router.
-  isOutsideMainRouter: boolean
-  flex?: number
-  query?: string
-}
+const ContextButton = styled(Text)`
+  background-color: ${p => p.theme.colors.gray.light};
+  padding: ${p => p.theme.space[1]} ${p => p.theme.space[2]};
+  border-radius: ${constants.radii.regular};
+  margin-right: ${p => p.theme.space[6]};
+  cursor: pointer;
+`
 
-class AdvancedPrimarySearch extends PureComponent<AdvancedPrimarySearchProps> {
-  state = {
-    mode: 'resting',
-    debouncedQuery: '',
-    query: '',
-    cursor: null,
-    href: null,
-  }
-
-  constructor(props: AdvancedPrimarySearchProps) {
-    super(props)
-
-    this.state = {
-      mode: props.query && props.query !== '' ? 'blur' : 'resting',
-      debouncedQuery: props.query || '',
-      query: props.query || '',
-      cursor: null,
-      href: null,
-    }
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (isEmpty(nextProps.query) && !isEmpty(this.state.query)) {
-      this.resetState()
-    }
-
-    if (nextProps.query !== this.state.query) {
-      this.setState({ query: nextProps.query, debouncedQuery: nextProps.query })
-    }
-  }
-
-  resetState = () => {
-    this.setState({ query: '', mode: 'focus' })
-  }
-
-  searchInputRef = React.createRef()
-
-  handleSelection = href => this.setState({ href })
-
-  handleQuery = query => {
-    this.setState({ query, cursor: null })
-  }
-
-  handleDebouncedQuery = debouncedQuery => {
-    this.setState({ debouncedQuery, cursor: null })
-  }
-
-  handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (!e.metaKey) {
-      this.setState({ query: '', debouncedQuery: '' })
-    }
-  }
-
-  handleBlur = () => {
-    if (this.state.query) {
-      this.setState({ mode: 'blur' })
-      return
-    }
-
-    this.setState({ mode: 'resting' })
-  }
-
-  handleFocus = () => this.setState({ mode: 'focus' })
-
-  handleKeyDown = ({ key }) => {
-    const { cursor, href, query } = this.state
-    const { navigate, isOutsideMainRouter } = this.props
-
-    switch (key) {
-      case 'Escape':
-        this.setState({ query: '' })
-        break
-      case 'Enter':
-        if (query === '') return
-        this.setState({ mode: 'blur' })
-
-        if (isOutsideMainRouter) {
-          window.location.href = href
-          break
-        }
-
-        navigate(href)
-        break
-      case 'ArrowDown':
-        this.setState({
-          cursor: (cursor === null ? -1 : cursor) + 1,
-        })
-        break
-      case 'ArrowUp':
-        this.setState({
-          cursor: (cursor === null ? 0 : cursor) - 1,
-        })
-        break
-      default:
-        break
-    }
-  }
-
-  handleMouseEnter = () => {
-    if (this.state.mode !== 'resting') return
-    this.setState({ mode: 'hover' })
-  }
-
-  handleMouseLeave = () => {
-    if (this.state.mode !== 'hover') return
-    this.setState({ mode: 'resting' })
-  }
-
-  render() {
-    const { scheme, ...rest } = this.props
-    const { mode, query, debouncedQuery, cursor } = this.state
-
-    return (
-      <Container {...rest}>
-        {mode === 'resting' && <HomeLink />}
-
-        <SearchInput
-          globallyFocusOnKey="/"
-          tabIndex={0}
-          flex="1"
-          py={6}
-          placeholder="Search Are.na"
-          bg={scheme === 'GROUP' && 'transparent'}
-          border={0}
-          query={query}
-          onQueryChange={this.handleQuery}
-          onDebouncedQueryChange={this.handleDebouncedQuery}
-          ref={this.searchInputRef}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          onKeyDown={this.handleKeyDown}
-          onMouseEnter={this.handleMouseEnter}
-          onMouseLeave={this.handleMouseLeave}
-          outlineless
-          iconMap={{
-            resting: null,
-            focus: 'MagnifyingGlass',
-            hover: 'MagnifyingGlass',
-            active: 'X',
-          }}
-        />
-
-        {query && debouncedQuery && mode != 'blur' && (
-          <Overlay targetEl={() => this.searchInputRef.current} fullWidth>
-            <Results>
-              <PrimarySearchResults
-                query={query}
-                debouncedQuery={debouncedQuery}
-                cursor={cursor}
-                onSelection={this.handleSelection}
-                onClick={this.handleClick}
-              />
-            </Results>
-          </Overlay>
-        )}
-      </Container>
-    )
-  }
-}
+// const Results = styled(Box)`
+//   height: 100%;
+//   ${overflowScrolling}
+// `
 
 const AdvancedPrimarySearchContainer: React.FC<{
   scheme: 'DEFAULT' | 'GROUP'
   flex?: number
-}> = ({ ...props }) => {
-  const naviate = useNavigate()
-  const isOutsideMainRouter = useIsOutsideMainRouter()
+}> = ({ scheme, flex, ...rest }) => {
+  const { page } = useContext(PageContext)
+  const { state, updateQuery, addFilter } = useContext(AdvancedSearchContext)
+  console.log({ state })
+  const searchInputRef = useRef(null)
+  const searchRef = useRef(null)
+  const [mode, setMode] = useState<'resting' | 'blur' | 'focus' | 'hover'>(
+    'resting'
+  )
 
-  const params: any = useParams()
+  const handleFocus = useCallback(() => {
+    setMode('focus')
+  }, [mode, setMode])
+  const handleBlur = useCallback(() => {
+    if (state.query) {
+      setMode('blur')
+      return
+    }
+    setMode('resting')
+  }, [state, mode, setMode])
+  const handleKeyDown = useCallback(() => {}, [])
+  const handleMouseEnter = useCallback(() => {
+    // if (mode === 'resting') {
+    //   setMode('hover')
+    // }
+  }, [mode, setMode])
+  const handleMouseLeave = useCallback(() => {
+    if (mode === 'hover') {
+      setMode('resting')
+    }
+  }, [mode, setMode])
+
+  const onContextButtonClick = useCallback(() => {
+    if (page.type === PageTypeEnum.PERSON) {
+      searchInputRef.current.focus()
+      console.log('parseInt(page.id)', parseInt(page.id))
+      addFilter('where', WhereEnum.USER, parseInt(page.id))
+    }
+  }, [page, addFilter, searchInputRef])
 
   return (
-    <AdvancedPrimarySearch
-      navigate={naviate}
-      isOutsideMainRouter={isOutsideMainRouter}
-      query={params?.term}
-      {...props}
-    />
+    <Container flex={1} {...rest}>
+      {mode === 'resting' && <HomeLink />}
+
+      <SearchInput
+        globallyFocusOnKey="/"
+        tabIndex={0}
+        flex={1}
+        py={6}
+        bg={scheme === 'GROUP' && 'transparent'}
+        border={0}
+        query={state.query}
+        onDebouncedQueryChange={updateQuery}
+        ref={searchRef}
+        searchInputRef={searchInputRef}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        outlineless
+        iconMap={{
+          resting: null,
+          focus: 'MagnifyingGlass',
+          hover: 'MagnifyingGlass',
+          active: 'X',
+        }}
+      />
+
+      {mode === 'resting' && (
+        <ContextButtonContainer>
+          <ContextButton>Search Are.na</ContextButton>
+
+          {page?.type === PageTypeEnum.CHANNEL ||
+            (page?.type === PageTypeEnum.PERSON && (
+              <ContextButton onClick={onContextButtonClick}>
+                Search this {page.type.toLowerCase()}
+              </ContextButton>
+            ))}
+        </ContextButtonContainer>
+      )}
+    </Container>
   )
 }
 

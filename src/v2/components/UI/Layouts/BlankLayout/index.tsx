@@ -11,6 +11,7 @@ import analytics from 'v2/util/analytics'
 import globalKeyboardShortcuts from 'v2/util/globalKeyboardShortcuts'
 import { useLocation } from 'react-router'
 import PageContextProvider from 'v2/components/PageContext'
+import { AdvancedSearchContextProvider } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 
 export const BlankLayout: React.FC = ({ children }) => {
   const location = useLocation()
@@ -30,14 +31,16 @@ export const BlankLayout: React.FC = ({ children }) => {
 
   return (
     <PageContextProvider>
-      <LegacyDarkTheme />
-      <BaseStyles />
+      <AdvancedSearchContextProvider>
+        <LegacyDarkTheme />
+        <BaseStyles />
 
-      <Description>
-        Are.na is a platform for connecting ideas and building knowledge.
-      </Description>
+        <Description>
+          Are.na is a platform for connecting ideas and building knowledge.
+        </Description>
 
-      {children}
+        {children}
+      </AdvancedSearchContextProvider>
     </PageContextProvider>
   )
 }

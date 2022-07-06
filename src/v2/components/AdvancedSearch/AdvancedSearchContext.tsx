@@ -31,6 +31,7 @@ type Action =
       payload: {
         field: 'where' | 'what' | 'fields'
         filter: WhereEnum | WhatEnum | FieldsEnum
+        id?: number
       }
     }
   | {
@@ -62,9 +63,10 @@ const extractVariableFromStateAndPayload = (
   payload: {
     field: 'where' | 'what' | 'fields'
     filter?: WhereEnum | WhatEnum | FieldsEnum
+    id?: number
   }
 ) => {
-  const { field, filter } = payload
+  const { field, filter, id } = payload
   const typedFilter: any = filter ? filter : null
   const variables = { ...state.variables }
   const existingFacet: any = variables[field]?.facets || null
@@ -73,6 +75,7 @@ const extractVariableFromStateAndPayload = (
     filter: typedFilter,
     variables,
     existingFacet,
+    id,
   }
 }
 
@@ -83,10 +86,15 @@ const ReducerMethodMap = {
       filter,
       variables,
       existingFacet,
+      id,
     } = extractVariableFromStateAndPayload(state, action.payload)
     const newValue = filter as WhereEnum
 
     set(variables, `${field}.facets`, newValue)
+    if (id) set(variables, `${field}.id`, id)
+
+    console.log({ id, field, filter, variables })
+
     const regex = new RegExp(`(\\s)${field}:(\\S*)`, 'gm')
     const query = existingFacet
       ? state.query.replace(regex, ` ${stringifyFacet(field, filter)}`)
