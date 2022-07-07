@@ -33,6 +33,10 @@ const ContextButton = styled(Text)`
   border-radius: ${constants.radii.regular};
   margin-right: ${p => p.theme.space[6]};
   cursor: pointer;
+
+  &:hover {
+    background-color: ${p => p.theme.colors.gray.semiLight};
+  }
 `
 
 // const Results = styled(Box)`
@@ -58,6 +62,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const handleFocus = useCallback(() => {
     setMode('focus')
   }, [mode, setMode])
+
   const handleBlur = useCallback(() => {
     if (state.query) {
       setMode('blur')
@@ -65,6 +70,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
     }
     setMode('resting')
   }, [state, mode, setMode])
+
   const handleKeyDown = useCallback(
     ({ key }) => {
       if (key === 'Enter') {
@@ -73,16 +79,22 @@ const AdvancedPrimarySearchContainer: React.FC<{
     },
     [navigate, state]
   )
+
   const handleMouseEnter = useCallback(() => {
     // if (mode === 'resting') {
     //   setMode('hover')
     // }
   }, [mode, setMode])
+
   const handleMouseLeave = useCallback(() => {
     if (mode === 'hover') {
       setMode('resting')
     }
   }, [mode, setMode])
+
+  const onSearchButtonClick = useCallback(() => {
+    searchInputRef.current.focus()
+  }, [])
 
   const onContextButtonClick = useCallback(() => {
     if (page.type === PageTypeEnum.PERSON) {
@@ -122,7 +134,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
 
       {mode === 'resting' && (
         <ContextButtonContainer>
-          <ContextButton>Search Are.na</ContextButton>
+          <ContextButton onClick={onSearchButtonClick}>
+            Search Are.na
+          </ContextButton>
 
           {page?.type === PageTypeEnum.CHANNEL ||
             (page?.type === PageTypeEnum.PERSON && (

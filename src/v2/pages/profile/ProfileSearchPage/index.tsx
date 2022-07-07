@@ -26,7 +26,13 @@ export const ProfileSearchPage: React.FC = () => {
   })
 
   if (loading) {
-    return <LoadingPage />
+    return (
+      <TopBarLayout>
+        <Constrain>
+          <LoadingPage />
+        </Constrain>
+      </TopBarLayout>
+    )
   }
 
   if (error) {

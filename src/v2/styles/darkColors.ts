@@ -21,7 +21,7 @@ const COLORS = {
     semiBold: '#D3D3D3',
     medium: '#6E6E6E',
     regular: '#2F2F2F',
-    semiLight: '#2F2F2F',
+    semiLight: '#393939',
     light: '#2F2F2F',
     hint: '#131313',
     block: '#D3D3D3',

@@ -294,7 +294,6 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
   }, [])
 
   const generateUrl = useCallback(() => {
-    console.log({ state })
     return generateUrlFromVariables(state.variables)
   }, [state, state.variables])
 

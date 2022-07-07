@@ -89,7 +89,7 @@ export const AppRoutes = () => {
         </Route>
 
         {isAdmin && (
-          <Route path="search2">
+          <Route path="search2" element={<Search2Page />}>
             <Route path=":term" element={<Search2Page />}>
               <Route path=":view" element={<Search2Page />} />
             </Route>
