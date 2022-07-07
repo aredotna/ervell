@@ -11,6 +11,7 @@ import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSear
 import Text from 'v2/components/UI/Text'
 import constants from 'v2/styles/constants'
 import { WhereEnum } from '__generated__/globalTypes'
+import { useNavigate } from 'react-router'
 
 const Container = styled(Box)`
   position: relative;
@@ -44,8 +45,10 @@ const AdvancedPrimarySearchContainer: React.FC<{
   flex?: number
 }> = ({ scheme, flex, ...rest }) => {
   const { page } = useContext(PageContext)
-  const { state, updateQuery, addFilter } = useContext(AdvancedSearchContext)
-  console.log({ state })
+  const navigate = useNavigate()
+  const { state, updateQuery, addFilter, generateUrl } = useContext(
+    AdvancedSearchContext
+  )
   const searchInputRef = useRef(null)
   const searchRef = useRef(null)
   const [mode, setMode] = useState<'resting' | 'blur' | 'focus' | 'hover'>(
@@ -62,7 +65,14 @@ const AdvancedPrimarySearchContainer: React.FC<{
     }
     setMode('resting')
   }, [state, mode, setMode])
-  const handleKeyDown = useCallback(() => {}, [])
+  const handleKeyDown = useCallback(
+    ({ key }) => {
+      if (key === 'Enter') {
+        navigate(generateUrl())
+      }
+    },
+    [navigate, state]
+  )
   const handleMouseEnter = useCallback(() => {
     // if (mode === 'resting') {
     //   setMode('hover')
@@ -94,7 +104,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
         bg={scheme === 'GROUP' && 'transparent'}
         border={0}
         query={state.query}
-        onDebouncedQueryChange={updateQuery}
+        onQueryChange={updateQuery}
         ref={searchRef}
         searchInputRef={searchInputRef}
         onFocus={handleFocus}

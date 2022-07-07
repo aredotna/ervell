@@ -1,6 +1,7 @@
 import { merge, set } from 'lodash'
 import React, { createContext, useCallback, useEffect, useReducer } from 'react'
 import tokenizeSearch, {
+  generateUrlFromVariables,
   stringifyFacet,
   stringifyOrder,
   stringifyVariables,
@@ -93,12 +94,10 @@ const ReducerMethodMap = {
     set(variables, `${field}.facets`, newValue)
     if (id) set(variables, `${field}.id`, id)
 
-    console.log({ id, field, filter, variables })
-
     const regex = new RegExp(`(\\s)${field}:(\\S*)`, 'gm')
     const query = existingFacet
       ? state.query.replace(regex, ` ${stringifyFacet(field, filter)}`)
-      : `${state.query} ${stringifyFacet(field, filter)}`
+      : `${state.query} ${stringifyFacet(field, filter, id)} `
 
     const disabledFilters = calculatedDisabledFilters(variables, query)
 
@@ -214,6 +213,7 @@ interface AdvancedSearchContextType {
   setAllFilter: (field: 'where' | 'what' | 'fields') => void
   setOrder: (facet: SortOrderEnum, dir: SortDirection) => void
   updateQuery: (query: string) => void
+  generateUrl: () => string
   state: State
 }
 
@@ -223,6 +223,7 @@ export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
   updateQuery: () => {},
   setAllFilter: () => {},
   setOrder: () => {},
+  generateUrl: () => '',
   state: {
     query: '',
     variables: {},
@@ -251,9 +252,10 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
   const addFilter = useCallback(
     (
       field: 'where' | 'what' | 'fields',
-      filter: WhereEnum | WhatEnum | FieldsEnum
+      filter: WhereEnum | WhatEnum | FieldsEnum,
+      id?: number
     ) => {
-      dispatch({ type: 'ADD_FILTER', payload: { field, filter } })
+      dispatch({ type: 'ADD_FILTER', payload: { field, filter, id } })
     },
     []
   )
@@ -280,6 +282,11 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     dispatch({ type: 'QUERY_CHANGE', payload: query })
   }, [])
 
+  const generateUrl = useCallback(() => {
+    console.log({ state })
+    return generateUrlFromVariables(state.variables)
+  }, [state, state.variables])
+
   useEffect(() => {
     if (onVariablesChange) {
       onVariablesChange(state.variables)
@@ -301,6 +308,7 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
         updateQuery,
         setAllFilter,
         setOrder,
+        generateUrl,
       }}
     >
       {children}

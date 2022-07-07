@@ -19,6 +19,9 @@ export const WhereFilter: React.FC<FilterProps> = ({
     toggleFilter,
     currentDisabledFilters,
   }
+
+  console.log('WHEREFILTER', { id })
+
   return (
     <FilterContainer>
       <CategoryLabel>Where</CategoryLabel>
@@ -41,7 +44,7 @@ export const WhereFilter: React.FC<FilterProps> = ({
       {id && (
         <FilterOption
           currentFilters={currentFilters}
-          filter={WhereEnum.CHANNEL}
+          filter={WhereEnum.USER}
           {...updateProps}
         />
       )}

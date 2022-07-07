@@ -49,6 +49,8 @@ export const AdvancedSearchFilter: React.FC = () => {
     AdvancedSearchContext
   )
 
+  console.log({ state })
+
   const toggleFilter = useCallback(
     (
       filter: WhereEnum | WhatEnum | FieldsEnum,
@@ -75,10 +77,12 @@ export const AdvancedSearchFilter: React.FC = () => {
     [state, state.variables, addFilter, removeFilter]
   )
 
+  const id = state?.variables?.where?.id as any
+
   return (
     <FiltersContainer>
       <WhereFilter
-        id={state?.variables?.where?.id[0] || null}
+        id={id || null}
         clearAndSetAll={toggleAll}
         toggleFilter={toggleFilter}
         currentFilters={state.variables?.where?.facets}

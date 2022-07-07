@@ -22,3 +22,33 @@ export const EnumLabelMap = {
   [FieldsEnum.DOMAIN]: 'Domain',
   [FieldsEnum.URL]: 'URL',
 }
+
+export const TypedEnumLabelMap = {
+  where: {
+    [WhereEnum.ALL]: 'All Are.na',
+    [WhereEnum.MY]: 'My Are.na',
+    [WhereEnum.CHANNEL]: 'This channel',
+    [WhereEnum.FOLLOWING]: 'My network',
+    [WhereEnum.USER]: 'This person',
+  },
+  what: {
+    [WhatEnum.ALL]: 'All',
+    [WhatEnum.ATTACHMENT]: 'Attachments',
+    [WhatEnum.BLOCK]: 'All types',
+    [WhatEnum.CHANNEL]: 'Channels',
+    [WhatEnum.GROUP]: 'Groups',
+    [WhatEnum.IMAGE]: 'Images',
+    [WhatEnum.LINK]: 'Links',
+    [WhatEnum.MEDIA]: 'Embeds',
+    [WhatEnum.TEXT]: 'Texts',
+    [WhatEnum.USER]: 'People',
+  },
+  fields: {
+    [FieldsEnum.ALL]: 'All',
+    [FieldsEnum.NAME]: 'Title',
+    [FieldsEnum.DESCRIPTION]: 'Description',
+    [FieldsEnum.CONTENT]: 'Content',
+    [FieldsEnum.DOMAIN]: 'Domain',
+    [FieldsEnum.URL]: 'URL',
+  },
+}

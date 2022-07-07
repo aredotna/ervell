@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
-import { EnumLabelMap } from 'v2/components/AdvancedSearch/utils/labels'
+import { TypedEnumLabelMap } from 'v2/components/AdvancedSearch/utils/labels'
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
 import { AnyFilter } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 
@@ -83,7 +83,7 @@ export const FilterOption: React.FC<FilterOptionProps> = ({
       {...rest}
     >
       <FilterLabel disabled={isDisabled} active={isSelected}>
-        {EnumLabelMap[filter]}
+        {TypedEnumLabelMap[field][filter]}
       </FilterLabel>
     </FilterContainer>
   )

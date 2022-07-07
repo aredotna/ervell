@@ -11,6 +11,10 @@ import { AnyFilter } from '../AdvancedSearchContext'
 const disabledFilterRules = {
   // "My Are.na" does not contain users
   [WhereEnum.MY]: [WhatEnum.USER],
+
+  // When scoped by person, no users
+  [WhereEnum.USER]: [WhatEnum.USER],
+
   // Channels, users, groups do not contain urls or domains
   [WhatEnum.CHANNEL]: [FieldsEnum.DOMAIN, FieldsEnum.URL],
   [WhatEnum.USER]: [FieldsEnum.DOMAIN, FieldsEnum.URL],

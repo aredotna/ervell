@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 
 import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
@@ -26,10 +26,18 @@ export const ProfileBreadcrumb: React.FC<ProfileBreadcrumbProps> = ({
   identifiable,
 }) => {
   const location = useLocation()
+  const [params] = useSearchParams()
   const pathname = location.pathname
 
   const showBadge =
-    !/follow(ers|ing)$/.test(pathname) && !/groups$/.test(pathname)
+    !/follow(ers|ing)$/.test(pathname) &&
+    !/groups$/.test(pathname) &&
+    !/search$/.test(pathname)
+
+  const searchTerm = params.get('term[facet]')
+  const searchLabel = searchTerm
+    ? `Search results for '${searchTerm}'`
+    : 'All results'
 
   return (
     <StickyBreadcrumbPath>
@@ -65,6 +73,10 @@ export const ProfileBreadcrumb: React.FC<ProfileBreadcrumbProps> = ({
 
       {/groups$/.test(pathname) && (
         <StickyBreadcrumbPath.Crumb>Groups</StickyBreadcrumbPath.Crumb>
+      )}
+
+      {/search$/.test(pathname) && (
+        <StickyBreadcrumbPath.Crumb>{searchLabel}</StickyBreadcrumbPath.Crumb>
       )}
     </StickyBreadcrumbPath>
   )
