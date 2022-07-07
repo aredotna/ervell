@@ -1,7 +1,7 @@
 import { merge, set } from 'lodash'
 import { parse } from 'qs'
 import React, { createContext, useCallback, useEffect, useReducer } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import tokenizeSearch, {
   generateUrlFromVariables,
   stringifyFacet,
@@ -59,6 +59,10 @@ type Action =
         facet: SortOrderEnum
         dir: SortDirection
       }
+    }
+  | {
+      type: 'SET_VARIABLES'
+      payload: AdvancedSearchVariables
     }
 
 const extractVariableFromStateAndPayload = (
@@ -152,6 +156,17 @@ const ReducerMethodMap = {
     }
   },
 
+  SET_VARIABLES: (state: State, action: any) => {
+    const newVariables = action.payload
+
+    return {
+      ...state,
+      variables: newVariables,
+      query: stringifyVariables(newVariables),
+      disabledFilters: calculatedDisabledFilters(state.variables, newVariables),
+    }
+  },
+
   SET_ORDER: (state: State, action: any) => {
     const { facet, dir } = action.payload
 
@@ -194,6 +209,7 @@ const reducer = (state: State, action: Action) => {
     case 'SET_ALL':
     case 'QUERY_CHANGE':
     case 'SET_ORDER':
+    case 'SET_VARIABLES':
       return ReducerMethodMap[action.type](state, action)
     case 'TOGGLE_ALL_BLOCKS':
       return state
@@ -245,6 +261,7 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
   children,
 }) => {
   const [searchParams] = useSearchParams()
+  const { search } = useLocation()
   const parsedVariables = parse(searchParams.toString())
   const where = parsedVariables.where as any
   const page = parsedVariables.page as any
@@ -308,6 +325,19 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
       onQueryChange(state.query)
     }
   }, [state.query])
+
+  useEffect(() => {
+    const parsedVariables = parse(search)
+    const where = parsedVariables.where as any
+    const page = parsedVariables.page as any
+    const per = parsedVariables.per as any
+
+    set(parsedVariables, 'where.id', parseInt(where?.id))
+    set(parsedVariables, 'page', parseInt(page))
+    set(parsedVariables, 'per', parseInt(per))
+
+    dispatch({ type: 'SET_VARIABLES', payload: parsedVariables })
+  }, [search])
 
   return (
     <AdvancedSearchContext.Provider

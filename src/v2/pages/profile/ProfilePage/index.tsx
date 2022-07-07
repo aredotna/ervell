@@ -167,7 +167,11 @@ const ProfilePageWrapper: React.FC<{ view?: string }> = props => {
   }
 
   const calcedView = props.view || cookies.view || 'channels'
-  const sort = setValid(query.sort || cookies.sort, VALID_SORTS, 'UPDATED_AT')
+  const sort = setValid(
+    query.get('sort') || cookies.sort,
+    VALID_SORTS,
+    'UPDATED_AT'
+  )
   const indexFilter = setValid(query.get('filter'), VALID_INDEX_FILTERS, 'OWN')
 
   const blockFilter = setValid(
