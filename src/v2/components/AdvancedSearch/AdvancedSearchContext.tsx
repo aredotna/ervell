@@ -1,5 +1,7 @@
 import { merge, set } from 'lodash'
+import { parse } from 'qs'
 import React, { createContext, useCallback, useEffect, useReducer } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import tokenizeSearch, {
   generateUrlFromVariables,
   stringifyFacet,
@@ -238,14 +240,23 @@ interface AdvancedSearchContextProps {
 }
 
 export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps> = ({
-  variables,
   onVariablesChange,
   onQueryChange,
   children,
 }) => {
+  const [searchParams] = useSearchParams()
+  const parsedVariables = parse(searchParams.toString())
+  const where = parsedVariables.where as any
+  const page = parsedVariables.page as any
+  const per = parsedVariables.per as any
+
+  set(parsedVariables, 'where.id', parseInt(where?.id))
+  set(parsedVariables, 'page', parseInt(page))
+  set(parsedVariables, 'per', parseInt(per))
+
   const [state, dispatch] = useReducer(reducer, {
-    query: stringifyVariables(variables),
-    variables: variables || {},
+    query: stringifyVariables(parsedVariables),
+    variables: parsedVariables || {},
     disabledFilters: [],
   })
 

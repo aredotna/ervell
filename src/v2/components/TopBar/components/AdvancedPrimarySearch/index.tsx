@@ -52,7 +52,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const searchInputRef = useRef(null)
   const searchRef = useRef(null)
   const [mode, setMode] = useState<'resting' | 'blur' | 'focus' | 'hover'>(
-    'resting'
+    state.query ? 'blur' : 'resting'
   )
 
   const handleFocus = useCallback(() => {
@@ -87,7 +87,6 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const onContextButtonClick = useCallback(() => {
     if (page.type === PageTypeEnum.PERSON) {
       searchInputRef.current.focus()
-      console.log('parseInt(page.id)', parseInt(page.id))
       addFilter('where', WhereEnum.USER, parseInt(page.id))
     }
   }, [page, addFilter, searchInputRef])
