@@ -16,7 +16,7 @@ import {
   hasBlockFilters,
 } from 'v2/components/AdvancedSearch/utils/where'
 import Box from 'v2/components/UI/Box'
-import { WhatEnum } from '__generated__/globalTypes'
+import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
 
 const BlockMenuContainer = styled(Box)`
   position: relative;
@@ -59,12 +59,6 @@ export const WhatFilter: React.FC<FilterProps> = ({
   clearAndSetAll,
   currentDisabledFilters,
 }) => {
-  const updateProps = {
-    field: 'what' as any,
-    toggleFilter,
-    currentDisabledFilters,
-  }
-
   const [mode, setMode] = useState<'resting' | 'block'>('resting')
 
   const handleClose = useCallback(() => {
@@ -74,6 +68,23 @@ export const WhatFilter: React.FC<FilterProps> = ({
   const handleOpen = useCallback(() => {
     setMode('block')
   }, [setMode])
+
+  const handleSet = useCallback(
+    (
+      filter: WhereEnum | WhatEnum | FieldsEnum,
+      field: 'what' | 'where' | 'fields'
+    ) => {
+      toggleFilter(filter, field)
+      setMode('resting')
+    },
+    [setMode, toggleFilter]
+  )
+
+  const updateProps = {
+    field: 'what' as any,
+    toggleFilter: handleSet,
+    currentDisabledFilters,
+  }
 
   if (mode === 'block') {
     return (

@@ -1,7 +1,7 @@
 import { merge, set } from 'lodash'
 import { parse } from 'qs'
 import React, { createContext, useCallback, useEffect, useReducer } from 'react'
-import { useLocation, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import tokenizeSearch, {
   generateUrlFromVariables,
   stringifyFacet,
@@ -34,7 +34,7 @@ type Action =
       payload: {
         field: 'where' | 'what' | 'fields'
         filter: WhereEnum | WhatEnum | FieldsEnum
-        id?: number
+        id?: string
       }
     }
   | {
@@ -70,13 +70,16 @@ const extractVariableFromStateAndPayload = (
   payload: {
     field: 'where' | 'what' | 'fields'
     filter?: WhereEnum | WhatEnum | FieldsEnum
-    id?: number
+    id?: string
   }
 ) => {
   const { field, filter, id } = payload
   const typedFilter: any = filter ? filter : null
   const variables = { ...state.variables }
-  const existingFacet: any = variables[field]?.facets || null
+  const existingFacet: any =
+    field === 'where'
+      ? variables[field]?.facet
+      : variables[field]?.facets || null
   return {
     field,
     filter: typedFilter,
@@ -96,8 +99,9 @@ const ReducerMethodMap = {
       id,
     } = extractVariableFromStateAndPayload(state, action.payload)
     const newValue = filter as WhereEnum
+    const facetKey = field === 'where' ? 'facet' : 'facets'
 
-    set(variables, `${field}.facets`, newValue)
+    set(variables, `${field}.${facetKey}`, newValue)
     if (id) set(variables, `${field}.id`, id)
 
     const regex = new RegExp(`(\\s)${field}:(\\S*)`, 'gm')
@@ -130,8 +134,10 @@ const ReducerMethodMap = {
       action.payload
     )
 
-    const newValue = [FieldsEnum.ALL]
-    set(variables, `${field}.facets`, newValue)
+    const newValue = field === 'where' ? FieldsEnum.ALL : [FieldsEnum.ALL]
+    const facetKey = field === 'where' ? 'facet' : 'facets'
+
+    set(variables, `${field}.${facetKey}`, newValue)
     const regex = new RegExp(`(\\s)${field}:(\\S*)`, 'gm')
     const query = state.query.replace(regex, '')
 
@@ -222,7 +228,7 @@ interface AdvancedSearchContextType {
   addFilter: (
     field: 'where' | 'what' | 'fields',
     filter: WhereEnum | WhatEnum | FieldsEnum,
-    id?: number
+    id?: string
   ) => void
   removeFilter: (
     field: 'where' | 'what' | 'fields',
@@ -261,13 +267,13 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
   children,
 }) => {
   const [searchParams] = useSearchParams()
-  const { search } = useLocation()
+  // const { search } = useLocation()
   const parsedVariables = parse(searchParams.toString())
   const where = parsedVariables.where as any
   const page = parsedVariables.page as any
   const per = parsedVariables.per as any
 
-  set(parsedVariables, 'where.id', parseInt(where?.id))
+  set(parsedVariables, 'where.id', where?.id)
   set(parsedVariables, 'page', parseInt(page))
   set(parsedVariables, 'per', parseInt(per))
 
@@ -281,7 +287,7 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     (
       field: 'where' | 'what' | 'fields',
       filter: WhereEnum | WhatEnum | FieldsEnum,
-      id?: number
+      id?: string
     ) => {
       dispatch({ type: 'ADD_FILTER', payload: { field, filter, id } })
     },
@@ -326,18 +332,18 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     }
   }, [state.query])
 
-  useEffect(() => {
-    const parsedVariables = parse(search)
-    const where = parsedVariables.where as any
-    const page = parsedVariables.page as any
-    const per = parsedVariables.per as any
+  // useEffect(() => {
+  //   const parsedVariables = parse(search)
+  //   const where = parsedVariables.where as any
+  //   const page = parsedVariables.page as any
+  //   const per = parsedVariables.per as any
 
-    set(parsedVariables, 'where.id', parseInt(where?.id))
-    set(parsedVariables, 'page', parseInt(page))
-    set(parsedVariables, 'per', parseInt(per))
+  //   set(parsedVariables, 'where.id', parseInt(where?.id))
+  //   set(parsedVariables, 'page', parseInt(page))
+  //   set(parsedVariables, 'per', parseInt(per))
 
-    dispatch({ type: 'SET_VARIABLES', payload: parsedVariables })
-  }, [search])
+  //   dispatch({ type: 'SET_VARIABLES', payload: parsedVariables })
+  // }, [search])
 
   return (
     <AdvancedSearchContext.Provider

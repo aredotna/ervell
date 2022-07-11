@@ -99,7 +99,17 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const onContextButtonClick = useCallback(() => {
     if (page.type === PageTypeEnum.PERSON) {
       searchInputRef.current.focus()
-      addFilter('where', WhereEnum.USER, parseInt(page.id))
+      addFilter('where', WhereEnum.USER, page.id)
+    }
+
+    if (page.type === PageTypeEnum.CHANNEL) {
+      searchInputRef.current.focus()
+      addFilter('where', WhereEnum.CHANNEL, page.id)
+    }
+
+    if (page.type === PageTypeEnum.GROUP) {
+      searchInputRef.current.focus()
+      addFilter('where', WhereEnum.GROUP, page.id)
     }
   }, [page, addFilter, searchInputRef])
 
@@ -138,12 +148,23 @@ const AdvancedPrimarySearchContainer: React.FC<{
             Search Are.na
           </ContextButton>
 
-          {page?.type === PageTypeEnum.CHANNEL ||
-            (page?.type === PageTypeEnum.PERSON && (
-              <ContextButton onClick={onContextButtonClick}>
-                Search this {page.type.toLowerCase()}
-              </ContextButton>
-            ))}
+          {page?.type === PageTypeEnum.PERSON && (
+            <ContextButton onClick={onContextButtonClick}>
+              Search this {page.type.toLowerCase()}
+            </ContextButton>
+          )}
+
+          {page?.type === PageTypeEnum.CHANNEL && (
+            <ContextButton onClick={onContextButtonClick}>
+              Search this {page.type.toLowerCase()}
+            </ContextButton>
+          )}
+
+          {page?.type === PageTypeEnum.GROUP && (
+            <ContextButton onClick={onContextButtonClick}>
+              Search this {page.type.toLowerCase()}
+            </ContextButton>
+          )}
         </ContextButtonContainer>
       )}
     </Container>

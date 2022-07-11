@@ -41,7 +41,7 @@ export const ChannelSearchPage: React.FC = () => {
   return (
     <TopBarLayout>
       <AdvancedSearchContextProvider
-        variables={{ where: { facets: [WhereEnum.CHANNEL], id: [channel.id] } }}
+        variables={{ where: { facet: WhereEnum.CHANNEL, id } }}
       >
         <Constrain>
           <ChannelSearchMetadata channel={channel} />

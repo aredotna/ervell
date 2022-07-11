@@ -326,9 +326,8 @@ export interface What {
 }
 
 export interface Where {
-  facets?: WhereEnum[] | null;
-  id?: number[] | null;
-  op?: OperationEnum | null;
+  facet?: WhereEnum | null;
+  id?: string | null;
 }
 
 //==============================================================

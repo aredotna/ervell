@@ -8,7 +8,7 @@ import {
   WhereEnum,
 } from '__generated__/globalTypes'
 
-import { isArray, pickBy } from 'lodash'
+import { pickBy } from 'lodash'
 
 export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
   const tokens = search.split(/\s+/)
@@ -66,7 +66,7 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
 export const stringifyFacet = (
   field: 'where' | 'what' | 'fields',
   filter: WhereEnum | WhatEnum | FieldsEnum,
-  id?: number
+  id?: string
 ) => {
   if (field === 'where' && id) {
     return `${filter.toLowerCase()}:${id}`
@@ -90,10 +90,8 @@ export const stringifyOrder = (
 export const stringifyVariables = (variables: AdvancedSearchVariables) => {
   const strings = [
     variables?.term?.facet ? `${variables?.term.facet}` : undefined,
-    variables?.where?.facets?.length && isArray(variables?.where?.facets)
-      ? variables?.where.facets
-          ?.map(mapFacets('where', variables.where.id))
-          .join(' ')
+    variables?.where?.facet
+      ? stringifyFacet('where', variables.where.facet, variables.where.id)
       : undefined,
     variables?.what?.facets?.length
       ? variables?.what.facets.map(mapFacets('what', null)).join(' ')
@@ -115,9 +113,14 @@ const getUrlPath = (variables: AdvancedSearchVariables) => {
 
   if (
     variables.where?.id &&
-    (variables.where.facets as any) === WhereEnum.USER
+    (variables.where.facet === WhereEnum.USER ||
+      variables.where.facet === WhereEnum.GROUP)
   ) {
     urlBase = `/${variables.where.id}/search`
+  }
+
+  if (variables.where?.id && variables.where.facet === WhereEnum.CHANNEL) {
+    urlBase = `/somethign/${variables.where.id}/search`
   }
 
   return urlBase

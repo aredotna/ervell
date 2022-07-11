@@ -34,7 +34,7 @@ const disabledFilterRules = {
 export const allFacetsFromVariables = (
   variables: AdvancedSearchVariables
 ): AnyFilter[] => {
-  const whereFacets = variables?.where?.facets
+  const whereFacets = [variables?.where?.facet]
   const fieldsFacets = variables?.fields?.facets
   const whatFacets = variables?.what?.facets
   const orderFacet = variables?.order?.facet

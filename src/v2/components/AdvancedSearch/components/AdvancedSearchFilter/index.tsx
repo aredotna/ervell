@@ -56,7 +56,10 @@ export const AdvancedSearchFilter: React.FC = () => {
       filter: WhereEnum | WhatEnum | FieldsEnum,
       field: 'what' | 'where' | 'fields'
     ) => {
-      const currentFilter = (state.variables[field]?.facets as any) || null
+      const currentFilter =
+        field == 'where'
+          ? state.variables[field]?.facet
+          : state.variables[field]?.facets || null
       currentFilter == filter
         ? removeFilter(field, filter)
         : addFilter(field, filter)
@@ -69,7 +72,10 @@ export const AdvancedSearchFilter: React.FC = () => {
       filter: WhereEnum | WhatEnum | FieldsEnum,
       field: 'what' | 'where' | 'fields'
     ) => {
-      const currentFilter = (state.variables[field]?.facets as any) || null
+      const currentFilter =
+        field == 'where'
+          ? state.variables[field]?.facet
+          : state.variables[field]?.facets || null
       currentFilter == WhereEnum.ALL
         ? removeFilter(field, filter)
         : setAllFilter(field)
@@ -85,7 +91,7 @@ export const AdvancedSearchFilter: React.FC = () => {
         id={id || null}
         clearAndSetAll={toggleAll}
         toggleFilter={toggleFilter}
-        currentFilters={state.variables?.where?.facets}
+        currentFilter={state.variables?.where?.facet}
         currentDisabledFilters={state.disabledFilters}
       />
       <WhatFilter

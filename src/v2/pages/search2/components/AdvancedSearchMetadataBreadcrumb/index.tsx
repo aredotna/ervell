@@ -7,12 +7,16 @@ interface AdvancedSearchMetadataBreadcrumbProps {
 
 const AdvancedSearchMetadataBreadcrumb: React.FC<AdvancedSearchMetadataBreadcrumbProps> = ({
   term,
-}) => (
-  <StickyBreadcrumbPath>
-    <StickyBreadcrumbPath.Crumb>
-      <div>{`Search results for '${term}'`}</div>
-    </StickyBreadcrumbPath.Crumb>
-  </StickyBreadcrumbPath>
-)
+}) => {
+  const searchLabel = term ? `Search results for '${term}'` : 'All'
+
+  return (
+    <StickyBreadcrumbPath>
+      <StickyBreadcrumbPath.Crumb>
+        <div>{searchLabel}</div>
+      </StickyBreadcrumbPath.Crumb>
+    </StickyBreadcrumbPath>
+  )
+}
 
 export default AdvancedSearchMetadataBreadcrumb

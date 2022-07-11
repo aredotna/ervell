@@ -69,6 +69,7 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
     this.setState({ query: '', mode: 'focus' })
   }
 
+  inputRef = React.createRef()
   searchInputRef = React.createRef()
 
   handleSelection = href => this.setState({ href })
@@ -161,7 +162,8 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
           query={query}
           onQueryChange={this.handleQuery}
           onDebouncedQueryChange={this.handleDebouncedQuery}
-          ref={this.searchInputRef}
+          ref={this.inputRef}
+          searchInputRef={this.searchInputRef}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onKeyDown={this.handleKeyDown}

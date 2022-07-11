@@ -7,7 +7,9 @@ import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSear
 
 const AdvancedSearchMetadata: React.FC = () => {
   const { state } = useContext(AdvancedSearchContext)
-  const term = state.variables.term.facet
+  const term = state.variables.term?.facet
+
+  console.log({ term })
 
   return (
     <HeaderMetadataContainer
