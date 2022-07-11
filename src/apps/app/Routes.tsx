@@ -14,7 +14,9 @@ import ProfilePage from '../../v2/pages/profile/ProfilePage'
 import SharedChannelPage from 'v2/pages/channel/SharedChannelPage'
 import ChannelFollowersPage from 'v2/pages/channel/ChannelFollowersPage'
 import ChannelPageWrapper from 'v2/pages/channel/ChannelPageWrapper'
-import EmbeddedChannelPage from '../../v2/pages/channel/EmbeddedChannelPage'
+import EmbeddedChannelPage from 'v2/pages/channel/EmbeddedChannelPage'
+import { ChannelSearchPage } from 'v2/pages/channel/ChannelSearchPage'
+
 // Block
 import BlockPage from 'v2/pages/block'
 // Settings
@@ -38,6 +40,7 @@ import { EducationPage } from 'v2/pages/about/EducationPage'
 import useIsAdmin from 'v2/hooks/useIsAdmin'
 import { Search2Page } from 'v2/pages/search2'
 import { ModalBlockWrapper } from 'v2/pages/block/ModalBlockWrapper'
+import { ProfileSearchPage } from 'v2/pages/profile/ProfileSearchPage'
 
 export const AppRoutes = () => {
   const { isLoggedIn } = useLoginStatus()
@@ -86,7 +89,7 @@ export const AppRoutes = () => {
         </Route>
 
         {isAdmin && (
-          <Route path="search2">
+          <Route path="search2" element={<Search2Page />}>
             <Route path=":term" element={<Search2Page />}>
               <Route path=":view" element={<Search2Page />} />
             </Route>
@@ -145,6 +148,9 @@ export const AppRoutes = () => {
         <Route path=":id/table" element={<ProfilePage view="table" />} />
         <Route path=":id/index" element={<ProfilePage view="index" />} />
         <Route path=":id/groups" element={<ProfilePage view="groups" />} />
+
+        {isAdmin && <Route path=":id/search" element={<ProfileSearchPage />} />}
+
         <Route path=":id" element={<ProfilePage />} />
 
         {/* Channel */}
@@ -161,6 +167,9 @@ export const AppRoutes = () => {
           element={<ChannelPageWrapper view="grid" />}
         />
         <Route path=":user_id/:id/embed" element={<EmbeddedChannelPage />} />
+        {isAdmin && (
+          <Route path=":user_id/:id/search" element={<ChannelSearchPage />} />
+        )}
         <Route path=":user_id/:id" element={<ChannelPageWrapper />} />
 
         {/* Share Channel */}

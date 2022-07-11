@@ -48,6 +48,7 @@ interface Props extends BoxProps {
   placeholder?: string
   query?: string
   outlineless?: boolean
+  searchInputRef?: any
 }
 
 interface State {
@@ -73,7 +74,7 @@ class SearchInput extends PureComponent<Props, State> {
   }
 
   handleDebouncedQueryChange: (props: any) => any
-  input: any
+  inputRef: any
 
   constructor(props: Props) {
     super(props)
@@ -89,6 +90,8 @@ class SearchInput extends PureComponent<Props, State> {
       mode: props.query && props.query !== '' ? 'active' : 'resting',
       query: props.query,
     }
+
+    this.inputRef = props.searchInputRef || React.createRef()
   }
 
   componentDidMount() {
@@ -112,8 +115,8 @@ class SearchInput extends PureComponent<Props, State> {
 
   resetState = () => {
     this.setState({ query: '', mode: 'focus' })
-    this.input.value = ''
-    this.input.focus()
+    this.inputRef.current.value = ''
+    this.inputRef.current.focus()
   }
 
   maybeAttachGlobalFocusKeyListener = () => {
@@ -123,8 +126,8 @@ class SearchInput extends PureComponent<Props, State> {
       Mousetrap.bind(globallyFocusOnKey, event => {
         event.preventDefault()
         this.handleFocus()
-        this.input.focus()
-        this.input.value = ''
+        this.inputRef.current.focus()
+        this.inputRef.current.value = ''
       })
     }
   }
@@ -181,6 +184,7 @@ class SearchInput extends PureComponent<Props, State> {
       debounceWait: _debounceWait,
       forwardedRef,
       iconMap,
+      searchInputRef,
       ...rest
     } = this.props
 
@@ -212,9 +216,7 @@ class SearchInput extends PureComponent<Props, State> {
           px={ICON_OFFSET}
           borderColor="gray.regular"
           {...innerProps}
-          ref={input => {
-            this.input = input
-          }}
+          ref={searchInputRef}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onChange={this.handleChange}

@@ -25,6 +25,8 @@ export const AdvancedSearchResultsGrid: React.FC = () => {
     variables: { ...state.variables },
   })
 
+  console.log({ ...state.variables })
+
   useEffect(() => {
     setPage(1)
     refetch(state.variables)

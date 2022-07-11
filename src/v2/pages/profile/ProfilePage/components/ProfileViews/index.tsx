@@ -210,13 +210,15 @@ const ProfileViews: React.FC<ProfileViewsProps> = ({
   const { setPage } = useContext(PageContext)
   const pageType = {
     GROUP: PageTypeEnum.GROUP,
-    DEFAULT: PageTypeEnum.USER,
+    DEFAULT: PageTypeEnum.PERSON,
   }[scheme]
+
+  console.log({ id })
 
   useEffect(() => {
     setPage({
       type: pageType,
-      id: id.toString(),
+      id,
     })
   }, [])
 

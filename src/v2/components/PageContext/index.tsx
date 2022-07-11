@@ -3,11 +3,11 @@ import React from 'react'
 export enum PageTypeEnum {
   CHANNEL = 'CHANNEL',
   GROUP = 'GROUP',
-  USER = 'USER',
+  PERSON = 'PERSON',
   BLOCK = 'BLOCK',
 }
 
-type PageType =
+export type PageType =
   | {
       type: PageTypeEnum.CHANNEL
       id: string
@@ -17,7 +17,7 @@ type PageType =
       id: string
     }
   | {
-      type: PageTypeEnum.USER
+      type: PageTypeEnum.PERSON
       id: string
     }
   | {
