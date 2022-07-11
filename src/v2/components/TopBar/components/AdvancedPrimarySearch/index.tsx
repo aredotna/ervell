@@ -2,8 +2,9 @@ import React, { useCallback, useContext, useRef, useState } from 'react'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
+import Overlay from 'v2/components/UI/Overlay'
+
 import HomeLink from 'v2/components/TopBar/components/PrimarySearch/components/HomeLink'
-// import Overlay from 'v2/components/UI/Overlay'
 import SearchInput, { ICON_OFFSET } from 'v2/components/UI/SearchInput'
 
 import { PageContext, PageTypeEnum } from 'v2/components/PageContext'
@@ -12,6 +13,8 @@ import Text from 'v2/components/UI/Text'
 import constants from 'v2/styles/constants'
 import { WhereEnum } from '__generated__/globalTypes'
 import { useNavigate } from 'react-router'
+import { overflowScrolling } from 'v2/styles/mixins'
+import { AdvancedSearchResults } from './components/AdvancedSearchResults'
 
 const Container = styled(Box)`
   position: relative;
@@ -39,10 +42,10 @@ const ContextButton = styled(Text)`
   }
 `
 
-// const Results = styled(Box)`
-//   height: 100%;
-//   ${overflowScrolling}
-// `
+const Results = styled(Box)`
+  height: 100%;
+  ${overflowScrolling}
+`
 
 const AdvancedPrimarySearchContainer: React.FC<{
   scheme: 'DEFAULT' | 'GROUP'
@@ -166,6 +169,14 @@ const AdvancedPrimarySearchContainer: React.FC<{
             </ContextButton>
           )}
         </ContextButtonContainer>
+      )}
+
+      {mode != 'blur' && mode != 'resting' && (
+        <Overlay targetEl={() => searchRef.current} fullWidth>
+          <Results>
+            <AdvancedSearchResults />
+          </Results>
+        </Overlay>
       )}
     </Container>
   )
