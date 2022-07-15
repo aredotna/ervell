@@ -14,7 +14,8 @@ import constants from 'v2/styles/constants'
 import { WhereEnum } from '__generated__/globalTypes'
 import { useNavigate } from 'react-router'
 import { overflowScrolling } from 'v2/styles/mixins'
-import { AdvancedSearchResults } from './components/AdvancedSearchResults'
+import { AdvancedSearchResultsContainer } from './components/AdvancedSearchResults'
+import LargeLabeledCheckbox from 'v2/components/UI/Inputs/components/LargeLabelledCheckbox'
 
 const Container = styled(Box)`
   position: relative;
@@ -28,6 +29,7 @@ const ContextButtonContainer = styled(Box)`
   display: flex;
   align-items: center;
   height: 100%;
+  width: calc(100% - ${ICON_OFFSET});
 `
 
 const ContextButton = styled(Text)`
@@ -40,6 +42,16 @@ const ContextButton = styled(Text)`
   &:hover {
     background-color: ${p => p.theme.colors.gray.semiLight};
   }
+`
+
+const DevCheckbox = styled(Box)`
+  position: absolute;
+  right: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: ${p => p.theme.space[2]};
 `
 
 const Results = styled(Box)`
@@ -60,6 +72,10 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const searchRef = useRef(null)
   const [mode, setMode] = useState<'resting' | 'blur' | 'focus' | 'hover'>(
     state.query ? 'blur' : 'resting'
+  )
+
+  const [includeOriginalResults, setIncludeOriginalResults] = useState<boolean>(
+    false
   )
 
   const handleFocus = useCallback(() => {
@@ -145,7 +161,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
         }}
       />
 
-      {mode === 'resting' && (
+      {mode === 'resting' && !includeOriginalResults && (
         <ContextButtonContainer>
           <ContextButton onClick={onSearchButtonClick}>
             Search Are.na
@@ -171,10 +187,22 @@ const AdvancedPrimarySearchContainer: React.FC<{
         </ContextButtonContainer>
       )}
 
+      <DevCheckbox>
+        <LargeLabeledCheckbox
+          f={1}
+          checked={includeOriginalResults}
+          onChange={() => setIncludeOriginalResults(!includeOriginalResults)}
+        >
+          Use quicksearch results
+        </LargeLabeledCheckbox>
+      </DevCheckbox>
+
       {mode != 'blur' && mode != 'resting' && (
         <Overlay targetEl={() => searchRef.current} fullWidth>
           <Results>
-            <AdvancedSearchResults />
+            <AdvancedSearchResultsContainer
+              includeOriginalResults={includeOriginalResults}
+            />
           </Results>
         </Overlay>
       )}

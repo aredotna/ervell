@@ -45,6 +45,9 @@ type Action =
       }
     }
   | {
+      type: 'RESET_ALL'
+    }
+  | {
       type: 'SET_ALL'
       payload: {
         field: 'where' | 'what' | 'fields'
@@ -123,6 +126,14 @@ const ReducerMethodMap = {
     set(variables, `${field}`, null)
     delete variables[field]
     const query = state.query.replace(` ${stringifyFacet(field, filter)}`, '')
+    const disabledFilters = calculatedDisabledFilters(variables, query)
+
+    return { ...state, query, variables, disabledFilters }
+  },
+
+  RESET_ALL: (state: State) => {
+    const variables = {}
+    const query = ''
     const disabledFilters = calculatedDisabledFilters(variables, query)
 
     return { ...state, query, variables, disabledFilters }
@@ -216,6 +227,7 @@ const reducer = (state: State, action: Action) => {
     case 'QUERY_CHANGE':
     case 'SET_ORDER':
     case 'SET_VARIABLES':
+    case 'RESET_ALL':
       return ReducerMethodMap[action.type](state, action)
     case 'TOGGLE_ALL_BLOCKS':
       return state
@@ -236,6 +248,7 @@ interface AdvancedSearchContextType {
   ) => void
   setAllFilter: (field: 'where' | 'what' | 'fields') => void
   setOrder: (facet: SortOrderEnum, dir: SortDirection) => void
+  resetAll: () => void
   updateQuery: (query: string) => void
   generateUrl: () => string
   state: State
@@ -248,6 +261,7 @@ export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
   setAllFilter: () => {},
   setOrder: () => {},
   generateUrl: () => '',
+  resetAll: () => {},
   state: {
     query: '',
     variables: {},
@@ -316,6 +330,10 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     dispatch({ type: 'QUERY_CHANGE', payload: query })
   }, [])
 
+  const resetAll = useCallback(() => {
+    dispatch({ type: 'RESET_ALL' })
+  }, [])
+
   const generateUrl = useCallback(() => {
     return generateUrlFromVariables(state.variables)
   }, [state, state.variables])
@@ -355,6 +373,7 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
         setAllFilter,
         setOrder,
         generateUrl,
+        resetAll,
       }}
     >
       {children}
