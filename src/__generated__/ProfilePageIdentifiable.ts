@@ -42,6 +42,7 @@ export interface ProfilePageIdentifiable_Group {
   avatar: string | null;
   can: ProfilePageIdentifiable_Group_can | null;
   name: string;
+  label: string;
   href: string | null;
   visibility: string;
   /**
@@ -81,6 +82,7 @@ export interface ProfilePageIdentifiable_User_counts {
 export interface ProfilePageIdentifiable_User {
   __typename: "User";
   name: string;
+  label: string;
   href: string | null;
   badge: string | null;
   custom_badge: string | null;

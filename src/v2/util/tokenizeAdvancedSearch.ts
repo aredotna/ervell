@@ -1,4 +1,5 @@
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
+import { stringify } from 'qs'
 import {
   FieldsEnum,
   SortDirection,
@@ -25,7 +26,7 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
   const whereTokens = colonTokenPairs
     .filter(token => token.key === 'where')
     .map(token => WhereEnum[token.value.toUpperCase()])
-    .filter(Boolean) as WhereEnum[]
+    .filter(Boolean)[0] as WhereEnum | undefined
   const whatTokens = colonTokenPairs
     .filter(token => token.key === 'what')
     .map(token => WhatEnum[token.value.toUpperCase()])
@@ -51,7 +52,7 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
 
   const variables = {
     term: term === '' ? null : { facet: term },
-    where: whereTokens.length ? { facets: whereTokens } : undefined,
+    where: whereTokens ? { facet: whereTokens } : undefined,
     what: whatTokens.length ? { facets: whatTokens } : undefined,
     fields: fieldsTokens.length ? { facets: fieldsTokens } : undefined,
     order: sortToken ? { facet: sortToken, dir: directionToken } : undefined,
@@ -64,14 +65,18 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
 
 export const stringifyFacet = (
   field: 'where' | 'what' | 'fields',
-  filter: WhereEnum | WhatEnum | FieldsEnum
+  filter: WhereEnum | WhatEnum | FieldsEnum,
+  id?: string
 ) => {
+  if (field === 'where' && id) {
+    return `${filter.toLowerCase()}:${id}`
+  }
   return `${field}:${filter.toLowerCase()}`
 }
 
-const mapFacets = function(type) {
+const mapFacets = function(type, id) {
   return function(facet) {
-    return `${type}:${facet.toLowerCase()}`
+    return stringifyFacet(type, facet, id)
   }
 }
 
@@ -85,14 +90,14 @@ export const stringifyOrder = (
 export const stringifyVariables = (variables: AdvancedSearchVariables) => {
   const strings = [
     variables?.term?.facet ? `${variables?.term.facet}` : undefined,
-    variables?.where?.facets?.length
-      ? variables?.where.facets.map(mapFacets('where')).join(' ')
+    variables?.where?.facet
+      ? stringifyFacet('where', variables.where.facet, variables.where.id)
       : undefined,
     variables?.what?.facets?.length
-      ? variables?.what.facets.map(mapFacets('what')).join(' ')
+      ? variables?.what.facets.map(mapFacets('what', null)).join(' ')
       : undefined,
     variables?.fields?.facets?.length
-      ? variables?.fields.facets.map(mapFacets('fields')).join(' ')
+      ? variables?.fields.facets.map(mapFacets('fields', null)).join(' ')
       : undefined,
     variables?.order?.facet ? `sort:${variables?.order.facet}` : undefined,
     variables?.order?.dir ? `dir:${variables?.order.dir}` : undefined,
@@ -101,6 +106,35 @@ export const stringifyVariables = (variables: AdvancedSearchVariables) => {
   ]
 
   return strings.filter(Boolean).join(' ')
+}
+
+const getUrlPath = (variables: AdvancedSearchVariables) => {
+  let urlBase = '/search2'
+
+  if (
+    variables.where?.id &&
+    (variables.where.facet === WhereEnum.USER ||
+      variables.where.facet === WhereEnum.GROUP)
+  ) {
+    urlBase = `/${variables.where.id}/search`
+  }
+
+  if (variables.where?.id && variables.where.facet === WhereEnum.CHANNEL) {
+    urlBase = `/somethign/${variables.where.id}/search`
+  }
+
+  return urlBase
+}
+
+export const generateUrlFromVariables = (
+  variables: AdvancedSearchVariables
+) => {
+  const path = getUrlPath(variables)
+  const params = stringify(variables, {
+    arrayFormat: 'brackets',
+    encode: false,
+  })
+  return `${path}?${params}`
 }
 
 export default tokenizeSearch

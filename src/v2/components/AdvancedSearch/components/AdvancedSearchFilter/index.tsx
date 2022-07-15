@@ -33,6 +33,7 @@ export const CategoryLabel = styled(Text).attrs({
 export interface FilterProps {
   currentFilters?: WhereEnum[] | WhatEnum[] | FieldsEnum[]
   currentDisabledFilters?: AnyFilter[]
+  id?: number
   toggleFilter: (
     filter: WhereEnum | WhatEnum | FieldsEnum,
     field: 'what' | 'where' | 'fields'
@@ -48,12 +49,17 @@ export const AdvancedSearchFilter: React.FC = () => {
     AdvancedSearchContext
   )
 
+  console.log({ state })
+
   const toggleFilter = useCallback(
     (
       filter: WhereEnum | WhatEnum | FieldsEnum,
       field: 'what' | 'where' | 'fields'
     ) => {
-      const currentFilter = (state.variables[field]?.facets as any) || null
+      const currentFilter =
+        field == 'where'
+          ? state.variables[field]?.facet
+          : state.variables[field]?.facets || null
       currentFilter == filter
         ? removeFilter(field, filter)
         : addFilter(field, filter)
@@ -66,7 +72,10 @@ export const AdvancedSearchFilter: React.FC = () => {
       filter: WhereEnum | WhatEnum | FieldsEnum,
       field: 'what' | 'where' | 'fields'
     ) => {
-      const currentFilter = (state.variables[field]?.facets as any) || null
+      const currentFilter =
+        field == 'where'
+          ? state.variables[field]?.facet
+          : state.variables[field]?.facets || null
       currentFilter == WhereEnum.ALL
         ? removeFilter(field, filter)
         : setAllFilter(field)
@@ -74,12 +83,15 @@ export const AdvancedSearchFilter: React.FC = () => {
     [state, state.variables, addFilter, removeFilter]
   )
 
+  const id = state?.variables?.where?.id as any
+
   return (
     <FiltersContainer>
       <WhereFilter
+        id={id || null}
         clearAndSetAll={toggleAll}
         toggleFilter={toggleFilter}
-        currentFilters={state.variables?.where?.facets}
+        currentFilter={state.variables?.where?.facet}
         currentDisabledFilters={state.disabledFilters}
       />
       <WhatFilter

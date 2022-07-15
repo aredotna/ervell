@@ -58,7 +58,8 @@ interface CheckboxProps {
   checked: boolean
   disabled?: boolean
   className?: string
-  onChange?: (any) => void
+  onChange?: (checked: boolean) => void
+  f?: number
 }
 
 const LargeLabeledCheckbox: React.FC<CheckboxProps> = ({
@@ -67,6 +68,7 @@ const LargeLabeledCheckbox: React.FC<CheckboxProps> = ({
   className,
   children,
   onChange,
+  f = 4,
   ...props
 }) => {
   const [isChecked, setChecked] = useState(checked)
@@ -86,7 +88,7 @@ const LargeLabeledCheckbox: React.FC<CheckboxProps> = ({
           <polyline points="20 6 9 17 4 12" />
         </Icon>
       </StyledCheckbox>
-      <CheckboxLabel f={4}>{children}</CheckboxLabel>
+      <CheckboxLabel f={f}>{children}</CheckboxLabel>
     </CheckboxContainer>
   )
 }

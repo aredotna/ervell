@@ -8,12 +8,14 @@ export default gql`
 
     ... on User {
       name
+      label: name
       href
       ...ProfileBadge
     }
 
     ... on Group {
       name
+      label: name
       href
       visibility
     }

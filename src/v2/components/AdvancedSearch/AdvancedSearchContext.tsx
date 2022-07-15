@@ -1,6 +1,9 @@
-import { set } from 'lodash'
+import { merge, set } from 'lodash'
+import { parse } from 'qs'
 import React, { createContext, useCallback, useEffect, useReducer } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import tokenizeSearch, {
+  generateUrlFromVariables,
   stringifyFacet,
   stringifyOrder,
   stringifyVariables,
@@ -31,6 +34,7 @@ type Action =
       payload: {
         field: 'where' | 'what' | 'fields'
         filter: WhereEnum | WhatEnum | FieldsEnum
+        id?: string
       }
     }
   | {
@@ -39,6 +43,9 @@ type Action =
         field: 'where' | 'what' | 'fields'
         filter: WhereEnum | WhatEnum | FieldsEnum
       }
+    }
+  | {
+      type: 'RESET_ALL'
     }
   | {
       type: 'SET_ALL'
@@ -56,23 +63,32 @@ type Action =
         dir: SortDirection
       }
     }
+  | {
+      type: 'SET_VARIABLES'
+      payload: AdvancedSearchVariables
+    }
 
 const extractVariableFromStateAndPayload = (
   state: State,
   payload: {
     field: 'where' | 'what' | 'fields'
     filter?: WhereEnum | WhatEnum | FieldsEnum
+    id?: string
   }
 ) => {
-  const { field, filter } = payload
+  const { field, filter, id } = payload
   const typedFilter: any = filter ? filter : null
   const variables = { ...state.variables }
-  const existingFacet: any = variables[field]?.facets || null
+  const existingFacet: any =
+    field === 'where'
+      ? variables[field]?.facet
+      : variables[field]?.facets || null
   return {
     field,
     filter: typedFilter,
     variables,
     existingFacet,
+    id,
   }
 }
 
@@ -83,14 +99,18 @@ const ReducerMethodMap = {
       filter,
       variables,
       existingFacet,
+      id,
     } = extractVariableFromStateAndPayload(state, action.payload)
     const newValue = filter as WhereEnum
+    const facetKey = field === 'where' ? 'facet' : 'facets'
 
-    set(variables, `${field}.facets`, newValue)
+    set(variables, `${field}.${facetKey}`, newValue)
+    if (id) set(variables, `${field}.id`, id)
+
     const regex = new RegExp(`(\\s)${field}:(\\S*)`, 'gm')
     const query = existingFacet
       ? state.query.replace(regex, ` ${stringifyFacet(field, filter)}`)
-      : `${state.query} ${stringifyFacet(field, filter)}`
+      : `${state.query} ${stringifyFacet(field, filter, id)} `
 
     const disabledFilters = calculatedDisabledFilters(variables, query)
 
@@ -111,14 +131,24 @@ const ReducerMethodMap = {
     return { ...state, query, variables, disabledFilters }
   },
 
+  RESET_ALL: (state: State) => {
+    const variables = {}
+    const query = ''
+    const disabledFilters = calculatedDisabledFilters(variables, query)
+
+    return { ...state, query, variables, disabledFilters }
+  },
+
   SET_ALL: (state: State, action: any) => {
     const { field, variables } = extractVariableFromStateAndPayload(
       state,
       action.payload
     )
 
-    const newValue = [FieldsEnum.ALL]
-    set(variables, `${field}.facets`, newValue)
+    const newValue = field === 'where' ? FieldsEnum.ALL : [FieldsEnum.ALL]
+    const facetKey = field === 'where' ? 'facet' : 'facets'
+
+    set(variables, `${field}.${facetKey}`, newValue)
     const regex = new RegExp(`(\\s)${field}:(\\S*)`, 'gm')
     const query = state.query.replace(regex, '')
 
@@ -133,12 +163,24 @@ const ReducerMethodMap = {
   },
 
   QUERY_CHANGE: (state: State, action: any) => {
-    const variables = tokenizeSearch(action.payload)
+    const variables = merge(state.variables, tokenizeSearch(action.payload))
+
     return {
       ...state,
       query: action.payload,
       variables,
       disabledFilters: calculatedDisabledFilters(variables, action.payload),
+    }
+  },
+
+  SET_VARIABLES: (state: State, action: any) => {
+    const newVariables = action.payload
+
+    return {
+      ...state,
+      variables: newVariables,
+      query: stringifyVariables(newVariables),
+      disabledFilters: calculatedDisabledFilters(state.variables, newVariables),
     }
   },
 
@@ -184,6 +226,8 @@ const reducer = (state: State, action: Action) => {
     case 'SET_ALL':
     case 'QUERY_CHANGE':
     case 'SET_ORDER':
+    case 'SET_VARIABLES':
+    case 'RESET_ALL':
       return ReducerMethodMap[action.type](state, action)
     case 'TOGGLE_ALL_BLOCKS':
       return state
@@ -195,7 +239,8 @@ const reducer = (state: State, action: Action) => {
 interface AdvancedSearchContextType {
   addFilter: (
     field: 'where' | 'what' | 'fields',
-    filter: WhereEnum | WhatEnum | FieldsEnum
+    filter: WhereEnum | WhatEnum | FieldsEnum,
+    id?: string
   ) => void
   removeFilter: (
     field: 'where' | 'what' | 'fields',
@@ -203,7 +248,9 @@ interface AdvancedSearchContextType {
   ) => void
   setAllFilter: (field: 'where' | 'what' | 'fields') => void
   setOrder: (facet: SortOrderEnum, dir: SortDirection) => void
+  resetAll: () => void
   updateQuery: (query: string) => void
+  generateUrl: () => string
   state: State
 }
 
@@ -213,6 +260,8 @@ export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
   updateQuery: () => {},
   setAllFilter: () => {},
   setOrder: () => {},
+  generateUrl: () => '',
+  resetAll: () => {},
   state: {
     query: '',
     variables: {},
@@ -227,23 +276,34 @@ interface AdvancedSearchContextProps {
 }
 
 export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps> = ({
-  variables,
   onVariablesChange,
   onQueryChange,
   children,
 }) => {
+  const [searchParams] = useSearchParams()
+  // const { search } = useLocation()
+  const parsedVariables = parse(searchParams.toString())
+  const where = parsedVariables.where as any
+  const page = parsedVariables.page as any
+  const per = parsedVariables.per as any
+
+  set(parsedVariables, 'where.id', where?.id)
+  set(parsedVariables, 'page', parseInt(page))
+  set(parsedVariables, 'per', parseInt(per))
+
   const [state, dispatch] = useReducer(reducer, {
-    query: stringifyVariables(variables),
-    variables: variables || {},
+    query: stringifyVariables(parsedVariables),
+    variables: parsedVariables || {},
     disabledFilters: [],
   })
 
   const addFilter = useCallback(
     (
       field: 'where' | 'what' | 'fields',
-      filter: WhereEnum | WhatEnum | FieldsEnum
+      filter: WhereEnum | WhatEnum | FieldsEnum,
+      id?: string
     ) => {
-      dispatch({ type: 'ADD_FILTER', payload: { field, filter } })
+      dispatch({ type: 'ADD_FILTER', payload: { field, filter, id } })
     },
     []
   )
@@ -270,6 +330,14 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     dispatch({ type: 'QUERY_CHANGE', payload: query })
   }, [])
 
+  const resetAll = useCallback(() => {
+    dispatch({ type: 'RESET_ALL' })
+  }, [])
+
+  const generateUrl = useCallback(() => {
+    return generateUrlFromVariables(state.variables)
+  }, [state, state.variables])
+
   useEffect(() => {
     if (onVariablesChange) {
       onVariablesChange(state.variables)
@@ -282,6 +350,19 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     }
   }, [state.query])
 
+  // useEffect(() => {
+  //   const parsedVariables = parse(search)
+  //   const where = parsedVariables.where as any
+  //   const page = parsedVariables.page as any
+  //   const per = parsedVariables.per as any
+
+  //   set(parsedVariables, 'where.id', parseInt(where?.id))
+  //   set(parsedVariables, 'page', parseInt(page))
+  //   set(parsedVariables, 'per', parseInt(per))
+
+  //   dispatch({ type: 'SET_VARIABLES', payload: parsedVariables })
+  // }, [search])
+
   return (
     <AdvancedSearchContext.Provider
       value={{
@@ -291,6 +372,8 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
         updateQuery,
         setAllFilter,
         setOrder,
+        generateUrl,
+        resetAll,
       }}
     >
       {children}

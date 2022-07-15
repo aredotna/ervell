@@ -16,6 +16,7 @@ interface PrimarySearchResultsProps {
   cursor: number
   onSelection: (href) => void
   onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  showAllResultsLink?: boolean
 }
 
 const PrimarySearchResults: React.FC<PrimarySearchResultsProps> = ({
@@ -24,6 +25,7 @@ const PrimarySearchResults: React.FC<PrimarySearchResultsProps> = ({
   cursor = null,
   onSelection = () => {},
   onClick,
+  showAllResultsLink = true,
 }) => {
   const selectResult = result => {
     if (result) return onSelection(result.href)
@@ -73,7 +75,7 @@ const PrimarySearchResults: React.FC<PrimarySearchResultsProps> = ({
         />
       ))}
 
-      {results.length > 0 && (
+      {results.length > 0 && showAllResultsLink && (
         <PrimarySearchResult
           to={`/search/${encodeURIComponent(query)}`}
           selected={selected === results.length}
