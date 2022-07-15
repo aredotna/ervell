@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 import ColoredChannelLink from 'v2/components/UI/ColoredChannelLink'
 import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
@@ -21,6 +21,15 @@ interface ChannelBreadcrumbProps {
 export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
   channel,
 }) => {
+  const [params] = useSearchParams()
+  const pathname = location.pathname
+
+  const showBadge = !/search$/.test(pathname)
+
+  const searchTerm = params.get('term[facet]')
+  const searchLabel = searchTerm
+    ? `Search results for '${searchTerm}'`
+    : 'All results'
   return (
     <StickyBreadcrumbPath>
       {({ mode }) => [
@@ -62,9 +71,16 @@ export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
               }[mode]
             }
           </ColoredChannelLink>
-          {channel.visibility === 'private' && <BorderedLock ml={3} />}
+          {channel.visibility === 'private' && showBadge && (
+            <BorderedLock ml={3} />
+          )}
         </StickyBreadcrumbPath.Crumb>,
+
+        /search$/.test(pathname) && (
+          <StickyBreadcrumbPath.Crumb>{searchLabel}</StickyBreadcrumbPath.Crumb>
+        ),
       ]}
+      {}
     </StickyBreadcrumbPath>
   )
 }

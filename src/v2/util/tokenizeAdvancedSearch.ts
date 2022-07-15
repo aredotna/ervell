@@ -26,7 +26,7 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
   const whereTokens = colonTokenPairs
     .filter(token => token.key === 'where')
     .map(token => WhereEnum[token.value.toUpperCase()])
-    .filter(Boolean) as WhereEnum[]
+    .filter(Boolean)[0] as WhereEnum | undefined
   const whatTokens = colonTokenPairs
     .filter(token => token.key === 'what')
     .map(token => WhatEnum[token.value.toUpperCase()])
@@ -52,7 +52,7 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
 
   const variables = {
     term: term === '' ? null : { facet: term },
-    where: whereTokens.length ? { facets: whereTokens } : undefined,
+    where: whereTokens ? { facet: whereTokens } : undefined,
     what: whatTokens.length ? { facets: whatTokens } : undefined,
     fields: fieldsTokens.length ? { facets: fieldsTokens } : undefined,
     order: sortToken ? { facet: sortToken, dir: directionToken } : undefined,
