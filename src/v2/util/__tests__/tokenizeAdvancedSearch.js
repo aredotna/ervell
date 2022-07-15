@@ -9,19 +9,19 @@ describe('tokenizeSearch', () => {
 
   it('should split out valid tokens with : into key/value pairs', () => {
     const query =
-      'hello world where:following where:my what:image what:text fields:domain fields:url'
+      'hello world where:my what:image what:text fields:domain fields:url'
     const tokens = tokenizeSearch(query)
     expect(tokens.term).toEqual({ facet: 'hello world' })
-    expect(tokens.where).toEqual({ facets: ['FOLLOWING', 'MY'] })
+    expect(tokens.where).toEqual({ facet: 'MY' })
     expect(tokens.what).toEqual({ facets: ['IMAGE', 'TEXT'] })
     expect(tokens.fields).toEqual({ facets: ['DOMAIN', 'URL'] })
   })
 
   it('should ignore invalid tokens', () => {
-    const query = 'hello world where:following where:my where:foo'
+    const query = 'hello world where:my where:nothing'
     const tokens = tokenizeSearch(query)
     expect(tokens.term).toEqual({ facet: 'hello world' })
-    expect(tokens.where).toEqual({ facets: ['FOLLOWING', 'MY'] })
+    expect(tokens.where).toEqual({ facet: 'MY' })
   })
 
   it('should filter out key value pairs that do not correspond to anything', () => {
