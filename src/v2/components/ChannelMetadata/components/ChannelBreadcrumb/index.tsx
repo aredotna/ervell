@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 
 import ColoredChannelLink from 'v2/components/UI/ColoredChannelLink'
 import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
@@ -22,6 +22,7 @@ export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
   channel,
 }) => {
   const [params] = useSearchParams()
+  const location = useLocation()
   const pathname = location?.pathname
 
   const showBadge = !/search$/.test(pathname)
