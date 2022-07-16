@@ -22,7 +22,7 @@ export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
   channel,
 }) => {
   const [params] = useSearchParams()
-  const pathname = location.pathname
+  const pathname = location?.pathname
 
   const showBadge = !/search$/.test(pathname)
 
