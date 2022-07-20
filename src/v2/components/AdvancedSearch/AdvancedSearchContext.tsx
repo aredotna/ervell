@@ -1,4 +1,5 @@
-import { merge, set } from 'lodash'
+import { set } from 'lodash'
+import { merge } from 'merge-anything'
 import { parse } from 'qs'
 import React, { createContext, useCallback, useEffect, useReducer } from 'react'
 import { useSearchParams } from 'react-router-dom'
@@ -25,6 +26,7 @@ export interface State {
   query: string
   variables: AdvancedSearchVariables
   disabledFilters: AnyFilter[]
+  mode: 'full' | 'quick'
 }
 
 type Action =
@@ -92,7 +94,7 @@ const extractVariableFromStateAndPayload = (
   }
 }
 
-const ReducerMethodMap = {
+export const ReducerMethodMap = {
   ADD_FILTER: (state: State, action: any) => {
     const {
       field,
@@ -114,7 +116,9 @@ const ReducerMethodMap = {
 
     const disabledFilters = calculatedDisabledFilters(variables, query)
 
-    return { query, variables, disabledFilters }
+    console.log('ADD_FILTER', { variables })
+
+    return { query, variables, disabledFilters, mode: state.mode }
   },
 
   REMOVE_FILTER: (state: State, action: any) => {
@@ -163,7 +167,10 @@ const ReducerMethodMap = {
   },
 
   QUERY_CHANGE: (state: State, action: any) => {
-    const variables = merge(state.variables, tokenizeSearch(action.payload))
+    const variables = merge(state.variables, tokenizeSearch(action.payload), {
+      page: null,
+      per: null,
+    })
 
     return {
       ...state,
@@ -250,7 +257,7 @@ interface AdvancedSearchContextType {
   setOrder: (facet: SortOrderEnum, dir: SortDirection) => void
   resetAll: () => void
   updateQuery: (query: string) => void
-  generateUrl: () => string
+  generateUrl: (paramsOnly?: boolean, basePath?: string) => string
   state: State
 }
 
@@ -266,6 +273,7 @@ export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
     query: '',
     variables: {},
     disabledFilters: [],
+    mode: 'quick',
   },
 })
 
@@ -282,19 +290,22 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
 }) => {
   const [searchParams] = useSearchParams()
   // const { search } = useLocation()
-  const parsedVariables = parse(searchParams.toString())
+  const parsedVariables = parse(searchParams.toString(), {
+    ignoreQueryPrefix: true,
+  })
   const where = parsedVariables.where as any
   const page = parsedVariables.page as any
   const per = parsedVariables.per as any
 
   set(parsedVariables, 'where.id', where?.id)
-  set(parsedVariables, 'page', parseInt(page))
-  set(parsedVariables, 'per', parseInt(per))
+  if (parseInt(page)) set(parsedVariables, 'page', parseInt(page))
+  if (parseInt(per)) set(parsedVariables, 'per', parseInt(per))
 
   const [state, dispatch] = useReducer(reducer, {
     query: stringifyVariables(parsedVariables),
     variables: parsedVariables || {},
     disabledFilters: [],
+    mode: 'quick',
   })
 
   const addFilter = useCallback(
@@ -334,9 +345,12 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     dispatch({ type: 'RESET_ALL' })
   }, [])
 
-  const generateUrl = useCallback(() => {
-    return generateUrlFromVariables(state.variables)
-  }, [state, state.variables])
+  const generateUrl = useCallback(
+    (paramsOnly?: boolean, basePath?: string) => {
+      return generateUrlFromVariables(state.variables, paramsOnly, basePath)
+    },
+    [state, state.variables]
+  )
 
   useEffect(() => {
     if (onVariablesChange) {
@@ -349,19 +363,6 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
       onQueryChange(state.query)
     }
   }, [state.query])
-
-  // useEffect(() => {
-  //   const parsedVariables = parse(search)
-  //   const where = parsedVariables.where as any
-  //   const page = parsedVariables.page as any
-  //   const per = parsedVariables.per as any
-
-  //   set(parsedVariables, 'where.id', parseInt(where?.id))
-  //   set(parsedVariables, 'page', parseInt(page))
-  //   set(parsedVariables, 'per', parseInt(per))
-
-  //   dispatch({ type: 'SET_VARIABLES', payload: parsedVariables })
-  // }, [search])
 
   return (
     <AdvancedSearchContext.Provider

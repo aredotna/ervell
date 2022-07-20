@@ -77,7 +77,7 @@ export const WhatFilter: React.FC<FilterProps> = ({
       toggleFilter(filter, field)
       setMode('resting')
     },
-    [setMode, toggleFilter]
+    [setMode, toggleFilter, currentDisabledFilters]
   )
 
   const updateProps = {

@@ -8,7 +8,7 @@ import {
   WhereEnum,
 } from '__generated__/globalTypes'
 
-import { pickBy } from 'lodash'
+import { isArray, isEmpty, omit, pickBy } from 'lodash'
 
 export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
   const tokens = search.split(/\s+/)
@@ -71,7 +71,7 @@ export const stringifyFacet = (
   if (field === 'where' && id) {
     return `${filter.toLowerCase()}:${id}`
   }
-  return `${field}:${filter.toLowerCase()}`
+  return `${field}:${filter?.toLowerCase()}`
 }
 
 const mapFacets = function(type, id) {
@@ -87,22 +87,35 @@ export const stringifyOrder = (
   return `sort:${order.toLowerCase()} dir:${direction.toLocaleLowerCase()}`
 }
 
+export const stringifyVariable = (
+  variables: AdvancedSearchVariables,
+  field
+) => {
+  const value = variables[field]?.facets
+  // if this is an array and not empty, map over it
+  if (isArray(value) && !isEmpty(value)) {
+    return value.map(mapFacets('fields', null)).join(' ')
+  }
+
+  // if this is a string and not empty, return it's strinified value
+  if (typeof value === 'string' && value !== '') {
+    return stringifyFacet(field, value as any)
+  }
+
+  return null
+}
+
 export const stringifyVariables = (variables: AdvancedSearchVariables) => {
   const strings = [
     variables?.term?.facet ? `${variables?.term.facet}` : undefined,
     variables?.where?.facet
       ? stringifyFacet('where', variables.where.facet, variables.where.id)
       : undefined,
-    variables?.what?.facets?.length
-      ? variables?.what.facets.map(mapFacets('what', null)).join(' ')
+    stringifyVariable(variables, 'what'),
+    stringifyVariable(variables, 'fields'),
+    variables?.order
+      ? stringifyOrder(variables.order.facet, variables.order.dir)
       : undefined,
-    variables?.fields?.facets?.length
-      ? variables?.fields.facets.map(mapFacets('fields', null)).join(' ')
-      : undefined,
-    variables?.order?.facet ? `sort:${variables?.order.facet}` : undefined,
-    variables?.order?.dir ? `dir:${variables?.order.dir}` : undefined,
-    variables?.per ? `per:${variables?.per}` : undefined,
-    variables?.page ? `page:${variables?.page}` : undefined,
   ]
 
   return strings.filter(Boolean).join(' ')
@@ -127,13 +140,21 @@ const getUrlPath = (variables: AdvancedSearchVariables) => {
 }
 
 export const generateUrlFromVariables = (
-  variables: AdvancedSearchVariables
+  variables: AdvancedSearchVariables,
+  paramsOnly?: boolean,
+  basePath?: string
 ) => {
-  const path = getUrlPath(variables)
-  const params = stringify(variables, {
+  const path =
+    basePath !== '/' && basePath ? `${basePath}/search` : getUrlPath(variables)
+  const params = stringify(omit(variables, ['page', 'per']), {
     arrayFormat: 'brackets',
     encode: false,
   })
+
+  if (paramsOnly) {
+    return params
+  }
+
   return `${path}?${params}`
 }
 
