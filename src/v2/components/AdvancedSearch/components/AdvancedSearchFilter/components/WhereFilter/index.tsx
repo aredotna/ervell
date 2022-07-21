@@ -31,11 +31,13 @@ export const WhereFilterOption: React.FC<WhereFilterOptionProps> = ({
 }) => {
   const isDisabled = currentDisabledFilters?.includes(filter)
   const isSelected = filter && currentFilter === filter
+
   const onClick = useCallback(() => {
     if (!isDisabled) {
       toggleFilter(filter, field)
     }
   }, [toggleFilter, currentDisabledFilters])
+
   return (
     <FilterLabelContainer
       disabled={isDisabled}

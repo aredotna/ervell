@@ -44,12 +44,19 @@ export interface FilterProps {
   ) => void
 }
 
-export const AdvancedSearchFilter: React.FC = () => {
+interface AdvancedSearchFilterProps {
+  onToggleFilter?: (
+    filter?: WhereEnum | WhatEnum | FieldsEnum,
+    field?: 'what' | 'where' | 'fields'
+  ) => void
+}
+
+export const AdvancedSearchFilter: React.FC<AdvancedSearchFilterProps> = ({
+  onToggleFilter,
+}) => {
   const { state, addFilter, removeFilter, setAllFilter } = useContext(
     AdvancedSearchContext
   )
-
-  console.log({ state })
 
   const toggleFilter = useCallback(
     (
@@ -63,8 +70,12 @@ export const AdvancedSearchFilter: React.FC = () => {
       currentFilter == filter
         ? removeFilter(field, filter)
         : addFilter(field, filter)
+
+      if (onToggleFilter) {
+        onToggleFilter(filter, field)
+      }
     },
-    [state, state.variables, addFilter, removeFilter]
+    [state, state.variables, addFilter, removeFilter, onToggleFilter]
   )
 
   const toggleAll = useCallback(
