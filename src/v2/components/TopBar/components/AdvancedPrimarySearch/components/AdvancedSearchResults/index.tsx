@@ -1,5 +1,8 @@
 import { useLazyQuery } from '@apollo/client'
-import React, { useCallback, useContext, useEffect } from 'react'
+import { merge } from 'merge-anything'
+import React, { useCallback, useContext } from 'react'
+import { useLocation } from 'react-router'
+import useDeepCompareEffect from 'use-deep-compare-effect'
 import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 
 import PrimarySearchResult from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults/PrimarySearchResult'
@@ -31,6 +34,7 @@ export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsConta
   includeOriginalResults = true,
 }) => {
   const { state, generateUrl } = useContext(AdvancedSearchContext)
+  const { pathname } = useLocation()
 
   const term = state.variables.term?.facet
 
@@ -53,7 +57,7 @@ export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsConta
       )}
       {
         <PrimarySearchResult
-          to={generateUrl()}
+          to={generateUrl(false, pathname)}
           selected={true}
           bg="gray.semiLight"
           pl={ICON_OFFSET}
@@ -67,6 +71,12 @@ export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsConta
 
 interface AdvancedSearchResultsProps {
   variables: AdvancedSearchVariables
+}
+
+const DEFAULTS: AdvancedSearchVariables = {
+  page: 1,
+  per: 6,
+  what: { facets: [WhatEnum.CHANNEL, WhatEnum.GROUP, WhatEnum.USER] },
 }
 
 export const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
@@ -83,15 +93,10 @@ export const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
     resetAll()
   }, [])
 
-  useEffect(() => {
-    performSearch({
-      variables: {
-        ...variables,
-        per: 6,
-        what: { facets: [WhatEnum.CHANNEL, WhatEnum.GROUP, WhatEnum.USER] },
-      },
-    })
-  }, [variables, variables.term.facet])
+  useDeepCompareEffect(() => {
+    const mergedVariables = merge(DEFAULTS, variables, { per: 10, page: 1 })
+    performSearch({ variables: mergedVariables })
+  }, [variables])
 
   if (called && loading) {
     return (
@@ -111,7 +116,7 @@ export const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
     )
   }
 
-  const results = called && data.searches.advanced.results
+  const results = called && data?.searches.advanced.results
 
   return (
     <>

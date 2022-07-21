@@ -74,7 +74,7 @@ export const AdvancedSearchResultsGrid: React.FC = () => {
     return <BlocksLoadingIndicator />
   }
 
-  const contents = data.searches?.advanced.results
+  const contents = data?.searches?.advanced.results || []
 
   return (
     <div>

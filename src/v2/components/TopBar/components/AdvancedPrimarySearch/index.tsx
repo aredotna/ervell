@@ -12,7 +12,7 @@ import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSear
 import Text from 'v2/components/UI/Text'
 import constants from 'v2/styles/constants'
 import { WhereEnum } from '__generated__/globalTypes'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { overflowScrolling } from 'v2/styles/mixins'
 import { AdvancedSearchResultsContainer } from './components/AdvancedSearchResults'
 import LargeLabeledCheckbox from 'v2/components/UI/Inputs/components/LargeLabelledCheckbox'
@@ -65,6 +65,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
 }> = ({ scheme, flex, ...rest }) => {
   const { page } = useContext(PageContext)
   const navigate = useNavigate()
+  const location = useLocation()
   const { state, updateQuery, addFilter, generateUrl } = useContext(
     AdvancedSearchContext
   )
@@ -93,7 +94,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const handleKeyDown = useCallback(
     ({ key }) => {
       if (key === 'Enter') {
-        navigate(generateUrl())
+        navigate(generateUrl(false, location.pathname))
       }
     },
     [navigate, state]
@@ -161,7 +162,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
         }}
       />
 
-      {mode === 'resting' && !includeOriginalResults && (
+      {mode === 'resting' && !state.query && !includeOriginalResults && (
         <ContextButtonContainer>
           <ContextButton onClick={onSearchButtonClick}>
             Search Are.na

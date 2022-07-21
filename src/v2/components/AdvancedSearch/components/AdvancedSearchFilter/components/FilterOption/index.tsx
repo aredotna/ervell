@@ -70,11 +70,13 @@ export const FilterOption: React.FC<FilterOptionProps> = ({
   const typedCurrentFilter: any[] = currentFilters ? currentFilters : []
   const isDisabled = currentDisabledFilters?.includes(filter)
   const isSelected = filter && typedCurrentFilter?.includes(filter)
+
   const onClick = useCallback(() => {
     if (!isDisabled) {
       toggleFilter(filter, field)
     }
   }, [toggleFilter, currentDisabledFilters])
+
   return (
     <FilterContainer
       disabled={isDisabled}

@@ -51,12 +51,12 @@ export default class HeaderMetadataContainer extends PureComponent {
   }
 
   render() {
-    const { breadcrumb, actions, children, pre, post, ...rest } = this.props
+    const { breadcrumb, actions, children, pre, post, mb, ...rest } = this.props
 
     return (
       <Box
         mt={constants.containerOffset}
-        mb={children ? 7 : null}
+        mb={children ? 7 : mb || null}
         mx="auto"
         {...rest}
       >

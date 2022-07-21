@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router'
 
 import HeaderMetadataContainer from 'v2/components/UI/HeaderMetadata/HeaderMetadataContainer'
 import { ChannelBreadcrumb } from 'v2/components/ChannelMetadata/components/ChannelBreadcrumb'
 import { ChannelSearchPage_channel } from '__generated__/ChannelSearchPage'
 import AdvancedSearchFilter from 'v2/components/AdvancedSearch/components/AdvancedSearchFilter'
+import Box from 'v2/components/UI/Box'
+import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
+import { generateUrlFromVariables } from 'v2/util/tokenizeAdvancedSearch'
 
 interface ChannelMetadataProps {
   channel: ChannelSearchPage_channel
@@ -15,13 +19,29 @@ export const ChannelSearchMetadata: React.FC<ChannelMetadataProps> = ({
   view,
   ...rest
 }) => {
+  const navigate = useNavigate()
+  const { state } = useContext(AdvancedSearchContext)
+
+  useEffect(() => {
+    navigate(generateUrlFromVariables(state.variables), { replace: true })
+  }, [
+    state.variables.where?.facet,
+    state.variables.what?.facets,
+    state.variables.fields?.facets,
+    state.variables.order?.facet,
+    state.variables.order?.dir,
+  ])
+
   return (
-    <HeaderMetadataContainer
-      breadcrumb={<ChannelBreadcrumb channel={channel} />}
-      {...rest}
-    >
-      <AdvancedSearchFilter />
-    </HeaderMetadataContainer>
+    <Box mb={9}>
+      <HeaderMetadataContainer
+        breadcrumb={<ChannelBreadcrumb channel={channel} />}
+        mb={9}
+        {...rest}
+      >
+        <AdvancedSearchFilter />
+      </HeaderMetadataContainer>
+    </Box>
   )
 }
 
