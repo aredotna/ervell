@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { FocusEvent, PureComponent } from 'react'
 import styled from 'styled-components'
 import { isEmpty, debounce, pick, omit } from 'underscore'
 import Mousetrap from 'mousetrap'
@@ -41,7 +41,7 @@ interface Props extends BoxProps {
   forwardedRef?: any
   globallyFocusOnKey?: string
   iconMap?: IconMap
-  onBlur?: () => any
+  onBlur?: (e: FocusEvent<Element>) => any
   onDebouncedQueryChange?: (props: any) => any
   onFocus?: () => any
   onQueryChange?: (props: any) => any
@@ -150,8 +150,8 @@ class SearchInput extends PureComponent<Props, State> {
     this.setState({ mode: 'focus' })
   }
 
-  handleBlur = () => {
-    this.props.onBlur()
+  handleBlur = (e: FocusEvent) => {
+    this.props.onBlur(e)
     if (this.state.mode === 'active') return
     this.setState({ mode: 'resting' })
   }
