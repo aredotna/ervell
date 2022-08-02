@@ -1,4 +1,10 @@
-import React, { useCallback, useContext, useRef, useState } from 'react'
+import React, {
+  FocusEvent,
+  useCallback,
+  useContext,
+  useRef,
+  useState,
+} from 'react'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
@@ -16,6 +22,7 @@ import { useLocation, useNavigate } from 'react-router'
 import { overflowScrolling } from 'v2/styles/mixins'
 import { AdvancedSearchResultsContainer } from './components/AdvancedSearchResults'
 import LargeLabeledCheckbox from 'v2/components/UI/Inputs/components/LargeLabelledCheckbox'
+import { AdvancedSearchFilter } from './components/AdvancedSearchFilter'
 
 const Container = styled(Box)`
   position: relative;
@@ -83,13 +90,25 @@ const AdvancedPrimarySearchContainer: React.FC<{
     setMode('focus')
   }, [mode, setMode])
 
-  const handleBlur = useCallback(() => {
+  const handleBlur = useCallback(
+    (e: FocusEvent<Element>) => {
+      console.log({ e })
+      // if (state.query) {
+      //   setMode('blur')
+      //   return
+      // }
+      // setMode('resting')
+    },
+    [state, mode, setMode]
+  )
+
+  const onClose = useCallback(() => {
     if (state.query) {
       setMode('blur')
       return
     }
     setMode('resting')
-  }, [state, mode, setMode])
+  }, [])
 
   const handleKeyDown = useCallback(
     ({ key }) => {
@@ -114,6 +133,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
 
   const onSearchButtonClick = useCallback(() => {
     searchInputRef.current.focus()
+    setMode('focus')
   }, [])
 
   const onContextButtonClick = useCallback(() => {
@@ -199,8 +219,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
       </DevCheckbox>
 
       {mode != 'blur' && mode != 'resting' && (
-        <Overlay targetEl={() => searchRef.current} fullWidth>
+        <Overlay targetEl={() => searchRef.current} onClose={onClose} fullWidth>
           <Results>
+            <AdvancedSearchFilter />
             <AdvancedSearchResultsContainer
               includeOriginalResults={includeOriginalResults}
             />

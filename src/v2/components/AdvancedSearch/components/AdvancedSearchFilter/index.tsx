@@ -57,7 +57,6 @@ export const AdvancedSearchFilter: React.FC<AdvancedSearchFilterProps> = ({
   const { state, addFilter, removeFilter, setAllFilter } = useContext(
     AdvancedSearchContext
   )
-
   const toggleFilter = useCallback(
     (
       filter: WhereEnum | WhatEnum | FieldsEnum,
