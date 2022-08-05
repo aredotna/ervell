@@ -49,6 +49,7 @@ import Channel from 'v2/components/UI/Icons/Channel.svg'
 import CircleFilled from 'v2/components/UI/Icons/CircleFilled.svg'
 import CircleOutline from 'v2/components/UI/Icons/CircleOutline.svg'
 import CloseEx from 'v2/components/UI/Icons/CloseIcon.svg'
+import Caret from 'v2/components/UI/Icons/Caret.svg'
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -95,6 +96,7 @@ export const COMPONENTS = {
   CircleFilled: <CircleFilled />,
   CircleOutline: <CircleOutline />,
   Close: <CloseEx />,
+  Caret: <Caret />,
 }
 
 export const ICON_NAMES = Object.keys(COMPONENTS)

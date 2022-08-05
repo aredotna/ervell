@@ -135,7 +135,11 @@ export const PrimarySearchResult: React.FC<PrimarySearchResultProps &
     )
   }
 
-  return <Container {...rest}>{children}</Container>
+  return (
+    <Container selected={selected} {...rest}>
+      {children}
+    </Container>
+  )
 }
 
 export default PrimarySearchResult
