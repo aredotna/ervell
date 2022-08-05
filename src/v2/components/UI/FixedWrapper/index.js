@@ -8,7 +8,7 @@ const FixedWrapper = styled(Box)`
   ${props => props.bottom && 'bottom: 0;'}
   right: 0;
   left: 0;
-  z-index: 1;
+  z-index: ${props => props.zIndex || 1};
 `
 
 FixedWrapper.defaultProps = {

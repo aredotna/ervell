@@ -9,7 +9,16 @@ import Box, { BoxProps } from 'v2/components/UI/Box'
 import Icons from 'v2/components/UI/Icons'
 import { Input } from 'v2/components/UI/Inputs'
 
-const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'flex']
+export const OUTER_PROPS_KEYS = [
+  'm',
+  'mt',
+  'mr',
+  'mb',
+  'ml',
+  'mx',
+  'my',
+  'flex',
+]
 
 export const ICON_OFFSET = '3.125em'
 
@@ -29,7 +38,7 @@ const Icon = styled.div`
   cursor: pointer;
 `
 
-interface IconMap {
+export interface IconMap {
   active: string
   focus: string
   hover: string

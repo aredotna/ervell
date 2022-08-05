@@ -35,6 +35,7 @@ export const FilterLabel = styled(Text).attrs({
   lineHeight: 1.5,
   fontWeight: 'bold',
 })`
+  cursor: pointer;
   ${props =>
     props.active &&
     `
