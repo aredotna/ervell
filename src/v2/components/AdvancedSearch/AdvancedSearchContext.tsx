@@ -172,11 +172,6 @@ export const ReducerMethodMap = {
       per: null,
     })
 
-    console.log('QUERY_CHANGE', {
-      variables,
-      'tokenizeSearch(action.payload)': tokenizeSearch(action.payload),
-    })
-
     return {
       ...state,
       query: action.payload,
