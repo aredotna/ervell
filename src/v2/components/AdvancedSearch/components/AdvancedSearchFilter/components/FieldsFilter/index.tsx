@@ -18,6 +18,13 @@ export const FieldsFilter: React.FC<FilterProps> = ({
     toggleFilter,
     currentDisabledFilters,
   }
+
+  const typedCurrentFilter = currentFilters as FieldsEnum[]
+  const defaultSelected =
+    !typedCurrentFilter ||
+    typedCurrentFilter?.length === 0 ||
+    typedCurrentFilter?.includes(FieldsEnum.ALL)
+
   return (
     <FilterContainer>
       <CategoryLabel>Fields</CategoryLabel>
@@ -26,6 +33,7 @@ export const FieldsFilter: React.FC<FilterProps> = ({
         filter={FieldsEnum.ALL}
         {...updateProps}
         toggleFilter={clearAndSetAll}
+        active={defaultSelected}
       />
       <FilterOption
         currentFilters={currentFilters}

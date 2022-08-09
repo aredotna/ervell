@@ -19,6 +19,7 @@ interface OrderOptionProps {
   label: string
   currentOrder?: Order
   disabledFilters: AnyFilter[]
+  active?: boolean
 }
 
 const OrderOption: React.FC<OrderOptionProps> = ({
@@ -27,9 +28,11 @@ const OrderOption: React.FC<OrderOptionProps> = ({
   label,
   currentOrder,
   disabledFilters,
+  active,
 }) => {
   const { setOrder } = useContext(AdvancedSearchContext)
-  const isSelected = facet === currentOrder?.facet && dir === currentOrder?.dir
+  const isSelected =
+    active || (facet === currentOrder?.facet && dir === currentOrder?.dir)
   const isDisabled = disabledFilters.includes(facet)
 
   const onClick = useCallback(() => {
@@ -50,16 +53,19 @@ export const Orders: React.FC = () => {
 
   const currentOrder = state.variables?.order
   const disabledFilters = state.disabledFilters
+  const defaultSelected =
+    !currentOrder || currentOrder.facet === SortOrderEnum.SCORE
 
   return (
     <FilterContainer>
       <CategoryLabel>Order</CategoryLabel>
       <OrderOption
-        facet={SortOrderEnum.NAME}
+        facet={SortOrderEnum.SCORE}
         dir={SortDirection.ASC}
         label="Default"
         currentOrder={currentOrder}
         disabledFilters={disabledFilters}
+        active={defaultSelected}
       />
 
       <OrderOption
