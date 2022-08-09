@@ -135,13 +135,18 @@ export const WhatFilter: React.FC<FilterProps> = ({
     )
   }
 
+  const typedCurrentFilter = currentFilters as WhatEnum[]
+
   const blockFiltersActive = hasBlockFilters(currentFilters as WhatEnum[])
-  const blockSubtypeLabels = currentBlockFilterLabels(
-    currentFilters as WhatEnum[]
-  )
+  const blockSubtypeLabels = currentBlockFilterLabels(typedCurrentFilter)
   const blockLabel = blockFiltersActive
     ? `Blocks: ${blockSubtypeLabels}`
     : 'Blocks'
+
+  const defaultSelected =
+    !typedCurrentFilter ||
+    typedCurrentFilter?.length == 0 ||
+    typedCurrentFilter.includes(WhatEnum.ALL)
 
   return (
     <FilterContainer>
@@ -151,6 +156,7 @@ export const WhatFilter: React.FC<FilterProps> = ({
         filter={WhatEnum.ALL}
         {...updateProps}
         toggleFilter={clearAndSetAll}
+        active={defaultSelected}
       />
       <FilterOptionContainer onClick={handleOpen} active={blockFiltersActive}>
         <FilterLabel active={blockFiltersActive}>{blockLabel}</FilterLabel>

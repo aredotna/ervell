@@ -231,6 +231,7 @@ export enum SortOrderEnum {
   CREATED_AT = "CREATED_AT",
   NAME = "NAME",
   RANDOM = "RANDOM",
+  SCORE = "SCORE",
   UPDATED_AT = "UPDATED_AT",
 }
 

@@ -150,14 +150,6 @@ const AdvancedPrimarySearchContainer: React.FC<{
     }
   }, [page, addFilter, searchInputRef])
 
-  // useEffect((): void => {
-  //   if (!isEmpty(state.query)) {
-  //     setMode('active')
-  //   }
-  // }, [state.query])
-
-  console.log({ mode })
-
   return (
     <Container
       ref={containerRef}
@@ -166,7 +158,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
       onMouseLeave={handleMouseLeave}
       {...rest}
     >
-      {(mode === 'resting' || mode === 'blur') && <HomeLink />}
+      {(mode === 'resting' || mode === 'blur' || mode === 'hover') && (
+        <HomeLink />
+      )}
 
       <AdvancedSearchInput
         // globallyFocusOnKey="/"
