@@ -19,6 +19,7 @@ import { WhatEnum } from '__generated__/globalTypes'
 import PrimarySearchResults from '../../../PrimarySearch/components/PrimarySearchResults'
 import advancedSearchResultsQuery from './queries/advancedSearchResultsQuery'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
+import { isEmpty } from 'lodash'
 
 interface AdvancedSearchResultsContainerProps {
   includeOriginalResults?: boolean
@@ -45,16 +46,18 @@ export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsConta
   return (
     <>
       {includeOriginalResults && term && (
-        <PrimarySearchResults
-          query={term}
-          debouncedQuery={term}
-          cursor={null}
-          onSelection={() => {}}
-          onClick={() => {}}
-          showAllResultsLink={false}
-        />
+        <>
+          <PrimarySearchResults
+            query={term}
+            debouncedQuery={term}
+            cursor={null}
+            onSelection={() => {}}
+            onClick={() => {}}
+            showAllResultsLink={false}
+          />
+        </>
       )}
-      {!includeOriginalResults && term && (
+      {!includeOriginalResults && (
         <AdvancedSearchResultsQuery
           variables={state.variables}
           searchInputRef={searchInputRef}
@@ -85,9 +88,14 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
   >(advancedSearchResultsQuery)
 
   useDeepCompareEffect(() => {
-    const mergedVariables = merge(DEFAULTS, variables, { per: 10, page: 1 })
-    performSearch({ variables: mergedVariables })
-  }, [variables])
+    const mergedVariables = merge(DEFAULTS, variables, {
+      per: 10,
+      page: 1,
+    }) as any
+    if (mergedVariables.term?.facet && !isEmpty(mergedVariables.term?.facet)) {
+      performSearch({ variables: mergedVariables })
+    }
+  }, [variables, variables?.where?.facet])
 
   if (called && loading) {
     return (
@@ -110,6 +118,7 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
   return (
     <AdvancedSearchResults
       data={data}
+      term={variables.term?.facet}
       called={called}
       loading={loading}
       error={error}
@@ -120,6 +129,7 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
 
 interface AdvancedSearchResultsProps {
   data: AdvancedQuickSearch | null
+  term?: string
   loading: boolean
   error: ApolloError | null
   called: boolean
@@ -128,18 +138,17 @@ interface AdvancedSearchResultsProps {
 
 const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   data,
+  term,
   loading,
   error,
   called,
   searchInputRef,
 }) => {
-  const { resetAll, generateUrl, state } = useContext(AdvancedSearchContext)
+  const { resetAll, generateUrl } = useContext(AdvancedSearchContext)
   const { pathname } = useLocation()
   const navigate = useNavigate()
 
-  const term = state.variables.term?.facet
-
-  const searchLabel = term ? `See all results for "${term}"` : 'See all results'
+  const searchLabel = term ? `See all results for "${term}"` : 'See everything'
 
   const handleResultClick = useCallback(() => {
     resetAll()
@@ -195,8 +204,8 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
       )}
 
       {called &&
+        term &&
         data?.searches.advanced.results &&
-        called &&
         data?.searches.advanced.results.length > 0 &&
         data?.searches.advanced.results.map((result, _idx) => {
           if (INVALID_TYPES.includes(result.__typename)) {
@@ -219,7 +228,6 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
         key={`see_all_results_${index === maxResults - 1}`}
         to={generateUrl(false, pathname)}
         pl={ICON_OFFSET}
-        selected={index === maxResults - 1}
       >
         <Text fontWeight="bold">{searchLabel}</Text>
       </PrimarySearchResult>

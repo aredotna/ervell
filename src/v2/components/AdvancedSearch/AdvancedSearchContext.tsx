@@ -167,7 +167,7 @@ export const ReducerMethodMap = {
   },
 
   QUERY_CHANGE: (state: State, action: any) => {
-    const variables = merge(state.variables, tokenizeSearch(action.payload), {
+    const variables = merge(tokenizeSearch(action.payload), {
       page: null,
       per: null,
     })
