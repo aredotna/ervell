@@ -127,7 +127,8 @@ const getUrlPath = (variables: AdvancedSearchVariables) => {
   if (
     variables.where?.id &&
     (variables.where.facet === WhereEnum.USER ||
-      variables.where.facet === WhereEnum.GROUP)
+      variables.where.facet === WhereEnum.GROUP ||
+      variables.where.facet === WhereEnum.MY)
   ) {
     urlBase = `/${variables.where.id}/search`
   }

@@ -25,6 +25,7 @@ import FilterMenuToggle from './components/AdvancedFilterMenuToggle'
 import SearchOverlay from '../SearchOverlay'
 import AdvancedSearchInput from './components/AdvancedSearchInput'
 import { isEmpty } from 'lodash'
+import useSerializedMe from 'v2/hooks/useSerializedMe'
 
 const Container = styled(Box)`
   position: relative;
@@ -80,6 +81,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const { state, updateQuery, addFilter, resetAll } = useContext(
     AdvancedSearchContext
   )
+  const { slug: currentUserId } = useSerializedMe()
+
   const searchInputRef = useRef(null)
   const searchRef = useRef(null)
   const containerRef = useRef(null)
@@ -136,7 +139,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const onContextButtonClick = useCallback(() => {
     if (page.type === PageTypeEnum.PERSON) {
       searchInputRef.current.focus()
-      addFilter('where', WhereEnum.USER, page.id)
+      page.id === currentUserId
+        ? addFilter('where', WhereEnum.MY, currentUserId)
+        : addFilter('where', WhereEnum.USER, page.id)
     }
 
     if (page.type === PageTypeEnum.CHANNEL) {
@@ -188,11 +193,19 @@ const AdvancedPrimarySearchContainer: React.FC<{
               Search Are.na
             </ContextButton>
 
-            {page?.type === PageTypeEnum.PERSON && (
-              <ContextButton onClick={onContextButtonClick}>
-                Search this {page.type.toLowerCase()}
-              </ContextButton>
-            )}
+            {page?.type === PageTypeEnum.PERSON &&
+              page?.id !== currentUserId && (
+                <ContextButton onClick={onContextButtonClick}>
+                  Search this {page.type.toLowerCase()}
+                </ContextButton>
+              )}
+
+            {page?.type === PageTypeEnum.PERSON &&
+              page?.id == currentUserId && (
+                <ContextButton onClick={onContextButtonClick}>
+                  Search your content
+                </ContextButton>
+              )}
 
             {page?.type === PageTypeEnum.CHANNEL && (
               <ContextButton onClick={onContextButtonClick}>
