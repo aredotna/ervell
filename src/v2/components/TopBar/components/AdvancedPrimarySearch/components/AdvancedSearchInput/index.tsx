@@ -55,7 +55,7 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
   iconMap = {
     resting: null,
     blur: null,
-    hover: 'MagnifyingGlass',
+    hover: null,
     focus: 'MagnifyingGlass',
     active: 'X',
   },

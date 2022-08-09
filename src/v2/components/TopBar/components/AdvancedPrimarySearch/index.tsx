@@ -151,8 +151,16 @@ const AdvancedPrimarySearchContainer: React.FC<{
   }, [page, addFilter, searchInputRef])
 
   return (
-    <Container ref={containerRef} flex={1} {...rest}>
-      {(mode === 'resting' || mode === 'blur') && <HomeLink />}
+    <Container
+      ref={containerRef}
+      flex={1}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      {...rest}
+    >
+      {(mode === 'resting' || mode === 'blur' || mode === 'hover') && (
+        <HomeLink />
+      )}
 
       <AdvancedSearchInput
         // globallyFocusOnKey="/"
@@ -168,8 +176,6 @@ const AdvancedPrimarySearchContainer: React.FC<{
         onFocus={handleFocus}
         onBlur={handleBlur}
         onReset={resetAll}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         mode={mode}
       />
 
