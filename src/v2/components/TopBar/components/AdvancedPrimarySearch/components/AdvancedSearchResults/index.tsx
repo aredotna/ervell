@@ -87,7 +87,7 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
   useDeepCompareEffect(() => {
     const mergedVariables = merge(DEFAULTS, variables, { per: 10, page: 1 })
     performSearch({ variables: mergedVariables })
-  }, [variables])
+  }, [variables, variables?.where?.facet])
 
   if (called && loading) {
     return (
