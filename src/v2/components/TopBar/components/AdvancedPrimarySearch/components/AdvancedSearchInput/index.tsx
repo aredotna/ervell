@@ -72,6 +72,7 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
   )
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log({ 'e.target.value': e.target.value })
     setQuery(e.target.value)
     onQueryChange && onQueryChange(e.target.value)
     handleDebouncedQueryChange && handleDebouncedQueryChange(e.target.value)
