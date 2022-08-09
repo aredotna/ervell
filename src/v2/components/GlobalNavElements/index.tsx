@@ -12,6 +12,7 @@ import { GlobalNavElements as GlobalNavElementsType } from '__generated__/Global
 import useLoginStatus from 'v2/hooks/useLoginStatus'
 import { BannerEnum } from '__generated__/globalTypes'
 import MonthlyPremiumReminder from '../MonthlyPremiumBanner'
+import constants from 'v2/styles/constants'
 
 interface GlobalNavElementsProps {
   scheme: 'DEFAULT' | 'GROUP'
@@ -46,7 +47,7 @@ export const GlobalNavElements: React.FC<GlobalNavElementsProps> = ({
   const components = []
 
   components.push(
-    <FixedWrapper key="TopBar" top>
+    <FixedWrapper key="TopBar" top zIndex={constants.z.header}>
       <TopBar scheme={scheme} me={data?.me} />
     </FixedWrapper>
   )
