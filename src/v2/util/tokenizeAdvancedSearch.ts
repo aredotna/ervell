@@ -68,7 +68,7 @@ export const stringifyFacet = (
   filter: WhereEnum | WhatEnum | FieldsEnum,
   id?: string
 ) => {
-  if (field === 'where' && id) {
+  if (field === 'where' && id && filter !== 'MY') {
     return `${filter.toLowerCase()}:${id}`
   }
   return `${field}:${filter?.toLowerCase()}`
@@ -134,7 +134,7 @@ const getUrlPath = (variables: AdvancedSearchVariables) => {
   }
 
   if (variables.where?.id && variables.where.facet === WhereEnum.CHANNEL) {
-    urlBase = `/somethign/${variables.where.id}/search`
+    urlBase = `/scoped/${variables.where.id}/search`
   }
 
   return urlBase
