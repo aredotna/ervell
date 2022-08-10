@@ -148,7 +148,9 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   const { pathname } = useLocation()
   const navigate = useNavigate()
 
-  const searchLabel = term ? `See all results for "${term}"` : 'See everything'
+  const searchLabel = term
+    ? `See all ${data?.searches?.advanced.total} results for "${term}"`
+    : 'See everything'
 
   const handleResultClick = useCallback(() => {
     resetAll()
