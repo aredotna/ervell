@@ -10,14 +10,17 @@ export enum PageTypeEnum {
 export type PageType =
   | {
       type: PageTypeEnum.CHANNEL
+      name?: string
       id: string
     }
   | {
       type: PageTypeEnum.GROUP
+      name?: string
       id: string
     }
   | {
       type: PageTypeEnum.PERSON
+      name?: string
       id: string
     }
   | {
