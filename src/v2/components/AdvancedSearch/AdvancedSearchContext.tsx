@@ -1,4 +1,4 @@
-import { set } from 'lodash'
+import { isEmpty, set } from 'lodash'
 import { merge } from 'merge-anything'
 import { parse } from 'qs'
 import React, { createContext, useCallback, useEffect, useReducer } from 'react'
@@ -27,6 +27,7 @@ export interface State {
   variables: AdvancedSearchVariables
   disabledFilters: AnyFilter[]
   mode: 'full' | 'quick'
+  total: number
 }
 
 type Action =
@@ -68,6 +69,10 @@ type Action =
   | {
       type: 'SET_VARIABLES'
       payload: AdvancedSearchVariables
+    }
+  | {
+      type: 'SET_TOTAL'
+      payload: number
     }
 
 const extractVariableFromStateAndPayload = (
@@ -116,9 +121,13 @@ export const ReducerMethodMap = {
 
     const disabledFilters = calculatedDisabledFilters(variables, query)
 
-    console.log('ADD_FILTER', { variables })
-
-    return { query, variables, disabledFilters, mode: state.mode }
+    return {
+      query,
+      variables,
+      disabledFilters,
+      mode: state.mode,
+      total: state.total,
+    }
   },
 
   REMOVE_FILTER: (state: State, action: any) => {
@@ -167,10 +176,17 @@ export const ReducerMethodMap = {
   },
 
   QUERY_CHANGE: (state: State, action: any) => {
-    const variables = merge(tokenizeSearch(action.payload), {
+    let variables
+    let newVariables = tokenizeSearch(action.payload)
+
+    variables = merge(state.variables, newVariables, {
       page: null,
       per: null,
     })
+
+    if (isEmpty(newVariables.term?.facet)) {
+      delete variables.term.facet
+    }
 
     return {
       ...state,
@@ -224,6 +240,10 @@ export const ReducerMethodMap = {
       variables,
     }
   },
+
+  SET_TOTAL: (state: State, action: any) => {
+    return { ...state, total: action.payload }
+  },
 }
 
 const reducer = (state: State, action: Action) => {
@@ -235,6 +255,7 @@ const reducer = (state: State, action: Action) => {
     case 'SET_ORDER':
     case 'SET_VARIABLES':
     case 'RESET_ALL':
+    case 'SET_TOTAL':
       return ReducerMethodMap[action.type](state, action)
     case 'TOGGLE_ALL_BLOCKS':
       return state
@@ -255,6 +276,7 @@ interface AdvancedSearchContextType {
   ) => void
   setAllFilter: (field: 'where' | 'what' | 'fields') => void
   setOrder: (facet: SortOrderEnum, dir: SortDirection) => void
+  setTotal: (total: number) => void
   resetAll: () => void
   updateQuery: (query: string) => void
   generateUrl: (paramsOnly?: boolean, basePath?: string) => string
@@ -267,6 +289,7 @@ export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
   updateQuery: () => {},
   setAllFilter: () => {},
   setOrder: () => {},
+  setTotal: () => {},
   generateUrl: () => '',
   resetAll: () => {},
   state: {
@@ -274,6 +297,7 @@ export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
     variables: {},
     disabledFilters: [],
     mode: 'quick',
+    total: 0,
   },
 })
 
@@ -306,6 +330,7 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     variables: parsedVariables || {},
     disabledFilters: [],
     mode: 'quick',
+    total: 0,
   })
 
   const addFilter = useCallback(
@@ -352,6 +377,10 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     [state, state.variables]
   )
 
+  const setTotal = useCallback((total: number) => {
+    dispatch({ type: 'SET_TOTAL', payload: total })
+  }, [])
+
   useEffect(() => {
     if (onVariablesChange) {
       onVariablesChange(state.variables)
@@ -373,6 +402,7 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
         updateQuery,
         setAllFilter,
         setOrder,
+        setTotal,
         generateUrl,
         resetAll,
       }}
