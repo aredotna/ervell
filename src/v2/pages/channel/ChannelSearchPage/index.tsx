@@ -10,11 +10,13 @@ import {
   ChannelSearchPage as ChannelSearchPageType,
   ChannelSearchPageVariables,
 } from '__generated__/ChannelSearchPage'
-import channelSearchPage from './queries/channelSearchPage'
 import ChannelSearchMetadata from './components/ChannelSearchMetadata'
+import { ChannelPageMetaTags } from 'v2/pages/channel/components/ChannelPageMetaTags'
+
 import { AdvancedSearchContextProvider } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 import { WhereEnum } from '__generated__/globalTypes'
 import { AdvancedSearchResultsGrid } from 'v2/components/AdvancedSearch/components/AdvancedSearchResultsGrid'
+import channelSearchPage from './queries/channelSearchPage'
 
 export const ChannelSearchPage: React.FC = () => {
   const { id } = useParams()
@@ -40,6 +42,7 @@ export const ChannelSearchPage: React.FC = () => {
 
   return (
     <TopBarLayout>
+      <ChannelPageMetaTags channel={channel} />
       <AdvancedSearchContextProvider
         variables={{ where: { facet: WhereEnum.CHANNEL, id } }}
       >

@@ -52,6 +52,9 @@ export interface ProfileSearchPageQuery_identity_identifiable_Group {
   user: ProfileSearchPageQuery_identity_identifiable_Group_user;
   counts: ProfileSearchPageQuery_identity_identifiable_Group_counts | null;
   users: ProfileSearchPageQuery_identity_identifiable_Group_users[] | null;
+  title: string;
+  description: string | null;
+  canonical: string | null;
 }
 
 export interface ProfileSearchPageQuery_identity_identifiable_User_can {
@@ -82,6 +85,10 @@ export interface ProfileSearchPageQuery_identity_identifiable_User {
   can: ProfileSearchPageQuery_identity_identifiable_User_can | null;
   about: string | null;
   counts: ProfileSearchPageQuery_identity_identifiable_User_counts | null;
+  title: string;
+  description: string | null;
+  canonical: string | null;
+  is_indexable: boolean;
 }
 
 export type ProfileSearchPageQuery_identity_identifiable = ProfileSearchPageQuery_identity_identifiable_Group | ProfileSearchPageQuery_identity_identifiable_User;
