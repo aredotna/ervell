@@ -185,7 +185,7 @@ export const ReducerMethodMap = {
     })
 
     if (isEmpty(newVariables.term?.facet)) {
-      delete variables.term.facet
+      delete variables.term?.facet
     }
 
     return {
