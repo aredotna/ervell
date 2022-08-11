@@ -176,13 +176,12 @@ export const ReducerMethodMap = {
   },
 
   QUERY_CHANGE: (state: State, action: any) => {
-    let variables
-    let newVariables = tokenizeSearch(action.payload)
+    const newVariables = tokenizeSearch(action.payload)
 
-    variables = merge(state.variables, newVariables, {
+    const variables = merge(state.variables, newVariables, {
       page: null,
       per: null,
-    })
+    }) as any
 
     if (isEmpty(newVariables.term?.facet)) {
       delete variables.term?.facet
