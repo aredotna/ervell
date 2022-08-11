@@ -1,11 +1,11 @@
-import { ApolloError, useLazyQuery } from '@apollo/client'
+import React, { useCallback, useContext, useEffect } from 'react'
+import { ApolloError, useQuery } from '@apollo/client'
 import { merge } from 'merge-anything'
-import React, { useCallback, useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router'
-import useDeepCompareEffect from 'use-deep-compare-effect'
 import { useKeyboardListNavigation } from 'use-keyboard-list-navigation'
-import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
+import { isEmpty } from 'lodash'
 
+import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 import PrimarySearchResult from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults/PrimarySearchResult'
 import { ICON_OFFSET } from 'v2/components/UI/SearchInput'
 import Text from 'v2/components/UI/Text'
@@ -19,7 +19,7 @@ import { WhatEnum } from '__generated__/globalTypes'
 import PrimarySearchResults from '../../../PrimarySearch/components/PrimarySearchResults'
 import advancedSearchResultsQuery from './queries/advancedSearchResultsQuery'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
-import { isEmpty } from 'lodash'
+import AdvancedSearchResultsTotal from '../AdvancedSearchResultsTotal'
 
 interface AdvancedSearchResultsContainerProps {
   includeOriginalResults?: boolean
@@ -82,22 +82,22 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
   variables,
   searchInputRef,
 }) => {
-  const [performSearch, { called, loading, error, data }] = useLazyQuery<
+  const { refetch, loading, error, data } = useQuery<
     AdvancedQuickSearch,
     AdvancedQuickSearchVariables
   >(advancedSearchResultsQuery)
 
-  useDeepCompareEffect(() => {
+  useEffect(() => {
     const mergedVariables = merge(DEFAULTS, variables, {
       per: 10,
       page: 1,
     }) as any
     if (mergedVariables.term?.facet && !isEmpty(mergedVariables.term?.facet)) {
-      performSearch({ variables: mergedVariables })
+      refetch(mergedVariables)
     }
-  }, [variables, variables?.where?.facet])
+  }, [variables, variables?.where])
 
-  if (called && loading) {
+  if (loading) {
     return (
       <PrimarySearchResult pl={ICON_OFFSET}>
         <Text fontWeight="bold">Searching...</Text>
@@ -105,7 +105,7 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
     )
   }
 
-  if (called && error) {
+  if (error) {
     return (
       <PrimarySearchResult pl={ICON_OFFSET}>
         <Text fontWeight="bold" color="state.alert">
@@ -119,7 +119,6 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
     <AdvancedSearchResults
       data={data}
       term={variables.term?.facet}
-      called={called}
       loading={loading}
       error={error}
       searchInputRef={searchInputRef}
@@ -132,7 +131,6 @@ interface AdvancedSearchResultsProps {
   term?: string
   loading: boolean
   error: ApolloError | null
-  called: boolean
   searchInputRef?: React.RefObject<HTMLInputElement>
 }
 
@@ -141,16 +139,11 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   term,
   loading,
   error,
-  called,
   searchInputRef,
 }) => {
   const { resetAll, generateUrl } = useContext(AdvancedSearchContext)
   const { pathname } = useLocation()
   const navigate = useNavigate()
-
-  const searchLabel = term
-    ? `See all ${data?.searches?.advanced.total} results for "${term}"`
-    : 'Explore all results'
 
   const handleResultClick = useCallback(() => {
     resetAll()
@@ -191,7 +184,7 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
 
   return (
     <>
-      {called && error && (
+      {error && (
         <PrimarySearchResult pl={ICON_OFFSET}>
           <Text fontWeight="bold" color="state.alert">
             {error.message}
@@ -199,14 +192,13 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
         </PrimarySearchResult>
       )}
 
-      {called && loading && (
+      {loading && (
         <PrimarySearchResult pl={ICON_OFFSET}>
           <Text fontWeight="bold">Searching...</Text>
         </PrimarySearchResult>
       )}
 
-      {called &&
-        term &&
+      {term &&
         data?.searches.advanced.results &&
         data?.searches.advanced.results.length > 0 &&
         data?.searches.advanced.results.map((result, _idx) => {
@@ -226,13 +218,11 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
           )
         })}
 
-      <PrimarySearchResult
-        key={`see_all_results_${index === maxResults - 1}`}
-        to={generateUrl(false, pathname)}
-        pl={ICON_OFFSET}
-      >
-        <Text fontWeight="bold">{searchLabel}</Text>
-      </PrimarySearchResult>
+      <AdvancedSearchResultsTotal
+        index={index}
+        maxResults={maxResults}
+        pathname={pathname}
+      />
     </>
   )
 }
