@@ -16,13 +16,11 @@ import {
 import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 import { WhatEnum } from '__generated__/globalTypes'
-import PrimarySearchResults from '../../../PrimarySearch/components/PrimarySearchResults'
 import advancedSearchResultsQuery from './queries/advancedSearchResultsQuery'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 import AdvancedSearchResultsTotal from '../AdvancedSearchResultsTotal'
 
 interface AdvancedSearchResultsContainerProps {
-  includeOriginalResults?: boolean
   searchInputRef?: React.RefObject<HTMLInputElement>
 }
 
@@ -36,33 +34,15 @@ const INVALID_TYPES = [
 ]
 
 export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsContainerProps> = ({
-  includeOriginalResults = true,
   searchInputRef,
 }) => {
   const { state } = useContext(AdvancedSearchContext)
-
-  const term = state.variables.term?.facet
-
   return (
     <>
-      {includeOriginalResults && term && (
-        <>
-          <PrimarySearchResults
-            query={term}
-            debouncedQuery={term}
-            cursor={null}
-            onSelection={() => {}}
-            onClick={() => {}}
-            showAllResultsLink={false}
-          />
-        </>
-      )}
-      {!includeOriginalResults && (
-        <AdvancedSearchResultsQuery
-          variables={state.variables}
-          searchInputRef={searchInputRef}
-        />
-      )}
+      <AdvancedSearchResultsQuery
+        variables={state.variables}
+        searchInputRef={searchInputRef}
+      />
     </>
   )
 }

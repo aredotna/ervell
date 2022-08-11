@@ -19,7 +19,6 @@ import constants from 'v2/styles/constants'
 import { WhereEnum } from '__generated__/globalTypes'
 import { overflowScrolling } from 'v2/styles/mixins'
 import { AdvancedSearchResultsContainer } from './components/AdvancedSearchResults'
-import LargeLabeledCheckbox from 'v2/components/UI/Inputs/components/LargeLabelledCheckbox'
 import { AdvancedSearchFilter } from './components/AdvancedSearchFilter'
 import FilterMenuToggle from './components/AdvancedFilterMenuToggle'
 import SearchOverlay from '../SearchOverlay'
@@ -95,10 +94,6 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const toggleFilterOpen = useCallback(() => {
     setFilterOpen(!filterOpen)
   }, [setFilterOpen, filterOpen])
-
-  const [includeOriginalResults, setIncludeOriginalResults] = useState<boolean>(
-    false
-  )
 
   const handleFocus = useCallback(() => {
     isEmpty(state.query) ? setMode('focus') : setMode('active')
@@ -184,42 +179,37 @@ const AdvancedPrimarySearchContainer: React.FC<{
         mode={mode}
       />
 
-      {mode != 'focus' &&
-        mode != 'active' &&
-        !state.query &&
-        !includeOriginalResults && (
-          <ContextButtonContainer>
-            <ContextButton onClick={onSearchButtonClick}>
-              Search Are.na
+      {mode != 'focus' && mode != 'active' && !state.query && (
+        <ContextButtonContainer>
+          <ContextButton onClick={onSearchButtonClick}>
+            Search Are.na
+          </ContextButton>
+
+          {page?.type === PageTypeEnum.PERSON && page?.id !== currentUserId && (
+            <ContextButton onClick={onContextButtonClick}>
+              Search this {page.type.toLowerCase()}
             </ContextButton>
+          )}
 
-            {page?.type === PageTypeEnum.PERSON &&
-              page?.id !== currentUserId && (
-                <ContextButton onClick={onContextButtonClick}>
-                  Search this {page.type.toLowerCase()}
-                </ContextButton>
-              )}
+          {page?.type === PageTypeEnum.PERSON && page?.id == currentUserId && (
+            <ContextButton onClick={onContextButtonClick}>
+              Search your content
+            </ContextButton>
+          )}
 
-            {page?.type === PageTypeEnum.PERSON &&
-              page?.id == currentUserId && (
-                <ContextButton onClick={onContextButtonClick}>
-                  Search your content
-                </ContextButton>
-              )}
+          {page?.type === PageTypeEnum.CHANNEL && (
+            <ContextButton onClick={onContextButtonClick}>
+              Search this {page.type.toLowerCase()}
+            </ContextButton>
+          )}
 
-            {page?.type === PageTypeEnum.CHANNEL && (
-              <ContextButton onClick={onContextButtonClick}>
-                Search this {page.type.toLowerCase()}
-              </ContextButton>
-            )}
-
-            {page?.type === PageTypeEnum.GROUP && (
-              <ContextButton onClick={onContextButtonClick}>
-                Search this {page.type.toLowerCase()}
-              </ContextButton>
-            )}
-          </ContextButtonContainer>
-        )}
+          {page?.type === PageTypeEnum.GROUP && (
+            <ContextButton onClick={onContextButtonClick}>
+              Search this {page.type.toLowerCase()}
+            </ContextButton>
+          )}
+        </ContextButtonContainer>
+      )}
 
       {(mode == 'focus' || mode == 'active') && (
         <SearchOverlay
@@ -235,24 +225,12 @@ const AdvancedPrimarySearchContainer: React.FC<{
                 />
               </Box>
             )}
-
-            <LargeLabeledCheckbox
-              f={1}
-              checked={includeOriginalResults}
-              onChange={() =>
-                setIncludeOriginalResults(!includeOriginalResults)
-              }
-            >
-              Use quicksearch results
-            </LargeLabeledCheckbox>
           </Controls>
           <Results>
             {filterOpen && (
               <AdvancedSearchFilter toggleOpen={toggleFilterOpen} />
             )}
-            <AdvancedSearchResultsContainer
-              includeOriginalResults={includeOriginalResults}
-            />
+            <AdvancedSearchResultsContainer />
           </Results>
         </SearchOverlay>
       )}
