@@ -150,7 +150,7 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
 
   const searchLabel = term
     ? `See all ${data?.searches?.advanced.total} results for "${term}"`
-    : 'See everything'
+    : 'Explore all results'
 
   const handleResultClick = useCallback(() => {
     resetAll()
