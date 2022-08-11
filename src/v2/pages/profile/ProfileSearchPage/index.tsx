@@ -14,6 +14,7 @@ import {
 import profileSearchPageQuery from './queries/profileSearchPageQuery'
 import ProfileSearchMetadata from './components/ProfileSearchMetadata'
 import { AdvancedSearchResultsGrid } from 'v2/components/AdvancedSearch/components/AdvancedSearchResultsGrid'
+import ProfileMetaTags from 'v2/pages/profile/ProfilePage/components/ProfileMetaTags'
 
 export const ProfileSearchPage: React.FC = () => {
   const { id } = useParams()
@@ -45,6 +46,7 @@ export const ProfileSearchPage: React.FC = () => {
 
   return (
     <TopBarLayout>
+      <ProfileMetaTags identifiable={identifiable} />
       <Constrain>
         <ProfileSearchMetadata identifiable={identifiable} />
         <AdvancedSearchResultsGrid />
