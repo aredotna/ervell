@@ -152,12 +152,15 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   const onEnter = useCallback(
     ({
       element,
+      state,
     }: {
       index: number
       element: AdvancedQuickSearchResult | null
+      state: any
     }) => {
       if (
         element &&
+        state.interactive &&
         (element.__typename === 'User' ||
           element.__typename === 'Group' ||
           element.__typename === 'Channel')
@@ -177,6 +180,7 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
     ref: searchInputRef,
     list: results,
     waitForInteractive: true,
+    defaultValue: null,
     onEnter,
   })
 
