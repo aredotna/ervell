@@ -15,7 +15,7 @@ import {
 import search from '../../queries/search'
 
 export const AdvancedSearchResultsGrid: React.FC = () => {
-  const { state } = useContext(AdvancedSearchContext)
+  const { state, setTotal } = useContext(AdvancedSearchContext)
   const [page, setPage] = useState<number>(1)
 
   const { data, loading, error, refetch, networkStatus, fetchMore } = useQuery<
@@ -29,6 +29,10 @@ export const AdvancedSearchResultsGrid: React.FC = () => {
     setPage(1)
     refetch(state.variables)
   }, [state.variables])
+
+  useEffect(() => {
+    setTotal(data?.searches.advanced.total)
+  }, [data?.searches.advanced.total])
 
   const loadMore = useCallback(() => {
     fetchMore({
