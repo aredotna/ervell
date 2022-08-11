@@ -25,6 +25,7 @@ import SearchOverlay from '../SearchOverlay'
 import AdvancedSearchInput from './components/AdvancedSearchInput'
 import { isEmpty } from 'lodash'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
+import AdvancedSearchReturnLabel from './components/AdvancedSearchReturnLabel'
 
 const Container = styled(Box)`
   position: relative;
@@ -154,6 +155,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
     <Container
       ref={containerRef}
       flex={1}
+      mode={mode}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       {...rest}
@@ -217,6 +219,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
           targetElement={containerRef.current}
         >
           <Controls>
+            {(mode === 'focus' || mode === 'active') && (
+              <AdvancedSearchReturnLabel />
+            )}
             {(mode === 'focus' || mode === 'active') && !filterOpen && (
               <Box mr={5}>
                 <FilterMenuToggle

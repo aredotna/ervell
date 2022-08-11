@@ -8,6 +8,7 @@ import {
   color,
   width,
   borderRadius,
+  bgColor,
 } from 'styled-system'
 
 import { preset } from 'v2/styles/functions'
@@ -20,6 +21,14 @@ export const outlinelessMixin = css`
     `
   outline: none;
 `}
+`
+
+export const backgroundlessMixin = css`
+  ${props =>
+    props.backgroundless &&
+    `
+    background-color: transparent !important;
+  `}
 `
 
 export const borderlessMixin = css`
@@ -55,7 +64,7 @@ export const defaultMixin = css`
   appearance: none;
   box-sizing: border-box;
   display: block;
-  background-color: ${props => props.theme.colors.background};
+  ${preset(bgColor, { bgColor: 'background' })}
   line-height: ${LINE_HEIGHTS.input};
   ${preset(fontFamily, { font: 'sans' })}
   ${preset(width, { width: '100%' })}
@@ -88,6 +97,7 @@ export const defaultMixin = css`
   ${errorMixin}
   ${borderlessMixin}
   ${outlinelessMixin}
+  ${backgroundlessMixin}
 `
 
 export default defaultMixin

@@ -12,6 +12,12 @@ export const ICON_OFFSET = '3.125em'
 
 const Container = styled(Box)`
   position: relative;
+
+  ${props =>
+    (props.mode === 'active' || props.mode === 'focus') &&
+    `
+    background-color: ${props.theme.colors.gray.hint};
+  `}
 `
 
 const Icon = styled.div`
@@ -108,6 +114,7 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
     <Container
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      mode={mode}
       {...outerProps}
     >
       {iconMap[mode] && (
@@ -128,6 +135,7 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
         borderColor="gray.regular"
         {...innerProps}
         outlineless
+        backgroundless
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onChange}
