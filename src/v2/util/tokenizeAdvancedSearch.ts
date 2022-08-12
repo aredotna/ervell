@@ -51,13 +51,13 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
   const term = searchTokens.join(' ').trim()
 
   const variables = {
-    term: term === '' ? null : { facet: term },
     where: whereTokens ? { facet: whereTokens } : undefined,
     what: whatTokens.length ? { facets: whatTokens } : undefined,
     fields: fieldsTokens.length ? { facets: fieldsTokens } : undefined,
     order: sortToken ? { facet: sortToken, dir: directionToken } : undefined,
     per,
     page,
+    term: term === '' ? null : { facet: term },
   }
 
   return pickBy(variables)
@@ -107,7 +107,6 @@ export const stringifyVariable = (
 
 export const stringifyVariables = (variables: AdvancedSearchVariables) => {
   const strings = [
-    variables?.term?.facet ? `${variables?.term.facet}` : undefined,
     variables?.where?.facet
       ? stringifyFacet('where', variables.where.facet, variables.where.id)
       : undefined,
@@ -116,6 +115,7 @@ export const stringifyVariables = (variables: AdvancedSearchVariables) => {
     variables?.order
       ? stringifyOrder(variables.order.facet, variables.order.dir)
       : undefined,
+    variables?.term?.facet ? `${variables?.term.facet}` : undefined,
   ]
 
   return strings.filter(Boolean).join(' ')
