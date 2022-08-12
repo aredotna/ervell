@@ -5,7 +5,8 @@ import Text from 'v2/components/UI/Text'
 
 const Container = styled(Box).attrs({
   mr: 5,
-  p: 2,
+  py: 1,
+  px: 2,
 })`
   display: flex;
   align-items: center;

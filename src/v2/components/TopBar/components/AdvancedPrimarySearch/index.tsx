@@ -1,5 +1,6 @@
 import React, {
   FocusEvent,
+  KeyboardEvent,
   useCallback,
   useContext,
   useRef,
@@ -89,8 +90,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const [mode, setMode] = useState<
     'resting' | 'blur' | 'focus' | 'hover' | 'active'
   >(state.query ? 'blur' : 'resting')
-
   const [filterOpen, setFilterOpen] = useState(false)
+  const [anyResultHighlighted, setAnyResultHighlighted] = useState(false)
 
   const toggleFilterOpen = useCallback(() => {
     setFilterOpen(!filterOpen)
@@ -151,6 +152,13 @@ const AdvancedPrimarySearchContainer: React.FC<{
     }
   }, [page, addFilter, searchInputRef])
 
+  const handleKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Escape') {
+      resetAll()
+      onClose()
+    }
+  }, [])
+
   return (
     <Container
       ref={containerRef}
@@ -165,7 +173,6 @@ const AdvancedPrimarySearchContainer: React.FC<{
       )}
 
       <AdvancedSearchInput
-        // globallyFocusOnKey="/"
         tabIndex={0}
         flex={1}
         py={6}
@@ -178,6 +185,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
         onFocus={handleFocus}
         onBlur={handleBlur}
         onReset={resetAll}
+        onKeyDown={handleKeyDown}
         mode={mode}
       />
 
@@ -219,9 +227,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
           targetElement={containerRef.current}
         >
           <Controls>
-            {(mode === 'focus' || mode === 'active') && (
-              <AdvancedSearchReturnLabel />
-            )}
+            {(mode === 'focus' || mode === 'active') &&
+              !anyResultHighlighted && <AdvancedSearchReturnLabel />}
             {(mode === 'focus' || mode === 'active') && !filterOpen && (
               <Box mr={5}>
                 <FilterMenuToggle
@@ -235,7 +242,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
             {filterOpen && (
               <AdvancedSearchFilter toggleOpen={toggleFilterOpen} />
             )}
-            <AdvancedSearchResultsContainer />
+            <AdvancedSearchResultsContainer
+              onAnyResultHighlighted={setAnyResultHighlighted}
+            />
           </Results>
         </SearchOverlay>
       )}

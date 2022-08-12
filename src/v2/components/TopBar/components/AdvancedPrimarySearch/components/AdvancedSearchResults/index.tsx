@@ -22,6 +22,7 @@ import AdvancedSearchResultsTotal from '../AdvancedSearchResultsTotal'
 
 interface AdvancedSearchResultsContainerProps {
   searchInputRef?: React.RefObject<HTMLInputElement>
+  onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const INVALID_TYPES = [
@@ -35,6 +36,7 @@ const INVALID_TYPES = [
 
 export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsContainerProps> = ({
   searchInputRef,
+  onAnyResultHighlighted,
 }) => {
   const { state } = useContext(AdvancedSearchContext)
   return (
@@ -42,6 +44,7 @@ export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsConta
       <AdvancedSearchResultsQuery
         variables={state.variables}
         searchInputRef={searchInputRef}
+        onAnyResultHighlighted={onAnyResultHighlighted}
       />
     </>
   )
@@ -50,6 +53,7 @@ export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsConta
 interface AdvancedSearchResultsQueryProps {
   variables: AdvancedSearchVariables
   searchInputRef?: React.RefObject<HTMLInputElement>
+  onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const DEFAULTS: AdvancedSearchVariables = {
@@ -61,6 +65,7 @@ const DEFAULTS: AdvancedSearchVariables = {
 export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProps> = ({
   variables,
   searchInputRef,
+  onAnyResultHighlighted,
 }) => {
   const { refetch, loading, error, data } = useQuery<
     AdvancedQuickSearch,
@@ -102,6 +107,7 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
       loading={loading}
       error={error}
       searchInputRef={searchInputRef}
+      onAnyResultHighlighted={onAnyResultHighlighted}
     />
   )
 }
@@ -112,6 +118,7 @@ interface AdvancedSearchResultsProps {
   loading: boolean
   error: ApolloError | null
   searchInputRef?: React.RefObject<HTMLInputElement>
+  onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
@@ -120,6 +127,7 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   loading,
   error,
   searchInputRef,
+  onAnyResultHighlighted,
 }) => {
   const { resetAll, generateUrl } = useContext(AdvancedSearchContext)
   const { pathname } = useLocation()
@@ -156,13 +164,19 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   const results =
     !error && !loading && data ? [...data?.searches.advanced.results, null] : []
 
-  const { index } = useKeyboardListNavigation({
+  const { index, interactive } = useKeyboardListNavigation({
     ref: searchInputRef,
     list: results,
     waitForInteractive: true,
     defaultValue: null,
     onEnter,
   })
+
+  useEffect(() => {
+    if (onAnyResultHighlighted) {
+      onAnyResultHighlighted(interactive)
+    }
+  }, [interactive])
 
   const maxResults = results.length
 
