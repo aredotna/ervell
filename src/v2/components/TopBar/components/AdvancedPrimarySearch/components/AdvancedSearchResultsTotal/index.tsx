@@ -37,7 +37,7 @@ export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps
 
   if (loading) {
     const loadingLabel = term
-      ? `See all results for ${term}`
+      ? `See all results for '${term}'`
       : 'See all results'
     return (
       <PrimarySearchResult
@@ -50,9 +50,24 @@ export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps
     )
   }
 
-  const searchLabel = term
-    ? `See all ${data?.searches?.advanced.total} results for ${term}`
-    : 'See all results'
+  const total = data?.searches?.advanced.total
+
+  if (total === 0) {
+    return (
+      <PrimarySearchResult
+        key={`no_results_${index === maxResults - 1}`}
+        pl={ICON_OFFSET}
+        bg="background"
+      >
+        <Text fontWeight="bold">No results</Text>
+      </PrimarySearchResult>
+    )
+  }
+
+  const searchLabel =
+    term && total > 0
+      ? `See all ${total} results for '${term}'`
+      : 'See all results'
 
   return (
     <PrimarySearchResult
