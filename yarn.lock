@@ -22161,9 +22161,9 @@ use-deep-compare-effect@^1.8.1:
     dequal "^2.0.2"
 
 use-keyboard-list-navigation@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/use-keyboard-list-navigation/-/use-keyboard-list-navigation-2.3.1.tgz#d73420a7f87206f54ed87a7b6055293888884a81"
-  integrity sha512-qWSQQlwINfS0daXEZKVUjcDap6funZ8XKK7gkDPkKip1ay6AAPdnPWH/ev+c3pGPNd4+xdt4hTpbvUDQybNsAg==
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/use-keyboard-list-navigation/-/use-keyboard-list-navigation-2.4.2.tgz#d237e6cc35886c0f541d9e65eb5b3d2a65e6498d"
+  integrity sha512-PCoIDKsEmYaoce6pOwgU5xsqBjrRuUwcNNdIP1ZTmxyz9716zOAFJJHAp44QE74Zmnxc1VvgYxAfIkaCbq105A==
   dependencies:
     map-cursor-to-max "^1.0.0"
 

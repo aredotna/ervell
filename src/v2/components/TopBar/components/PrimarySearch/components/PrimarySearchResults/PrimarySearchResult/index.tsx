@@ -13,6 +13,7 @@ import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 import { AdaptibleLink } from 'v2/components/UI/AdaptibleLink'
 import { PrimarySearchIcon } from '../PrimarySearchIcon'
 import { PrimarySearchCount } from '../PrimarySearchCount'
+import AdvancedSearchReturnLabel from 'v2/components/TopBar/components/AdvancedPrimarySearch/components/AdvancedSearchReturnLabel'
 
 const Label = styled(Text)`
   font-weight: bold;
@@ -129,7 +130,8 @@ export const PrimarySearchResult: React.FC<PrimarySearchResultProps &
             </Label>
           </PathContainer>
 
-          <PrimarySearchCount result={result} />
+          {!selected && <PrimarySearchCount result={result} />}
+          {selected && <AdvancedSearchReturnLabel label={'Open'} />}
         </ResultContainer>
       </Container>
     )

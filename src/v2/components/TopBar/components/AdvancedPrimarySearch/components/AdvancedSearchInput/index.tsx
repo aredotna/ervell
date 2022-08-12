@@ -1,4 +1,5 @@
 import React, { FocusEvent, useCallback, useEffect, useState } from 'react'
+import Mousetrap from 'mousetrap'
 import styled from 'styled-components'
 import { debounce, pick, omit } from 'underscore'
 import compactObject from 'v2/util/compactObject'
@@ -12,6 +13,12 @@ export const ICON_OFFSET = '3.125em'
 
 const Container = styled(Box)`
   position: relative;
+
+  ${props =>
+    (props.mode === 'active' || props.mode === 'focus') &&
+    `
+    background-color: ${props.theme.colors.gray.hint};
+  `}
 `
 
 const Icon = styled.div`
@@ -101,6 +108,19 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
     [onBlur]
   )
 
+  useEffect(() => {
+    Mousetrap.bind('/', event => {
+      event.preventDefault()
+      handleFocus()
+      searchInputRef.current.focus()
+      searchInputRef.current.value = ''
+    })
+
+    return () => {
+      Mousetrap.unbind('/')
+    }
+  }, [searchInputRef, handleFocus])
+
   const outerProps = compactObject(pick(rest, ...OUTER_PROPS_KEYS))
   const innerProps = omit(rest, ...OUTER_PROPS_KEYS)
 
@@ -108,6 +128,7 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
     <Container
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      mode={mode}
       {...outerProps}
     >
       {iconMap[mode] && (
@@ -128,6 +149,7 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
         borderColor="gray.regular"
         {...innerProps}
         outlineless
+        backgroundless
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onChange}

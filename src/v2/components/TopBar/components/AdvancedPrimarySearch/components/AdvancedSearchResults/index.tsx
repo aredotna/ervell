@@ -16,14 +16,13 @@ import {
 import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 import { WhatEnum } from '__generated__/globalTypes'
-import PrimarySearchResults from '../../../PrimarySearch/components/PrimarySearchResults'
 import advancedSearchResultsQuery from './queries/advancedSearchResultsQuery'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 import AdvancedSearchResultsTotal from '../AdvancedSearchResultsTotal'
 
 interface AdvancedSearchResultsContainerProps {
-  includeOriginalResults?: boolean
   searchInputRef?: React.RefObject<HTMLInputElement>
+  onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const INVALID_TYPES = [
@@ -36,33 +35,17 @@ const INVALID_TYPES = [
 ]
 
 export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsContainerProps> = ({
-  includeOriginalResults = true,
   searchInputRef,
+  onAnyResultHighlighted,
 }) => {
   const { state } = useContext(AdvancedSearchContext)
-
-  const term = state.variables.term?.facet
-
   return (
     <>
-      {includeOriginalResults && term && (
-        <>
-          <PrimarySearchResults
-            query={term}
-            debouncedQuery={term}
-            cursor={null}
-            onSelection={() => {}}
-            onClick={() => {}}
-            showAllResultsLink={false}
-          />
-        </>
-      )}
-      {!includeOriginalResults && (
-        <AdvancedSearchResultsQuery
-          variables={state.variables}
-          searchInputRef={searchInputRef}
-        />
-      )}
+      <AdvancedSearchResultsQuery
+        variables={state.variables}
+        searchInputRef={searchInputRef}
+        onAnyResultHighlighted={onAnyResultHighlighted}
+      />
     </>
   )
 }
@@ -70,6 +53,7 @@ export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsConta
 interface AdvancedSearchResultsQueryProps {
   variables: AdvancedSearchVariables
   searchInputRef?: React.RefObject<HTMLInputElement>
+  onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const DEFAULTS: AdvancedSearchVariables = {
@@ -81,11 +65,14 @@ const DEFAULTS: AdvancedSearchVariables = {
 export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProps> = ({
   variables,
   searchInputRef,
+  onAnyResultHighlighted,
 }) => {
+  const skipQuery = isEmpty(variables.term?.facet)
+
   const { refetch, loading, error, data } = useQuery<
     AdvancedQuickSearch,
     AdvancedQuickSearchVariables
-  >(advancedSearchResultsQuery)
+  >(advancedSearchResultsQuery, { variables, skip: skipQuery })
 
   useEffect(() => {
     const mergedVariables = merge(DEFAULTS, variables, {
@@ -122,6 +109,7 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
       loading={loading}
       error={error}
       searchInputRef={searchInputRef}
+      onAnyResultHighlighted={onAnyResultHighlighted}
     />
   )
 }
@@ -132,6 +120,7 @@ interface AdvancedSearchResultsProps {
   loading: boolean
   error: ApolloError | null
   searchInputRef?: React.RefObject<HTMLInputElement>
+  onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
@@ -140,8 +129,9 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   loading,
   error,
   searchInputRef,
+  onAnyResultHighlighted,
 }) => {
-  const { resetAll, generateUrl } = useContext(AdvancedSearchContext)
+  const { resetAll, generateUrl, state } = useContext(AdvancedSearchContext)
   const { pathname } = useLocation()
   const navigate = useNavigate()
 
@@ -152,33 +142,45 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   const onEnter = useCallback(
     ({
       element,
+      state,
     }: {
       index: number
       element: AdvancedQuickSearchResult | null
+      state: any
     }) => {
       if (
         element &&
+        state.interactive &&
         (element.__typename === 'User' ||
           element.__typename === 'Group' ||
           element.__typename === 'Channel')
       ) {
+        resetAll()
+        searchInputRef?.current?.blur()
         return navigate(element.href, { state: getBreadcrumbPath(element) })
       }
       searchInputRef?.current?.blur()
       return navigate(generateUrl(false, pathname))
     },
-    [searchInputRef, generateUrl, pathname]
+    [searchInputRef, generateUrl, pathname, resetAll]
   )
 
   const results =
     !error && !loading && data ? [...data?.searches.advanced.results, null] : []
 
-  const { index } = useKeyboardListNavigation({
+  const { index, interactive } = useKeyboardListNavigation({
     ref: searchInputRef,
     list: results,
     waitForInteractive: true,
+    defaultValue: null,
     onEnter,
   })
+
+  useEffect(() => {
+    if (onAnyResultHighlighted) {
+      onAnyResultHighlighted(interactive)
+    }
+  }, [interactive])
 
   const maxResults = results.length
 
@@ -218,11 +220,13 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
           )
         })}
 
-      <AdvancedSearchResultsTotal
-        index={index}
-        maxResults={maxResults}
-        pathname={pathname}
-      />
+      {(term || state?.variables?.where?.id) && (
+        <AdvancedSearchResultsTotal
+          index={index}
+          maxResults={maxResults}
+          pathname={pathname}
+        />
+      )}
     </>
   )
 }

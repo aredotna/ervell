@@ -1,7 +1,9 @@
 import React, {
   FocusEvent,
+  KeyboardEvent,
   useCallback,
   useContext,
+  useEffect,
   useRef,
   useState,
 } from 'react'
@@ -19,13 +21,14 @@ import constants from 'v2/styles/constants'
 import { WhereEnum } from '__generated__/globalTypes'
 import { overflowScrolling } from 'v2/styles/mixins'
 import { AdvancedSearchResultsContainer } from './components/AdvancedSearchResults'
-import LargeLabeledCheckbox from 'v2/components/UI/Inputs/components/LargeLabelledCheckbox'
 import { AdvancedSearchFilter } from './components/AdvancedSearchFilter'
 import FilterMenuToggle from './components/AdvancedFilterMenuToggle'
 import SearchOverlay from '../SearchOverlay'
 import AdvancedSearchInput from './components/AdvancedSearchInput'
 import { isEmpty } from 'lodash'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
+import AdvancedSearchReturnLabel from './components/AdvancedSearchReturnLabel'
+import { useLocation, useNavigate } from 'react-router'
 
 const Container = styled(Box)`
   position: relative;
@@ -78,7 +81,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
   flex?: number
 }> = ({ scheme, flex, ...rest }) => {
   const { page } = useContext(PageContext)
-  const { state, updateQuery, addFilter, resetAll } = useContext(
+  const { state, updateQuery, addFilter, resetAll, generateUrl } = useContext(
     AdvancedSearchContext
   )
   const { slug: currentUserId } = useSerializedMe()
@@ -89,16 +92,14 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const [mode, setMode] = useState<
     'resting' | 'blur' | 'focus' | 'hover' | 'active'
   >(state.query ? 'blur' : 'resting')
-
   const [filterOpen, setFilterOpen] = useState(false)
+  const [anyResultHighlighted, setAnyResultHighlighted] = useState(false)
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
 
   const toggleFilterOpen = useCallback(() => {
     setFilterOpen(!filterOpen)
   }, [setFilterOpen, filterOpen])
-
-  const [includeOriginalResults, setIncludeOriginalResults] = useState<boolean>(
-    false
-  )
 
   const handleFocus = useCallback(() => {
     isEmpty(state.query) ? setMode('focus') : setMode('active')
@@ -155,10 +156,30 @@ const AdvancedPrimarySearchContainer: React.FC<{
     }
   }, [page, addFilter, searchInputRef])
 
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === 'Escape') {
+        resetAll()
+        onClose()
+      }
+
+      if (e.key === 'Enter' && !anyResultHighlighted) {
+        onClose()
+        return navigate(generateUrl(false, pathname))
+      }
+    },
+    [anyResultHighlighted, onClose, resetAll, generateUrl]
+  )
+
+  useEffect(() => {
+    onClose()
+  }, [pathname, onClose])
+
   return (
     <Container
       ref={containerRef}
       flex={1}
+      mode={mode}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       {...rest}
@@ -168,7 +189,6 @@ const AdvancedPrimarySearchContainer: React.FC<{
       )}
 
       <AdvancedSearchInput
-        // globallyFocusOnKey="/"
         tabIndex={0}
         flex={1}
         py={6}
@@ -181,45 +201,41 @@ const AdvancedPrimarySearchContainer: React.FC<{
         onFocus={handleFocus}
         onBlur={handleBlur}
         onReset={resetAll}
+        onKeyDown={handleKeyDown}
         mode={mode}
       />
 
-      {mode != 'focus' &&
-        mode != 'active' &&
-        !state.query &&
-        !includeOriginalResults && (
-          <ContextButtonContainer>
-            <ContextButton onClick={onSearchButtonClick}>
-              Search Are.na
+      {mode != 'focus' && mode != 'active' && !state.query && (
+        <ContextButtonContainer>
+          <ContextButton onClick={onSearchButtonClick}>
+            Search Are.na
+          </ContextButton>
+
+          {page?.type === PageTypeEnum.PERSON && page?.id !== currentUserId && (
+            <ContextButton onClick={onContextButtonClick}>
+              Search this {page.type.toLowerCase()}
             </ContextButton>
+          )}
 
-            {page?.type === PageTypeEnum.PERSON &&
-              page?.id !== currentUserId && (
-                <ContextButton onClick={onContextButtonClick}>
-                  Search this {page.type.toLowerCase()}
-                </ContextButton>
-              )}
+          {page?.type === PageTypeEnum.PERSON && page?.id == currentUserId && (
+            <ContextButton onClick={onContextButtonClick}>
+              Search your content
+            </ContextButton>
+          )}
 
-            {page?.type === PageTypeEnum.PERSON &&
-              page?.id == currentUserId && (
-                <ContextButton onClick={onContextButtonClick}>
-                  Search your content
-                </ContextButton>
-              )}
+          {page?.type === PageTypeEnum.CHANNEL && (
+            <ContextButton onClick={onContextButtonClick}>
+              Search this {page.type.toLowerCase()}
+            </ContextButton>
+          )}
 
-            {page?.type === PageTypeEnum.CHANNEL && (
-              <ContextButton onClick={onContextButtonClick}>
-                Search this {page.type.toLowerCase()}
-              </ContextButton>
-            )}
-
-            {page?.type === PageTypeEnum.GROUP && (
-              <ContextButton onClick={onContextButtonClick}>
-                Search this {page.type.toLowerCase()}
-              </ContextButton>
-            )}
-          </ContextButtonContainer>
-        )}
+          {page?.type === PageTypeEnum.GROUP && (
+            <ContextButton onClick={onContextButtonClick}>
+              Search this {page.type.toLowerCase()}
+            </ContextButton>
+          )}
+        </ContextButtonContainer>
+      )}
 
       {(mode == 'focus' || mode == 'active') && (
         <SearchOverlay
@@ -227,6 +243,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
           targetElement={containerRef.current}
         >
           <Controls>
+            {(mode === 'focus' || mode === 'active') &&
+              !anyResultHighlighted && <AdvancedSearchReturnLabel />}
             {(mode === 'focus' || mode === 'active') && !filterOpen && (
               <Box mr={5}>
                 <FilterMenuToggle
@@ -235,23 +253,13 @@ const AdvancedPrimarySearchContainer: React.FC<{
                 />
               </Box>
             )}
-
-            <LargeLabeledCheckbox
-              f={1}
-              checked={includeOriginalResults}
-              onChange={() =>
-                setIncludeOriginalResults(!includeOriginalResults)
-              }
-            >
-              Use quicksearch results
-            </LargeLabeledCheckbox>
           </Controls>
           <Results>
             {filterOpen && (
               <AdvancedSearchFilter toggleOpen={toggleFilterOpen} />
             )}
             <AdvancedSearchResultsContainer
-              includeOriginalResults={includeOriginalResults}
+              onAnyResultHighlighted={setAnyResultHighlighted}
             />
           </Results>
         </SearchOverlay>

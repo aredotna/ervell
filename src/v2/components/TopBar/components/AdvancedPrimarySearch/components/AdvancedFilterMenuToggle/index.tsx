@@ -31,7 +31,7 @@ export const FilterMenuToggle: React.FC<FilterMenuToggleProps> = ({
 
   return (
     <Box>
-      <FilterLabel onClick={onClick}>
+      <FilterLabel color="gray.medium" onClick={onClick}>
         <Caret open={open} /> {label}
       </FilterLabel>
     </Box>
