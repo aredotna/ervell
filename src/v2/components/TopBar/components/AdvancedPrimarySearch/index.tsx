@@ -137,7 +137,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
   }, [])
 
   const handleMouseEnter = useCallback(() => {
-    if (mode != 'active' && mode != 'hover' && mode != 'focus') {
+    if (mode != 'active' && mode != 'focus') {
       setMode('hover')
     }
   }, [mode, setMode])
