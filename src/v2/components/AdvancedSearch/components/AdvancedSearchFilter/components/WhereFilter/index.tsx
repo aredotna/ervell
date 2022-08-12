@@ -88,23 +88,27 @@ export const WhereFilter: React.FC<WhereFilterProps> = ({
   return (
     <FilterContainer>
       <CategoryLabel>Where</CategoryLabel>
-      <WhereFilterOption
-        currentFilter={currentFilter}
-        filter={WhereEnum.ALL}
-        {...updateProps}
-        toggleFilter={clearAndSetAll}
-        active={defaultSelected}
-      />
-      <WhereFilterOption
-        currentFilter={currentFilter}
-        filter={WhereEnum.MY}
-        {...updateProps}
-      />
-      <WhereFilterOption
-        currentFilter={currentFilter}
-        filter={WhereEnum.FOLLOWING}
-        {...updateProps}
-      />
+      {!id && (
+        <>
+          <WhereFilterOption
+            currentFilter={currentFilter}
+            filter={WhereEnum.ALL}
+            {...updateProps}
+            toggleFilter={clearAndSetAll}
+            active={defaultSelected}
+          />
+          <WhereFilterOption
+            currentFilter={currentFilter}
+            filter={WhereEnum.MY}
+            {...updateProps}
+          />
+          <WhereFilterOption
+            currentFilter={currentFilter}
+            filter={WhereEnum.FOLLOWING}
+            {...updateProps}
+          />
+        </>
+      )}
       {id && (
         <WhereFilterOption
           currentFilter={currentFilter}

@@ -47,16 +47,32 @@ const ContextButtonContainer = styled(Box)`
 `
 
 const ContextButton = styled(Text)`
-  background-color: ${p => p.theme.colors.gray.light};
-  padding: ${p => p.theme.space[1]} ${p => p.theme.space[2]};
-  border-radius: ${constants.radii.regular};
-  margin-right: ${p => p.theme.space[6]};
+  background-color: ${p => p.theme.colors.background};
+  padding: ${p => p.theme.space[1]} ${p => p.theme.space[5]};
   cursor: pointer;
   pointer-events: all;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${p => p.theme.colors.gray.medium};
+  border-bottom-right-radius: ${p => p.theme.radii.regular};
+
+  &:not(:first-child) {
+    border-bottom-left-radius: ${p => p.theme.radii.regular};
+  }
 
   &:hover {
-    background-color: ${p => p.theme.colors.gray.semiLight};
+    background-color: ${p => p.theme.colors.gray.hint};
+    color: ${p => p.theme.colors.gray.base};
   }
+
+  ${props =>
+    props.mode == 'hover' &&
+    `
+    background-color: ${props.theme.colors.gray.hint} !important;
+    color: ${p => p.theme.colors.gray.base};
+  `}
 `
 
 const Controls = styled(Box)`
@@ -90,7 +106,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const searchRef = useRef(null)
   const containerRef = useRef(null)
   const [mode, setMode] = useState<
-    'resting' | 'blur' | 'focus' | 'hover' | 'active'
+    'resting' | 'blur' | 'focus' | 'hover' | 'active' | 'hoverSecondary'
   >(state.query ? 'blur' : 'resting')
   const [filterOpen, setFilterOpen] = useState(false)
   const [anyResultHighlighted, setAnyResultHighlighted] = useState(false)
@@ -121,13 +137,25 @@ const AdvancedPrimarySearchContainer: React.FC<{
   }, [])
 
   const handleMouseEnter = useCallback(() => {
-    if (mode === 'resting') {
+    if (mode != 'active' && mode != 'hover' && mode != 'focus') {
       setMode('hover')
+    }
+  }, [mode, setMode])
+
+  const handleMouseEnterSecondary = useCallback(() => {
+    if (mode != 'active' && mode != 'hoverSecondary' && mode != 'focus') {
+      setMode('hoverSecondary')
     }
   }, [mode, setMode])
 
   const handleMouseLeave = useCallback(() => {
     if (mode === 'hover') {
+      setMode('resting')
+    }
+  }, [mode, setMode])
+
+  const handleMouseLeaveSecondary = useCallback(() => {
+    if (mode === 'hoverSecondary') {
       setMode('resting')
     }
   }, [mode, setMode])
@@ -176,16 +204,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
   }, [pathname, onClose])
 
   return (
-    <Container
-      ref={containerRef}
-      flex={1}
-      mode={mode}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      {...rest}
-    >
-      {(mode === 'resting' || mode === 'blur' || mode === 'hover') && (
-        <HomeLink />
+    <Container ref={containerRef} flex={1} mode={mode} {...rest}>
+      {(mode === 'resting' || mode === 'blur') && (
+        <HomeLink backgroundColor="gray.light" />
       )}
 
       <AdvancedSearchInput
@@ -202,35 +223,59 @@ const AdvancedPrimarySearchContainer: React.FC<{
         onBlur={handleBlur}
         onReset={resetAll}
         onKeyDown={handleKeyDown}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         mode={mode}
       />
 
       {mode != 'focus' && mode != 'active' && !state.query && (
         <ContextButtonContainer>
-          <ContextButton onClick={onSearchButtonClick}>
+          <ContextButton
+            key={mode}
+            onClick={onSearchButtonClick}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            mode={mode}
+          >
             Search Are.na
           </ContextButton>
 
           {page?.type === PageTypeEnum.PERSON && page?.id !== currentUserId && (
-            <ContextButton onClick={onContextButtonClick}>
-              Search this {page.type.toLowerCase()}
+            <ContextButton
+              onClick={onContextButtonClick}
+              onMouseEnter={handleMouseEnterSecondary}
+              onMouseLeave={handleMouseLeaveSecondary}
+            >
+              Search person&apos;s content
             </ContextButton>
           )}
 
           {page?.type === PageTypeEnum.PERSON && page?.id == currentUserId && (
-            <ContextButton onClick={onContextButtonClick}>
+            <ContextButton
+              onClick={onContextButtonClick}
+              onMouseEnter={handleMouseEnterSecondary}
+              onMouseLeave={handleMouseLeaveSecondary}
+            >
               Search your content
             </ContextButton>
           )}
 
           {page?.type === PageTypeEnum.CHANNEL && (
-            <ContextButton onClick={onContextButtonClick}>
+            <ContextButton
+              onClick={onContextButtonClick}
+              onMouseEnter={handleMouseEnterSecondary}
+              onMouseLeave={handleMouseLeaveSecondary}
+            >
               Search this {page.type.toLowerCase()}
             </ContextButton>
           )}
 
           {page?.type === PageTypeEnum.GROUP && (
-            <ContextButton onClick={onContextButtonClick}>
+            <ContextButton
+              onClick={onContextButtonClick}
+              onMouseEnter={handleMouseEnterSecondary}
+              onMouseLeave={handleMouseLeaveSecondary}
+            >
               Search this {page.type.toLowerCase()}
             </ContextButton>
           )}
