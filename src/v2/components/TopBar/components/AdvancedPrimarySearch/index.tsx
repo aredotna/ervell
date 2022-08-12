@@ -246,7 +246,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
               onMouseEnter={handleMouseEnterSecondary}
               onMouseLeave={handleMouseLeaveSecondary}
             >
-              Search person's content
+              Search person&apos;s content
             </ContextButton>
           )}
 
