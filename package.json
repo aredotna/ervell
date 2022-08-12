@@ -213,7 +213,7 @@
     "underscore": "*",
     "underscore.string": "*",
     "use-deep-compare-effect": "^1.8.1",
-    "use-keyboard-list-navigation": "https://github.com/aredotna/use-keyboard-list-navigation",
+    "use-keyboard-list-navigation": "^2.3.1",
     "useragent": "^2.3.0",
     "validator": "*",
     "waypoints": "^4.0.1",

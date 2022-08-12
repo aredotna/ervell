@@ -22160,9 +22160,10 @@ use-deep-compare-effect@^1.8.1:
     "@babel/runtime" "^7.12.5"
     dequal "^2.0.2"
 
-"use-keyboard-list-navigation@https://github.com/aredotna/use-keyboard-list-navigation":
-  version "0.0.0-development"
-  resolved "https://github.com/aredotna/use-keyboard-list-navigation#48f83a7b3c92c6af04a68562eb25503aa5c77372"
+use-keyboard-list-navigation@^2.3.1:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/use-keyboard-list-navigation/-/use-keyboard-list-navigation-2.4.2.tgz#d237e6cc35886c0f541d9e65eb5b3d2a65e6498d"
+  integrity sha512-PCoIDKsEmYaoce6pOwgU5xsqBjrRuUwcNNdIP1ZTmxyz9716zOAFJJHAp44QE74Zmnxc1VvgYxAfIkaCbq105A==
   dependencies:
     map-cursor-to-max "^1.0.0"
 

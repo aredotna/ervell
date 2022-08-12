@@ -27,6 +27,7 @@ import AdvancedSearchInput from './components/AdvancedSearchInput'
 import { isEmpty } from 'lodash'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
 import AdvancedSearchReturnLabel from './components/AdvancedSearchReturnLabel'
+import { useLocation, useNavigate } from 'react-router'
 
 const Container = styled(Box)`
   position: relative;
@@ -79,7 +80,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
   flex?: number
 }> = ({ scheme, flex, ...rest }) => {
   const { page } = useContext(PageContext)
-  const { state, updateQuery, addFilter, resetAll } = useContext(
+  const { state, updateQuery, addFilter, resetAll, generateUrl } = useContext(
     AdvancedSearchContext
   )
   const { slug: currentUserId } = useSerializedMe()
@@ -92,6 +93,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
   >(state.query ? 'blur' : 'resting')
   const [filterOpen, setFilterOpen] = useState(false)
   const [anyResultHighlighted, setAnyResultHighlighted] = useState(false)
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
 
   const toggleFilterOpen = useCallback(() => {
     setFilterOpen(!filterOpen)
@@ -152,12 +155,19 @@ const AdvancedPrimarySearchContainer: React.FC<{
     }
   }, [page, addFilter, searchInputRef])
 
-  const handleKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Escape') {
-      resetAll()
-      onClose()
-    }
-  }, [])
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === 'Escape') {
+        resetAll()
+        onClose()
+      }
+
+      if (e.key === 'Enter' && !anyResultHighlighted) {
+        return navigate(generateUrl(false, pathname))
+      }
+    },
+    [anyResultHighlighted, onClose, resetAll]
+  )
 
   return (
     <Container
