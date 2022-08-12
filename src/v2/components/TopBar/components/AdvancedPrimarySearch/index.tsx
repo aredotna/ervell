@@ -3,6 +3,7 @@ import React, {
   KeyboardEvent,
   useCallback,
   useContext,
+  useEffect,
   useRef,
   useState,
 } from 'react'
@@ -163,11 +164,16 @@ const AdvancedPrimarySearchContainer: React.FC<{
       }
 
       if (e.key === 'Enter' && !anyResultHighlighted) {
+        onClose()
         return navigate(generateUrl(false, pathname))
       }
     },
-    [anyResultHighlighted, onClose, resetAll]
+    [anyResultHighlighted, onClose, resetAll, generateUrl]
   )
+
+  useEffect(() => {
+    onClose()
+  }, [pathname, onClose])
 
   return (
     <Container

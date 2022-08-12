@@ -67,10 +67,12 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
   searchInputRef,
   onAnyResultHighlighted,
 }) => {
+  const skipQuery = isEmpty(variables.term?.facet)
+
   const { refetch, loading, error, data } = useQuery<
     AdvancedQuickSearch,
     AdvancedQuickSearchVariables
-  >(advancedSearchResultsQuery)
+  >(advancedSearchResultsQuery, { variables, skip: skipQuery })
 
   useEffect(() => {
     const mergedVariables = merge(DEFAULTS, variables, {
@@ -129,7 +131,7 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   searchInputRef,
   onAnyResultHighlighted,
 }) => {
-  const { resetAll, generateUrl } = useContext(AdvancedSearchContext)
+  const { resetAll, generateUrl, state } = useContext(AdvancedSearchContext)
   const { pathname } = useLocation()
   const navigate = useNavigate()
 
@@ -153,12 +155,14 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
           element.__typename === 'Group' ||
           element.__typename === 'Channel')
       ) {
+        resetAll()
+        searchInputRef?.current?.blur()
         return navigate(element.href, { state: getBreadcrumbPath(element) })
       }
       searchInputRef?.current?.blur()
       return navigate(generateUrl(false, pathname))
     },
-    [searchInputRef, generateUrl, pathname]
+    [searchInputRef, generateUrl, pathname, resetAll]
   )
 
   const results =
@@ -216,11 +220,13 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
           )
         })}
 
-      <AdvancedSearchResultsTotal
-        index={index}
-        maxResults={maxResults}
-        pathname={pathname}
-      />
+      {(term || state?.variables?.where?.id) && (
+        <AdvancedSearchResultsTotal
+          index={index}
+          maxResults={maxResults}
+          pathname={pathname}
+        />
+      )}
     </>
   )
 }
