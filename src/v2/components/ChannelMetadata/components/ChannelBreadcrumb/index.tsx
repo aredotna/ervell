@@ -31,6 +31,7 @@ export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
   const searchLabel = searchTerm
     ? `Search results for '${searchTerm}'`
     : 'All results'
+
   return (
     <StickyBreadcrumbPath>
       {({ mode }) => [
@@ -77,7 +78,7 @@ export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
           )}
         </StickyBreadcrumbPath.Crumb>,
 
-        /search$/.test(pathname) && (
+        /\/search$/.test(pathname) && (
           <StickyBreadcrumbPath.Crumb>{searchLabel}</StickyBreadcrumbPath.Crumb>
         ),
       ]}

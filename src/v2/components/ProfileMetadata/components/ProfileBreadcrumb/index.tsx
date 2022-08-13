@@ -75,7 +75,7 @@ export const ProfileBreadcrumb: React.FC<ProfileBreadcrumbProps> = ({
         <StickyBreadcrumbPath.Crumb>Groups</StickyBreadcrumbPath.Crumb>
       )}
 
-      {/search$/.test(pathname) && (
+      {/\/search$/.test(pathname) && (
         <StickyBreadcrumbPath.Crumb>{searchLabel}</StickyBreadcrumbPath.Crumb>
       )}
     </StickyBreadcrumbPath>

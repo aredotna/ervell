@@ -1,11 +1,11 @@
-import { ApolloError, useLazyQuery } from '@apollo/client'
+import React, { useCallback, useContext, useEffect } from 'react'
+import { ApolloError, useQuery } from '@apollo/client'
 import { merge } from 'merge-anything'
-import React, { useCallback, useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router'
-import useDeepCompareEffect from 'use-deep-compare-effect'
 import { useKeyboardListNavigation } from 'use-keyboard-list-navigation'
-import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
+import { isEmpty } from 'lodash'
 
+import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 import PrimarySearchResult from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults/PrimarySearchResult'
 import { ICON_OFFSET } from 'v2/components/UI/SearchInput'
 import Text from 'v2/components/UI/Text'
@@ -16,13 +16,13 @@ import {
 import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 import { WhatEnum } from '__generated__/globalTypes'
-import PrimarySearchResults from '../../../PrimarySearch/components/PrimarySearchResults'
 import advancedSearchResultsQuery from './queries/advancedSearchResultsQuery'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
+import AdvancedSearchResultsTotal from '../AdvancedSearchResultsTotal'
 
 interface AdvancedSearchResultsContainerProps {
-  includeOriginalResults?: boolean
   searchInputRef?: React.RefObject<HTMLInputElement>
+  onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const INVALID_TYPES = [
@@ -35,31 +35,17 @@ const INVALID_TYPES = [
 ]
 
 export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsContainerProps> = ({
-  includeOriginalResults = true,
   searchInputRef,
+  onAnyResultHighlighted,
 }) => {
   const { state } = useContext(AdvancedSearchContext)
-
-  const term = state.variables.term?.facet
-
   return (
     <>
-      {includeOriginalResults && term && (
-        <PrimarySearchResults
-          query={term}
-          debouncedQuery={term}
-          cursor={null}
-          onSelection={() => {}}
-          onClick={() => {}}
-          showAllResultsLink={false}
-        />
-      )}
-      {!includeOriginalResults && term && (
-        <AdvancedSearchResultsQuery
-          variables={state.variables}
-          searchInputRef={searchInputRef}
-        />
-      )}
+      <AdvancedSearchResultsQuery
+        variables={state.variables}
+        searchInputRef={searchInputRef}
+        onAnyResultHighlighted={onAnyResultHighlighted}
+      />
     </>
   )
 }
@@ -67,6 +53,7 @@ export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsConta
 interface AdvancedSearchResultsQueryProps {
   variables: AdvancedSearchVariables
   searchInputRef?: React.RefObject<HTMLInputElement>
+  onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const DEFAULTS: AdvancedSearchVariables = {
@@ -78,18 +65,26 @@ const DEFAULTS: AdvancedSearchVariables = {
 export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProps> = ({
   variables,
   searchInputRef,
+  onAnyResultHighlighted,
 }) => {
-  const [performSearch, { called, loading, error, data }] = useLazyQuery<
+  const skipQuery = isEmpty(variables.term?.facet)
+
+  const { refetch, loading, error, data } = useQuery<
     AdvancedQuickSearch,
     AdvancedQuickSearchVariables
-  >(advancedSearchResultsQuery)
+  >(advancedSearchResultsQuery, { variables, skip: skipQuery })
 
-  useDeepCompareEffect(() => {
-    const mergedVariables = merge(DEFAULTS, variables, { per: 10, page: 1 })
-    performSearch({ variables: mergedVariables })
-  }, [variables])
+  useEffect(() => {
+    const mergedVariables = merge(DEFAULTS, variables, {
+      per: 10,
+      page: 1,
+    }) as any
+    if (mergedVariables.term?.facet && !isEmpty(mergedVariables.term?.facet)) {
+      refetch(mergedVariables)
+    }
+  }, [variables, variables?.where])
 
-  if (called && loading) {
+  if (loading) {
     return (
       <PrimarySearchResult pl={ICON_OFFSET}>
         <Text fontWeight="bold">Searching...</Text>
@@ -97,7 +92,7 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
     )
   }
 
-  if (called && error) {
+  if (error) {
     return (
       <PrimarySearchResult pl={ICON_OFFSET}>
         <Text fontWeight="bold" color="state.alert">
@@ -110,36 +105,35 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
   return (
     <AdvancedSearchResults
       data={data}
-      called={called}
+      term={variables.term?.facet}
       loading={loading}
       error={error}
       searchInputRef={searchInputRef}
+      onAnyResultHighlighted={onAnyResultHighlighted}
     />
   )
 }
 
 interface AdvancedSearchResultsProps {
   data: AdvancedQuickSearch | null
+  term?: string
   loading: boolean
   error: ApolloError | null
-  called: boolean
   searchInputRef?: React.RefObject<HTMLInputElement>
+  onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   data,
+  term,
   loading,
   error,
-  called,
   searchInputRef,
+  onAnyResultHighlighted,
 }) => {
   const { resetAll, generateUrl, state } = useContext(AdvancedSearchContext)
   const { pathname } = useLocation()
   const navigate = useNavigate()
-
-  const term = state.variables.term?.facet
-
-  const searchLabel = term ? `See all results for "${term}"` : 'See all results'
 
   const handleResultClick = useCallback(() => {
     resetAll()
@@ -148,39 +142,51 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   const onEnter = useCallback(
     ({
       element,
+      state,
     }: {
       index: number
       element: AdvancedQuickSearchResult | null
+      state: any
     }) => {
       if (
         element &&
+        state.interactive &&
         (element.__typename === 'User' ||
           element.__typename === 'Group' ||
           element.__typename === 'Channel')
       ) {
+        resetAll()
+        searchInputRef?.current?.blur()
         return navigate(element.href, { state: getBreadcrumbPath(element) })
       }
       searchInputRef?.current?.blur()
       return navigate(generateUrl(false, pathname))
     },
-    [searchInputRef, generateUrl, pathname]
+    [searchInputRef, generateUrl, pathname, resetAll]
   )
 
   const results =
     !error && !loading && data ? [...data?.searches.advanced.results, null] : []
 
-  const { index } = useKeyboardListNavigation({
+  const { index, interactive } = useKeyboardListNavigation({
     ref: searchInputRef,
     list: results,
     waitForInteractive: true,
+    defaultValue: null,
     onEnter,
   })
+
+  useEffect(() => {
+    if (onAnyResultHighlighted) {
+      onAnyResultHighlighted(interactive)
+    }
+  }, [interactive])
 
   const maxResults = results.length
 
   return (
     <>
-      {called && error && (
+      {error && (
         <PrimarySearchResult pl={ICON_OFFSET}>
           <Text fontWeight="bold" color="state.alert">
             {error.message}
@@ -188,15 +194,14 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
         </PrimarySearchResult>
       )}
 
-      {called && loading && (
+      {loading && (
         <PrimarySearchResult pl={ICON_OFFSET}>
           <Text fontWeight="bold">Searching...</Text>
         </PrimarySearchResult>
       )}
 
-      {called &&
+      {term &&
         data?.searches.advanced.results &&
-        called &&
         data?.searches.advanced.results.length > 0 &&
         data?.searches.advanced.results.map((result, _idx) => {
           if (INVALID_TYPES.includes(result.__typename)) {
@@ -215,14 +220,13 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
           )
         })}
 
-      <PrimarySearchResult
-        key={`see_all_results_${index === maxResults - 1}`}
-        to={generateUrl(false, pathname)}
-        pl={ICON_OFFSET}
-        selected={index === maxResults - 1}
-      >
-        <Text fontWeight="bold">{searchLabel}</Text>
-      </PrimarySearchResult>
+      {(term || state?.variables?.where?.id) && (
+        <AdvancedSearchResultsTotal
+          index={index}
+          maxResults={maxResults}
+          pathname={pathname}
+        />
+      )}
     </>
   )
 }

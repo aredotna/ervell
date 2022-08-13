@@ -16,7 +16,7 @@ export const FilterContainer = styled(Box).attrs({
   ${props =>
     props.active &&
     `
-    background-color: ${props.theme.colors.gray.light};
+    background-color: ${props.theme.colors.gray.hint};
   `}
 
   ${props =>
@@ -58,6 +58,7 @@ interface FilterOptionProps {
     filter: WhereEnum | WhatEnum | FieldsEnum,
     field: 'where' | 'what' | 'fields'
   ) => void
+  active?: boolean
 }
 
 export const FilterOption: React.FC<FilterOptionProps> = ({
@@ -66,11 +67,12 @@ export const FilterOption: React.FC<FilterOptionProps> = ({
   currentFilters = [],
   currentDisabledFilters,
   toggleFilter,
+  active,
   ...rest
 }) => {
   const typedCurrentFilter: any[] = currentFilters ? currentFilters : []
   const isDisabled = currentDisabledFilters?.includes(filter)
-  const isSelected = filter && typedCurrentFilter?.includes(filter)
+  const isSelected = active || (filter && typedCurrentFilter?.includes(filter))
 
   const onClick = useCallback(() => {
     if (!isDisabled) {

@@ -1,7 +1,9 @@
 import React, {
   FocusEvent,
+  KeyboardEvent,
   useCallback,
   useContext,
+  useEffect,
   useRef,
   useState,
 } from 'react'
@@ -19,12 +21,14 @@ import constants from 'v2/styles/constants'
 import { WhereEnum } from '__generated__/globalTypes'
 import { overflowScrolling } from 'v2/styles/mixins'
 import { AdvancedSearchResultsContainer } from './components/AdvancedSearchResults'
-import LargeLabeledCheckbox from 'v2/components/UI/Inputs/components/LargeLabelledCheckbox'
 import { AdvancedSearchFilter } from './components/AdvancedSearchFilter'
 import FilterMenuToggle from './components/AdvancedFilterMenuToggle'
 import SearchOverlay from '../SearchOverlay'
 import AdvancedSearchInput from './components/AdvancedSearchInput'
 import { isEmpty } from 'lodash'
+import useSerializedMe from 'v2/hooks/useSerializedMe'
+import AdvancedSearchReturnLabel from './components/AdvancedSearchReturnLabel'
+import { useLocation, useNavigate } from 'react-router'
 
 const Container = styled(Box)`
   position: relative;
@@ -43,16 +47,32 @@ const ContextButtonContainer = styled(Box)`
 `
 
 const ContextButton = styled(Text)`
-  background-color: ${p => p.theme.colors.gray.light};
-  padding: ${p => p.theme.space[1]} ${p => p.theme.space[2]};
-  border-radius: ${constants.radii.regular};
-  margin-right: ${p => p.theme.space[6]};
+  background-color: ${p => p.theme.colors.background};
+  padding: ${p => p.theme.space[1]} ${p => p.theme.space[5]};
   cursor: pointer;
   pointer-events: all;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${p => p.theme.colors.gray.medium};
+  border-bottom-right-radius: ${p => p.theme.radii.regular};
+
+  &:not(:first-child) {
+    border-bottom-left-radius: ${p => p.theme.radii.regular};
+  }
 
   &:hover {
-    background-color: ${p => p.theme.colors.gray.semiLight};
+    background-color: ${p => p.theme.colors.gray.hint};
+    color: ${p => p.theme.colors.gray.base};
   }
+
+  ${props =>
+    props.mode == 'hover' &&
+    `
+    background-color: ${props.theme.colors.gray.hint} !important;
+    color: ${p => p.theme.colors.gray.base};
+  `}
 `
 
 const Controls = styled(Box)`
@@ -77,25 +97,25 @@ const AdvancedPrimarySearchContainer: React.FC<{
   flex?: number
 }> = ({ scheme, flex, ...rest }) => {
   const { page } = useContext(PageContext)
-  const { state, updateQuery, addFilter, resetAll } = useContext(
+  const { state, updateQuery, addFilter, resetAll, generateUrl } = useContext(
     AdvancedSearchContext
   )
+  const { slug: currentUserId } = useSerializedMe()
+
   const searchInputRef = useRef(null)
   const searchRef = useRef(null)
   const containerRef = useRef(null)
   const [mode, setMode] = useState<
-    'resting' | 'blur' | 'focus' | 'hover' | 'active'
+    'resting' | 'blur' | 'focus' | 'hover' | 'active' | 'hoverSecondary'
   >(state.query ? 'blur' : 'resting')
-
   const [filterOpen, setFilterOpen] = useState(false)
+  const [anyResultHighlighted, setAnyResultHighlighted] = useState(false)
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
 
   const toggleFilterOpen = useCallback(() => {
     setFilterOpen(!filterOpen)
   }, [setFilterOpen, filterOpen])
-
-  const [includeOriginalResults, setIncludeOriginalResults] = useState<boolean>(
-    false
-  )
 
   const handleFocus = useCallback(() => {
     isEmpty(state.query) ? setMode('focus') : setMode('active')
@@ -117,13 +137,25 @@ const AdvancedPrimarySearchContainer: React.FC<{
   }, [])
 
   const handleMouseEnter = useCallback(() => {
-    if (mode === 'resting') {
+    if (mode != 'active' && mode != 'focus') {
       setMode('hover')
+    }
+  }, [mode, setMode])
+
+  const handleMouseEnterSecondary = useCallback(() => {
+    if (mode != 'active' && mode != 'hoverSecondary' && mode != 'focus') {
+      setMode('hoverSecondary')
     }
   }, [mode, setMode])
 
   const handleMouseLeave = useCallback(() => {
     if (mode === 'hover') {
+      setMode('resting')
+    }
+  }, [mode, setMode])
+
+  const handleMouseLeaveSecondary = useCallback(() => {
+    if (mode === 'hoverSecondary') {
       setMode('resting')
     }
   }, [mode, setMode])
@@ -136,7 +168,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const onContextButtonClick = useCallback(() => {
     if (page.type === PageTypeEnum.PERSON) {
       searchInputRef.current.focus()
-      addFilter('where', WhereEnum.USER, page.id)
+      page.id === currentUserId
+        ? addFilter('where', WhereEnum.MY, currentUserId)
+        : addFilter('where', WhereEnum.USER, page.id)
     }
 
     if (page.type === PageTypeEnum.CHANNEL) {
@@ -150,26 +184,32 @@ const AdvancedPrimarySearchContainer: React.FC<{
     }
   }, [page, addFilter, searchInputRef])
 
-  // useEffect((): void => {
-  //   if (!isEmpty(state.query)) {
-  //     setMode('active')
-  //   }
-  // }, [state.query])
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === 'Escape') {
+        resetAll()
+        onClose()
+      }
 
-  console.log({ mode })
+      if (e.key === 'Enter' && !anyResultHighlighted) {
+        onClose()
+        return navigate(generateUrl(false, pathname))
+      }
+    },
+    [anyResultHighlighted, onClose, resetAll, generateUrl]
+  )
+
+  useEffect(() => {
+    onClose()
+  }, [pathname, onClose])
 
   return (
-    <Container
-      ref={containerRef}
-      flex={1}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      {...rest}
-    >
-      {(mode === 'resting' || mode === 'blur') && <HomeLink />}
+    <Container ref={containerRef} flex={1} mode={mode} {...rest}>
+      {(mode === 'resting' || mode === 'blur') && (
+        <HomeLink backgroundColor="gray.light" />
+      )}
 
       <AdvancedSearchInput
-        // globallyFocusOnKey="/"
         tabIndex={0}
         flex={1}
         py={6}
@@ -182,37 +222,65 @@ const AdvancedPrimarySearchContainer: React.FC<{
         onFocus={handleFocus}
         onBlur={handleBlur}
         onReset={resetAll}
+        onKeyDown={handleKeyDown}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         mode={mode}
       />
 
-      {mode != 'focus' &&
-        mode != 'active' &&
-        !state.query &&
-        !includeOriginalResults && (
-          <ContextButtonContainer>
-            <ContextButton onClick={onSearchButtonClick}>
-              Search Are.na
+      {mode != 'focus' && mode != 'active' && !state.query && (
+        <ContextButtonContainer>
+          <ContextButton
+            key={mode}
+            onClick={onSearchButtonClick}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            mode={mode}
+          >
+            Search Are.na
+          </ContextButton>
+
+          {page?.type === PageTypeEnum.PERSON && page?.id !== currentUserId && (
+            <ContextButton
+              onClick={onContextButtonClick}
+              onMouseEnter={handleMouseEnterSecondary}
+              onMouseLeave={handleMouseLeaveSecondary}
+            >
+              Search person&apos;s content
             </ContextButton>
+          )}
 
-            {page?.type === PageTypeEnum.PERSON && (
-              <ContextButton onClick={onContextButtonClick}>
-                Search this {page.type.toLowerCase()}
-              </ContextButton>
-            )}
+          {page?.type === PageTypeEnum.PERSON && page?.id == currentUserId && (
+            <ContextButton
+              onClick={onContextButtonClick}
+              onMouseEnter={handleMouseEnterSecondary}
+              onMouseLeave={handleMouseLeaveSecondary}
+            >
+              Search your content
+            </ContextButton>
+          )}
 
-            {page?.type === PageTypeEnum.CHANNEL && (
-              <ContextButton onClick={onContextButtonClick}>
-                Search this {page.type.toLowerCase()}
-              </ContextButton>
-            )}
+          {page?.type === PageTypeEnum.CHANNEL && (
+            <ContextButton
+              onClick={onContextButtonClick}
+              onMouseEnter={handleMouseEnterSecondary}
+              onMouseLeave={handleMouseLeaveSecondary}
+            >
+              Search this {page.type.toLowerCase()}
+            </ContextButton>
+          )}
 
-            {page?.type === PageTypeEnum.GROUP && (
-              <ContextButton onClick={onContextButtonClick}>
-                Search this {page.type.toLowerCase()}
-              </ContextButton>
-            )}
-          </ContextButtonContainer>
-        )}
+          {page?.type === PageTypeEnum.GROUP && (
+            <ContextButton
+              onClick={onContextButtonClick}
+              onMouseEnter={handleMouseEnterSecondary}
+              onMouseLeave={handleMouseLeaveSecondary}
+            >
+              Search this {page.type.toLowerCase()}
+            </ContextButton>
+          )}
+        </ContextButtonContainer>
+      )}
 
       {(mode == 'focus' || mode == 'active') && (
         <SearchOverlay
@@ -220,6 +288,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
           targetElement={containerRef.current}
         >
           <Controls>
+            {(mode === 'focus' || mode === 'active') &&
+              !anyResultHighlighted && <AdvancedSearchReturnLabel />}
             {(mode === 'focus' || mode === 'active') && !filterOpen && (
               <Box mr={5}>
                 <FilterMenuToggle
@@ -228,23 +298,13 @@ const AdvancedPrimarySearchContainer: React.FC<{
                 />
               </Box>
             )}
-
-            <LargeLabeledCheckbox
-              f={1}
-              checked={includeOriginalResults}
-              onChange={() =>
-                setIncludeOriginalResults(!includeOriginalResults)
-              }
-            >
-              Use quicksearch results
-            </LargeLabeledCheckbox>
           </Controls>
           <Results>
             {filterOpen && (
               <AdvancedSearchFilter toggleOpen={toggleFilterOpen} />
             )}
             <AdvancedSearchResultsContainer
-              includeOriginalResults={includeOriginalResults}
+              onAnyResultHighlighted={setAnyResultHighlighted}
             />
           </Results>
         </SearchOverlay>

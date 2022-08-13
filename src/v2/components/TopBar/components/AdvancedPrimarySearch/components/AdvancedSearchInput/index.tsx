@@ -1,4 +1,5 @@
 import React, { FocusEvent, useCallback, useEffect, useState } from 'react'
+import Mousetrap from 'mousetrap'
 import styled from 'styled-components'
 import { debounce, pick, omit } from 'underscore'
 import compactObject from 'v2/util/compactObject'
@@ -12,6 +13,12 @@ export const ICON_OFFSET = '3.125em'
 
 const Container = styled(Box)`
   position: relative;
+
+  ${props =>
+    (props.mode === 'active' || props.mode === 'focus') &&
+    `
+    background-color: ${props.theme.colors.gray.hint};
+  `}
 `
 
 const Icon = styled.div`
@@ -24,11 +31,17 @@ const Icon = styled.div`
   bottom: 0;
   width: ${ICON_OFFSET};
   cursor: pointer;
+
+  ${props =>
+    props.mode === 'hover' &&
+    `
+    background-color: ${props.theme.colors.gray.hint};
+  `}
 `
 
 interface AdvancedSearchInputProps extends BoxProps {
   initialQuery?: string
-  mode?: 'resting' | 'blur' | 'focus' | 'hover' | 'active'
+  mode?: 'resting' | 'blur' | 'focus' | 'hover' | 'active' | 'hoverSecondary'
   onQueryChange?: (query: string) => void
   onDebouncedQueryChange?: (query: string) => void
   onMouseEnter?: () => void
@@ -56,6 +69,7 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
     resting: null,
     blur: null,
     hover: 'MagnifyingGlass',
+    hoverSecondary: 'MagnifyingGlass',
     focus: 'MagnifyingGlass',
     active: 'X',
   },
@@ -101,6 +115,19 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
     [onBlur]
   )
 
+  useEffect(() => {
+    Mousetrap.bind('/', event => {
+      event.preventDefault()
+      handleFocus()
+      searchInputRef.current.focus()
+      searchInputRef.current.value = ''
+    })
+
+    return () => {
+      Mousetrap.unbind('/')
+    }
+  }, [searchInputRef, handleFocus])
+
   const outerProps = compactObject(pick(rest, ...OUTER_PROPS_KEYS))
   const innerProps = omit(rest, ...OUTER_PROPS_KEYS)
 
@@ -108,10 +135,11 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
     <Container
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      mode={mode}
       {...outerProps}
     >
       {iconMap[mode] && (
-        <Icon onClick={handleReset}>
+        <Icon mode={mode} onClick={handleReset}>
           <Icons
             width="1.5em"
             height="0.88em"
@@ -128,6 +156,7 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
         borderColor="gray.regular"
         {...innerProps}
         outlineless
+        backgroundless
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onChange}

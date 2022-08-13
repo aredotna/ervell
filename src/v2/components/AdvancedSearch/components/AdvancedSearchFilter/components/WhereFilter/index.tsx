@@ -19,6 +19,7 @@ interface WhereFilterOptionProps {
     filter: WhereEnum | WhatEnum | FieldsEnum,
     field: 'where' | 'what' | 'fields'
   ) => void
+  active?: boolean
 }
 
 export const WhereFilterOption: React.FC<WhereFilterOptionProps> = ({
@@ -27,10 +28,11 @@ export const WhereFilterOption: React.FC<WhereFilterOptionProps> = ({
   currentFilter = [],
   currentDisabledFilters,
   toggleFilter,
+  active,
   ...rest
 }) => {
   const isDisabled = currentDisabledFilters?.includes(filter)
-  const isSelected = filter && currentFilter === filter
+  const isSelected = active || (filter && currentFilter === filter)
 
   const onClick = useCallback(() => {
     if (!isDisabled) {
@@ -79,25 +81,34 @@ export const WhereFilter: React.FC<WhereFilterProps> = ({
     currentDisabledFilters,
   }
 
+  const typedCurrentFilter = currentFilter as WhereEnum
+  const defaultSelected =
+    !typedCurrentFilter || typedCurrentFilter === WhereEnum.ALL
+
   return (
     <FilterContainer>
       <CategoryLabel>Where</CategoryLabel>
-      <WhereFilterOption
-        currentFilter={currentFilter}
-        filter={WhereEnum.ALL}
-        {...updateProps}
-        toggleFilter={clearAndSetAll}
-      />
-      <WhereFilterOption
-        currentFilter={currentFilter}
-        filter={WhereEnum.MY}
-        {...updateProps}
-      />
-      <WhereFilterOption
-        currentFilter={currentFilter}
-        filter={WhereEnum.FOLLOWING}
-        {...updateProps}
-      />
+      {!id && (
+        <>
+          <WhereFilterOption
+            currentFilter={currentFilter}
+            filter={WhereEnum.ALL}
+            {...updateProps}
+            toggleFilter={clearAndSetAll}
+            active={defaultSelected}
+          />
+          <WhereFilterOption
+            currentFilter={currentFilter}
+            filter={WhereEnum.MY}
+            {...updateProps}
+          />
+          <WhereFilterOption
+            currentFilter={currentFilter}
+            filter={WhereEnum.FOLLOWING}
+            {...updateProps}
+          />
+        </>
+      )}
       {id && (
         <WhereFilterOption
           currentFilter={currentFilter}

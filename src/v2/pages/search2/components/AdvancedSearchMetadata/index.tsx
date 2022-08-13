@@ -11,6 +11,7 @@ import Box from 'v2/components/UI/Box'
 const AdvancedSearchMetadata: React.FC = () => {
   const { state } = useContext(AdvancedSearchContext)
   const term = state.variables.term?.facet
+  const total = state.total
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -26,7 +27,9 @@ const AdvancedSearchMetadata: React.FC = () => {
   return (
     <Box mb={9}>
       <HeaderMetadataContainer
-        breadcrumb={<AdvancedSearchMetadataBreadcrumb term={term} />}
+        breadcrumb={
+          <AdvancedSearchMetadataBreadcrumb term={term} total={total} />
+        }
       >
         <AdvancedSearchFilter />
       </HeaderMetadataContainer>

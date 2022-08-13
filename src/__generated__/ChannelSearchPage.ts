@@ -13,6 +13,7 @@ export interface ChannelSearchPage_channel_owner_User {
   name: string;
   href: string | null;
   label: string;
+  is_indexable: boolean;
 }
 
 export interface ChannelSearchPage_channel_owner_Group {
@@ -41,6 +42,11 @@ export interface ChannelSearchPage_channel {
   owner: ChannelSearchPage_channel_owner;
   counts: ChannelSearchPage_channel_counts | null;
   label: string;
+  meta_title: string;
+  meta_description: string | null;
+  canonical: string | null;
+  is_nsfw: boolean;
+  image_url: string | null;
 }
 
 export interface ChannelSearchPage {

@@ -51,13 +51,13 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
   const term = searchTokens.join(' ').trim()
 
   const variables = {
-    term: term === '' ? null : { facet: term },
     where: whereTokens ? { facet: whereTokens } : undefined,
     what: whatTokens.length ? { facets: whatTokens } : undefined,
     fields: fieldsTokens.length ? { facets: fieldsTokens } : undefined,
     order: sortToken ? { facet: sortToken, dir: directionToken } : undefined,
     per,
     page,
+    term: term === '' ? null : { facet: term },
   }
 
   return pickBy(variables)
@@ -68,7 +68,7 @@ export const stringifyFacet = (
   filter: WhereEnum | WhatEnum | FieldsEnum,
   id?: string
 ) => {
-  if (field === 'where' && id) {
+  if (field === 'where' && id && filter !== 'MY') {
     return `${filter.toLowerCase()}:${id}`
   }
   return `${field}:${filter?.toLowerCase()}`
@@ -107,7 +107,6 @@ export const stringifyVariable = (
 
 export const stringifyVariables = (variables: AdvancedSearchVariables) => {
   const strings = [
-    variables?.term?.facet ? `${variables?.term.facet}` : undefined,
     variables?.where?.facet
       ? stringifyFacet('where', variables.where.facet, variables.where.id)
       : undefined,
@@ -116,6 +115,7 @@ export const stringifyVariables = (variables: AdvancedSearchVariables) => {
     variables?.order
       ? stringifyOrder(variables.order.facet, variables.order.dir)
       : undefined,
+    variables?.term?.facet ? `${variables?.term.facet}` : undefined,
   ]
 
   return strings.filter(Boolean).join(' ')
@@ -127,13 +127,14 @@ const getUrlPath = (variables: AdvancedSearchVariables) => {
   if (
     variables.where?.id &&
     (variables.where.facet === WhereEnum.USER ||
-      variables.where.facet === WhereEnum.GROUP)
+      variables.where.facet === WhereEnum.GROUP ||
+      variables.where.facet === WhereEnum.MY)
   ) {
     urlBase = `/${variables.where.id}/search`
   }
 
   if (variables.where?.id && variables.where.facet === WhereEnum.CHANNEL) {
-    urlBase = `/somethign/${variables.where.id}/search`
+    urlBase = `/scoped/${variables.where.id}/search`
   }
 
   return urlBase
