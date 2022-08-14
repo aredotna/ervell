@@ -230,6 +230,7 @@ class SearchInput extends PureComponent<Props, State> {
           onBlur={this.handleBlur}
           onChange={this.handleChange}
           defaultValue={query}
+          backgroundless
           autoCorrect="off"
           autoComplete="off"
           autoCapitalize="off"

@@ -143,6 +143,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                       <TextInput
                         {...props.input}
                         placeholder="First name"
+                        backgroundless
                         errorMessage={
                           props.meta.error || props.meta.submitError
                         }
@@ -162,6 +163,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                       <TextInput
                         {...props.input}
                         placeholder="Last name"
+                        backgroundless
                         errorMessage={
                           props.meta.error || props.meta.submitError
                         }
@@ -180,6 +182,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                       <TextInput
                         {...props.input}
                         placeholder="Email"
+                        backgroundless
                         errorMessage={
                           props.meta.error || props.meta.submitError
                         }
@@ -197,6 +200,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                       placeholder="Unconfirmed email address"
                       readOnly
                       disabled
+                      backgroundless
                       value={me.unconfirmed_email}
                     />
                   </InputContainer>
@@ -219,6 +223,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                         {...props.input}
                         type="password"
                         placeholder="Password"
+                        backgroundless
                         errorMessage={
                           props.meta.error || props.meta.submitError
                         }
@@ -238,6 +243,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                         {...props.input}
                         type="password"
                         placeholder="Confirm password"
+                        backgroundless
                         errorMessage={
                           props.meta.error || props.meta.submitError
                         }
@@ -257,6 +263,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                         <Bio
                           {...props.input}
                           placeholder="Bio"
+                          backgroundless
                           rows={4}
                           errorMessage={
                             props.meta.error || props.meta.submitError
