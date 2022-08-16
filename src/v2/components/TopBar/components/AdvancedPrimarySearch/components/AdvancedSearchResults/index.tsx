@@ -23,6 +23,7 @@ import AdvancedSearchResultsTotal from '../AdvancedSearchResultsTotal'
 interface AdvancedSearchResultsContainerProps {
   searchInputRef?: React.RefObject<HTMLInputElement>
   onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
+  onResultClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 const INVALID_TYPES = [
@@ -37,6 +38,7 @@ const INVALID_TYPES = [
 export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsContainerProps> = ({
   searchInputRef,
   onAnyResultHighlighted,
+  onResultClick,
 }) => {
   const { state } = useContext(AdvancedSearchContext)
   return (
@@ -45,6 +47,7 @@ export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsConta
         variables={state.variables}
         searchInputRef={searchInputRef}
         onAnyResultHighlighted={onAnyResultHighlighted}
+        onResultClick={onResultClick}
       />
     </>
   )
@@ -54,6 +57,7 @@ interface AdvancedSearchResultsQueryProps {
   variables: AdvancedSearchVariables
   searchInputRef?: React.RefObject<HTMLInputElement>
   onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
+  onResultClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 const DEFAULTS: AdvancedSearchVariables = {
@@ -66,6 +70,7 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
   variables,
   searchInputRef,
   onAnyResultHighlighted,
+  onResultClick,
 }) => {
   const skipQuery = isEmpty(variables.term?.facet)
 
@@ -110,6 +115,7 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
       error={error}
       searchInputRef={searchInputRef}
       onAnyResultHighlighted={onAnyResultHighlighted}
+      onResultClick={onResultClick}
     />
   )
 }
@@ -120,6 +126,7 @@ interface AdvancedSearchResultsProps {
   loading: boolean
   error: ApolloError | null
   searchInputRef?: React.RefObject<HTMLInputElement>
+  onResultClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -129,15 +136,12 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   loading,
   error,
   searchInputRef,
+  onResultClick,
   onAnyResultHighlighted,
 }) => {
   const { resetAll, generateUrl, state } = useContext(AdvancedSearchContext)
   const { pathname } = useLocation()
   const navigate = useNavigate()
-
-  const handleResultClick = useCallback(() => {
-    resetAll()
-  }, [])
 
   const onEnter = useCallback(
     ({
@@ -215,7 +219,7 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
               key={`result_${result.__typename}_${typedResult.id}`}
               result={typedResult}
               selected={_idx === index}
-              onClick={handleResultClick}
+              onClick={onResultClick}
             />
           )
         })}

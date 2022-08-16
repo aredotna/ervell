@@ -93,7 +93,7 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
 
   const handleMouseEnter = useCallback(() => {
     onMouseEnter && onMouseEnter()
-  }, [])
+  }, [onMouseEnter])
 
   const handleMouseLeave = useCallback(() => {
     onMouseLeave && onMouseLeave()

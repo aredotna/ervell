@@ -50,22 +50,28 @@ const FeedGroups = ({ groups, context }) => (
 
     {groups.length > 0 && (
       <Body my={6}>
-        {groups.map(group => (
-          <FeedGroup key={`FeedGroup__${group.id}`}>
-            {[
-              <FeedGroupSentence
-                key={`FeedGroupSentence__${group.id}`}
-                group={group}
-              />,
+        {groups.map(group => {
+          if (group.item_phrase == '' && !group.item) {
+            return null
+          }
 
-              <FeedGroupObjects
-                key={`FeedGroupObjects__${group.id}`}
-                objects={group.objects}
-                context={context}
-              />,
-            ]}
-          </FeedGroup>
-        ))}
+          return (
+            <FeedGroup key={`FeedGroup__${group.id}`}>
+              {[
+                <FeedGroupSentence
+                  key={`FeedGroupSentence__${group.id}`}
+                  group={group}
+                />,
+
+                <FeedGroupObjects
+                  key={`FeedGroupObjects__${group.id}`}
+                  objects={group.objects}
+                  context={context}
+                />,
+              ]}
+            </FeedGroup>
+          )
+        })}
       </Body>
     )}
   </Container>
