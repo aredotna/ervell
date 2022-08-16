@@ -3,7 +3,6 @@ import React, {
   KeyboardEvent,
   useCallback,
   useContext,
-  useEffect,
   useRef,
   useState,
 } from 'react'
@@ -148,12 +147,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
   }, [state.query, setMode])
 
   const handleMouseEnter = useCallback(() => {
-    console.log('mouse enter', mode, mode != 'resting')
     if (mode != 'resting') {
-      console.log('mouse enter, leaving early')
       return
     }
-    console.log('mouse enter, setting mode to hover')
     setMode('hover')
   }, [mode, setMode])
 
@@ -227,8 +223,6 @@ const AdvancedPrimarySearchContainer: React.FC<{
     },
     []
   )
-
-  console.log({ mode })
 
   return (
     <Container ref={containerRef} flex={1} mode={mode} {...rest}>
@@ -332,6 +326,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
             )}
             <AdvancedSearchResultsContainer
               onAnyResultHighlighted={setAnyResultHighlighted}
+              onResultClick={handleResultClick}
             />
           </Results>
         </SearchOverlay>
