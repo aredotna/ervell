@@ -25,6 +25,10 @@ const FeedObjectLink: React.FC<FeedObjectLinkProps> = ({
   label,
   ...rest
 }) => {
+  if (!obj?.__typename) {
+    return null
+  }
+
   const href = obj?.href
   const visibility = obj?.__typename === 'Channel' && obj.visibility
   const title = label ? label : obj.__typename !== 'Comment' && obj?.label
