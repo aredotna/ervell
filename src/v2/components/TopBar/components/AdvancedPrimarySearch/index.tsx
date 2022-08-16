@@ -136,9 +136,6 @@ const AdvancedPrimarySearchContainer: React.FC<{
   )
 
   const onClose = useCallback(() => {
-    console.log('close', mode)
-    // if (mode === 'focus') return
-
     if (state.query) {
       setMode('blur')
       return
@@ -160,9 +157,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
   }, [mode, setMode])
 
   const handleMouseLeave = useCallback(() => {
-    console.log('mouse leave', mode)
     if (mode != 'hover') {
-      console.log('mouse leave, leaving early')
       return
     }
     setMode('resting')

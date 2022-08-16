@@ -56,7 +56,7 @@ export const FeedGroupSentence: React.FC<FeedGroupSentenceProps> = ({
     is_private,
   } = group
 
-  if (!item?.__typename) {
+  if (!item_phrase && !item?.__typename) {
     return null
   }
 
