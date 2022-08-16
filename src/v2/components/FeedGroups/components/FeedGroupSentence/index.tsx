@@ -56,12 +56,16 @@ export const FeedGroupSentence: React.FC<FeedGroupSentenceProps> = ({
     is_private,
   } = group
 
+  if (!item_phrase && !item?.__typename) {
+    return null
+  }
+
   return (
     <Container my={3} pr={6}>
       <Sentence>
         <FeedObjectLink obj={owner} {...owner} />
 
-        {action === 'commented' && item.__typename === 'Comment' && (
+        {action === 'commented' && item?.__typename === 'Comment' && (
           <span>
             <Label>
               {' said '}

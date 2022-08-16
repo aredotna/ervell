@@ -36,6 +36,10 @@ export default class FeedGroupObjects extends PureComponent {
     return (
       <ObjectGrid>
         {objects.map(object => {
+          if (!object?.__typename) {
+            return null
+          }
+
           const isIdentifiable =
             object.__typename === 'User' || object.__typename === 'Group'
 

@@ -3,7 +3,6 @@ import React, {
   KeyboardEvent,
   useCallback,
   useContext,
-  useEffect,
   useRef,
   useState,
 } from 'react'
@@ -97,9 +96,14 @@ const AdvancedPrimarySearchContainer: React.FC<{
   flex?: number
 }> = ({ scheme, flex, ...rest }) => {
   const { page } = useContext(PageContext)
-  const { state, updateQuery, addFilter, resetAll, generateUrl } = useContext(
-    AdvancedSearchContext
-  )
+  const {
+    state,
+    updateQuery,
+    addFilter,
+    resetAll,
+    generateUrl,
+    removeFilter,
+  } = useContext(AdvancedSearchContext)
   const { slug: currentUserId } = useSerializedMe()
 
   const searchInputRef = useRef(null)
@@ -118,6 +122,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
   }, [setFilterOpen, filterOpen])
 
   const handleFocus = useCallback(() => {
+    state.variables?.where?.id &&
+      isEmpty(state.query) &&
+      removeFilter('where', state.variables.where.facet)
     isEmpty(state.query) ? setMode('focus') : setMode('active')
   }, [mode, setMode, state.query])
 
@@ -134,12 +141,13 @@ const AdvancedPrimarySearchContainer: React.FC<{
       return
     }
     setMode('resting')
-  }, [])
+  }, [state.query, setMode])
 
   const handleMouseEnter = useCallback(() => {
-    if (mode != 'active' && mode != 'focus') {
-      setMode('hover')
+    if (mode != 'resting') {
+      return
     }
+    setMode('hover')
   }, [mode, setMode])
 
   const handleMouseEnterSecondary = useCallback(() => {
@@ -149,9 +157,10 @@ const AdvancedPrimarySearchContainer: React.FC<{
   }, [mode, setMode])
 
   const handleMouseLeave = useCallback(() => {
-    if (mode === 'hover') {
-      setMode('resting')
+    if (mode != 'hover') {
+      return
     }
+    setMode('resting')
   }, [mode, setMode])
 
   const handleMouseLeaveSecondary = useCallback(() => {
@@ -182,6 +191,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
       searchInputRef.current.focus()
       addFilter('where', WhereEnum.GROUP, page.id)
     }
+    setMode('focus')
   }, [page, addFilter, searchInputRef])
 
   const handleKeyDown = useCallback(
@@ -199,9 +209,15 @@ const AdvancedPrimarySearchContainer: React.FC<{
     [anyResultHighlighted, onClose, resetAll, generateUrl]
   )
 
-  useEffect(() => {
-    onClose()
-  }, [pathname, onClose])
+  const handleResultClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      if (!e.metaKey) {
+        resetAll()
+        onClose()
+      }
+    },
+    []
+  )
 
   return (
     <Container ref={containerRef} flex={1} mode={mode} {...rest}>
@@ -305,6 +321,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
             )}
             <AdvancedSearchResultsContainer
               onAnyResultHighlighted={setAnyResultHighlighted}
+              onResultClick={handleResultClick}
             />
           </Results>
         </SearchOverlay>
