@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client'
 import axios from 'axios'
 
 import mapErrors from 'v2/util/mapErrors'
+import analytics from 'v2/util/analytics'
 
 import billingQuery from 'v2/components/Billing/queries/billing'
 
@@ -171,10 +172,13 @@ const BillingForm: React.FC<BillingFormProps> = ({
       return Promise.reject('Not a valid plan id')
     }
 
+    const plan_id = planId.toUpperCase() as SupportedPlanEnum
+
     const defaultVariables = {
       coupon_code: couponCode,
-      plan_id: planId.toUpperCase() as SupportedPlanEnum,
+      plan_id,
     }
+
     const variables =
       total === 0
         ? defaultVariables
@@ -252,6 +256,9 @@ const BillingForm: React.FC<BillingFormProps> = ({
             return handleSubscribeToPremium()
           }
           return null
+        })
+        .then(() => {
+          return analytics.event(plan_id.toString().toUpperCase(), total)
         })
         .then(() => {
           // Most of the time, this will mean nothing.
