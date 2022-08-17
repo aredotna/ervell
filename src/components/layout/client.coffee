@@ -26,7 +26,6 @@ module.exports = ->
   setupPusherAndCurrentUser()
   setupViews()
   setupAjaxHeaders()
-  setupAnalytics()
   initNightMode()
   initLoggedOutCTA()
   initLightboxKeyboardShortcuts.bind()
@@ -76,34 +75,3 @@ setupAjaxHeaders = ->
   $.ajaxSetup
     beforeSend: (xhr) ->
       xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER.authentication_token
-
-# TODO: Extract
-# Initialize analytics & track page views
-setupAnalytics = ->
-  return if sd.SAVE # Doesn't track Bookmarklet view (?)
-  return if sd.DO_NOT_TRACK
-
-  analytics ga: ga
-  analytics.registerCurrentUser()
-
-  args =
-    title: document.title
-    location: window.location.href
-    page: window.location.pathname
-
-  # TODO: This is weird.
-  if sd.CHANNEL and sd.CHANNEL.status is 'private'
-    args =
-      page: '/'
-      title: 'Arena / [Private]'
-      location: 'https://www.are.na/401-private'
-
-  analytics.trackPageview(args)
-
-  # Log a visit once per session
-  unless Cookies.get('active_session')?
-    Cookies.set 'active_session', true
-    analytics.track.funnel if sd.CURRENT_USER
-      'Visited logged in'
-    else
-      'Visited logged out'

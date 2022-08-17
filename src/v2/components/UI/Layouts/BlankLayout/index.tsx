@@ -27,7 +27,7 @@ export const BlankLayout: React.FC = ({ children }) => {
 
   useEffect(() => {
     analytics.trackPageView()
-  }, [location])
+  }, [location.pathname])
 
   return (
     <PageContextProvider>

@@ -146,7 +146,6 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
   render() {
     const { scheme, ...rest } = this.props
     const { mode, query, debouncedQuery, cursor } = this.state
-    console.log({ mode })
     return (
       <Container {...rest}>
         {mode === 'resting' && <HomeLink />}
