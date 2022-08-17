@@ -213,8 +213,6 @@ const ProfileViews: React.FC<ProfileViewsProps> = ({
     DEFAULT: PageTypeEnum.PERSON,
   }[scheme]
 
-  console.log({ id })
-
   useEffect(() => {
     setPage({
       type: pageType,

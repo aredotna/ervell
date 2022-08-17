@@ -134,6 +134,7 @@
     "express": "^4.16.4",
     "express-ipfilter": "^1.0.1",
     "express-spam-referral-blocker": "^1.2.1",
+    "fathom-client": "^3.5.0",
     "file-loader": "^1.1.11",
     "filesize": "^4.1.2",
     "final-form": "^4.18.5",
