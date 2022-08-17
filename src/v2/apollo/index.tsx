@@ -6,7 +6,9 @@ import url from 'url'
 
 import { ApolloClient, ApolloLink, ApolloProvider } from '@apollo/client'
 import { onError } from '@apollo/client/link/error'
-import { BatchHttpLink } from '@apollo/client/link/batch-http'
+// import { BatchHttpLink } from '@apollo/client/link/batch-http'
+import { HttpLink } from '@apollo/client'
+
 import { createHttpLink } from '@apollo/client/link/http'
 import { setContext } from '@apollo/client/link/context'
 import { HelmetProvider } from 'react-helmet-async'
@@ -34,8 +36,8 @@ const {
   },
 } = sharify
 
-const clientHttpLink = new BatchHttpLink({ uri: CLIENT_GRAPHQL_ENDPOINT })
-const serverHttpLink = new BatchHttpLink({ uri: GRAPHQL_ENDPOINT })
+const clientHttpLink = new HttpLink({ uri: CLIENT_GRAPHQL_ENDPOINT })
+const serverHttpLink = new HttpLink({ uri: GRAPHQL_ENDPOINT })
 const contentfulHttpLink = createHttpLink({
   uri: CLIENT_CONTENTFUL_GRAPHQL_ENDPOINT,
 })
