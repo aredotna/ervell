@@ -14,6 +14,8 @@ const CollaboratorCount = styled.span`
   font-weight: normal;
 `
 
+const A = styled.a``
+
 interface ChannelBreadcrumbProps {
   channel: Channel
 }
@@ -24,6 +26,7 @@ export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
   const [params] = useSearchParams()
   const location = useLocation()
   const pathname = location?.pathname
+  const useRealLink = pathname?.includes('/share/')
 
   const showBadge = !/search$/.test(pathname)
 
@@ -32,14 +35,16 @@ export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
     ? `Search results for '${searchTerm}'`
     : 'All results'
 
+  const props = useRealLink
+    ? { href: channel.owner.href }
+    : { to: channel.owner.href, state: getBreadcrumbPath(channel.owner) }
+  const Tag = useRealLink ? A : Link
+
   return (
     <StickyBreadcrumbPath>
       {({ mode }) => [
         <StickyBreadcrumbPath.Crumb key="head">
-          <Link
-            to={channel.owner.href}
-            state={getBreadcrumbPath(channel.owner)}
-          >
+          <Tag {...props}>
             {unescape(channel.owner.name)}
 
             {channel.counts.collaborators > 0 && (
@@ -48,7 +53,7 @@ export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
                 (+{channel.counts.collaborators})
               </CollaboratorCount>
             )}
-          </Link>
+          </Tag>
         </StickyBreadcrumbPath.Crumb>,
 
         <StickyBreadcrumbPath.Crumb key="tail">

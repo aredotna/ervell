@@ -62,7 +62,13 @@ App.get(
     res.locals.sd.X_SHARE_TOKEN = req.params.token
     next()
   },
-  ...resolve
+  middlewareStack,
+  (req, res, next) => {
+    req.apollo
+      .render(withStaticRouter(Routes), {}, { mode: 'page' })
+      .then(apolloRes => pageResolver({ bundleName: 'app', apolloRes, res }))
+      .catch(next)
+  }
 )
   .get('/group/:id/invite/:code', ensureLoggedIn, ...resolve)
   .get(
