@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 
-import ChannelRow from 'v2/components/ProfileChannels/components/ChannelRow'
+import { ChannelRow } from 'v2/components/ProfileChannels/components/ChannelRow'
 import Grid from 'v2/components/UI/Grid'
 import Cell from 'v2/components/Cell'
 
@@ -66,3 +66,5 @@ export const ChannelRowContents: React.FC<ChannelRowContentsProps> = ({
     </ChannelRow>
   )
 }
+
+export default ChannelRowContents
