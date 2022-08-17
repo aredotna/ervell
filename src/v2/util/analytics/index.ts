@@ -1,9 +1,9 @@
 import * as Fathom from 'fathom-client'
 
 const EVENT_CODES = {
-  MONTHLY: 'VYQ1HCEC',
-  YEARLY: 'GEB9UYLM',
-  PLUS_YEARLY: 'ZZYHEWZN',
+  MONTHLY: 'OBXRH7LQ',
+  YEARLY: 'MARIM8F8',
+  PLUS_YEARLY: 'GXL9W0MB',
 }
 
 export default {
