@@ -52,7 +52,7 @@ const CountLine = styled(Text).attrs({
   }
 `
 
-const ChannelRow = ({ children, channel, ...rest }) => (
+export const ChannelRow = ({ children, channel, ...rest }) => (
   <Row {...rest}>
     {children}
 

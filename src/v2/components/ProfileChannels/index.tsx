@@ -7,11 +7,8 @@ import constants from 'v2/styles/constants'
 import profileChannelsQuery from 'v2/components/ProfileChannels/queries/profileChannels'
 import profileChannelSearchQuery from 'v2/components/ProfileChannels/queries/profileChannelSearch'
 
-import Grid from 'v2/components/UI/Grid'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import SearchInput from 'v2/components/UI/SearchInput'
-import Cell from 'v2/components/Cell'
-import ChannelRow from 'v2/components/ProfileChannels/components/ChannelRow'
 import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator'
 
 import { ChannelsSort, SearchSorts } from '__generated__/globalTypes'
@@ -26,6 +23,7 @@ import {
   ProfileChannelsSearchVariables,
 } from '__generated__/ProfileChannelsSearch'
 import useIsSpiderRequesting from 'v2/hooks/useIsSpiderRequesting'
+import { ChannelRowContents } from './components/ChannelRowContents'
 
 interface ProfileChannelsProps {
   id: string
@@ -183,28 +181,7 @@ export const ProfileChannels: React.FC<ProfileChannelsProps> = ({
           {channels.map(channel => {
             if (!channel) return null
 
-            return (
-              <ChannelRow key={channel.id} channel={channel}>
-                <Grid>
-                  <Cell.Konnectable
-                    konnectable={channel}
-                    isPreviewable={false}
-                  />
-
-                  {channel.blokks.map((blokk, i) =>
-                    blokk ? (
-                      <Cell.Konnectable
-                        key={`${blokk.__typename}_${blokk.id}`}
-                        konnectable={blokk}
-                        context={channel.blokks}
-                      />
-                    ) : (
-                      <Cell.Skeletal key={i} />
-                    )
-                  )}
-                </Grid>
-              </ChannelRow>
-            )
+            return <ChannelRowContents key={channel.id} channel={channel} />
           })}
         </InfiniteScroll>
       )}
