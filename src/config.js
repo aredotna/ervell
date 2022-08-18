@@ -21,7 +21,6 @@ module.exports = {
   IMAGE_PATH: '/images/',
   IMAGE_PROXY_URL: 'http://images.are.na',
   REDIS_URL: null,
-  GOOGLE_ANALYTICS_ID: 'UA-XXXXX-Y',
   STRIPE_PUBLISHABLE_KEY: null,
   X_APP_TOKEN: null,
   IOS_APP_ID: 1299153149,

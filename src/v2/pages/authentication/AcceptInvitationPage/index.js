@@ -53,7 +53,6 @@ class AcceptInvitationPage extends Component {
     const { validation_token } = this.state
     const { invitation_token, raw_invitation_token } = this.props
 
-    console.log({ invitation_token, raw_invitation_token })
     return (
       <Query query={inviteeQuery} variables={{ invitation_token }} ssr={false}>
         {({ loading, error, data }) => {
