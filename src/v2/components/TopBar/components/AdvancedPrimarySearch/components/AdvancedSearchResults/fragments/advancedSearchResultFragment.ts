@@ -3,6 +3,7 @@ import { gql } from '@apollo/client'
 import loadingBreadcrumbChannelFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbChannel'
 import loadingBreadcrumbUserFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbUser'
 import loadingBreadcrumbGroupFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbGroup'
+import advancedSearchResultBlockFragment from '../../AdvancedSearchResultBlock/fragments/advancedSearchResultBlockFragment'
 
 export default gql`
   fragment AdvancedQuickSearchResult on SsearchResult {
@@ -39,8 +40,10 @@ export default gql`
     ...LoadingBreadcrumbChannel
     ...LoadingBreadcrumbGroup
     ...LoadingBreadcrumbUser
+    ...AdvancedQuickSearchResultBlock
   }
   ${loadingBreadcrumbChannelFragment}
   ${loadingBreadcrumbUserFragment}
   ${loadingBreadcrumbGroupFragment}
+  ${advancedSearchResultBlockFragment}
 `
