@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { ResultBlock } from 'v2/components/TopBar/components/AdvancedPrimarySearch/components/AdvancedSearchResultBlock'
 import Box from 'v2/components/UI/Box'
 
 import Icons from 'v2/components/UI/Icons'
@@ -13,6 +14,10 @@ const Container = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  img {
+    width: 16px;
+  }
 `
 
 const ChannelIcon = styled(Box)`
@@ -22,13 +27,26 @@ const ChannelIcon = styled(Box)`
 `
 
 interface PrimarySearchIconProps {
-  result?: PrimarySearchResult
+  result?: PrimarySearchResult | ResultBlock
 }
 
 export const PrimarySearchIcon: React.FC<PrimarySearchIconProps> = ({
   result,
 }) => {
   if (!result) return null
+
+  if (
+    result.__typename === 'Link' ||
+    result.__typename === 'Image' ||
+    result.__typename === 'Attachment' ||
+    result.__typename === 'Embed'
+  ) {
+    return (
+      <Container>
+        <img src={result.src} />
+      </Container>
+    )
+  }
 
   if (result.__typename === 'Channel') {
     return (
@@ -42,6 +60,7 @@ export const PrimarySearchIcon: React.FC<PrimarySearchIconProps> = ({
     Channel: 'Channel',
     User: 'Profile',
     Group: 'Group',
+    Text: 'Text',
   }[result.__typename]
 
   return (

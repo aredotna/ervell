@@ -19,6 +19,7 @@ import { WhatEnum } from '__generated__/globalTypes'
 import advancedSearchResultsQuery from './queries/advancedSearchResultsQuery'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 import AdvancedSearchResultsTotal from '../AdvancedSearchResultsTotal'
+import { AdvancedSearchResultBlock } from '../AdvancedSearchResultBlock'
 
 interface AdvancedSearchResultsContainerProps {
   searchInputRef?: React.RefObject<HTMLInputElement>
@@ -26,14 +27,7 @@ interface AdvancedSearchResultsContainerProps {
   onResultClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
-const INVALID_TYPES = [
-  'Attachment',
-  'Embed',
-  'Image',
-  'Link',
-  'PendingBlock',
-  'Text',
-]
+const INVALID_TYPES = ['PendingBlock']
 
 export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsContainerProps> = ({
   searchInputRef,
@@ -60,11 +54,15 @@ interface AdvancedSearchResultsQueryProps {
   onResultClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
-const DEFAULTS: AdvancedSearchVariables = {
+const DEFAULTS = (hasId: boolean): AdvancedSearchVariables => ({
   page: 1,
   per: 6,
-  what: { facets: [WhatEnum.CHANNEL, WhatEnum.GROUP, WhatEnum.USER] },
-}
+  what: {
+    facets: hasId
+      ? [WhatEnum.ALL]
+      : [WhatEnum.CHANNEL, WhatEnum.GROUP, WhatEnum.USER],
+  },
+})
 
 export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProps> = ({
   variables,
@@ -80,7 +78,7 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
   >(advancedSearchResultsQuery, { variables, skip: skipQuery })
 
   useEffect(() => {
-    const mergedVariables = merge(DEFAULTS, variables, {
+    const mergedVariables = merge(DEFAULTS(!!variables?.where?.id), variables, {
       per: 10,
       page: 1,
     }) as any
@@ -140,8 +138,9 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   onAnyResultHighlighted,
 }) => {
   const { resetAll, generateUrl, state } = useContext(AdvancedSearchContext)
-  const { pathname } = useLocation()
+  const location = useLocation()
   const navigate = useNavigate()
+  const { pathname } = location
 
   const onEnter = useCallback(
     ({
@@ -163,6 +162,24 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
         searchInputRef?.current?.blur()
         return navigate(element.href, { state: getBreadcrumbPath(element) })
       }
+
+      if (
+        element &&
+        state.interactive &&
+        (element.__typename === 'Attachment' ||
+          element.__typename === 'Embed' ||
+          element.__typename === 'Text' ||
+          element.__typename == 'Image' ||
+          element.__typename === 'Link')
+      ) {
+        const state = location && {
+          background: JSON.stringify(location),
+          context: [],
+        }
+        searchInputRef?.current?.blur()
+        return navigate(element.href, { state })
+      }
+
       searchInputRef?.current?.blur()
       return navigate(generateUrl(false, pathname))
     },
@@ -210,6 +227,22 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
         data?.searches.advanced.results.map((result, _idx) => {
           if (INVALID_TYPES.includes(result.__typename)) {
             return null
+          }
+
+          if (
+            result.__typename === 'Attachment' ||
+            result.__typename === 'Embed' ||
+            result.__typename === 'Image' ||
+            result.__typename === 'Link' ||
+            result.__typename === 'Text'
+          ) {
+            return (
+              <AdvancedSearchResultBlock
+                selected={_idx === index}
+                result={result}
+                onClick={onResultClick}
+              />
+            )
           }
 
           const typedResult = result as any
