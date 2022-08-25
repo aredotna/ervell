@@ -14,12 +14,14 @@ interface AdvancedQuickSearchResultProps {
   index: number
   maxResults: number
   pathname: string
+  selected: boolean
 }
 
 export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps> = ({
   index,
   maxResults,
   pathname,
+  selected,
 }) => {
   const { generateUrl, state } = useContext(AdvancedSearchContext)
   const { data, loading, refetch } = useQuery<
@@ -44,6 +46,7 @@ export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps
         key={`see_all_results_${index === maxResults - 1}`}
         to={generateUrl(false, pathname)}
         pl={ICON_OFFSET}
+        selected={selected}
       >
         <Text fontWeight="bold">{loadingLabel}</Text>
       </PrimarySearchResult>
@@ -74,6 +77,7 @@ export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps
       key={`see_all_results_${index === maxResults - 1}`}
       to={generateUrl(false, pathname)}
       pl={ICON_OFFSET}
+      selected={selected}
     >
       <Text fontWeight="bold">{searchLabel}</Text>
     </PrimarySearchResult>
