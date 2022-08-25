@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import Text from 'v2/components/UI/Text'
@@ -14,7 +14,6 @@ import { AdaptibleLink } from 'v2/components/UI/AdaptibleLink'
 import { PrimarySearchIcon } from '../PrimarySearchIcon'
 import { PrimarySearchCount } from '../PrimarySearchCount'
 import AdvancedSearchReturnLabel from 'v2/components/TopBar/components/AdvancedPrimarySearch/components/AdvancedSearchReturnLabel'
-import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
 
 const Label = styled(Text)`
   font-weight: bold;
@@ -80,33 +79,14 @@ interface PrimarySearchResultProps {
   selected?: boolean
   to?: string
   bg?: any
-  onClick?: (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    result?: AdvancedQuickSearchResult
-  ) => void
 }
 
 export const PrimarySearchResult: React.FC<PrimarySearchResultProps &
-  BoxProps> = ({ result, children, selected = false, onClick, ...rest }) => {
+  BoxProps> = ({ result, children, selected = false, ...rest }) => {
   if (result) {
-    console.log(result)
-    const handleOnClick = useCallback(
-      (
-        e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-        result: AdvancedQuickSearchResult
-      ) => {
-        console.log('handleOnClick', { result })
-        if (onClick) {
-          onClick(e, result)
-        }
-      },
-      [onClick, result]
-    )
-
     return (
       <Container
         href={result.href}
-        onClick={handleOnClick}
         to={result.href}
         state={getBreadcrumbPath(result)}
         selected={selected}

@@ -29,6 +29,7 @@ const Container = styled(AdaptibleLink)<{ hideHover?: boolean }>`
   text-decoration: none;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 
   &:hover {
     background-color: ${props => props.theme.colors.gray.hint};
@@ -172,7 +173,7 @@ export const AdvancedSearchResult: React.FC<AdvancedSearchResultProps &
   }
 
   return (
-    <Container selected={selected} {...rest}>
+    <Container onClick={onClick} selected={selected} {...rest}>
       {children}
     </Container>
   )

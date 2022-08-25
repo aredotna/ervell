@@ -1,13 +1,15 @@
 import { useQuery } from '@apollo/client'
-import React, { useContext, useEffect } from 'react'
+import React, { useCallback, useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router'
 import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
-import PrimarySearchResult from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults/PrimarySearchResult'
 import Text from 'v2/components/UI/Text'
+import useRecentSearches from 'v2/hooks/useRecentSearches'
 import {
   AdvancedQuickSearchTotal,
   AdvancedQuickSearchTotalVariables,
 } from '__generated__/AdvancedQuickSearchTotal'
 import { ICON_OFFSET } from '../AdvancedSearchInput'
+import AdvancedSearchResult from '../AdvancedSearchResult'
 import advancedSearchResultsTotalQuery from './queries/advancedSearchResultsTotalQuery'
 
 interface AdvancedQuickSearchResultProps {
@@ -24,6 +26,8 @@ export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps
   selected,
 }) => {
   const { generateUrl, state } = useContext(AdvancedSearchContext)
+  const navigate = useNavigate()
+  const { addRecentSearch } = useRecentSearches()
   const { data, loading, refetch } = useQuery<
     AdvancedQuickSearchTotal,
     AdvancedQuickSearchTotalVariables
@@ -37,19 +41,24 @@ export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps
 
   const term = state.variables.term?.facet
 
+  const handleClick = useCallback(() => {
+    addRecentSearch(state.variables)
+    return navigate(generateUrl(false, pathname))
+  }, [state, addRecentSearch])
+
   if (loading) {
     const loadingLabel = term
       ? `See all results for '${term}'`
       : 'See all results'
     return (
-      <PrimarySearchResult
+      <AdvancedSearchResult
         key={`see_all_results_${index === maxResults - 1}`}
         to={generateUrl(false, pathname)}
         pl={ICON_OFFSET}
         selected={selected}
       >
         <Text fontWeight="bold">{loadingLabel}</Text>
-      </PrimarySearchResult>
+      </AdvancedSearchResult>
     )
   }
 
@@ -57,13 +66,13 @@ export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps
 
   if (total === 0) {
     return (
-      <PrimarySearchResult
+      <AdvancedSearchResult
         key={`no_results_${index === maxResults - 1}`}
         pl={ICON_OFFSET}
         bg="background"
       >
         <Text fontWeight="bold">No results</Text>
-      </PrimarySearchResult>
+      </AdvancedSearchResult>
     )
   }
 
@@ -73,14 +82,14 @@ export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps
       : 'See all results'
 
   return (
-    <PrimarySearchResult
+    <AdvancedSearchResult
       key={`see_all_results_${index === maxResults - 1}`}
-      to={generateUrl(false, pathname)}
       pl={ICON_OFFSET}
       selected={selected}
+      onClick={handleClick}
     >
       <Text fontWeight="bold">{searchLabel}</Text>
-    </PrimarySearchResult>
+    </AdvancedSearchResult>
   )
 }
 
