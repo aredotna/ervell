@@ -215,6 +215,7 @@
     "underscore.string": "*",
     "use-deep-compare-effect": "^1.8.1",
     "use-keyboard-list-navigation": "^2.3.1",
+    "use-local-storage-state": "17",
     "useragent": "^2.3.0",
     "validator": "*",
     "waypoints": "^4.0.1",

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 
 import Text from 'v2/components/UI/Text'
@@ -8,12 +8,13 @@ import BorderedLock from 'v2/components/UI/BorderedLock'
 import { overflowEllipsis } from 'v2/styles/mixins'
 import { BoxProps, mixin as boxMixin } from 'v2/components/UI/Box'
 
-import { PrimarySearchResult as PrimarySearchResultType } from '__generated__/PrimarySearchResult'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 import { AdaptibleLink } from 'v2/components/UI/AdaptibleLink'
-import { PrimarySearchIcon } from '../PrimarySearchIcon'
-import { PrimarySearchCount } from '../PrimarySearchCount'
+import { AdvancedSearchIcon } from '../AdvancedSearchIcon'
+import { AdvancedSearchCount } from '../AdvancedSearchCount'
 import AdvancedSearchReturnLabel from 'v2/components/TopBar/components/AdvancedPrimarySearch/components/AdvancedSearchReturnLabel'
+import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
+import { AdvancedSearchResultBlock } from '../AdvancedSearchResultBlock'
 
 const Label = styled(Text)`
   font-weight: bold;
@@ -22,12 +23,13 @@ const Label = styled(Text)`
   ${overflowEllipsis}
 `
 
-const Container = styled(AdaptibleLink)`
+const Container = styled(AdaptibleLink)<{ hideHover?: boolean }>`
   ${boxMixin}
   display: flex;
   text-decoration: none;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 
   &:hover {
     background-color: ${props => props.theme.colors.gray.hint};
@@ -74,25 +76,60 @@ Container.defaultProps = {
   borderColor: 'gray.semiLight',
 }
 
-interface PrimarySearchResultProps {
-  result?: PrimarySearchResultType
+interface AdvancedSearchResultProps {
+  result?: AdvancedQuickSearchResult
   selected?: boolean
   to?: string
   bg?: any
+  onClick?: (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    result?: AdvancedQuickSearchResult
+  ) => void
 }
 
-export const PrimarySearchResult: React.FC<PrimarySearchResultProps &
-  BoxProps> = ({ result, children, selected = false, ...rest }) => {
+export const AdvancedSearchResult: React.FC<AdvancedSearchResultProps &
+  BoxProps> = ({ result, children, selected = false, onClick, ...rest }) => {
+  const handleOnClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      if (onClick) {
+        console.log('onClick', result)
+        onClick(e, result)
+      }
+    },
+    [onClick, result]
+  )
+
   if (result) {
+    if (result.__typename == 'PendingBlock') {
+      return null
+    }
+
+    if (
+      result.__typename === 'Attachment' ||
+      result.__typename === 'Embed' ||
+      result.__typename === 'Image' ||
+      result.__typename === 'Link' ||
+      result.__typename === 'Text'
+    ) {
+      return (
+        <AdvancedSearchResultBlock
+          selected={selected}
+          result={result}
+          onClick={onClick}
+        />
+      )
+    }
+
     return (
       <Container
         href={result.href}
+        onClick={handleOnClick}
         to={result.href}
         state={getBreadcrumbPath(result)}
         selected={selected}
         {...rest}
       >
-        <PrimarySearchIcon result={result} />
+        <AdvancedSearchIcon result={result} />
         <ResultContainer>
           <PathContainer>
             {result.__typename === 'Channel' && result.owner && (
@@ -128,7 +165,7 @@ export const PrimarySearchResult: React.FC<PrimarySearchResultProps &
             </Label>
           </PathContainer>
 
-          {!selected && <PrimarySearchCount result={result} />}
+          {!selected && <AdvancedSearchCount result={result} />}
           {selected && <AdvancedSearchReturnLabel label={'Open'} />}
         </ResultContainer>
       </Container>
@@ -136,10 +173,10 @@ export const PrimarySearchResult: React.FC<PrimarySearchResultProps &
   }
 
   return (
-    <Container selected={selected} {...rest}>
+    <Container onClick={onClick} selected={selected} {...rest}>
       {children}
     </Container>
   )
 }
 
-export default PrimarySearchResult
+export default AdvancedSearchResult

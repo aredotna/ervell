@@ -1,8 +1,7 @@
-import React, { useCallback, useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ApolloError, useQuery } from '@apollo/client'
 import { merge } from 'merge-anything'
-import { useLocation, useNavigate } from 'react-router'
-import { useKeyboardListNavigation } from 'use-keyboard-list-navigation'
+import { useLocation } from 'react-router'
 import { isEmpty } from 'lodash'
 
 import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
@@ -17,14 +16,18 @@ import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResu
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 import { WhatEnum } from '__generated__/globalTypes'
 import advancedSearchResultsQuery from './queries/advancedSearchResultsQuery'
-import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 import AdvancedSearchResultsTotal from '../AdvancedSearchResultsTotal'
-import { AdvancedSearchResultBlock } from '../AdvancedSearchResultBlock'
+import { AdvancedSearchDefaultResults } from '../AdvancedSearchDefaultResults'
+import AdvancedSearchResult from '../AdvancedSearchResult'
+import useSearchKeyboardNavigation from '../../hooks/useSearchKeyboardNavigation'
 
 interface AdvancedSearchResultsContainerProps {
   searchInputRef?: React.RefObject<HTMLInputElement>
   onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
-  onResultClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  onResultClick: (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    result?: AdvancedQuickSearchResult
+  ) => void
 }
 
 const INVALID_TYPES = ['PendingBlock']
@@ -35,6 +38,17 @@ export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsConta
   onResultClick,
 }) => {
   const { state } = useContext(AdvancedSearchContext)
+
+  const showRecentSearches = state.variables.term?.facet === undefined
+
+  if (showRecentSearches) {
+    return (
+      <AdvancedSearchDefaultResults
+        onAnyResultHighlighted={onAnyResultHighlighted}
+      />
+    )
+  }
+
   return (
     <>
       <AdvancedSearchResultsQuery
@@ -51,7 +65,10 @@ interface AdvancedSearchResultsQueryProps {
   variables: AdvancedSearchVariables
   searchInputRef?: React.RefObject<HTMLInputElement>
   onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
-  onResultClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  onResultClick: (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    result?: AdvancedQuickSearchResult
+  ) => void
 }
 
 const DEFAULTS = (hasId: boolean): AdvancedSearchVariables => ({
@@ -124,7 +141,10 @@ interface AdvancedSearchResultsProps {
   loading: boolean
   error: ApolloError | null
   searchInputRef?: React.RefObject<HTMLInputElement>
-  onResultClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  onResultClick: (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    result?: AdvancedQuickSearchResult
+  ) => void
   onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -137,64 +157,16 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   onResultClick,
   onAnyResultHighlighted,
 }) => {
-  const { resetAll, generateUrl, state } = useContext(AdvancedSearchContext)
+  const { state } = useContext(AdvancedSearchContext)
   const location = useLocation()
-  const navigate = useNavigate()
   const { pathname } = location
-
-  const onEnter = useCallback(
-    ({
-      element,
-      state,
-    }: {
-      index: number
-      element: AdvancedQuickSearchResult | null
-      state: any
-    }) => {
-      if (
-        element &&
-        state.interactive &&
-        (element.__typename === 'User' ||
-          element.__typename === 'Group' ||
-          element.__typename === 'Channel')
-      ) {
-        resetAll()
-        searchInputRef?.current?.blur()
-        return navigate(element.href, { state: getBreadcrumbPath(element) })
-      }
-
-      if (
-        element &&
-        state.interactive &&
-        (element.__typename === 'Attachment' ||
-          element.__typename === 'Embed' ||
-          element.__typename === 'Text' ||
-          element.__typename == 'Image' ||
-          element.__typename === 'Link')
-      ) {
-        const state = location && {
-          background: JSON.stringify(location),
-          context: [],
-        }
-        searchInputRef?.current?.blur()
-        return navigate(element.href, { state })
-      }
-
-      searchInputRef?.current?.blur()
-      return navigate(generateUrl(false, pathname))
-    },
-    [searchInputRef, generateUrl, pathname, resetAll]
-  )
 
   const results =
     !error && !loading && data ? [...data?.searches.advanced.results, null] : []
 
-  const { index, interactive } = useKeyboardListNavigation({
-    ref: searchInputRef,
-    list: results,
-    waitForInteractive: true,
-    defaultValue: null,
-    onEnter,
+  const { index, interactive } = useSearchKeyboardNavigation({
+    searchInputRef,
+    results,
   })
 
   useEffect(() => {
@@ -229,28 +201,10 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
             return null
           }
 
-          if (
-            result.__typename === 'Attachment' ||
-            result.__typename === 'Embed' ||
-            result.__typename === 'Image' ||
-            result.__typename === 'Link' ||
-            result.__typename === 'Text'
-          ) {
-            return (
-              <AdvancedSearchResultBlock
-                selected={_idx === index}
-                result={result}
-                onClick={onResultClick}
-              />
-            )
-          }
-
-          const typedResult = result as any
-
           return (
-            <PrimarySearchResult
-              key={`result_${result.__typename}_${typedResult.id}`}
-              result={typedResult}
+            <AdvancedSearchResult
+              key={`result_${result.__typename}_${result.id}`}
+              result={result}
               selected={_idx === index}
               onClick={onResultClick}
             />
@@ -262,6 +216,7 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
           index={index}
           maxResults={maxResults}
           pathname={pathname}
+          selected={index == maxResults - 1}
         />
       )}
     </>

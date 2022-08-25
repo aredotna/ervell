@@ -22172,6 +22172,11 @@ use-keyboard-list-navigation@^2.3.1:
   dependencies:
     map-cursor-to-max "^1.0.0"
 
+use-local-storage-state@17:
+  version "17.2.0"
+  resolved "https://registry.yarnpkg.com/use-local-storage-state/-/use-local-storage-state-17.2.0.tgz#4928f792b0030b9fca3e9b7cb15e39526dfbb41f"
+  integrity sha512-CcnSJ3oaCbb4aXPRpctXNoAOfJ1V4+OWLHrvA2s2hOYCE7HG0QEyKd324XAs7FsyXv/uzYcu7sPxn+KwvJIwlw==
+
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"

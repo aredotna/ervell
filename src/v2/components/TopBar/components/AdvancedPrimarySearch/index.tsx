@@ -32,6 +32,8 @@ import { useLocation, useNavigate } from 'react-router'
 import { useQuery } from '@apollo/client'
 import { TopBarUiStateQuery } from '__generated__/TopBarUiStateQuery'
 import topBarUiStateQuery from './queries/topBarUiStateQuery'
+import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
+import useRecentSearches from 'v2/hooks/useRecentSearches'
 
 const Container = styled(Box)`
   position: relative;
@@ -125,6 +127,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const { pathname } = useLocation()
   const navigate = useNavigate()
 
+  const { addRecentSearch } = useRecentSearches()
+
   const toggleFilterOpen = useCallback(() => {
     try {
       Cookies.set(`TopBar--filterState`, !filterOpen)
@@ -213,6 +217,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
       if (e.key === 'Escape') {
         resetAll()
         onClose()
+        searchInputRef.current.blur()
       }
 
       if (e.key === 'Enter' && !anyResultHighlighted) {
@@ -224,13 +229,18 @@ const AdvancedPrimarySearchContainer: React.FC<{
   )
 
   const handleResultClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    (
+      e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+      result: AdvancedQuickSearchResult
+    ) => {
+      if (result) addRecentSearch(result)
+
       if (!e.metaKey) {
         resetAll()
         onClose()
       }
     },
-    []
+    [addRecentSearch]
   )
 
   return (

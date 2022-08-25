@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import advancedSearchResultFragment from '../fragments/advancedSearchResultFragment'
+import advancedSearchResultFragment from '../../AdvancedSearchResult/fragment/advancedSearchResultFragment'
 
 export default gql`
   query AdvancedQuickSearch(
