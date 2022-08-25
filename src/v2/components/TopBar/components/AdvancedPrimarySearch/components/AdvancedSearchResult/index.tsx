@@ -89,6 +89,16 @@ interface AdvancedSearchResultProps {
 
 export const AdvancedSearchResult: React.FC<AdvancedSearchResultProps &
   BoxProps> = ({ result, children, selected = false, onClick, ...rest }) => {
+  const handleOnClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      if (onClick) {
+        console.log('onClick', result)
+        onClick(e, result)
+      }
+    },
+    [onClick, result]
+  )
+
   if (result) {
     if (result.__typename == 'PendingBlock') {
       return null
@@ -109,16 +119,6 @@ export const AdvancedSearchResult: React.FC<AdvancedSearchResultProps &
         />
       )
     }
-
-    const handleOnClick = useCallback(
-      (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        if (onClick) {
-          console.log('onClick', result)
-          onClick(e, result)
-        }
-      },
-      [onClick, result]
-    )
 
     return (
       <Container
