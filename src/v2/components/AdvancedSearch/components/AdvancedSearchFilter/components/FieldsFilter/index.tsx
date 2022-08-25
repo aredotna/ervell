@@ -47,6 +47,11 @@ export const FieldsFilter: React.FC<FilterProps> = ({
       />
       <FilterOption
         currentFilters={currentFilters}
+        filter={FieldsEnum.CONTENT}
+        {...updateProps}
+      />
+      <FilterOption
+        currentFilters={currentFilters}
         filter={FieldsEnum.DOMAIN}
         {...updateProps}
       />
