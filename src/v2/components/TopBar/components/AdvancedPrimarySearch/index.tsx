@@ -7,6 +7,7 @@ import React, {
   useState,
 } from 'react'
 import styled from 'styled-components'
+import Cookies from 'cookies-js'
 
 import Box from 'v2/components/UI/Box'
 
@@ -28,6 +29,11 @@ import { isEmpty } from 'lodash'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
 import AdvancedSearchReturnLabel from './components/AdvancedSearchReturnLabel'
 import { useLocation, useNavigate } from 'react-router'
+import { useQuery } from '@apollo/client'
+import { TopBarUiStateQuery } from '__generated__/TopBarUiStateQuery'
+import topBarUiStateQuery from './queries/topBarUiStateQuery'
+import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
+import useRecentSearches from 'v2/hooks/useRecentSearches'
 
 const Container = styled(Box)`
   position: relative;
@@ -106,20 +112,32 @@ const AdvancedPrimarySearchContainer: React.FC<{
   } = useContext(AdvancedSearchContext)
   const { slug: currentUserId } = useSerializedMe()
 
+  const { data, refetch } = useQuery<TopBarUiStateQuery>(topBarUiStateQuery)
+
   const searchInputRef = useRef(null)
   const searchRef = useRef(null)
   const containerRef = useRef(null)
   const [mode, setMode] = useState<
     'resting' | 'blur' | 'focus' | 'hover' | 'active' | 'hoverSecondary'
   >(state.query ? 'blur' : 'resting')
-  const [filterOpen, setFilterOpen] = useState(false)
+  const [filterOpen, setFilterOpen] = useState<boolean>(
+    data.cookies.view == 'true' || false
+  )
   const [anyResultHighlighted, setAnyResultHighlighted] = useState(false)
   const { pathname } = useLocation()
   const navigate = useNavigate()
 
+  const { addRecentSearch } = useRecentSearches()
+
   const toggleFilterOpen = useCallback(() => {
+    try {
+      Cookies.set(`TopBar--filterState`, !filterOpen)
+      refetch()
+    } catch (err) {
+      console.error(err)
+    }
     setFilterOpen(!filterOpen)
-  }, [setFilterOpen, filterOpen])
+  }, [setFilterOpen, filterOpen, refetch])
 
   const handleFocus = useCallback(() => {
     state.variables?.where?.id &&
@@ -199,6 +217,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
       if (e.key === 'Escape') {
         resetAll()
         onClose()
+        searchInputRef.current.blur()
       }
 
       if (e.key === 'Enter' && !anyResultHighlighted) {
@@ -210,13 +229,18 @@ const AdvancedPrimarySearchContainer: React.FC<{
   )
 
   const handleResultClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    (
+      e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+      result: AdvancedQuickSearchResult
+    ) => {
+      if (result) addRecentSearch(result)
+
       if (!e.metaKey) {
         resetAll()
         onClose()
       }
     },
-    []
+    [addRecentSearch]
   )
 
   return (

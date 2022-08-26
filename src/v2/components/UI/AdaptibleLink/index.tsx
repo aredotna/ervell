@@ -11,6 +11,7 @@ interface AdaptibleLinkProps {
     state: any
   }
   href: string
+  onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 // TODO: *Delete and replace with react-router Link*
@@ -28,7 +29,7 @@ export const AdaptibleLink: React.FC<AdaptibleLinkProps> = ({
 
   const params = isOutsideMainRouter ? href : { to }
 
-  const onClick = useCallback(
+  const handleClick = useCallback(
     e => {
       if (isOutsideMainRouter && e.metaKey) {
         window.open(href, '_blank')
@@ -46,14 +47,14 @@ export const AdaptibleLink: React.FC<AdaptibleLinkProps> = ({
 
   if (href || to) {
     return (
-      <Link onMouseDown={onClick} {...params} {...rest}>
+      <Link onMouseDown={handleClick} {...params} {...rest}>
         {children}
       </Link>
     )
   }
 
   return (
-    <Text onMouseDown={onClick} {...rest}>
+    <Text onMouseDown={handleClick} {...rest}>
       {children}
     </Text>
   )

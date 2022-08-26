@@ -26,11 +26,11 @@ const ChannelIcon = styled(Box)`
   border: 1px solid ${props => props.theme.colors.channel[props.visibility]};
 `
 
-interface PrimarySearchIconProps {
+interface AdvancedSearchIconProps {
   result?: PrimarySearchResult | ResultBlock
 }
 
-export const PrimarySearchIcon: React.FC<PrimarySearchIconProps> = ({
+export const AdvancedSearchIcon: React.FC<AdvancedSearchIconProps> = ({
   result,
 }) => {
   if (!result) return null

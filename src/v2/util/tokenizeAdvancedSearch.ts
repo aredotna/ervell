@@ -92,9 +92,10 @@ export const stringifyVariable = (
   field
 ) => {
   const value = variables[field]?.facets
+
   // if this is an array and not empty, map over it
   if (isArray(value) && !isEmpty(value)) {
-    return value.map(mapFacets('fields', null)).join(' ')
+    return value.map(mapFacets(field, null)).join(' ')
   }
 
   // if this is a string and not empty, return it's strinified value

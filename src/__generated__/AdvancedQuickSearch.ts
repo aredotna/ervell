@@ -17,10 +17,6 @@ export interface AdvancedQuickSearch_searches_advanced_filters {
   order: SortOrderEnum[] | null;
 }
 
-export interface AdvancedQuickSearch_searches_advanced_results_Attachment {
-  __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
-}
-
 export interface AdvancedQuickSearch_searches_advanced_results_User {
   __typename: "User";
   id: number;
@@ -51,6 +47,12 @@ export interface AdvancedQuickSearch_searches_advanced_results_Channel_owner_Gro
 
 export type AdvancedQuickSearch_searches_advanced_results_Channel_owner = AdvancedQuickSearch_searches_advanced_results_Channel_owner_User | AdvancedQuickSearch_searches_advanced_results_Channel_owner_Group;
 
+export interface AdvancedQuickSearch_searches_advanced_results_Channel_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
 export interface AdvancedQuickSearch_searches_advanced_results_Channel {
   __typename: "Channel";
   id: number;
@@ -58,9 +60,100 @@ export interface AdvancedQuickSearch_searches_advanced_results_Channel {
   href: string | null;
   visibility: string;
   owner: AdvancedQuickSearch_searches_advanced_results_Channel_owner;
+  title: string;
+  user: AdvancedQuickSearch_searches_advanced_results_Channel_user | null;
 }
 
-export type AdvancedQuickSearch_searches_advanced_results = AdvancedQuickSearch_searches_advanced_results_Attachment | AdvancedQuickSearch_searches_advanced_results_User | AdvancedQuickSearch_searches_advanced_results_Group | AdvancedQuickSearch_searches_advanced_results_Channel;
+export interface AdvancedQuickSearch_searches_advanced_results_Attachment_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface AdvancedQuickSearch_searches_advanced_results_Attachment {
+  __typename: "Attachment";
+  id: number;
+  title: string;
+  href: string | null;
+  user: AdvancedQuickSearch_searches_advanced_results_Attachment_user | null;
+  src: string | null;
+}
+
+export interface AdvancedQuickSearch_searches_advanced_results_PendingBlock_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface AdvancedQuickSearch_searches_advanced_results_PendingBlock {
+  __typename: "PendingBlock";
+  id: number;
+  title: string;
+  href: string | null;
+  user: AdvancedQuickSearch_searches_advanced_results_PendingBlock_user | null;
+}
+
+export interface AdvancedQuickSearch_searches_advanced_results_Embed_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface AdvancedQuickSearch_searches_advanced_results_Embed {
+  __typename: "Embed";
+  id: number;
+  title: string;
+  href: string | null;
+  user: AdvancedQuickSearch_searches_advanced_results_Embed_user | null;
+  src: string | null;
+}
+
+export interface AdvancedQuickSearch_searches_advanced_results_Image_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface AdvancedQuickSearch_searches_advanced_results_Image {
+  __typename: "Image";
+  id: number;
+  title: string;
+  href: string | null;
+  user: AdvancedQuickSearch_searches_advanced_results_Image_user | null;
+  src: string | null;
+}
+
+export interface AdvancedQuickSearch_searches_advanced_results_Link_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface AdvancedQuickSearch_searches_advanced_results_Link {
+  __typename: "Link";
+  id: number;
+  title: string;
+  href: string | null;
+  user: AdvancedQuickSearch_searches_advanced_results_Link_user | null;
+  src: string | null;
+}
+
+export interface AdvancedQuickSearch_searches_advanced_results_Text_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface AdvancedQuickSearch_searches_advanced_results_Text {
+  __typename: "Text";
+  id: number;
+  title: string;
+  href: string | null;
+  user: AdvancedQuickSearch_searches_advanced_results_Text_user | null;
+  content: string;
+}
+
+export type AdvancedQuickSearch_searches_advanced_results = AdvancedQuickSearch_searches_advanced_results_User | AdvancedQuickSearch_searches_advanced_results_Group | AdvancedQuickSearch_searches_advanced_results_Channel | AdvancedQuickSearch_searches_advanced_results_Attachment | AdvancedQuickSearch_searches_advanced_results_PendingBlock | AdvancedQuickSearch_searches_advanced_results_Embed | AdvancedQuickSearch_searches_advanced_results_Image | AdvancedQuickSearch_searches_advanced_results_Link | AdvancedQuickSearch_searches_advanced_results_Text;
 
 export interface AdvancedQuickSearch_searches_advanced {
   __typename: "AdvancedResult";
