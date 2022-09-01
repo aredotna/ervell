@@ -28,7 +28,7 @@ const ResultContainer = styled(Box)`
 `
 
 const Term = styled(Text).attrs({
-  f: [5],
+  f: [4],
   color: 'gray.bold',
   pr: 3,
 })`

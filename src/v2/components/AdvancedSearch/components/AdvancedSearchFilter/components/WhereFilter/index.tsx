@@ -57,7 +57,7 @@ export const WhereFilterOption: React.FC<WhereFilterOptionProps> = ({
 interface WhereFilterProps {
   currentFilter: WhereEnum
   currentDisabledFilters?: AnyFilter[]
-  id?: number
+  id?: string
   toggleFilter: (
     filter: WhereEnum | WhatEnum | FieldsEnum,
     field: 'what' | 'where' | 'fields'

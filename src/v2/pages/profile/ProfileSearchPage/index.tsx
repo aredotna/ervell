@@ -7,17 +7,21 @@ import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
 import Constrain from 'v2/components/UI/Constrain'
 
-import {
-  ProfileSearchPageQuery,
-  ProfileSearchPageQueryVariables,
-} from '__generated__/ProfileSearchPageQuery'
-import profileSearchPageQuery from './queries/profileSearchPageQuery'
 import ProfileSearchMetadata from './components/ProfileSearchMetadata'
 import { AdvancedSearchResultsGrid } from 'v2/components/AdvancedSearch/components/AdvancedSearchResultsGrid'
 import ProfileMetaTags from 'v2/pages/profile/ProfilePage/components/ProfileMetaTags'
 
+import profileSearchPageQuery from './queries/profileSearchPageQuery'
+import { WhereEnum } from '__generated__/globalTypes'
+import {
+  ProfileSearchPageQuery,
+  ProfileSearchPageQueryVariables,
+} from '__generated__/ProfileSearchPageQuery'
+import useSerializedMe from 'v2/hooks/useSerializedMe'
+
 export const ProfileSearchPage: React.FC = () => {
   const { id } = useParams()
+  const { id: myId } = useSerializedMe()
 
   const { data, error, loading } = useQuery<
     ProfileSearchPageQuery,
@@ -44,12 +48,16 @@ export const ProfileSearchPage: React.FC = () => {
     identity: { identifiable },
   } = data
 
+  const isMe = identifiable.id === parseInt(myId)
+  const where = isMe ? WhereEnum.MY : WhereEnum.USER
+  const parsedId = isMe ? null : id
+
   return (
     <TopBarLayout>
       <ProfileMetaTags identifiable={identifiable} />
       <Constrain>
         <ProfileSearchMetadata identifiable={identifiable} />
-        <AdvancedSearchResultsGrid />
+        <AdvancedSearchResultsGrid initialScope={{ where, id: parsedId }} />
       </Constrain>
     </TopBarLayout>
   )

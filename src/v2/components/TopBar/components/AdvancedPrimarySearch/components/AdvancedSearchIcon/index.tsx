@@ -33,7 +33,7 @@ interface AdvancedSearchIconProps {
 export const AdvancedSearchIcon: React.FC<AdvancedSearchIconProps> = ({
   result,
 }) => {
-  if (!result) return null
+  if (!result || !result.__typename) return null
 
   if (
     result.__typename === 'Link' ||

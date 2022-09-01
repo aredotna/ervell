@@ -22,6 +22,7 @@ export default function({
     generateUrl,
     state: { variables },
   } = useContext(AdvancedSearchContext)
+
   const { addRecentSearch } = useRecentSearches()
   const location = useLocation()
   const navigate = useNavigate()

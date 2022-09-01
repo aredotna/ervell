@@ -25,7 +25,7 @@ export interface AdvancedQuickSearchTotal {
 
 export interface AdvancedQuickSearchTotalVariables {
   term?: Term | null;
-  where?: Where | null;
+  where?: Where[] | null;
   what?: What | null;
   fields?: Fields | null;
   order?: Order | null;
