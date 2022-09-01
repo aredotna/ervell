@@ -12,7 +12,7 @@ describe('tokenizeSearch', () => {
       'hello world where:my what:image what:text fields:domain fields:url'
     const tokens = tokenizeSearch(query)
     expect(tokens.term).toEqual({ facet: 'hello world' })
-    expect(tokens.where).toEqual({ facet: 'MY' })
+    expect(tokens.where).toEqual([{ facet: 'MY' }])
     expect(tokens.what).toEqual({ facets: ['IMAGE', 'TEXT'] })
     expect(tokens.fields).toEqual({ facets: ['DOMAIN', 'URL'] })
   })
@@ -21,7 +21,7 @@ describe('tokenizeSearch', () => {
     const query = 'hello world where:my where:nothing'
     const tokens = tokenizeSearch(query)
     expect(tokens.term).toEqual({ facet: 'hello world' })
-    expect(tokens.where).toEqual({ facet: 'MY' })
+    expect(tokens.where).toEqual([{ facet: 'MY' }])
   })
 
   it('should filter out key value pairs that do not correspond to anything', () => {
