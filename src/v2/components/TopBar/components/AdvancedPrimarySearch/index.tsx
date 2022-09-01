@@ -330,7 +330,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
         >
           <Controls>
             {(mode === 'focus' || mode === 'active') &&
-              !anyResultHighlighted && <AdvancedSearchReturnLabel />}
+              !anyResultHighlighted && (
+                <AdvancedSearchReturnLabel url={generateUrl(false, pathname)} />
+              )}
             {(mode === 'focus' || mode === 'active') && !filterOpen && (
               <Box mr={5}>
                 <FilterMenuToggle

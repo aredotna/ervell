@@ -165,7 +165,9 @@ export const AdvancedSearchResult: React.FC<AdvancedSearchResultProps &
           </PathContainer>
 
           {!selected && <AdvancedSearchCount result={result} />}
-          {selected && <AdvancedSearchReturnLabel label={'Open'} />}
+          {selected && (
+            <AdvancedSearchReturnLabel url={result.href} label={'Open'} />
+          )}
         </ResultContainer>
       </Container>
     )
