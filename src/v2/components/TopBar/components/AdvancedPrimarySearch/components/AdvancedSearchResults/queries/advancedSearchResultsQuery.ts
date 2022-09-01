@@ -4,7 +4,7 @@ import advancedSearchResultFragment from '../../AdvancedSearchResult/fragment/ad
 export default gql`
   query AdvancedQuickSearch(
     $term: Term
-    $where: Where
+    $where: [Where!]
     $what: What
     $fields: Fields
     $order: Order

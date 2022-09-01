@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 export default gql`
   query AdvancedQuickSearchTotal(
     $term: Term
-    $where: Where
+    $where: [Where!]
     $what: What
     $fields: Fields
     $order: Order

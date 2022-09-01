@@ -13,16 +13,37 @@ import {
   AdvancedSearchVariables,
 } from '__generated__/AdvancedSearch'
 import search from '../../queries/search'
+import { WhereEnum } from '__generated__/globalTypes'
 
-export const AdvancedSearchResultsGrid: React.FC = () => {
+interface Props {
+  initialScope?: {
+    where: WhereEnum
+    id?: string
+  }
+}
+
+export const AdvancedSearchResultsGrid: React.FC<Props> = ({
+  initialScope,
+}) => {
   const { state, setTotal } = useContext(AdvancedSearchContext)
   const [page, setPage] = useState<number>(1)
+
+  const extraVariables = initialScope
+    ? {
+        where: [{ facet: initialScope.where, id: initialScope.id }],
+      }
+    : {}
+
+  const variables: AdvancedSearchVariables = {
+    ...state.variables,
+    ...extraVariables,
+  }
 
   const { data, loading, error, refetch, networkStatus, fetchMore } = useQuery<
     AdvancedSearch,
     AdvancedSearchVariables
   >(search, {
-    variables: { ...state.variables },
+    variables,
   })
 
   useEffect(() => {

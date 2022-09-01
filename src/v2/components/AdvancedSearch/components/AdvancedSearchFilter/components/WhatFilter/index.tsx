@@ -14,7 +14,7 @@ import {
 import {
   currentBlockFilterLabels,
   hasBlockFilters,
-} from 'v2/components/AdvancedSearch/utils/where'
+} from 'v2/components/AdvancedSearch/utils/what'
 import Box from 'v2/components/UI/Box'
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
 

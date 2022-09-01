@@ -92,7 +92,6 @@ export const AdvancedSearchResult: React.FC<AdvancedSearchResultProps &
   const handleOnClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       if (onClick) {
-        console.log('onClick', result)
         onClick(e, result)
       }
     },

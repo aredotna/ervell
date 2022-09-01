@@ -22,15 +22,12 @@ export const ProfileSearchMetadata: React.FC<ProfileMetadataProps> = ({
   const navigate = useNavigate()
   const { state } = useContext(AdvancedSearchContext)
 
+  console.log('PROFILESEARCHMETADATA state', state)
+
   useEffect(() => {
+    console.log('NAVIGATE state', state)
     navigate(generateUrlFromVariables(state.variables), { replace: true })
-  }, [
-    state.variables.where?.facet,
-    state.variables.what?.facets,
-    state.variables.fields?.facets,
-    state.variables.order?.facet,
-    state.variables.order?.dir,
-  ])
+  }, [state.query])
 
   return (
     <Box mb={9}>

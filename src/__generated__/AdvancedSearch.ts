@@ -406,7 +406,7 @@ export interface AdvancedSearch {
 
 export interface AdvancedSearchVariables {
   term?: Term | null;
-  where?: Where | null;
+  where?: Where[] | null;
   what?: What | null;
   fields?: Fields | null;
   order?: Order | null;

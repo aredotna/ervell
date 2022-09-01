@@ -51,7 +51,7 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
   const term = searchTokens.join(' ').trim()
 
   const variables = {
-    where: whereTokens ? { facet: whereTokens } : undefined,
+    where: whereTokens ? [{ facet: whereTokens }] : undefined,
     what: whatTokens.length ? { facets: whatTokens } : undefined,
     fields: fieldsTokens.length ? { facets: fieldsTokens } : undefined,
     order: sortToken ? { facet: sortToken, dir: directionToken } : undefined,
@@ -59,6 +59,8 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
     page,
     term: term === '' ? null : { facet: term },
   }
+
+  console.log('tokenize', { variables })
 
   return pickBy(variables)
 }
@@ -68,6 +70,8 @@ export const stringifyFacet = (
   filter: WhereEnum | WhatEnum | FieldsEnum,
   id?: string
 ) => {
+  console.log({ field, filter, id })
+
   if (field === 'where' && id && filter !== 'MY') {
     return `${filter.toLowerCase()}:${id}`
   }
@@ -108,8 +112,12 @@ export const stringifyVariable = (
 
 export const stringifyVariables = (variables: AdvancedSearchVariables) => {
   const strings = [
-    variables?.where?.facet
-      ? stringifyFacet('where', variables.where.facet, variables.where.id)
+    variables?.where && variables?.where[0]?.facet
+      ? stringifyFacet(
+          'where',
+          variables?.where[0]?.facet,
+          variables?.where[0]?.id
+        )
       : undefined,
     stringifyVariable(variables, 'what'),
     stringifyVariable(variables, 'fields'),
@@ -119,6 +127,8 @@ export const stringifyVariables = (variables: AdvancedSearchVariables) => {
     variables?.term?.facet ? `${variables?.term.facet}` : undefined,
   ]
 
+  console.log({ strings })
+
   return strings.filter(Boolean).join(' ')
 }
 
@@ -126,16 +136,21 @@ const getUrlPath = (variables: AdvancedSearchVariables) => {
   let urlBase = '/search2'
 
   if (
-    variables.where?.id &&
-    (variables.where.facet === WhereEnum.USER ||
-      variables.where.facet === WhereEnum.GROUP ||
-      variables.where.facet === WhereEnum.MY)
+    variables.where &&
+    variables?.where[0]?.id &&
+    (variables?.where[0]?.facet === WhereEnum.USER ||
+      variables?.where[0]?.facet === WhereEnum.GROUP ||
+      variables?.where[0]?.facet === WhereEnum.MY)
   ) {
-    urlBase = `/${variables.where.id}/search`
+    urlBase = `/${variables?.where[0]?.id}/search`
   }
 
-  if (variables.where?.id && variables.where.facet === WhereEnum.CHANNEL) {
-    urlBase = `/scoped/${variables.where.id}/search`
+  if (
+    variables.where &&
+    variables?.where[0]?.id &&
+    variables?.where[0]?.facet === WhereEnum.CHANNEL
+  ) {
+    urlBase = `/scoped/${variables?.where[0]?.id}/search`
   }
 
   return urlBase
@@ -148,6 +163,7 @@ export const generateUrlFromVariables = (
 ) => {
   const path =
     basePath !== '/' && basePath ? `${basePath}/search` : getUrlPath(variables)
+
   const params = stringify(omit(variables, ['page', 'per']), {
     arrayFormat: 'brackets',
     encode: false,

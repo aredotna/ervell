@@ -19,8 +19,6 @@ export default function() {
 
   const addRecentSearch = useCallback(
     (search: RecentSearch) => {
-      console.log('addingRecentSearch', { search })
-
       let newRecentSearches = recentSearches?.filter(x => x) || []
 
       // find if search is a search result or a search variables

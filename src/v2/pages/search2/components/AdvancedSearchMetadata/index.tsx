@@ -16,13 +16,7 @@ const AdvancedSearchMetadata: React.FC = () => {
 
   useEffect(() => {
     navigate(generateUrlFromVariables(state.variables), { replace: true })
-  }, [
-    state.variables.where?.facet,
-    state.variables.what?.facets,
-    state.variables.fields?.facets,
-    state.variables.order?.facet,
-    state.variables.order?.dir,
-  ])
+  }, [state.query])
 
   return (
     <Box mb={9}>

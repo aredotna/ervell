@@ -6,7 +6,7 @@ import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/f
 export default gql`
   query AdvancedSearch(
     $term: Term
-    $where: Where
+    $where: [Where!]
     $what: What
     $fields: Fields
     $order: Order
