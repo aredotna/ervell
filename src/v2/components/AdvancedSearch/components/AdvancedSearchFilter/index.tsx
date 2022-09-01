@@ -1,5 +1,6 @@
 import React, { useCallback, useContext } from 'react'
 import styled from 'styled-components'
+import { getCurrentFilter } from 'v2/components/AdvancedSearch/utils/filters'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 
@@ -62,10 +63,8 @@ export const AdvancedSearchFilter: React.FC<AdvancedSearchFilterProps> = ({
       filter: WhereEnum | WhatEnum | FieldsEnum,
       field: 'what' | 'where' | 'fields'
     ) => {
-      const currentFilter =
-        field == 'where'
-          ? state.variables[field]?.facet
-          : state.variables[field]?.facets || null
+      const currentFilter = getCurrentFilter(field, state.variables)
+
       currentFilter == filter
         ? removeFilter(field, filter)
         : addFilter(field, filter)
@@ -82,10 +81,7 @@ export const AdvancedSearchFilter: React.FC<AdvancedSearchFilterProps> = ({
       filter: WhereEnum | WhatEnum | FieldsEnum,
       field: 'what' | 'where' | 'fields'
     ) => {
-      const currentFilter =
-        field == 'where'
-          ? state.variables[field]?.facet
-          : state.variables[field]?.facets || null
+      const currentFilter = getCurrentFilter(field, state.variables)
       currentFilter == WhereEnum.ALL
         ? removeFilter(field, filter)
         : setAllFilter(field)
@@ -93,7 +89,8 @@ export const AdvancedSearchFilter: React.FC<AdvancedSearchFilterProps> = ({
     [state, state.variables, addFilter, removeFilter]
   )
 
-  const id = state?.variables?.where?.id as any
+  const where = (state?.variables?.where && state?.variables?.where[0]) || null
+  const id = where?.id
 
   return (
     <FiltersContainer>
@@ -101,7 +98,7 @@ export const AdvancedSearchFilter: React.FC<AdvancedSearchFilterProps> = ({
         id={id || null}
         clearAndSetAll={toggleAll}
         toggleFilter={toggleFilter}
-        currentFilter={state.variables?.where?.facet}
+        currentFilter={where?.facet}
         currentDisabledFilters={state.disabledFilters}
       />
       <WhatFilter

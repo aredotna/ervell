@@ -95,10 +95,14 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
   >(advancedSearchResultsQuery, { variables, skip: skipQuery })
 
   useEffect(() => {
-    const mergedVariables = merge(DEFAULTS(!!variables?.where?.id), variables, {
-      per: 10,
-      page: 1,
-    }) as any
+    const mergedVariables = merge(
+      DEFAULTS(!!(variables?.where && variables?.where[0]?.id)),
+      variables,
+      {
+        per: 10,
+        page: 1,
+      }
+    ) as any
     if (mergedVariables.term?.facet && !isEmpty(mergedVariables.term?.facet)) {
       refetch(mergedVariables)
     }
@@ -211,7 +215,7 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
           )
         })}
 
-      {(term || state?.variables?.where?.id) && (
+      {(term || state?.variables?.where[0]?.id) && (
         <AdvancedSearchResultsTotal
           index={index}
           maxResults={maxResults}

@@ -40,6 +40,8 @@ type Action =
         id?: string
       }
     }
+  | { type: 'ADD_WHERE_FILTER'; payload: { filter: WhereEnum; id: string } }
+  | { type: 'REMOVE_WHERE_FILTER'; payload: { filter: WhereEnum; id: string } }
   | {
       type: 'REMOVE_FILTER'
       payload: {
@@ -88,8 +90,9 @@ const extractVariableFromStateAndPayload = (
   const variables = { ...state.variables }
   const existingFacet: any =
     field === 'where'
-      ? variables[field]?.facet
+      ? variables.where && variables.where[0]?.facet
       : variables[field]?.facets || null
+
   return {
     field,
     filter: typedFilter,
@@ -109,16 +112,42 @@ export const ReducerMethodMap = {
       id,
     } = extractVariableFromStateAndPayload(state, action.payload)
     const newValue = filter as WhereEnum
-    const facetKey = field === 'where' ? 'facet' : 'facets'
 
-    set(variables, `${field}.${facetKey}`, newValue)
-    if (id) set(variables, `${field}.id`, id)
+    if (field === 'where') {
+      set(variables, 'where', [{ facet: newValue }])
+    } else {
+      set(variables, `${field}.facets`, newValue)
+    }
+
+    if (id) set(variables, 'where[0].id', id)
 
     const regex = new RegExp(`(\\s)${field}:(\\S*)`, 'gm')
     const query = existingFacet
       ? state.query.replace(regex, ` ${stringifyFacet(field, filter)}`)
       : `${state.query} ${stringifyFacet(field, filter, id)} `
 
+    const disabledFilters = calculatedDisabledFilters(variables, query)
+
+    return {
+      query,
+      variables,
+      disabledFilters,
+      mode: state.mode,
+      total: state.total,
+    }
+  },
+
+  ADD_WHERE_FILTER: (state: State, action: any) => {
+    const { field, filter, variables, id } = extractVariableFromStateAndPayload(
+      state,
+      action.payload
+    )
+    const newValue = filter as WhereEnum
+
+    set(variables, 'where', [{ facet: newValue }, ...variables.where])
+    if (id) set(variables, 'where[0].id', id)
+
+    const query = `${state.query} ${stringifyFacet(field, filter, id)} `
     const disabledFilters = calculatedDisabledFilters(variables, query)
 
     return {
@@ -138,6 +167,24 @@ export const ReducerMethodMap = {
 
     set(variables, `${field}`, null)
     delete variables[field]
+    const query = state.query.replace(` ${stringifyFacet(field, filter)}`, '')
+    const disabledFilters = calculatedDisabledFilters(variables, query)
+
+    return { ...state, query, variables, disabledFilters }
+  },
+
+  REMOVE_WHERE_FILTER: (state: State, action: any) => {
+    const { field, filter, variables } = extractVariableFromStateAndPayload(
+      state,
+      action.payload
+    )
+
+    set(
+      variables,
+      'where',
+      variables.where.filter(({ facet }) => facet !== filter)
+    )
+
     const query = state.query.replace(` ${stringifyFacet(field, filter)}`, '')
     const disabledFilters = calculatedDisabledFilters(variables, query)
 
@@ -255,6 +302,8 @@ const reducer = (state: State, action: Action) => {
     case 'SET_VARIABLES':
     case 'RESET_ALL':
     case 'SET_TOTAL':
+    case 'ADD_WHERE_FILTER':
+    case 'REMOVE_WHERE_FILTER':
       return ReducerMethodMap[action.type](state, action)
     case 'TOGGLE_ALL_BLOCKS':
       return state
@@ -273,6 +322,14 @@ interface AdvancedSearchContextType {
     field: 'where' | 'what' | 'fields',
     filter: WhereEnum | WhatEnum | FieldsEnum
   ) => void
+  addWhereFilter: (
+    filter: WhereEnum | WhatEnum | FieldsEnum,
+    id?: string
+  ) => void
+  removeWhereFilter: (
+    filter: WhereEnum | WhatEnum | FieldsEnum,
+    id?: string
+  ) => void
   setAllFilter: (field: 'where' | 'what' | 'fields') => void
   setOrder: (facet: SortOrderEnum, dir: SortDirection) => void
   setTotal: (total: number) => void
@@ -285,6 +342,8 @@ interface AdvancedSearchContextType {
 export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
   addFilter: () => {},
   removeFilter: () => {},
+  addWhereFilter: () => {},
+  removeWhereFilter: () => {},
   updateQuery: () => {},
   setAllFilter: () => {},
   setOrder: () => {},
@@ -312,15 +371,18 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
   children,
 }) => {
   const [searchParams] = useSearchParams()
-  // const { search } = useLocation()
   const parsedVariables = parse(searchParams.toString(), {
     ignoreQueryPrefix: true,
+    parseArrays: true,
   })
-  const where = parsedVariables.where as any
+
   const page = parsedVariables.page as any
   const per = parsedVariables.per as any
 
-  set(parsedVariables, 'where.id', where?.id)
+  if (parsedVariables.where && parsedVariables.where[0].facet == WhereEnum.MY) {
+    parsedVariables.where[0].id = null
+  }
+
   if (parseInt(page)) set(parsedVariables, 'page', parseInt(page))
   if (parseInt(per)) set(parsedVariables, 'per', parseInt(per))
 
@@ -343,6 +405,10 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     []
   )
 
+  const addWhereFilter = useCallback((filter: WhereEnum, id?: string) => {
+    dispatch({ type: 'ADD_WHERE_FILTER', payload: { filter, id } })
+  }, [])
+
   const removeFilter = useCallback(
     (
       field: 'where' | 'what' | 'fields',
@@ -352,6 +418,10 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     },
     []
   )
+
+  const removeWhereFilter = useCallback((filter: WhereEnum, id?: string) => {
+    dispatch({ type: 'REMOVE_WHERE_FILTER', payload: { filter, id } })
+  }, [])
 
   const setAllFilter = useCallback((field: 'where' | 'what' | 'fields') => {
     dispatch({ type: 'SET_ALL', payload: { field } })
@@ -373,7 +443,7 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     (paramsOnly?: boolean, basePath?: string) => {
       return generateUrlFromVariables(state.variables, paramsOnly, basePath)
     },
-    [state, state.variables]
+    [state.query]
   )
 
   const setTotal = useCallback((total: number) => {
@@ -397,7 +467,9 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
       value={{
         state,
         addFilter,
+        addWhereFilter,
         removeFilter,
+        removeWhereFilter,
         updateQuery,
         setAllFilter,
         setOrder,

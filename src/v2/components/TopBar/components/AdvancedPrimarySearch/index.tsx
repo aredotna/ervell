@@ -126,7 +126,6 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const [anyResultHighlighted, setAnyResultHighlighted] = useState(false)
   const { pathname } = useLocation()
   const navigate = useNavigate()
-
   const { addRecentSearch } = useRecentSearches()
 
   const toggleFilterOpen = useCallback(() => {
@@ -140,9 +139,10 @@ const AdvancedPrimarySearchContainer: React.FC<{
   }, [setFilterOpen, filterOpen, refetch])
 
   const handleFocus = useCallback(() => {
-    state.variables?.where?.id &&
+    state.variables?.where &&
+      state.variables?.where[0]?.id &&
       isEmpty(state.query) &&
-      removeFilter('where', state.variables.where.facet)
+      removeFilter('where', state.variables.where[0]?.facet)
     isEmpty(state.query) ? setMode('focus') : setMode('active')
   }, [mode, setMode, state.query])
 
@@ -222,10 +222,11 @@ const AdvancedPrimarySearchContainer: React.FC<{
 
       if (e.key === 'Enter' && !anyResultHighlighted) {
         onClose()
+        addRecentSearch(state.variables)
         return navigate(generateUrl(false, pathname))
       }
     },
-    [anyResultHighlighted, onClose, resetAll, generateUrl]
+    [anyResultHighlighted, onClose, resetAll, generateUrl, addRecentSearch]
   )
 
   const handleResultClick = useCallback(

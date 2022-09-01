@@ -34,7 +34,7 @@ const disabledFilterRules = {
 export const allFacetsFromVariables = (
   variables: AdvancedSearchVariables
 ): AnyFilter[] => {
-  const whereFacets = [variables?.where?.facet]
+  const whereFacets = variables?.where ? variables?.where[0]?.facet : []
   const fieldsFacets = variables?.fields?.facets
   const whatFacets = variables?.what?.facets
   const orderFacet = variables?.order?.facet
@@ -54,4 +54,16 @@ export const calculatedDisabledFilters = (
   if (isEmpty(query)) disabledFilters.push(WhatEnum.USER)
 
   return disabledFilters
+}
+
+export const getCurrentFilter = (
+  field: 'what' | 'where' | 'fields',
+  variables: AdvancedSearchVariables
+) => {
+  const currentFilter =
+    field == 'where'
+      ? variables.where && variables.where[0]?.facet
+      : variables[field]?.facets || null
+
+  return currentFilter
 }
