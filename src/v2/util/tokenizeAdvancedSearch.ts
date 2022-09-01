@@ -60,8 +60,6 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
     term: term === '' ? null : { facet: term },
   }
 
-  console.log('tokenize', { variables })
-
   return pickBy(variables)
 }
 

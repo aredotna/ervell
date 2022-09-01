@@ -113,8 +113,6 @@ export const ReducerMethodMap = {
     } = extractVariableFromStateAndPayload(state, action.payload)
     const newValue = filter as WhereEnum
 
-    console.log('ADD_FILTER', { field, filter, variables, existingFacet, id })
-
     if (field === 'where') {
       set(variables, 'where', [{ facet: newValue }])
     } else {

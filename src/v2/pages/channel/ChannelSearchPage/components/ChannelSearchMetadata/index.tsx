@@ -23,7 +23,6 @@ export const ChannelSearchMetadata: React.FC<ChannelMetadataProps> = ({
   const { state } = useContext(AdvancedSearchContext)
 
   useEffect(() => {
-    console.log('CHANNEL SEARCH METADATA state', state)
     navigate(generateUrlFromVariables(state.variables), { replace: true })
   }, [state.query])
 
