@@ -68,8 +68,6 @@ export const stringifyFacet = (
   filter: WhereEnum | WhatEnum | FieldsEnum,
   id?: string
 ) => {
-  console.log({ field, filter, id })
-
   if (field === 'where' && id && filter !== 'MY') {
     return `${filter.toLowerCase()}:${id}`
   }
@@ -124,8 +122,6 @@ export const stringifyVariables = (variables: AdvancedSearchVariables) => {
       : undefined,
     variables?.term?.facet ? `${variables?.term.facet}` : undefined,
   ]
-
-  console.log({ strings })
 
   return strings.filter(Boolean).join(' ')
 }

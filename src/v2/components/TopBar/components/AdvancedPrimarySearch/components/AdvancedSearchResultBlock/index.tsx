@@ -81,8 +81,6 @@ export const AdvancedSearchResultBlock: React.FC<AdvancedSearchResultBlockProps>
   onClick,
   children,
 }) => {
-  console.log({ result, selected })
-
   const location = useLocation()
 
   const state = location && {
