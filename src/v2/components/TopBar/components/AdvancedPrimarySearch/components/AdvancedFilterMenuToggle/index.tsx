@@ -11,7 +11,7 @@ interface FilterMenuToggleProps {
 }
 
 const Caret = styled(Icons).attrs({
-  name: 'Caret',
+  name: 'Dropdown',
   size: 6,
   color: 'gray.medium',
   mr: 2,

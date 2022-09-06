@@ -51,6 +51,7 @@ import CircleOutline from 'v2/components/UI/Icons/CircleOutline.svg'
 import CloseEx from 'v2/components/UI/Icons/CloseIcon.svg'
 import Caret from 'v2/components/UI/Icons/Caret.svg'
 import Text from 'v2/components/UI/Icons/Text.svg'
+import Dropdown from 'v2/components/UI/Icons/DropdownCaret.svg'
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -99,6 +100,7 @@ export const COMPONENTS = {
   Close: <CloseEx />,
   Caret: <Caret />,
   Text: <Text />,
+  Dropdown: <Dropdown />,
 }
 
 export const ICON_NAMES = Object.keys(COMPONENTS)
