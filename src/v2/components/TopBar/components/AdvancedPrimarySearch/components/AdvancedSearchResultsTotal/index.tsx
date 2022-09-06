@@ -1,5 +1,7 @@
 import { useQuery } from '@apollo/client'
 import React, { useCallback, useContext, useEffect } from 'react'
+import styled from 'styled-components'
+
 import { useNavigate } from 'react-router'
 import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 import Text from 'v2/components/UI/Text'
@@ -11,12 +13,35 @@ import {
 import { ICON_OFFSET } from '../AdvancedSearchInput'
 import AdvancedSearchResult from '../AdvancedSearchResult'
 import advancedSearchResultsTotalQuery from './queries/advancedSearchResultsTotalQuery'
+import Box from 'v2/components/UI/Box'
 
 interface AdvancedQuickSearchResultProps {
   index: number
   maxResults: number
   pathname: string
   selected: boolean
+}
+
+const Container = styled(Box).attrs({
+  pr: 6,
+  py: 6,
+  bg: 'gray.light',
+  borderTop: '1px solid',
+  borderColor: 'gray.semiLight',
+})<{ hideHover?: boolean }>`
+  display: flex;
+  text-decoration: none;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+`
+
+const AdvancedNoResults: React.FC = () => {
+  return (
+    <Container key={`no_results_0`} pl={ICON_OFFSET} bg="gray.light">
+      <Text fontWeight="bold">No results</Text>
+    </Container>
+  )
 }
 
 export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps> = ({
@@ -65,15 +90,7 @@ export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps
   const total = data?.searches?.advanced.total
 
   if (total === 0) {
-    return (
-      <AdvancedSearchResult
-        key={`no_results_${index === maxResults - 1}`}
-        pl={ICON_OFFSET}
-        bg="background"
-      >
-        <Text fontWeight="bold">No results</Text>
-      </AdvancedSearchResult>
-    )
+    return <AdvancedNoResults />
   }
 
   const searchLabel =
