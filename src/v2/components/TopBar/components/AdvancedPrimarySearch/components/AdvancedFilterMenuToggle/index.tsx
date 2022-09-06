@@ -23,6 +23,16 @@ const Caret = styled(Icons).attrs({
   ${p => !p.open && `transform: rotate(180deg);`}
 `
 
+const Container = styled(Box)`
+  &:hover ${FilterLabel} {
+    color: ${p => p.theme.colors.gray.bold};
+  }
+
+  &:hover ${Caret} path {
+    fill: ${p => p.theme.colors.gray.bold};
+  }
+`
+
 export const FilterMenuToggle: React.FC<FilterMenuToggleProps> = ({
   open,
   onClick,
@@ -30,11 +40,11 @@ export const FilterMenuToggle: React.FC<FilterMenuToggleProps> = ({
   const label = open ? 'Hide filters' : 'Show filters'
 
   return (
-    <Box>
+    <Container>
       <FilterLabel color="gray.medium" onClick={onClick}>
         <Caret open={open} /> {label}
       </FilterLabel>
-    </Box>
+    </Container>
   )
 }
 
