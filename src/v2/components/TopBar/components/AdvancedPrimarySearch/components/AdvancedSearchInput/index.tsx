@@ -33,7 +33,7 @@ const Icon = styled.div`
   cursor: pointer;
 
   ${props =>
-    props.mode === 'hover' &&
+    props.containerMode === 'hover' &&
     `
     background-color: ${props.theme.colors.gray.hint};
   `}
@@ -42,6 +42,7 @@ const Icon = styled.div`
 interface AdvancedSearchInputProps extends BoxProps {
   initialQuery?: string
   mode?: 'resting' | 'blur' | 'focus' | 'hover' | 'active' | 'hoverSecondary'
+  containerMode?: 'resting' | 'hover'
   onQueryChange?: (query: string) => void
   onDebouncedQueryChange?: (query: string) => void
   onMouseEnter?: () => void
@@ -73,6 +74,7 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
     focus: 'MagnifyingGlass',
     active: 'X',
   },
+  containerMode,
   ...rest
 }) => {
   const [query, setQuery] = useState<string>(initialQuery || '')
@@ -139,7 +141,7 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
       {...outerProps}
     >
       {iconMap[mode] && (
-        <Icon mode={mode} onClick={handleReset}>
+        <Icon mode={mode} containerMode={containerMode} onClick={handleReset}>
           <Icons
             width="1.5em"
             height="0.88em"

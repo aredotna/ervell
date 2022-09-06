@@ -62,6 +62,7 @@ const ContextButton = styled(Text)`
   justify-content: center;
   color: ${p => p.theme.colors.gray.medium};
   border-bottom-right-radius: ${p => p.theme.radii.regular};
+  cursor: text;
 
   &:not(:first-child) {
     border-bottom-left-radius: ${p => p.theme.radii.regular};
@@ -76,7 +77,7 @@ const ContextButton = styled(Text)`
     props.mode == 'hover' &&
     `
     background-color: ${props.theme.colors.gray.hint} !important;
-    color: ${p => p.theme.colors.gray.base};
+    color: ${p => p.theme.colors.gray.bold};
   `}
 `
 
@@ -120,6 +121,10 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const [mode, setMode] = useState<
     'resting' | 'blur' | 'focus' | 'hover' | 'active' | 'hoverSecondary'
   >(state.query ? 'blur' : 'resting')
+  const [containerMode, setContainerMode] = useState<'resting' | 'hover'>(
+    'resting'
+  )
+
   const [filterOpen, setFilterOpen] = useState<boolean>(
     data.cookies.view == 'true' || false
   )
@@ -244,8 +249,23 @@ const AdvancedPrimarySearchContainer: React.FC<{
     [addRecentSearch]
   )
 
+  const onContainerMouseEnter = useCallback(() => {
+    setContainerMode('hover')
+  }, [])
+
+  const onContainerMouseLeave = useCallback(() => {
+    setContainerMode('resting')
+  }, [])
+
   return (
-    <Container ref={containerRef} flex={1} mode={mode} {...rest}>
+    <Container
+      onMouseEnter={onContainerMouseEnter}
+      onMouseLeave={onContainerMouseLeave}
+      ref={containerRef}
+      flex={1}
+      mode={mode}
+      {...rest}
+    >
       {(mode === 'resting' || mode === 'blur') && (
         <HomeLink backgroundColor="gray.light" />
       )}
@@ -267,6 +287,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         mode={mode}
+        containerMode={containerMode}
       />
 
       {mode != 'focus' && mode != 'active' && !state.query && (
