@@ -23,7 +23,7 @@ import Pencil from 'v2/components/UI/Icons/Pencil.svg'
 import SpeechBubble from 'v2/components/UI/Icons/SpeechBubble.svg'
 import Unfollow from 'v2/components/UI/Icons/Unfollow.svg'
 import Unmute from 'v2/components/UI/Icons/Unmute.svg'
-import Group from 'v2/components/UI/Icons/Group.svg'
+import Group from 'v2/components/UI/Icons/GroupIcon.svg'
 import Logout from 'v2/components/UI/Icons/Logout.svg'
 import Medallion from 'v2/components/UI/Icons/Medallion.svg'
 import Tools from 'v2/components/UI/Icons/Tools.svg'
@@ -44,13 +44,14 @@ import Android from 'v2/components/UI/Icons/Android.svg'
 import Hamburger from 'v2/components/UI/Icons/Hamburger.svg'
 import Minimize from 'v2/components/UI/Icons/Minimize.svg'
 import Filters from 'v2/components/UI/Icons/Filters.svg'
-import Profile from 'v2/components/UI/Icons/Profile.svg'
+import Profile from 'v2/components/UI/Icons/ProfileIcon.svg'
 import Channel from 'v2/components/UI/Icons/Channel.svg'
 import CircleFilled from 'v2/components/UI/Icons/CircleFilled.svg'
 import CircleOutline from 'v2/components/UI/Icons/CircleOutline.svg'
 import CloseEx from 'v2/components/UI/Icons/CloseIcon.svg'
 import Caret from 'v2/components/UI/Icons/Caret.svg'
 import Text from 'v2/components/UI/Icons/Text.svg'
+import Dropdown from 'v2/components/UI/Icons/DropdownCaret.svg'
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -99,6 +100,7 @@ export const COMPONENTS = {
   Close: <CloseEx />,
   Caret: <Caret />,
   Text: <Text />,
+  Dropdown: <Dropdown />,
 }
 
 export const ICON_NAMES = Object.keys(COMPONENTS)

@@ -65,7 +65,7 @@ export const AdvancedSearchIcon: React.FC<AdvancedSearchIconProps> = ({
 
   return (
     <Container>
-      <Icons name={name} width="1.5em" height="0.88em" color="gray.base" />
+      <Icons name={name} width="1.5em" height="0.88em" color="gray.medium" />
     </Container>
   )
 }

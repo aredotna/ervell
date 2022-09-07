@@ -62,6 +62,7 @@ const ContextButton = styled(Text)`
   justify-content: center;
   color: ${p => p.theme.colors.gray.medium};
   border-bottom-right-radius: ${p => p.theme.radii.regular};
+  cursor: text;
 
   &:not(:first-child) {
     border-bottom-left-radius: ${p => p.theme.radii.regular};
@@ -76,7 +77,7 @@ const ContextButton = styled(Text)`
     props.mode == 'hover' &&
     `
     background-color: ${props.theme.colors.gray.hint} !important;
-    color: ${p => p.theme.colors.gray.base};
+    color: ${p => p.theme.colors.gray.bold};
   `}
 `
 
@@ -120,6 +121,10 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const [mode, setMode] = useState<
     'resting' | 'blur' | 'focus' | 'hover' | 'active' | 'hoverSecondary'
   >(state.query ? 'blur' : 'resting')
+  const [containerMode, setContainerMode] = useState<'resting' | 'hover'>(
+    'resting'
+  )
+
   const [filterOpen, setFilterOpen] = useState<boolean>(
     data.cookies.view == 'true' || false
   )
@@ -159,33 +164,24 @@ const AdvancedPrimarySearchContainer: React.FC<{
       return
     }
     setMode('resting')
-  }, [state.query, setMode])
+    setContainerMode('resting')
+  }, [state.query, setMode, setContainerMode])
 
   const handleMouseEnter = useCallback(() => {
     if (mode != 'resting') {
       return
     }
     setMode('hover')
-  }, [mode, setMode])
-
-  const handleMouseEnterSecondary = useCallback(() => {
-    if (mode != 'active' && mode != 'hoverSecondary' && mode != 'focus') {
-      setMode('hoverSecondary')
-    }
-  }, [mode, setMode])
+    setContainerMode('hover')
+  }, [mode, setMode, setContainerMode])
 
   const handleMouseLeave = useCallback(() => {
     if (mode != 'hover') {
       return
     }
+    setContainerMode('resting')
     setMode('resting')
-  }, [mode, setMode])
-
-  const handleMouseLeaveSecondary = useCallback(() => {
-    if (mode === 'hoverSecondary') {
-      setMode('resting')
-    }
-  }, [mode, setMode])
+  }, [mode, setMode, setContainerMode])
 
   const onSearchButtonClick = useCallback(() => {
     searchInputRef.current.focus()
@@ -226,7 +222,14 @@ const AdvancedPrimarySearchContainer: React.FC<{
         return navigate(generateUrl(false, pathname))
       }
     },
-    [anyResultHighlighted, onClose, resetAll, generateUrl, addRecentSearch]
+    [
+      anyResultHighlighted,
+      onClose,
+      resetAll,
+      generateUrl,
+      addRecentSearch,
+      setContainerMode,
+    ]
   )
 
   const handleResultClick = useCallback(
@@ -244,11 +247,24 @@ const AdvancedPrimarySearchContainer: React.FC<{
     [addRecentSearch]
   )
 
+  const onContainerMouseEnter = useCallback(() => {
+    setContainerMode('hover')
+  }, [])
+
+  const onContainerMouseLeave = useCallback(() => {
+    setContainerMode('resting')
+  }, [])
+
   return (
-    <Container ref={containerRef} flex={1} mode={mode} {...rest}>
-      {(mode === 'resting' || mode === 'blur') && (
-        <HomeLink backgroundColor="gray.light" />
-      )}
+    <Container
+      onMouseEnter={onContainerMouseEnter}
+      onMouseLeave={onContainerMouseLeave}
+      ref={containerRef}
+      flex={1}
+      mode={mode}
+      {...rest}
+    >
+      {containerMode == 'resting' && <HomeLink backgroundColor="gray.light" />}
 
       <AdvancedSearchInput
         tabIndex={0}
@@ -267,6 +283,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         mode={mode}
+        containerMode={containerMode}
       />
 
       {mode != 'focus' && mode != 'active' && !state.query && (
@@ -274,9 +291,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
           <ContextButton
             key={mode}
             onClick={onSearchButtonClick}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            mode={mode}
+            mode={containerMode}
+            onMouseEnter={onContainerMouseEnter}
+            onMouseLeave={onContainerMouseLeave}
           >
             Search Are.na
           </ContextButton>
@@ -284,8 +301,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.PERSON && page?.id !== currentUserId && (
             <ContextButton
               onClick={onContextButtonClick}
-              onMouseEnter={handleMouseEnterSecondary}
-              onMouseLeave={handleMouseLeaveSecondary}
+              onMouseEnter={onContainerMouseEnter}
+              onMouseLeave={onContainerMouseLeave}
             >
               Search person&apos;s content
             </ContextButton>
@@ -294,8 +311,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.PERSON && page?.id == currentUserId && (
             <ContextButton
               onClick={onContextButtonClick}
-              onMouseEnter={handleMouseEnterSecondary}
-              onMouseLeave={handleMouseLeaveSecondary}
+              onMouseEnter={onContainerMouseEnter}
+              onMouseLeave={onContainerMouseLeave}
             >
               Search your content
             </ContextButton>
@@ -304,8 +321,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.CHANNEL && (
             <ContextButton
               onClick={onContextButtonClick}
-              onMouseEnter={handleMouseEnterSecondary}
-              onMouseLeave={handleMouseLeaveSecondary}
+              onMouseEnter={onContainerMouseEnter}
+              onMouseLeave={onContainerMouseLeave}
             >
               Search this {page.type.toLowerCase()}
             </ContextButton>
@@ -314,8 +331,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.GROUP && (
             <ContextButton
               onClick={onContextButtonClick}
-              onMouseEnter={handleMouseEnterSecondary}
-              onMouseLeave={handleMouseLeaveSecondary}
+              onMouseEnter={onContainerMouseEnter}
+              onMouseLeave={onContainerMouseLeave}
             >
               Search this {page.type.toLowerCase()}
             </ContextButton>
@@ -330,7 +347,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
         >
           <Controls>
             {(mode === 'focus' || mode === 'active') &&
-              !anyResultHighlighted && <AdvancedSearchReturnLabel />}
+              !anyResultHighlighted && (
+                <AdvancedSearchReturnLabel url={generateUrl(false, pathname)} />
+              )}
             {(mode === 'focus' || mode === 'active') && !filterOpen && (
               <Box mr={5}>
                 <FilterMenuToggle

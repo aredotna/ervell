@@ -8,8 +8,8 @@ import FilterMenuToggle from '../AdvancedFilterMenuToggle'
 
 const Container = styled(Box)<{ open: boolean }>`
   background-color: ${p => p.theme.colors.gray.light};
-  padding: ${p => (p.open ? p.theme.space[3] : p.theme.space[3])} ${ICON_OFFSET}
-    ${p => (p.open ? p.theme.space[8] : p.theme.space[6])};
+  padding: ${p => p.theme.space[3]} ${p => p.theme.space[6]}
+    ${p => (p.open ? p.theme.space[8] : p.theme.space[6])} ${ICON_OFFSET};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -25,7 +25,7 @@ export const AdvancedSearchFilter: React.FC<AdvancedSearchFilterProps> = ({
   return (
     <Container>
       <AdvancedFilter />
-      <Box mt={6}>
+      <Box mt={5}>
         <FilterMenuToggle open={true} onClick={toggleOpen} />
       </Box>
     </Container>
