@@ -164,33 +164,24 @@ const AdvancedPrimarySearchContainer: React.FC<{
       return
     }
     setMode('resting')
-  }, [state.query, setMode])
+    setContainerMode('resting')
+  }, [state.query, setMode, setContainerMode])
 
   const handleMouseEnter = useCallback(() => {
     if (mode != 'resting') {
       return
     }
     setMode('hover')
-  }, [mode, setMode])
-
-  const handleMouseEnterSecondary = useCallback(() => {
-    if (mode != 'active' && mode != 'hoverSecondary' && mode != 'focus') {
-      setMode('hoverSecondary')
-    }
-  }, [mode, setMode])
+    setContainerMode('hover')
+  }, [mode, setMode, setContainerMode])
 
   const handleMouseLeave = useCallback(() => {
     if (mode != 'hover') {
       return
     }
+    setContainerMode('resting')
     setMode('resting')
-  }, [mode, setMode])
-
-  const handleMouseLeaveSecondary = useCallback(() => {
-    if (mode === 'hoverSecondary') {
-      setMode('resting')
-    }
-  }, [mode, setMode])
+  }, [mode, setMode, setContainerMode])
 
   const onSearchButtonClick = useCallback(() => {
     searchInputRef.current.focus()
@@ -231,7 +222,14 @@ const AdvancedPrimarySearchContainer: React.FC<{
         return navigate(generateUrl(false, pathname))
       }
     },
-    [anyResultHighlighted, onClose, resetAll, generateUrl, addRecentSearch]
+    [
+      anyResultHighlighted,
+      onClose,
+      resetAll,
+      generateUrl,
+      addRecentSearch,
+      setContainerMode,
+    ]
   )
 
   const handleResultClick = useCallback(
@@ -266,9 +264,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
       mode={mode}
       {...rest}
     >
-      {(mode === 'resting' || mode === 'blur') && (
-        <HomeLink backgroundColor="gray.light" />
-      )}
+      {containerMode == 'resting' && <HomeLink backgroundColor="gray.light" />}
 
       <AdvancedSearchInput
         tabIndex={0}
@@ -295,9 +291,9 @@ const AdvancedPrimarySearchContainer: React.FC<{
           <ContextButton
             key={mode}
             onClick={onSearchButtonClick}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            mode={mode}
+            mode={containerMode}
+            onMouseEnter={onContainerMouseEnter}
+            onMouseLeave={onContainerMouseLeave}
           >
             Search Are.na
           </ContextButton>
@@ -305,8 +301,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.PERSON && page?.id !== currentUserId && (
             <ContextButton
               onClick={onContextButtonClick}
-              onMouseEnter={handleMouseEnterSecondary}
-              onMouseLeave={handleMouseLeaveSecondary}
+              onMouseEnter={onContainerMouseEnter}
+              onMouseLeave={onContainerMouseLeave}
             >
               Search person&apos;s content
             </ContextButton>
@@ -315,8 +311,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.PERSON && page?.id == currentUserId && (
             <ContextButton
               onClick={onContextButtonClick}
-              onMouseEnter={handleMouseEnterSecondary}
-              onMouseLeave={handleMouseLeaveSecondary}
+              onMouseEnter={onContainerMouseEnter}
+              onMouseLeave={onContainerMouseLeave}
             >
               Search your content
             </ContextButton>
@@ -325,8 +321,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.CHANNEL && (
             <ContextButton
               onClick={onContextButtonClick}
-              onMouseEnter={handleMouseEnterSecondary}
-              onMouseLeave={handleMouseLeaveSecondary}
+              onMouseEnter={onContainerMouseEnter}
+              onMouseLeave={onContainerMouseLeave}
             >
               Search this {page.type.toLowerCase()}
             </ContextButton>
@@ -335,8 +331,8 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.GROUP && (
             <ContextButton
               onClick={onContextButtonClick}
-              onMouseEnter={handleMouseEnterSecondary}
-              onMouseLeave={handleMouseLeaveSecondary}
+              onMouseEnter={onContainerMouseEnter}
+              onMouseLeave={onContainerMouseLeave}
             >
               Search this {page.type.toLowerCase()}
             </ContextButton>

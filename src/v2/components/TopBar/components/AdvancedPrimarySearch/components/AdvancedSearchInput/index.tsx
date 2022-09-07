@@ -133,20 +133,27 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
   const outerProps = compactObject(pick(rest, ...OUTER_PROPS_KEYS))
   const innerProps = omit(rest, ...OUTER_PROPS_KEYS)
 
+  console.log({ mode, containerMode })
+
   return (
     <Container
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       mode={mode}
+      containerMode={containerMode}
       {...outerProps}
     >
-      {iconMap[mode] && (
-        <Icon mode={mode} containerMode={containerMode} onClick={handleReset}>
+      {iconMap[containerMode] && (
+        <Icon
+          mode={containerMode}
+          containerMode={containerMode}
+          onClick={handleReset}
+        >
           <Icons
             width="1.5em"
             height="0.88em"
             color="gray.medium"
-            name={iconMap[mode]}
+            name={iconMap[containerMode]}
           />
         </Icon>
       )}
