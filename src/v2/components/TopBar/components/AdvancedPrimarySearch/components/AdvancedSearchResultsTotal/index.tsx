@@ -14,12 +14,17 @@ import { ICON_OFFSET } from '../AdvancedSearchInput'
 import AdvancedSearchResult from '../AdvancedSearchResult'
 import advancedSearchResultsTotalQuery from './queries/advancedSearchResultsTotalQuery'
 import Box from 'v2/components/UI/Box'
+import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
 
 interface AdvancedQuickSearchResultProps {
   index: number
   maxResults: number
   pathname: string
   selected: boolean
+  onClick?: (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    result?: AdvancedQuickSearchResult
+  ) => void
 }
 
 const Container = styled(Box).attrs({
