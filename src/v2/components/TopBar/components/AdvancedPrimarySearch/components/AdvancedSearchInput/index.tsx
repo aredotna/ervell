@@ -133,8 +133,6 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
   const outerProps = compactObject(pick(rest, ...OUTER_PROPS_KEYS))
   const innerProps = omit(rest, ...OUTER_PROPS_KEYS)
 
-  console.log({ mode, containerMode })
-
   return (
     <Container
       onMouseEnter={handleMouseEnter}
