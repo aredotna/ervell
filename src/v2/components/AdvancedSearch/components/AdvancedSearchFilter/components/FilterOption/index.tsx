@@ -5,30 +5,7 @@ import Text from 'v2/components/UI/Text'
 import { TypedEnumLabelMap } from 'v2/components/AdvancedSearch/utils/labels'
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
 import { AnyFilter } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
-
-export const FilterContainer = styled(Box).attrs({
-  p: 1,
-})`
-  cursor: pointer;
-  &:hover {
-    background-color: ${props => props.theme.colors.gray.semiLight};
-  }
-  ${props =>
-    props.active &&
-    `
-    background-color: ${props.theme.colors.gray.hint};
-  `}
-
-  ${props =>
-    props.disabled &&
-    `
-    cursor: default;
-
-    &:hover {
-      background-color: transparent;
-    }
-  `}
-`
+import constants from 'v2/styles/constants'
 
 export const FilterLabel = styled(Text).attrs({
   f: 1,
@@ -45,7 +22,38 @@ export const FilterLabel = styled(Text).attrs({
   ${props =>
     props.disabled &&
     `
-    color: ${props.theme.colors.gray.semiLight};
+    color: ${props.theme.colors.gray.regular};
+  `}
+`
+
+export const FilterContainer = styled(Box).attrs({
+  p: 1,
+})`
+  cursor: pointer;
+  border-radius: ${constants.radii.subtle};
+
+  &:hover {
+    background-color: ${props => props.theme.colors.gray.cell};
+  }
+
+  &:hover ${FilterLabel} {
+    color: ${props => props.theme.colors.gray.bold};
+  }
+
+  ${props =>
+    props.active &&
+    `
+    background-color: ${props.theme.colors.gray.hint};
+  `}
+
+  ${props =>
+    props.disabled &&
+    `
+    cursor: default;
+
+    &:hover {
+      background-color: transparent;
+    }
   `}
 `
 

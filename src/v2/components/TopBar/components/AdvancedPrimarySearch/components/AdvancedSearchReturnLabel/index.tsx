@@ -1,13 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import Box from 'v2/components/UI/Box'
+
+import { mixin as boxMixin } from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 
-const Container = styled(Box).attrs({
+const Container = styled(Link).attrs({
   mr: 5,
   py: 1,
   px: 2,
 })`
+  ${boxMixin}
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,17 +22,23 @@ const Label = styled(Text).attrs({
   color: 'gray.medium',
 })`
   display: inline;
+
+  &:hover {
+    color: ${p => p.theme.colors.gray.bold};
+  }
 `
 
 interface AdvancedSearchReturnLabelProps {
   label?: string
+  url?: string
 }
 
 export const AdvancedSearchReturnLabel: React.FC<AdvancedSearchReturnLabelProps> = ({
   label = 'See all results',
+  url,
 }) => {
   return (
-    <Container>
+    <Container to={url}>
       <Label f={0} mr={4}>
         ⮐{' '}
       </Label>

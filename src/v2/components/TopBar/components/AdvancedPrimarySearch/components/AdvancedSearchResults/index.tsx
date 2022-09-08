@@ -221,6 +221,7 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
           maxResults={maxResults}
           pathname={pathname}
           selected={index == maxResults - 1}
+          onClick={onResultClick}
         />
       )}
     </>
