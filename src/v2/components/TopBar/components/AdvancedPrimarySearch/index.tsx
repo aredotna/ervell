@@ -60,7 +60,7 @@ const ContextButton = styled(Text)`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${p => p.theme.colors.gray.regular};
+  color: ${p => p.theme.colors.gray.medium};
   border-bottom-right-radius: ${p => p.theme.radii.regular};
   cursor: text;
 
@@ -68,17 +68,17 @@ const ContextButton = styled(Text)`
     border-bottom-left-radius: ${p => p.theme.radii.regular};
   }
 
-  &:hover {
-    background-color: ${p => p.theme.colors.gray.hint};
-    color: ${p => p.theme.colors.gray.base};
-  }
-
-  ${props =>
-    props.mode == 'hover' &&
-    `
-    background-color: ${props.theme.colors.gray.hint} !important;
-    color: ${p => p.theme.colors.gray.bold};
-  `}
+  ${props => {
+    if (props.mode == 'hover') {
+      return `
+        color: ${props.theme.colors.gray.regular};
+  
+        &:hover {
+          color: ${props.theme.colors.gray.bold};
+        }
+      `
+    }
+  }}
 `
 
 const Controls = styled(Box)`
@@ -289,7 +289,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
       {mode != 'focus' && mode != 'active' && !state.query && (
         <ContextButtonContainer>
           <ContextButton
-            key={mode}
+            key={containerMode}
             onClick={onSearchButtonClick}
             mode={containerMode}
             onMouseEnter={onContainerMouseEnter}
