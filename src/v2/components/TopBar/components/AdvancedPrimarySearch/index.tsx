@@ -52,7 +52,7 @@ const ContextButtonContainer = styled(Box)`
 `
 
 const ContextButton = styled(Text)`
-  background-color: ${p => p.theme.colors.background};
+  background-color: transparent;
   padding: ${p => p.theme.space[1]} ${p => p.theme.space[5]};
   cursor: pointer;
   pointer-events: all;
@@ -60,7 +60,7 @@ const ContextButton = styled(Text)`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${p => p.theme.colors.gray.medium};
+  color: ${p => p.theme.colors.gray.regular};
   border-bottom-right-radius: ${p => p.theme.radii.regular};
   cursor: text;
 
@@ -301,6 +301,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.PERSON && page?.id !== currentUserId && (
             <ContextButton
               onClick={onContextButtonClick}
+              mode={containerMode}
               onMouseEnter={onContainerMouseEnter}
               onMouseLeave={onContainerMouseLeave}
             >
@@ -311,6 +312,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.PERSON && page?.id == currentUserId && (
             <ContextButton
               onClick={onContextButtonClick}
+              mode={containerMode}
               onMouseEnter={onContainerMouseEnter}
               onMouseLeave={onContainerMouseLeave}
             >
@@ -321,6 +323,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.CHANNEL && (
             <ContextButton
               onClick={onContextButtonClick}
+              mode={containerMode}
               onMouseEnter={onContainerMouseEnter}
               onMouseLeave={onContainerMouseLeave}
             >
@@ -331,6 +334,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.GROUP && (
             <ContextButton
               onClick={onContextButtonClick}
+              mode={containerMode}
               onMouseEnter={onContainerMouseEnter}
               onMouseLeave={onContainerMouseLeave}
             >
