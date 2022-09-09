@@ -52,7 +52,7 @@ const ContextButtonContainer = styled(Box)`
 `
 
 const ContextButton = styled(Text)`
-  background-color: ${p => p.theme.colors.background};
+  background-color: transparent;
   padding: ${p => p.theme.space[1]} ${p => p.theme.space[5]};
   cursor: pointer;
   pointer-events: all;
@@ -68,17 +68,17 @@ const ContextButton = styled(Text)`
     border-bottom-left-radius: ${p => p.theme.radii.regular};
   }
 
-  &:hover {
-    background-color: ${p => p.theme.colors.gray.hint};
-    color: ${p => p.theme.colors.gray.base};
-  }
-
-  ${props =>
-    props.mode == 'hover' &&
-    `
-    background-color: ${props.theme.colors.gray.hint} !important;
-    color: ${p => p.theme.colors.gray.bold};
-  `}
+  ${props => {
+    if (props.mode == 'hover') {
+      return `
+        color: ${props.theme.colors.gray.regular};
+  
+        &:hover {
+          color: ${props.theme.colors.gray.bold};
+        }
+      `
+    }
+  }}
 `
 
 const Controls = styled(Box)`
@@ -289,7 +289,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
       {mode != 'focus' && mode != 'active' && !state.query && (
         <ContextButtonContainer>
           <ContextButton
-            key={mode}
+            key={containerMode}
             onClick={onSearchButtonClick}
             mode={containerMode}
             onMouseEnter={onContainerMouseEnter}
@@ -301,6 +301,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.PERSON && page?.id !== currentUserId && (
             <ContextButton
               onClick={onContextButtonClick}
+              mode={containerMode}
               onMouseEnter={onContainerMouseEnter}
               onMouseLeave={onContainerMouseLeave}
             >
@@ -311,6 +312,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.PERSON && page?.id == currentUserId && (
             <ContextButton
               onClick={onContextButtonClick}
+              mode={containerMode}
               onMouseEnter={onContainerMouseEnter}
               onMouseLeave={onContainerMouseLeave}
             >
@@ -321,6 +323,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.CHANNEL && (
             <ContextButton
               onClick={onContextButtonClick}
+              mode={containerMode}
               onMouseEnter={onContainerMouseEnter}
               onMouseLeave={onContainerMouseLeave}
             >
@@ -331,6 +334,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.GROUP && (
             <ContextButton
               onClick={onContextButtonClick}
+              mode={containerMode}
               onMouseEnter={onContainerMouseEnter}
               onMouseLeave={onContainerMouseLeave}
             >

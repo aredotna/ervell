@@ -15,7 +15,9 @@ const Container = styled(Box)`
   position: relative;
 
   ${props =>
-    (props.mode === 'active' || props.mode === 'focus') &&
+    (props.mode === 'active' ||
+      props.mode === 'focus' ||
+      props.containerMode == 'hover') &&
     `
     background-color: ${props.theme.colors.gray.hint};
   `}
