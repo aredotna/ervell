@@ -21,6 +21,7 @@ const Information = styled.div`
 const Name = styled.a`
   display: block;
   font-weight: bold;
+  color: ${x => x.theme.colors.gray.base};
 `
 
 const Email = styled.div`
