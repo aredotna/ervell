@@ -124,8 +124,6 @@ class SearchInput extends PureComponent<Props, State> {
 
   resetState = () => {
     this.setState({ query: '', mode: 'focus' })
-    this.inputRef.current.value = ''
-    this.inputRef.current.focus()
   }
 
   maybeAttachGlobalFocusKeyListener = () => {

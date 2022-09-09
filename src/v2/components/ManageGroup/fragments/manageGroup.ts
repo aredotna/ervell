@@ -8,6 +8,7 @@ export default gql`
     id
     name
     href
+    slug
     description(format: MARKDOWN)
     invite {
       code

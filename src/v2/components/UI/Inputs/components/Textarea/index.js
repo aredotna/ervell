@@ -10,6 +10,7 @@ export const mixin = css`
   ${preset(lineHeight, { lineHeight: 1 })}
   resize: ${props => props.resize};
   white-space: pre-wrap;
+  background-color: ${props => props.theme.colors.background};
 `
 
 const Textarea = styled.textarea`

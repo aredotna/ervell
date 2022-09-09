@@ -30,6 +30,7 @@ const Information = styled.div`
   padding-left: 1em;
   font-size: ${x => x.theme.fontSizesIndexed.xs};
   line-height: ${x => x.theme.lineHeightsIndexed.base};
+  color: ${x => x.theme.colors.gray.base};
 
   &:first-child {
     padding-left: 0;
