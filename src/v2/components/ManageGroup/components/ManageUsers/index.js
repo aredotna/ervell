@@ -92,7 +92,6 @@ class ManageUsers extends Component {
   render() {
     const {
       group: { name, owner, memberships },
-      group,
     } = this.props
 
     return (
