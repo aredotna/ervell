@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from '@apollo/client/react/hoc'
 import { propType } from 'v2/util/inlinedGraphqlAnywhere'
-import { gql } from '@apollo/client'
+
 import compose from 'lodash.flowright'
 
 import manageUsersFragment from 'v2/components/ManageGroup/components/ManageUsers/fragments/manageUsers'
@@ -17,6 +17,7 @@ import Box from 'v2/components/UI/Box'
 import CollaboratorSearch from 'v2/components/CollaboratorSearch'
 import ManagedMembers from 'v2/components/ManagedMembers'
 
+import profilePageQuery from 'v2/pages/profile/ProfilePage/queries/profilePage'
 import profileGroupUserListFragment from 'v2/components/ProfileMetadata/components/ProfileGroupUserList/fragments/profileGroupUserList'
 
 class ManageUsers extends Component {
@@ -46,16 +47,8 @@ class ManageUsers extends Component {
 
     return [
       {
-        query: gql`
-        query ManageUsersQuery {
-          identity(id: "${group.id}") {
-            identifiable {
-              ...ProfileGroupUserList
-            }
-          }
-        }
-        ${profileGroupUserListFragment}
-      `,
+        query: profilePageQuery,
+        variables: { id: group.slug },
       },
     ]
   }
@@ -99,6 +92,7 @@ class ManageUsers extends Component {
   render() {
     const {
       group: { name, owner, memberships },
+      group,
     } = this.props
 
     return (
