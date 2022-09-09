@@ -18,7 +18,6 @@ import CollaboratorSearch from 'v2/components/CollaboratorSearch'
 import ManagedMembers from 'v2/components/ManagedMembers'
 
 import profilePageQuery from 'v2/pages/profile/ProfilePage/queries/profilePage'
-import profileGroupUserListFragment from 'v2/components/ProfileMetadata/components/ProfileGroupUserList/fragments/profileGroupUserList'
 
 class ManageUsers extends Component {
   static propTypes = {
