@@ -25,7 +25,7 @@ interface AdvancedSearchResultsContainerProps {
   searchInputRef?: React.RefObject<HTMLInputElement>
   onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
   onResultClick: (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    e: AnimationPlaybackEventInit,
     result?: AdvancedQuickSearchResult
   ) => void
 }

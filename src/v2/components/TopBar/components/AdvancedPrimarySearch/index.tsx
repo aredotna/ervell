@@ -1,8 +1,12 @@
 import React, {
   FocusEvent,
   KeyboardEvent,
+  MouseEvent,
+  Reducer,
   useCallback,
   useContext,
+  useEffect,
+  useReducer,
   useRef,
   useState,
 } from 'react'
@@ -34,6 +38,13 @@ import { TopBarUiStateQuery } from '__generated__/TopBarUiStateQuery'
 import topBarUiStateQuery from './queries/topBarUiStateQuery'
 import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
 import useRecentSearches from 'v2/hooks/useRecentSearches'
+import {
+  advancedPrimarySearchReducer,
+  initialTopBarState,
+  TopBarAction,
+  TopBarState,
+} from './advancedPrimarySearchReducer'
+import { color } from 'styled-system'
 
 const Container = styled(Box)`
   position: relative;
@@ -64,21 +75,15 @@ const ContextButton = styled(Text)`
   border-bottom-right-radius: ${p => p.theme.radii.regular};
   cursor: text;
 
+  ${color}
+
   &:not(:first-child) {
     border-bottom-left-radius: ${p => p.theme.radii.regular};
   }
 
-  ${props => {
-    if (props.mode == 'hover') {
-      return `
-        color: ${props.theme.colors.gray.regular};
-  
-        &:hover {
-          color: ${props.theme.colors.gray.bold};
-        }
-      `
-    }
-  }}
+  &:hover {
+    color: ${p => p.theme.colors.gray.bold};
+  }
 `
 
 const Controls = styled(Box)`
@@ -118,12 +123,25 @@ const AdvancedPrimarySearchContainer: React.FC<{
   const searchInputRef = useRef(null)
   const searchRef = useRef(null)
   const containerRef = useRef(null)
-  const [mode, setMode] = useState<
-    'resting' | 'blur' | 'focus' | 'hover' | 'active' | 'hoverSecondary'
-  >(state.query ? 'blur' : 'resting')
-  const [containerMode, setContainerMode] = useState<'resting' | 'hover'>(
-    'resting'
-  )
+
+  const primaryButtonRef = useRef(null)
+  const secondaryButtonRef = useRef(null)
+  const iconRef = useRef(null)
+
+  const [topBarState, dispatch] = useReducer<
+    Reducer<TopBarState, TopBarAction>
+  >(advancedPrimarySearchReducer, {
+    ...initialTopBarState,
+    mode: !isEmpty(state.query) ? 'blurred' : 'resting',
+    hasQuery: !isEmpty(state.query),
+  })
+
+  useEffect(() => {
+    dispatch({
+      type: 'CHANGE_QUERY',
+      payload: !isEmpty(state.query),
+    })
+  }, [state.query])
 
   const [filterOpen, setFilterOpen] = useState<boolean>(
     data.cookies.view == 'true' || false
@@ -144,49 +162,78 @@ const AdvancedPrimarySearchContainer: React.FC<{
   }, [setFilterOpen, filterOpen, refetch])
 
   const handleFocus = useCallback(() => {
+    // Remove filter if we are focusing on the search input with a /
     state.variables?.where &&
       state.variables?.where[0]?.id &&
       isEmpty(state.query) &&
       removeFilter('where', state.variables.where[0]?.facet)
-    isEmpty(state.query) ? setMode('focus') : setMode('active')
-  }, [mode, setMode, state.query])
+
+    dispatch({ type: 'FOCUS', payload: null })
+  }, [state.query, dispatch])
 
   const handleBlur = useCallback(
     (e: FocusEvent<Element>) => {
       console.log({ e })
     },
-    [state, mode, setMode]
+    [state]
   )
 
   const onClose = useCallback(() => {
-    if (state.query) {
-      setMode('blur')
-      return
-    }
-    setMode('resting')
-    setContainerMode('resting')
-  }, [state.query, setMode, setContainerMode])
-
-  const handleMouseEnter = useCallback(() => {
-    if (mode != 'resting') {
-      return
-    }
-    setMode('hover')
-    setContainerMode('hover')
-  }, [mode, setMode, setContainerMode])
-
-  const handleMouseLeave = useCallback(() => {
-    if (mode != 'hover') {
-      return
-    }
-    setContainerMode('resting')
-    setMode('resting')
-  }, [mode, setMode, setContainerMode])
+    dispatch({ type: 'CLOSE', payload: null })
+  }, [state.query])
 
   const onSearchButtonClick = useCallback(() => {
     searchInputRef.current.focus()
-    setMode('focus')
   }, [])
+
+  const handleHover = useCallback(
+    (e: MouseEvent<HTMLDivElement, MouseEvent>) => {
+      console.log('handling hover > target', e.target, {
+        ' containerRef.current': containerRef.current,
+        ' primaryButtonRef.current': primaryButtonRef.current,
+        ' secondaryButtonRef.current': secondaryButtonRef.current,
+        ' iconRef.current': iconRef.current,
+        ' searchRef.current': searchRef.current,
+        ' searchInputRef.current': searchInputRef.current,
+      })
+      if (e.target == primaryButtonRef.current) {
+        dispatch({ type: 'MOUSEENTER_PRIMARY', payload: null })
+      }
+
+      if (e.target == secondaryButtonRef.current) {
+        dispatch({ type: 'MOUSEENTER_SECONDARY', payload: null })
+      }
+
+      if (e.target == iconRef.current) {
+        dispatch({ type: 'MOUSEENTER_ICON', payload: null })
+      }
+
+      if (
+        e.target == containerRef.current ||
+        e.target == searchRef.current ||
+        e.target == searchInputRef.current
+      ) {
+        console.log('handling hover > container', e.target)
+        dispatch({ type: 'MOUSEENTER_CONTAINER', payload: null })
+      }
+    },
+    [
+      primaryButtonRef,
+      secondaryButtonRef,
+      iconRef,
+      containerRef,
+      searchRef,
+      topBarState,
+      dispatch,
+    ]
+  )
+
+  const handleLeave = useCallback(
+    (e: MouseEvent<HTMLDivElement, MouseEvent>) => {
+      dispatch({ type: 'MOUSELEAVE', payload: e })
+    },
+    [primaryButtonRef]
+  )
 
   const onContextButtonClick = useCallback(() => {
     if (page.type === PageTypeEnum.PERSON) {
@@ -205,7 +252,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
       searchInputRef.current.focus()
       addFilter('where', WhereEnum.GROUP, page.id)
     }
-    setMode('focus')
+    dispatch({ type: 'FOCUS', payload: null })
   }, [page, addFilter, searchInputRef])
 
   const handleKeyDown = useCallback(
@@ -214,6 +261,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
         resetAll()
         onClose()
         searchInputRef.current.blur()
+        dispatch({ type: 'CLEAR', payload: null })
       }
 
       if (e.key === 'Enter' && !anyResultHighlighted) {
@@ -222,14 +270,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
         return navigate(generateUrl(false, pathname))
       }
     },
-    [
-      anyResultHighlighted,
-      onClose,
-      resetAll,
-      generateUrl,
-      addRecentSearch,
-      setContainerMode,
-    ]
+    [anyResultHighlighted, onClose, resetAll, generateUrl, addRecentSearch]
   )
 
   const handleResultClick = useCallback(
@@ -247,24 +288,16 @@ const AdvancedPrimarySearchContainer: React.FC<{
     [addRecentSearch]
   )
 
-  const onContainerMouseEnter = useCallback(() => {
-    setContainerMode('hover')
-  }, [])
-
-  const onContainerMouseLeave = useCallback(() => {
-    setContainerMode('resting')
-  }, [])
-
   return (
     <Container
-      onMouseEnter={onContainerMouseEnter}
-      onMouseLeave={onContainerMouseLeave}
+      onMouseEnter={handleHover}
+      onMouseLeave={handleLeave}
       ref={containerRef}
       flex={1}
-      mode={mode}
+      mode={topBarState.mode}
       {...rest}
     >
-      {containerMode == 'resting' && <HomeLink backgroundColor="gray.light" />}
+      {!topBarState.icon && <HomeLink backgroundColor="gray.light" />}
 
       <AdvancedSearchInput
         tabIndex={0}
@@ -275,25 +308,29 @@ const AdvancedPrimarySearchContainer: React.FC<{
         initialQuery={state.query}
         onQueryChange={updateQuery}
         ref={searchRef}
+        searchContainerRef={searchRef}
         searchInputRef={searchInputRef}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onReset={resetAll}
         onKeyDown={handleKeyDown}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        mode={mode}
-        containerMode={containerMode}
+        onHover={handleHover}
+        onLeave={handleLeave}
+        icon={topBarState.icon}
+        iconBg={topBarState.iconBgColor}
+        iconRef={iconRef}
+        containerBg={topBarState.containerBg}
+        mode={topBarState.mode}
       />
 
-      {mode != 'focus' && mode != 'active' && !state.query && (
+      {topBarState.mode != 'active' && !state.query && (
         <ContextButtonContainer>
           <ContextButton
-            key={containerMode}
             onClick={onSearchButtonClick}
-            mode={containerMode}
-            onMouseEnter={onContainerMouseEnter}
-            onMouseLeave={onContainerMouseLeave}
+            onMouseEnter={handleHover}
+            onMouseLeave={handleLeave}
+            ref={primaryButtonRef}
+            bg={topBarState.primaryButtonBg}
           >
             Search Are.na
           </ContextButton>
@@ -301,9 +338,10 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.PERSON && page?.id !== currentUserId && (
             <ContextButton
               onClick={onContextButtonClick}
-              mode={containerMode}
-              onMouseEnter={onContainerMouseEnter}
-              onMouseLeave={onContainerMouseLeave}
+              onMouseEnter={handleHover}
+              onMouseLeave={handleLeave}
+              ref={secondaryButtonRef}
+              bg={topBarState.secondaryButtonBg}
             >
               Search person&apos;s content
             </ContextButton>
@@ -312,9 +350,10 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.PERSON && page?.id == currentUserId && (
             <ContextButton
               onClick={onContextButtonClick}
-              mode={containerMode}
-              onMouseEnter={onContainerMouseEnter}
-              onMouseLeave={onContainerMouseLeave}
+              onMouseEnter={handleHover}
+              onMouseLeave={handleLeave}
+              ref={secondaryButtonRef}
+              bg={topBarState.secondaryButtonBg}
             >
               Search your content
             </ContextButton>
@@ -323,9 +362,10 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.CHANNEL && (
             <ContextButton
               onClick={onContextButtonClick}
-              mode={containerMode}
-              onMouseEnter={onContainerMouseEnter}
-              onMouseLeave={onContainerMouseLeave}
+              onMouseEnter={handleHover}
+              onMouseLeave={handleLeave}
+              ref={secondaryButtonRef}
+              bg={topBarState.secondaryButtonBg}
             >
               Search this {page.type.toLowerCase()}
             </ContextButton>
@@ -334,9 +374,10 @@ const AdvancedPrimarySearchContainer: React.FC<{
           {page?.type === PageTypeEnum.GROUP && (
             <ContextButton
               onClick={onContextButtonClick}
-              mode={containerMode}
-              onMouseEnter={onContainerMouseEnter}
-              onMouseLeave={onContainerMouseLeave}
+              onMouseEnter={handleHover}
+              onMouseLeave={handleLeave}
+              ref={secondaryButtonRef}
+              bg={topBarState.secondaryButtonBg}
             >
               Search this {page.type.toLowerCase()}
             </ContextButton>
@@ -344,17 +385,16 @@ const AdvancedPrimarySearchContainer: React.FC<{
         </ContextButtonContainer>
       )}
 
-      {(mode == 'focus' || mode == 'active') && (
+      {topBarState.mode == 'active' && (
         <SearchOverlay
           onOuterClick={onClose}
           targetElement={containerRef.current}
         >
           <Controls>
-            {(mode === 'focus' || mode === 'active') &&
-              !anyResultHighlighted && (
-                <AdvancedSearchReturnLabel url={generateUrl(false, pathname)} />
-              )}
-            {(mode === 'focus' || mode === 'active') && !filterOpen && (
+            {topBarState.mode === 'active' && !anyResultHighlighted && (
+              <AdvancedSearchReturnLabel url={generateUrl(false, pathname)} />
+            )}
+            {topBarState.mode === 'active' && !filterOpen && (
               <Box mr={5}>
                 <FilterMenuToggle
                   open={filterOpen}
