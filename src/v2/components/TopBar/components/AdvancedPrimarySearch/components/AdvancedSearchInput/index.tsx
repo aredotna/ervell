@@ -1,4 +1,10 @@
-import React, { FocusEvent, useCallback, useEffect, useState } from 'react'
+import React, {
+  FocusEvent,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import Mousetrap from 'mousetrap'
 import styled from 'styled-components'
 import { debounce, pick, omit } from 'underscore'
@@ -8,10 +14,13 @@ import Box, { BoxProps } from 'v2/components/UI/Box'
 import { IconMap, OUTER_PROPS_KEYS } from 'v2/components/UI/SearchInput'
 import { Input } from 'v2/components/UI/Inputs'
 import Icons from 'v2/components/UI/Icons'
+import { IconState, TopBarMode } from '../../advancedPrimarySearchReducer'
+import { color } from 'styled-system'
 
 export const ICON_OFFSET = '3.125em'
 
 const Container = styled(Box)`
+  ${color}
   position: relative;
 
   ${props =>
@@ -23,7 +32,7 @@ const Container = styled(Box)`
   `}
 `
 
-const Icon = styled.div`
+const Icon = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,16 +52,20 @@ const Icon = styled.div`
 
 interface AdvancedSearchInputProps extends BoxProps {
   initialQuery?: string
-  mode?: 'resting' | 'blur' | 'focus' | 'hover' | 'active' | 'hoverSecondary'
-  containerMode?: 'resting' | 'hover'
+  mode?: TopBarMode
+  icon?: IconState
+  iconBg?: string
+  iconRef?: React.RefObject<HTMLDivElement>
+  containerBg?: string
   onQueryChange?: (query: string) => void
   onDebouncedQueryChange?: (query: string) => void
-  onMouseEnter?: () => void
-  onMouseLeave?: () => void
+  onHover?: (event: MouseEvent<HTMLDivElement, MouseEvent>) => void
+  onLeave?: (event: MouseEvent<HTMLDivElement, MouseEvent>) => void
   onFocus?: () => void
   onReset?: () => void
   onBlur?: (e: FocusEvent<Element>) => void
   iconMap?: IconMap
+  searchContainerRef?: React.RefObject<HTMLDivElement>
   searchInputRef?: any
 }
 
@@ -61,22 +74,18 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
   initialQuery,
   onQueryChange,
   onDebouncedQueryChange,
-  onMouseEnter,
-  onMouseLeave,
+  onHover,
+  onLeave,
   onFocus,
   onBlur,
   onReset,
   mode,
+  icon,
+  iconBg,
+  iconRef,
   searchInputRef,
-  iconMap = {
-    resting: null,
-    blur: null,
-    hover: 'MagnifyingGlass',
-    hoverSecondary: 'MagnifyingGlass',
-    focus: 'MagnifyingGlass',
-    active: 'X',
-  },
-  containerMode,
+  searchContainerRef,
+  containerBg,
   ...rest
 }) => {
   const [query, setQuery] = useState<string>(initialQuery || '')
@@ -95,13 +104,19 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
     handleDebouncedQueryChange && handleDebouncedQueryChange(e.target.value)
   }
 
-  const handleMouseEnter = useCallback(() => {
-    onMouseEnter && onMouseEnter()
-  }, [onMouseEnter])
+  const handleMouseEnter = useCallback(
+    (e: MouseEvent<HTMLDivElement, MouseEvent>) => {
+      onHover && onHover(e)
+    },
+    [onHover]
+  )
 
-  const handleMouseLeave = useCallback(() => {
-    onMouseLeave && onMouseLeave()
-  }, [onMouseLeave])
+  const handleMouseLeave = useCallback(
+    (e: MouseEvent<HTMLDivElement, MouseEvent>) => {
+      onHover && onLeave(e)
+    },
+    [onHover]
+  )
 
   const handleReset = useCallback(() => {
     searchInputRef.current.focus()
@@ -139,21 +154,17 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
     <Container
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      mode={mode}
-      containerMode={containerMode}
+      ref={searchContainerRef}
+      bg={containerBg}
       {...outerProps}
     >
-      {iconMap[containerMode] && (
-        <Icon
-          mode={containerMode}
-          containerMode={containerMode}
-          onClick={handleReset}
-        >
+      {icon && (
+        <Icon onClick={handleReset} bg={iconBg} ref={iconRef}>
           <Icons
             width="1.5em"
             height="0.88em"
             color="gray.medium"
-            name={iconMap[containerMode]}
+            name={icon}
           />
         </Icon>
       )}
