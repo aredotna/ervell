@@ -64,8 +64,8 @@ const ReducerMethodMap = {
   MOUSEENTER_ICON: state => {
     return {
       ...state,
-      primaryButtonBg: 'gray.light',
-      icon: getIconState(state),
+      primaryButtonBg: null,
+      icon: state.hasQuery ? 'X' : null,
       iconBgColor: 'gray.light',
       containerBg: state.hasQuery ? 'gray.light' : null,
       secondaryButtonBg: null,
@@ -139,7 +139,7 @@ const ReducerMethodMap = {
     return {
       ...state,
       hasQuery: payload,
-      icon: getIconState({ ...state, hasQuery: payload }),
+      icon: state.hasQuery ? 'X' : null,
     }
   },
 }
