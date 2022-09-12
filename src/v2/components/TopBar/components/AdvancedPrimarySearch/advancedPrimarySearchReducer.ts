@@ -85,7 +85,6 @@ const ReducerMethodMap = {
   },
 
   MOUSELEAVE: state => {
-    console.log({ state })
     if (state.mode === 'active') {
       return { ...state }
     }
