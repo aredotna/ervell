@@ -78,12 +78,14 @@ const ReducerMethodMap = {
       primaryButtonBg: 'gray.light',
       icon: getIconState(state),
       iconBgColor: 'gray.light',
-      containerBg: state.hasQuery ? 'gray.light' : null,
+      containerBg:
+        state.hasQuery || state.mode == 'active' ? 'gray.light' : null,
       secondaryButtonBg: null,
     }
   },
 
   MOUSELEAVE: state => {
+    console.log({ state })
     if (state.mode === 'active') {
       return { ...state }
     }
