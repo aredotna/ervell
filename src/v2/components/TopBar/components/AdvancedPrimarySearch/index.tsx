@@ -261,7 +261,14 @@ const AdvancedPrimarySearchContainer: React.FC<{
         return navigate(generateUrl(false, pathname))
       }
     },
-    [anyResultHighlighted, onClose, resetAll, generateUrl, addRecentSearch]
+    [
+      anyResultHighlighted,
+      onClose,
+      resetAll,
+      generateUrl,
+      addRecentSearch,
+      state.variables,
+    ]
   )
 
   const handleResultClick = useCallback(
