@@ -188,14 +188,6 @@ const AdvancedPrimarySearchContainer: React.FC<{
 
   const handleHover = useCallback(
     (e: MouseEvent<HTMLDivElement, MouseEvent>) => {
-      console.log('handling hover > target', e.target, {
-        ' containerRef.current': containerRef.current,
-        ' primaryButtonRef.current': primaryButtonRef.current,
-        ' secondaryButtonRef.current': secondaryButtonRef.current,
-        ' iconRef.current': iconRef.current,
-        ' searchRef.current': searchRef.current,
-        ' searchInputRef.current': searchInputRef.current,
-      })
       if (e.target == primaryButtonRef.current) {
         dispatch({ type: 'MOUSEENTER_PRIMARY', payload: null })
       }
@@ -213,7 +205,6 @@ const AdvancedPrimarySearchContainer: React.FC<{
         e.target == searchRef.current ||
         e.target == searchInputRef.current
       ) {
-        console.log('handling hover > container', e.target)
         dispatch({ type: 'MOUSEENTER_CONTAINER', payload: null })
       }
     },

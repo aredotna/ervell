@@ -53,7 +53,6 @@ const Icon = styled(Box)`
 interface AdvancedSearchInputProps extends BoxProps {
   initialQuery?: string
   mode?: TopBarMode
-  containerMode?: 'resting' | 'hover'
   icon?: IconState
   iconBg?: string
   iconRef?: React.RefObject<HTMLDivElement>
@@ -87,7 +86,6 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
   searchInputRef,
   searchContainerRef,
   containerBg,
-  containerMode,
   ...rest
 }) => {
   const [query, setQuery] = useState<string>(initialQuery || '')
