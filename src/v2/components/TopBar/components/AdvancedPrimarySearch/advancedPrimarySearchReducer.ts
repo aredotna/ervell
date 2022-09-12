@@ -89,7 +89,13 @@ const ReducerMethodMap = {
     }
 
     if (state.mode === 'blurred') {
-      return { ...state, containerBg: null, iconBgColor: null }
+      return {
+        ...state,
+        containerBg: null,
+        iconBgColor: null,
+        primaryButtonBg: null,
+        secondaryButtonBg: null,
+      }
     }
 
     return { ...initialTopBarState }
