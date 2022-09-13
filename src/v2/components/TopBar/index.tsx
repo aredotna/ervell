@@ -71,12 +71,14 @@ export const TopBar: React.FC<TopBarProps> = ({ scheme, me, ...rest }) => {
   const { data } = useQuery<IsConfirmed>(IS_CONFIRMED_QUERY, { ssr: false })
   const [userMode, setUserMode] = useState<'resting' | 'open'>('resting')
   const isAdmin = useIsAdmin()
+  const isSupporter = useSerializedMe()?.is_supporter
+  const showNewSearch = isAdmin || isSupporter
 
   const needsDot = data && !data.me?.is_confirmed
 
   return (
     <Container scheme={scheme} {...rest}>
-      {isAdmin ? (
+      {showNewSearch ? (
         <AdvancedPrimarySearchContainer flex={1} scheme={scheme} />
       ) : (
         <PrimarySearch flex={1} scheme={scheme} />
