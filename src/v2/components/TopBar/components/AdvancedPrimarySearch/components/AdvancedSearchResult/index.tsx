@@ -98,7 +98,7 @@ export const AdvancedSearchResult: React.FC<AdvancedSearchResultProps &
     [onClick, result]
   )
 
-  if (result) {
+  if (result && result.href) {
     if (result.__typename == 'PendingBlock') {
       return null
     }
@@ -165,7 +165,7 @@ export const AdvancedSearchResult: React.FC<AdvancedSearchResultProps &
           </PathContainer>
 
           {!selected && <AdvancedSearchCount result={result} />}
-          {selected && (
+          {selected && result.href && (
             <AdvancedSearchReturnLabel url={result.href} label={'Open'} />
           )}
         </ResultContainer>

@@ -56,7 +56,7 @@ const FullSearchResult: React.FC<{
   result: AdvancedSearchVariables
   selected: boolean
 }> = ({ result, selected }) => {
-  const term = result.term.facet
+  const term = result.term?.facet || '(All results)'
   const variables = stringifyVariables(omit(result, 'term'))
 
   return (
