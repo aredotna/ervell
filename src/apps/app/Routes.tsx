@@ -41,10 +41,13 @@ import useIsAdmin from 'v2/hooks/useIsAdmin'
 import { Search2Page } from 'v2/pages/search2'
 import { ModalBlockWrapper } from 'v2/pages/block/ModalBlockWrapper'
 import { ProfileSearchPage } from 'v2/pages/profile/ProfileSearchPage'
+import useSerializedMe from 'v2/hooks/useSerializedMe'
 
 export const AppRoutes = () => {
   const { isLoggedIn } = useLoginStatus()
   const isAdmin = useIsAdmin()
+  const isSupporter = useSerializedMe()?.is_supporter
+  const showNewSearch = isAdmin || isSupporter
 
   const location = useLocation()
   const state = location.state as any
@@ -88,7 +91,7 @@ export const AppRoutes = () => {
           </Route>
         </Route>
 
-        {isAdmin && (
+        {showNewSearch && (
           <Route path="search2" element={<Search2Page />}>
             <Route path=":term" element={<Search2Page />}>
               <Route path=":view" element={<Search2Page />} />
@@ -149,7 +152,9 @@ export const AppRoutes = () => {
         <Route path=":id/index" element={<ProfilePage view="index" />} />
         <Route path=":id/groups" element={<ProfilePage view="groups" />} />
 
-        {isAdmin && <Route path=":id/search" element={<ProfileSearchPage />} />}
+        {showNewSearch && (
+          <Route path=":id/search" element={<ProfileSearchPage />} />
+        )}
 
         <Route path=":id" element={<ProfilePage />} />
 
@@ -167,7 +172,7 @@ export const AppRoutes = () => {
           element={<ChannelPageWrapper view="grid" />}
         />
         <Route path=":user_id/:id/embed" element={<EmbeddedChannelPage />} />
-        {isAdmin && (
+        {showNewSearch && (
           <Route path=":user_id/:id/search" element={<ChannelSearchPage />} />
         )}
         <Route path=":user_id/:id" element={<ChannelPageWrapper />} />

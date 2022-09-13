@@ -9,7 +9,8 @@ export type RecentSearch = AdvancedSearchVariables | AdvancedQuickSearchResult
 export const isFullSearch = (
   search: RecentSearch
 ): search is AdvancedSearchVariables => {
-  return (search as AdvancedSearchVariables).term !== undefined
+  const typedSearch = search as AdvancedSearchVariables
+  return typedSearch.term !== undefined || typedSearch.where !== undefined
 }
 
 export default function() {
