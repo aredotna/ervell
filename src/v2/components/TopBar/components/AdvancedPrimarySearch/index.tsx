@@ -515,7 +515,7 @@ export const QuestionMarkOverlay: React.FC = () => {
             <Copy>
               As a supporter, you get early access to our new advanced search
               features. We are still working on some details (date filters, for
-              example), but we'd be grateful to hear your feedback.
+              example), but we&apos;d be grateful to hear your feedback.
             </Copy>
             <Copy>Two options:</Copy>
             <Copy>
