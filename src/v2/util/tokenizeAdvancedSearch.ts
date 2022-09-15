@@ -155,8 +155,9 @@ export const generateUrlFromVariables = (
   paramsOnly?: boolean,
   basePath?: string
 ) => {
-  const path =
-    basePath !== '/' && basePath ? `${basePath}/search` : getUrlPath(variables)
+  const useBasePath =
+    basePath !== '/' && basePath !== undefined && !basePath.includes('/search')
+  const path = useBasePath ? `${basePath}/search` : getUrlPath(variables)
 
   const params = stringify(omit(variables, ['page', 'per']), {
     arrayFormat: 'brackets',
