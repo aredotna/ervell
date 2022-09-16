@@ -2,7 +2,6 @@ Backbone = require 'backbone'
 Backbone.$ = $
 sd = require('sharify').data
 Cookies = require 'cookies-js'
-moment =  require 'moment'
 Pusher = require 'pusher-js'
 
 BodyView = require './body/view.coffee'

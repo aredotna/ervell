@@ -2,7 +2,7 @@ Base = require "./base.coffee"
 sd = require("sharify").data
 _ = require 'underscore'
 _s = require 'underscore.string'
-moment = require 'moment'
+{ DateTime } =  require 'luxon'
 
 module.exports = class Block extends Base
   url: -> "#{sd.API_URL}/blocks/#{@id}"
@@ -106,7 +106,7 @@ module.exports = class Block extends Base
     @get('user').id is user.id
 
   connectedAtAgo: ->
-    moment(@get('connected_at')).fromNow()
+    DateTime.fromSql(@get('connected_at')).toRelative()
 
   allows: (permission, user) ->
     _s.include @getPermissions(user), permission

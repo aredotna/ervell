@@ -1,4 +1,6 @@
 import React, { useCallback, useContext } from 'react'
+import { DateTime } from 'luxon'
+
 import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 import {
   FilterContainer,
@@ -52,6 +54,9 @@ export const TimeRange: React.FC = () => {
   }
 
   const defaultSelected = !currentRange.before && !currentRange.after
+  const now = DateTime.now()
+    .plus({ days: 1 })
+    .toISODate()
 
   return (
     <FilterContainer>
@@ -65,29 +70,37 @@ export const TimeRange: React.FC = () => {
       <RangeOption
         label="Past day"
         currentRange={currentRange}
-        before="now"
-        after="1d"
+        before={now}
+        after={DateTime.now()
+          .minus({ days: 1 })
+          .toISODate()}
       />
 
       <RangeOption
         label="Past week"
         currentRange={currentRange}
-        before="now"
-        after="1w"
+        before={now}
+        after={DateTime.now()
+          .minus({ weeks: 1 })
+          .toISODate()}
       />
 
       <RangeOption
         label="Past month"
         currentRange={currentRange}
-        before="now"
-        after="1m"
+        before={now}
+        after={DateTime.now()
+          .minus({ months: 1 })
+          .toISODate()}
       />
 
       <RangeOption
         label="Past year"
         currentRange={currentRange}
-        before="now"
-        after="1y"
+        before={now}
+        after={DateTime.now()
+          .minus({ years: 1 })
+          .toISODate()}
       />
     </FilterContainer>
   )
