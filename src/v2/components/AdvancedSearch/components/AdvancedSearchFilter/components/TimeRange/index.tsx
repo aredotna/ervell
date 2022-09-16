@@ -54,9 +54,7 @@ export const TimeRange: React.FC = () => {
   }
 
   const defaultSelected = !currentRange.before && !currentRange.after
-  const now = DateTime.now()
-    .plus({ days: 1 })
-    .toISODate()
+  const now = DateTime.now().plus({ days: 1 })
 
   return (
     <FilterContainer>
@@ -70,37 +68,29 @@ export const TimeRange: React.FC = () => {
       <RangeOption
         label="Past day"
         currentRange={currentRange}
-        before={now}
-        after={DateTime.now()
-          .minus({ days: 1 })
-          .toISODate()}
+        before={now.toISODate()}
+        after={now.minus({ hours: 24 }).toISODate()}
       />
 
       <RangeOption
         label="Past week"
         currentRange={currentRange}
-        before={now}
-        after={DateTime.now()
-          .minus({ weeks: 1 })
-          .toISODate()}
+        before={now.toISODate()}
+        after={now.minus({ weeks: 1 }).toISODate()}
       />
 
       <RangeOption
         label="Past month"
         currentRange={currentRange}
-        before={now}
-        after={DateTime.now()
-          .minus({ months: 1 })
-          .toISODate()}
+        before={now.toISODate()}
+        after={now.minus({ months: 1 }).toISODate()}
       />
 
       <RangeOption
         label="Past year"
         currentRange={currentRange}
-        before={now}
-        after={DateTime.now()
-          .minus({ years: 1 })
-          .toISODate()}
+        before={now.toISODate()}
+        after={now.minus({ years: 1 }).toISODate()}
       />
     </FilterContainer>
   )
