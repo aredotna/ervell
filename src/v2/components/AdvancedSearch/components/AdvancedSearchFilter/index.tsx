@@ -8,6 +8,7 @@ import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
 import { AdvancedSearchContext, AnyFilter } from '../../AdvancedSearchContext'
 import { FieldsFilter } from './components/FieldsFilter'
 import { Orders } from './components/Orders'
+import { TimeRange } from './components/TimeRange'
 import { WhatFilter } from './components/WhatFilter'
 import { WhereFilter } from './components/WhereFilter'
 
@@ -114,6 +115,7 @@ export const AdvancedSearchFilter: React.FC<AdvancedSearchFilterProps> = ({
         currentDisabledFilters={state.disabledFilters}
       />
       <Orders />
+      <TimeRange />
     </FiltersContainer>
   )
 }

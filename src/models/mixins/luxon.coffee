@@ -1,10 +1,10 @@
-moment = require 'moment'
+{ DateTime } =  require 'luxon'
 
 module.exports =
   DEFAULT_DATE_FORMAT: 'YYYY-MM-DD'
 
   date: (attr) ->
-    moment(@get(attr))
+    DateTime.fromSQL(@get(attr))
 
   formatDate: (attr, form = @DEFAULT_DATE_FORMAT) ->
-    @date(attr).format(form)
+    DateTime.fromSQL(@get(attr)).format(form)

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import moment from 'moment'
+import { DateTime } from 'luxon'
 
 import Text from 'v2/components/UI/Text'
 import { Link } from 'react-router-dom'
@@ -62,7 +62,7 @@ export const BlogPreview: React.FC<BlogPreviewProps> = ({ post }) => {
       <Category>{post.category}</Category>
       <Title>{post.title}</Title>
       <Description>{post.previewText}</Description>
-      <Meta>{moment(post.displayDate).format('LL')}</Meta>
+      <Meta>{DateTime.fromISO(post.displayDate).toISODate()}</Meta>
       <Meta>{post.author.name}</Meta>
     </Post>
   )

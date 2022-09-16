@@ -1,18 +1,16 @@
-import moment from 'moment'
+import { DateTime } from 'luxon'
 
 export function calculateAge() {
-  const originDate = moment('2011-08-09', 'YYYY-MM-DD')
-  const current = moment().startOf('day')
-  const years = current.diff(originDate, 'years')
-  originDate.add(years, 'years')
-  const days = current.diff(originDate, 'days')
+  const originDate = DateTime.fromISO('2011-08-09')
+  const current = DateTime.now()
+  const { years, days } = current.diff(originDate, ['years', 'days'])
   return { years, days }
 }
 
 export function calculatedAgePhrase() {
   const { years, days } = calculateAge()
 
-  const daysWord = days == 1 ? 'day' : 'days'
+  const daysWord = Math.floor(days) == 1 ? 'day' : 'days'
 
-  return `${years} years and ${days} ${daysWord}`
+  return `${years} years and ${Math.floor(days)} ${daysWord}`
 }

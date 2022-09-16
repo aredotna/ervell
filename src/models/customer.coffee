@@ -4,10 +4,10 @@ Model = require './base.coffee'
 Coupon = require './coupon.coffee'
 Sources = require '../collections/sources.coffee'
 Subscriptions = require '../collections/subscriptions.coffee'
-Moment = require './mixins/moment.coffee'
+Luxon = require './mixins/luxon.coffee'
 
 module.exports = class Customer extends Model
-  extend @prototype, Moment
+  extend @prototype, Luxon
 
   url: "#{API_URL}/account/customer"
 

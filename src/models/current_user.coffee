@@ -1,7 +1,6 @@
 _ = require 'underscore'
 sd = require('sharify').data
 Backbone = require 'backbone'
-moment = require 'moment'
 User = require './user.coffee'
 mediator = require '../lib/mediator.coffee'
 

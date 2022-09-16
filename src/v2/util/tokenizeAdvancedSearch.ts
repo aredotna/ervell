@@ -35,6 +35,17 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
     .filter(token => token.key === 'fields')
     .map(token => FieldsEnum[token.value.toUpperCase()])
     .filter(Boolean) as FieldsEnum[]
+
+  const before = colonTokenPairs
+    .filter(token => token.key === 'before')
+    .map(token => token.value)
+    .filter(Boolean)[0] as string | undefined
+
+  const after = colonTokenPairs
+    .filter(token => token.key === 'after')
+    .map(token => token.value)
+    .filter(Boolean)[0] as string | undefined
+
   const sortToken =
     (colonTokenPairs
       .find(token => token.key === 'sort')
@@ -57,6 +68,8 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
     order: sortToken ? { facet: sortToken, dir: directionToken } : undefined,
     per,
     page,
+    before,
+    after,
     term: term === '' ? null : { facet: term },
   }
 
@@ -78,6 +91,19 @@ const mapFacets = function(type, id) {
   return function(facet) {
     return stringifyFacet(type, facet, id)
   }
+}
+
+export const stringifyRange = (before: string, after: string) => {
+  if (before && after) {
+    return `before:${before} after:${after}`
+  }
+  if (before) {
+    return `before:${before}`
+  }
+  if (after) {
+    return `after:${after}`
+  }
+  return ''
 }
 
 export const stringifyOrder = (
@@ -119,6 +145,9 @@ export const stringifyVariables = (variables: AdvancedSearchVariables) => {
     stringifyVariable(variables, 'fields'),
     variables?.order
       ? stringifyOrder(variables.order.facet, variables.order.dir)
+      : undefined,
+    variables?.before || variables?.after
+      ? stringifyRange(variables.before, variables.after)
       : undefined,
     variables?.term?.facet ? `${variables?.term.facet}` : undefined,
   ]

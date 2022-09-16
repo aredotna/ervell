@@ -7,6 +7,7 @@ import tokenizeSearch, {
   generateUrlFromVariables,
   stringifyFacet,
   stringifyOrder,
+  stringifyRange,
   stringifyVariables,
 } from 'v2/util/tokenizeAdvancedSearch'
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
@@ -66,6 +67,13 @@ type Action =
       payload: {
         facet: SortOrderEnum
         dir: SortDirection
+      }
+    }
+  | {
+      type: 'SET_RANGE'
+      payload: {
+        before?: string
+        after?: string
       }
     }
   | {
@@ -253,6 +261,33 @@ export const ReducerMethodMap = {
     }
   },
 
+  SET_RANGE: (state: State, action: any) => {
+    const { before, after } = action.payload
+    let query = state.query
+
+    if (state.variables.before || state.variables.after) {
+      query = query.replace(
+        ` ${stringifyRange(state.variables.before, state.variables.after)}`,
+        ` ${stringifyRange(before, after)}`
+      )
+    } else {
+      query = `${query} ${stringifyRange(before, after)}`
+    }
+
+    const variables = {
+      ...state.variables,
+      before,
+      after,
+    }
+
+    return {
+      ...state,
+      query,
+      disabledFilters: calculatedDisabledFilters(variables, query),
+      variables,
+    }
+  },
+
   SET_ORDER: (state: State, action: any) => {
     const { facet, dir } = action.payload
 
@@ -299,6 +334,7 @@ const reducer = (state: State, action: Action) => {
     case 'SET_ALL':
     case 'QUERY_CHANGE':
     case 'SET_ORDER':
+    case 'SET_RANGE':
     case 'SET_VARIABLES':
     case 'RESET_ALL':
     case 'SET_TOTAL':
@@ -332,6 +368,7 @@ interface AdvancedSearchContextType {
   ) => void
   setAllFilter: (field: 'where' | 'what' | 'fields') => void
   setOrder: (facet: SortOrderEnum, dir: SortDirection) => void
+  setRange: (before?: string, after?: string) => void
   setTotal: (total: number) => void
   resetAll: () => void
   updateQuery: (query: string) => void
@@ -347,6 +384,7 @@ export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
   updateQuery: () => {},
   setAllFilter: () => {},
   setOrder: () => {},
+  setRange: () => {},
   setTotal: () => {},
   generateUrl: () => '',
   resetAll: () => {},
@@ -431,6 +469,10 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     dispatch({ type: 'SET_ORDER', payload: { facet, dir } })
   }, [])
 
+  const setRange = useCallback((before?: string, after?: string) => {
+    dispatch({ type: 'SET_RANGE', payload: { before, after } })
+  }, [])
+
   const updateQuery = useCallback((query: string) => {
     dispatch({ type: 'QUERY_CHANGE', payload: query })
   }, [])
@@ -473,6 +515,7 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
         updateQuery,
         setAllFilter,
         setOrder,
+        setRange,
         setTotal,
         generateUrl,
         resetAll,
