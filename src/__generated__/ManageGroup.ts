@@ -54,6 +54,7 @@ export interface ManageGroup {
   id: number;
   name: string;
   href: string | null;
+  slug: string;
   description: string | null;
   invite: ManageGroup_invite | null;
   can: ManageGroup_can | null;

@@ -54,6 +54,7 @@ export interface inviteGroupUser_invite_group_users_group {
   id: number;
   name: string;
   href: string | null;
+  slug: string;
   description: string | null;
   invite: inviteGroupUser_invite_group_users_group_invite | null;
   can: inviteGroupUser_invite_group_users_group_can | null;
