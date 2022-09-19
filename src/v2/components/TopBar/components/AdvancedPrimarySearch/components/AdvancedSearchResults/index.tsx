@@ -45,6 +45,8 @@ export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsConta
     return (
       <AdvancedSearchDefaultResults
         onAnyResultHighlighted={onAnyResultHighlighted}
+        state={state}
+        onResultClick={onResultClick}
       />
     )
   }
