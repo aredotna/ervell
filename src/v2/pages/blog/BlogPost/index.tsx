@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import styled from 'styled-components'
-import moment from 'moment'
+import { DateTime } from 'luxon'
 
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 import Description from 'v2/components/UI/Head/components/Description'
@@ -70,6 +70,8 @@ export const BlogPost: React.FC = () => {
     return null
   }
 
+  const displayDate = DateTime.fromISO(post.publishDate).toLocaleString()
+
   return (
     <ErrorBoundary>
       <Title>{post ? post.title : 'Blog'}</Title>
@@ -82,7 +84,7 @@ export const BlogPost: React.FC = () => {
           <PostTitle>{post.title}</PostTitle>
 
           <Metadata>
-            <Meta>{moment(post.displayDate).format('LL')}</Meta>
+            <Meta>{displayDate}</Meta>
             <Meta>{post.author.name}</Meta>
           </Metadata>
 

@@ -54,6 +54,7 @@ export interface updateGroupMutation_update_group_group {
   id: number;
   name: string;
   href: string | null;
+  slug: string;
   description: string | null;
   invite: updateGroupMutation_update_group_group_invite | null;
   can: updateGroupMutation_update_group_group_can | null;

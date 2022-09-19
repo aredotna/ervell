@@ -12,6 +12,8 @@ export default gql`
     $order: Order
     $page: Int
     $per: Int
+    $before: String
+    $after: String
   ) {
     searches {
       advanced(
@@ -22,6 +24,8 @@ export default gql`
         order: $order
         per: $per
         page: $page
+        before: $before
+        after: $after
       ) {
         total
         filters {

@@ -179,4 +179,6 @@ export interface AdvancedQuickSearchVariables {
   order?: Order | null;
   page?: number | null;
   per?: number | null;
+  before?: string | null;
+  after?: string | null;
 }

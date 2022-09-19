@@ -2,7 +2,7 @@
 # Base model to extend from
 #
 Backbone = require 'backbone'
-moment = require 'moment'
+{ DateTime } =  require 'luxon'
 _ = require 'underscore'
 ModelLib = require '../lib/model_lib.coffee'
 sd = require("sharify").data
@@ -58,9 +58,9 @@ module.exports = class Base extends Backbone.Model
       token
     _.unescape(textArray.join(" ")) + (if text.length > limit then "..." else "")
 
-  createdAtAgo:  -> moment(@get('created_at')).fromNow()
+  createdAtAgo:  -> DateTime.fromSql(@get('created_at')).toRelative() 
 
-  updatedAtAgo:  -> moment(@get('updated_at')).fromNow()
+  updatedAtAgo:  -> DateTime.fromSql(@get('updated_at')).toRelative()
 
   serialize: ->
     data = super

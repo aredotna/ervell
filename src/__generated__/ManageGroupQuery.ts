@@ -54,6 +54,7 @@ export interface ManageGroupQuery_group {
   id: number;
   name: string;
   href: string | null;
+  slug: string;
   description: string | null;
   invite: ManageGroupQuery_group_invite | null;
   can: ManageGroupQuery_group_can | null;
