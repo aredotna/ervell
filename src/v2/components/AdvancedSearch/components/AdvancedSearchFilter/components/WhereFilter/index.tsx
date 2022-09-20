@@ -1,6 +1,6 @@
-import { omit, without } from 'lodash'
+import { omit } from 'lodash'
 import React, { useCallback, useContext } from 'react'
-import { useLocation, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import {
   AnyFilter,
   AdvancedSearchContext,
