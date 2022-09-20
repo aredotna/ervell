@@ -5,6 +5,12 @@ import styled from 'styled-components'
 import { mixin as boxMixin } from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 
+const Label = styled(Text).attrs({
+  color: 'gray.medium',
+})`
+  display: inline;
+`
+
 const Container = styled(Link).attrs({
   mr: 5,
   py: 1,
@@ -16,14 +22,8 @@ const Container = styled(Link).attrs({
   justify-content: center;
   background-color: ${p => p.theme.colors.background};
   border-radius: ${p => p.theme.radii.regular};
-`
 
-const Label = styled(Text).attrs({
-  color: 'gray.medium',
-})`
-  display: inline;
-
-  &:hover {
+  &:hover ${Label} {
     color: ${p => p.theme.colors.gray.bold};
   }
 `
