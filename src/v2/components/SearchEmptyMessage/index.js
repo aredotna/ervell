@@ -23,7 +23,9 @@ export default class SearchEmptyMessage extends PureComponent {
 
     return (
       <Copy f={6} my={8} color="gray.medium" lineHeight={2}>
-        {`No results for '${term}'`}
+        {term
+          ? `No results for '${term}'`
+          : `No results found, try changing your search filters.`}
       </Copy>
     )
   }
