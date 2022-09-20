@@ -157,7 +157,7 @@
     "newrelic": "6.14.0",
     "nib": "*",
     "node-deeplink": "https://github.com/aredotna/node-deeplink",
-    "passport": "^0.4.0",
+    "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "process": "^0.11.10",
     "prop-types": "^15.6.0",
