@@ -14,7 +14,7 @@ import {
 } from '__generated__/AdvancedQuickSearch'
 import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
-import { WhatEnum } from '__generated__/globalTypes'
+import { FieldsEnum, WhatEnum } from '__generated__/globalTypes'
 import advancedSearchResultsQuery from './queries/advancedSearchResultsQuery'
 import AdvancedSearchResultsTotal from '../AdvancedSearchResultsTotal'
 import { AdvancedSearchDefaultResults } from '../AdvancedSearchDefaultResults'
@@ -76,6 +76,9 @@ interface AdvancedSearchResultsQueryProps {
 const DEFAULTS = (hasId: boolean): AdvancedSearchVariables => ({
   page: 1,
   per: 6,
+  fields: {
+    facets: hasId ? [FieldsEnum.ALL] : [FieldsEnum.NAME],
+  },
   what: {
     facets: hasId
       ? [WhatEnum.ALL]
