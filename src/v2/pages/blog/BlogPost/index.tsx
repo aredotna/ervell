@@ -70,7 +70,7 @@ export const BlogPost: React.FC = () => {
     return null
   }
 
-  const displayDate = DateTime.fromISO(post.publishDate).toLocaleString()
+  const displayDate = DateTime.fromISO(post.displayDate).toLocaleString()
 
   return (
     <ErrorBoundary>
