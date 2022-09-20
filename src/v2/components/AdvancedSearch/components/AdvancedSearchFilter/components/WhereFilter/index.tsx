@@ -1,5 +1,10 @@
-import React, { useCallback } from 'react'
-import { AnyFilter } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
+import { omit, without } from 'lodash'
+import React, { useCallback, useContext } from 'react'
+import { useLocation, useNavigate } from 'react-router'
+import {
+  AnyFilter,
+  AdvancedSearchContext,
+} from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 import {
   FilterContainer,
   CategoryLabel,
@@ -9,6 +14,7 @@ import {
   FilterContainer as FilterLabelContainer,
 } from 'v2/components/AdvancedSearch/components/AdvancedSearchFilter/components/FilterOption'
 import { TypedEnumLabelMap } from 'v2/components/AdvancedSearch/utils/labels'
+import { generateUrlFromVariables } from 'v2/util/tokenizeAdvancedSearch'
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
 interface WhereFilterOptionProps {
   field: 'where' | 'what' | 'fields'
@@ -110,12 +116,32 @@ export const WhereFilter: React.FC<WhereFilterProps> = ({
         </>
       )}
       {id && (
-        <WhereFilterOption
-          currentFilter={currentFilter}
-          filter={WhereEnum.USER}
-          {...updateProps}
-        />
+        <>
+          <WhereFilterRemoveScope />
+          <WhereFilterOption
+            currentFilter={currentFilter}
+            filter={currentFilter}
+            {...updateProps}
+          />
+        </>
       )}
     </FilterContainer>
+  )
+}
+
+const WhereFilterRemoveScope: React.FC = () => {
+  const { state } = useContext(AdvancedSearchContext)
+  const navigate = useNavigate()
+
+  const onClick = useCallback(() => {
+    const variables = omit(state.variables, 'where')
+    const url = generateUrlFromVariables(variables)
+    navigate(`${url}`)
+  }, [navigate, state.variables])
+
+  return (
+    <FilterLabelContainer onClick={onClick}>
+      <FilterLabel>All Are.na</FilterLabel>
+    </FilterLabelContainer>
   )
 }
