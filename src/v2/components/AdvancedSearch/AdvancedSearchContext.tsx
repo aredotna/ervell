@@ -242,6 +242,30 @@ export const ReducerMethodMap = {
       delete variables.term?.facet
     }
 
+    if (isEmpty(newVariables.where)) {
+      delete variables.where
+    }
+
+    if (isEmpty(newVariables.what)) {
+      delete variables.what
+    }
+
+    if (isEmpty(newVariables.fields)) {
+      delete variables.fields
+    }
+
+    if (isEmpty(newVariables.order)) {
+      delete variables.order
+    }
+
+    if (isEmpty(newVariables.before)) {
+      delete variables.before
+    }
+
+    if (isEmpty(newVariables.after)) {
+      delete variables.after
+    }
+
     return {
       ...state,
       query: action.payload,
