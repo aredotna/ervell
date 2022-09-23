@@ -15,6 +15,7 @@ import {
   AdvancedQuickSearchResultBlock_Text,
 } from '__generated__/AdvancedQuickSearchResultBlock'
 import { PrimarySearchIcon } from '../../../PrimarySearch/components/PrimarySearchResults/PrimarySearchIcon'
+import { truncate } from 'lodash'
 
 const Container = styled(AdaptibleLink).attrs({
   borderTop: '1px solid',
@@ -88,6 +89,11 @@ export const AdvancedSearchResultBlock: React.FC<AdvancedSearchResultBlockProps>
     context: [],
   }
 
+  const label =
+    result.__typename === 'Text'
+      ? truncate(`${result.title} ${result.content}`, { length: 100 })
+      : result.title
+
   return (
     <Container
       to={result.href}
@@ -97,7 +103,7 @@ export const AdvancedSearchResultBlock: React.FC<AdvancedSearchResultBlockProps>
     >
       <PrimarySearchIcon result={result} />
       <ResultContainer>
-        <Label>{result.title}</Label>
+        <Label>{label}</Label>
         <SmallLabel>
           {result.__typename} – by {result.user.name}
         </SmallLabel>

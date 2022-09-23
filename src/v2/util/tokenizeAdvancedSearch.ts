@@ -25,26 +25,43 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
 
   const whereTokens = colonTokenPairs
     .filter(token => token.key === 'where')
-    .map(token => WhereEnum[token.value.toUpperCase()])
-    .filter(Boolean)[0] as WhereEnum | undefined
+    .map(
+      token =>
+        WhereEnum[token.value.toUpperCase()] && {
+          facet: WhereEnum[token.value.toUpperCase()],
+        }
+    )
+    .filter(value => value?.facet)
   const whatTokens = colonTokenPairs
     .filter(token => token.key === 'what')
     .map(token => WhatEnum[token.value.toUpperCase()])
-    .filter(Boolean) as WhatEnum[]
+    .filter(Boolean)
   const fieldsTokens = colonTokenPairs
     .filter(token => token.key === 'fields')
     .map(token => FieldsEnum[token.value.toUpperCase()])
-    .filter(Boolean) as FieldsEnum[]
+    .filter(Boolean)
+
+  const scopedWhereTokens = colonTokenPairs
+    .filter(
+      token =>
+        token.key === 'channel' || token.key === 'group' || token.key === 'user'
+    )
+    .filter(Boolean)
+    .map(token => ({
+      facet: WhereEnum[token.key.toUpperCase()],
+      id: token.value,
+    }))
+    .filter(Boolean)
 
   const before = colonTokenPairs
     .filter(token => token.key === 'before')
     .map(token => token.value)
-    .filter(Boolean)[0] as string | undefined
+    .filter(Boolean)[0]
 
   const after = colonTokenPairs
     .filter(token => token.key === 'after')
     .map(token => token.value)
-    .filter(Boolean)[0] as string | undefined
+    .filter(Boolean)[0]
 
   const sortToken =
     (colonTokenPairs
@@ -61,8 +78,13 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
 
   const term = searchTokens.join(' ').trim()
 
+  const whereObject =
+    (!isEmpty(scopedWhereTokens) && scopedWhereTokens) ||
+    (!isEmpty(whereTokens) && whereTokens) ||
+    undefined
+
   const variables = {
-    where: whereTokens ? [{ facet: whereTokens }] : undefined,
+    where: whereObject ? whereObject : undefined,
     what: whatTokens.length ? { facets: whatTokens } : undefined,
     fields: fieldsTokens.length ? { facets: fieldsTokens } : undefined,
     order: sortToken ? { facet: sortToken, dir: directionToken } : undefined,
