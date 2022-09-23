@@ -13,6 +13,7 @@ export const FilterLabel = styled(Text).attrs({
   fontWeight: 'bold',
 })`
   cursor: pointer;
+
   ${props =>
     props.active &&
     `
@@ -22,6 +23,7 @@ export const FilterLabel = styled(Text).attrs({
   ${props =>
     props.disabled &&
     `
+    pointer-events: none;
     color: ${props.theme.colors.gray.regular};
   `}
 `
@@ -36,10 +38,6 @@ export const FilterContainer = styled(Box).attrs({
     background-color: ${props => props.theme.colors.gray.cell};
   }
 
-  &:hover ${FilterLabel} {
-    color: ${props => props.theme.colors.gray.bold};
-  }
-
   ${props =>
     props.active &&
     `
@@ -47,9 +45,17 @@ export const FilterContainer = styled(Box).attrs({
   `}
 
   ${props =>
+    !props.disabled &&
+    `
+    &:hover ${FilterLabel} { 
+      color: ${props.theme.colors.gray.bold}; 
+    }`}
+
+  ${props =>
     props.disabled &&
     `
     cursor: default;
+    pointer-events: none;
 
     &:hover {
       background-color: transparent;

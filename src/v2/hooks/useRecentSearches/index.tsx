@@ -5,6 +5,7 @@ import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResu
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 
 export type RecentSearch = AdvancedSearchVariables | AdvancedQuickSearchResult
+export const MAX_RECENT_SEARCHES = 4
 
 export const isFullSearch = (
   search: RecentSearch
@@ -44,7 +45,9 @@ export default function() {
         )
       }
 
-      setRecentSearches([search, ...newRecentSearches].slice(0, 4))
+      setRecentSearches(
+        [search, ...newRecentSearches].slice(0, MAX_RECENT_SEARCHES)
+      )
     },
     [recentSearches, setRecentSearches]
   )

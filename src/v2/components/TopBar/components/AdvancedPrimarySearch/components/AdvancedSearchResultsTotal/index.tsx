@@ -15,6 +15,9 @@ import AdvancedSearchResult from '../AdvancedSearchResult'
 import advancedSearchResultsTotalQuery from './queries/advancedSearchResultsTotalQuery'
 import Box from 'v2/components/UI/Box'
 import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
+import { isEmpty, merge } from 'lodash'
+import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
+import { FieldsEnum } from '__generated__/globalTypes'
 
 interface AdvancedQuickSearchResultProps {
   index: number
@@ -49,6 +52,14 @@ const AdvancedNoResults: React.FC = () => {
   )
 }
 
+const DEFAULTS = (hasId: boolean): AdvancedSearchVariables => ({
+  page: 1,
+  per: 6,
+  fields: {
+    facets: hasId ? [FieldsEnum.ALL] : [FieldsEnum.NAME],
+  },
+})
+
 export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps> = ({
   index,
   maxResults,
@@ -66,7 +77,17 @@ export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps
   })
 
   useEffect(() => {
-    refetch(state.variables)
+    const mergedVariables = merge(
+      DEFAULTS(!!(state.variables?.where && state.variables?.where[0]?.id)),
+      state.variables,
+      {
+        per: 10,
+        page: 1,
+      }
+    ) as any
+    if (mergedVariables.term?.facet && !isEmpty(mergedVariables.term?.facet)) {
+      refetch(mergedVariables)
+    }
   }, [state.variables])
 
   const term = state.variables.term?.facet

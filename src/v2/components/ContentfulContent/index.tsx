@@ -29,6 +29,7 @@ const Figure = styled.figure`
 `
 
 const Image = styled.img`
+  width: 100%;
   max-width: 100%;
   margin: 0 auto;
   display: block;
@@ -93,7 +94,7 @@ export const optionsWithEmbeds = (embedData: any, defaultFontSize: number) => {
           <Figure>
             <Image
               srcSet={[
-                `${block.small} 670w`,
+                `${block.small} 800w`,
                 `${block.medium} 1340w`,
                 `${block.large} 2010w`,
               ]}

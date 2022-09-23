@@ -62,7 +62,7 @@ export const BlogPreview: React.FC<BlogPreviewProps> = ({ post }) => {
       <Category>{post.category}</Category>
       <Title>{post.title}</Title>
       <Description>{post.previewText}</Description>
-      <Meta>{DateTime.fromISO(post.displayDate).toISODate()}</Meta>
+      <Meta>{DateTime.fromISO(post.displayDate).toLocaleString()}</Meta>
       <Meta>{post.author.name}</Meta>
     </Post>
   )

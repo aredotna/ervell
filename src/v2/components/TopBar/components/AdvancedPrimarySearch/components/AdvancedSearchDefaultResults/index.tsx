@@ -9,12 +9,19 @@ import {
 } from 'v2/util/tokenizeAdvancedSearch'
 
 import Text from 'v2/components/UI/Text'
-import useRecentSearches, { isFullSearch } from 'v2/hooks/useRecentSearches'
+import useRecentSearches, {
+  isFullSearch,
+  MAX_RECENT_SEARCHES,
+} from 'v2/hooks/useRecentSearches'
 import useSearchKeyboardNavigation from '../../hooks/useSearchKeyboardNavigation'
 
 import AdvancedSearchResult from '../AdvancedSearchResult'
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
-import { omit } from 'lodash'
+import { isEmpty, omit } from 'lodash'
+import { State } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
+import AdvancedSearchResultsTotal from '../AdvancedSearchResultsTotal'
+import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
+import { useLocation } from 'react-router'
 
 const Label = styled(Text).attrs({
   f: [0],
@@ -75,13 +82,22 @@ const FullSearchResult: React.FC<{
 interface AdvancedSearchDefaultResultsProps {
   searchInputRef?: React.RefObject<HTMLInputElement>
   onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
+  state: State
+  onResultClick: (
+    e: AnimationPlaybackEventInit,
+    result?: AdvancedQuickSearchResult
+  ) => void
 }
 
 export const AdvancedSearchDefaultResults: React.FC<AdvancedSearchDefaultResultsProps> = ({
   searchInputRef,
   onAnyResultHighlighted,
+  state,
+  onResultClick,
 }) => {
   const { recentSearches } = useRecentSearches()
+  const location = useLocation()
+  const { pathname } = location
 
   const { index, interactive } = useSearchKeyboardNavigation({
     searchInputRef,
@@ -94,6 +110,9 @@ export const AdvancedSearchDefaultResults: React.FC<AdvancedSearchDefaultResults
     }
   }, [interactive])
 
+  const showSeeAllResults =
+    state?.variables?.where && state?.variables?.where[0]?.id
+
   if (recentSearches?.length > 0) {
     return (
       <>
@@ -105,7 +124,7 @@ export const AdvancedSearchDefaultResults: React.FC<AdvancedSearchDefaultResults
 
         {recentSearches &&
           recentSearches
-            .filter(x => x)
+            .filter(x => !isEmpty(x))
             .map((search, _idx) => {
               const selected = index === _idx
 
@@ -123,6 +142,16 @@ export const AdvancedSearchDefaultResults: React.FC<AdvancedSearchDefaultResults
                 />
               )
             })}
+
+        {showSeeAllResults && (
+          <AdvancedSearchResultsTotal
+            index={index}
+            maxResults={MAX_RECENT_SEARCHES}
+            pathname={pathname}
+            selected={index == MAX_RECENT_SEARCHES - 1}
+            onClick={onResultClick}
+          />
+        )}
       </>
     )
   }

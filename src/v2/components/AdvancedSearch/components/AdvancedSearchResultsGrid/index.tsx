@@ -1,6 +1,8 @@
 import { NetworkStatus, useQuery } from '@apollo/client'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
-import { AdvancedSearchContext } from '../../AdvancedSearchContext'
+import { merge } from 'lodash'
+
+import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 
 import SearchEmptyMessage from 'v2/components/SearchEmptyMessage'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
@@ -13,7 +15,7 @@ import {
   AdvancedSearchVariables,
 } from '__generated__/AdvancedSearch'
 import search from '../../queries/search'
-import { WhereEnum } from '__generated__/globalTypes'
+import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
 
 interface Props {
   initialScope?: {
@@ -21,6 +23,17 @@ interface Props {
     id?: string
   }
 }
+
+const DEFAULTS = (hasId: boolean): AdvancedSearchVariables => ({
+  page: 1,
+  per: 6,
+  fields: {
+    facets: [FieldsEnum.ALL],
+  },
+  what: {
+    facets: hasId ? [WhatEnum.CHANNEL, WhatEnum.BLOCK] : [WhatEnum.ALL],
+  },
+})
 
 export const AdvancedSearchResultsGrid: React.FC<Props> = ({
   initialScope,
@@ -44,11 +57,20 @@ export const AdvancedSearchResultsGrid: React.FC<Props> = ({
     AdvancedSearchVariables
   >(search, {
     variables,
+    ssr: false,
   })
 
   useEffect(() => {
     setPage(1)
-    refetch(state.variables)
+    const mergedVariables = merge(
+      DEFAULTS(!!(variables?.where && variables?.where[0]?.id)),
+      variables,
+      {
+        per: 10,
+        page: 1,
+      }
+    ) as any
+    refetch(mergedVariables)
   }, [state.variables])
 
   useEffect(() => {
