@@ -1,4 +1,4 @@
-import { compact, flatten, isEmpty } from 'lodash'
+import { compact, flatten, isEmpty, merge } from 'lodash'
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 import {
   FieldsEnum,
@@ -29,6 +29,82 @@ const disabledFilterRules = {
   [FieldsEnum.DOMAIN]: [WhatEnum.CHANNEL, WhatEnum.GROUP],
   [FieldsEnum.URL]: [WhatEnum.CHANNEL, WhatEnum.GROUP],
   [SortOrderEnum.CONNECTIONS_COUNT]: [WhatEnum.GROUP],
+}
+
+export const scopedDisabledFilters = {
+  where: {
+    [WhereEnum.MY]: {
+      what: [WhatEnum.USER],
+    },
+    [WhereEnum.USER]: {
+      what: [WhatEnum.USER],
+    },
+  },
+  what: {
+    [WhatEnum.CHANNEL]: {
+      fields: [FieldsEnum.DOMAIN, FieldsEnum.URL],
+    },
+    [WhatEnum.USER]: {
+      fields: [FieldsEnum.DOMAIN, FieldsEnum.URL],
+      where: [WhereEnum.MY],
+    },
+    [WhatEnum.GROUP]: {
+      fields: [FieldsEnum.DOMAIN, FieldsEnum.URL],
+      order: [SortOrderEnum.CONNECTIONS_COUNT],
+    },
+  },
+  fields: {
+    [FieldsEnum.DOMAIN]: {
+      what: [WhatEnum.CHANNEL, WhatEnum.GROUP],
+    },
+    [FieldsEnum.URL]: {
+      what: [WhatEnum.CHANNEL, WhatEnum.GROUP],
+    },
+  },
+  order: {
+    [SortOrderEnum.CONNECTIONS_COUNT]: {
+      what: [WhatEnum.GROUP],
+    },
+  },
+}
+
+export const getDisabledFilters = (
+  variables: AdvancedSearchVariables,
+  query: string
+) => {
+  const { where, what, fields, order } = variables
+  let disabledFilters = {}
+
+  if (!isEmpty(where)) {
+    disabledFilters = merge(
+      disabledFilters,
+      scopedDisabledFilters.where[where[0].facet]
+    )
+  }
+  if (what) {
+    disabledFilters = merge(
+      disabledFilters,
+      scopedDisabledFilters.what[what.facets[0]]
+    )
+  }
+  if (fields) {
+    disabledFilters = merge(
+      disabledFilters,
+      scopedDisabledFilters.fields[fields.facets[0]]
+    )
+  }
+  if (order) {
+    disabledFilters = merge(
+      disabledFilters,
+      scopedDisabledFilters.order[order.facet]
+    )
+  }
+
+  if (isEmpty(query)) {
+    disabledFilters = merge(disabledFilters, { what: [WhatEnum.USER] })
+  }
+
+  return disabledFilters
 }
 
 export const allFacetsFromVariables = (
