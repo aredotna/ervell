@@ -28,12 +28,6 @@ export default gql`
         after: $after
       ) {
         total
-        filters {
-          what
-          where
-          fields
-          order
-        }
         results {
           ...KonnectableCell
           ...IdentifiableCell
