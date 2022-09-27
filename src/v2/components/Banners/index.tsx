@@ -84,8 +84,8 @@ const __Confirm__: React.FC<ConfirmBlockProps> = ({
       {...rest}
     >
       <Box>
-        Please check your email to confirm your account. Haven’t received an
-        email yet?
+        Please check your email to confirm your account. Haven&apos;t received
+        an email yet?
       </Box>
 
       <Button
@@ -223,8 +223,8 @@ export const StronglyProposePremium = props => (
 export const PricingSurvey = props => (
   <Banner bg="state.supporter" color="white" iconName="Exclaim" {...props}>
     <Box>
-      What do you think a fair price for Are.na is? We're surveying our members,
-      and would love your help.
+      What do you think a fair price for Are.na is? We&apos;re surveying our
+      members, and would love your help.
     </Box>
     <ButtonLink
       color="state.supporter"
