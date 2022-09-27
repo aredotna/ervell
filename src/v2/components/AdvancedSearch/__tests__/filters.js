@@ -26,7 +26,7 @@ describe('AdvancedSearch filters', () => {
     )
     expect(disabledFilters).toEqual({
       what: ['USER'],
-      fields: ['DOMAIN', 'URL'],
+      fields: ['DOMAIN', 'URL', 'CONTENT'],
     })
   })
 
