@@ -228,7 +228,7 @@ export const PricingSurvey = props => (
     </Box>
     <ButtonLink
       color="state.supporter"
-      href="https://www.are.na/blog/open-call-for-pitches-for-the-2023-are-na-annual"
+      href="https://www.surveymonkey.com/r/NY2MZ77"
       target="_blank"
     >
       Let us know
