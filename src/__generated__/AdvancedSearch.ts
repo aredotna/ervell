@@ -3,19 +3,11 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { Term, Where, What, Fields, Order, WhatEnum, WhereEnum, FieldsEnum, SortOrderEnum } from "./globalTypes";
+import { Term, Where, What, Fields, Order } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: AdvancedSearch
 // ====================================================
-
-export interface AdvancedSearch_searches_advanced_filters {
-  __typename: "AdvancedFilterResult";
-  what: WhatEnum[] | null;
-  where: WhereEnum[] | null;
-  fields: FieldsEnum[] | null;
-  order: SortOrderEnum[] | null;
-}
 
 export interface AdvancedSearch_searches_advanced_results_Attachment_user {
   __typename: "User";
@@ -391,7 +383,6 @@ export type AdvancedSearch_searches_advanced_results = AdvancedSearch_searches_a
 export interface AdvancedSearch_searches_advanced {
   __typename: "AdvancedResult";
   total: number;
-  filters: AdvancedSearch_searches_advanced_filters | null;
   results: (AdvancedSearch_searches_advanced_results | null)[] | null;
 }
 
