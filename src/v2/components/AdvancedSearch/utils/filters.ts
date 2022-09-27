@@ -68,10 +68,17 @@ export const scopedDisabledFilters = {
   },
 }
 
+interface DisabledFilters {
+  what?: AnyFilter[]
+  where?: AnyFilter[]
+  fields?: AnyFilter[]
+  order?: AnyFilter[]
+}
+
 export const getDisabledFilters = (
   variables: AdvancedSearchVariables,
   query: string
-) => {
+): DisabledFilters => {
   const { where, what, fields, order } = variables
   let disabledFilters = {}
 
@@ -81,19 +88,19 @@ export const getDisabledFilters = (
       scopedDisabledFilters.where[where[0].facet]
     )
   }
-  if (what) {
+  if (!isEmpty(what)) {
     disabledFilters = merge(
       disabledFilters,
       scopedDisabledFilters.what[what.facets[0]]
     )
   }
-  if (fields) {
+  if (!isEmpty(fields)) {
     disabledFilters = merge(
       disabledFilters,
       scopedDisabledFilters.fields[fields.facets[0]]
     )
   }
-  if (order) {
+  if (!isEmpty(order)) {
     disabledFilters = merge(
       disabledFilters,
       scopedDisabledFilters.order[order.facet]

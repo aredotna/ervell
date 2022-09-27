@@ -29,4 +29,11 @@ describe('AdvancedSearch filters', () => {
       fields: ['DOMAIN', 'URL'],
     })
   })
+
+  it('should return an object of disabled filters when query is empty', () => {
+    const disabledFilters = getDisabledFilters({}, '')
+    expect(disabledFilters).toEqual({
+      what: ['USER'],
+    })
+  })
 })
