@@ -43,7 +43,10 @@ export const AdvancedSearchResultsGrid: React.FC<Props> = ({
 
   const extraVariables = initialScope
     ? {
-        where: [{ facet: initialScope.where, id: initialScope.id }],
+        where: [
+          { facet: initialScope.where, id: initialScope.id },
+          ...state.variables.where,
+        ],
       }
     : {}
 

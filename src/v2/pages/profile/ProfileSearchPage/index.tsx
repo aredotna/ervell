@@ -49,7 +49,11 @@ export const ProfileSearchPage: React.FC = () => {
   } = data
 
   const isMe = identifiable.id === parseInt(myId)
-  const where = isMe ? WhereEnum.MY : WhereEnum.USER
+  const where = isMe
+    ? WhereEnum.MY
+    : identifiable.__typename == 'Group'
+    ? WhereEnum.GROUP
+    : WhereEnum.USER
   const parsedId = isMe ? null : id
 
   return (

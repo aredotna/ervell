@@ -438,6 +438,8 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
     parseArrays: true,
   })
 
+  console.log('parsedVariables', parsedVariables)
+
   const page = parsedVariables.page as any
   const per = parsedVariables.per as any
 
@@ -527,6 +529,8 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
       onQueryChange(state.query)
     }
   }, [state.query])
+
+  console.log({ state })
 
   return (
     <AdvancedSearchContext.Provider

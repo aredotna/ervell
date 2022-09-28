@@ -30,6 +30,7 @@ export const TypedEnumLabelMap = {
     [WhereEnum.CHANNEL]: 'This channel',
     [WhereEnum.FOLLOWING]: 'My network',
     [WhereEnum.USER]: 'This person',
+    [WhereEnum.GROUP]: 'This group',
   },
   what: {
     [WhatEnum.ALL]: 'All',

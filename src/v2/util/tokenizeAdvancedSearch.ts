@@ -154,15 +154,24 @@ export const stringifyVariable = (
   return null
 }
 
+const stringifyWhere = (variables: AdvancedSearchVariables) => {
+  const where = variables.where
+
+  console.log({ where })
+  if (isArray(where) && !isEmpty(where)) {
+    return where
+      .map(({ facet, id }) => stringifyFacet('where', facet, id))
+      .join(' ')
+  }
+  if (typeof where === 'string' && where !== '') {
+    return stringifyFacet('where', where as any)
+  }
+  return null
+}
+
 export const stringifyVariables = (variables: AdvancedSearchVariables) => {
   const strings = [
-    variables?.where && variables?.where[0]?.facet
-      ? stringifyFacet(
-          'where',
-          variables?.where[0]?.facet,
-          variables?.where[0]?.id
-        )
-      : undefined,
+    stringifyWhere(variables),
     stringifyVariable(variables, 'what'),
     stringifyVariable(variables, 'fields'),
     variables?.order
@@ -211,7 +220,7 @@ export const generateUrlFromVariables = (
   const path = useBasePath ? `${basePath}/search` : getUrlPath(variables)
 
   const params = stringify(omit(variables, ['page', 'per']), {
-    arrayFormat: 'brackets',
+    arrayFormat: 'indices',
     encode: false,
   })
 
