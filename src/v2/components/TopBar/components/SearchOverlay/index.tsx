@@ -22,10 +22,15 @@ const Container = styled(Box)`
 const Inner = styled(Box)`
   position: relative;
   width: ${props => props.width};
+
   ${props =>
     props.debug &&
     `
     background-color: rgba(255, 0, 0, 0.1);
+  `}
+
+  ${constants.media.small`
+    width: 100vw;
   `}
 `
 

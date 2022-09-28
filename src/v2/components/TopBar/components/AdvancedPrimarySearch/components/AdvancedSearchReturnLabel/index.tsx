@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { mixin as boxMixin } from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
+import constants from 'v2/styles/constants'
 
 const Label = styled(Text).attrs({
   color: 'gray.medium',
@@ -26,6 +27,10 @@ const Container = styled(Link).attrs({
   &:hover ${Label} {
     color: ${p => p.theme.colors.gray.bold};
   }
+
+  ${constants.media.small`
+    display: none;
+  `}
 `
 
 interface AdvancedSearchReturnLabelProps {

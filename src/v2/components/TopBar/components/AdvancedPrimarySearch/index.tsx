@@ -64,6 +64,10 @@ const ContextButtonContainer = styled(Box)`
   width: calc(100% - ${ICON_OFFSET});
   pointer-events: none;
   z-index: 1;
+
+  ${constants.media.small`
+    display: none;
+  `}
 `
 
 const ContextButton = styled(Text)`
@@ -100,6 +104,10 @@ const Controls = styled(Box)`
   justify-content: flex-end;
   padding-right: ${p => p.theme.space[2]};
   z-index: 1000;
+
+  ${constants.media.small`
+    transform: translateY(0);
+  `}
 `
 
 const Results = styled(Box)`
