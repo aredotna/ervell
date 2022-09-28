@@ -15,8 +15,11 @@ import { AdvancedSearchCount } from '../AdvancedSearchCount'
 import AdvancedSearchReturnLabel from 'v2/components/TopBar/components/AdvancedPrimarySearch/components/AdvancedSearchReturnLabel'
 import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
 import { AdvancedSearchResultBlock } from '../AdvancedSearchResultBlock'
+import constants from 'v2/styles/constants'
 
-const Label = styled(Text)`
+const Label = styled(Text).attrs({
+  f: [1, 2, 3],
+})`
   font-weight: bold;
   // Push out to accomodate "overflowing" badge border
   padding-right: 1px;
@@ -47,6 +50,11 @@ const ResultContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   flex: 1;
+
+  ${constants.media.small`
+    flex-direction: column;
+    align-items: flex-start;
+  `}
 `
 
 const PathContainer = styled.div`
