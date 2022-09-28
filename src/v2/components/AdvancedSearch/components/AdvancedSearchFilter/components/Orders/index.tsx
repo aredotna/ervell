@@ -1,8 +1,5 @@
 import React, { useCallback, useContext } from 'react'
-import {
-  AdvancedSearchContext,
-  AnyFilter,
-} from 'v2/components/AdvancedSearch/AdvancedSearchContext'
+import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 import {
   FilterContainer,
   CategoryLabel,
@@ -11,6 +8,10 @@ import {
   FilterLabel,
   FilterContainer as Container,
 } from 'v2/components/AdvancedSearch/components/AdvancedSearchFilter/components/FilterOption'
+import {
+  currentFilterIsDisabled,
+  DisabledFilters,
+} from 'v2/components/AdvancedSearch/utils/filters'
 import { Order, SortDirection, SortOrderEnum } from '__generated__/globalTypes'
 
 interface OrderOptionProps {
@@ -18,7 +19,7 @@ interface OrderOptionProps {
   dir: SortDirection
   label: string
   currentOrder?: Order
-  disabledFilters: AnyFilter[]
+  disabledFilters: DisabledFilters
   active?: boolean
 }
 
@@ -33,7 +34,7 @@ const OrderOption: React.FC<OrderOptionProps> = ({
   const { setOrder } = useContext(AdvancedSearchContext)
   const isSelected =
     active || (facet === currentOrder?.facet && dir === currentOrder?.dir)
-  const isDisabled = disabledFilters.includes(facet)
+  const isDisabled = currentFilterIsDisabled('order', facet, disabledFilters)
 
   const onClick = useCallback(() => {
     setOrder(facet, dir)

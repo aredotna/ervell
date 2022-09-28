@@ -84,8 +84,8 @@ const __Confirm__: React.FC<ConfirmBlockProps> = ({
       {...rest}
     >
       <Box>
-        Please check your email to confirm your account. Haven’t received an
-        email yet?
+        Please check your email to confirm your account. Haven&apos;t received
+        an email yet?
       </Box>
 
       <Button
@@ -220,15 +220,18 @@ export const StronglyProposePremium = props => (
   </Banner>
 )
 
-export const AnnualSubmissionReminder = props => (
+export const PricingSurvey = props => (
   <Banner bg="state.supporter" color="white" iconName="Exclaim" {...props}>
-    <Box>Submit your pitch for the 2023 Are.na Annual</Box>
+    <Box>
+      What do you think a fair price for Are.na is? We&apos;re surveying our
+      members, and would love your help.
+    </Box>
     <ButtonLink
       color="state.supporter"
-      href="https://www.are.na/blog/open-call-for-pitches-for-the-2023-are-na-annual"
+      href="https://www.surveymonkey.com/r/NY2MZ77"
       target="_blank"
     >
-      Learn more
+      Let us know
     </ButtonLink>
   </Banner>
 )
@@ -305,5 +308,5 @@ export default {
   LOGGED_OUT_EXPLORE: LoggedOutExplore,
   LOGGED_OUT_PROFILE: LoggedOutProfile,
   LOGGED_OUT_CHANNEL: LoggedOutChannel,
-  ANNUAL_SUBMISSION_2022: AnnualSubmissionReminder,
+  PRICING_SURVEY_2022: PricingSurvey,
 }

@@ -4,8 +4,11 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import { TypedEnumLabelMap } from 'v2/components/AdvancedSearch/utils/labels'
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
-import { AnyFilter } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 import constants from 'v2/styles/constants'
+import {
+  currentFilterIsDisabled,
+  DisabledFilters,
+} from 'v2/components/AdvancedSearch/utils/filters'
 
 export const FilterLabel = styled(Text).attrs({
   f: 1,
@@ -67,7 +70,7 @@ interface FilterOptionProps {
   field: 'where' | 'what' | 'fields'
   filter: WhereEnum | WhatEnum | FieldsEnum
   currentFilters?: WhereEnum[] | WhatEnum[] | FieldsEnum[]
-  currentDisabledFilters?: AnyFilter[]
+  currentDisabledFilters?: DisabledFilters
   toggleFilter: (
     filter: WhereEnum | WhatEnum | FieldsEnum,
     field: 'where' | 'what' | 'fields'
@@ -85,7 +88,11 @@ export const FilterOption: React.FC<FilterOptionProps> = ({
   ...rest
 }) => {
   const typedCurrentFilter: any[] = currentFilters ? currentFilters : []
-  const isDisabled = currentDisabledFilters?.includes(filter)
+  const isDisabled = currentFilterIsDisabled(
+    field,
+    filter,
+    currentDisabledFilters
+  )
   const isSelected = active || (filter && typedCurrentFilter?.includes(filter))
 
   const onClick = useCallback(() => {

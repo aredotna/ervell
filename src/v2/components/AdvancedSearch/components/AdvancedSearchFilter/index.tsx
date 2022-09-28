@@ -1,11 +1,14 @@
 import React, { useCallback, useContext } from 'react'
 import styled from 'styled-components'
-import { getCurrentFilter } from 'v2/components/AdvancedSearch/utils/filters'
+import {
+  DisabledFilters,
+  getCurrentFilter,
+} from 'v2/components/AdvancedSearch/utils/filters'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
-import { AdvancedSearchContext, AnyFilter } from '../../AdvancedSearchContext'
+import { AdvancedSearchContext } from '../../AdvancedSearchContext'
 import { FieldsFilter } from './components/FieldsFilter'
 import { Orders } from './components/Orders'
 import { TimeRange } from './components/TimeRange'
@@ -34,7 +37,7 @@ export const CategoryLabel = styled(Text).attrs({
 
 export interface FilterProps {
   currentFilters?: WhereEnum[] | WhatEnum[] | FieldsEnum[]
-  currentDisabledFilters?: AnyFilter[]
+  currentDisabledFilters?: DisabledFilters
   id?: number
   toggleFilter: (
     filter: WhereEnum | WhatEnum | FieldsEnum,

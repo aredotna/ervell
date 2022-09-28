@@ -1,4 +1,4 @@
-import { compact, flatten, isEmpty } from 'lodash'
+import { isEmpty, merge } from 'lodash'
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 import {
   FieldsEnum,
@@ -8,27 +8,107 @@ import {
 } from '__generated__/globalTypes'
 import { AnyFilter } from '../AdvancedSearchContext'
 
-const disabledFilterRules = {
-  // "My Are.na" does not contain users
-  [WhereEnum.MY]: [WhatEnum.USER],
+export const scopedDisabledFilters = {
+  where: {
+    [WhereEnum.MY]: {
+      what: [WhatEnum.USER],
+    },
+    [WhereEnum.USER]: {
+      what: [WhatEnum.USER],
+    },
+    [WhereEnum.FOLLOWING]: {
+      what: [WhatEnum.USER],
+    },
+  },
+  what: {
+    [WhatEnum.CHANNEL]: {
+      fields: [FieldsEnum.DOMAIN, FieldsEnum.URL, FieldsEnum.CONTENT],
+    },
+    [WhatEnum.USER]: {
+      fields: [FieldsEnum.DOMAIN, FieldsEnum.URL, FieldsEnum.CONTENT],
+      where: [WhereEnum.MY, WhereEnum.FOLLOWING],
+    },
+    [WhatEnum.GROUP]: {
+      fields: [FieldsEnum.DOMAIN, FieldsEnum.URL, FieldsEnum.CONTENT],
+      order: [SortOrderEnum.CONNECTIONS_COUNT],
+    },
+  },
+  fields: {
+    [FieldsEnum.DOMAIN]: {
+      what: [WhatEnum.CHANNEL, WhatEnum.GROUP, WhatEnum.USER],
+    },
+    [FieldsEnum.URL]: {
+      what: [WhatEnum.CHANNEL, WhatEnum.GROUP, WhatEnum.USER],
+    },
+    [FieldsEnum.CONTENT]: {
+      what: [WhatEnum.CHANNEL, WhatEnum.GROUP, WhatEnum.USER],
+    },
+  },
+  order: {
+    [SortOrderEnum.CONNECTIONS_COUNT]: {
+      what: [WhatEnum.GROUP],
+    },
+  },
+}
 
-  // When scoped by person, no users
-  [WhereEnum.USER]: [WhatEnum.USER],
+export interface DisabledFilters {
+  what?: AnyFilter[]
+  where?: AnyFilter[]
+  fields?: AnyFilter[]
+  order?: AnyFilter[]
+}
 
-  // Channels, users, groups do not contain urls or domains
-  [WhatEnum.CHANNEL]: [FieldsEnum.DOMAIN, FieldsEnum.URL],
-  [WhatEnum.USER]: [FieldsEnum.DOMAIN, FieldsEnum.URL],
-  [WhatEnum.GROUP]: [
-    FieldsEnum.DOMAIN,
-    FieldsEnum.URL,
-    SortOrderEnum.CONNECTIONS_COUNT,
-  ],
+export const getDisabledFilters = (
+  variables: AdvancedSearchVariables,
+  query: string
+): DisabledFilters => {
+  const { where, what, fields, order } = variables
+  let disabledFilters = {}
 
-  // And the reverse
-  [WhatEnum.USER]: [WhereEnum.MY],
-  [FieldsEnum.DOMAIN]: [WhatEnum.CHANNEL, WhatEnum.GROUP],
-  [FieldsEnum.URL]: [WhatEnum.CHANNEL, WhatEnum.GROUP],
-  [SortOrderEnum.CONNECTIONS_COUNT]: [WhatEnum.GROUP],
+  if (!isEmpty(where)) {
+    disabledFilters = merge(
+      disabledFilters,
+      scopedDisabledFilters.where[where[0].facet]
+    )
+  }
+
+  if (!isEmpty(what)) {
+    const whatFacets = (what?.facets as unknown) as WhatEnum
+    disabledFilters = merge(
+      disabledFilters,
+      scopedDisabledFilters.what[whatFacets]
+    )
+  }
+
+  if (!isEmpty(fields)) {
+    const fieldsFacets = (fields?.facets as unknown) as FieldsEnum
+    disabledFilters = merge(
+      disabledFilters,
+      scopedDisabledFilters.fields[fieldsFacets]
+    )
+  }
+
+  if (!isEmpty(order)) {
+    disabledFilters = merge(
+      disabledFilters,
+      scopedDisabledFilters.order[order.facet]
+    )
+  }
+
+  if (isEmpty(query)) {
+    disabledFilters = merge(disabledFilters, { what: [WhatEnum.USER] })
+  }
+
+  return disabledFilters
+}
+
+export const currentFilterIsDisabled = (
+  type: 'what' | 'where' | 'fields' | 'order',
+  filter: AnyFilter,
+  disabledFilters: DisabledFilters
+): boolean => {
+  const disabled = disabledFilters[type]
+  return disabled && disabled.includes(filter)
 }
 
 export const allFacetsFromVariables = (
@@ -40,20 +120,6 @@ export const allFacetsFromVariables = (
   const orderFacet = variables?.order?.facet
 
   return [...whereFacets, ...fieldsFacets, ...whatFacets, orderFacet]
-}
-
-export const calculatedDisabledFilters = (
-  variables: AdvancedSearchVariables,
-  query: string
-): AnyFilter[] => {
-  const allFacets = allFacetsFromVariables(variables)
-  const disabledFilters = compact(
-    flatten(allFacets.map(f => disabledFilterRules[f]))
-  )
-
-  if (isEmpty(query)) disabledFilters.push(WhatEnum.USER)
-
-  return disabledFilters
 }
 
 export const getCurrentFilter = (
