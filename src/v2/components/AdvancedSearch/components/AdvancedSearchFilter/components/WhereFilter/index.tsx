@@ -1,10 +1,7 @@
 import { omit } from 'lodash'
 import React, { useCallback, useContext } from 'react'
 import { useNavigate } from 'react-router'
-import {
-  AnyFilter,
-  AdvancedSearchContext,
-} from 'v2/components/AdvancedSearch/AdvancedSearchContext'
+import { AdvancedSearchContext } from 'v2/components/AdvancedSearch/AdvancedSearchContext'
 import {
   FilterContainer,
   CategoryLabel,
@@ -13,6 +10,10 @@ import {
   FilterLabel,
   FilterContainer as FilterLabelContainer,
 } from 'v2/components/AdvancedSearch/components/AdvancedSearchFilter/components/FilterOption'
+import {
+  currentFilterIsDisabled,
+  DisabledFilters,
+} from 'v2/components/AdvancedSearch/utils/filters'
 import { TypedEnumLabelMap } from 'v2/components/AdvancedSearch/utils/labels'
 import { generateUrlFromVariables } from 'v2/util/tokenizeAdvancedSearch'
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
@@ -20,7 +21,7 @@ interface WhereFilterOptionProps {
   field: 'where' | 'what' | 'fields'
   filter: WhereEnum
   currentFilter?: WhereEnum
-  currentDisabledFilters?: AnyFilter[]
+  currentDisabledFilters?: DisabledFilters
   toggleFilter: (
     filter: WhereEnum | WhatEnum | FieldsEnum,
     field: 'where' | 'what' | 'fields'
@@ -37,7 +38,11 @@ export const WhereFilterOption: React.FC<WhereFilterOptionProps> = ({
   active,
   ...rest
 }) => {
-  const isDisabled = currentDisabledFilters?.includes(filter)
+  const isDisabled = currentFilterIsDisabled(
+    'where',
+    filter,
+    currentDisabledFilters
+  )
   const isSelected = active || (filter && currentFilter === filter)
 
   const onClick = useCallback(() => {
@@ -62,7 +67,7 @@ export const WhereFilterOption: React.FC<WhereFilterOptionProps> = ({
 
 interface WhereFilterProps {
   currentFilter: WhereEnum
-  currentDisabledFilters?: AnyFilter[]
+  currentDisabledFilters?: DisabledFilters
   id?: string
   toggleFilter: (
     filter: WhereEnum | WhatEnum | FieldsEnum,
