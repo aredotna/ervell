@@ -98,11 +98,14 @@ export const AdvancedSearchInput: React.FC<AdvancedSearchInputProps &
     [onDebouncedQueryChange]
   )
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value)
-    onQueryChange && onQueryChange(e.target.value)
-    handleDebouncedQueryChange && handleDebouncedQueryChange(e.target.value)
-  }
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setQuery(e.target.value)
+      onQueryChange && onQueryChange(e.target.value)
+      onDebouncedQueryChange && handleDebouncedQueryChange(e.target.value)
+    },
+    [handleDebouncedQueryChange, onQueryChange]
+  )
 
   const handleMouseEnter = useCallback(
     (e: MouseEvent<HTMLDivElement, MouseEvent>) => {
