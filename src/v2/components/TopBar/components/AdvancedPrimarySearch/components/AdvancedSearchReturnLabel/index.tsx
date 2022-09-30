@@ -34,7 +34,7 @@ const Container = styled(Box).attrs({
 interface AdvancedSearchReturnLabelProps {
   label?: string
   url?: string
-  variables: AdvancedSearchVariables
+  variables?: AdvancedSearchVariables
 }
 
 export const AdvancedSearchReturnLabel: React.FC<AdvancedSearchReturnLabelProps> = ({
@@ -46,7 +46,7 @@ export const AdvancedSearchReturnLabel: React.FC<AdvancedSearchReturnLabelProps>
   const { addRecentSearch } = useRecentSearches()
   const onClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault()
-    addRecentSearch(variables)
+    variables && addRecentSearch(variables)
     navigate(url)
   }
 
