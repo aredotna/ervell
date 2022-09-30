@@ -157,7 +157,6 @@ export const stringifyVariable = (
 const stringifyWhere = (variables: AdvancedSearchVariables) => {
   const where = variables.where
 
-  console.log({ where })
   if (isArray(where) && !isEmpty(where)) {
     return where
       .map(({ facet, id }) => stringifyFacet('where', facet, id))

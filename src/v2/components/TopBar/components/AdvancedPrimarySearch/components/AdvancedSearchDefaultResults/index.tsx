@@ -155,5 +155,17 @@ export const AdvancedSearchDefaultResults: React.FC<AdvancedSearchDefaultResults
       </>
     )
   }
-  return null
+  return (
+    <>
+      {showSeeAllResults && (
+        <AdvancedSearchResultsTotal
+          index={index}
+          maxResults={MAX_RECENT_SEARCHES}
+          pathname={pathname}
+          selected={index == MAX_RECENT_SEARCHES - 1}
+          onClick={onResultClick}
+        />
+      )}
+    </>
+  )
 }
