@@ -146,6 +146,9 @@ export function getCache({
             keyArgs: everythingExcept('page', 'per'),
             merge: paginationWithPageAndPer,
           },
+          searches: {
+            merge: true,
+          },
         },
       },
 
