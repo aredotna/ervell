@@ -1,7 +1,6 @@
 import { gql } from '@apollo/client'
 
 import compactChannelFragment from 'v2/components/CompactChannel/fragments/compactChannel'
-import fullBlockChannelsAlsoInFragment from 'v2/components/FullBlock/components/FullBlockChannelsAlsoIn/fragments/fullBlockChannelsAlsoIn'
 
 export default gql`
   fragment FullBlockConnections on Konnectable {
@@ -39,5 +38,4 @@ export default gql`
     ...FullBlockChannelsAlsoIn
   }
   ${compactChannelFragment}
-  ${fullBlockChannelsAlsoInFragment}
 `
