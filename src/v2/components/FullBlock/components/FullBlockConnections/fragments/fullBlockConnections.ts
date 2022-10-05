@@ -35,7 +35,6 @@ export default gql`
         url
       }
     }
-    ...FullBlockChannelsAlsoIn
   }
   ${compactChannelFragment}
 `
