@@ -12,7 +12,6 @@ import {
 } from 'v2/components/CompactChannel'
 import { LoadMore } from 'v2/components/FullBlock/components/FullBlockConnections/components/LoadMore'
 import Connect from 'v2/components/Connect'
-import FullBlockChannelsAlsoIn from 'v2/components/FullBlock/components/FullBlockChannelsAlsoIn'
 
 import {
   FullBlockConnectionsQuery,
@@ -79,14 +78,7 @@ export const FullBlockConnections: React.FC<FullBlockConnectionsProps> = ({
     return null
 
   const {
-    block,
-    block: {
-      current_user_channels,
-      private_channels,
-      public_channels,
-      counts,
-      source,
-    },
+    block: { current_user_channels, private_channels, public_channels, counts },
   } = data
 
   const total = loading ? 0 : private_channels.length + public_channels.length
@@ -186,22 +178,6 @@ export const FullBlockConnections: React.FC<FullBlockConnectionsProps> = ({
 
       {hasMore && !(loading || loadingMore) && (
         <LoadMore onLoadMore={onLoadMore} />
-      )}
-
-      {counts && counts.channels_with_same_source > 0 && (
-        <React.Fragment>
-          <Text
-            mt={7}
-            f={1}
-            color="gray.medium"
-            textAlign="center"
-            textTransform="uppercase"
-          >
-            Blocks with <span title={source.url}>this URL</span> also appear in
-          </Text>
-
-          <FullBlockChannelsAlsoIn block={block} loading={loading} />
-        </React.Fragment>
       )}
     </Box>
   )
