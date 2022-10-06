@@ -56,14 +56,38 @@ export interface DisabledFilters {
   where?: AnyFilter[]
   fields?: AnyFilter[]
   order?: AnyFilter[]
+  period?: AnyFilter[]
 }
+
+const nonPremiumDisabledFilters = {
+  what: [],
+  where: [WhereEnum.FOLLOWING],
+  fields: [
+    FieldsEnum.CONTENT,
+    FieldsEnum.DOMAIN,
+    FieldsEnum.URL,
+    FieldsEnum.DESCRIPTION,
+    FieldsEnum.NAME,
+  ],
+  order: [
+    SortOrderEnum.CONNECTIONS_COUNT,
+    SortOrderEnum.RANDOM,
+    SortOrderEnum.CREATED_AT,
+    SortOrderEnum.NAME,
+  ],
+} as DisabledFilters
 
 export const getDisabledFilters = (
   variables: AdvancedSearchVariables,
-  query: string
+  query: string,
+  notPremium?: boolean
 ): DisabledFilters => {
   const { where, what, fields, order } = variables
   let disabledFilters = {}
+
+  if (notPremium) {
+    disabledFilters = merge(disabledFilters, nonPremiumDisabledFilters)
+  }
 
   if (!isEmpty(where)) {
     disabledFilters = merge(
@@ -120,6 +144,39 @@ export const allFacetsFromVariables = (
   const orderFacet = variables?.order?.facet
 
   return [...whereFacets, ...fieldsFacets, ...whatFacets, orderFacet]
+}
+
+export const getFilteredVariables = (
+  variables: AdvancedSearchVariables,
+  disabledFilters: DisabledFilters
+): AdvancedSearchVariables => {
+  const { where, what, fields, order } = variables
+  const {
+    what: disabledWhat,
+    where: disabledWhere,
+    fields: disabledFields,
+    order: disabledOrder,
+  } = disabledFilters
+  const whatFacets = (what?.facets as unknown) as WhatEnum
+  const fieldsFacets = (fields?.facets as unknown) as FieldsEnum
+
+  const filteredWhere = where?.filter(
+    facet => !disabledWhere?.includes(facet.facet)
+  )
+  const filteredWhat = disabledWhat.includes(whatFacets) ? undefined : what
+  const filteredFields = disabledFields.includes(fieldsFacets)
+    ? undefined
+    : fields
+  const filteredOrder =
+    order?.facet && !disabledOrder?.includes(order.facet) ? order : undefined
+
+  return {
+    ...variables,
+    where: filteredWhere,
+    what: filteredWhat,
+    fields: filteredFields,
+    order: filteredOrder,
+  }
 }
 
 export const getCurrentFilter = (

@@ -226,7 +226,7 @@ export enum SortDirection {
 /**
  * Ways to sort Advanced Search results
  */
-export enum SortOrderEnum {
+export enum  SortOrderEnum {
   CONNECTIONS_COUNT = "CONNECTIONS_COUNT",
   CREATED_AT = "CREATED_AT",
   NAME = "NAME",
