@@ -5,7 +5,13 @@ import {
   getCurrentFilter,
 } from 'v2/components/AdvancedSearch/utils/filters'
 import Box from 'v2/components/UI/Box'
+import {
+  Copy,
+  Message,
+  QuestionMarkOverlay,
+} from 'v2/components/UI/QuestionMarkOverlay'
 import Text from 'v2/components/UI/Text'
+import useSerializedMe from 'v2/hooks/useSerializedMe'
 
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
 import { AdvancedSearchContext } from '../../AdvancedSearchContext'
@@ -59,6 +65,8 @@ interface AdvancedSearchFilterProps {
 export const AdvancedSearchFilter: React.FC<AdvancedSearchFilterProps> = ({
   onToggleFilter,
 }) => {
+  const { is_premium } = useSerializedMe()
+
   const { state, addFilter, removeFilter, setAllFilter } = useContext(
     AdvancedSearchContext
   )
@@ -97,29 +105,52 @@ export const AdvancedSearchFilter: React.FC<AdvancedSearchFilterProps> = ({
   const id = where?.id
 
   return (
-    <FiltersContainer>
-      <WhereFilter
-        id={id || null}
-        clearAndSetAll={toggleAll}
-        toggleFilter={toggleFilter}
-        currentFilter={where?.facet}
-        currentDisabledFilters={state.disabledFilters}
-      />
-      <WhatFilter
-        clearAndSetAll={toggleAll}
-        toggleFilter={toggleFilter}
-        currentFilters={state.variables?.what?.facets}
-        currentDisabledFilters={state.disabledFilters}
-      />
-      <FieldsFilter
-        clearAndSetAll={toggleAll}
-        toggleFilter={toggleFilter}
-        currentFilters={state.variables?.fields?.facets}
-        currentDisabledFilters={state.disabledFilters}
-      />
-      <Orders />
-      <TimeRange />
-    </FiltersContainer>
+    <Box>
+      {!is_premium && (
+        <Box mb={4}>
+          <QuestionMarkOverlay
+            label={'About search filters'}
+            labelColor="state.premium"
+            iconColor="state.premium"
+            iconHoverColor="state.premium"
+          >
+            <Message>
+              <Copy>
+                Advanced search filters are detailed search options which can be
+                combined to give you fine-grained control over your search
+                results.
+                <br />
+                <br />
+                To use these filters, you must be a premium member.
+              </Copy>
+            </Message>
+          </QuestionMarkOverlay>
+        </Box>
+      )}
+      <FiltersContainer>
+        <WhereFilter
+          id={id || null}
+          clearAndSetAll={toggleAll}
+          toggleFilter={toggleFilter}
+          currentFilter={where?.facet}
+          currentDisabledFilters={state.disabledFilters}
+        />
+        <WhatFilter
+          clearAndSetAll={toggleAll}
+          toggleFilter={toggleFilter}
+          currentFilters={state.variables?.what?.facets}
+          currentDisabledFilters={state.disabledFilters}
+        />
+        <FieldsFilter
+          clearAndSetAll={toggleAll}
+          toggleFilter={toggleFilter}
+          currentFilters={state.variables?.fields?.facets}
+          currentDisabledFilters={state.disabledFilters}
+        />
+        <Orders />
+        <TimeRange />
+      </FiltersContainer>
+    </Box>
   )
 }
 
