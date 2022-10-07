@@ -405,7 +405,10 @@ const AdvancedPrimarySearchContainer: React.FC<{
         >
           <Controls>
             {topBarState.mode === 'active' && !anyResultHighlighted && (
-              <AdvancedSearchReturnLabel url={generateUrl(false, pathname)} />
+              <AdvancedSearchReturnLabel
+                variables={state.variables}
+                url={generateUrl(false, pathname)}
+              />
             )}
             {topBarState.mode === 'active' && !filterOpen && (
               <Box mr={5}>
