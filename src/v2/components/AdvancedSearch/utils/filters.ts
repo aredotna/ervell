@@ -163,8 +163,8 @@ export const getFilteredVariables = (
   const filteredWhere = where?.filter(
     facet => !disabledWhere?.includes(facet.facet)
   )
-  const filteredWhat = disabledWhat.includes(whatFacets) ? undefined : what
-  const filteredFields = disabledFields.includes(fieldsFacets)
+  const filteredWhat = disabledWhat?.includes(whatFacets) ? undefined : what
+  const filteredFields = disabledFields?.includes(fieldsFacets)
     ? undefined
     : fields
   const filteredOrder =
