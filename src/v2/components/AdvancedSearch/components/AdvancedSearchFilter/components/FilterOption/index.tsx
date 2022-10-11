@@ -41,6 +41,8 @@ export const FilterContainer = styled(Box).attrs({
     background-color: ${props => props.theme.colors.gray.cell};
   }
 
+  min-width: 150px;
+
   ${props =>
     props.active &&
     `

@@ -24,7 +24,13 @@ import { WhereFilter } from './components/WhereFilter'
 const FiltersContainer = styled(Box).attrs({
   display: 'flex',
   flexDirection: 'row',
-})``
+})`
+  flex-wrap: wrap;
+
+  ${constants.media.small`
+  width: 100vw;
+`}
+`
 
 export const FilterContainer = styled(Box).attrs({
   mt: 5,
