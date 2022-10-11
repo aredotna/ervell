@@ -3,6 +3,7 @@ import { merge } from 'merge-anything'
 import { parse } from 'qs'
 import React, { createContext, useCallback, useEffect, useReducer } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import useSerializedMe from 'v2/hooks/useSerializedMe'
 import tokenizeSearch, {
   generateUrlFromVariables,
   stringifyFacet,
@@ -18,7 +19,11 @@ import {
   WhatEnum,
   WhereEnum,
 } from '__generated__/globalTypes'
-import { DisabledFilters, getDisabledFilters } from './utils/filters'
+import {
+  DisabledFilters,
+  getDisabledFilters,
+  getFilteredVariables,
+} from './utils/filters'
 // import { currentBlockFilters, hasBlockFilters } from './utils/where'
 
 export type AnyFilter = WhatEnum | WhereEnum | SortOrderEnum | FieldsEnum
@@ -29,6 +34,7 @@ export interface State {
   disabledFilters: DisabledFilters
   mode: 'full' | 'quick'
   total: number
+  notPremium: boolean
 }
 
 type Action =
@@ -134,14 +140,20 @@ export const ReducerMethodMap = {
       ? state.query.replace(regex, ` ${stringifyFacet(field, filter)}`)
       : `${state.query} ${stringifyFacet(field, filter, id)} `
 
-    const disabledFilters = getDisabledFilters(variables, query)
+    const disabledFilters = getDisabledFilters(
+      variables,
+      query,
+      state.notPremium
+    )
+    const filteredVariables = getFilteredVariables(variables, disabledFilters)
 
     return {
       query,
-      variables,
+      variables: filteredVariables,
       disabledFilters,
       mode: state.mode,
       total: state.total,
+      notPremium: state.notPremium,
     }
   },
 
@@ -156,14 +168,20 @@ export const ReducerMethodMap = {
     if (id) set(variables, 'where[0].id', id)
 
     const query = `${state.query} ${stringifyFacet(field, filter, id)} `
-    const disabledFilters = getDisabledFilters(variables, query)
+    const disabledFilters = getDisabledFilters(
+      variables,
+      query,
+      state.notPremium
+    )
+    const filteredVariables = getFilteredVariables(variables, disabledFilters)
 
     return {
       query,
-      variables,
+      variables: filteredVariables,
       disabledFilters,
       mode: state.mode,
       total: state.total,
+      notPremium: state.notPremium,
     }
   },
 
@@ -176,9 +194,14 @@ export const ReducerMethodMap = {
     set(variables, `${field}`, null)
     delete variables[field]
     const query = state.query.replace(` ${stringifyFacet(field, filter)}`, '')
-    const disabledFilters = getDisabledFilters(variables, query)
+    const disabledFilters = getDisabledFilters(
+      variables,
+      query,
+      state.notPremium
+    )
+    const filteredVariables = getFilteredVariables(variables, disabledFilters)
 
-    return { ...state, query, variables, disabledFilters }
+    return { ...state, query, variables: filteredVariables, disabledFilters }
   },
 
   REMOVE_WHERE_FILTER: (state: State, action: any) => {
@@ -194,17 +217,27 @@ export const ReducerMethodMap = {
     )
 
     const query = state.query.replace(` ${stringifyFacet(field, filter)}`, '')
-    const disabledFilters = getDisabledFilters(variables, query)
+    const disabledFilters = getDisabledFilters(
+      variables,
+      query,
+      state.notPremium
+    )
+    const filteredVariables = getFilteredVariables(variables, disabledFilters)
 
-    return { ...state, query, variables, disabledFilters }
+    return { ...state, query, variables: filteredVariables, disabledFilters }
   },
 
   RESET_ALL: (state: State) => {
     const variables = {}
     const query = ''
-    const disabledFilters = getDisabledFilters(variables, query)
+    const disabledFilters = getDisabledFilters(
+      variables,
+      query,
+      state.notPremium
+    )
+    const filteredVariables = getFilteredVariables(variables, disabledFilters)
 
-    return { ...state, query, variables, disabledFilters }
+    return { ...state, query, variables: filteredVariables, disabledFilters }
   },
 
   SET_ALL: (state: State, action: any) => {
@@ -220,12 +253,17 @@ export const ReducerMethodMap = {
     const regex = new RegExp(`(\\s)${field}:(\\S*)`, 'gm')
     const query = state.query.replace(regex, '')
 
-    const disabledFilters = getDisabledFilters(variables, query)
+    const disabledFilters = getDisabledFilters(
+      variables,
+      query,
+      state.notPremium
+    )
+    const filteredVariables = getFilteredVariables(variables, disabledFilters)
 
     return {
       ...state,
       query: `${query} ${stringifyFacet(field, FieldsEnum.ALL)}`,
-      variables,
+      variables: filteredVariables,
       disabledFilters,
     }
   },
@@ -266,22 +304,39 @@ export const ReducerMethodMap = {
       delete variables.after
     }
 
+    const disabledFilters = getDisabledFilters(
+      variables,
+      action.payload,
+      state.notPremium
+    )
+    const filteredVariables = getFilteredVariables(variables, disabledFilters)
+
     return {
       ...state,
       query: action.payload,
-      variables,
-      disabledFilters: getDisabledFilters(variables, action.payload),
+      variables: filteredVariables,
+      disabledFilters,
     }
   },
 
   SET_VARIABLES: (state: State, action: any) => {
     const newVariables = action.payload
 
+    const disabledFilters = getDisabledFilters(
+      newVariables,
+      action.payload,
+      state.notPremium
+    )
+    const filteredVariables = getFilteredVariables(
+      newVariables,
+      disabledFilters
+    )
+
     return {
       ...state,
-      variables: newVariables,
+      variables: filteredVariables,
       query: stringifyVariables(newVariables),
-      disabledFilters: getDisabledFilters(state.variables, newVariables),
+      disabledFilters,
     }
   },
 
@@ -304,11 +359,18 @@ export const ReducerMethodMap = {
       after,
     }
 
+    const disabledFilters = getDisabledFilters(
+      variables,
+      action.payload,
+      state.notPremium
+    )
+    const filteredVariables = getFilteredVariables(variables, disabledFilters)
+
     return {
       ...state,
       query,
-      disabledFilters: getDisabledFilters(variables, query),
-      variables,
+      disabledFilters,
+      variables: filteredVariables,
     }
   },
 
@@ -338,11 +400,18 @@ export const ReducerMethodMap = {
       },
     }
 
+    const disabledFilters = getDisabledFilters(
+      variables,
+      action.payload,
+      state.notPremium
+    )
+    const filteredVariables = getFilteredVariables(variables, disabledFilters)
+
     return {
       ...state,
       query,
-      disabledFilters: getDisabledFilters(variables, query),
-      variables,
+      disabledFilters,
+      variables: filteredVariables,
     }
   },
 
@@ -418,6 +487,7 @@ export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
     disabledFilters: {},
     mode: 'quick',
     total: 0,
+    notPremium: true,
   },
 })
 
@@ -432,6 +502,7 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
   onQueryChange,
   children,
 }) => {
+  const { is_premium } = useSerializedMe()
   const [searchParams] = useSearchParams()
   const parsedVariables = parse(searchParams.toString(), {
     ignoreQueryPrefix: true,
@@ -448,15 +519,21 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
   if (parseInt(page)) set(parsedVariables, 'page', parseInt(page))
   if (parseInt(per)) set(parsedVariables, 'per', parseInt(per))
 
+  const disabledFilters = getDisabledFilters(
+    parsedVariables,
+    parsedVariables?.term?.facet,
+    !is_premium
+  )
+  const filteredVariables =
+    getFilteredVariables(parsedVariables, disabledFilters) || {}
+
   const [state, dispatch] = useReducer(reducer, {
     query: stringifyVariables(parsedVariables),
-    variables: parsedVariables || {},
-    disabledFilters: getDisabledFilters(
-      parsedVariables,
-      parsedVariables?.term?.facet
-    ),
+    variables: filteredVariables,
+    disabledFilters,
     mode: 'quick',
     total: 0,
+    notPremium: !is_premium,
   })
 
   const addFilter = useCallback(

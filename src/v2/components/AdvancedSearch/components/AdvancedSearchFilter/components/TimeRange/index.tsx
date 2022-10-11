@@ -10,6 +10,7 @@ import {
   FilterLabel,
   FilterContainer as Container,
 } from 'v2/components/AdvancedSearch/components/AdvancedSearchFilter/components/FilterOption'
+import useSerializedMe from 'v2/hooks/useSerializedMe'
 
 interface RangeOptionProps {
   label: string
@@ -20,6 +21,7 @@ interface RangeOptionProps {
     after?: string
   }
   active?: boolean
+  disabled?: boolean
 }
 
 const RangeOption: React.FC<RangeOptionProps> = ({
@@ -28,6 +30,7 @@ const RangeOption: React.FC<RangeOptionProps> = ({
   active,
   before,
   after,
+  disabled,
 }) => {
   const { setRange } = useContext(AdvancedSearchContext)
 
@@ -39,14 +42,17 @@ const RangeOption: React.FC<RangeOptionProps> = ({
     (currentRange?.before === before && currentRange?.after === after) || active
 
   return (
-    <Container active={isSelected} onClick={onClick}>
-      <FilterLabel active={isSelected}>{label}</FilterLabel>
+    <Container disabled={disabled} active={isSelected} onClick={onClick}>
+      <FilterLabel disabled={disabled} active={isSelected}>
+        {label}
+      </FilterLabel>
     </Container>
   )
 }
 
 export const TimeRange: React.FC = () => {
   const { state } = useContext(AdvancedSearchContext)
+  const { is_premium } = useSerializedMe()
 
   const currentRange = {
     before: state.variables?.before,
@@ -55,6 +61,7 @@ export const TimeRange: React.FC = () => {
 
   const defaultSelected = !currentRange.before && !currentRange.after
   const now = DateTime.now().plus({ days: 1 })
+  const disabled = !is_premium
 
   return (
     <FilterContainer>
@@ -70,6 +77,7 @@ export const TimeRange: React.FC = () => {
         currentRange={currentRange}
         before={now.toISODate()}
         after={now.minus({ hours: 24 }).toISODate()}
+        disabled={disabled}
       />
 
       <RangeOption
@@ -77,6 +85,7 @@ export const TimeRange: React.FC = () => {
         currentRange={currentRange}
         before={now.toISODate()}
         after={now.minus({ weeks: 1 }).toISODate()}
+        disabled={disabled}
       />
 
       <RangeOption
@@ -84,6 +93,7 @@ export const TimeRange: React.FC = () => {
         currentRange={currentRange}
         before={now.toISODate()}
         after={now.minus({ months: 1 }).toISODate()}
+        disabled={disabled}
       />
 
       <RangeOption
@@ -91,6 +101,7 @@ export const TimeRange: React.FC = () => {
         currentRange={currentRange}
         before={now.toISODate()}
         after={now.minus({ years: 1 }).toISODate()}
+        disabled={disabled}
       />
     </FilterContainer>
   )

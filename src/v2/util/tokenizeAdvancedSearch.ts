@@ -186,7 +186,7 @@ export const stringifyVariables = (variables: AdvancedSearchVariables) => {
 }
 
 const getUrlPath = (variables: AdvancedSearchVariables) => {
-  let urlBase = '/search2'
+  let urlBase = '/search'
 
   if (
     variables.where &&

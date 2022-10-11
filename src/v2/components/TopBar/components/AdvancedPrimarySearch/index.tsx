@@ -12,10 +12,9 @@ import React, {
 } from 'react'
 import styled from 'styled-components'
 import Cookies from 'cookies-js'
+import { color } from 'styled-system'
 
 import Box from 'v2/components/UI/Box'
-import Icon from 'v2/components/UI/Icons'
-import Overlay from 'v2/components/UI/Overlay'
 
 import HomeLink from 'v2/components/TopBar/components/PrimarySearch/components/HomeLink'
 import { ICON_OFFSET } from 'v2/components/UI/SearchInput'
@@ -46,8 +45,11 @@ import {
   TopBarAction,
   TopBarState,
 } from './advancedPrimarySearchReducer'
-import { color } from 'styled-system'
-import { useHover } from 'v2/hooks/useHover'
+import {
+  Copy,
+  Message,
+  QuestionMarkOverlay,
+} from 'v2/components/UI/QuestionMarkOverlay'
 
 const Container = styled(Box)`
   position: relative;
@@ -113,6 +115,18 @@ const Controls = styled(Box)`
 const Results = styled(Box)`
   height: 100%;
   ${overflowScrolling}
+`
+
+const BetaMessage = styled(Message).attrs({
+  border: '1px solid',
+  borderColor: 'white',
+  bg: 'state.supporter',
+  p: 4,
+})`
+  border-radius: ${props => props.theme.radii.regular};
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  max-width: 20em;
 `
 
 const AdvancedPrimarySearchContainer: React.FC<{
@@ -394,7 +408,35 @@ const AdvancedPrimarySearchContainer: React.FC<{
           )}
 
           {/* TODO: Remove when we fully launch */}
-          <QuestionMarkOverlay />
+          <QuestionMarkOverlay>
+            <BetaMessage>
+              <Copy>
+                <strong>Advanced Search</strong>
+              </Copy>
+              <Copy>
+                As a supporter, you get early access to our new advanced search
+                features. We are still working on some details (date filters,
+                for example), but we&apos;d be grateful to hear your feedback.
+              </Copy>
+              <Copy>Two options:</Copy>
+              <Copy>
+                <ol>
+                  <li>
+                    You can fill out{' '}
+                    <a href="https://airtable.com/shrFiBKYHP1XeV2r8">
+                      this feedback form
+                    </a>
+                    .
+                  </li>
+                  <li>
+                    You can add feedback to the #supporter-council channel in
+                    our <a href="https://www.are.na/settings/perks">Discord</a>.
+                  </li>
+                </ol>
+              </Copy>
+              <Copy>Thank you! We appreciate your support ✨</Copy>
+            </BetaMessage>
+          </QuestionMarkOverlay>
         </ContextButtonContainer>
       )}
 
@@ -435,119 +477,3 @@ const AdvancedPrimarySearchContainer: React.FC<{
 }
 
 export default AdvancedPrimarySearchContainer
-
-const LinkContainer = styled(Box)`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  height: 100%;
-  width: 50px;
-  background-color: transparent;
-  pointer-events: all;
-
-  ${props =>
-    props.isActive &&
-    `
-    svg path {
-      fill: ${x => x.theme.colors.gray.block};
-    }
-  `}
-`
-
-const BetaMessage = styled(Box).attrs({
-  border: '1px solid',
-  borderColor: 'white',
-  bg: 'state.supporter',
-  p: 4,
-})`
-  border-radius: ${props => props.theme.radii.regular};
-  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-  max-width: 20em;
-`
-
-const Copy = styled(Text).attrs({
-  f: 1,
-  m: 4,
-  color: 'white',
-  boldLinks: true,
-})`
-  ol li {
-    margin-left: ${props => props.theme.space[3]};
-  }
-  ol {
-    list-style: decimal;
-    margin-left: ${props => props.theme.space[3]};
-    padding-left: ${props => props.theme.space[5]};
-  }
-`
-
-export const QuestionMarkOverlay: React.FC = () => {
-  const [hoverRef, isHovered] = useHover()
-  const [isActive, setIsActive] = useState(false)
-  const targetEl = useRef(null)
-
-  const toggleFilterOpen = useCallback(() => {
-    setIsActive(!isActive)
-  }, [isActive, setIsActive])
-
-  return (
-    <>
-      <LinkContainer
-        ref={hoverRef}
-        isActive={isHovered}
-        onClick={toggleFilterOpen}
-      >
-        <Icon
-          name="QuestionCircle"
-          size="0.75rem"
-          ml={3}
-          color={isHovered ? 'gray.medium' : 'gray.semiLight'}
-        />
-        <span ref={targetEl} />
-      </LinkContainer>
-
-      {isActive && (
-        <Overlay
-          alignToY="bottom"
-          alignToX="right"
-          anchorY="top"
-          anchorX="left"
-          offsetY={5}
-          offsetX={0}
-          disableTarget
-          targetEl={() => targetEl.current}
-          onClose={toggleFilterOpen}
-        >
-          <BetaMessage>
-            <Copy>
-              <strong>Advanced Search</strong>
-            </Copy>
-            <Copy>
-              As a supporter, you get early access to our new advanced search
-              features. We are still working on some details (date filters, for
-              example), but we&apos;d be grateful to hear your feedback.
-            </Copy>
-            <Copy>Two options:</Copy>
-            <Copy>
-              <ol>
-                <li>
-                  You can fill out{' '}
-                  <a href="https://airtable.com/shrFiBKYHP1XeV2r8">
-                    this feedback form
-                  </a>
-                  .
-                </li>
-                <li>
-                  You can add feedback to the #supporter-council channel in our{' '}
-                  <a href="https://www.are.na/settings/perks">Discord</a>.
-                </li>
-              </ol>
-            </Copy>
-            <Copy>Thank you! We appreciate your support ✨</Copy>
-          </BetaMessage>
-        </Overlay>
-      )}
-    </>
-  )
-}

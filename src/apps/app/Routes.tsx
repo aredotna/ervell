@@ -57,6 +57,8 @@ export const AppRoutes = () => {
 
   const preventScroll = state && state.preventScroll
 
+  const SearchComponent = isLoggedIn ? Search2Page : SearchPage
+
   useEffect(() => {
     if (!background && !preventScroll && type != 'POP') {
       window.scrollTo(0, 0)
@@ -85,19 +87,11 @@ export const AppRoutes = () => {
         <Route path="education" element={<EducationPage />} />
 
         {/* Search */}
-        <Route path="search">
-          <Route path=":term" element={<SearchPage />}>
-            <Route path=":view" element={<SearchPage />} />
+        <Route path="search" element={<SearchComponent />}>
+          <Route path=":term" element={<SearchComponent />}>
+            <Route path=":view" element={<SearchComponent />} />
           </Route>
         </Route>
-
-        {showNewSearch && (
-          <Route path="search2" element={<Search2Page />}>
-            <Route path=":term" element={<Search2Page />}>
-              <Route path=":view" element={<Search2Page />} />
-            </Route>
-          </Route>
-        )}
 
         {/* Block */}
         <Route path="block/:id" element={<BlockPage />} />
