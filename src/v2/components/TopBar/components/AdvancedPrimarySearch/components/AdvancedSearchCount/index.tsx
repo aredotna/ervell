@@ -22,7 +22,7 @@ interface AdvancedSearchCountProps {
 }
 
 const Label = styled(Text).attrs({
-  f: [1],
+  f: [0, 1],
   color: 'gray.medium',
 })`
   text-transform: uppercase;
