@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import Box, { mixin as boxMixin } from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
+import constants from 'v2/styles/constants'
 import useRecentSearches from 'v2/hooks/useRecentSearches'
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 
@@ -29,6 +30,10 @@ const Container = styled(Box).attrs({
   &:hover ${Label} {
     color: ${p => p.theme.colors.gray.bold};
   }
+
+  ${constants.media.small`
+    display: none;
+  `}
 `
 
 interface AdvancedSearchReturnLabelProps {

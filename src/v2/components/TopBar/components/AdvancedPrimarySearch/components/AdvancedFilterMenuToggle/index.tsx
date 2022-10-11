@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { FilterLabel } from 'v2/components/AdvancedSearch/components/AdvancedSearchFilter/components/FilterOption'
 import Box from 'v2/components/UI/Box'
 import Icons from 'v2/components/UI/Icons'
+import constants from 'v2/styles/constants'
 
 interface FilterMenuToggleProps {
   open: boolean
@@ -21,9 +22,14 @@ const Caret = styled(Icons).attrs({
   vertical-align: middle;
 
   ${p => !p.open && `transform: rotate(180deg);`}
+
+  ${constants.media.small`
+    display: none;
+  `}
 `
 
 const Container = styled(Box)`
+  width: 100px;
   &:hover ${FilterLabel} {
     color: ${p => p.theme.colors.gray.bold};
   }

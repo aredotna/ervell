@@ -6,6 +6,7 @@ import {
 } from 'v2/components/AdvancedSearch/utils/filters'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
+import constants from 'v2/styles/constants'
 
 import { FieldsEnum, WhatEnum, WhereEnum } from '__generated__/globalTypes'
 import { AdvancedSearchContext } from '../../AdvancedSearchContext'
@@ -18,7 +19,13 @@ import { WhereFilter } from './components/WhereFilter'
 const FiltersContainer = styled(Box).attrs({
   display: 'flex',
   flexDirection: 'row',
-})``
+})`
+  flex-wrap: wrap;
+
+  ${constants.media.small`
+  width: 100vw;
+`}
+`
 
 export const FilterContainer = styled(Box).attrs({
   mt: 5,
