@@ -32,7 +32,6 @@ import SearchOverlay from '../SearchOverlay'
 import AdvancedSearchInput from './components/AdvancedSearchInput'
 import { isEmpty } from 'lodash'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
-import AdvancedSearchReturnLabel from './components/AdvancedSearchReturnLabel'
 import { useLocation, useNavigate } from 'react-router'
 import { useQuery } from '@apollo/client'
 import { TopBarUiStateQuery } from '__generated__/TopBarUiStateQuery'
@@ -446,12 +445,6 @@ const AdvancedPrimarySearchContainer: React.FC<{
           targetElement={containerRef.current}
         >
           <Controls>
-            {topBarState.mode === 'active' && !anyResultHighlighted && (
-              <AdvancedSearchReturnLabel
-                variables={state.variables}
-                url={generateUrl(false, pathname)}
-              />
-            )}
             {topBarState.mode === 'active' && !filterOpen && (
               <Box mr={5}>
                 <FilterMenuToggle
