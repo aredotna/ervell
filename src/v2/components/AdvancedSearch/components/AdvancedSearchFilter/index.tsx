@@ -21,6 +21,8 @@ import { TimeRange } from './components/TimeRange'
 import { WhatFilter } from './components/WhatFilter'
 import { WhereFilter } from './components/WhereFilter'
 
+import constants from 'v2/styles/constants'
+
 const FiltersContainer = styled(Box).attrs({
   display: 'flex',
   flexDirection: 'row',
