@@ -12,7 +12,6 @@ const LinkContainer = styled(Box)`
   display: flex;
   align-items: center;
   cursor: pointer;
-  height: 100%;
   background-color: transparent;
   pointer-events: all;
   max-width: fit-content;
@@ -28,7 +27,7 @@ const LinkContainer = styled(Box)`
 
 const IconContainer = styled(Box)`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 `
 
