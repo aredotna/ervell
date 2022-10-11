@@ -32,7 +32,9 @@ const Container = styled(AdaptibleLink)<{ hideHover?: boolean }>`
   text-decoration: none;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     background-color: ${props => props.theme.colors.gray.hint};
@@ -174,7 +176,7 @@ export const AdvancedSearchResult: React.FC<AdvancedSearchResultProps &
 
           {!selected && <AdvancedSearchCount result={result} />}
           {selected && result.href && (
-            <AdvancedSearchReturnLabel url={result.href} label={'Open'} />
+            <AdvancedSearchReturnLabel url={result.href} label={'Enter'} />
           )}
         </ResultContainer>
       </Container>

@@ -26,6 +26,8 @@ const Container = styled(Box).attrs({
   justify-content: center;
   background-color: ${p => p.theme.colors.background};
   border-radius: ${p => p.theme.radii.regular};
+  position: absolute;
+  right: 0;
 
   &:hover ${Label} {
     color: ${p => p.theme.colors.gray.bold};

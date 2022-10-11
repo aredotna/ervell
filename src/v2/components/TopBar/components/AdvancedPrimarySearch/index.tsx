@@ -461,6 +461,7 @@ const AdvancedPrimarySearchContainer: React.FC<{
             <AdvancedSearchResultsContainer
               onAnyResultHighlighted={setAnyResultHighlighted}
               onResultClick={handleResultClick}
+              anyResultHighlighted={anyResultHighlighted}
             />
           </Results>
         </SearchOverlay>
