@@ -24,6 +24,7 @@ import useSearchKeyboardNavigation from '../../hooks/useSearchKeyboardNavigation
 interface AdvancedSearchResultsContainerProps {
   searchInputRef?: React.RefObject<HTMLInputElement>
   onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
+  anyResultHighlighted?: boolean
   onResultClick: (
     e: AnimationPlaybackEventInit,
     result?: AdvancedQuickSearchResult
@@ -35,6 +36,7 @@ const INVALID_TYPES = ['PendingBlock']
 export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsContainerProps> = ({
   searchInputRef,
   onAnyResultHighlighted,
+  anyResultHighlighted,
   onResultClick,
 }) => {
   const { state } = useContext(AdvancedSearchContext)
@@ -47,6 +49,7 @@ export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsConta
         onAnyResultHighlighted={onAnyResultHighlighted}
         state={state}
         onResultClick={onResultClick}
+        anyResultHighlighted={anyResultHighlighted}
       />
     )
   }
@@ -57,6 +60,7 @@ export const AdvancedSearchResultsContainer: React.FC<AdvancedSearchResultsConta
         variables={state.variables}
         searchInputRef={searchInputRef}
         onAnyResultHighlighted={onAnyResultHighlighted}
+        anyResultHighlighted={anyResultHighlighted}
         onResultClick={onResultClick}
       />
     </>
@@ -67,6 +71,7 @@ interface AdvancedSearchResultsQueryProps {
   variables: AdvancedSearchVariables
   searchInputRef?: React.RefObject<HTMLInputElement>
   onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
+  anyResultHighlighted?: boolean
   onResultClick: (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     result?: AdvancedQuickSearchResult
@@ -90,6 +95,7 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
   variables,
   searchInputRef,
   onAnyResultHighlighted,
+  anyResultHighlighted,
   onResultClick,
 }) => {
   const skipQuery = isEmpty(variables.term?.facet)
@@ -139,6 +145,7 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
       error={error}
       searchInputRef={searchInputRef}
       onAnyResultHighlighted={onAnyResultHighlighted}
+      anyResultHighlighted={anyResultHighlighted}
       onResultClick={onResultClick}
     />
   )
@@ -155,6 +162,7 @@ interface AdvancedSearchResultsProps {
     result?: AdvancedQuickSearchResult
   ) => void
   onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
+  anyResultHighlighted?: boolean
 }
 
 const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
@@ -165,6 +173,7 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
   searchInputRef,
   onResultClick,
   onAnyResultHighlighted,
+  anyResultHighlighted,
 }) => {
   const { state } = useContext(AdvancedSearchContext)
   const location = useLocation()
@@ -227,6 +236,7 @@ const AdvancedSearchResults: React.FC<AdvancedSearchResultsProps> = ({
           pathname={pathname}
           selected={index == maxResults - 1}
           onClick={onResultClick}
+          anyResultHighlighted={anyResultHighlighted}
         />
       )}
     </>
