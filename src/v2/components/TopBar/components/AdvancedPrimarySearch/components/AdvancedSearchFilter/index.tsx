@@ -5,12 +5,7 @@ import Box from 'v2/components/UI/Box'
 import { ICON_OFFSET } from 'v2/components/UI/SearchInput'
 import AdvancedFilter from 'v2/components/AdvancedSearch/components/AdvancedSearchFilter'
 import FilterMenuToggle from '../AdvancedFilterMenuToggle'
-import {
-  Copy,
-  Message,
-  QuestionMarkOverlay,
-} from 'v2/components/UI/QuestionMarkOverlay'
-import { FilterLabel } from 'v2/components/AdvancedSearch/components/AdvancedSearchFilter/components/FilterOption'
+import { AdvancedSearchCheatSheetButton } from '../AdvancedSearchCheatSheet'
 
 const Container = styled(Box)<{ open: boolean }>`
   background-color: ${p => p.theme.colors.gray.light};
@@ -29,17 +24,8 @@ const ControlContainer = styled(Box).attrs({
   align-items: flex-end;
   justify-content: flex-start;
 `
-
 interface AdvancedSearchFilterProps {
   toggleOpen: () => void
-}
-
-const Label: React.FC = () => {
-  return (
-    <FilterLabel ml={3} color="gray.medium">
-      Cheat sheet
-    </FilterLabel>
-  )
 }
 
 export const AdvancedSearchFilter: React.FC<AdvancedSearchFilterProps> = ({
@@ -50,11 +36,7 @@ export const AdvancedSearchFilter: React.FC<AdvancedSearchFilterProps> = ({
       <AdvancedFilter />
       <ControlContainer>
         <FilterMenuToggle open={true} onClick={toggleOpen} />
-        <QuestionMarkOverlay iconColor="gray.medium" label={<Label />}>
-          <Message>
-            <Copy>Hello now</Copy>
-          </Message>
-        </QuestionMarkOverlay>
+        <AdvancedSearchCheatSheetButton />
       </ControlContainer>
     </Container>
   )
