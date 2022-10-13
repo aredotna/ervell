@@ -11,7 +11,7 @@ import { ChannelBreadcrumb as Channel } from '__generated__/ChannelBreadcrumb'
 import { unescape } from 'lodash'
 import { parse } from 'qs'
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
-import { SecondaryBreadcrumb } from 'v2/components/AdvancedSearch/components/AdvancedSearchSecondaryBreadcrumb'
+import { SecondaryBreadcrumbs } from 'v2/components/AdvancedSearch/components/AdvancedSearchSecondaryBreadcrumb'
 
 const CollaboratorCount = styled.span`
   font-weight: normal;
@@ -53,9 +53,9 @@ export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
     parseArrays: true,
   }) as AdvancedSearchVariables
 
-  const hasSecondary = parsedVariables.where.length > 1
-  const where = parsedVariables.where[1]
-  const secondary = hasSecondary ? <SecondaryBreadcrumb where={where} /> : null
+  const hasSecondary = parsedVariables.where?.length > 1
+  const where = parsedVariables?.where && parsedVariables?.where.slice(1)
+  const secondary = hasSecondary ? <SecondaryBreadcrumbs where={where} /> : null
 
   return (
     <>
