@@ -18,7 +18,7 @@ import { AdvancedSearchResultBlock } from '../AdvancedSearchResultBlock'
 import constants from 'v2/styles/constants'
 
 const Label = styled(Text).attrs({
-  f: [1, 2, 3],
+  f: [2, 3, 4],
 })`
   font-weight: bold;
   // Push out to accomodate "overflowing" badge border
