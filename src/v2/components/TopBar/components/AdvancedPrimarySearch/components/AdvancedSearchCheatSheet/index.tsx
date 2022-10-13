@@ -120,6 +120,10 @@ const CheatSheetModal: React.FC = () => {
             Type <strong>user:person-name channel:channel-name</strong> to
             search content from a specific person and channel
           </li>
+          <li>
+            Type <strong>channel:channel-name1 channel:channel-name2</strong> to
+            search content from a combination between multiple channels
+          </li>
         </ul>
         <strong>Date ranges</strong>
         <ul>
@@ -129,9 +133,9 @@ const CheatSheetModal: React.FC = () => {
             range
           </li>
           <li>
-            Date ranges uses <strong>updated at</strong> by default. Set the
-            order to <strong>newest first</strong> to get results created within
-            a specific time range
+            Date range search uses <strong>updated at</strong> by default. Set
+            the order to <strong>newest first</strong> to get results created
+            within a specific time range
           </li>
         </ul>
       </CheatSheetCopy>
