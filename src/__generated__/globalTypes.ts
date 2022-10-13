@@ -16,7 +16,6 @@ export enum BannerEnum {
   INVITE = "INVITE",
   MONTHLY_PREMIUM_REMINDER = "MONTHLY_PREMIUM_REMINDER",
   PREMIUM_PLUS = "PREMIUM_PLUS",
-  PRICING_SURVEY_2022 = "PRICING_SURVEY_2022",
   PROPOSE_PREMIUM = "PROPOSE_PREMIUM",
   STRONGLY_PROPOSE_PREMIUM = "STRONGLY_PROPOSE_PREMIUM",
 }
@@ -226,7 +225,7 @@ export enum SortDirection {
 /**
  * Ways to sort Advanced Search results
  */
-export enum  SortOrderEnum {
+export enum SortOrderEnum {
   CONNECTIONS_COUNT = "CONNECTIONS_COUNT",
   CREATED_AT = "CREATED_AT",
   NAME = "NAME",
