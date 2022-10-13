@@ -12,6 +12,7 @@ export interface SecondaryChannelBreadcrumbQuery_channel_owner_User {
   id: number;
   name: string;
   label: string;
+  href: string | null;
 }
 
 export interface SecondaryChannelBreadcrumbQuery_channel_owner_Group {
@@ -19,6 +20,7 @@ export interface SecondaryChannelBreadcrumbQuery_channel_owner_Group {
   id: number;
   name: string;
   label: string;
+  href: string | null;
 }
 
 export type SecondaryChannelBreadcrumbQuery_channel_owner = SecondaryChannelBreadcrumbQuery_channel_owner_User | SecondaryChannelBreadcrumbQuery_channel_owner_Group;

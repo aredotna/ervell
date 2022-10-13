@@ -15,12 +15,14 @@ export default gql`
           id
           name
           label: name
+          href
         }
 
         ... on Group {
           id
           name
           label: name
+          href
         }
       }
     }
