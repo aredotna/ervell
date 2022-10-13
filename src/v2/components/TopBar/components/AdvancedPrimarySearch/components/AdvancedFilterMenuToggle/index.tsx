@@ -29,7 +29,6 @@ const Caret = styled(Icons).attrs({
 `
 
 const Container = styled(Box)`
-  width: 100px;
   &:hover ${FilterLabel} {
     color: ${p => p.theme.colors.gray.bold};
   }

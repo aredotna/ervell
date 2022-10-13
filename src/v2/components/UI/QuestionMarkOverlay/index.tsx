@@ -12,7 +12,6 @@ const LinkContainer = styled(Box)`
   display: flex;
   align-items: center;
   cursor: pointer;
-  height: 100%;
   background-color: transparent;
   pointer-events: all;
   max-width: fit-content;
@@ -28,7 +27,7 @@ const LinkContainer = styled(Box)`
 
 const IconContainer = styled(Box)`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 `
 
@@ -50,13 +49,17 @@ export const Copy = styled(Text).attrs({
   color: 'white',
   boldLinks: true,
 })`
-  ol li {
+  ol li,
+  ul li {
     margin-left: ${props => props.theme.space[3]};
+  }
+  ul,
+  ol {
+    margin-left: ${props => props.theme.space[3]};
+    padding-left: ${props => props.theme.space[5]};
   }
   ol {
     list-style: decimal;
-    margin-left: ${props => props.theme.space[3]};
-    padding-left: ${props => props.theme.space[5]};
   }
 `
 
@@ -73,6 +76,12 @@ interface Props {
   iconColor?: string
   iconHoverColor?: string
   labelColor?: string
+  offsetY?: number
+  offsetX?: number
+  anchorX?: 'left' | 'right'
+  anchorY?: 'top' | 'bottom'
+  alignToX?: 'left' | 'right'
+  alignToY?: 'top' | 'bottom'
 }
 
 export const QuestionMarkOverlay: React.FC<Props> = ({
@@ -81,6 +90,12 @@ export const QuestionMarkOverlay: React.FC<Props> = ({
   iconColor = 'gray.semiLight',
   iconHoverColor = 'gray.medium',
   labelColor = 'gray.semiLight',
+  offsetY = 20,
+  offsetX = 0,
+  anchorX = 'left',
+  anchorY = 'top',
+  alignToX = 'right',
+  alignToY = 'bottom',
 }) => {
   const [hoverRef, isHovered] = useHover()
   const [isActive, setIsActive] = useState(false)
@@ -98,7 +113,7 @@ export const QuestionMarkOverlay: React.FC<Props> = ({
         onClick={toggleFilterOpen}
       >
         <IconContainer>
-          <span ref={targetEl} />
+          {alignToX == 'left' && <span ref={targetEl} />}
           <Icon
             name="QuestionCircle"
             size="0.75rem"
@@ -111,17 +126,18 @@ export const QuestionMarkOverlay: React.FC<Props> = ({
           ) : (
             label
           )}
+          {alignToX == 'right' && <span ref={targetEl} />}
         </IconContainer>
       </LinkContainer>
 
       {isActive && (
         <Overlay
-          alignToY="bottom"
-          alignToX="right"
-          anchorY="top"
-          anchorX="left"
-          offsetY={20}
-          offsetX={0}
+          alignToY={alignToY}
+          alignToX={alignToX}
+          anchorY={anchorY}
+          anchorX={anchorX}
+          offsetY={offsetY}
+          offsetX={offsetX}
           disableTarget
           targetEl={() => targetEl.current}
           onClose={toggleFilterOpen}

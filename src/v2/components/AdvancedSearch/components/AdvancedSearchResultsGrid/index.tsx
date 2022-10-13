@@ -81,6 +81,7 @@ export const AdvancedSearchResultsGrid: React.FC<Props> = ({
   }, [data?.searches.advanced.total])
 
   const loadMore = useCallback(() => {
+    console.log('loadMore')
     fetchMore({
       variables: { ...state.variables, page: page + 1 },
       updateQuery: (prev, { fetchMoreResult }) => {

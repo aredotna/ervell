@@ -28,7 +28,6 @@ const StuckBreadcrumbPath = styled(BreadcrumbPath)`
 
   > div {
     pointer-events: auto;
-    height: 100%;
     font-size: ${x => x.theme.fontSizesIndexed.base};
   }
 
@@ -44,6 +43,7 @@ export default class StickyBreadcrumbPath extends PureComponent {
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     stuckChildren: PropTypes.node,
+    secondary: PropTypes.node,
   }
 
   static defaultProps = {
@@ -76,13 +76,13 @@ export default class StickyBreadcrumbPath extends PureComponent {
 
   render() {
     const { mode } = this.state
-    const { children, stuckChildren } = this.props
+    const { children, stuckChildren, secondary } = this.props
 
     return (
       <Container>
         <Waypoint onEnter={this.handleEnter} onLeave={this.handleLeave}>
           <div ref={this.targetEl}>
-            <BreadcrumbPath>
+            <BreadcrumbPath secondary={secondary}>
               {provideChildrenWithProps(children, { mode })}
             </BreadcrumbPath>
           </div>

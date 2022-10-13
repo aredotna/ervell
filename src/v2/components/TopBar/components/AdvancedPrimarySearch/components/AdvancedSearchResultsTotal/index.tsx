@@ -134,7 +134,9 @@ export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps
       selected={selected}
       onClick={handleClick}
     >
-      <Text fontWeight="bold">{searchLabel}</Text>
+      <Text fontWeight="bold" f={[2, 3, 4]}>
+        {searchLabel}
+      </Text>
       {(selected || !anyResultHighlighted) && (
         <AdvancedSearchReturnLabel
           url={generateUrl(false, pathname)}
