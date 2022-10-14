@@ -106,7 +106,9 @@ export const SecondaryChannelBreadcrumb: React.FC<SecondaryBreadcrumbProps> = ({
   return (
     <CrumbContainer>
       <FirstCrumb>+</FirstCrumb>
-      <Crumb>{channel.owner.name}</Crumb>
+      <Crumb>
+        <Link to={channel.owner.href}>{channel.owner.name}</Link>
+      </Crumb>
       <Crumb>
         <ColoredChannelLink
           as={Link}
@@ -161,7 +163,7 @@ export const SecondaryUserBreadcrumb: React.FC<SecondaryBreadcrumbProps> = ({
   return (
     <CrumbContainer>
       <Crumb>
-        <A href={data.user.slug} dangerouslySetInnerHTML={{ __html: label }} />
+        <A href={data.user.href} dangerouslySetInnerHTML={{ __html: label }} />
       </Crumb>
     </CrumbContainer>
   )
