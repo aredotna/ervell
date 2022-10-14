@@ -29,10 +29,12 @@ const A = styled.a``
 
 interface SecondaryBreadcrumbsProps {
   where: Where[]
+  context: Where
 }
 
 export const SecondaryBreadcrumbs: React.FC<SecondaryBreadcrumbsProps> = ({
   where,
+  context,
 }) => {
   const sortedWhere = where.sort((a, b) => a.facet.localeCompare(b.facet))
   const totalUsers = sortedWhere.filter(w => w.facet === 'USER').length
@@ -45,6 +47,7 @@ export const SecondaryBreadcrumbs: React.FC<SecondaryBreadcrumbsProps> = ({
             key={index}
             index={index}
             where={crumb}
+            context={context}
             totalUsers={totalUsers}
             totalChannels={totalChannels}
           />
@@ -57,6 +60,7 @@ export const SecondaryBreadcrumbs: React.FC<SecondaryBreadcrumbsProps> = ({
 interface SecondaryBreadcrumbProps {
   where: Where
   index: number
+  context: Where
   total?: number
   totalUsers?: number
   totalChannels?: number
@@ -126,6 +130,7 @@ export const SecondaryChannelBreadcrumb: React.FC<SecondaryBreadcrumbProps> = ({
 export const SecondaryUserBreadcrumb: React.FC<SecondaryBreadcrumbProps> = ({
   index,
   where,
+  context,
   totalUsers,
   totalChannels,
 }) => {
@@ -153,12 +158,27 @@ export const SecondaryUserBreadcrumb: React.FC<SecondaryBreadcrumbProps> = ({
   }
 
   const isFirst = index === totalChannels
+  const contextIsUser = context?.facet === 'USER'
   const isFirstAndOnly = isFirst && totalUsers === 1
   const isNotFirstOfUsers = totalUsers > 1 && !isFirst
-  const prepended = isNotFirstOfUsers ? 'OR ' : '→ '
-  const appended = isFirstAndOnly ? ' only' : ''
+  const prepended = isNotFirstOfUsers || contextIsUser ? 'OR ' : '→ '
+  const appended = isFirstAndOnly && !contextIsUser ? ' only' : ''
 
   const label = `${prepended}owned by ${unescape(data.user.name)}${appended}`
+
+  if (contextIsUser) {
+    return (
+      <CrumbContainer>
+        <FirstCrumb>OR</FirstCrumb>
+        <Crumb>
+          <A
+            href={data.user.href}
+            dangerouslySetInnerHTML={{ __html: data.user.name }}
+          />
+        </Crumb>
+      </CrumbContainer>
+    )
+  }
 
   return (
     <CrumbContainer>
