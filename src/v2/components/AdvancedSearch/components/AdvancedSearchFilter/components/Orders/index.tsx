@@ -94,6 +94,14 @@ export const Orders: React.FC = () => {
       />
 
       <OrderOption
+        label="Alphabetical by title"
+        facet={SortOrderEnum.NAME}
+        dir={SortDirection.ASC}
+        currentOrder={currentOrder}
+        disabledFilters={disabledFilters}
+      />
+
+      <OrderOption
         label="No. of connections"
         facet={SortOrderEnum.CONNECTIONS_COUNT}
         dir={SortDirection.DESC}

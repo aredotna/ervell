@@ -37,17 +37,13 @@ import { AboutPage } from 'v2/pages/about/AboutPage'
 import RoadmapPage from 'v2/pages/about/RoadmapPage'
 import PricingPage from 'v2/pages/about/PricingPage'
 import { EducationPage } from 'v2/pages/about/EducationPage'
-import useIsAdmin from 'v2/hooks/useIsAdmin'
 import { Search2Page } from 'v2/pages/search2'
 import { ModalBlockWrapper } from 'v2/pages/block/ModalBlockWrapper'
 import { ProfileSearchPage } from 'v2/pages/profile/ProfileSearchPage'
-import useSerializedMe from 'v2/hooks/useSerializedMe'
 
 export const AppRoutes = () => {
   const { isLoggedIn } = useLoginStatus()
-  const isAdmin = useIsAdmin()
-  const isSupporter = useSerializedMe()?.is_supporter
-  const showNewSearch = isAdmin || isSupporter
+  const showNewSearch = isLoggedIn
 
   const location = useLocation()
   const state = location.state as any
@@ -56,6 +52,8 @@ export const AppRoutes = () => {
   const background = state && state.background && JSON.parse(state.background)
 
   const preventScroll = state && state.preventScroll
+
+  const SearchComponent = isLoggedIn ? Search2Page : SearchPage
 
   useEffect(() => {
     if (!background && !preventScroll && type != 'POP') {
@@ -85,19 +83,11 @@ export const AppRoutes = () => {
         <Route path="education" element={<EducationPage />} />
 
         {/* Search */}
-        <Route path="search">
-          <Route path=":term" element={<SearchPage />}>
-            <Route path=":view" element={<SearchPage />} />
+        <Route path="search" element={<SearchComponent />}>
+          <Route path=":term" element={<SearchComponent />}>
+            <Route path=":view" element={<SearchComponent />} />
           </Route>
         </Route>
-
-        {showNewSearch && (
-          <Route path="search2" element={<Search2Page />}>
-            <Route path=":term" element={<Search2Page />}>
-              <Route path=":view" element={<Search2Page />} />
-            </Route>
-          </Route>
-        )}
 
         {/* Block */}
         <Route path="block/:id" element={<BlockPage />} />

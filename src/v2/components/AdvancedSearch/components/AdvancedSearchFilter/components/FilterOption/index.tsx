@@ -27,7 +27,7 @@ export const FilterLabel = styled(Text).attrs({
     props.disabled &&
     `
     pointer-events: none;
-    color: ${props.theme.colors.gray.regular};
+    color: ${props.theme.colors.gray.medium};
   `}
 `
 

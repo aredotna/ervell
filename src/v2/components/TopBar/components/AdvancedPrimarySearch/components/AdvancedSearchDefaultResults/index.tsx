@@ -82,6 +82,7 @@ const FullSearchResult: React.FC<{
 interface AdvancedSearchDefaultResultsProps {
   searchInputRef?: React.RefObject<HTMLInputElement>
   onAnyResultHighlighted?: React.Dispatch<React.SetStateAction<boolean>>
+  anyResultHighlighted?: boolean
   state: State
   onResultClick: (
     e: AnimationPlaybackEventInit,
@@ -92,6 +93,7 @@ interface AdvancedSearchDefaultResultsProps {
 export const AdvancedSearchDefaultResults: React.FC<AdvancedSearchDefaultResultsProps> = ({
   searchInputRef,
   onAnyResultHighlighted,
+  anyResultHighlighted,
   state,
   onResultClick,
 }) => {
@@ -150,6 +152,7 @@ export const AdvancedSearchDefaultResults: React.FC<AdvancedSearchDefaultResults
             pathname={pathname}
             selected={index == MAX_RECENT_SEARCHES - 1}
             onClick={onResultClick}
+            anyResultHighlighted={anyResultHighlighted}
           />
         )}
       </>
@@ -164,6 +167,7 @@ export const AdvancedSearchDefaultResults: React.FC<AdvancedSearchDefaultResults
           pathname={pathname}
           selected={index == MAX_RECENT_SEARCHES - 1}
           onClick={onResultClick}
+          anyResultHighlighted={anyResultHighlighted}
         />
       )}
     </>

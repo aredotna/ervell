@@ -13,8 +13,8 @@ import { GlobalNavElements_me as Me } from '__generated__/GlobalNavElements'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
 import IS_CONFIRMED_QUERY from './queries/isConfirmed'
 import { IsConfirmed } from '__generated__/IsConfirmed'
-import useIsAdmin from 'v2/hooks/useIsAdmin'
 import AdvancedPrimarySearchContainer from './components/AdvancedPrimarySearch'
+import useLoginStatus from 'v2/hooks/useLoginStatus'
 
 const Container = styled(Box)`
   position: relative;
@@ -68,11 +68,10 @@ interface TopBarProps {
 
 export const TopBar: React.FC<TopBarProps> = ({ scheme, me, ...rest }) => {
   const serializedMe = useSerializedMe()
+  const { isLoggedIn } = useLoginStatus()
   const { data } = useQuery<IsConfirmed>(IS_CONFIRMED_QUERY, { ssr: false })
   const [userMode, setUserMode] = useState<'resting' | 'open'>('resting')
-  const isAdmin = useIsAdmin()
-  const isSupporter = useSerializedMe()?.is_supporter
-  const showNewSearch = isAdmin || isSupporter
+  const showNewSearch = isLoggedIn
 
   const needsDot = data && !data.me?.is_confirmed
 

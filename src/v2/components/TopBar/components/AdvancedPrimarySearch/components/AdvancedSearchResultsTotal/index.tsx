@@ -18,12 +18,14 @@ import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResu
 import { isEmpty, merge } from 'lodash'
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 import { FieldsEnum } from '__generated__/globalTypes'
+import AdvancedSearchReturnLabel from '../AdvancedSearchReturnLabel'
 
 interface AdvancedQuickSearchResultProps {
   index: number
   maxResults: number
   pathname: string
   selected: boolean
+  anyResultHighlighted: boolean
   onClick?: (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     result?: AdvancedQuickSearchResult
@@ -65,6 +67,7 @@ export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps
   maxResults,
   pathname,
   selected,
+  anyResultHighlighted,
 }) => {
   const { generateUrl, state } = useContext(AdvancedSearchContext)
   const navigate = useNavigate()
@@ -131,7 +134,15 @@ export const AdvancedSearchResultsTotal: React.FC<AdvancedQuickSearchResultProps
       selected={selected}
       onClick={handleClick}
     >
-      <Text fontWeight="bold">{searchLabel}</Text>
+      <Text fontWeight="bold" f={[2, 3, 4]}>
+        {searchLabel}
+      </Text>
+      {(selected || !anyResultHighlighted) && (
+        <AdvancedSearchReturnLabel
+          url={generateUrl(false, pathname)}
+          label={'Enter'}
+        />
+      )}
     </AdvancedSearchResult>
   )
 }

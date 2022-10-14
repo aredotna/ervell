@@ -49,7 +49,9 @@ const ResultContainer = styled.div`
   flex: 1;
 `
 
-const Label = styled(Text)`
+const Label = styled(Text).attrs({
+  f: [2, 3, 4],
+})`
   font-weight: bold;
   // Push out to accomodate "overflowing" badge border
   padding-right: 1px;
