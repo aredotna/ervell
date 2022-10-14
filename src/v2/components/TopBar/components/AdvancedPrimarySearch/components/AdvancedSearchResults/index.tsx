@@ -112,8 +112,6 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
       page: 1,
     }) as any
 
-    console.log({ mergedVariables, variables, defaults })
-
     if (mergedVariables.term?.facet && !isEmpty(mergedVariables.term?.facet)) {
       refetch(mergedVariables)
     }
