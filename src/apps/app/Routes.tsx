@@ -37,17 +37,13 @@ import { AboutPage } from 'v2/pages/about/AboutPage'
 import RoadmapPage from 'v2/pages/about/RoadmapPage'
 import PricingPage from 'v2/pages/about/PricingPage'
 import { EducationPage } from 'v2/pages/about/EducationPage'
-import useIsAdmin from 'v2/hooks/useIsAdmin'
 import { Search2Page } from 'v2/pages/search2'
 import { ModalBlockWrapper } from 'v2/pages/block/ModalBlockWrapper'
 import { ProfileSearchPage } from 'v2/pages/profile/ProfileSearchPage'
-import useSerializedMe from 'v2/hooks/useSerializedMe'
 
 export const AppRoutes = () => {
   const { isLoggedIn } = useLoginStatus()
-  const isAdmin = useIsAdmin()
-  const isSupporter = useSerializedMe()?.is_supporter
-  const showNewSearch = isAdmin || isSupporter
+  const showNewSearch = isLoggedIn
 
   const location = useLocation()
   const state = location.state as any
