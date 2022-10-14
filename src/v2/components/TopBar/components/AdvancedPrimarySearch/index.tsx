@@ -44,11 +44,6 @@ import {
   TopBarAction,
   TopBarState,
 } from './advancedPrimarySearchReducer'
-import {
-  Copy,
-  Message,
-  QuestionMarkOverlay,
-} from 'v2/components/UI/QuestionMarkOverlay'
 
 const Container = styled(Box)`
   position: relative;
@@ -114,18 +109,6 @@ const Controls = styled(Box)`
 const Results = styled(Box)`
   height: 100%;
   ${overflowScrolling}
-`
-
-const BetaMessage = styled(Message).attrs({
-  border: '1px solid',
-  borderColor: 'white',
-  bg: 'state.supporter',
-  p: 4,
-})`
-  border-radius: ${props => props.theme.radii.regular};
-  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-  max-width: 20em;
 `
 
 const AdvancedPrimarySearchContainer: React.FC<{
@@ -405,37 +388,6 @@ const AdvancedPrimarySearchContainer: React.FC<{
               Search this {page.type.toLowerCase()}
             </ContextButton>
           )}
-
-          {/* TODO: Remove when we fully launch */}
-          <QuestionMarkOverlay>
-            <BetaMessage>
-              <Copy>
-                <strong>Advanced Search</strong>
-              </Copy>
-              <Copy>
-                As a supporter, you get early access to our new advanced search
-                features. We are still working on some details (date filters,
-                for example), but we&apos;d be grateful to hear your feedback.
-              </Copy>
-              <Copy>Two options:</Copy>
-              <Copy>
-                <ol>
-                  <li>
-                    You can fill out{' '}
-                    <a href="https://airtable.com/shrFiBKYHP1XeV2r8">
-                      this feedback form
-                    </a>
-                    .
-                  </li>
-                  <li>
-                    You can add feedback to the #supporter-council channel in
-                    our <a href="https://www.are.na/settings/perks">Discord</a>.
-                  </li>
-                </ol>
-              </Copy>
-              <Copy>Thank you! We appreciate your support ✨</Copy>
-            </BetaMessage>
-          </QuestionMarkOverlay>
         </ContextButtonContainer>
       )}
 
