@@ -170,13 +170,21 @@ export const getFilteredVariables = (
   const filteredOrder =
     order?.facet && !disabledOrder?.includes(order.facet) ? order : undefined
 
-  return {
+  const filteredVariables = {
     ...variables,
     where: filteredWhere,
     what: filteredWhat,
     fields: filteredFields,
     order: filteredOrder,
   }
+
+  // Filter out any null values
+  return Object.keys(filteredVariables).reduce((acc, key) => {
+    if (filteredVariables[key]) {
+      acc[key] = filteredVariables[key]
+    }
+    return acc
+  }, {})
 }
 
 export const getCurrentFilter = (

@@ -106,14 +106,14 @@ export const AdvancedSearchResultsQuery: React.FC<AdvancedSearchResultsQueryProp
   >(advancedSearchResultsQuery, { variables, skip: skipQuery })
 
   useEffect(() => {
-    const mergedVariables = merge(
-      DEFAULTS(!!(variables?.where && variables?.where[0]?.id)),
-      variables,
-      {
-        per: 10,
-        page: 1,
-      }
-    ) as any
+    const defaults = DEFAULTS(!!(variables?.where && variables?.where[0]?.id))
+    const mergedVariables = merge(defaults, variables, {
+      per: 10,
+      page: 1,
+    }) as any
+
+    console.log({ mergedVariables, variables, defaults })
+
     if (mergedVariables.term?.facet && !isEmpty(mergedVariables.term?.facet)) {
       refetch(mergedVariables)
     }
