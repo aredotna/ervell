@@ -66,7 +66,7 @@ class PendingGroupUser extends Component {
 
   render() {
     const {
-      data: { loading },
+      data: { loading, error },
     } = this.props
 
     if (loading) {
@@ -86,7 +86,11 @@ class PendingGroupUser extends Component {
     const {
       data: { user },
     } = this.props
-    const isOwner = currentUserService().id === user.id
+    const isOwner = currentUserService().id === user?.id
+
+    if (!user || error) {
+      return null
+    }
 
     return (
       <Container>
