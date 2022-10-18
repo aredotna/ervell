@@ -87,7 +87,7 @@ export const CreateGroupModal: React.FC<CreateGroupProps> = ({
   const handleAddUser = useCallback(
     ({ member_id: user_id }) => {
       const newUserIds = new Set([...userIds, user_id])
-      setUserIds([...newUserIds])
+      setUserIds(Array.from(newUserIds))
     },
     [setUserIds, userIds]
   )
@@ -169,8 +169,6 @@ export const CreateGroupModal: React.FC<CreateGroupProps> = ({
   const nameField = useField('name', form)
   const descriptionField = useField('description', form)
 
-  console.log({ data })
-
   if (!data?.me.id || loading) {
     return <div />
   }
@@ -226,7 +224,6 @@ export const CreateGroupModal: React.FC<CreateGroupProps> = ({
               types={['USER']}
               onAdd={handleAddUser}
               onInvite={handleInviteUser}
-              channel_id={channel_id}
             />
 
             {userIds.length > 0 && (
