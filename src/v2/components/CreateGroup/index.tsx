@@ -20,7 +20,6 @@ import {
   createGroupMutation,
   createGroupMutationVariables,
 } from '__generated__/createGroupMutation'
-import { CreateGroup } from '__generated__/CreateGroup'
 import {
   addGroupUsersMutation,
   addGroupUsersMutationVariables,
@@ -33,6 +32,7 @@ import {
   addChannelMemberGroupMutation,
   addChannelMemberGroupMutationVariables,
 } from '__generated__/addChannelMemberGroupMutation'
+import { CreateGroupModal as CreateGroupModalQuery } from '__generated__/CreateGroupModal'
 
 interface CreateGroupProps {
   channel_id?: string
@@ -47,7 +47,9 @@ export const CreateGroupModal: React.FC<CreateGroupProps> = ({
   onClose,
   setHasSeenNewGroupExplanation,
 }) => {
-  const { data, loading, error } = useQuery<CreateGroup>(CREATE_GROUP_QUERY)
+  const { data, loading, error } = useQuery<CreateGroupModalQuery>(
+    CREATE_GROUP_QUERY
+  )
   const [mode, setMode] = useState<Mode>('resting')
   const [userIds, setUserIds] = useState<string[]>([])
 
@@ -167,11 +169,15 @@ export const CreateGroupModal: React.FC<CreateGroupProps> = ({
   const nameField = useField('name', form)
   const descriptionField = useField('description', form)
 
-  if (!data.id || loading) {
-    return null
+  console.log({ data })
+
+  if (!data?.me.id || loading) {
+    return <div />
   }
 
-  const { has_seen_new_group_explanation } = data
+  const {
+    me: { has_seen_new_group_explanation },
+  } = data
 
   return (
     <TitledDialog title="New group" label={label} onDone={handleSubmit}>
@@ -237,3 +243,5 @@ export const CreateGroupModal: React.FC<CreateGroupProps> = ({
     </TitledDialog>
   )
 }
+
+export default CreateGroupModal
