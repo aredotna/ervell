@@ -26,9 +26,7 @@ export default class CollaboratorAddButton extends Component {
 
     this.setState({ mode: 'adding' })
 
-    return onAdd({ member_id, member_type }).catch(() =>
-      this.setState({ mode: 'error' })
-    )
+    return onAdd({ member_id, member_type })
   }
 
   render() {

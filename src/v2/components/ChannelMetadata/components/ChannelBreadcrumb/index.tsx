@@ -55,7 +55,10 @@ export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
 
   const hasSecondary = parsedVariables.where?.length > 1
   const where = parsedVariables?.where && parsedVariables?.where.slice(1)
-  const secondary = hasSecondary ? <SecondaryBreadcrumbs where={where} /> : null
+  const context = parsedVariables?.where && parsedVariables?.where[0]
+  const secondary = hasSecondary ? (
+    <SecondaryBreadcrumbs where={where} context={context} />
+  ) : null
 
   return (
     <>
