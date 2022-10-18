@@ -33,6 +33,7 @@ import {
   addChannelMemberGroupMutationVariables,
 } from '__generated__/addChannelMemberGroupMutation'
 import { CreateGroupModal as CreateGroupModalQuery } from '__generated__/CreateGroupModal'
+import { MemberTypes } from '__generated__/globalTypes'
 
 interface CreateGroupProps {
   channel_id?: string
@@ -153,6 +154,7 @@ export const CreateGroupModal: React.FC<CreateGroupProps> = ({
             variables: {
               channel_id,
               member_id: group_id.toString(),
+              member_type: MemberTypes.GROUP,
             },
           })
         })

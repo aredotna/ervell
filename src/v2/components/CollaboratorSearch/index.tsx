@@ -47,7 +47,6 @@ export const CollaboratorSearch: React.FC<CollaboratorSearchProps> = ({
     member_id: string
     member_type: string
   }) => {
-    console.log('handleAdd', member_id, member_type, onAdd)
     onAdd({ member_id, member_type })
     resetQuery()
   }
