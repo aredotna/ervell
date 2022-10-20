@@ -39,7 +39,7 @@ export default class SecondaryLinks extends PureComponent {
 
         <SmallLink href="/tools">
           <Icons name="Tools" size="1rem" color="gray.medium" mr={4} />
-          More tools
+          Install browser extension
         </SmallLink>
 
         <SmallLink href="http://help.are.na">
