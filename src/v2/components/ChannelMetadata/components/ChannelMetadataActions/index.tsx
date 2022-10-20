@@ -81,19 +81,19 @@ export const ChannelMetadataActions: React.FC<ChannelMetadataActionsProps> = ({
 
     const modal = new Modal(ManageChannel, { id: channel.id, onUpdate })
     modal.open()
-  }, [])
+  }, [channel])
 
   const handleClick = useCallback(() => {
     if (mode == 'closing') return
     setMode('open')
-  }, [])
+  }, [setMode])
 
   const handleClose = useCallback(() => {
     setMode('closing')
     setTimeout(() => {
       setMode('resting')
     }, 100)
-  }, [])
+  }, [setMode])
 
   const { id, can } = channel
 
