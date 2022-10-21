@@ -43,7 +43,6 @@ import { ProfileSearchPage } from 'v2/pages/profile/ProfileSearchPage'
 
 export const AppRoutes = () => {
   const { isLoggedIn } = useLoginStatus()
-  const showNewSearch = isLoggedIn
 
   const location = useLocation()
   const state = location.state as any
@@ -142,9 +141,7 @@ export const AppRoutes = () => {
         <Route path=":id/index" element={<ProfilePage view="index" />} />
         <Route path=":id/groups" element={<ProfilePage view="groups" />} />
 
-        {showNewSearch && (
-          <Route path=":id/search" element={<ProfileSearchPage />} />
-        )}
+        <Route path=":id/search" element={<ProfileSearchPage />} />
 
         <Route path=":id" element={<ProfilePage />} />
 
@@ -162,9 +159,7 @@ export const AppRoutes = () => {
           element={<ChannelPageWrapper view="grid" />}
         />
         <Route path=":user_id/:id/embed" element={<EmbeddedChannelPage />} />
-        {showNewSearch && (
-          <Route path=":user_id/:id/search" element={<ChannelSearchPage />} />
-        )}
+        <Route path=":user_id/:id/search" element={<ChannelSearchPage />} />
         <Route path=":user_id/:id" element={<ChannelPageWrapper />} />
 
         {/* Share Channel */}

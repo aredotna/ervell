@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
-import React from 'react'
-import { useParams } from 'react-router'
+import React, { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router'
 
 import { LoadingPage } from 'v2/components/LoadingPage'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
@@ -21,14 +21,23 @@ import useSerializedMe from 'v2/hooks/useSerializedMe'
 
 export const ProfileSearchPage: React.FC = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
   const { id: myId } = useSerializedMe()
+  const isLoggedIn = !!myId
 
   const { data, error, loading } = useQuery<
     ProfileSearchPageQuery,
     ProfileSearchPageQueryVariables
   >(profileSearchPageQuery, {
     variables: { id },
+    skip: !isLoggedIn,
   })
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate(`/${id}`, { state: { background: location } })
+    }
+  }, [isLoggedIn, id, navigate])
 
   if (loading) {
     return (
@@ -42,6 +51,10 @@ export const ProfileSearchPage: React.FC = () => {
 
   if (error) {
     return <ErrorAlert isReloadable>{error.message}</ErrorAlert>
+  }
+
+  if (!isLoggedIn) {
+    return null
   }
 
   const {

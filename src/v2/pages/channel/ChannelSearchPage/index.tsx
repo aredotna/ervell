@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
-import React from 'react'
-import { useParams } from 'react-router'
+import React, { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router'
 import { LoadingPage } from 'v2/components/LoadingPage'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 
@@ -16,9 +16,12 @@ import { ChannelPageMetaTags } from 'v2/pages/channel/components/ChannelPageMeta
 import { AdvancedSearchResultsGrid } from 'v2/components/AdvancedSearch/components/AdvancedSearchResultsGrid'
 import channelSearchPage from './queries/channelSearchPage'
 import { WhereEnum } from '__generated__/globalTypes'
+import useLoginStatus from 'v2/hooks/useLoginStatus'
 
 export const ChannelSearchPage: React.FC = () => {
   const { id } = useParams()
+  const { isLoggedIn } = useLoginStatus()
+  const navigate = useNavigate()
 
   const { data, loading, error } = useQuery<
     ChannelSearchPageType,
@@ -29,12 +32,22 @@ export const ChannelSearchPage: React.FC = () => {
     },
   })
 
+  useEffect(() => {
+    if (!isLoggedIn && data?.channel) {
+      navigate(data.channel.href, { state: { background: location } })
+    }
+  }, [isLoggedIn, id, navigate, data])
+
   if (loading) {
     return <LoadingPage />
   }
 
   if (error) {
     return <ErrorAlert isReloadable>{error.message}</ErrorAlert>
+  }
+
+  if (!isLoggedIn) {
+    return null
   }
 
   const { channel } = data
