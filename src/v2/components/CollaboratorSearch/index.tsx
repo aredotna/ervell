@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { debounce } from 'underscore'
 
 import CollaboratorSearchField from './components/CollaboratorSearchField'
@@ -13,15 +13,14 @@ interface CollaboratorSearchProps {
   }: {
     member_id: string
     member_type: string
-  }) => void
-  onInvite: ({ email }: { email: string }) => void
+  }) => any
+  onInvite: ({ email }: { email: string }) => any
   types?: collaboratorType[]
 }
 
 export const CollaboratorSearch: React.FC<CollaboratorSearchProps> = ({
   onAdd,
   onInvite,
-  types = ['USER', 'GROUP'],
 }) => {
   const [query, setQuery] = useState('')
   const [debouncedQuery, setDebouncedQuery] = useState('')
@@ -40,21 +39,27 @@ export const CollaboratorSearch: React.FC<CollaboratorSearchProps> = ({
     setDebouncedQuery('')
   }
 
-  const handleAdd = ({
-    member_id,
-    member_type,
-  }: {
-    member_id: string
-    member_type: string
-  }) => {
-    onAdd({ member_id, member_type })
-    resetQuery()
-  }
+  const handleAdd = useCallback(
+    ({
+      member_id,
+      member_type,
+    }: {
+      member_id: string
+      member_type: string
+    }) => {
+      onAdd({ member_id, member_type })
+      resetQuery()
+    },
+    [onAdd, resetQuery]
+  )
 
-  const handleInvite = (email: string) => {
-    onInvite({ email })
-    resetQuery()
-  }
+  const handleInvite = useCallback(
+    ({ email }: { email: string }) => {
+      onInvite({ email })
+      resetQuery()
+    },
+    [onInvite, resetQuery]
+  )
 
   return (
     <div>
@@ -63,7 +68,6 @@ export const CollaboratorSearch: React.FC<CollaboratorSearchProps> = ({
       {query !== '' && (
         <CollaboratorSearchResults
           query={debouncedQuery}
-          types={types}
           onAdd={handleAdd}
           onInvite={handleInvite}
         />
