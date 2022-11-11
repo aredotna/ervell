@@ -38,9 +38,18 @@ export const CancelPremium: React.FC<CancelPremiumProps & BoxProps> = ({
 
       {mode !== 'resting' && (
         <div>
+          <Text f={2} mb={4} color="state.alert" fontWeight="bold">
+            Are you sure?
+          </Text>
           <Text f={2} mb={4} color="state.alert">
-            If you're cancelling your premium membership, you'll lose access to
-            all of your premium features. Are you sure you want to cancel?
+            If you're cancelling your Premium membership, you'll lose access to
+            all of your premium features and won't be able to add any more
+            blocks.
+          </Text>
+          <Text f={2} mb={4} color="state.alert" boldLinks>
+            <strong>Note:</strong> If you're cancelling for financial reasons,
+            please <a href="mailto:help@are.na">contact us</a> and we'll work
+            with you.
           </Text>
           <GenericButton
             f={2}
@@ -50,7 +59,7 @@ export const CancelPremium: React.FC<CancelPremiumProps & BoxProps> = ({
           >
             {
               {
-                active: 'Yes, cancel Premium',
+                active: 'Yes, please cancel my Premium membership',
                 cancelling: 'Cancelling...',
                 error: 'Error',
                 refreshing: 'Wait',
@@ -60,10 +69,11 @@ export const CancelPremium: React.FC<CancelPremiumProps & BoxProps> = ({
           {mode !== 'cancelling' && (
             <GenericButton
               f={2}
-              color="state.alert"
+              bg="state.premium"
+              color="white"
               onClick={cancelCancellation}
             >
-              No
+              Nevermind, I'll keep my Premium membership!
             </GenericButton>
           )}
         </div>
