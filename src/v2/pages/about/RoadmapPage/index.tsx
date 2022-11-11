@@ -257,6 +257,13 @@ export const RoadmapPageInner: React.FC<RoadmapPageInnerProps> = ({
         </div>
       </SupportOptions>
 
+      <div>
+        <Subheadline color="gray.bold">Expenses</Subheadline>
+        <Box>
+          <ContentfulContent content={roadmapData?.roadmap.expenses.json} />
+        </Box>
+      </div>
+
       <TableSection>
         <Subheadline pb={1} mb={0} color="gray.bold">
           Product Plan

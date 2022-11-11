@@ -38,6 +38,9 @@ export const RoadmapContents = gql`
       productCompleted {
         json
       }
+      expenses {
+        json
+      }
     }
   }
 `

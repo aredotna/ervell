@@ -51,7 +51,11 @@ const Ol = styled.ol`
   }
 `
 
-const Li = styled.li``
+const Li = styled.li`
+  ${BaseText} {
+    margin: 0;
+  }
+`
 
 const Blockquote = styled.blockquote`
   border-left: 2px solid ${({ theme }) => theme.colors.gray.light};
