@@ -33,6 +33,10 @@ const AppStoreLinks = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+
+  svg {
+    fill: transparent;
+  }
 `
 
 export const ExtendedArena: React.FC = () => {
@@ -44,27 +48,20 @@ export const ExtendedArena: React.FC = () => {
         <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/12759260/original_6053cafdbe96c250a57e37238f153a7a.png?1628198024?bc=0" />
       </Screenshots>
       <AppStoreLinks>
-        <Button
-          f={3}
-          color="gray.block"
-          href={ITUNES_LINK}
-          style={{ width: '120px' }}
-          mr={6}
-          px={0}
-        >
-          <Icons name="Apple" size="1em" color="gray.block" mr={3} />
-          iOS
-        </Button>
-        <Button
-          f={3}
-          color="gray.block"
-          href={ANDROID_LINK}
-          style={{ width: '120px' }}
-          px={0}
-        >
-          <Icons name="Android" size="1em" color="gray.block" mr={3} />
-          Android
-        </Button>
+        <Icons
+          name="AppStore"
+          style={{ fill: 'unset' }}
+          width={140}
+          height={40}
+          mr={3}
+        />
+        <Icons
+          name="PlayStore"
+          style={{ fill: 'unset' }}
+          width={140}
+          height={40}
+          mr={3}
+        />
       </AppStoreLinks>
 
       <Text f={5} mt={8} mb={6}>
