@@ -96,8 +96,11 @@ export const CancelPremium: React.FC<CancelPremiumProps & BoxProps> = ({
               If you're cancelling your Premium membership, you'll lose access
               to all of your premium features and won't be able to add any more
               blocks. <strong>Note:</strong> If you're cancelling for financial
-              reasons, please <a href="mailto:help@are.na">contact us</a> and
-              we'll work with you.
+              reasons, please{' '}
+              <a href="mailto:help@are.na?subject=Premium account financial assistance">
+                contact us
+              </a>{' '}
+              and we'll work with you.
             </Text>
             <ButtonContainer>
               <Button
