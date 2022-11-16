@@ -1,8 +1,55 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 
 import Box, { BoxProps } from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import GenericButton from 'v2/components/UI/GenericButton'
+import Icons from 'v2/components/UI/Icons'
+import constants from 'v2/styles/constants'
+
+const Outer = styled(Box)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const Container = styled(Box).attrs({
+  px: 6,
+  py: 6,
+  borderRadius: '0.5em',
+})`
+  background-color: ${p => p.theme.colors.gray.input};
+  flex-shrink: 0;
+  text-align: left;
+  flex-basis: 0;
+`
+
+const ButtonContainer = styled(Box).attrs({
+  mt: 7,
+})`
+  flex-basis: 400px;
+  width: 636px;
+
+  ${constants.media.small`
+    width: 100%;
+  `}
+`
+
+const HeaderContainer = styled(Box).attrs({
+  mb: 5,
+})`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`
+
+const Button = styled(GenericButton).attrs({
+  mb: 4,
+})`
+  flex-shrink: 0;
+  flex-basis: auto;
+  white-space: nowrap;
+`
 
 interface CancelPremiumProps {
   onCancel: () => void
@@ -37,46 +84,50 @@ export const CancelPremium: React.FC<CancelPremiumProps & BoxProps> = ({
       )}
 
       {mode !== 'resting' && (
-        <div>
-          <Text f={2} mb={4} color="state.alert" fontWeight="bold">
-            Are you sure?
-          </Text>
-          <Text f={2} mb={4} color="state.alert">
-            If you're cancelling your Premium membership, you'll lose access to
-            all of your premium features and won't be able to add any more
-            blocks.
-          </Text>
-          <Text f={2} mb={4} color="state.alert" boldLinks>
-            <strong>Note:</strong> If you're cancelling for financial reasons,
-            please <a href="mailto:help@are.na">contact us</a> and we'll work
-            with you.
-          </Text>
-          <GenericButton
-            f={2}
-            color="state.alert"
-            onClick={onCancel}
-            disabled={mode === 'cancelling'}
-          >
-            {
-              {
-                active: 'Yes, please cancel my Premium membership',
-                cancelling: 'Cancelling...',
-                error: 'Error',
-                refreshing: 'Wait',
-              }[mode]
-            }
-          </GenericButton>{' '}
-          {mode !== 'cancelling' && (
-            <GenericButton
-              f={2}
-              bg="state.premium"
-              color="white"
-              onClick={cancelCancellation}
-            >
-              Nevermind, I'll keep my Premium membership!
-            </GenericButton>
-          )}
-        </div>
+        <Outer>
+          <Container>
+            <HeaderContainer>
+              <Icons name="Info" size="0.75rem" color="gray.regular" mr={4} />
+              <Text f={2} mb={4} fontWeight="bold">
+                Are you sure?
+              </Text>
+            </HeaderContainer>
+            <Text f={2} mb={4} boldLinks>
+              If you're cancelling your Premium membership, you'll lose access
+              to all of your premium features and won't be able to add any more
+              blocks. <strong>Note:</strong> If you're cancelling for financial
+              reasons, please <a href="mailto:help@are.na">contact us</a> and
+              we'll work with you.
+            </Text>
+            <ButtonContainer>
+              <Button
+                f={2}
+                onClick={onCancel}
+                disabled={mode === 'cancelling'}
+                mr={4}
+              >
+                {
+                  {
+                    active: 'Yes, please cancel my Premium membership',
+                    cancelling: 'Cancelling...',
+                    error: 'Error',
+                    refreshing: 'Wait',
+                  }[mode]
+                }
+              </Button>{' '}
+              {mode !== 'cancelling' && (
+                <Button
+                  f={2}
+                  borderColor="state.premium"
+                  color="state.premium"
+                  onClick={cancelCancellation}
+                >
+                  Nevermind, I'll keep my Premium membership!
+                </Button>
+              )}
+            </ButtonContainer>
+          </Container>
+        </Outer>
       )}
     </Box>
   )
