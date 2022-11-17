@@ -125,7 +125,7 @@ export const CancelPremium: React.FC<CancelPremiumProps & BoxProps> = ({
                   color="state.premium"
                   onClick={cancelCancellation}
                 >
-                  Nevermind, I'll keep my Premium membership!
+                  Nevermind, I&apos;ll keep my Premium membership!
                 </Button>
               )}
             </ButtonContainer>
