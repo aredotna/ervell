@@ -29,7 +29,8 @@ const TopLabel = styled(Text).attrs({
 })``
 
 const TeamContainer = styled(Box).attrs({
-  mb: 8,
+  mb: 9,
+  mr: 5,
 })`
   display: flex;
   justify-content: space-between;
@@ -37,7 +38,7 @@ const TeamContainer = styled(Box).attrs({
 
 const Team = styled(Box)`
   transform-origin: bottom right;
-  transform: rotate(-90deg) translateY(1.25em) translateX(5em);
+  transform: rotate(-90deg) translateY(2.25em) translateX(6em);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -63,20 +64,21 @@ export const TeamChart: React.FC = () => {
         <TopLabel>Advisors</TopLabel>
       </Top>
       <TeamContainer>
-        <Team>
+        <Team ml={3}>
           <Member>Engineer</Member>
           <Member>Product</Member>
         </Team>
 
-        <Team ml={5}>
+        <Team ml={8}>
           <Member>Community</Member>
-          <Member>Engineer</Member>
+          <Member>Strategy</Member>
           <Member>Engineer</Member>
         </Team>
 
         <Team mr={7}>
           <Member>Community</Member>
-          <Member>Community</Member>
+          <Member>Strategy</Member>
+          <Member>Product</Member>
           <Member>Product</Member>
           <Member>Engineer</Member>
         </Team>

@@ -48,20 +48,24 @@ export const ExtendedArena: React.FC = () => {
         <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/12759260/original_6053cafdbe96c250a57e37238f153a7a.png?1628198024?bc=0" />
       </Screenshots>
       <AppStoreLinks>
-        <Icons
-          name="AppStore"
-          style={{ fill: 'unset' }}
-          width={140}
-          height={40}
-          mr={3}
-        />
-        <Icons
-          name="PlayStore"
-          style={{ fill: 'unset' }}
-          width={140}
-          height={40}
-          mr={3}
-        />
+        <a href={ITUNES_LINK} target="_blank" rel="noreferrer">
+          <Icons
+            name="AppStore"
+            style={{ fill: 'unset' }}
+            width={140}
+            height={40}
+            mr={3}
+          />
+        </a>
+        <a href={ANDROID_LINK} target="_blank" rel="noreferrer">
+          <Icons
+            name="PlayStore"
+            style={{ fill: 'unset' }}
+            width={140}
+            height={40}
+            mr={3}
+          />
+        </a>
       </AppStoreLinks>
 
       <Text f={5} mt={8} mb={6}>

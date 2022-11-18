@@ -8,6 +8,7 @@ import {
 
 import Box from 'v2/components/UI/Box'
 import BlankLayout from 'v2/components/UI/Layouts/BlankLayout'
+import Button from 'v2/components/UI/GenericButton'
 import Text from 'v2/components/UI/Text'
 import { P } from 'v2/pages/about/components/Text'
 import { calculatedAgePhrase } from 'v2/util/calculateAge'
@@ -26,6 +27,12 @@ import { EducationCTA } from './components/EducationCTA'
 import { TopMenu } from './components/TopMenu'
 import constants from 'v2/styles/constants'
 import { useParams } from 'react-router'
+import { AboutPageContents } from '__generated__/contentful/AboutPageContents'
+import { AboutPageContents as AboutPageContentsQuery } from './contentfulQueries/aboutPage'
+import { useQuery } from '@apollo/client'
+import TeamInner from './components/Team'
+import BusinessModelAndPosition from './components/BusinessModelAndPosition'
+import { CommunityApiProjects } from './components/CommunityApiProjects'
 
 const MaxBox = styled(Box).attrs({
   mx: 'auto',
@@ -86,6 +93,12 @@ const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
       clearTimeout(timer1)
     }
   }, [section, scrollTo])
+
+  const { data } = useQuery<AboutPageContents>(AboutPageContentsQuery, {
+    context: { clientName: 'contentful' },
+    ssr: false,
+  })
+
   return (
     <BlankLayout>
       <TopMenu />
@@ -167,15 +180,23 @@ const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
           <Box textAlign="center" mb={6}>
             <Header>Team</Header>
           </Box>
-          <P>
-            Are.na has many co-founders. Currently, a small team is building the
-            platform:
-          </P>
-          <TeamChart />
-          <P mt={6}>
-            You can chat with them most Friday mornings (EST) on{' '}
-            <a href="/settings/perks">Discord</a>.
-          </P>
+          <TeamInner content={data?.aboutPage.team.teamDescription} />
+          <Box mt={8}>
+            <TeamChart />
+          </Box>
+        </MaxBoxBottom>
+      </Section>
+
+      <Section id={'Business model'}>
+        <MaxBoxBottom>
+          <Box textAlign="center" mb={6}>
+            <Header>Business model</Header>
+          </Box>
+          <BusinessModelAndPosition
+            content={
+              data?.aboutPage.businessModelAndPosition.businessModelContent
+            }
+          />
         </MaxBoxBottom>
       </Section>
 
@@ -186,6 +207,59 @@ const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
           </Box>
           <RoadmapPageInner />
         </MaxBoxBottom>
+      </Section>
+
+      <Section id={'API / Community Projects'}>
+        <Box mb={10}>
+          <MaxBox>
+            <Box textAlign="center" mb={8}>
+              <Header>API and Community Projects</Header>
+              <P>
+                Are.na is &quot;Open Source by Default&quot; and we&apos;re
+                always excited to see people using the platform in new ways. You
+                can find a{' '}
+                <a href="https://www.are.na/are-na-commons/are-na-tools">
+                  list of projects built with Are.na
+                </a>{' '}
+                and find more resources in the{' '}
+                <a href="https://www.are.na/are-na-commons/are-na-community-dev-lounge">
+                  Arena Community Dev Lounge
+                </a>
+                .
+              </P>
+              <Box
+                textAlign="center"
+                display="flex"
+                justifyContent="space-between"
+                flexDirection={['column', 'row']}
+              >
+                <Button
+                  f={3}
+                  mr={6}
+                  px={9}
+                  my={5}
+                  color="gray.block"
+                  href="https://dev.are.na/documentation/channels"
+                >
+                  API Documentation
+                </Button>
+
+                <Button
+                  f={3}
+                  mr={6}
+                  px={9}
+                  my={5}
+                  color="gray.block"
+                  href="https://github.com/aredotna"
+                >
+                  Github
+                </Button>
+              </Box>
+            </Box>
+          </MaxBox>
+
+          <CommunityApiProjects />
+        </Box>
       </Section>
 
       <Section id={'Editorial'}>
@@ -201,15 +275,6 @@ const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
         </MaxBoxBottom>
       </Section>
 
-      <Section id={'Testimonials'}>
-        <MaxBoxBottom>
-          <Box textAlign="center" mb={9}>
-            <Header>Testimonials</Header>
-          </Box>
-          <Testimonials />
-        </MaxBoxBottom>
-      </Section>
-
       <Section id={'Extended Are.na'}>
         <MaxBoxBottom>
           <Box textAlign="center" mb={8}>
@@ -219,7 +284,16 @@ const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
         </MaxBoxBottom>
       </Section>
 
-      <Section id={'Contact &amp; Support'}>
+      <Section id={'Testimonials'}>
+        <MaxBoxBottom>
+          <Box textAlign="center" mb={9}>
+            <Header>Testimonials</Header>
+          </Box>
+          <Testimonials />
+        </MaxBoxBottom>
+      </Section>
+
+      <Section id={'Contact and Support'}>
         <MaxBoxBottom>
           <Box textAlign="center" mb={8}>
             <Header>Contact &amp; Support</Header>
