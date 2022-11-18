@@ -52,6 +52,8 @@ import CloseEx from 'v2/components/UI/Icons/CloseIcon.svg'
 import Caret from 'v2/components/UI/Icons/Caret.svg'
 import Text from 'v2/components/UI/Icons/Text.svg'
 import Dropdown from 'v2/components/UI/Icons/DropdownCaret.svg'
+import AppStore from 'v2/components/UI/Icons/Appstore.svg'
+import PlayStore from 'v2/components/UI/Icons/Playstore.svg'
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -101,6 +103,8 @@ export const COMPONENTS = {
   Caret: <Caret />,
   Text: <Text />,
   Dropdown: <Dropdown />,
+  AppStore: <AppStore />,
+  PlayStore: <PlayStore />,
 }
 
 export const ICON_NAMES = Object.keys(COMPONENTS)

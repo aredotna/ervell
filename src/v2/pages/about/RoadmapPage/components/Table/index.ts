@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { BaseText } from 'v2/components/ContentfulContent'
 
 import Box from 'v2/components/UI/Box'
 import constants from 'v2/styles/constants'
@@ -52,6 +53,10 @@ export const Column = styled(Box).attrs({})`
   &:last-child {
     border-top-right-radius: ${constants.radii.regular};
     border-bottom-right-radius: ${constants.radii.regular};
+  }
+
+  ${BaseText} {
+    margin: 0;
   }
 `
 
