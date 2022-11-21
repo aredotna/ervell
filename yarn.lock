@@ -18514,6 +18514,11 @@ react-split-pane@^0.1.89:
     react-lifecycles-compat "^3.0.4"
     react-style-proptype "^3.0.0"
 
+react-string-replace@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-string-replace/-/react-string-replace-1.1.0.tgz#a3f7b458e697e77d70b0ea663caf38ab38f7cc17"
+  integrity sha512-N6RalSDFGbOHs0IJi1H611WbZsvk3ZT47Jl2JEXFbiS3kTwsdCYij70Keo/tWtLy7sfhDsYm7CwNM/WmjXIaMw==
+
 react-stripe-elements@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-stripe-elements/-/react-stripe-elements-2.0.1.tgz#197db4762c57bf73a07d852564ebdbac52954094"

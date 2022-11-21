@@ -28,6 +28,8 @@ const Inner = styled.div`
 
 const Copy = styled(Text).attrs({
   f: 3,
+  boldLinks: true,
+  color: 'gray.bold',
 })`
   width: 70%;
   line-height: 1.5;
@@ -46,7 +48,14 @@ const Headline = styled(Text).attrs({
   margin-bottom: 1rem;
 `
 
-const A = styled(Text)``
+const A = styled.a`
+  font-weight: bold;
+  cursor: pointer !important;
+
+  &:hover {
+    color: ${props => props.theme.colors.gray.bold};
+  }
+`
 
 const Image = styled.img`
   max-height: 400px;
@@ -65,7 +74,7 @@ interface DescriptiveCarouselProps {
     headline: string
     copy: string
     image: string
-    link: string
+    link?: string
   }[]
 }
 

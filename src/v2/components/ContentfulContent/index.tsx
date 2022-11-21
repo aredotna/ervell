@@ -1,22 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Document, MARKS, BLOCKS } from '@contentful/rich-text-types'
+import reactStringReplace from 'react-string-replace'
+import { MARKS, BLOCKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 import Box from 'v2/components/UI/Box'
 
 import HorizontalRule from 'v2/components/UI/HorizontalRule'
-import Text from '../UI/Text'
+import Text, { TextProps } from '../UI/Text'
+import { CustomerCount } from '../CustomerCount'
+import { PremiumRevenue } from '../PremiumRevenue'
+import { isEmpty } from 'lodash'
 
-const BaseText = styled(Text).attrs({
+export const BaseText = styled(Text).attrs({
   my: 6,
   lineHeight: 2,
-  underlineLinks: true,
 })`
   a[href*='#'] {
     vertical-align: super;
     font-size: 10px;
   }
+  white-space: pre-wrap;
 `
 
 const HR = styled(HorizontalRule).attrs({ color: 'gray.light' })`
@@ -41,6 +45,10 @@ const Figcaption = styled.figcaption`
   color: ${({ theme }) => theme.colors.gray.base};
 `
 
+const UL = styled.ul`
+  margin-bottom: 0;
+`
+
 const Ol = styled.ol`
   list-style-type: decimal;
   margin-left: ${props => props.theme.space[5]};
@@ -51,7 +59,11 @@ const Ol = styled.ol`
   }
 `
 
-const Li = styled.li``
+const Li = styled.li`
+  ${BaseText} {
+    margin: 0;
+  }
+`
 
 const Blockquote = styled.blockquote`
   border-left: 2px solid ${({ theme }) => theme.colors.gray.light};
@@ -71,7 +83,13 @@ const Container = styled(Box)`
   }
 `
 
-export const optionsWithEmbeds = (embedData: any, defaultFontSize: number) => {
+export const optionsWithEmbeds = (
+  embedData: any,
+  defaultFontSize: number | string,
+  defaultFontColor?: string,
+  underlineLinks?: boolean,
+  boldLinks?: boolean
+) => {
   return {
     renderMark: {
       [MARKS.BOLD]: text => (
@@ -117,11 +135,15 @@ export const optionsWithEmbeds = (embedData: any, defaultFontSize: number) => {
           {children}
         </BaseText>
       ),
+      [BLOCKS.UL_LIST]: (_, children) => <UL>{children}</UL>,
       [BLOCKS.OL_LIST]: (_, children) => <Ol>{children}</Ol>,
       [BLOCKS.LIST_ITEM]: (_, children) => <Li>{children}</Li>,
       [BLOCKS.QUOTE]: (_, children) => <Blockquote>{children}</Blockquote>,
       [BLOCKS.HR]: () => <HR />,
       [BLOCKS.PARAGRAPH]: (_, children) => {
+        if (isEmpty(children)) {
+          return null
+        }
         if (
           children[0] &&
           typeof children[0] === 'string' &&
@@ -129,7 +151,36 @@ export const optionsWithEmbeds = (embedData: any, defaultFontSize: number) => {
         ) {
           return <div dangerouslySetInnerHTML={{ __html: children[0] }} />
         }
-        return <BaseText f={defaultFontSize}>{children}</BaseText>
+
+        let parsedChildren = reactStringReplace(
+          children,
+          '[premium-count]',
+          () => (
+            <strong>
+              <CustomerCount />
+            </strong>
+          )
+        )
+        parsedChildren = reactStringReplace(
+          parsedChildren,
+          '[premium-revenue]',
+          () => (
+            <strong>
+              <PremiumRevenue />
+            </strong>
+          )
+        )
+
+        return (
+          <BaseText
+            f={defaultFontSize}
+            color={defaultFontColor}
+            underlineLinks={underlineLinks}
+            boldLinks={boldLinks}
+          >
+            {parsedChildren}
+          </BaseText>
+        )
       },
     },
     renderText: text => text,
@@ -137,22 +188,40 @@ export const optionsWithEmbeds = (embedData: any, defaultFontSize: number) => {
 }
 
 interface ContentfulContentProps {
-  content: Document
+  content: any
   embedData?: any
-  defaultFontSize?: number
+  defaultFontSize?: number | string
+  defaultFontColor?: string
+  underlineLinks?: boolean
+  boldLinks?: boolean
   id?: string
 }
 
-export const ContentfulContent: React.FC<ContentfulContentProps> = ({
+export const ContentfulContent: React.FC<ContentfulContentProps &
+  TextProps> = ({
   content,
   embedData,
   defaultFontSize = 4,
+  defaultFontColor = 'gray.bold',
+  underlineLinks = true,
+  boldLinks = false,
   id,
+  ...rest
 }) => {
   const parsedContent = documentToReactComponents(
     content,
-    optionsWithEmbeds(embedData, defaultFontSize)
+    optionsWithEmbeds(
+      embedData,
+      defaultFontSize,
+      defaultFontColor,
+      underlineLinks,
+      boldLinks
+    )
   )
 
-  return <Container id={id}>{parsedContent}</Container>
+  return (
+    <Container id={id} {...rest}>
+      {parsedContent}
+    </Container>
+  )
 }

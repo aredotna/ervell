@@ -52,6 +52,11 @@ export interface RoadmapContents_roadmap_productCompleted {
   json: any;
 }
 
+export interface RoadmapContents_roadmap_expenses {
+  __typename: "RoadmapExpenses";
+  json: any;
+}
+
 export interface RoadmapContents_roadmap {
   __typename: "Roadmap";
   sys: RoadmapContents_roadmap_sys;
@@ -71,6 +76,7 @@ export interface RoadmapContents_roadmap {
   productUpNext: RoadmapContents_roadmap_productUpNext | null;
   productOnTheHorizon: RoadmapContents_roadmap_productOnTheHorizon | null;
   productCompleted: RoadmapContents_roadmap_productCompleted | null;
+  expenses: RoadmapContents_roadmap_expenses | null;
 }
 
 export interface RoadmapContents {

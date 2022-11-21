@@ -1,13 +1,12 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
-import { Document } from '@contentful/rich-text-types'
 
 import BLOG_POST_ASSETS_QUERY from 'v2/pages/blog/BlogPost/contentfulQueries/BlogPostByID'
 import { ContentfulContent } from 'v2/components/ContentfulContent'
 
 interface BlogPostContentProps {
   id: string
-  content: Document
+  content: any
   defaultFontSize?: number
   divId?: string
 }

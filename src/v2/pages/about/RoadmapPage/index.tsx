@@ -37,6 +37,7 @@ import { RoadmapContents } from '__generated__/contentful/RoadmapContents'
 import { ContentfulContent } from 'v2/components/ContentfulContent'
 import { AboutTopBarLayout } from 'v2/components/UI/Layouts/AboutTopBarLayout'
 import { LoggedOutFooter } from 'v2/components/LoggedOutFooter'
+import { FONT_SIZES } from 'v2/styles/text'
 
 const Container = styled(Box).attrs({
   mt: 9,
@@ -54,9 +55,11 @@ const Paragraph = styled(Description).attrs({
 `
 
 const SmallParagraph = styled(Paragraph)`
+  font-size: ${FONT_SIZES.home.md};
   max-width: 460px;
   width: 100%;
   height: 7em;
+  padding: 0 ${constants.space[3]};
 `
 
 const Link = styled.a`
@@ -80,35 +83,78 @@ const SupportOptions = styled(Box)`
   `}
 `
 
+const PremiumBullets = styled.div`
+  ul {
+    list-style: none;
+  }
+
+  ul li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  ul li::before {
+    content: '•';
+    color: ${x => x.theme.colors.state.premium};
+    display: inline-block;
+    width: 0.75em;
+    margin-left: -0.75em;
+    font-size: 1.5em;
+    line-height: 0.5em;
+  }
+`
+
+const BigTable = styled(Table)`
+  width: 910px;
+
+  ${Column} {
+    width: auto;
+    flex: 1;
+  }
+
+  ${Cell} {
+    max-height: calc(${constants.blockWidth} * 1.25);
+  }
+`
+
 const ContributeButton = styled(Button).attrs({
-  f: 5,
+  f: 4,
   flex: 1,
   alignSelf: 'center',
 })`
-  background-color: ${x => x.theme.colors.state.supporter};
+  width: 95%;
+  padding-left: 0;
+  padding-right: 0;
   border-color: ${x => x.theme.colors.state.supporter};
-  color: white;
+  background-color: ${props => props.theme.colors.background};
+  color: ${x => x.theme.colors.state.supporter};
 
   &:hover {
+    background-color: ${x => x.theme.colors.state.supporter};
     border-color: ${x => x.theme.colors.state.supporter};
-    background-color: ${props => props.theme.colors.background};
-    color: ${x => x.theme.colors.state.supporter};
+    color: ${x => x.theme.colors.background} !important;
   }
 `
 
 const PremiumButton = styled(Button).attrs({
-  f: 5,
+  f: 4,
   flex: 1,
   alignSelf: 'center',
 })`
-  background-color: ${x => x.theme.colors.state.premium};
+  width: 95%;
+  padding-left: 0;
+  padding-right: 0;
   border-color: ${x => x.theme.colors.state.premium};
-  color: white;
+  background-color: ${props => props.theme.colors.background};
+  color: ${x => x.theme.colors.state.premium};
+
+  margin: 0 1em;
 
   &:hover {
+    background-color: ${x => x.theme.colors.state.premium};
     border-color: ${x => x.theme.colors.state.premium};
-    background-color: ${props => props.theme.colors.background};
-    color: ${x => x.theme.colors.state.premium};
+    color: ${x => x.theme.colors.background} !important;
   }
 `
 
@@ -204,7 +250,7 @@ export const RoadmapPageInner: React.FC<RoadmapPageInnerProps> = ({
 
           <SmallParagraph>
             Premium members get unlimited private content, additional privacy
-            settings, an invitation to our members’ Slack and more features
+            settings, an invitation to our members’ Discord and more features
             soon. More about Premium:
           </SmallParagraph>
 
@@ -257,6 +303,13 @@ export const RoadmapPageInner: React.FC<RoadmapPageInnerProps> = ({
         </div>
       </SupportOptions>
 
+      <div>
+        <Subheadline color="gray.bold">Expenses</Subheadline>
+        <Box>
+          <ContentfulContent content={roadmapData?.roadmap.expenses.json} />
+        </Box>
+      </div>
+
       <TableSection>
         <Subheadline pb={1} mb={0} color="gray.bold">
           Product Plan
@@ -264,44 +317,34 @@ export const RoadmapPageInner: React.FC<RoadmapPageInnerProps> = ({
         <Text f={2} pb={8} color="gray.medium">
           Last updated: {lastUpdated}
         </Text>
-        <Table>
+        <BigTable>
           <Column>
-            <ColumnHeader>In Progress</ColumnHeader>
+            <ColumnHeader>In progress and upcoming</ColumnHeader>
             <Cell>
+              <PremiumBullets>
+                <ContentfulContent
+                  content={roadmapData?.roadmap.productInProgress.json}
+                  defaultFontSize={2}
+                />
+              </PremiumBullets>
+
               <ContentfulContent
-                content={roadmapData?.roadmap.productInProgress.json}
+                content={roadmapData?.roadmap.productUpNext.json}
                 defaultFontSize={2}
               />
             </Cell>
           </Column>
-          <Column>
-            <ColumnHeader>Up next</ColumnHeader>
-            <Cell>
-              <ContentfulContent
-                content={roadmapData?.roadmap.productUpNext.json}
-                defaultFontSize={3}
-              />
-            </Cell>
-          </Column>
-          <Column>
-            <ColumnHeader>On the Horizon</ColumnHeader>
-            <Cell>
-              <ContentfulContent
-                content={roadmapData?.roadmap.productOnTheHorizon.json}
-                defaultFontSize={3}
-              />
-            </Cell>
-          </Column>
           <LightColumn>
-            <ColumnHeader>Archived</ColumnHeader>
+            <ColumnHeader>Completed</ColumnHeader>
             <Cell>
               <ContentfulContent
                 content={roadmapData?.roadmap.productCompleted.json}
-                defaultFontSize={3}
+                defaultFontSize={2}
+                defaultFontColor="gray.regular"
               />
             </Cell>
           </LightColumn>
-        </Table>
+        </BigTable>
       </TableSection>
 
       <TableSection>
