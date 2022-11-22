@@ -96,7 +96,7 @@ const PremiumBullets = styled.div`
 
   ul li::before {
     content: '•';
-    color: ${x => x.theme.colors.state.premium};
+    color: ${x => x.theme.colors.channel.open};
     display: inline-block;
     width: 0.75em;
     margin-left: -0.75em;
@@ -305,9 +305,9 @@ export const RoadmapPageInner: React.FC<RoadmapPageInnerProps> = ({
 
       <div>
         <Subheadline color="gray.bold">Expenses</Subheadline>
-        <Box>
+        <Paragraph>
           <ContentfulContent content={roadmapData?.roadmap.expenses.json} />
-        </Box>
+        </Paragraph>
       </div>
 
       <TableSection>
