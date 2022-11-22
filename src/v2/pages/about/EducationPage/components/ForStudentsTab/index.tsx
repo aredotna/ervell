@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
+import Text from 'v2/components/UI/Text'
 
 import CenterBox from 'v2/pages/about/components/CenterBox'
 import { Subheadline, Description } from 'v2/pages/about/components/Text'
+import { CTA } from '../..'
 
 const Screenshot = styled.img`
   max-width: 640px;
@@ -24,13 +26,16 @@ const PremiumButton = styled(Button)`
   }
 `
 
-interface ForStudentsProps {
-  scrollToPremium: () => void
-}
+export const ForStudents: React.FC = () => {
+  const premiumRef = React.createRef<any>()
 
-export const ForStudents: React.FC<ForStudentsProps> = ({
-  scrollToPremium,
-}) => {
+  const scrollToPremium = () => {
+    window.scroll({
+      top: premiumRef.current.offsetTop - 100,
+      behavior: 'smooth',
+    })
+  }
+
   return (
     <div>
       <CenterBox mt={9} mb={6}>
@@ -60,6 +65,28 @@ export const ForStudents: React.FC<ForStudentsProps> = ({
         </Description>
       </CenterBox>
       <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017943/original_c852f944421a96c8ff1753cc843f78b1.png?1541873535" />
+      <div ref={premiumRef}>
+        <CTA>
+          <CenterBox my={10}>
+            <Subheadline>Get 50% off Are.na Premium</Subheadline>
+            <Description>
+              Are.na Premium gives you unlimited blocks and extra features. Use
+              coupon code{' '}
+              <a href="/settings/billing">
+                <Text display="inline" color="state.premium" font="mono">
+                  CURIOUS
+                </Text>
+              </a>{' '}
+              to get two years of Premium for half the price.
+              <div>
+                <PremiumButton f={4} my={7} href="/settings/billing">
+                  Upgrade to Premium
+                </PremiumButton>
+              </div>
+            </Description>
+          </CenterBox>
+        </CTA>
+      </div>
     </div>
   )
 }

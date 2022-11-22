@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import CenterBox from 'v2/pages/about/components/CenterBox'
 import { Subheadline, Description } from 'v2/pages/about/components/Text'
+import { CTA } from '../..'
 
 const Screenshot = styled.img`
   max-width: 640px;
@@ -38,6 +39,19 @@ export default class ForEducators extends Component {
           </Description>
         </CenterBox>
         <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017937/original_f0f9212098c0b5cfe1738b446823b0a3.png?1541873526" />
+        <div>
+          <CTA>
+            <CenterBox my={10}>
+              <Subheadline>Get 50% off Are.na Premium</Subheadline>
+              <Description>
+                If you use Are.na with your class or department, we'd be more
+                than happy to set up your educators discount. Please reach out
+                to <a href="mailto:help@are.na">help@are.na</a> and we'll get
+                you sorted.
+              </Description>
+            </CenterBox>
+          </CTA>
+        </div>
       </div>
     )
   }

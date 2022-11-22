@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
-import Text from 'v2/components/UI/Text'
 
 import Tabs from 'v2/components/UI/Tabs'
 
@@ -30,20 +29,11 @@ const TabContent = styled.div`
   border-bottom: 1px solid ${x => x.theme.colors.gray.semiLight};
 `
 
-const CTA = styled(Box)`
-  border-bottom: 1px solid ${x => x.theme.colors.gray.semiLight};
+export const CTA = styled(Box)`
+  border-top: 1px solid ${x => x.theme.colors.gray.semiLight};
 `
 
 export const EducationPage: React.FC = () => {
-  const premiumRef = React.createRef<any>()
-
-  const scrollToPremium = () => {
-    window.scroll({
-      top: premiumRef.current.offsetTop - 100,
-      behavior: 'smooth',
-    })
-  }
-
   return (
     <AboutTopBarLayout>
       <Container>
@@ -56,29 +46,13 @@ export const EducationPage: React.FC = () => {
         </CenterBox>
         <Tabs>
           <TabContent label="For Students">
-            <ForStudentsTab scrollToPremium={scrollToPremium} />
+            <ForStudentsTab />
           </TabContent>
           <TabContent label="For Educators">
             <ForEducatorsTab />
           </TabContent>
         </Tabs>
-        <div ref={premiumRef}>
-          <CTA>
-            <CenterBox my={10}>
-              <Subheadline>Get 50% off Are.na Premium</Subheadline>
-              <Description>
-                Are.na Premium gives you unlimited blocks and extra features.
-                Use coupon code{' '}
-                <a href="/settings/billing">
-                  <Text display="inline" color="state.premium" font="mono">
-                    CURIOUS
-                  </Text>
-                </a>{' '}
-                to get two years of Premium for half the price.
-              </Description>
-            </CenterBox>
-          </CTA>
-        </div>
+
         <UniversityLogoCta />
         <CaseStudiesCta />
         <Box>
