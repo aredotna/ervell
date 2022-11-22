@@ -44,10 +44,10 @@ export default class ForEducators extends Component {
             <CenterBox my={10}>
               <Subheadline>Get 50% off Are.na Premium</Subheadline>
               <Description>
-                If you use Are.na with your class or department, we'd be more
-                than happy to set up your educators discount. Please reach out
-                to <a href="mailto:help@are.na">help@are.na</a> and we'll get
-                you sorted.
+                If you use Are.na with your class or department, we&apos;d be
+                more than happy to set up your educators discount. Please reach
+                out to <a href="mailto:help@are.na">help@are.na</a> and
+                we&apos;ll get you sorted.
               </Description>
             </CenterBox>
           </CTA>
