@@ -14,7 +14,7 @@ export const CommunityAPIQuery = gql`
         }
         ... on Link {
           title
-          image_url
+          image_url(size: LARGE)
           description(format: HTML)
           source_url
         }

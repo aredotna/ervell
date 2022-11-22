@@ -47,6 +47,7 @@ const Figcaption = styled.figcaption`
 
 const UL = styled.ul`
   margin-bottom: 0;
+  color: ${({ theme }) => theme.colors.gray.base};
 `
 
 const Ol = styled.ol`
