@@ -59,6 +59,7 @@ const A = styled.a`
 
 const Image = styled.img`
   max-height: 400px;
+  max-width: 650px;
   width: auto;
   padding-bottom: 1rem;
   user-drag: none;
