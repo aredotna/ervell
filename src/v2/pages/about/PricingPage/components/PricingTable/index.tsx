@@ -7,6 +7,9 @@ import Text from 'v2/components/UI/Text'
 import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
 
 import useSerializedMe from 'v2/hooks/useSerializedMe'
+import { useQuery } from '@apollo/client'
+import { PlansQuery } from './queries/plansQuery'
+import { Plans } from '__generated__/Plans'
 
 const Table = styled(Box).attrs({ mb: 7 })`
   display: flex;
@@ -97,14 +100,29 @@ const Feature = styled(Text).attrs({
   color: 'gray.extraBold',
 })``
 
+export const centsToDollars = cents =>
+  (cents / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+
 const PricingTable: React.FC = () => {
   const currentUser = useSerializedMe()
   const isLoggedIn = currentUser && !!currentUser.id
   const isPremium = currentUser.is_premium
   const isSupporter = currentUser.is_supporter
 
+  const { data } = useQuery<Plans>(PlansQuery)
+
   const signUpLink = isLoggedIn ? '/' : '/sign_up'
   const signUpCopy = isLoggedIn ? '👍 Thank you!' : 'Sign up'
+
+  const premiumYearlyPrice = centsToDollars(
+    data?.plans.find(plan => plan.id === 'yearly')?.amount
+  )
+  const premiumMonthlyPrice = centsToDollars(
+    data?.plans.find(plan => plan.id === 'monthly')?.amount
+  )
+  const supporterYearlyPrice = centsToDollars(
+    data?.plans.find(plan => plan.id === 'plus_yearly')?.amount
+  )
 
   const premiumButtonCopy = (() => {
     if (isPremium) {
@@ -133,8 +151,8 @@ const PricingTable: React.FC = () => {
     <Table>
       <Cell>
         <PlanTitle color="state.premium">Premium</PlanTitle>
-        <PlanPrice>$5 / month</PlanPrice>
-        <PlanSubPrice>or $45 / year</PlanSubPrice>
+        <PlanPrice>${premiumMonthlyPrice} / month</PlanPrice>
+        <PlanSubPrice>or ${premiumYearlyPrice} / year</PlanSubPrice>
         <PremiumButton href={premiumLink} disabled={isPremium}>
           {premiumButtonCopy}
         </PremiumButton>
@@ -154,7 +172,7 @@ const PricingTable: React.FC = () => {
       </Cell>
       <Cell>
         <PlanTitle color="state.supporter">Premium Supporter</PlanTitle>
-        <PlanPrice>$120 / year</PlanPrice>
+        <PlanPrice>${supporterYearlyPrice} / year</PlanPrice>
         <PlanSubPrice dangerouslySetInnerHTML={{ __html: '&nbsp;' }} />
         <GroupButton href={supporterLink}>{supporterButtonCopy}</GroupButton>
         <Features>
