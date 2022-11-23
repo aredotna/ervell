@@ -11,7 +11,7 @@ import { useQuery } from '@apollo/client'
 import { PlansQuery } from './queries/plansQuery'
 import { Plans } from '__generated__/Plans'
 
-const Table = styled(Box).attrs({ mb: 7 })`
+const Table = styled(Box).attrs({ mb: 8 })`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -92,16 +92,40 @@ const GroupButton = styled(CTAButton)`
 
 const Features = styled(Box).attrs({
   mt: 7,
+  display: 'flex',
+  flex: 1,
 })``
 
-const Feature = styled(Text).attrs({
+const FeatureList = styled.ul`
+  margin: 0;
+  padding-left: ${x => x.theme.space[6]};
+  color: ${x => x.theme.colors.gray.bold};
+`
+
+const FeatureItem = styled.li``
+
+const FeatureLabel = styled(Text).attrs({
   f: [1, 1, 4, 4],
   py: 3,
   color: 'gray.extraBold',
 })``
 
+const Feature: React.FC<{ bold?: boolean }> = ({ children, bold }) => {
+  return (
+    <FeatureItem>
+      <FeatureLabel fontWeight={bold ? 'bold' : 'normal'}>
+        {children}
+      </FeatureLabel>
+    </FeatureItem>
+  )
+}
+
 export const centsToDollars = cents =>
-  (cents / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+  (cents / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  })
 
 const PricingTable: React.FC = () => {
   const currentUser = useSerializedMe()
@@ -151,44 +175,43 @@ const PricingTable: React.FC = () => {
     <Table>
       <Cell>
         <PlanTitle color="state.premium">Premium</PlanTitle>
-        <PlanPrice>${premiumMonthlyPrice} / month</PlanPrice>
-        <PlanSubPrice>or ${premiumYearlyPrice} / year</PlanSubPrice>
+        <PlanPrice>{premiumMonthlyPrice} / month</PlanPrice>
+        <PlanSubPrice>or {premiumYearlyPrice} / year</PlanSubPrice>
         <PremiumButton href={premiumLink} disabled={isPremium}>
           {premiumButtonCopy}
         </PremiumButton>
         <Features>
-          <Feature fontWeight="bold">
-            Unlimited public and private blocks
-          </Feature>
-          <Feature fontWeight="bold">
-            Extract content for links and articles
-          </Feature>
-          <Feature fontWeight="bold">
-            Table / spreadsheet view for channels
-          </Feature>
-          <Feature fontWeight="bold">Hide from search engines</Feature>
-          <Feature fontWeight="bold">Priority support</Feature>
+          <FeatureList>
+            <Feature bold>Unlimited public and private blocks</Feature>
+            <Feature bold>Advanced search filters</Feature>
+            <Feature bold>Full text for links and articles</Feature>
+            <Feature bold>Table view</Feature>
+            <Feature bold>Hide from search engines</Feature>
+            <Feature bold>Priority support</Feature>
+          </FeatureList>
         </Features>
       </Cell>
       <Cell>
         <PlanTitle color="state.supporter">Premium Supporter</PlanTitle>
-        <PlanPrice>${supporterYearlyPrice} / year</PlanPrice>
+        <PlanPrice>{supporterYearlyPrice} / year</PlanPrice>
         <PlanSubPrice dangerouslySetInnerHTML={{ __html: '&nbsp;' }} />
         <GroupButton href={supporterLink}>{supporterButtonCopy}</GroupButton>
         <Features>
-          <Feature fontWeight="bold">Early access to new features</Feature>
-          <Feature fontWeight="bold">Free Are.na Annual</Feature>
-          <Feature fontWeight="bold">Bi-annual company reports</Feature>
-          <Feature fontWeight="bold">
-            The fuzzy feeling of giving a little extra to support an independent
-            company
-          </Feature>
-          <Feature>All premium features</Feature>
+          <FeatureList>
+            <Feature bold>Early access to new features</Feature>
+            <Feature bold>Complimentary Are.na Annual</Feature>
+            <Feature bold>Bi-annual company reports</Feature>
+            <Feature bold>
+              The fuzzy feeling of giving a little extra to support an
+              independent company
+            </Feature>
+            <Feature>All premium features</Feature>
+          </FeatureList>
         </Features>
       </Cell>
       <Cell>
-        <PlanTitle>Standard</PlanTitle>
-        <PlanPrice>Free</PlanPrice>
+        <PlanTitle>Are.na</PlanTitle>
+        <PlanPrice>Free guest</PlanPrice>
         <PlanSubPrice>&nbsp;</PlanSubPrice>
         <CTAButton
           color="gray.extraBold"
@@ -198,7 +221,26 @@ const PricingTable: React.FC = () => {
           {signUpCopy}
         </CTAButton>
         <Features>
-          <Feature>Up to 200 total blocks*</Feature>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            flexDirection="column"
+          >
+            <Box>
+              <Text pt={2} color="gray.extraBold">
+                A good option to test Are.na
+              </Text>
+              <FeatureList>
+                <Feature>Up to 200 total blocks*</Feature>
+              </FeatureList>
+            </Box>
+            <Box>
+              <Text f={3} color="gray.medium" mb={8}>
+                *A block is an individual piece of content. Blocks can be
+                images, text, links, attachments, or embeds.
+              </Text>
+            </Box>
+          </Box>
         </Features>
       </Cell>
     </Table>
