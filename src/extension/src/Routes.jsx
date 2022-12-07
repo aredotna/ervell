@@ -15,8 +15,6 @@ const BlocksWithQuery = () => {
 const ExtRoutes = () => {
   const { isLoggedIn } = useLoginStatus()
 
-  console.log('isLoggedIn', isLoggedIn)
-
   return (
     <Extension>
       <Routes>

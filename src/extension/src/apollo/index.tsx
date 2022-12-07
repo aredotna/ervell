@@ -24,8 +24,6 @@ export const initApolloClient = async ({
 } = {}) => {
   const cache = getCache()
 
-  console.log('process.env.GRAPHQL_ENDPOINT', process.env.GRAPHQL_ENDPOINT)
-
   const authLink = setContext((_, { headers }) => ({
     headers: {
       ...headers,
@@ -84,7 +82,6 @@ export const mountWithApolloProvider = async (
   if (!mountNode) return null
 
   const client = await initClientSideApolloClient()
-  console.log('mount apollo', { client })
   const WrappedComponent = wrapWithProviders(client)(Component, props)
 
   return mount(WrappedComponent, mountNode)
