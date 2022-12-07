@@ -2,8 +2,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { graphql } from '@apollo/client/react/hoc'
-import { MutationFunction } from '@apollo/client'
+import { ApolloError, MutationFunction } from '@apollo/client'
 import { omit } from 'underscore'
+import browser from 'webextension-polyfill'
 
 import Layout from 'v2/components/Bookmarklet/components/Layout'
 import PaneMessenger from 'lib/PaneMessenger'
@@ -103,6 +104,20 @@ class Blocks extends Component<BlocksProps> {
       default:
         break
     }
+  }
+
+  handleError = (error: ApolloError) => {
+    error.graphQLErrors.forEach(e => {
+      if (e.extensions.code === 'UNAUTHORIZED') {
+        try {
+          browser.storage.local.remove('authentication_token')
+        } catch {
+          window.localStorage.removeItem('authentication_token')
+        }
+
+        window.location.reload()
+      }
+    })
   }
 
   handleConnectionSelect = (
@@ -221,6 +236,7 @@ class Blocks extends Component<BlocksProps> {
               <ConnectionSelectionList
                 onConnectionSelection={this.handleConnectionSelect}
                 selectedChannels={selectedChannels}
+                onError={this.handleError}
               />
             </ConnectContainer>
           </Section>

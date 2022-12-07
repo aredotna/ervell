@@ -14,13 +14,17 @@ import { InitialExtensionDataFragment } from '__generated__/InitialExtensionData
 import extensionData from 'extension/src/apollo/extensionData'
 import INITIAL_DATA from 'extension/src/apollo/fragments/initialData'
 
-const httpLink = new BatchHttpLink({ uri: process.env.GRAPHQL_ENDPOINT })
+const httpLink = new BatchHttpLink({
+  uri: process.env.GRAPHQL_ENDPOINT || 'https://api.are.na/graphql',
+})
 
-export const initApolloClient = ({
+export const initApolloClient = async ({
   token: X_AUTH_TOKEN = '',
   isLoggedIn = false,
 } = {}) => {
   const cache = getCache()
+
+  console.log('process.env.GRAPHQL_ENDPOINT', process.env.GRAPHQL_ENDPOINT)
 
   const authLink = setContext((_, { headers }) => ({
     headers: {
@@ -51,6 +55,8 @@ export const initApolloClient = ({
 
   window.__APOLLO_CLIENT__ = client
 
+  console.log('apollo setup', { client })
+
   return client
 }
 
@@ -78,6 +84,7 @@ export const mountWithApolloProvider = async (
   if (!mountNode) return null
 
   const client = await initClientSideApolloClient()
+  console.log('mount apollo', { client })
   const WrappedComponent = wrapWithProviders(client)(Component, props)
 
   return mount(WrappedComponent, mountNode)
