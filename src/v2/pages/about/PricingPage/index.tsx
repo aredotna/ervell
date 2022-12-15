@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
+import Icons from 'v2/components/UI/Icons'
 
 import { Headline, Subheadline } from 'v2/pages/about/components/Text'
 import CenterBox from 'v2/pages/about/components/CenterBox'
@@ -18,6 +19,7 @@ const Container = styled(Box).attrs({
 })``
 
 const GradientContent = styled.div`
+  margin-top: ${props => props.theme.space[10]};
   background: linear-gradient(
     ${x => x.theme.colors.gray.hint},
     ${props => props.theme.colors.background}
@@ -29,6 +31,17 @@ const CTA = styled(Box)`
   border-bottom: 1px solid ${x => x.theme.colors.gray.light};
 `
 
+const CTAContainer = styled(Box).attrs({
+  border: '1px dashed',
+  borderColor: 'gray.medium',
+  position: 'relative',
+  maxWidth: '600px',
+  m: '0 auto',
+  mb: 5,
+  p: 5,
+  borderRadius: '300px',
+})``
+
 const PricingPage: React.FC = () => {
   return (
     <AboutTopBarLayout>
@@ -39,18 +52,36 @@ const PricingPage: React.FC = () => {
 
         <PricingTable />
 
-        <Box
-          border="1px dashed"
-          borderColor="gray.medium"
-          position="relative"
-          maxWidth="700px"
-          m="0 auto"
-          mb={5}
-          p={5}
-        >
+        <CTAContainer>
+          <Box display="flex" alignItems="center" justifyContent="center">
+            <Icons name="QuestionCircle" size="1em" mr={4} color="gray.bold" />
+            <Text f={4} color="gray.bold" textAlign="center">
+              Upcoming changes on January 15th, 2023
+            </Text>
+          </Box>
+
           <Text f={4} color="gray.bold" textAlign="center">
-            Do you use Are.na with a group?
+            Read our{' '}
+            <strong>
+              <a
+                href="/blog/on-pricing"
+                role="link"
+                aria-label="Read our upcoming plans for pricing changes"
+              >
+                upcoming plans for pricing changes
+              </a>
+            </strong>{' '}
           </Text>
+        </CTAContainer>
+
+        <CTAContainer>
+          <Box display="flex" alignItems="center" justifyContent="center">
+            <Icons name="Group" size="1em" mr={4} color="gray.bold" />
+            <Text f={4} color="gray.bold" textAlign="center">
+              Do you use Are.na on a team or in a group?
+            </Text>
+          </Box>
+
           <Text f={4} color="gray.bold" textAlign="center">
             Learn how{' '}
             <strong>
@@ -64,20 +95,21 @@ const PricingPage: React.FC = () => {
             </strong>{' '}
             works.
           </Text>
-        </Box>
+        </CTAContainer>
 
-        <Box
-          border="1px dashed"
-          borderColor="gray.medium"
-          position="relative"
-          maxWidth="700px"
-          m="0 auto"
-          mb={5}
-          p={5}
-        >
-          <Text f={4} color="gray.bold" textAlign="center">
-            Student or Educator?
-          </Text>
+        <CTAContainer>
+          <Box display="flex" alignItems="center" justifyContent="center">
+            <Icons
+              name="Clipboard"
+              size="0.75em"
+              mr={3}
+              mb={1}
+              color="gray.bold"
+            />
+            <Text f={4} color="gray.bold" textAlign="center">
+              Student or using Are.na in a class?
+            </Text>
+          </Box>
           <Text f={4} color="gray.bold" textAlign="center">
             Learn how{' '}
             <strong>
@@ -91,12 +123,7 @@ const PricingPage: React.FC = () => {
             </strong>{' '}
             on premium plans.
           </Text>
-        </Box>
-
-        <Text f={3} color="gray.medium" textAlign="center" pb={6} mb={8}>
-          *A block is an individual piece of content. Blocks can be images,
-          text, links, attachments, or embeds.
-        </Text>
+        </CTAContainer>
         <GradientContent>
           <CTA>
             <CenterBox mt={9} mb={6} pb={9}>

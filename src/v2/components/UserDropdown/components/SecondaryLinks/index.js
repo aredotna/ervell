@@ -42,14 +42,19 @@ export default class SecondaryLinks extends PureComponent {
           Install browser extension
         </SmallLink>
 
+        <SmallLink href="/tools/send-invitation">
+          <Icons name="Follow" size="1rem" color="gray.medium" mr={4} />
+          Send an invite
+        </SmallLink>
+
         <SmallLink href="http://help.are.na">
           <Icons name="Question" size="1rem" color="gray.medium" mr={4} />
           Help / FAQs
         </SmallLink>
 
-        <SmallLink href="/tools/send-invitation">
-          <Icons name="Follow" size="1rem" color="gray.medium" mr={4} />
-          Send an invite
+        <SmallLink href="http://store.are.na">
+          <Icons name="CircleFilled" size="1rem" color="gray.medium" mr={4} />
+          Store / Gift shop
         </SmallLink>
 
         <SmallLink href="/about">
