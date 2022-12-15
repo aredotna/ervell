@@ -220,18 +220,15 @@ export const StronglyProposePremium = props => (
   </Banner>
 )
 
-export const PricingSurvey = props => (
-  <Banner bg="state.supporter" color="white" iconName="Exclaim" {...props}>
-    <Box>
-      What do you think a fair price for Are.na is? We&apos;re surveying our
-      members, and would love your help.
-    </Box>
+export const PricingChanges = props => (
+  <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
+    <Box>Upcoming changes to Are.na Premium on January 15th 2023. </Box>
     <ButtonLink
-      color="state.supporter"
-      href="https://www.surveymonkey.com/r/NY2MZ77"
+      color="state.premium"
+      href="https://www.are.na/blog/on-pricing"
       target="_blank"
     >
-      Let us know
+      Read more
     </ButtonLink>
   </Banner>
 )
@@ -308,5 +305,5 @@ export default {
   LOGGED_OUT_EXPLORE: LoggedOutExplore,
   LOGGED_OUT_PROFILE: LoggedOutProfile,
   LOGGED_OUT_CHANNEL: LoggedOutChannel,
-  PRICING_SURVEY_2022: PricingSurvey,
+  PRICING_CHANGES: PricingChanges,
 }

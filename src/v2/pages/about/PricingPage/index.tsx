@@ -54,6 +54,28 @@ const PricingPage: React.FC = () => {
 
         <CTAContainer>
           <Box display="flex" alignItems="center" justifyContent="center">
+            <Icons name="QuestionCircle" size="1em" mr={4} color="gray.bold" />
+            <Text f={4} color="gray.bold" textAlign="center">
+              Upcoming changes on January 15th, 2023
+            </Text>
+          </Box>
+
+          <Text f={4} color="gray.bold" textAlign="center">
+            Read our{' '}
+            <strong>
+              <a
+                href="/blog/on-pricing"
+                role="link"
+                aria-label="Read our upcoming plans for pricing changes"
+              >
+                upcoming plans for pricing changes
+              </a>
+            </strong>{' '}
+          </Text>
+        </CTAContainer>
+
+        <CTAContainer>
+          <Box display="flex" alignItems="center" justifyContent="center">
             <Icons name="Group" size="1em" mr={4} color="gray.bold" />
             <Text f={4} color="gray.bold" textAlign="center">
               Do you use Are.na on a team or in a group?
