@@ -25,13 +25,7 @@ export default class Billing extends PureComponent {
     const { plan_id, onSuccess } = this.props
 
     return (
-      <Box
-        width={['100%', '75%', '75%']}
-        mx="auto"
-        mt={6}
-        mb={8}
-        position="relative"
-      >
+      <Box width={['60%']} mx="auto" mt={6} mb={8} position="relative">
         <Query query={billingQuery} ssr={false}>
           {({ loading, error, data }) => {
             if (loading) {

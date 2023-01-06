@@ -4,14 +4,14 @@ import { useMutation } from '@apollo/client'
 import axios from 'axios'
 
 import mapErrors from 'v2/util/mapErrors'
-import analytics from 'v2/util/analytics'
+import Modal from 'v2/components/UI/Modal'
 
 import billingQuery from 'v2/components/Billing/queries/billing'
 
 import subscribeToPremiumWithOptionalTokenMutation from 'v2/components/Billing/components/BillingForm/mutations/subscribeToPremiumWithOptionalToken'
 import cancelPremiumSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/cancelPremiumSubscription'
-import applyCouponToSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/applyCouponToSubscription'
 import downgradeToLifetimeSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/downgradeToLifetimeSubscription'
+import setupIncompleteSubscriptionMutation from './mutations/setupIncompleteSubscription'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -21,9 +21,6 @@ import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import GenericButton from 'v2/components/UI/GenericButton'
 import Icons from 'v2/components/UI/Icons'
 import PlanSelection from 'v2/components/Billing/components/PlanSelection'
-import CouponCode from 'v2/components/Billing/components/CouponCode'
-import CreditCard from 'v2/components/Billing/components/CreditCard'
-import PlanChanges from 'v2/components/Billing/components/PlanChanges'
 import CancellationNotice from 'v2/components/Billing/components/CancellationNotice'
 import CancelPremium from 'v2/components/Billing/components/CancelPremium'
 import StatusOverlay from 'v2/components/Billing/components/StatusOverlay'
@@ -31,10 +28,6 @@ import StatusOverlay from 'v2/components/Billing/components/StatusOverlay'
 import useMergeState from 'v2/hooks/useMergeState'
 
 import { CancelPremiumSubscription as CancelPremiumSubscriptionType } from '__generated__/CancelPremiumSubscription'
-import {
-  ApplyCouponToSubscription as ApplyCouponToSubscriptionType,
-  ApplyCouponToSubscriptionVariables,
-} from '__generated__/ApplyCouponToSubscription'
 import { DowngradeToLifetime } from '__generated__/DowngradeToLifetime'
 import { Billing as Me } from '__generated__/Billing'
 import { SupportedPlanEnum } from '__generated__/globalTypes'
@@ -42,6 +35,11 @@ import {
   SubscribeToPremiumWithOptionalToken,
   SubscribeToPremiumWithOptionalTokenVariables,
 } from '__generated__/SubscribeToPremiumWithOptionalToken'
+import { PaymentForm } from '../PaymentForm'
+import {
+  SetupIncompleteSubscription,
+  SetupIncompleteSubscriptionVariables,
+} from '__generated__/SetupIncompleteSubscription'
 
 type OperationsEnum =
   | 'CHANGE_PLAN_ID'
@@ -92,20 +90,19 @@ const BillingForm: React.FC<BillingFormProps> = ({
   const [cancelPremiumSubscription] = useMutation<
     CancelPremiumSubscriptionType
   >(cancelPremiumSubscriptionMutation)
-  const [applyCouponToSubscription] = useMutation<
-    ApplyCouponToSubscriptionType,
-    ApplyCouponToSubscriptionVariables
-  >(applyCouponToSubscriptionMutation)
   const [downgradeToLifetimeSubscription] = useMutation<DowngradeToLifetime>(
     downgradeToLifetimeSubscriptionMutation
   )
 
+  const [setupIncompleteSubscription] = useMutation<
+    SetupIncompleteSubscription,
+    SetupIncompleteSubscriptionVariables
+  >(setupIncompleteSubscriptionMutation)
+
   const planId = state.planId || customer.plan?.id
 
-  const isPlanChanged = plan_id !== customer?.plan?.id
   const fromPlanToPlan = `${customer?.plan?.id}:${planId}`
-  const customerCanSubmit =
-    (customer.default_credit_card && operations.length > 0) || total === 0
+  const customerCanSubmit = operations.length > 0 || total === 0
 
   const doWeNeedTo = useCallback(
     (operationName: OperationsEnum) => {
@@ -156,13 +153,6 @@ const BillingForm: React.FC<BillingFormProps> = ({
     [setState]
   )
 
-  const handleUpdateTotal = useCallback(
-    (total: number) => {
-      setState({ total })
-    },
-    [setState]
-  )
-
   const handleSubscribeToPremium = useCallback(() => {
     if (!customer.default_credit_card && total !== 0) {
       return Promise.reject(new Error('Please add a credit card to continue'))
@@ -209,73 +199,27 @@ const BillingForm: React.FC<BillingFormProps> = ({
   const handleSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
+      const plan_id = planId.toUpperCase() as SupportedPlanEnum
 
-      const plan_id = planId
+      setupIncompleteSubscription({ variables: { plan_id } }).then(response => {
+        const clientSecret =
+          response.data.setup_incomplete_subscription.client_secret
+        const subscriptionId =
+          response.data.setup_incomplete_subscription.subscription.id
+        const componentProps = {
+          planId,
+          subscriptionId,
+          clientSecret,
+          onClose: () => setState({ mode: 'resting' }),
+        }
+        const modalProps = { width: '70%', maxWidth: '60em' }
+        const modal = new Modal(PaymentForm, componentProps, modalProps)
+        modal.open()
+      })
 
       setState({ mode: 'processing' })
-
-      if (
-        doWeNeedTo('CANCEL_PREMIUM_SUBSCRIPTION') ||
-        // If we are changing to `basic`, then we are actually cancelling.
-        // Nothing else needs to happen so return.
-        (doWeNeedTo('CHANGE_PLAN_ID') && plan_id === 'basic')
-      ) {
-        return cancelPremiumSubscription()
-          .then(() => resolveWithMode('canceled'))
-          .catch(handleErrors)
-      }
-
-      if (
-        doWeNeedTo('DOWNGRADE_TO_LIFETIME') ||
-        // If we are changing to `basic`, then we are actually cancelling.
-        // Nothing else needs to happen so return.
-        (doWeNeedTo('CHANGE_PLAN_ID') && plan_id === 'lifetime')
-      ) {
-        return downgradeToLifetimeSubscription()
-          .then(() => resolveWithMode('canceled'))
-          .catch(handleErrors)
-      }
-
-      // Otherwise we are subscribing.
-      const waitForCouponCode =
-        doWeNeedTo('APPLY_COUPON_CODE') &&
-        // APPLY_COUPON_CODE is inclusive with swiching plans so ignore this
-        // if we are also going to change the plan up
-        !doWeNeedTo('CHANGE_PLAN_ID')
-          ? applyCouponToSubscription()
-          : Promise.resolve(null)
-
-      if (doWeNeedTo('RESUBSCRIBE')) {
-        return handleSubscribeToPremium()
-      }
-
-      return waitForCouponCode
-        .then(() => {
-          // Now we can change the plan id if we need to
-          if (doWeNeedTo('CHANGE_PLAN_ID')) {
-            return handleSubscribeToPremium()
-          }
-          return null
-        })
-        .then(() => {
-          return analytics.event(plan_id.toString().toUpperCase(), total)
-        })
-        .then(() => {
-          // Most of the time, this will mean nothing.
-          // But when we are embedding the billing page elsewhere,
-          // we can trigger a redirect using this prop.
-          onSuccess()
-
-          const resolution = doWeNeedTo('CHANGE_PLAN_ID')
-            ? 'subscribed'
-            : 'card_changed'
-          return resolveWithMode(resolution)
-        })
-        .catch(handleErrors)
     },
     [
-      applyCouponToSubscription,
-      cancelPremiumSubscription,
       doWeNeedTo,
       downgradeToLifetimeSubscription,
       handleErrors,
@@ -283,7 +227,7 @@ const BillingForm: React.FC<BillingFormProps> = ({
       resolveWithMode,
       setState,
       planId,
-      handleSubscribeToPremium,
+      setupIncompleteSubscription,
     ]
   )
 
@@ -301,17 +245,6 @@ const BillingForm: React.FC<BillingFormProps> = ({
       .then(() => resolveWithMode('canceled'))
       .catch(handleErrors)
   }, [handleSubmit, addOperation, setState])
-
-  const handleCouponCode = useCallback(
-    coupon_code => {
-      const operation = coupon_code === '' ? removeOperation : addOperation
-      setState({
-        couponCode: coupon_code,
-        operations: operation('APPLY_COUPON_CODE'),
-      })
-    },
-    [addOperation, removeOperation, setState]
-  )
 
   const handleReenable = useCallback(() => {
     if (customer.is_beneficiary) {
@@ -426,44 +359,6 @@ const BillingForm: React.FC<BillingFormProps> = ({
               </React.Fragment>
             )}
           </Box>
-
-          {plan_id !== 'basic' && !customer.is_beneficiary && (
-            <Box flex="1" ml={[0, 0, 6]}>
-              <Box
-                borderBottom="1px solid"
-                borderColor="gray.semiLight"
-                pb={6}
-                mb={6}
-                mt={[8, 8, 0]}
-              >
-                <Text f={4} fontWeight="bold">
-                  Billing
-                </Text>
-              </Box>
-
-              <CreditCard mb={8} customer={customer} />
-
-              {!customer.is_canceled && (
-                <CouponCode
-                  mb={6}
-                  key={`coupon_${mode}`}
-                  onDebouncedCode={handleCouponCode}
-                  code={couponCode}
-                />
-              )}
-
-              {(couponCode !== '' || isPlanChanged) &&
-                planId !== 'lifetime' &&
-                planId !== 'basic' && (
-                  <PlanChanges
-                    entity={customer}
-                    planId={planId.toUpperCase() as SupportedPlanEnum}
-                    couponCode={couponCode}
-                    handleTotalChange={handleUpdateTotal}
-                  />
-                )}
-            </Box>
-          )}
         </Box>
 
         {!customer.is_canceled &&
