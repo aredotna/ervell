@@ -148,7 +148,7 @@
     "jquery": "*",
     "jquery.finger": "*",
     "lodash.flowright": "^3.5.0",
-    "luxon": "^3.0.3",
+    "luxon": "^3.2.1",
     "marked": "^4.0.10",
     "merge-anything": "^5.0.2",
     "morgan": "^1.9.1",
