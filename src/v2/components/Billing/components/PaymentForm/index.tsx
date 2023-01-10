@@ -46,7 +46,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
   )
 }
 
-const PaymentFormInner: React.FC<PaymentFormProps> = () => {
+const PaymentFormInner: React.FC<PaymentFormProps> = ({ subscriptionId }) => {
   const stripe = useStripe()
   const elements = useElements()
 
@@ -55,16 +55,14 @@ const PaymentFormInner: React.FC<PaymentFormProps> = () => {
       return
     }
 
-    await stripe
-      .confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: `${window.location.origin}/settings/billing/refresh`,
-        },
-      })
-      .then(() => {
-        // UpdateIncompleteSubscriptionMutation.commit({
-      })
+    const return_url = `${window.location.origin}/settings/refresh_subscription?subscription_id=${subscriptionId}`
+
+    await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url,
+      },
+    })
   }, [stripe, elements])
 
   if (!stripe || !elements) {

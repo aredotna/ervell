@@ -133,20 +133,22 @@ const PricingTable: React.FC = () => {
   const isPremium = currentUser.is_premium
   const isSupporter = currentUser.is_supporter
 
-  const { data } = useQuery<Plans>(PlansQuery)
+  const { data, loading } = useQuery<Plans>(PlansQuery)
 
   const signUpLink = isLoggedIn ? '/' : '/sign_up'
   const signUpCopy = isLoggedIn ? '👍 Thank you!' : 'Sign up'
 
-  const premiumYearlyPrice = centsToDollars(
-    data?.plans.find(plan => plan.id === 'yearly')?.amount
-  )
-  const premiumMonthlyPrice = centsToDollars(
-    data?.plans.find(plan => plan.id === 'monthly')?.amount
-  )
-  const supporterYearlyPrice = centsToDollars(
-    data?.plans.find(plan => plan.id === 'plus_yearly')?.amount
-  )
+  const premiumYearlyPrice = loading
+    ? '–'
+    : centsToDollars(data?.plans.find(plan => plan.id === 'yearly')?.amount)
+  const premiumMonthlyPrice = loading
+    ? '–'
+    : centsToDollars(data?.plans.find(plan => plan.id === 'monthly')?.amount)
+  const supporterYearlyPrice = loading
+    ? '–'
+    : centsToDollars(
+        data?.plans.find(plan => plan.id === 'plus_yearly')?.amount
+      )
 
   const premiumButtonCopy = (() => {
     if (isPremium) {
