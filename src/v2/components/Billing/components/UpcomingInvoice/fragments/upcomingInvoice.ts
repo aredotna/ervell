@@ -8,5 +8,15 @@ export default gql`
       total
       next_payment_attempt_at(format: "%D")
     }
+
+    default_payment_method {
+      __typename
+      id
+      card {
+        __typename
+        last4
+        brand
+      }
+    }
   }
 `

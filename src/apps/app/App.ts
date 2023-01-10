@@ -23,6 +23,30 @@ const redirectLoggedOutToPricing = (req, res, next) => {
   next()
 }
 
+const refresh = (req, res, next) => {
+  const { user } = req
+
+  if (!user) return next()
+
+  const headers = {
+    'X-AUTH-TOKEN': user.get('access_token'),
+  }
+
+  return user
+    .fetch({ headers })
+    .then(() => {
+      req.login(user, err => {
+        if (err) return next(err)
+
+        // IMPORTANT: return the `response` instead of the `user.toJSON()`
+        // Why? Because `user.toJSON()` is already parsed. Returning
+        // an already parsed response will make it unparesable.
+        return res.redirect(`/settings/${req.params.section}`)
+      })
+    })
+    .catch(next)
+}
+
 const resolve = [
   ...middlewareStack,
   (req, res, next) => {
@@ -76,6 +100,7 @@ App.get(
     redirectLoggedOutToPricing,
     ...resolve
   )
+  .get('/settings/:section/refresh', refresh)
   .get('/settings', ensureLoggedIn, ...resolve)
   .get('/settings/*', ensureLoggedIn, ...resolve)
   .get(

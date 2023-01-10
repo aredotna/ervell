@@ -15,13 +15,16 @@ export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_custo
   term: string | null;
 }
 
-export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_default_credit_card {
+export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_default_payment_method_card {
   __typename: "CreditCard";
   id: string | null;
   brand: string | null;
-  last4: string | null;
-  exp_year: string | null;
-  exp_month: string | null;
+}
+
+export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_default_payment_method {
+  __typename: "PaymentMethod";
+  id: string | null;
+  card: ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_default_payment_method_card | null;
 }
 
 export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_patron {
@@ -29,6 +32,15 @@ export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_custo
   id: number;
   name: string;
   hidden_email: string;
+}
+
+export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_default_credit_card {
+  __typename: "CreditCard";
+  id: string | null;
+  brand: string | null;
+  last4: string | null;
+  exp_year: string | null;
+  exp_month: string | null;
 }
 
 export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_credit_cards {
@@ -49,9 +61,10 @@ export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_custo
   is_beneficiary: boolean;
   plan: ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_plan | null;
   updated_at: string | null;
-  default_credit_card: ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_default_credit_card | null;
+  default_payment_method: ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_default_payment_method | null;
   patron: ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_patron | null;
   current_period_end_at: string | null;
+  default_credit_card: ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_default_credit_card | null;
   credit_cards: ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_credit_cards[] | null;
 }
 

@@ -23,7 +23,20 @@ export interface UpcomingInvoice_upcoming_invoice {
   next_payment_attempt_at: string | null;
 }
 
+export interface UpcomingInvoice_default_payment_method_card {
+  __typename: "CreditCard";
+  last4: string | null;
+  brand: string | null;
+}
+
+export interface UpcomingInvoice_default_payment_method {
+  __typename: "PaymentMethod";
+  id: string | null;
+  card: UpcomingInvoice_default_payment_method_card | null;
+}
+
 export interface UpcomingInvoice {
   __typename: "Customer";
   upcoming_invoice: UpcomingInvoice_upcoming_invoice | null;
+  default_payment_method: UpcomingInvoice_default_payment_method | null;
 }

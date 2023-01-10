@@ -154,7 +154,7 @@ const BillingForm: React.FC<BillingFormProps> = ({
   )
 
   const handleSubscribeToPremium = useCallback(() => {
-    if (!customer.default_credit_card && total !== 0) {
+    if (!customer.default_payment_method && total !== 0) {
       return Promise.reject(new Error('Please add a credit card to continue'))
     }
 
@@ -201,6 +201,14 @@ const BillingForm: React.FC<BillingFormProps> = ({
       e.preventDefault()
       const plan_id = planId.toUpperCase() as SupportedPlanEnum
 
+      if (doWeNeedTo('CHANGE_PLAN_ID') && !fromPlanToPlan.includes('basic')) {
+        return handleSubscribeToPremium()
+          .then(() => {
+            resolveWithMode('subscribed')
+          })
+          .catch(handleErrors)
+      }
+
       setupIncompleteSubscription({ variables: { plan_id } }).then(response => {
         const clientSecret =
           response.data.setup_incomplete_subscription.client_secret
@@ -226,7 +234,9 @@ const BillingForm: React.FC<BillingFormProps> = ({
       onSuccess,
       resolveWithMode,
       setState,
+      fromPlanToPlan,
       planId,
+      handleSubscribeToPremium,
       setupIncompleteSubscription,
     ]
   )
@@ -375,14 +385,15 @@ const BillingForm: React.FC<BillingFormProps> = ({
                 <Icons name="CreditCard" size="1rem" mr={4} color="gray.bold" />
 
                 {{
-                  'basic:monthly': 'Activate',
-                  'basic:yearly': 'Activate',
+                  'basic:monthly': 'Enter payment details',
+                  'basic:yearly': 'Enter payment details',
                   'monthly:yearly': 'Update subscription',
                   'yearly:monthly': 'Update subscription',
                   'monthly:plus_yearly': 'Upgrade subscription',
                   'yearly:plus_yearly': 'Upgrade subscription',
                   'monthly:basic': 'Cancel Premium',
                   'yearly:basic': 'Cancel Premium',
+                  'basic:plus_yearly': 'Enter payment details',
                 }[fromPlanToPlan] || 'Save changes'}
               </GenericButton>
 

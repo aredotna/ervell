@@ -14,9 +14,14 @@ export default gql`
       id
       term
     }
-    default_credit_card {
+    default_payment_method {
       __typename
       id
+      card {
+        __typename
+        id
+        brand
+      }
     }
 
     is_canceled
