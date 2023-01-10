@@ -55,14 +55,16 @@ const PaymentFormInner: React.FC<PaymentFormProps> = () => {
       return
     }
 
-    let { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `https://www.are.na/settings/billing`,
-      },
-    })
-
-    console.log({ error })
+    await stripe
+      .confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${window.location.origin}/settings/billing/refresh`,
+        },
+      })
+      .then(() => {
+        // UpdateIncompleteSubscriptionMutation.commit({
+      })
   }, [stripe, elements])
 
   if (!stripe || !elements) {
