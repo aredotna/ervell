@@ -3,6 +3,7 @@ import React from 'react'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
+import { centsToDollarsAndCents } from 'v2/pages/about/PricingPage/components/PricingTable'
 import { UpcomingInvoice as Customer } from '__generated__/UpcomingInvoice'
 
 interface UpcomingInvoiceProps {
@@ -29,12 +30,14 @@ export const UpcomingInvoice: React.FC<UpcomingInvoiceProps> = props => {
       <Text f={2}>
         <>
           Next payment due:{' '}
-          {upcoming_invoice.subtotal === upcoming_invoice.total ? (
-            `$${upcoming_invoice.total / 100.0}`
+          {upcoming_invoice.subtotal <= upcoming_invoice.total ? (
+            `${centsToDollarsAndCents(upcoming_invoice.total)}`
           ) : (
             <span>
-              <del>{`$${upcoming_invoice.subtotal / 100.0}`}</del>
-              {` $${upcoming_invoice.total / 100.0}`}
+              <del>{`${centsToDollarsAndCents(
+                upcoming_invoice.subtotal
+              )}`}</del>
+              {` ${centsToDollarsAndCents(upcoming_invoice.total)}`}
             </span>
           )}
           {upcoming_invoice.next_payment_attempt_at &&

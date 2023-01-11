@@ -1,11 +1,21 @@
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
-import { useElements, useStripe, PaymentElement } from '@stripe/react-stripe-js'
+import {
+  useElements,
+  useStripe,
+  PaymentElement,
+  AddressElement,
+} from '@stripe/react-stripe-js'
+import {
+  StripeAddressElementChangeEvent,
+  StripePaymentElementChangeEvent,
+} from '@stripe/stripe-js'
 
 import StripeElementsContext from 'v2/components/StripeElementsContext'
 import Box from 'v2/components/UI/Box'
 import GenericButton from 'v2/components/UI/GenericButton'
 import Text from 'v2/components/UI/Text'
+import useSerializedMe from 'v2/hooks/useSerializedMe'
 
 const Container = styled(Box).attrs({
   display: 'flex',
@@ -49,6 +59,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
 const PaymentFormInner: React.FC<PaymentFormProps> = ({ subscriptionId }) => {
   const stripe = useStripe()
   const elements = useElements()
+  const user = useSerializedMe()
 
   const handleSubmit = useCallback(async () => {
     if (!stripe || !elements) {
@@ -65,6 +76,23 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ subscriptionId }) => {
     })
   }, [stripe, elements])
 
+  const handleCardChange = useCallback(
+    (event: StripePaymentElementChangeEvent) => {
+      console.log({
+        event,
+        elements,
+      })
+    },
+    [elements]
+  )
+
+  const handleAddressChange = useCallback(
+    (event: StripeAddressElementChangeEvent) => {
+      console.log({ event })
+    },
+    []
+  )
+
   if (!stripe || !elements) {
     return <div>loading...</div>
   }
@@ -79,7 +107,19 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ subscriptionId }) => {
           <Text f={2} fontWeight="bold" mb={5}>
             Billing info
           </Text>
-          <PaymentElement />
+          <PaymentElement
+            onChange={handleCardChange}
+            onBlur={handleCardChange}
+          />
+          <AddressElement
+            options={{
+              mode: 'billing',
+              defaultValues: {
+                name: user.name,
+              },
+            }}
+            onChange={handleAddressChange}
+          />
         </PaymentContainer>
 
         <InvoiceContainer>

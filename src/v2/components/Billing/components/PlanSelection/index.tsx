@@ -6,6 +6,13 @@ import Text from 'v2/components/UI/Text'
 import RadioOptions from 'v2/components/UI/RadioOptions'
 import TotalBlocksMeter from 'v2/components/TotalBlocksMeter'
 import { PlanSelection as PlanSelectionType } from '__generated__/PlanSelection'
+import { PremiumPlansQuery } from './queries/plansQuery'
+import { PremiumPlans } from '__generated__/PremiumPlans'
+import { useQuery } from '@apollo/client'
+import {
+  centsToDollars,
+  centsToDollarsAndCents,
+} from 'v2/pages/about/PricingPage/components/PricingTable'
 
 const OptionLabel = styled(Text).attrs({
   f: 4,
@@ -50,6 +57,8 @@ interface PlanSelectionProps {
 }
 
 const PlanSelection: React.FC<PlanSelectionProps> = props => {
+  const { data, loading } = useQuery<PremiumPlans>(PremiumPlansQuery)
+
   const {
     onSelect,
     plan_id,
@@ -61,6 +70,23 @@ const PlanSelection: React.FC<PlanSelectionProps> = props => {
   // TODO: Extract into actual can field
   const plansDisabled =
     customer.is_canceled || customer.is_lifetime || customer.is_beneficiary
+
+  const premiumYearlyPrice = loading
+    ? '–'
+    : centsToDollars(data?.plans.find(plan => plan.id === 'yearly')?.amount)
+  const premiumYearlyPriceAsMonthly = loading
+    ? '–'
+    : centsToDollarsAndCents(
+        data?.plans.find(plan => plan.id === 'yearly')?.amount / 12
+      )
+  const premiumMonthlyPrice = loading
+    ? '–'
+    : centsToDollars(data?.plans.find(plan => plan.id === 'monthly')?.amount)
+  const supporterYearlyPrice = loading
+    ? '–'
+    : centsToDollars(
+        data?.plans.find(plan => plan.id === 'plus_yearly')?.amount
+      )
 
   return (
     <RadioOptions value={planId} onSelect={onSelect}>
@@ -104,8 +130,8 @@ const PlanSelection: React.FC<PlanSelectionProps> = props => {
                 <Link href="/pricing" target="_blank">
                   Learn more about Premium
                 </Link>
-                <Link href="/blog/building-together" target="_blank">
-                  Learn more about the new block limits
+                <Link href="/blog/on-pricing" target="_blank">
+                  Learn more about recent pricing changes
                 </Link>
               </Text>
             </Box>
@@ -122,7 +148,7 @@ const PlanSelection: React.FC<PlanSelectionProps> = props => {
                 <Option>
                   <OptionLabel selected={selected}>
                     <strong>Annual Premium</strong>
-                    <strong>$3.75 / month</strong>
+                    <strong>{premiumYearlyPriceAsMonthly} / month</strong>
                   </OptionLabel>
 
                   <OptionDescription>
@@ -131,7 +157,12 @@ const PlanSelection: React.FC<PlanSelectionProps> = props => {
                       search engines, and gain access to new features.
                     </Box>
 
-                    <Box textAlign="right">$45 billed annually</Box>
+                    <Box textAlign="right">
+                      <Text f={2}>{premiumYearlyPrice} billed annually</Text>
+                      <Text f={2} color="state.premium" fontWeight="bold">
+                        Save 17%
+                      </Text>
+                    </Box>
                   </OptionDescription>
                 </Option>
               )}
@@ -149,7 +180,7 @@ const PlanSelection: React.FC<PlanSelectionProps> = props => {
                 <Option>
                   <OptionLabel selected={selected}>
                     <strong>Monthly Premium</strong>
-                    <strong>$5 / month</strong>
+                    <strong>{premiumMonthlyPrice} / month</strong>
                   </OptionLabel>
 
                   <OptionDescription>
@@ -200,7 +231,7 @@ const PlanSelection: React.FC<PlanSelectionProps> = props => {
                   <strong>
                     <Text color="state.supporter">Premium Supporter</Text>
                   </strong>
-                  <strong>$120 / year</strong>
+                  <strong>{supporterYearlyPrice} / year</strong>
                 </OptionLabel>
 
                 <OptionDescription>

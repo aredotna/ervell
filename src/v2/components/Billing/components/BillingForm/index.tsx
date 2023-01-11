@@ -79,6 +79,7 @@ const BillingForm: React.FC<BillingFormProps> = ({
   const [state, setState] = useMergeState<BillingFormState>({
     mode: 'resting',
     operations: [],
+    planId: plan_id as SupportedPlanEnum,
   })
 
   const { operations, mode, errorMessage, couponCode, total } = state
@@ -102,7 +103,7 @@ const BillingForm: React.FC<BillingFormProps> = ({
   const planId = state.planId || customer.plan?.id
 
   const fromPlanToPlan = `${customer?.plan?.id}:${planId}`
-  const customerCanSubmit = operations.length > 0 || total === 0
+  const customerCanSubmit = operations.length > 0 || total === 0 || plan_id
 
   const doWeNeedTo = useCallback(
     (operationName: OperationsEnum) => {

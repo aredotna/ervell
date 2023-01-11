@@ -127,6 +127,13 @@ export const centsToDollars = cents =>
     maximumFractionDigits: 0,
   })
 
+export const centsToDollarsAndCents = cents =>
+  (cents / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 2,
+  })
+
 const PricingTable: React.FC = () => {
   const currentUser = useSerializedMe()
   const isLoggedIn = currentUser && !!currentUser.id

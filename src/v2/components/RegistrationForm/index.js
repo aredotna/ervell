@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { graphql } from '@apollo/client/react/hoc'
@@ -84,6 +84,8 @@ class RegistrationForm extends Component {
     const mode = selected === 'premium' ? selected : 'resting'
     const redirectTo =
       selected === 'premium' ? '/welcome/billing' : this.props.redirectTo
+
+    console.log({ selected, mode, redirectTo })
     this.setState({ selected, mode, redirectTo })
   }
 
