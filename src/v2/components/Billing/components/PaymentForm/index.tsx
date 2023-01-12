@@ -214,6 +214,7 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
             <CardElement
               onChange={handleCardChange}
               options={{
+                hidePostalCode: true,
                 style: {
                   base: {
                     fontSize: '14px',
