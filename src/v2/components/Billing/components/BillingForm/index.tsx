@@ -11,7 +11,7 @@ import billingQuery from 'v2/components/Billing/queries/billing'
 import subscribeToPremiumWithOptionalTokenMutation from 'v2/components/Billing/components/BillingForm/mutations/subscribeToPremiumWithOptionalToken'
 import cancelPremiumSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/cancelPremiumSubscription'
 import downgradeToLifetimeSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/downgradeToLifetimeSubscription'
-import setupIncompleteSubscriptionMutation from './mutations/setupIncompleteSubscription'
+import setupIncompleteSubscriptionMutation from '../PaymentForm/mutations/setupIncompleteSubscription'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -210,21 +210,30 @@ const BillingForm: React.FC<BillingFormProps> = ({
           .catch(handleErrors)
       }
 
-      setupIncompleteSubscription({ variables: { plan_id } }).then(response => {
-        const clientSecret =
-          response.data.setup_incomplete_subscription.client_secret
-        const subscriptionId =
-          response.data.setup_incomplete_subscription.subscription.id
-        const componentProps = {
-          planId,
-          subscriptionId,
-          clientSecret,
+      const modalProps = { width: '70%', maxWidth: '60em' }
+      const modal = new Modal(
+        PaymentForm,
+        {
+          planId: plan_id,
           onClose: () => setState({ mode: 'resting' }),
-        }
-        const modalProps = { width: '70%', maxWidth: '60em' }
-        const modal = new Modal(PaymentForm, componentProps, modalProps)
-        modal.open()
-      })
+        },
+        modalProps
+      )
+      modal.open()
+
+      // setupIncompleteSubscription({ variables: { plan_id } }).then(response => {
+      //   const clientSecret =
+      //     response.data.setup_incomplete_subscription.client_secret
+      //   const subscriptionId =
+      //     response.data.setup_incomplete_subscription.subscription.id
+      //   const componentProps = {
+      //     planId,
+      //     subscriptionId,
+      //     clientSecret,
+      //     onClose: () => setState({ mode: 'resting' }),
+      //   }
+
+      // })
 
       setState({ mode: 'processing' })
     },
