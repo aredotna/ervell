@@ -76,6 +76,8 @@ const BillingForm: React.FC<BillingFormProps> = ({
 }) => {
   const { customer } = me
 
+  const defaultPlanId = plan_id
+
   const [state, setState] = useMergeState<BillingFormState>({
     mode: 'resting',
     operations: [],
@@ -103,7 +105,9 @@ const BillingForm: React.FC<BillingFormProps> = ({
   const planId = state.planId || customer.plan?.id
 
   const fromPlanToPlan = `${customer?.plan?.id}:${planId}`
-  const customerCanSubmit = operations.length > 0 || total === 0 || plan_id
+  const customerCanSubmit =
+    (operations.length > 0 || total === 0 || defaultPlanId) &&
+    mode === 'resting'
 
   const doWeNeedTo = useCallback(
     (operationName: OperationsEnum) => {
@@ -163,6 +167,8 @@ const BillingForm: React.FC<BillingFormProps> = ({
       return Promise.reject('Not a valid plan id')
     }
 
+    setState({ mode: 'processing' })
+
     const plan_id = planId.toUpperCase() as SupportedPlanEnum
 
     const defaultVariables = {
@@ -220,21 +226,6 @@ const BillingForm: React.FC<BillingFormProps> = ({
         modalProps
       )
       modal.open()
-
-      // setupIncompleteSubscription({ variables: { plan_id } }).then(response => {
-      //   const clientSecret =
-      //     response.data.setup_incomplete_subscription.client_secret
-      //   const subscriptionId =
-      //     response.data.setup_incomplete_subscription.subscription.id
-      //   const componentProps = {
-      //     planId,
-      //     subscriptionId,
-      //     clientSecret,
-      //     onClose: () => setState({ mode: 'resting' }),
-      //   }
-
-      // })
-
       setState({ mode: 'processing' })
     },
     [
@@ -394,17 +385,22 @@ const BillingForm: React.FC<BillingFormProps> = ({
               >
                 <Icons name="CreditCard" size="1rem" mr={4} color="gray.bold" />
 
-                {{
-                  'basic:monthly': 'Enter payment details',
-                  'basic:yearly': 'Enter payment details',
-                  'monthly:yearly': 'Update subscription',
-                  'yearly:monthly': 'Update subscription',
-                  'monthly:plus_yearly': 'Upgrade subscription',
-                  'yearly:plus_yearly': 'Upgrade subscription',
-                  'monthly:basic': 'Cancel Premium',
-                  'yearly:basic': 'Cancel Premium',
-                  'basic:plus_yearly': 'Enter payment details',
-                }[fromPlanToPlan] || 'Save changes'}
+                {mode === 'resting'
+                  ? {
+                      'basic:monthly': 'Enter payment details',
+                      'basic:yearly': 'Enter payment details',
+                      'monthly:yearly': 'Update subscription',
+                      'yearly:monthly': 'Update subscription',
+                      'monthly:plus_yearly': 'Upgrade subscription',
+                      'yearly:plus_yearly': 'Upgrade subscription',
+                      'monthly:basic': 'Cancel Premium',
+                      'yearly:basic': 'Cancel Premium',
+                      'basic:plus_yearly': 'Enter payment details',
+                    }[fromPlanToPlan]
+                  : {
+                      processing: 'Processing...',
+                      error: 'Error',
+                    }[mode] || 'Save changes'}
               </GenericButton>
 
               {plan_id !== 'basic' && customer.plan?.id !== 'basic' && (
