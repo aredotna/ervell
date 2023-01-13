@@ -2,6 +2,8 @@ import { gql } from '@apollo/client'
 
 export default gql`
   fragment UpcomingInvoice on Customer {
+    status
+
     upcoming_invoice {
       __typename
       subtotal

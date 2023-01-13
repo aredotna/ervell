@@ -21,7 +21,9 @@ export const UpcomingInvoice: React.FC<UpcomingInvoiceProps> = props => {
     // You don't have an invoice coming up
     !upcoming_invoice ||
     // Or your next invoice is actually a refund
-    upcoming_invoice.total <= 0
+    upcoming_invoice.total <= 0 ||
+    // Or you're on a free plan
+    customer.status === 'inactive'
   )
     return null
 
