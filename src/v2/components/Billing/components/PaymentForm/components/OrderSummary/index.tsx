@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { debounce } from 'lodash'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
@@ -23,37 +24,39 @@ const LineItem = styled(Box).attrs({})`
 
 const Label = styled(Text).attrs({
   f: 1,
-  fontWeight: 'bold',
 })``
 
 const Value = styled(Text).attrs({
   f: 1,
-  fontWeight: 'bold',
 })``
 
 interface OrderSummaryProps {
   planId: SupportedPlanEnum
   country: string
   postalCode: string
+  couponCode?: string
 }
 
 export const OrderSummary: React.FC<OrderSummaryProps> = ({
   planId,
   country,
   postalCode,
+  couponCode,
 }) => {
   const { data, refetch } = useQuery<OrderSummaryType, OrderSummaryVariables>(
     orderSummaryQuery,
     {
       variables: {
         plan_id: planId,
+        coupon_code: couponCode,
       },
     }
   )
 
   useEffect(() => {
-    console.log('refetching', country, postalCode, planId)
-    refetch({ plan_id: planId })
+    debounce(() => {
+      refetch({ plan_id: planId })
+    }, 100)
   }, [country, postalCode, planId])
 
   const subtotalValue = data?.me?.customer?.upcoming_invoice?.subtotal
@@ -65,15 +68,15 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
   const totalValue = data?.me?.customer?.upcoming_invoice?.total
     ? centsToDollarsAndCents(data?.me?.customer?.upcoming_invoice?.total)
     : '–'
-  const taxLabel = data?.me?.customer?.upcoming_invoice?.tax_rate?.percentage
+  const taxLabel = data?.me?.customer?.upcoming_invoice?.tax
     ? `Tax (${data.me.customer.upcoming_invoice.tax_rate.jurisdiction} ${data?.me?.customer?.upcoming_invoice?.tax_rate.percentage}%)`
     : 'Tax'
 
+  const discount = data?.me?.customer?.upcoming_invoice?.discount
+  const discountDescription = discount?.coupon.description
+
   return (
     <Box>
-      <Text f={3} fontWeight="bold">
-        Order Summary
-      </Text>
       <Invoice>
         <LineItem>
           <Label>Subtotal</Label>
@@ -83,9 +86,15 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
           <Label>{taxLabel}</Label>
           <Value>{taxValue}</Value>
         </LineItem>
+        {discount && (
+          <LineItem>
+            <Label color="state.premium">Discount</Label>
+            <Value color="state.premium">{discountDescription}</Value>
+          </LineItem>
+        )}
         <LineItem>
-          <Label>Total</Label>
-          <Value>{totalValue}</Value>
+          <Label fontWeight="bold">Total</Label>
+          <Value fontWeight="bold">{totalValue}</Value>
         </LineItem>
       </Invoice>
     </Box>

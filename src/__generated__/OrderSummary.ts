@@ -9,6 +9,18 @@ import { SupportedPlanEnum } from "./globalTypes";
 // GraphQL query operation: OrderSummary
 // ====================================================
 
+export interface OrderSummary_me_customer_upcoming_invoice_discount_coupon {
+  __typename: "Coupon";
+  id: string | null;
+  description: string | null;
+}
+
+export interface OrderSummary_me_customer_upcoming_invoice_discount {
+  __typename: "Discount";
+  id: string | null;
+  coupon: OrderSummary_me_customer_upcoming_invoice_discount_coupon | null;
+}
+
 export interface OrderSummary_me_customer_upcoming_invoice_tax_rate {
   __typename: "TaxRate";
   percentage: number | null;
@@ -29,6 +41,10 @@ export interface OrderSummary_me_customer_upcoming_invoice {
    * USD cents
    */
   total: number | null;
+  /**
+   * Dicsount applied to invoice
+   */
+  discount: OrderSummary_me_customer_upcoming_invoice_discount | null;
   tax_rate: OrderSummary_me_customer_upcoming_invoice_tax_rate | null;
 }
 
@@ -51,4 +67,5 @@ export interface OrderSummary {
 
 export interface OrderSummaryVariables {
   plan_id?: SupportedPlanEnum | null;
+  coupon_code?: string | null;
 }
