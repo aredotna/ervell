@@ -81,6 +81,7 @@ export interface Billing_customer {
   current_period_end_at: string | null;
   default_credit_card: Billing_customer_default_credit_card | null;
   credit_cards: Billing_customer_credit_cards[] | null;
+  status: string | null;
   upcoming_invoice: Billing_customer_upcoming_invoice | null;
 }
 

@@ -27,4 +27,5 @@ export interface SetupIncompleteSubscription {
 
 export interface SetupIncompleteSubscriptionVariables {
   plan_id: SupportedPlanEnum;
+  coupon_code?: string | null;
 }

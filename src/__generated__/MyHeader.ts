@@ -37,6 +37,7 @@ export interface MyHeader_customer_default_payment_method {
 
 export interface MyHeader_customer {
   __typename: "Customer";
+  status: string | null;
   upcoming_invoice: MyHeader_customer_upcoming_invoice | null;
   default_payment_method: MyHeader_customer_default_payment_method | null;
 }

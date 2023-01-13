@@ -37,6 +37,7 @@ export interface UpcomingInvoice_default_payment_method {
 
 export interface UpcomingInvoice {
   __typename: "Customer";
+  status: string | null;
   upcoming_invoice: UpcomingInvoice_upcoming_invoice | null;
   default_payment_method: UpcomingInvoice_default_payment_method | null;
 }
