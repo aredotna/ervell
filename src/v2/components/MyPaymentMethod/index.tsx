@@ -1,4 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client'
+import { useTheme } from 'styled-components'
+
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import React, { useCallback, useState } from 'react'
 
@@ -30,8 +32,6 @@ interface MyPaymentMethodProps {
 export const MyPaymentMethod: React.FC<MyPaymentMethodProps> = ({ onDone }) => {
   const stripe = useStripe()
   const elements = useElements()
-
-  console.log({ onDone })
 
   const [mode, setMode] = useState<'default' | 'saving' | 'saved' | 'error'>(
     'default'
@@ -139,6 +139,8 @@ export const MyPaymentMethod: React.FC<MyPaymentMethodProps> = ({ onDone }) => {
     [page, changeDefaultCard, addNewCard, onDone]
   )
 
+  const theme = useTheme()
+
   if (!stripe || !elements) {
     return null
   }
@@ -186,6 +188,10 @@ export const MyPaymentMethod: React.FC<MyPaymentMethodProps> = ({ onDone }) => {
                   fontSize: '14px',
                   fontFamily: 'Arial, sans-serif',
                   fontWeight: 100,
+                  color: theme.colors.gray.bold,
+                  '::placeholder': {
+                    color: theme.colors.gray.medium,
+                  },
                 },
               },
             }}
