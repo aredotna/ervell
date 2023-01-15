@@ -223,8 +223,8 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
   const handleAddressChange = useCallback(
     (event: StripeAddressElementChangeEvent) => {
       if (
-        !isEmpty(data?.me?.customer?.address.postal_code) &&
-        !isEmpty(data?.me?.customer?.address.country)
+        !isEmpty(data?.me?.customer?.address?.postal_code) &&
+        !isEmpty(data?.me?.customer?.address?.country)
       ) {
         setCountry(data.me.customer.address.country)
         setPostalCode(data.me.customer.address.postal_code)
@@ -373,7 +373,6 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
           f={3}
           bg="state.premium"
           color="white"
-          disabled={!isAddressComplete || inlineErrorMessage}
         >
           Upgrade to Premium
         </GenericButton>
