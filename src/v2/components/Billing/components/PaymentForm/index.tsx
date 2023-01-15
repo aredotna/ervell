@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { useMutation, useQuery } from '@apollo/client'
 import sharify from 'sharify'
 import {
@@ -131,6 +131,8 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
     SetupIncompleteSubscription,
     SetupIncompleteSubscriptionVariables
   >(setupIncompleteSubscriptionMutation)
+
+  const theme = useTheme()
 
   const handleSubmit = useCallback(async () => {
     if (!stripe || !elements) {
@@ -328,6 +330,10 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
                   fontSize: '14px',
                   fontFamily: 'Arial, sans-serif',
                   fontWeight: 100,
+                  color: theme.colors.gray.bold,
+                  '::placeholder': {
+                    color: theme.colors.gray.medium,
+                  },
                 },
               },
             }}
