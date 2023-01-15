@@ -67,6 +67,12 @@ const PlanSelection: React.FC<PlanSelectionProps> = props => {
   } = props
   const planId = plan_id || customer.plan?.id
 
+  const mappedPlanId =
+    {
+      old_yearly: 'yearly',
+      old_monthly: 'monthly',
+    }[planId] || planId
+
   // TODO: Extract into actual can field
   const plansDisabled =
     customer.is_canceled || customer.is_lifetime || customer.is_beneficiary
@@ -89,7 +95,7 @@ const PlanSelection: React.FC<PlanSelectionProps> = props => {
       )
 
   return (
-    <RadioOptions value={planId} onSelect={onSelect}>
+    <RadioOptions value={mappedPlanId} onSelect={onSelect}>
       {({ selectedValue, ...rest }) => (
         <div>
           {!customer.can_select_lifetime && (
