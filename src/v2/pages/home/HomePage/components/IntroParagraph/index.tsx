@@ -73,10 +73,11 @@ export const IntroParagraph: React.FC = () => {
             </Button>
             <P mt={5}>
               <ul>
-                <li>$5/month or $45/year</li>
+                <li>$7/month or $70/year</li>
+                <li>unlimited blocks</li>
+                <li>advanced search</li>
                 <li>reader mode + table view</li>
                 <li>increased privacy settings</li>
-                <li>unlimited blocks</li>
               </ul>
             </P>
           </ButtonBox>

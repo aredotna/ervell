@@ -39,6 +39,7 @@ export default class CouponCode extends PureComponent {
           placeholder="Coupon code"
           onChange={this.handleChange}
           defaultValue={code}
+          f={2}
         />
 
         <CouponCodeStatus

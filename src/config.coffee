@@ -49,6 +49,7 @@ module.exports =
   IP_DENYLIST: ''
   USE_CSP: false
   CSP_SRCS: ''
+  GOOGLE_MAPS_API_KEY: null
 
 # Override any values with env variables if they exist
 for key, val of module.exports

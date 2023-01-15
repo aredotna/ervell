@@ -44,6 +44,7 @@ module.exports = {
   IP_DENYLIST: '',
   USE_CSP: false,
   CSP_SRCS: '',
+  GOOGLE_MAPS_API_KEY: null,
 }
 
 for (const [key, val] of Object.entries(module.exports)) {
