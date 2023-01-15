@@ -48,7 +48,7 @@ const Container = styled(Box).attrs({
   flexDirection: 'row',
   p: 7,
 })`
-  height: 100%;
+  min-height: 100%;
   position: relative;
 `
 
@@ -71,9 +71,12 @@ const PaymentContainer = styled(Box).attrs({
   width: '70%',
   pr: 7,
   mr: 7,
+  pb: 7,
   borderRight: '1px solid',
   borderColor: 'gray.light',
-})``
+})`
+  overflow-y: auto;
+`
 
 const InvoiceContainer = styled(Box).attrs({
   width: '30%',

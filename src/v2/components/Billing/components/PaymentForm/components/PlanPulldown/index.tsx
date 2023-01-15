@@ -33,7 +33,14 @@ export const PlanPulldown: React.FC<PlanPulldownProps> = ({
       onChange={onChange}
       options={{
         MONTHLY: <PlanOption>Monthly – $7 billed monthly</PlanOption>,
-        YEARLY: <PlanOption>Yearly – $70 billed annually</PlanOption>,
+        YEARLY: (
+          <PlanOption>
+            Yearly – $70 billed annually{' '}
+            <Text f={3} display="inline" color="state.premium">
+              *Save 17%
+            </Text>
+          </PlanOption>
+        ),
         PLUS_YEARLY: (
           <PlanOption>Premium Supporter – $120 billed annually</PlanOption>
         ),
