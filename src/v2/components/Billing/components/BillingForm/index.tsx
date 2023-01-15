@@ -216,6 +216,21 @@ const BillingForm: React.FC<BillingFormProps> = ({
           .catch(handleErrors)
       }
 
+      if (
+        doWeNeedTo('DOWNGRADE_TO_LIFETIME') ||
+        // If we are changing to `basic`, then we are actually cancelling.
+        // Nothing else needs to happen so return.
+        (doWeNeedTo('CHANGE_PLAN_ID') && planId === 'lifetime')
+      ) {
+        return downgradeToLifetimeSubscription()
+          .then(() => resolveWithMode('canceled'))
+          .catch(handleErrors)
+      }
+
+      if (doWeNeedTo('RESUBSCRIBE')) {
+        return handleSubscribeToPremium()
+      }
+
       const modalProps = { width: '70%', maxWidth: '60em' }
       const modal = new Modal(
         PaymentForm,
@@ -395,9 +410,11 @@ const BillingForm: React.FC<BillingFormProps> = ({
                       'yearly:plus_yearly': 'Upgrade subscription',
                       'monthly:basic': 'Cancel Premium',
                       'yearly:basic': 'Cancel Premium',
+                      'plus_yearly:basic': 'Cancel Premium',
                       'basic:plus_yearly': 'Enter payment details',
-                    }[fromPlanToPlan]
+                    }[fromPlanToPlan] || 'Save changes'
                   : {
+                      resting: 'Save changes',
                       processing: 'Processing...',
                       error: 'Error',
                     }[mode] || 'Save changes'}
