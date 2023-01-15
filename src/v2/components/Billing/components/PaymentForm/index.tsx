@@ -374,7 +374,6 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
           f={3}
           bg="state.premium"
           color="white"
-          disabled={!isAddressComplete || inlineErrorMessage}
         >
           Upgrade to Premium
         </GenericButton>
