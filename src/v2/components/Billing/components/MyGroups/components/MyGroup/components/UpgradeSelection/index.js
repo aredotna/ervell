@@ -98,7 +98,7 @@ export default class UpgradeSelection extends PureComponent {
                 <Option>
                   <OptionLabel selected={selected}>
                     <strong>Upgrade users to annual Premium</strong>
-                    <strong>$3.75 / user / month</strong>
+                    <strong>$5.83 / user / month</strong>
                   </OptionLabel>
 
                   <OptionDescription>
@@ -108,7 +108,7 @@ export default class UpgradeSelection extends PureComponent {
                       and features.
                     </span>
 
-                    <span>$45 billed yearly</span>
+                    <span>$70 billed yearly</span>
                   </OptionDescription>
                 </Option>
               )}
@@ -134,7 +134,7 @@ export default class UpgradeSelection extends PureComponent {
                 <Option>
                   <OptionLabel selected={selected}>
                     <strong>Upgrade users to monthly Premium</strong>
-                    <strong>$5 / user / month</strong>
+                    <strong>$7 / user / month</strong>
                   </OptionLabel>
 
                   <OptionDescription>

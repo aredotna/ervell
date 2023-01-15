@@ -133,7 +133,7 @@ export default class PlanSelector extends Component {
             </Text>
             <Text f={1}>Unlimited public and private blocks + more</Text>
             <Text f={1}>
-              <strong>$5/month or $45/year</strong>
+              <strong>$7/month or $70/year</strong>
             </Text>
           </PremiumPlan>
         </PlanSelect>
