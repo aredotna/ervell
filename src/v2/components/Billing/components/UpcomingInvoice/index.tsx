@@ -1,10 +1,22 @@
 import { capitalize } from 'lodash'
 import React from 'react'
+import styled from 'styled-components'
+import { MyPaymentMethodWrapper } from 'v2/components/MyPaymentMethod'
 
 import Box from 'v2/components/UI/Box'
+import Modal from 'v2/components/UI/Modal'
 import Text from 'v2/components/UI/Text'
 import { centsToDollarsAndCents } from 'v2/pages/about/PricingPage/components/PricingTable'
 import { UpcomingInvoice as Customer } from '__generated__/UpcomingInvoice'
+
+const Link = styled(Text).attrs({
+  f: 2,
+  color: 'state.premium',
+  fontWeight: 'bold',
+})`
+  cursor: pointer;
+  display: inline-block;
+`
 
 interface UpcomingInvoiceProps {
   customer: Customer
@@ -16,6 +28,20 @@ export const UpcomingInvoice: React.FC<UpcomingInvoiceProps> = props => {
     customer,
     ...rest
   } = props
+
+  const openCreditCardModal = () => {
+    const modal = new Modal(
+      MyPaymentMethodWrapper,
+      {
+        onDone: () => {
+          console.log('ttrying to close')
+          modal.close()
+        },
+      },
+      {}
+    )
+    modal.open()
+  }
 
   if (
     // You don't have an invoice coming up
@@ -31,7 +57,7 @@ export const UpcomingInvoice: React.FC<UpcomingInvoiceProps> = props => {
     <Box pr={8} {...rest}>
       <Text f={2}>
         <>
-          Next payment due:{' '}
+          <strong>Next payment due:</strong>{' '}
           {upcoming_invoice.subtotal <= upcoming_invoice.total ? (
             `${centsToDollarsAndCents(upcoming_invoice.total)}`
           ) : (
@@ -49,20 +75,17 @@ export const UpcomingInvoice: React.FC<UpcomingInvoiceProps> = props => {
 
       {customer.default_payment_method &&
         customer.default_payment_method?.card && (
-          <Text f={2}>
-            Card on file:{' '}
-            {capitalize(customer.default_payment_method?.card?.brand)} **** ****
-            **** {customer.default_payment_method.card.last4}
-          </Text>
+          <>
+            <Text f={2}>
+              <strong>Card on file:</strong>{' '}
+              {capitalize(customer.default_payment_method?.card?.brand)} ****
+              **** **** {customer.default_payment_method.card.last4} (expires{' '}
+              {customer.default_payment_method.card.exp_month}/
+              {customer.default_payment_method.card.exp_year}){' '}
+              <Link onClick={openCreditCardModal}>Update card</Link>
+            </Text>
+          </>
         )}
-
-      {/* {currentDate < pricingChangeDate && (
-        <Text f={2} color="state.premium" underlineLinks>
-          <a href="https://www.are.na/blog/on-pricing">
-            Read about upcoming changes to premium plans on January 15th, 2023{' '}
-          </a>
-        </Text>
-      )} */}
     </Box>
   )
 }

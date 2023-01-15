@@ -27,6 +27,8 @@ export interface UpcomingInvoice_default_payment_method_card {
   __typename: "CreditCard";
   last4: string | null;
   brand: string | null;
+  exp_month: string | null;
+  exp_year: string | null;
 }
 
 export interface UpcomingInvoice_default_payment_method {

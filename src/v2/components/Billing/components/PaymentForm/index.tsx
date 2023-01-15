@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { useMutation, useQuery } from '@apollo/client'
 import sharify from 'sharify'
 import {
@@ -48,7 +48,7 @@ const Container = styled(Box).attrs({
   flexDirection: 'row',
   p: 7,
 })`
-  height: 100%;
+  min-height: 100%;
   position: relative;
 `
 
@@ -71,9 +71,12 @@ const PaymentContainer = styled(Box).attrs({
   width: '70%',
   pr: 7,
   mr: 7,
+  pb: 7,
   borderRight: '1px solid',
   borderColor: 'gray.light',
-})``
+})`
+  overflow-y: auto;
+`
 
 const InvoiceContainer = styled(Box).attrs({
   width: '30%',
@@ -131,6 +134,8 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
     SetupIncompleteSubscription,
     SetupIncompleteSubscriptionVariables
   >(setupIncompleteSubscriptionMutation)
+
+  const theme = useTheme()
 
   const handleSubmit = useCallback(async () => {
     if (!stripe || !elements) {
@@ -328,6 +333,10 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
                   fontSize: '14px',
                   fontFamily: 'Arial, sans-serif',
                   fontWeight: 100,
+                  color: theme.colors.gray.bold,
+                  '::placeholder': {
+                    color: theme.colors.gray.medium,
+                  },
                 },
               },
             }}

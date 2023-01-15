@@ -1,5 +1,7 @@
 import sharify from 'sharify'
 import React from 'react'
+import { useTheme } from 'styled-components'
+
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 
@@ -17,6 +19,8 @@ const StripeElementsContext: React.FC<StripeElementsContextProps> = ({
   children,
   clientSecret,
 }) => {
+  const theme = useTheme()
+
   const options = {
     clientSecret,
     appearance: {
@@ -25,6 +29,8 @@ const StripeElementsContext: React.FC<StripeElementsContextProps> = ({
         fontFamily: 'Arial, sans-serif',
         fontSizeBase: '14px',
         boxShadow: 'none',
+        colorText: theme.colors.gray.bold,
+        colorBackground: theme.colors.background,
       },
       rules: {
         '.Label': {
@@ -32,7 +38,7 @@ const StripeElementsContext: React.FC<StripeElementsContextProps> = ({
         },
         '.Input': {
           boxShadow: 'none',
-          border: '1px solid #e5e5e5',
+          border: `1px solid ${theme.colors.gray.semiLight}`,
           borderRadius: '0.25em',
         },
       },
