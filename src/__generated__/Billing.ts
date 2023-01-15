@@ -18,6 +18,8 @@ export interface Billing_customer_default_payment_method_card {
   id: string | null;
   brand: string | null;
   last4: string | null;
+  exp_month: string | null;
+  exp_year: string | null;
 }
 
 export interface Billing_customer_default_payment_method {

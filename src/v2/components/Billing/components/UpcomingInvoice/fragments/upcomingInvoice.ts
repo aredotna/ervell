@@ -18,6 +18,8 @@ export default gql`
         __typename
         last4
         brand
+        exp_month
+        exp_year
       }
     }
   }
