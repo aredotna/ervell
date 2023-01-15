@@ -58,7 +58,7 @@ const StatusContainer = styled(Box)`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: ${x => x.theme.colors.utility.opaque};
+  background-color: ${x => x.theme.colors.utility.translucent};
   z-index: 1;
   align-items: center;
   justify-content: center;
@@ -112,6 +112,7 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
   const retry = useCallback(() => setMode('resting'), [])
 
   const [errorMessage, setErrorMessage] = useState<string>('')
+  const [inlineErrorMessage, setInlineErrorMessage] = useState<string>('')
   const [country, setCountry] = useState<string>('')
   const [postalCode, setPostalCode] = useState<string>('')
   const [isAddressComplete, setIsAddressComplete] = useState<boolean>(false)
@@ -206,6 +207,14 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
     setupIncompleteSubscription,
   ])
 
+  const handleAddressBlur = useCallback(() => {
+    if (isAddressComplete) {
+      return
+    }
+
+    setInlineErrorMessage('Please enter a valid address')
+  }, [isAddressComplete])
+
   const handleAddressChange = useCallback(
     (event: StripeAddressElementChangeEvent) => {
       if (
@@ -244,7 +253,7 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
 
   const handleCardChange = useCallback(
     (event: StripeCardElementChangeEvent) => {
-      console.log({ event })
+      setInlineErrorMessage(event.error?.message || '')
     },
     []
   )
@@ -296,6 +305,7 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
               },
             }}
             onChange={handleAddressChange}
+            onBlur={handleAddressBlur}
           />
         </Box>
 
@@ -340,13 +350,21 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
           <CouponCode onDebouncedCode={setCouponCode} />
         </Box>
 
+        {inlineErrorMessage && (
+          <Box my={5}>
+            <Text f={2} color="state.alert" fontWeight="bold" mb={4}>
+              {inlineErrorMessage}
+            </Text>
+          </Box>
+        )}
+
         <GenericButton
           display="block"
           onClick={handleSubmit}
           f={3}
           bg="state.premium"
           color="white"
-          disabled={!isAddressComplete}
+          disabled={!isAddressComplete || inlineErrorMessage}
         >
           Upgrade to Premium
         </GenericButton>
@@ -365,7 +383,7 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
         </Text>
         {mode == 'error' && (
           <>
-            <Text f={4} color="state.alert" mb={4}>
+            <Text f={5} fontWeight="bold" color="state.alert" mb={6}>
               {errorMessage}
             </Text>
             <GenericButton
