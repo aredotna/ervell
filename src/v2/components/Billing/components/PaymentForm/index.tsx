@@ -209,8 +209,8 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
   const handleAddressChange = useCallback(
     (event: StripeAddressElementChangeEvent) => {
       if (
-        data?.me?.customer?.address.postal_code &&
-        data?.me?.customer?.address.country
+        !isEmpty(data?.me?.customer?.address.postal_code) &&
+        !isEmpty(data?.me?.customer?.address.country)
       ) {
         setCountry(data.me.customer.address.country)
         setPostalCode(data.me.customer.address.postal_code)
