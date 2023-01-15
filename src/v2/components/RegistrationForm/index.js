@@ -64,6 +64,11 @@ class RegistrationForm extends Component {
   constructor(props) {
     super(props)
 
+    const redirectTo =
+      this.props.selected === 'premium'
+        ? '/welcome/billing'
+        : this.props.redirectTo
+
     this.state = {
       mode: 'resting',
       email: props.email || '',
@@ -76,7 +81,7 @@ class RegistrationForm extends Component {
       attributeErrors: {},
       errorMessage: null,
       selected: this.props.selected,
-      redirectTo: this.props.redirectTo,
+      redirectTo: redirectTo,
     }
   }
 

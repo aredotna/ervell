@@ -15,13 +15,16 @@ export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_o
   term: string | null;
 }
 
-export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_default_credit_card {
+export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_default_payment_method_card {
   __typename: "CreditCard";
   id: string | null;
   brand: string | null;
-  last4: string | null;
-  exp_year: string | null;
-  exp_month: string | null;
+}
+
+export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_default_payment_method {
+  __typename: "PaymentMethod";
+  id: string | null;
+  card: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_default_payment_method_card | null;
 }
 
 export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_patron {
@@ -29,6 +32,15 @@ export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_o
   id: number;
   name: string;
   hidden_email: string;
+}
+
+export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_default_credit_card {
+  __typename: "CreditCard";
+  id: string | null;
+  brand: string | null;
+  last4: string | null;
+  exp_year: string | null;
+  exp_month: string | null;
 }
 
 export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_credit_cards {
@@ -49,9 +61,10 @@ export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_o
   is_beneficiary: boolean;
   plan: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_plan | null;
   updated_at: string | null;
-  default_credit_card: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_default_credit_card | null;
+  default_payment_method: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_default_payment_method | null;
   patron: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_patron | null;
   current_period_end_at: string | null;
+  default_credit_card: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_default_credit_card | null;
   credit_cards: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_credit_cards[] | null;
 }
 

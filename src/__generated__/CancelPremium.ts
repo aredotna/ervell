@@ -13,13 +13,16 @@ export interface CancelPremium_cancel_premium_subscription_me_customer_plan {
   term: string | null;
 }
 
-export interface CancelPremium_cancel_premium_subscription_me_customer_default_credit_card {
+export interface CancelPremium_cancel_premium_subscription_me_customer_default_payment_method_card {
   __typename: "CreditCard";
   id: string | null;
   brand: string | null;
-  last4: string | null;
-  exp_year: string | null;
-  exp_month: string | null;
+}
+
+export interface CancelPremium_cancel_premium_subscription_me_customer_default_payment_method {
+  __typename: "PaymentMethod";
+  id: string | null;
+  card: CancelPremium_cancel_premium_subscription_me_customer_default_payment_method_card | null;
 }
 
 export interface CancelPremium_cancel_premium_subscription_me_customer_patron {
@@ -27,6 +30,15 @@ export interface CancelPremium_cancel_premium_subscription_me_customer_patron {
   id: number;
   name: string;
   hidden_email: string;
+}
+
+export interface CancelPremium_cancel_premium_subscription_me_customer_default_credit_card {
+  __typename: "CreditCard";
+  id: string | null;
+  brand: string | null;
+  last4: string | null;
+  exp_year: string | null;
+  exp_month: string | null;
 }
 
 export interface CancelPremium_cancel_premium_subscription_me_customer_credit_cards {
@@ -47,9 +59,10 @@ export interface CancelPremium_cancel_premium_subscription_me_customer {
   is_beneficiary: boolean;
   plan: CancelPremium_cancel_premium_subscription_me_customer_plan | null;
   updated_at: string | null;
-  default_credit_card: CancelPremium_cancel_premium_subscription_me_customer_default_credit_card | null;
+  default_payment_method: CancelPremium_cancel_premium_subscription_me_customer_default_payment_method | null;
   patron: CancelPremium_cancel_premium_subscription_me_customer_patron | null;
   current_period_end_at: string | null;
+  default_credit_card: CancelPremium_cancel_premium_subscription_me_customer_default_credit_card | null;
   credit_cards: CancelPremium_cancel_premium_subscription_me_customer_credit_cards[] | null;
 }
 

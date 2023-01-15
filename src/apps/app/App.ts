@@ -9,6 +9,7 @@ import withStaticRouter from 'v2/hocs/WithStaticRouter'
 import { AppRoutes as Routes } from './Routes'
 import ensureLoggedIn from 'lib/middleware/ensureLoggedIn'
 import createAuthenticatedService from 'apps/authentication/mutations/createAuthenticatedService'
+import updateSubscriptionMutation from './mutations/updateSubscriptionMutation'
 
 export const App = Router()
 
@@ -21,6 +22,38 @@ const redirectLoggedOutToPricing = (req, res, next) => {
   }
 
   next()
+}
+
+const refreshSubscription = (req, res, next) => {
+  const { user } = req
+
+  if (!user) return next()
+
+  const headers = {
+    'X-AUTH-TOKEN': user.get('access_token'),
+  }
+
+  req.apollo.client
+    .mutate({
+      mutation: updateSubscriptionMutation,
+      variables: {
+        subscription_id: String(req.query.subscription_id),
+      },
+    })
+    .then(() => {
+      return user.fetch({ headers })
+    })
+    .then(() => {
+      req.login(user, err => {
+        if (err) return next(err)
+
+        // IMPORTANT: return the `response` instead of the `user.toJSON()`
+        // Why? Because `user.toJSON()` is already parsed. Returning
+        // an already parsed response will make it unparesable.
+        return res.redirect(`/settings/billing`)
+      })
+    })
+    .catch(err => next(err))
 }
 
 const resolve = [
@@ -76,6 +109,7 @@ App.get(
     redirectLoggedOutToPricing,
     ...resolve
   )
+  .get('/settings/refresh_subscription', apolloMiddleware, refreshSubscription)
   .get('/settings', ensureLoggedIn, ...resolve)
   .get('/settings/*', ensureLoggedIn, ...resolve)
   .get(

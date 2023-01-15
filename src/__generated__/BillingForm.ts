@@ -13,13 +13,16 @@ export interface BillingForm_customer_plan {
   term: string | null;
 }
 
-export interface BillingForm_customer_default_credit_card {
+export interface BillingForm_customer_default_payment_method_card {
   __typename: "CreditCard";
   id: string | null;
   brand: string | null;
-  last4: string | null;
-  exp_year: string | null;
-  exp_month: string | null;
+}
+
+export interface BillingForm_customer_default_payment_method {
+  __typename: "PaymentMethod";
+  id: string | null;
+  card: BillingForm_customer_default_payment_method_card | null;
 }
 
 export interface BillingForm_customer_patron {
@@ -27,6 +30,15 @@ export interface BillingForm_customer_patron {
   id: number;
   name: string;
   hidden_email: string;
+}
+
+export interface BillingForm_customer_default_credit_card {
+  __typename: "CreditCard";
+  id: string | null;
+  brand: string | null;
+  last4: string | null;
+  exp_year: string | null;
+  exp_month: string | null;
 }
 
 export interface BillingForm_customer_credit_cards {
@@ -47,9 +59,10 @@ export interface BillingForm_customer {
   is_beneficiary: boolean;
   plan: BillingForm_customer_plan | null;
   updated_at: string | null;
-  default_credit_card: BillingForm_customer_default_credit_card | null;
+  default_payment_method: BillingForm_customer_default_payment_method | null;
   patron: BillingForm_customer_patron | null;
   current_period_end_at: string | null;
+  default_credit_card: BillingForm_customer_default_credit_card | null;
   credit_cards: BillingForm_customer_credit_cards[] | null;
 }
 

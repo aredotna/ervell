@@ -29,6 +29,7 @@
   IP_DENYLIST,
   USE_CSP,
   CSP_SRCS,
+  GOOGLE_MAPS_API_KEY
 } = require '../config'
 
 _ = require 'underscore'
@@ -86,6 +87,7 @@ sharify.data = {
   RECAPTCHA_SITE_KEY
   USE_CSP
   CSP_SRCS
+  GOOGLE_MAPS_API_KEY
   JS_EXT: if 'production' is NODE_ENV then '.min.js.cgz' else '.js'
   CSS_EXT: if 'production' is NODE_ENV then '.min.css.cgz' else '.css'
 }
