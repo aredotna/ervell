@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { debounce } from 'lodash'
+import { throttle } from 'lodash'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
@@ -54,7 +54,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
   )
 
   useEffect(() => {
-    debounce(() => {
+    throttle(() => {
       refetch({ plan_id: planId })
     }, 100)
   }, [country, postalCode, planId])
