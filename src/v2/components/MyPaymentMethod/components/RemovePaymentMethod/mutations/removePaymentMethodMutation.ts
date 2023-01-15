@@ -3,7 +3,7 @@ import customerPaymentMethodsFragment from 'v2/components/MyPaymentMethod/fragme
 
 export default gql`
   mutation RemovePaymentMethod($id: String!) {
-    remove_credit_card(input: { id: $id }) {
+    remove_payment_method(input: { id: $id }) {
       customer {
         ...CustomerPaymentMethodsFragment
       }
