@@ -18287,17 +18287,17 @@ react-scroll-section@^3.0.2:
   dependencies:
     smoothscroll-polyfill "^0.4.4"
 
-react-slick@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.19.0.tgz#dade3b34c24db0b09a27911b308fcdd53baa592d"
-  integrity sha512-79YEq17v6h6E9VZB9vu3C1VB89TTp1S8SgFgV6dHQ1oDYZphWH0oPYI9YEsGOZrIiQF8mE4y/Kt6UazcuD4Yvw==
+react-slick@^0.22.0:
+  version "0.22.3"
+  resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.22.3.tgz#667991b2496e6b10bcca2a2e676ffadf34e7d56c"
+  integrity sha512-4u8/98/2BqdDkLSl3ovKlM+EamzAzAQlZozSZ7WIuw7TnlTFboFR/ntgU0JCnIRSeSj6S5pIa0gxXL8v5XSzfg==
   dependencies:
     can-use-dom "^0.1.0"
     classnames "^2.2.5"
     create-react-class "^15.5.2"
     enquire.js "^2.1.6"
     json2mq "^0.2.0"
-    object-assign "^4.1.0"
+    resize-observer-polyfill "^1.5.0"
 
 react-sortable-hoc@^2.0.0:
   version "2.0.0"
@@ -19123,6 +19123,11 @@ reselect@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/reselect/-/reselect-3.0.1.tgz#efdaa98ea7451324d092b2b2163a6a1d7a9a2147"
   integrity sha1-79qpjqdFEyTQkrKyFjpqHXqaIUc=
+
+resize-observer-polyfill@^1.5.0:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
 
 resolve-cwd@^2.0.0:
   version "2.0.0"
