@@ -14,7 +14,7 @@
     "deploy-staging": "sh scripts/deploy-staging.sh",
     "deploy-storybook": "storybook-to-ghpages --remote upstream",
     "deploy": "sh scripts/deploy.sh",
-    "extension": "NODE_ENV=development webpack --config src/extension/webpack.config.js --watch",
+    "extension": "NODE_ENV=development GRAPHQL_ENDPOINT=https://api.are.na/graphql webpack --config src/extension/webpack.config.js --watch",
     "extension:production": "NODE_ENV=production webpack --config src/extension/webpack.config.js",
     "generate-paths:development": "APP_URL=http://localhost:5000 node src/v2/pages/home/HomePage/lib/index.js",
     "generate-paths:production": "APP_URL=http://www.are.na node src/v2/pages/home/HomePage/lib/index.js",

@@ -7,7 +7,7 @@ import { IsLoggedInQueryHook } from '__generated__/IsLoggedInQueryHook'
 export default function() {
   const client = useApolloClient()
 
-  const cache = client.readQuery<IsLoggedInQueryHook>({
+  const cache = client?.readQuery<IsLoggedInQueryHook>({
     query: LOGIN_STATUS_QUERY,
   })
 
