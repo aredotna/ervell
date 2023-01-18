@@ -391,7 +391,7 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
         </Text>
         {mode != 'error' && (
           <Text f={1}>
-            (This may take a few seconds. Please don't close this window.)
+            (This may take a few seconds. Please don&apos;t close this window.)
           </Text>
         )}
 
