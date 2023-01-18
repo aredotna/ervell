@@ -382,13 +382,19 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
         <Text f={6} mb={6} color="gray.bold">
           {
             {
-              initializing: 'Thank you! Setting up your subscription...',
+              initializing: 'Setting up your subscription...',
               confirming: 'Confirming your payment...',
-              redirecting: 'Success! Redirecting you back...',
+              redirecting: 'Success! Refreshing your account...',
               error: 'Something went wrong. Please try again.',
             }[mode]
           }
         </Text>
+        {mode != 'error' && (
+          <Text f={1}>
+            (This may take a few seconds. Please don't close this window.)
+          </Text>
+        )}
+
         {mode == 'error' && (
           <>
             <Text f={5} fontWeight="bold" color="state.alert" mb={6}>
