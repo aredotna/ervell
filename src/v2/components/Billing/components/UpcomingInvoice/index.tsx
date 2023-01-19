@@ -1,6 +1,7 @@
 import { capitalize } from 'lodash'
 import React from 'react'
 import styled from 'styled-components'
+import { MyBillingAddressWrapper } from 'v2/components/MyBillingAddress'
 import { MyPaymentMethodWrapper } from 'v2/components/MyPaymentMethod'
 
 import Box from 'v2/components/UI/Box'
@@ -11,11 +12,15 @@ import { UpcomingInvoice as Customer } from '__generated__/UpcomingInvoice'
 
 const Link = styled(Text).attrs({
   f: 2,
-  color: 'state.premium',
+  color: 'gray.semiBold',
   fontWeight: 'bold',
 })`
   cursor: pointer;
   display: inline-block;
+
+  &:hover {
+    color: ${x => x.theme.colors.gray.bold};
+  }
 `
 
 interface UpcomingInvoiceProps {
@@ -34,7 +39,19 @@ export const UpcomingInvoice: React.FC<UpcomingInvoiceProps> = props => {
       MyPaymentMethodWrapper,
       {
         onDone: () => {
-          console.log('ttrying to close')
+          modal.close()
+        },
+      },
+      {}
+    )
+    modal.open()
+  }
+
+  const openBillingAddressModal = () => {
+    const modal = new Modal(
+      MyBillingAddressWrapper,
+      {
+        onDone: () => {
           modal.close()
         },
       },
@@ -81,11 +98,21 @@ export const UpcomingInvoice: React.FC<UpcomingInvoiceProps> = props => {
               {capitalize(customer.default_payment_method?.card?.brand)} ****
               **** **** {customer.default_payment_method.card.last4} (expires{' '}
               {customer.default_payment_method.card.exp_month}/
-              {customer.default_payment_method.card.exp_year}){' '}
-              <Link onClick={openCreditCardModal}>Update card</Link>
+              {customer.default_payment_method.card.exp_year}) —{' '}
+              <Link onClick={openCreditCardModal}>Update default card</Link>
             </Text>
           </>
         )}
+
+      {customer.address?.country && customer?.address.postal_code && (
+        <Text f={2}>
+          <strong>Billing address:</strong> {customer.address.line1}{' '}
+          {customer.address.line2} {customer.address.city}{' '}
+          {customer.address.state} {customer.address.postal_code}{' '}
+          {customer.address.country} —{' '}
+          <Link onClick={openBillingAddressModal}>Update address</Link>
+        </Text>
+      )}
     </Box>
   )
 }

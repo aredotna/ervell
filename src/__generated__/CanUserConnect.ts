@@ -9,6 +9,7 @@
 
 export interface CanUserConnect_me {
   __typename: "Me";
+  id: number;
   is_exceeding_either_connections_limit: boolean;
 }
 

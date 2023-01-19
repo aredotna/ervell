@@ -69,6 +69,16 @@ export interface Billing_customer_upcoming_invoice {
   next_payment_attempt_at: string | null;
 }
 
+export interface Billing_customer_address {
+  __typename: "Address";
+  line1: string | null;
+  line2: string | null;
+  country: string | null;
+  city: string | null;
+  state: string | null;
+  postal_code: string | null;
+}
+
 export interface Billing_customer {
   __typename: "Customer";
   id: number;
@@ -85,6 +95,7 @@ export interface Billing_customer {
   credit_cards: Billing_customer_credit_cards[] | null;
   status: string | null;
   upcoming_invoice: Billing_customer_upcoming_invoice | null;
+  address: Billing_customer_address | null;
 }
 
 export interface Billing_counts {
