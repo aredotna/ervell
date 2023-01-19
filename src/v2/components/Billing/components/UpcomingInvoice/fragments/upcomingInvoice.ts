@@ -8,7 +8,17 @@ export default gql`
       __typename
       subtotal
       total
-      next_payment_attempt_at(format: "%D")
+      next_payment_attempt_at(format: "%B %-d, %Y")
+    }
+
+    address {
+      __typename
+      line1
+      line2
+      country
+      city
+      state
+      postal_code
     }
 
     default_payment_method {

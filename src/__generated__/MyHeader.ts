@@ -23,6 +23,16 @@ export interface MyHeader_customer_upcoming_invoice {
   next_payment_attempt_at: string | null;
 }
 
+export interface MyHeader_customer_address {
+  __typename: "Address";
+  line1: string | null;
+  line2: string | null;
+  country: string | null;
+  city: string | null;
+  state: string | null;
+  postal_code: string | null;
+}
+
 export interface MyHeader_customer_default_payment_method_card {
   __typename: "CreditCard";
   last4: string | null;
@@ -41,6 +51,7 @@ export interface MyHeader_customer {
   __typename: "Customer";
   status: string | null;
   upcoming_invoice: MyHeader_customer_upcoming_invoice | null;
+  address: MyHeader_customer_address | null;
   default_payment_method: MyHeader_customer_default_payment_method | null;
 }
 

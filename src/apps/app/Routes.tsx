@@ -75,7 +75,7 @@ export const AppRoutes = () => {
         <Route path="notifications" element={<NotificationPage />} />
 
         {/* About pages */}
-        <Route path="about/:page" element={<AboutPage />} />
+        <Route path="about/:section" element={<AboutPage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="roadmap" element={<RoadmapPage />} />
         <Route path="pricing" element={<PricingPage />} />

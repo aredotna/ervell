@@ -110,7 +110,7 @@ export const DescriptiveCarousel: React.FC<DescriptiveCarouselProps> = ({
   return (
     <>
       <Carousel {...settings}>
-        {slides.map(slide => (
+        {slides?.map(slide => (
           <Slide key={slide.id}>
             <Inner>
               <Image alt={slide.headline} src={slide.image} />

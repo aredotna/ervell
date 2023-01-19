@@ -188,7 +188,7 @@
     "react-router-dom": "6.3.0",
     "react-safe-universal-inputs": "^3.0.1",
     "react-scroll-section": "^3.0.2",
-    "react-slick": "^0.19.0",
+    "react-slick": "^0.22.0",
     "react-sortable-hoc": "^2.0.0",
     "react-split-pane": "^0.1.89",
     "react-string-replace": "^1.1.0",
