@@ -25,5 +25,9 @@ export const CommunityApiProjects: React.FC = () => {
     }
   })
 
+  if (!slides) {
+    return null
+  }
+
   return <DescriptiveCarousel slides={slides} />
 }

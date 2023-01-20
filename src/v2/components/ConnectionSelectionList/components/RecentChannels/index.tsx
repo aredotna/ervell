@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useQuery } from '@apollo/client'
+import { ApolloError, useQuery } from '@apollo/client'
 import { useKeyboardListNavigation } from 'use-keyboard-list-navigation'
 
 import Indicator from 'v2/components/ConnectionSelectionList/components/Indicator'
@@ -16,6 +16,7 @@ interface RecentChannelsProps {
   onConnectionSelection?: OnConnectionSelectionType
   selectedChannels: Channel[]
   searchRef: React.MutableRefObject<any>
+  onError?: (error: ApolloError) => void
 }
 
 export const RecentChannels: React.FC<RecentChannelsProps> = ({
@@ -23,6 +24,7 @@ export const RecentChannels: React.FC<RecentChannelsProps> = ({
   onConnectionSelection,
   selectedChannels,
   searchRef,
+  onError,
   ...rest
 }) => {
   const { data, loading, error } = useQuery<RecentChannelsQuery>(
@@ -55,6 +57,12 @@ export const RecentChannels: React.FC<RecentChannelsProps> = ({
       setChannels(reducedChannels)
     }
   }, [data, setChannels, selectedChannels])
+
+  useEffect(() => {
+    if (error && onError) {
+      onError(error)
+    }
+  }, [error])
 
   const { index } = useKeyboardListNavigation({
     ref: searchRef,

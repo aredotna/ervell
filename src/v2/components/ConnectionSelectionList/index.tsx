@@ -11,6 +11,7 @@ import { RecentChannels } from 'v2/components/ConnectionSelectionList/components
 import SearchedChannels from 'v2/components/ConnectionSelectionList/components/SearchedChannels'
 
 import { SelectableChannel as Channel } from '__generated__/SelectableChannel'
+import { ApolloError } from '@apollo/client'
 
 const Container = styled.div`
   position: relative;
@@ -85,12 +86,14 @@ export interface ConnectionSelectionListProps {
   isOutlined?: boolean
   onConnectionSelection?: OnConnectionSelectionType
   selectedChannels?: Channel[]
+  onError?: (error: ApolloError) => void
 }
 
 export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = ({
   isOutlined = true,
   onConnectionSelection = () => {},
   selectedChannels = [],
+  onError,
 }) => {
   const [debouncedQuery, setDebouncedQuery] = useState<string>('')
   const [mode, setMode] = useState<'active' | 'resting'>('resting')
@@ -123,6 +126,7 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
             onConnectionSelection={onConnectionSelection}
             selectedChannels={selectedChannels}
             searchRef={inputRef}
+            onError={onError}
           />
         </>
       )}
