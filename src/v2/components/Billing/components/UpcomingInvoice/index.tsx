@@ -1,3 +1,4 @@
+import { useMutation } from '@apollo/client'
 import { capitalize } from 'lodash'
 import React from 'react'
 import styled from 'styled-components'
@@ -8,7 +9,9 @@ import Box from 'v2/components/UI/Box'
 import Modal from 'v2/components/UI/Modal'
 import Text from 'v2/components/UI/Text'
 import { centsToDollarsAndCents } from 'v2/pages/about/PricingPage/components/PricingTable'
+import { CreateCustomerPortalSession } from '__generated__/CreateCustomerPortalSession'
 import { UpcomingInvoice as Customer } from '__generated__/UpcomingInvoice'
+import createCustomerPortalSession from './mutations/createCustomerPortalSession'
 
 const Link = styled(Text).attrs({
   f: 2,
@@ -33,6 +36,18 @@ export const UpcomingInvoice: React.FC<UpcomingInvoiceProps> = props => {
     customer,
     ...rest
   } = props
+
+  const [createPortalSession] = useMutation<CreateCustomerPortalSession>(
+    createCustomerPortalSession
+  )
+
+  const handlePortalLink = async () => {
+    const { data } = await createPortalSession()
+
+    if (data) {
+      window.location.href = data.create_portal_session.url
+    }
+  }
 
   const openCreditCardModal = () => {
     const modal = new Modal(
@@ -86,7 +101,11 @@ export const UpcomingInvoice: React.FC<UpcomingInvoiceProps> = props => {
             </span>
           )}
           {upcoming_invoice.next_payment_attempt_at &&
-            ` on ${upcoming_invoice.next_payment_attempt_at}`}
+            ` on ${upcoming_invoice.next_payment_attempt_at}`}{' '}
+          —{' '}
+          <Link onClick={handlePortalLink} mt={6}>
+            View invoices
+          </Link>
         </>
       </Text>
 
