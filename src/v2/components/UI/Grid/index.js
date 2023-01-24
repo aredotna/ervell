@@ -63,6 +63,7 @@ export default class Grid extends Component {
         loadMore={loadMore}
         mr={`-${blockGutter}`}
         ml={`-${blockGutter}`}
+        useCapture
         {...rest}
       >
         {wrapChildren

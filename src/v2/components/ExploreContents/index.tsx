@@ -101,7 +101,7 @@ export const ExploreContents: React.FC<ExploreContentsProps> = ({
         <Grid
           pageStart={1}
           threshold={800}
-          initialLoad={false}
+          initialLoad={true}
           loader={<BlocksLoadingIndicator key="loading" />}
           hasMore={contents.length >= per && hasMore}
           loadMore={loadMore}
