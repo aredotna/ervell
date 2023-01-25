@@ -50,7 +50,7 @@ export default class SearchContents extends PureComponent {
       const {
         contents: { length },
       } = data
-      const hasMore = !errors && length > 0 && length >= per
+      const hasMore = !errors && length > 0
 
       this.setState({
         page: page + 1,
@@ -98,7 +98,7 @@ export default class SearchContents extends PureComponent {
                 <Grid
                   pageStart={1}
                   threshold={800}
-                  initialLoad={false}
+                  initialLoad={true}
                   loader={<BlocksLoadingIndicator key="loading" />}
                   hasMore={contents.length >= per && hasMore}
                   loadMore={this.loadMore(fetchMore)}
