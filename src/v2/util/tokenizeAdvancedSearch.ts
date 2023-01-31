@@ -236,6 +236,9 @@ export const generateUrlFromVariables = (
   paramsOnly?: boolean,
   basePath?: string
 ) => {
+  // remove trailing slash from basePath
+  basePath = basePath?.replace(/\/$/, '')
+
   const useBasePath = shouldUseBasePath(basePath)
 
   const path = useBasePath ? `${basePath}/search` : getUrlPath(variables)
