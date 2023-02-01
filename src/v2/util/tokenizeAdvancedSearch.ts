@@ -209,13 +209,38 @@ const getUrlPath = (variables: AdvancedSearchVariables) => {
   return urlBase
 }
 
+const shouldUseBasePath = (basePath: string) => {
+  const forbiddenPaths = [
+    '/search',
+    '/feed',
+    '/notifications',
+    '/settings',
+    '/tools',
+    '/table',
+    '/index',
+    '/channels',
+    '/blocks',
+    '/all',
+  ]
+
+  return (
+    basePath !== '/' &&
+    basePath !== undefined &&
+    !basePath.includes('/search') &&
+    !forbiddenPaths.some(path => basePath.includes(path))
+  )
+}
+
 export const generateUrlFromVariables = (
   variables: AdvancedSearchVariables,
   paramsOnly?: boolean,
   basePath?: string
 ) => {
-  const useBasePath =
-    basePath !== '/' && basePath !== undefined && !basePath.includes('/search')
+  // remove trailing slash from basePath
+  basePath = basePath?.replace(/\/$/, '')
+
+  const useBasePath = shouldUseBasePath(basePath)
+
   const path = useBasePath ? `${basePath}/search` : getUrlPath(variables)
 
   const params = stringify(omit(variables, ['page', 'per']), {
