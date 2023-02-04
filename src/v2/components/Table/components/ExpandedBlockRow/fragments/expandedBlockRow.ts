@@ -39,6 +39,7 @@ export const expandedBlockRowFragment = gql`
 
     ... on Link {
       image_url(size: THUMB)
+      content
       source {
         url
         provider_url
