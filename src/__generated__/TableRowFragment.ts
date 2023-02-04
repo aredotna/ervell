@@ -216,6 +216,9 @@ export interface TableRowFragment_Image {
   can: TableRowFragment_Image_can | null;
   image_url: string | null;
   href: string | null;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   source: TableRowFragment_Image_source | null;
   title: string;
@@ -328,6 +331,9 @@ export interface TableRowFragment_Text {
   can: TableRowFragment_Text_can | null;
   content: string;
   html: string;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   href: string | null;
   source: TableRowFragment_Text_source | null;

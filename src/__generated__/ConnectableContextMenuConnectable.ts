@@ -107,6 +107,9 @@ export interface ConnectableContextMenuConnectable_Image {
    */
   connection: ConnectableContextMenuConnectable_Image_connection | null;
   source: ConnectableContextMenuConnectable_Image_source | null;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
 }
 

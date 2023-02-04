@@ -267,6 +267,8 @@ export interface SearchContents_contents_Link {
   src_2x: string | null;
   src_3x: string | null;
   external_url: string | null;
+  content: string | null;
+  source_url: string | null;
 }
 
 export interface SearchContents_contents_PendingBlock_user {

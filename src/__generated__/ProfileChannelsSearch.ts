@@ -225,6 +225,8 @@ export interface ProfileChannelsSearch_identity_identifiable_Group_channels_blok
   src_2x: string | null;
   src_3x: string | null;
   external_url: string | null;
+  content: string | null;
+  source_url: string | null;
 }
 
 export interface ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_PendingBlock_user {
@@ -630,6 +632,8 @@ export interface ProfileChannelsSearch_identity_identifiable_User_channels_Chann
   src_2x: string | null;
   src_3x: string | null;
   external_url: string | null;
+  content: string | null;
+  source_url: string | null;
 }
 
 export interface ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_PendingBlock_user {

@@ -115,6 +115,9 @@ export interface FullBlockMetadataPane_Image {
   source: FullBlockMetadataPane_Image_source | null;
   shareable_href: string | null;
   shareable_title: string;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   downloadable_image: string | null;
   id: number;
@@ -159,6 +162,9 @@ export interface FullBlockMetadataPane_Text {
   source: FullBlockMetadataPane_Text_source | null;
   shareable_href: string | null;
   shareable_title: string;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   id: number;
   editable_title: string;

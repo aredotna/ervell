@@ -35,6 +35,9 @@ export interface FullBlockActions_Image_can {
 
 export interface FullBlockActions_Image {
   __typename: "Image";
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   downloadable_image: string | null;
   source: FullBlockActions_Image_source | null;
@@ -58,6 +61,9 @@ export interface FullBlockActions_Text_can {
 
 export interface FullBlockActions_Text {
   __typename: "Text";
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   source: FullBlockActions_Text_source | null;
   can: FullBlockActions_Text_can | null;

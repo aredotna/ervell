@@ -26,7 +26,7 @@ export interface KonnectableMetadata_Channel_connection {
 }
 
 export interface KonnectableMetadata_Channel {
-  __typename: "Channel" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
+  __typename: "Channel" | "Embed" | "Image" | "PendingBlock" | "Text";
   updated_at: string | null;
   title: string;
   user: KonnectableMetadata_Channel_user | null;
@@ -66,4 +66,34 @@ export interface KonnectableMetadata_Attachment {
   file_extension: string | null;
 }
 
-export type KonnectableMetadata = KonnectableMetadata_Channel | KonnectableMetadata_Attachment;
+export interface KonnectableMetadata_Link_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface KonnectableMetadata_Link_connection_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface KonnectableMetadata_Link_connection {
+  __typename: "Connection";
+  created_at: string | null;
+  user: KonnectableMetadata_Link_connection_user | null;
+}
+
+export interface KonnectableMetadata_Link {
+  __typename: "Link";
+  updated_at: string | null;
+  title: string;
+  user: KonnectableMetadata_Link_user | null;
+  /**
+   * Returns the outer channel if we are inside of one
+   */
+  connection: KonnectableMetadata_Link_connection | null;
+  source_url: string | null;
+}
+
+export type KonnectableMetadata = KonnectableMetadata_Channel | KonnectableMetadata_Attachment | KonnectableMetadata_Link;

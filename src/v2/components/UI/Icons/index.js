@@ -54,6 +54,7 @@ import Text from 'v2/components/UI/Icons/Text.svg'
 import Dropdown from 'v2/components/UI/Icons/DropdownCaret.svg'
 import AppStore from 'v2/components/UI/Icons/Appstore.svg'
 import PlayStore from 'v2/components/UI/Icons/Playstore.svg'
+import Twitter from 'v2/components/UI/Icons/Twitter.svg'
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -105,6 +106,7 @@ export const COMPONENTS = {
   Dropdown: <Dropdown />,
   AppStore: <AppStore />,
   PlayStore: <PlayStore />,
+  Twitter: <Twitter />,
 }
 
 export const ICON_NAMES = Object.keys(COMPONENTS)

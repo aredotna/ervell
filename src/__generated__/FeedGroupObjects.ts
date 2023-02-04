@@ -261,12 +261,14 @@ export interface FeedGroupObjects_objects_Link {
   src_2x: string | null;
   src_3x: string | null;
   external_url: string | null;
+  content: string | null;
   updated_at: string | null;
   user: FeedGroupObjects_objects_Link_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
   connection: FeedGroupObjects_objects_Link_connection | null;
+  source_url: string | null;
   id: number;
   source: FeedGroupObjects_objects_Link_source | null;
 }

@@ -224,6 +224,9 @@ export interface ProfileTableContents_user_contents_Image {
   can: ProfileTableContents_user_contents_Image_can | null;
   image_url: string | null;
   href: string | null;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   source: ProfileTableContents_user_contents_Image_source | null;
 }
@@ -336,6 +339,9 @@ export interface ProfileTableContents_user_contents_Text {
   can: ProfileTableContents_user_contents_Text_can | null;
   content: string;
   html: string;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   href: string | null;
   source: ProfileTableContents_user_contents_Text_source | null;

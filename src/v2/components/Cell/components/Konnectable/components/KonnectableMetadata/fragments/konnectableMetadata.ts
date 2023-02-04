@@ -21,6 +21,10 @@ export default gql`
       ... on Attachment {
         file_extension
       }
+
+      ... on Link {
+        source_url
+      }
     }
   }
 `
