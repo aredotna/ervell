@@ -15,5 +15,6 @@ export default gql`
     src_2x: resized_image_url(width: 630, height: 630, fallback_format: PNG)
     src_3x: resized_image_url(width: 945, height: 945, fallback_format: PNG)
     external_url: source_url
+    content(format: HTML)
   }
 `

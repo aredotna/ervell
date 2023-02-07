@@ -28,11 +28,20 @@ const LinkIcon = styled(Icons).attrs({
   vertical-align: middle;
 `
 
+const TwitterIcon = styled(LinkIcon).attrs({
+  name: 'Twitter',
+})``
+
 export const KonnectableMetadata: React.FC<Props> = ({
   mode = Mode.RESTING,
   konnectable,
   ...rest
 }) => {
+  const twitterLink =
+    konnectable.__typename === 'Link' &&
+    konnectable.source_url.includes('twitter.com')
+  const normalLink = konnectable.__typename === 'Link' && !twitterLink
+
   return (
     <Box pt={2} mt={6} mb={4} px={5} {...rest}>
       <Text f={1} fontWeight="bold" textAlign="center" color="gray.medium">
@@ -40,7 +49,9 @@ export const KonnectableMetadata: React.FC<Props> = ({
           <div>
             <Truncate length={40}>{konnectable.title}</Truncate>
 
-            {konnectable.__typename === 'Link' && <LinkIcon />}
+            {normalLink && <LinkIcon />}
+
+            {twitterLink && <TwitterIcon />}
 
             {konnectable.__typename === 'Attachment' && (
               <MetadataFileExtension ext={konnectable.file_extension} />

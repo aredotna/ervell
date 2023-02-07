@@ -236,6 +236,9 @@ export interface ChannelTableContentsSet_channel_blokks_Image {
   can: ChannelTableContentsSet_channel_blokks_Image_can | null;
   image_url: string | null;
   href: string | null;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   source: ChannelTableContentsSet_channel_blokks_Image_source | null;
 }
@@ -348,6 +351,9 @@ export interface ChannelTableContentsSet_channel_blokks_Text {
   can: ChannelTableContentsSet_channel_blokks_Text_can | null;
   content: string;
   html: string;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   href: string | null;
   source: ChannelTableContentsSet_channel_blokks_Text_source | null;

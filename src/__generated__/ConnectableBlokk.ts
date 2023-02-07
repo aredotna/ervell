@@ -197,6 +197,9 @@ export interface ConnectableBlokk_blokk_Image {
   src_3x: string | null;
   original_dimensions: ConnectableBlokk_blokk_Image_original_dimensions | null;
   can: ConnectableBlokk_blokk_Image_can | null;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
 }
 
@@ -259,6 +262,8 @@ export interface ConnectableBlokk_blokk_Link {
   src_2x: string | null;
   src_3x: string | null;
   external_url: string | null;
+  content: string | null;
+  source_url: string | null;
   can: ConnectableBlokk_blokk_Link_can | null;
 }
 

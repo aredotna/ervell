@@ -130,6 +130,7 @@ export interface ExpandedBlockRow_Link {
   created_at: string | null;
   updated_at: string | null;
   image_url: string | null;
+  content: string | null;
   source: ExpandedBlockRow_Link_source | null;
   title: string;
   user: ExpandedBlockRow_Link_user | null;

@@ -16,4 +16,5 @@ export interface KonnectableLink {
   src_2x: string | null;
   src_3x: string | null;
   external_url: string | null;
+  content: string | null;
 }

@@ -222,6 +222,9 @@ export interface ProfileTableContentsFragment_contents_Image {
   can: ProfileTableContentsFragment_contents_Image_can | null;
   image_url: string | null;
   href: string | null;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   source: ProfileTableContentsFragment_contents_Image_source | null;
 }
@@ -334,6 +337,9 @@ export interface ProfileTableContentsFragment_contents_Text {
   can: ProfileTableContentsFragment_contents_Text_can | null;
   content: string;
   html: string;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   href: string | null;
   source: ProfileTableContentsFragment_contents_Text_source | null;

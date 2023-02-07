@@ -36,6 +36,11 @@ export const baseMixin = css`
     margin: 0px 0px 0.3em;
     line-height: 1.45;
   }
+
+  img {
+    margin-top: 1rem;
+    max-width: 100%;
+  }
 `
 
 const tinyMixin = css`

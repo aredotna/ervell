@@ -83,6 +83,9 @@ export interface FullBlock_Image {
   editable_title: string;
   editable_description: string | null;
   can: FullBlock_Image_can | null;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   downloadable_image: string | null;
   editable_alt_text: string | null;
@@ -130,6 +133,9 @@ export interface FullBlock_Text {
   shareable_title: string;
   editable_title: string;
   editable_description: string | null;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   editable_content: string;
 }
@@ -167,6 +173,7 @@ export interface FullBlock_Link {
   image_url: string | null;
   image_updated_at: string | null;
   image_updated_at_unix_time: string | null;
+  content: string | null;
   source: FullBlock_Link_source | null;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;

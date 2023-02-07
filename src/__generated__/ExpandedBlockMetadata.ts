@@ -122,6 +122,9 @@ export interface ExpandedBlockMetadata_block_Image {
   source: ExpandedBlockMetadata_block_Image_source | null;
   shareable_href: string | null;
   shareable_title: string;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   downloadable_image: string | null;
   editable_title: string;
@@ -168,6 +171,9 @@ export interface ExpandedBlockMetadata_block_Text {
   source: ExpandedBlockMetadata_block_Text_source | null;
   shareable_href: string | null;
   shareable_title: string;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   editable_title: string;
   editable_description: string | null;

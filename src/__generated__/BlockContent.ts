@@ -53,6 +53,7 @@ export interface BlockContent_blokk_Link {
   image_url: string | null;
   image_updated_at: string | null;
   image_updated_at_unix_time: string | null;
+  content: string | null;
   source: BlockContent_blokk_Link_source | null;
 }
 
