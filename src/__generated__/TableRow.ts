@@ -222,6 +222,9 @@ export interface TableRow_blokk_Image {
   can: TableRow_blokk_Image_can | null;
   image_url: string | null;
   href: string | null;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   source: TableRow_blokk_Image_source | null;
 }
@@ -334,6 +337,9 @@ export interface TableRow_blokk_Text {
   can: TableRow_blokk_Text_can | null;
   content: string;
   html: string;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   href: string | null;
   source: TableRow_blokk_Text_source | null;

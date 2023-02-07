@@ -94,6 +94,7 @@ export interface ExpandedBlockRowContents_block_Link {
   image_url: string | null;
   image_updated_at: string | null;
   image_updated_at_unix_time: string | null;
+  content: string | null;
   source: ExpandedBlockRowContents_block_Link_source | null;
 }
 

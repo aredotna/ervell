@@ -83,6 +83,9 @@ export interface updateBlockCellMutation_update_block_block_Image {
   original_image_url: string | null;
   alt_text: string | null;
   can: updateBlockCellMutation_update_block_block_Image_can | null;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   downloadable_image: string | null;
   editable_alt_text: string | null;
@@ -130,6 +133,9 @@ export interface updateBlockCellMutation_update_block_block_Text {
   content: string;
   raw: string;
   can: updateBlockCellMutation_update_block_block_Text_can | null;
+  /**
+   * URL to find the original image on various services
+   */
   find_original_url: string | null;
   editable_content: string;
 }
@@ -179,6 +185,7 @@ export interface updateBlockCellMutation_update_block_block_Link {
   image_url: string | null;
   image_updated_at: string | null;
   image_updated_at_unix_time: string | null;
+  content: string | null;
   can: updateBlockCellMutation_update_block_block_Link_can | null;
 }
 

@@ -83,9 +83,14 @@ const FullBlockActions: React.FC<FullBlockActionsProps> = ({
     context: [],
   }
 
+  const linkIsFullTextTweet =
+    block?.__typename === 'Link' &&
+    block?.source_url?.match(/twitter\.com/) &&
+    block?.content
+
   return (
     <Container>
-      {block?.__typename === 'Link' && !hideLinkMode && (
+      {block?.__typename === 'Link' && !linkIsFullTextTweet && !hideLinkMode && (
         <Inner withBorder>
           <FullBlockSwitchViewMode
             linkViewMode={linkViewMode}
@@ -101,12 +106,13 @@ const FullBlockActions: React.FC<FullBlockActionsProps> = ({
           </Text>
         )}
 
-        {(block?.can.potentially_edit_thumbnail ||
-          block?.can.edit_thumbnail) && (
-          <>
-            <FullBlockChangeThumbnail block={block} />
-          </>
-        )}
+        {!linkIsFullTextTweet &&
+          (block?.can.potentially_edit_thumbnail ||
+            block?.can.edit_thumbnail) && (
+            <>
+              <FullBlockChangeThumbnail block={block} />
+            </>
+          )}
 
         {showOpenFullBlock && block?.href && (
           <Link to={block.href} state={state}>
