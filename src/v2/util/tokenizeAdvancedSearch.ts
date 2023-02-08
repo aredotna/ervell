@@ -211,12 +211,8 @@ const getUrlPath = (variables: AdvancedSearchVariables) => {
 
 export const generateUrlFromVariables = (
   variables: AdvancedSearchVariables,
-  paramsOnly?: boolean,
-  basePath?: string
+  paramsOnly?: boolean
 ) => {
-  // remove trailing slash from basePath
-  basePath = basePath?.replace(/\/$/, '')
-
   const path = getUrlPath(variables)
 
   const params = stringify(omit(variables, ['page', 'per']), {
