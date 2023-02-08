@@ -30,9 +30,16 @@ interface AllProps {
   sort: SearchSorts
   identifiable: ProfilePageIdentifiable
   fetchPolicy: FetchPolicy
+  seed?: number
 }
 
-const All: React.FC<AllProps> = ({ id, sort, identifiable, fetchPolicy }) => {
+const All: React.FC<AllProps> = ({
+  id,
+  sort,
+  identifiable,
+  fetchPolicy,
+  seed,
+}) => {
   const count =
     identifiable.__typename == 'Group'
       ? identifiable.counts.channels
@@ -44,6 +51,7 @@ const All: React.FC<AllProps> = ({ id, sort, identifiable, fetchPolicy }) => {
         type={null}
         sort={sort}
         fetchPolicy={fetchPolicy}
+        seed={seed}
       />
     </EmptyMessageOrComponent>
   )
@@ -55,6 +63,7 @@ interface BlocksProps {
   identifiable: ProfilePageIdentifiable_User
   fetchPolicy: FetchPolicy
   type: ConnectableTypeEnum
+  seed?: number
 }
 
 const Blocks: React.FC<BlocksProps> = ({
@@ -63,6 +72,7 @@ const Blocks: React.FC<BlocksProps> = ({
   identifiable,
   fetchPolicy,
   type,
+  seed,
 }) => {
   type = type || ConnectableTypeEnum.BLOCK
   return (
@@ -75,6 +85,7 @@ const Blocks: React.FC<BlocksProps> = ({
         type={type}
         sort={sort}
         fetchPolicy={fetchPolicy}
+        seed={seed}
       />
     </EmptyMessageOrComponent>
   )
@@ -85,6 +96,7 @@ interface ChannelsProps {
   sort: ChannelsSort
   identifiable: ProfilePageIdentifiable
   fetchPolicy: FetchPolicy
+  seed?: number
 }
 
 const Channels: React.FC<ChannelsProps> = ({
@@ -92,12 +104,18 @@ const Channels: React.FC<ChannelsProps> = ({
   sort,
   identifiable,
   fetchPolicy,
+  seed,
 }) => (
   <EmptyMessageOrComponent
     identifiable={identifiable}
     count={identifiable.counts.channels}
   >
-    <ProfileChannels id={id} sort={sort} fetchPolicy={fetchPolicy} />
+    <ProfileChannels
+      id={id}
+      sort={sort}
+      fetchPolicy={fetchPolicy}
+      seed={seed}
+    />
   </EmptyMessageOrComponent>
 )
 
@@ -190,6 +208,7 @@ interface ProfileViewsProps {
   type: ConnectableTypeEnum
   view: ProfileViewTypes
   scheme: 'GROUP' | 'DEFAULT'
+  seed?: number
 }
 
 const ProfileViews: React.FC<ProfileViewsProps> = ({
@@ -201,6 +220,7 @@ const ProfileViews: React.FC<ProfileViewsProps> = ({
   followType,
   type,
   scheme,
+  seed,
 }) => {
   const [renderedView, setRenderedView] = useState<ProfileViewTypes>(view)
   const [fetchPolicy] = useState<FetchPolicy>('cache-first')
@@ -234,6 +254,7 @@ const ProfileViews: React.FC<ProfileViewsProps> = ({
           sort={sort as SearchSorts}
           identifiable={identifiable}
           fetchPolicy={fetchPolicy}
+          seed={seed}
         />
       )
     case 'channels':
@@ -243,6 +264,7 @@ const ProfileViews: React.FC<ProfileViewsProps> = ({
           sort={sort as ChannelsSort}
           identifiable={identifiable}
           fetchPolicy={fetchPolicy}
+          seed={seed}
         />
       )
     case 'blocks':
@@ -253,6 +275,7 @@ const ProfileViews: React.FC<ProfileViewsProps> = ({
           identifiable={identifiable as ProfilePageIdentifiable_User}
           fetchPolicy={fetchPolicy}
           type={type}
+          seed={seed}
         />
       )
     case 'index':
