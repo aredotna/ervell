@@ -85,7 +85,6 @@ export const MyPaymentMethod: React.FC<MyPaymentMethodProps> = ({ onDone }) => {
   }, [elements, stripe])
 
   const changeDefaultCard = useCallback(async () => {
-    console.log({ defaultPaymentMethodId })
     if (!defaultPaymentMethodId) {
       return
     }
@@ -97,7 +96,6 @@ export const MyPaymentMethod: React.FC<MyPaymentMethodProps> = ({ onDone }) => {
 
   const handleChangeDefaultCard = useCallback(
     id => {
-      console.log({ id })
       setDefaultPaymentMethodId(id)
     },
     [setDefaultPaymentMethodId]

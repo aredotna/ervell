@@ -50,8 +50,6 @@ export const ProfileContents: React.FC<ProfileContentsProps> = ({
     q: null,
   })
 
-  console.log({ seed })
-
   const { data, loading, error, fetchMore } = useQuery<ProfileContentsQuery>(
     profileContentsQuery,
     {

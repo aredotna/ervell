@@ -56,7 +56,6 @@ export const MyBillingAddress: React.FC<MyBillingAddressProps> = ({
       const address = elements.getElement('address') as any
 
       address.getValue().then((result: StripeAddressElementChangeEvent) => {
-        console.log({ value: result.value })
         updateBillingAddress({
           variables: {
             line1: result.value.address.line1,
