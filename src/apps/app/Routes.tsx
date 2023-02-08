@@ -48,6 +48,9 @@ export const AppRoutes = () => {
   const state = location.state as any
   const type = useNavigationType()
 
+  // Get a random integer as a seed
+  const seed = Math.floor(Math.random() * 1000000)
+
   const background = state && state.background && JSON.parse(state.background)
 
   const preventScroll = state && state.preventScroll
@@ -129,9 +132,18 @@ export const AppRoutes = () => {
           path=":id/following"
           element={<ProfilePage view="following" />}
         />
-        <Route path=":id/all" element={<ProfilePage view="all" />} />
-        <Route path=":id/channels" element={<ProfilePage view="channels" />} />
-        <Route path=":id/blocks" element={<ProfilePage view="blocks" />} />
+        <Route
+          path=":id/all"
+          element={<ProfilePage view="all" seed={seed} />}
+        />
+        <Route
+          path=":id/channels"
+          element={<ProfilePage view="channels" seed={seed} />}
+        />
+        <Route
+          path=":id/blocks"
+          element={<ProfilePage view="blocks" seed={seed} />}
+        />
         <Route
           path=":id/followers"
           element={<ProfilePage view="followers" />}
@@ -143,7 +155,7 @@ export const AppRoutes = () => {
 
         <Route path=":id/search" element={<ProfileSearchPage />} />
 
-        <Route path=":id" element={<ProfilePage />} />
+        <Route path=":id" element={<ProfilePage seed={seed} />} />
 
         {/* Channel */}
         <Route
