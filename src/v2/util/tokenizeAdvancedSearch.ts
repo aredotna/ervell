@@ -1,6 +1,7 @@
 import { AdvancedSearchVariables } from '__generated__/AdvancedSearch'
 import { stringify } from 'qs'
 import {
+  ExtensionsEnum,
   FieldsEnum,
   SortDirection,
   SortOrderEnum,
@@ -39,6 +40,11 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
   const fieldsTokens = colonTokenPairs
     .filter(token => token.key === 'fields')
     .map(token => FieldsEnum[token.value.toUpperCase()])
+    .filter(Boolean)
+
+  const extensionsTokens = colonTokenPairs
+    .filter(token => token.key === 'extensions')
+    .map(token => ExtensionsEnum[token.value.toUpperCase()])
     .filter(Boolean)
 
   const scopedWhereTokens = colonTokenPairs
@@ -87,6 +93,7 @@ export const tokenizeSearch = (search: string): AdvancedSearchVariables => {
     where: whereObject ? whereObject : undefined,
     what: whatTokens.length ? { facets: whatTokens } : undefined,
     fields: fieldsTokens.length ? { facets: fieldsTokens } : undefined,
+    extensions: extensionsTokens.length ? extensionsTokens : undefined,
     order: sortToken ? { facet: sortToken, dir: directionToken } : undefined,
     per,
     page,
@@ -173,6 +180,9 @@ export const stringifyVariables = (variables: AdvancedSearchVariables) => {
     stringifyWhere(variables),
     stringifyVariable(variables, 'what'),
     stringifyVariable(variables, 'fields'),
+    variables?.extensions?.length
+      ? variables.extensions.map(e => `extensions:${e} `)
+      : undefined,
     variables?.order
       ? stringifyOrder(variables.order.facet, variables.order.dir)
       : undefined,
