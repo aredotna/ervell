@@ -58,7 +58,7 @@ viewModeMiddleware = require './middleware/view_mode'
 checkSessionMiddleware = require './middleware/check_session'
 isInverted = require '../components/night_mode/middleware'
 { default: assetMiddleware } = require "./middleware/asset"
-{ default: isSpiderMiddleware } = require './middleware/isSpider'
+{ default: sharifyLocals } = require './middleware/sharifyLocals'
 { default: ensureWWWMiddleware } = require './middleware/ensureWWW'
 { default: rateLimiterMiddleware } = require './middleware/rateLimit'
 
@@ -175,7 +175,7 @@ module.exports = (app) ->
     .use ensureWWWMiddleware
     .use isInverted
     .use viewModeMiddleware
-    .use isSpiderMiddleware
+    .use sharifyLocals
     .use rateLimiterMiddleware
 
   console.log 'Mounting apps...'
