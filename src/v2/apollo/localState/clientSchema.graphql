@@ -51,4 +51,5 @@ type ClientSharify {
   IS_OUTSIDE_MAIN_ROUTER: Boolean
   ADMIN_SLUGS: [String]
   THEME: String
+  SEED: String
 }
