@@ -42,11 +42,7 @@ export default function({
 
       if (isFullSearch(elementOrVariables)) {
         searchInputRef?.current?.blur()
-        const url = generateUrlFromVariables(
-          elementOrVariables,
-          false,
-          pathname
-        )
+        const url = generateUrlFromVariables(elementOrVariables, false)
         return navigate(url)
       }
 
