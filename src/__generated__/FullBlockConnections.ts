@@ -119,6 +119,7 @@ export interface FullBlockConnections_Attachment_counts {
   public_channels: number | null;
   current_user_channels: number | null;
   private_channels: number | null;
+  channels_with_same_source: number | null;
 }
 
 export interface FullBlockConnections_Attachment_current_user_channels_owner_Group {
@@ -219,6 +220,37 @@ export interface FullBlockConnections_Attachment_source {
   url: string | null;
 }
 
+export interface FullBlockConnections_Attachment_channels_with_same_source_owner_Group {
+  __typename: "Group";
+  id: number;
+  name: string;
+  visibility: string;
+}
+
+export interface FullBlockConnections_Attachment_channels_with_same_source_owner_User {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export type FullBlockConnections_Attachment_channels_with_same_source_owner = FullBlockConnections_Attachment_channels_with_same_source_owner_Group | FullBlockConnections_Attachment_channels_with_same_source_owner_User;
+
+export interface FullBlockConnections_Attachment_channels_with_same_source_counts {
+  __typename: "ChannelCounts";
+  contents: number | null;
+}
+
+export interface FullBlockConnections_Attachment_channels_with_same_source {
+  __typename: "Channel";
+  id: number;
+  href: string | null;
+  visibility: string;
+  title: string;
+  owner: FullBlockConnections_Attachment_channels_with_same_source_owner;
+  counts: FullBlockConnections_Attachment_channels_with_same_source_counts | null;
+  label: string;
+}
+
 export interface FullBlockConnections_Attachment {
   __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
   id: number;
@@ -227,6 +259,7 @@ export interface FullBlockConnections_Attachment {
   public_channels: FullBlockConnections_Attachment_public_channels[] | null;
   private_channels: FullBlockConnections_Attachment_private_channels[] | null;
   source: FullBlockConnections_Attachment_source | null;
+  channels_with_same_source: FullBlockConnections_Attachment_channels_with_same_source[] | null;
 }
 
 export type FullBlockConnections = FullBlockConnections_Channel | FullBlockConnections_Attachment;

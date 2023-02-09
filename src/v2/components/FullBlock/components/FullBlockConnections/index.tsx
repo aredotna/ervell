@@ -19,6 +19,7 @@ import {
 } from '__generated__/FullBlockConnectionsQuery'
 import { useQuery } from '@apollo/client'
 import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
+import FullBlockChannelsAlsoIn from 'v2/components/FullBlock/components/FullBlockChannelsAlsoIn'
 
 interface FullBlockConnectionsProps {
   id: string
@@ -78,7 +79,14 @@ export const FullBlockConnections: React.FC<FullBlockConnectionsProps> = ({
     return null
 
   const {
-    block: { current_user_channels, private_channels, public_channels, counts },
+    block,
+    block: {
+      current_user_channels,
+      private_channels,
+      public_channels,
+      counts,
+      source,
+    },
   } = data
 
   const total = loading ? 0 : private_channels.length + public_channels.length
@@ -178,6 +186,22 @@ export const FullBlockConnections: React.FC<FullBlockConnectionsProps> = ({
 
       {hasMore && !(loading || loadingMore) && (
         <LoadMore onLoadMore={onLoadMore} />
+      )}
+
+      {counts && counts.channels_with_same_source > 0 && (
+        <React.Fragment>
+          <Text
+            mt={7}
+            f={1}
+            color="gray.medium"
+            textAlign="center"
+            textTransform="uppercase"
+          >
+            Blocks with <span title={source.url}>this URL</span> also appear in
+          </Text>
+
+          <FullBlockChannelsAlsoIn block={block} loading={loading} />
+        </React.Fragment>
       )}
     </Box>
   )
