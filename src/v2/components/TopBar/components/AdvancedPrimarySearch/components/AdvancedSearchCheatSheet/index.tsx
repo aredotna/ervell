@@ -110,6 +110,19 @@ const CheatSheetModal: React.FC = () => {
             or channel
           </li>
         </ul>
+        <strong>File types</strong>
+        <ul>
+          <li>
+            Type <strong>file:[extension]</strong> to search for a specific file
+            type
+          </li>
+          <li>
+            Type <strong>file:pdf</strong> to search for PDFs
+          </li>
+          <li>
+            Type <strong>file:mp3</strong> to search for mp3s
+          </li>
+        </ul>
         <strong>Combined scopes</strong>
         <ul>
           <li>
