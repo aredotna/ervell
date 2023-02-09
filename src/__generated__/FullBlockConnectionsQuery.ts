@@ -217,6 +217,38 @@ export interface FullBlockConnectionsQuery_block_Attachment_counts {
   public_channels: number | null;
   current_user_channels: number | null;
   private_channels: number | null;
+  channels_with_same_source: number | null;
+}
+
+export interface FullBlockConnectionsQuery_block_Attachment_channels_with_same_source_owner_Group {
+  __typename: "Group";
+  id: number;
+  name: string;
+  visibility: string;
+}
+
+export interface FullBlockConnectionsQuery_block_Attachment_channels_with_same_source_owner_User {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export type FullBlockConnectionsQuery_block_Attachment_channels_with_same_source_owner = FullBlockConnectionsQuery_block_Attachment_channels_with_same_source_owner_Group | FullBlockConnectionsQuery_block_Attachment_channels_with_same_source_owner_User;
+
+export interface FullBlockConnectionsQuery_block_Attachment_channels_with_same_source_counts {
+  __typename: "ChannelCounts";
+  contents: number | null;
+}
+
+export interface FullBlockConnectionsQuery_block_Attachment_channels_with_same_source {
+  __typename: "Channel";
+  id: number;
+  href: string | null;
+  visibility: string;
+  title: string;
+  owner: FullBlockConnectionsQuery_block_Attachment_channels_with_same_source_owner;
+  counts: FullBlockConnectionsQuery_block_Attachment_channels_with_same_source_counts | null;
+  label: string;
 }
 
 export interface FullBlockConnectionsQuery_block_Attachment {
@@ -227,6 +259,7 @@ export interface FullBlockConnectionsQuery_block_Attachment {
   private_channels: FullBlockConnectionsQuery_block_Attachment_private_channels[] | null;
   source: FullBlockConnectionsQuery_block_Attachment_source | null;
   counts: FullBlockConnectionsQuery_block_Attachment_counts | null;
+  channels_with_same_source: FullBlockConnectionsQuery_block_Attachment_channels_with_same_source[] | null;
 }
 
 export type FullBlockConnectionsQuery_block = FullBlockConnectionsQuery_block_Channel | FullBlockConnectionsQuery_block_Attachment;
