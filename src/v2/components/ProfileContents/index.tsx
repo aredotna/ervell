@@ -16,6 +16,7 @@ import profileContentsQuery from 'v2/components/ProfileContents/queries/profileC
 import { ConnectableTypeEnum, SearchSorts } from '__generated__/globalTypes'
 import { ProfileContentsQuery } from '__generated__/ProfileContentsQuery'
 import usePrevious from 'v2/hooks/usePrevious'
+import useSeed from 'v2/hooks/useSeed'
 
 interface ProfileContentsProps {
   id: string | number
@@ -37,9 +38,9 @@ export const ProfileContents: React.FC<ProfileContentsProps> = ({
   type,
   sort,
   fetchPolicy,
-  seed,
 }) => {
   const isSpider = useIsSpiderRequesting()
+  const seed = useSeed()
 
   const [{ page, per, q, hasMore }, setState] = useMergeState<
     ProfileContentsState
@@ -49,8 +50,6 @@ export const ProfileContents: React.FC<ProfileContentsProps> = ({
     hasMore: true,
     q: null,
   })
-
-  console.log({ seed })
 
   const { data, loading, error, fetchMore } = useQuery<ProfileContentsQuery>(
     profileContentsQuery,

@@ -57,7 +57,6 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
   filter,
   type,
   followType,
-  seed,
 }) => {
   const { data, loading, error } = useQuery<
     ProfilePageType,
@@ -126,7 +125,6 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
           followType={followType}
           type={type}
           scheme={scheme}
-          seed={seed}
         />
 
         <MobileOrChildren>
@@ -158,7 +156,6 @@ const setValid = (value, validValues, defaultValue) => {
 // Weird container extracted from router
 const ProfilePageWrapper: React.FC<{
   view?: string
-  seed?: number
 }> = props => {
   const params = useParams()
   const [query] = useSearchParams()
@@ -200,7 +197,6 @@ const ProfilePageWrapper: React.FC<{
       filter={indexFilter}
       type={blockFilter}
       followType={followType}
-      seed={props.seed}
     />
   )
 }

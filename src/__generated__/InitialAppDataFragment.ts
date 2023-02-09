@@ -54,6 +54,7 @@ export interface InitialAppDataFragment_sharify {
   IS_OUTSIDE_MAIN_ROUTER: boolean | null;
   THEME: string | null;
   ADMIN_SLUGS: (string | null)[] | null;
+  SEED: string | null;
 }
 
 export interface InitialAppDataFragment {

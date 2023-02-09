@@ -40,6 +40,7 @@ export default gql`
       IS_OUTSIDE_MAIN_ROUTER
       THEME
       ADMIN_SLUGS
+      SEED
     }
   }
 `
