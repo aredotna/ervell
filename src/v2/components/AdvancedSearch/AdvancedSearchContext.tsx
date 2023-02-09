@@ -586,8 +586,8 @@ export const AdvancedSearchContextProvider: React.FC<AdvancedSearchContextProps>
   }, [])
 
   const generateUrl = useCallback(
-    (paramsOnly?: boolean, basePath?: string) => {
-      return generateUrlFromVariables(state.variables, paramsOnly, basePath)
+    (paramsOnly?: boolean) => {
+      return generateUrlFromVariables(state.variables, paramsOnly)
     },
     [state.query]
   )
