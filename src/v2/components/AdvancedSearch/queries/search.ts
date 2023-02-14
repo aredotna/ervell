@@ -10,6 +10,7 @@ export default gql`
     $what: What
     $fields: Fields
     $order: Order
+    $extensions: [ExtensionsEnum!]
     $page: Int
     $per: Int
     $before: String
@@ -22,6 +23,7 @@ export default gql`
         what: $what
         fields: $fields
         order: $order
+        extensions: $extensions
         per: $per
         page: $page
         before: $before

@@ -6,6 +6,7 @@ export default gql`
     $where: [Where!]
     $what: What
     $fields: Fields
+    $extensions: [ExtensionsEnum!]
     $order: Order
     $page: Int
     $per: Int
@@ -16,6 +17,7 @@ export default gql`
         where: $where
         what: $what
         fields: $fields
+        extensions: $extensions
         order: $order
         per: $per
         page: $page

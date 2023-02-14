@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { Term, Where, What, Fields, Order, WhatEnum, WhereEnum, FieldsEnum, SortOrderEnum } from "./globalTypes";
+import { Term, Where, What, Fields, ExtensionsEnum, Order, WhatEnum, WhereEnum, FieldsEnum, SortOrderEnum } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: AdvancedQuickSearch
@@ -176,6 +176,7 @@ export interface AdvancedQuickSearchVariables {
   where?: Where[] | null;
   what?: What | null;
   fields?: Fields | null;
+  extensions?: ExtensionsEnum[] | null;
   order?: Order | null;
   page?: number | null;
   per?: number | null;
