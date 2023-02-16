@@ -1,22 +1,21 @@
 import React, { useCallback, useState } from 'react'
-
-import billingQuery from 'v2/components/Billing/queries/groupBilling'
-
-import subscribeToPremiumForUsersMutation from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupCheckout/mutations/subscribeToPremiumForUsers'
+import { useMutation } from '@apollo/client'
 
 import Box from 'v2/components/UI/Box'
+import Modal from 'v2/components/UI/Modal'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import Count from 'v2/components/UI/Count'
 import GenericButton from 'v2/components/UI/GenericButton'
 import { LabelledInput, Label } from 'v2/components/UI/Inputs'
-import CouponCode from 'v2/components/Billing/components/CouponCode'
-import CreditCard from 'v2/components/Billing/components/CreditCard'
 import PlanChanges from 'v2/components/Billing/components/PlanChanges'
 import StatusOverlay from 'v2/components/Billing/components/StatusOverlay'
+import { PaymentForm } from 'v2/components/Billing/components/PaymentForm'
+
+import subscribeToPremiumForUsersMutation from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupCheckout/mutations/subscribeToPremiumForUsers'
+
 import { MyGroupCheckout as MyGroupCheckoutType } from '__generated__/MyGroupCheckout'
 import { UserSelection_users } from '__generated__/UserSelection'
 import { SupportedPlanEnum } from '__generated__/globalTypes'
-import { useMutation } from '@apollo/client'
 import {
   SubscribeToPremiumForUsers,
   SubscribeToPremiumForUsersVariables,
@@ -47,13 +46,30 @@ export const MyGroupCheckout: React.FC<MyGroupCheckoutProps> = ({
   const [mode, setMode] = useState<'resting' | 'processing'>('resting')
   const [couponCode, setCouponCode] = useState<string | null>(null)
 
-  const handleCouponCode = useCallback(code => setCouponCode(code), [])
   const handleTotalChange = () => {}
 
   const [subscribeToPremiumForUsers] = useMutation<
     SubscribeToPremiumForUsers,
     SubscribeToPremiumForUsersVariables
   >(subscribeToPremiumForUsersMutation)
+
+  const handleOpenPaymentModal = useCallback(() => {
+    const planId = selectedPlan.toUpperCase() as SupportedPlanEnum
+
+    const modalProps = { width: '70%', maxWidth: '60em' }
+    const modal = new Modal(
+      PaymentForm,
+      {
+        planId,
+        onClose: () => setMode('resting'),
+        userIds: upgradeableUsers.map(({ id }) => id),
+        groupId: group.id,
+      },
+      modalProps
+    )
+    modal.open()
+    setMode('processing')
+  }, [selectedPlan])
 
   const handleSubmit = useCallback(
     e => {
@@ -71,7 +87,7 @@ export const MyGroupCheckout: React.FC<MyGroupCheckoutProps> = ({
           plan_id: selectedPlan.toUpperCase() as SupportedPlanEnum,
           coupon_code: couponCode,
         },
-        refetchQueries: [{ query: billingQuery }],
+        // refetchQueries: [{ query: billingQuery }],
         awaitRefetchQueries: true,
       })
         .then(() => {
@@ -86,7 +102,7 @@ export const MyGroupCheckout: React.FC<MyGroupCheckoutProps> = ({
           return onError(err)
         })
     },
-    [customer, selectedPlan]
+    [customer, selectedPlan, couponCode, upgradeableUsers]
   )
 
   return (
@@ -99,22 +115,6 @@ export const MyGroupCheckout: React.FC<MyGroupCheckoutProps> = ({
 
       {selectedPlan !== 'basic' && (
         <form onSubmit={handleSubmit}>
-          <LabelledInput>
-            <Label>Billed to</Label>
-
-            <CreditCard customer={customer} />
-          </LabelledInput>
-
-          <LabelledInput>
-            <Label>Coupon</Label>
-
-            <CouponCode
-              key={`coupon_${mode}`}
-              onDebouncedCode={handleCouponCode}
-              code={couponCode}
-            />
-          </LabelledInput>
-
           {upgradeableUsers.length > 0 && (
             <LabelledInput>
               <Label />
@@ -134,10 +134,8 @@ export const MyGroupCheckout: React.FC<MyGroupCheckoutProps> = ({
 
             <div>
               <GenericButton
-                onClick={handleSubmit}
-                disabled={
-                  upgradeableUsers.length === 0 || !customer.default_credit_card
-                }
+                onClick={handleOpenPaymentModal}
+                disabled={upgradeableUsers.length === 0}
               >
                 {upgradeableUsers.length > 0 ? (
                   <span>

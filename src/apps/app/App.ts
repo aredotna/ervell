@@ -10,6 +10,7 @@ import { AppRoutes as Routes } from './Routes'
 import ensureLoggedIn from 'lib/middleware/ensureLoggedIn'
 import createAuthenticatedService from 'apps/authentication/mutations/createAuthenticatedService'
 import updateSubscriptionMutation from './mutations/updateSubscriptionMutation'
+import updateGroupSubscriptionMutation from './mutations/updateGroupSubscriptionMutation'
 
 export const App = Router()
 
@@ -44,13 +45,45 @@ const refreshSubscription = (req, res, next) => {
       return user.fetch({ headers })
     })
     .then(() => {
-      req.login(user, err => {
+      return req.login(user, err => {
         if (err) return next(err)
 
-        // IMPORTANT: return the `response` instead of the `user.toJSON()`
-        // Why? Because `user.toJSON()` is already parsed. Returning
-        // an already parsed response will make it unparesable.
         return res.redirect(`/settings/billing`)
+      })
+    })
+    .catch(err => next(err))
+}
+
+const refreshGroupSubscription = (req, res, next) => {
+  const { user } = req
+
+  if (!user) return next()
+
+  const headers = {
+    'X-AUTH-TOKEN': user.get('access_token'),
+  }
+
+  const subscription_id = String(req.query.subscription_id)
+  const group_id = String(req.query.group_id)
+  const user_ids = req.query.user_ids
+
+  req.apollo.client
+    .mutate({
+      mutation: updateGroupSubscriptionMutation,
+      variables: {
+        subscription_id,
+        group_id,
+        user_ids,
+      },
+    })
+    .then(() => {
+      return user.fetch({ headers })
+    })
+    .then(() => {
+      return req.login(user, err => {
+        if (err) return next(err)
+
+        return res.redirect(`/settings/group_billing`)
       })
     })
     .catch(err => next(err))
@@ -110,6 +143,11 @@ App.get(
     ...resolve
   )
   .get('/settings/refresh_subscription', apolloMiddleware, refreshSubscription)
+  .get(
+    '/settings/refresh_group_subscription',
+    apolloMiddleware,
+    refreshGroupSubscription
+  )
   .get('/settings', ensureLoggedIn, ...resolve)
   .get('/settings/*', ensureLoggedIn, ...resolve)
   .get(

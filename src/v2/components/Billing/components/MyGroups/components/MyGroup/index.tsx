@@ -5,6 +5,7 @@ import mapErrors from 'v2/util/mapErrors'
 import Box from 'v2/components/UI/Box'
 import Alert from 'v2/components/UI/Alert'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import PremiumAlert from 'v2/components/Billing/components/MyGroups/components/PremiumAlert'
 import MyGroupHeader from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupHeader'
 import UpgradeSelection from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/UpgradeSelection'
@@ -12,13 +13,21 @@ import MyGroupCheckout from 'v2/components/Billing/components/MyGroups/component
 import CreditCard from 'v2/components/Billing/components/CreditCard'
 import { LabelledInput, Label } from 'v2/components/UI/Inputs'
 import { MyGroupCheckout as MyGroupCheckoutType } from '__generated__/MyGroupCheckout'
-import { MyGroups_groups, MyGroups_groups_users } from '__generated__/MyGroups'
+import { MyGroups_groups_users } from '__generated__/MyGroups'
 import useMergeState from 'v2/hooks/useMergeState'
 import { SupportedPlanEnum } from '__generated__/globalTypes'
+import { GroupBilling_me_groups } from '__generated__/GroupBilling'
+import { MyGroup_group, MyGroup as MyGroupType } from '__generated__/MyGroup'
+import myGroup from './queries/myGroup'
+import { useQuery } from '@apollo/client'
 
+interface MyGroupLoaderProps {
+  me: MyGroupCheckoutType
+  group_id: GroupBilling_me_groups['id']
+}
 interface MyGroupProps {
   me: MyGroupCheckoutType
-  group: MyGroups_groups
+  group: MyGroup_group
 }
 
 interface MyGroupState {
@@ -27,6 +36,22 @@ interface MyGroupState {
   selectedPlan?: 'basic' | SupportedPlanEnum
   upgradeableUsers?: MyGroups_groups_users[]
 }
+
+export const MyGroupLoader: React.FC<MyGroupLoaderProps> = ({
+  group_id,
+  me,
+}) => {
+  const { loading, error, data } = useQuery<MyGroupType>(myGroup, {
+    variables: { id: group_id },
+  })
+
+  if (loading) return <LoadingIndicator my={9} />
+  if (error) return <ErrorAlert>{error.message}</ErrorAlert>
+
+  return <MyGroup me={me} group={data.group} />
+}
+
+export default MyGroupLoader
 
 export const MyGroup: React.FC<MyGroupProps> = ({ me, group, ...rest }) => {
   const [state, setState] = useMergeState<MyGroupState>({
@@ -173,5 +198,3 @@ export const MyGroup: React.FC<MyGroupProps> = ({ me, group, ...rest }) => {
     </Box>
   )
 }
-
-export default MyGroup

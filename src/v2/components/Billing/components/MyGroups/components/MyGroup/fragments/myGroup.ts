@@ -5,7 +5,7 @@ import upgradeSelectionFragment from 'v2/components/Billing/components/MyGroups/
 import userSelectionFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/fragments/userSelection'
 
 export default gql`
-  fragment MyGroup on Group {
+  fragment MyGroupFragment on Group {
     __typename
     id
     is_premium
