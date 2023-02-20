@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-import myCreditCardFragment from 'v2/components/MyCreditCard/fragments/myCreditCard'
+import myPaymentMethodFragment from 'v2/components/MyPaymentMethod/fragments/customerPaymentMethodsFragment'
 
 export default gql`
   fragment MyGroupCheckout on Me {
@@ -9,8 +9,8 @@ export default gql`
     customer {
       __typename
       id
-      ...MyCreditCard
+      ...CustomerPaymentMethodsFragment
     }
   }
-  ${myCreditCardFragment}
+  ${myPaymentMethodFragment}
 `

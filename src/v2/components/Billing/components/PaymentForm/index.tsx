@@ -216,7 +216,11 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({
         }
 
         const variables = groupId
-          ? { subscription_id: subscriptionId, user_ids: userIds, groupId }
+          ? {
+              subscription_id: subscriptionId,
+              user_ids: userIds,
+              group_id: groupId,
+            }
           : { subscription_id: subscriptionId }
 
         const params = stringify(variables, {
@@ -227,6 +231,7 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({
         const return_url = groupId
           ? `${window.location.origin}/settings/refresh_group_subscription?${params} `
           : `${window.location.origin}/settings/refresh_subscription?${params}`
+
         setMode('confirming')
 
         stripe
@@ -414,7 +419,7 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({
         <OrderSummary
           planId={planIdState}
           groupId={groupId}
-          quantity={userIds.length}
+          quantity={userIds?.length}
           country={country}
           postalCode={postalCode}
           couponCode={couponCode}

@@ -7,7 +7,12 @@
 // GraphQL query operation: GroupBilling
 // ====================================================
 
-export interface GroupBilling_me_customer_default_credit_card {
+export interface GroupBilling_me_customer_default_payment_method {
+  __typename: "PaymentMethod";
+  id: string | null;
+}
+
+export interface GroupBilling_me_customer_payment_methods_card {
   __typename: "CreditCard";
   id: string | null;
   brand: string | null;
@@ -16,20 +21,17 @@ export interface GroupBilling_me_customer_default_credit_card {
   exp_month: string | null;
 }
 
-export interface GroupBilling_me_customer_credit_cards {
-  __typename: "CreditCard";
+export interface GroupBilling_me_customer_payment_methods {
+  __typename: "PaymentMethod";
   id: string | null;
-  brand: string | null;
-  last4: string | null;
-  exp_year: string | null;
-  exp_month: string | null;
+  card: GroupBilling_me_customer_payment_methods_card | null;
 }
 
 export interface GroupBilling_me_customer {
   __typename: "Customer";
   id: number;
-  default_credit_card: GroupBilling_me_customer_default_credit_card | null;
-  credit_cards: GroupBilling_me_customer_credit_cards[] | null;
+  default_payment_method: GroupBilling_me_customer_default_payment_method | null;
+  payment_methods: GroupBilling_me_customer_payment_methods[] | null;
 }
 
 export interface GroupBilling_me_groups {

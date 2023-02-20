@@ -6,7 +6,6 @@ import Modal from 'v2/components/UI/Modal'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import Count from 'v2/components/UI/Count'
 import GenericButton from 'v2/components/UI/GenericButton'
-import { LabelledInput, Label } from 'v2/components/UI/Inputs'
 import PlanChanges from 'v2/components/Billing/components/PlanChanges'
 import StatusOverlay from 'v2/components/Billing/components/StatusOverlay'
 import { PaymentForm } from 'v2/components/Billing/components/PaymentForm'
@@ -20,13 +19,11 @@ import {
   SubscribeToPremiumForUsers,
   SubscribeToPremiumForUsersVariables,
 } from '__generated__/SubscribeToPremiumForUsers'
+import { MyGroup_group } from '__generated__/MyGroup'
 
 interface MyGroupCheckoutProps {
   me: MyGroupCheckoutType
-  group: {
-    __typename: 'Group' | 'Customer'
-    id: string | number
-  }
+  group: MyGroup_group
   selectedPlan: SupportedPlanEnum | 'basic'
   upgradeableUsers: UserSelection_users[]
   onSubscribed: () => void
@@ -73,6 +70,8 @@ export const MyGroupCheckout: React.FC<MyGroupCheckoutProps> = ({
 
   const handleSubmit = useCallback(
     e => {
+      if (!group.subscription) return handleOpenPaymentModal()
+
       e.preventDefault()
 
       setMode('processing')
@@ -83,7 +82,7 @@ export const MyGroupCheckout: React.FC<MyGroupCheckoutProps> = ({
         variables: {
           group_id: group.id.toString(),
           user_ids,
-          token: customer.default_credit_card.id,
+          token: customer.default_payment_method.id,
           plan_id: selectedPlan.toUpperCase() as SupportedPlanEnum,
           coupon_code: couponCode,
         },
@@ -102,7 +101,13 @@ export const MyGroupCheckout: React.FC<MyGroupCheckoutProps> = ({
           return onError(err)
         })
     },
-    [customer, selectedPlan, couponCode, upgradeableUsers]
+    [
+      customer,
+      selectedPlan,
+      couponCode,
+      upgradeableUsers,
+      handleOpenPaymentModal,
+    ]
   )
 
   return (
@@ -115,10 +120,8 @@ export const MyGroupCheckout: React.FC<MyGroupCheckoutProps> = ({
 
       {selectedPlan !== 'basic' && (
         <form onSubmit={handleSubmit}>
-          {upgradeableUsers.length > 0 && (
-            <LabelledInput>
-              <Label />
-
+          <Box width="100%" textAlign="center" mt={4}>
+            {upgradeableUsers.length > 0 && (
               <PlanChanges
                 entity={group}
                 planId={selectedPlan}
@@ -126,31 +129,26 @@ export const MyGroupCheckout: React.FC<MyGroupCheckoutProps> = ({
                 quantity={upgradeableUsers.length}
                 handleTotalChange={handleTotalChange}
               />
-            </LabelledInput>
-          )}
+            )}
 
-          <LabelledInput>
-            <Label />
-
-            <div>
-              <GenericButton
-                onClick={handleOpenPaymentModal}
-                disabled={upgradeableUsers.length === 0}
-              >
-                {upgradeableUsers.length > 0 ? (
-                  <span>
-                    Activate{' '}
-                    <Count
-                      amount={upgradeableUsers.length}
-                      label="Premium subscription"
-                    />
-                  </span>
-                ) : (
-                  'Activate'
-                )}
-              </GenericButton>
-            </div>
-          </LabelledInput>
+            <GenericButton
+              onClick={handleSubmit}
+              disabled={upgradeableUsers.length === 0}
+              mt={4}
+            >
+              {upgradeableUsers.length > 0 ? (
+                <span>
+                  Activate{' '}
+                  <Count
+                    amount={upgradeableUsers.length}
+                    label="Premium subscription"
+                  />
+                </span>
+              ) : (
+                'Activate'
+              )}
+            </GenericButton>
+          </Box>
         </form>
       )}
     </Box>

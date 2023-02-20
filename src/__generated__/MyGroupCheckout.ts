@@ -7,7 +7,12 @@
 // GraphQL fragment: MyGroupCheckout
 // ====================================================
 
-export interface MyGroupCheckout_customer_default_credit_card {
+export interface MyGroupCheckout_customer_default_payment_method {
+  __typename: "PaymentMethod";
+  id: string | null;
+}
+
+export interface MyGroupCheckout_customer_payment_methods_card {
   __typename: "CreditCard";
   id: string | null;
   brand: string | null;
@@ -16,20 +21,17 @@ export interface MyGroupCheckout_customer_default_credit_card {
   exp_month: string | null;
 }
 
-export interface MyGroupCheckout_customer_credit_cards {
-  __typename: "CreditCard";
+export interface MyGroupCheckout_customer_payment_methods {
+  __typename: "PaymentMethod";
   id: string | null;
-  brand: string | null;
-  last4: string | null;
-  exp_year: string | null;
-  exp_month: string | null;
+  card: MyGroupCheckout_customer_payment_methods_card | null;
 }
 
 export interface MyGroupCheckout_customer {
   __typename: "Customer";
   id: number;
-  default_credit_card: MyGroupCheckout_customer_default_credit_card | null;
-  credit_cards: MyGroupCheckout_customer_credit_cards[] | null;
+  default_payment_method: MyGroupCheckout_customer_default_payment_method | null;
+  payment_methods: MyGroupCheckout_customer_payment_methods[] | null;
 }
 
 export interface MyGroupCheckout {

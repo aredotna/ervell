@@ -49,9 +49,7 @@ export default class UpgradeCTA extends PureComponent {
 
     const { mode } = this.state
 
-    const amount =
-      upgradeableUsers.length +
-      ((group.subscription && group.subscription.users.length) || 0)
+    const amount = upgradeableUsers.length || 0
 
     return (
       <PremiumAlert {...rest}>

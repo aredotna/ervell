@@ -10,8 +10,6 @@ import PremiumAlert from 'v2/components/Billing/components/MyGroups/components/P
 import MyGroupHeader from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupHeader'
 import UpgradeSelection from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/UpgradeSelection'
 import MyGroupCheckout from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupCheckout'
-import CreditCard from 'v2/components/Billing/components/CreditCard'
-import { LabelledInput, Label } from 'v2/components/UI/Inputs'
 import { MyGroupCheckout as MyGroupCheckoutType } from '__generated__/MyGroupCheckout'
 import { MyGroups_groups_users } from '__generated__/MyGroups'
 import useMergeState from 'v2/hooks/useMergeState'
@@ -59,9 +57,9 @@ export const MyGroup: React.FC<MyGroupProps> = ({ me, group, ...rest }) => {
     selectedPlan: group.subscription
       ? (group.subscription.plan.id as SupportedPlanEnum)
       : 'basic',
-    upgradeableUsers: group.subscription
-      ? []
-      : [...group.users].filter(user => user.is_upgradeable),
+    upgradeableUsers: group.is_upgradeable
+      ? [...group.users].filter(user => user.is_upgradeable)
+      : [],
   })
 
   const { mode, selectedPlan, upgradeableUsers, errorMessage } = state
@@ -134,7 +132,7 @@ export const MyGroup: React.FC<MyGroupProps> = ({ me, group, ...rest }) => {
   )
 
   return (
-    <Box {...rest}>
+    <Box mb={10} {...rest}>
       <MyGroupHeader mb={7} group={group} onCanceled={handleCanceled} />
 
       {mode === 'subscribed' && (
@@ -186,13 +184,6 @@ export const MyGroup: React.FC<MyGroupProps> = ({ me, group, ...rest }) => {
       ) : (
         <>
           <PremiumAlert>Everyone in your group has Premium ;-)</PremiumAlert>
-          {selectedPlan !== 'basic' && (
-            <LabelledInput>
-              <Label>Billed to</Label>
-
-              <CreditCard customer={me.customer} />
-            </LabelledInput>
-          )}
         </>
       )}
     </Box>
