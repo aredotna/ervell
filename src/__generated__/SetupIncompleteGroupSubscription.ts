@@ -9,20 +9,20 @@ import { SupportedPlanEnum } from "./globalTypes";
 // GraphQL mutation operation: SetupIncompleteGroupSubscription
 // ====================================================
 
-export interface SetupIncompleteGroupSubscription_setup_incomplete_subscription_for_users_subscription {
+export interface SetupIncompleteGroupSubscription_setup_incomplete_subscription_for_group_subscription {
   __typename: "StripeSubscription";
   id: string;
   status: string;
 }
 
-export interface SetupIncompleteGroupSubscription_setup_incomplete_subscription_for_users {
-  __typename: "SetupIncompleteSubscriptionForUsersMutationPayload";
-  subscription: SetupIncompleteGroupSubscription_setup_incomplete_subscription_for_users_subscription | null;
+export interface SetupIncompleteGroupSubscription_setup_incomplete_subscription_for_group {
+  __typename: "SetupIncompleteSubscriptionForGroupMutationPayload";
+  subscription: SetupIncompleteGroupSubscription_setup_incomplete_subscription_for_group_subscription | null;
   client_secret: string | null;
 }
 
 export interface SetupIncompleteGroupSubscription {
-  setup_incomplete_subscription_for_users: SetupIncompleteGroupSubscription_setup_incomplete_subscription_for_users | null;
+  setup_incomplete_subscription_for_group: SetupIncompleteGroupSubscription_setup_incomplete_subscription_for_group | null;
 }
 
 export interface SetupIncompleteGroupSubscriptionVariables {

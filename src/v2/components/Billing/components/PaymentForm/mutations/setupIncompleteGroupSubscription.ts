@@ -7,7 +7,7 @@ export default gql`
     $group_id: ID!
     $user_ids: [ID]!
   ) {
-    setup_incomplete_subscription_for_users(
+    setup_incomplete_subscription_for_group(
       input: {
         plan_id: $plan_id
         coupon_code: $coupon_code

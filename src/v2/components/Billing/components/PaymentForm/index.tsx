@@ -201,10 +201,10 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({
     mutation()
       .then(({ data, errors }) => {
         const subscriptionId = groupId
-          ? data?.setup_incomplete_subscription_for_users?.subscription?.id
+          ? data?.setup_incomplete_subscription_for_group?.subscription?.id
           : data?.setup_incomplete_subscription?.subscription?.id
         const clientSecret = groupId
-          ? data?.setup_incomplete_subscription_for_users?.client_secret
+          ? data?.setup_incomplete_subscription_for_group?.client_secret
           : data?.setup_incomplete_subscription?.client_secret
 
         if (!subscriptionId) {
