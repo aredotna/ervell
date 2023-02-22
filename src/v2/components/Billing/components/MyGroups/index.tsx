@@ -16,8 +16,8 @@ interface MyGroupsProps {
 export const MyGroups: React.FC<MyGroupsProps> = ({ groups, me }) => {
   return (
     <>
-      {groups.map(group => (
-        <StripeContext>
+      {groups.map((group, key) => (
+        <StripeContext key={key}>
           <MyGroup me={me} group_id={group.id} />
         </StripeContext>
       ))}
