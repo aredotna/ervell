@@ -24,6 +24,7 @@ import CouponCode from 'v2/components/Billing/components/CouponCode'
 
 import updateAddressMutation from './mutations/updateAddressMutation'
 import setupIncompleteSubscriptionMutation from './mutations/setupIncompleteSubscription'
+import setupIncompleteGroupSubscriptionMutation from './mutations/setupIncompleteGroupSubscription'
 
 import {
   SetupIncompleteSubscription,
@@ -38,6 +39,11 @@ import { isEmpty } from 'lodash'
 import customerAddress from './queries/customerAddress'
 import { CustomerAddress } from '__generated__/CustomerAddress'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
+import {
+  SetupIncompleteGroupSubscription,
+  SetupIncompleteGroupSubscriptionVariables,
+} from '__generated__/SetupIncompleteGroupSubscription'
+import { stringify } from 'qs'
 
 const {
   data: { GOOGLE_MAPS_API_KEY },
@@ -86,17 +92,23 @@ interface PaymentFormProps {
   clientSecret?: string
   planId: string
   subscriptionId?: string
+  userIds?: string[]
+  groupId?: string
 }
 
 export const PaymentForm: React.FC<PaymentFormProps> = ({
   clientSecret,
   planId,
   subscriptionId,
+  userIds,
+  groupId,
 }) => {
   return (
     <StripeElementsContext clientSecret={clientSecret}>
       <PaymentFormInner
         planId={planId}
+        userIds={userIds}
+        groupId={groupId}
         clientSecret={clientSecret}
         subscriptionId={subscriptionId}
       />
@@ -104,7 +116,13 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({
   )
 }
 
-const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
+const PaymentFormInner: React.FC<PaymentFormProps> = ({
+  planId,
+  userIds,
+  groupId,
+}) => {
+  console.log({ userIds })
+
   const stripe = useStripe()
   const elements = useElements()
   const user = useSerializedMe()
@@ -134,6 +152,38 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
     SetupIncompleteSubscription,
     SetupIncompleteSubscriptionVariables
   >(setupIncompleteSubscriptionMutation)
+  const [setupIncompleteGroupSubscription] = useMutation<
+    SetupIncompleteGroupSubscription,
+    SetupIncompleteGroupSubscriptionVariables
+  >(setupIncompleteGroupSubscriptionMutation)
+
+  const handleSetupIncompleteSubscription = useCallback(() => {
+    return setupIncompleteSubscription({
+      variables: {
+        plan_id: planIdState,
+        coupon_code: couponCode,
+      },
+    })
+  }, [
+    country,
+    postalCode,
+    planIdState,
+    setMode,
+    setErrorMessage,
+    couponCode,
+    setupIncompleteSubscription,
+  ])
+
+  const handleSetupIncompleteGroupSubscription = useCallback(() => {
+    return setupIncompleteGroupSubscription({
+      variables: {
+        plan_id: planIdState,
+        coupon_code: couponCode,
+        group_id: groupId,
+        user_ids: userIds,
+      },
+    })
+  }, [userIds, setupIncompleteGroupSubscription, planIdState, couponCode])
 
   const theme = useTheme()
 
@@ -142,18 +192,20 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
       return
     }
 
+    const mutation = userIds
+      ? handleSetupIncompleteGroupSubscription
+      : handleSetupIncompleteSubscription
+
     setMode('initializing')
 
-    setupIncompleteSubscription({
-      variables: {
-        plan_id: planIdState,
-        coupon_code: couponCode,
-      },
-    })
+    mutation()
       .then(({ data, errors }) => {
-        const subscriptionId =
-          data?.setup_incomplete_subscription?.subscription?.id
-        const clientSecret = data?.setup_incomplete_subscription?.client_secret
+        const subscriptionId = groupId
+          ? data?.setup_incomplete_subscription_for_group?.subscription?.id
+          : data?.setup_incomplete_subscription?.subscription?.id
+        const clientSecret = groupId
+          ? data?.setup_incomplete_subscription_for_group?.client_secret
+          : data?.setup_incomplete_subscription?.client_secret
 
         if (!subscriptionId) {
           setMode('error')
@@ -163,7 +215,23 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
           return false
         }
 
-        const return_url = `${window.location.origin}/settings/refresh_subscription?subscription_id=${subscriptionId}`
+        const variables = groupId
+          ? {
+              subscription_id: subscriptionId,
+              user_ids: userIds,
+              group_id: groupId,
+            }
+          : { subscription_id: subscriptionId }
+
+        const params = stringify(variables, {
+          arrayFormat: 'indices',
+          encode: false,
+        })
+
+        const return_url = groupId
+          ? `${window.location.origin}/settings/refresh_group_subscription?${params} `
+          : `${window.location.origin}/settings/refresh_subscription?${params}`
+
         setMode('confirming')
 
         stripe
@@ -350,6 +418,8 @@ const PaymentFormInner: React.FC<PaymentFormProps> = ({ planId }) => {
         </Text>
         <OrderSummary
           planId={planIdState}
+          groupId={groupId}
+          quantity={userIds?.length}
           country={country}
           postalCode={postalCode}
           couponCode={couponCode}

@@ -7,7 +7,12 @@
 // GraphQL fragment: MyGroups
 // ====================================================
 
-export interface MyGroups_customer_default_credit_card {
+export interface MyGroups_customer_default_payment_method {
+  __typename: "PaymentMethod";
+  id: string | null;
+}
+
+export interface MyGroups_customer_payment_methods_card {
   __typename: "CreditCard";
   id: string | null;
   brand: string | null;
@@ -16,20 +21,17 @@ export interface MyGroups_customer_default_credit_card {
   exp_month: string | null;
 }
 
-export interface MyGroups_customer_credit_cards {
-  __typename: "CreditCard";
+export interface MyGroups_customer_payment_methods {
+  __typename: "PaymentMethod";
   id: string | null;
-  brand: string | null;
-  last4: string | null;
-  exp_year: string | null;
-  exp_month: string | null;
+  card: MyGroups_customer_payment_methods_card | null;
 }
 
 export interface MyGroups_customer {
   __typename: "Customer";
   id: number;
-  default_credit_card: MyGroups_customer_default_credit_card | null;
-  credit_cards: MyGroups_customer_credit_cards[] | null;
+  default_payment_method: MyGroups_customer_default_payment_method | null;
+  payment_methods: MyGroups_customer_payment_methods[] | null;
 }
 
 export interface MyGroups_groups_counts {

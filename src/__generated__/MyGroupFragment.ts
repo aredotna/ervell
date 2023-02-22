@@ -4,59 +4,59 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: MyGroup
+// GraphQL fragment: MyGroupFragment
 // ====================================================
 
-export interface MyGroup_group_subscription_plan {
+export interface MyGroupFragment_subscription_plan {
   __typename: "Plan";
   id: string;
   term: string | null;
 }
 
-export interface MyGroup_group_subscription_users {
+export interface MyGroupFragment_subscription_users {
   __typename: "User";
   id: number;
   name: string;
 }
 
-export interface MyGroup_group_subscription {
+export interface MyGroupFragment_subscription {
   __typename: "PremiumSubscription";
   id: string;
-  plan: MyGroup_group_subscription_plan | null;
-  users: MyGroup_group_subscription_users[] | null;
+  plan: MyGroupFragment_subscription_plan | null;
+  users: MyGroupFragment_subscription_users[] | null;
 }
 
-export interface MyGroup_group_user_can {
+export interface MyGroupFragment_user_can {
   __typename: "UserCan";
   cancel_premium: boolean | null;
 }
 
-export interface MyGroup_group_user {
+export interface MyGroupFragment_user {
   __typename: "User";
   id: number;
   name: string;
   hidden_email: string;
   is_premium: boolean;
   is_canceled: boolean;
-  can: MyGroup_group_user_can | null;
+  can: MyGroupFragment_user_can | null;
   href: string | null;
   initials: string;
   avatar: string | null;
 }
 
-export interface MyGroup_group_users_can {
+export interface MyGroupFragment_users_can {
   __typename: "UserCan";
   cancel_premium: boolean | null;
 }
 
-export interface MyGroup_group_users {
+export interface MyGroupFragment_users {
   __typename: "User";
   id: number;
   name: string;
   hidden_email: string;
   is_premium: boolean;
   is_canceled: boolean;
-  can: MyGroup_group_users_can | null;
+  can: MyGroupFragment_users_can | null;
   href: string | null;
   initials: string;
   avatar: string | null;
@@ -65,7 +65,7 @@ export interface MyGroup_group_users {
   is_exceeding_either_connections_limit: boolean;
 }
 
-export interface MyGroup_group_owner {
+export interface MyGroupFragment_owner {
   __typename: "User";
   id: number;
   name: string;
@@ -76,7 +76,7 @@ export interface MyGroup_group_owner {
   avatar: string | null;
 }
 
-export interface MyGroup_group {
+export interface MyGroupFragment {
   __typename: "Group";
   id: number;
   /**
@@ -87,20 +87,12 @@ export interface MyGroup_group {
    * Are *any* users in the group upgradeable to Premium?
    */
   is_upgradeable: boolean | null;
-  subscription: MyGroup_group_subscription | null;
+  subscription: MyGroupFragment_subscription | null;
   name: string;
   href: string | null;
   initials: string;
   avatar: string | null;
-  user: MyGroup_group_user;
-  users: MyGroup_group_users[] | null;
-  owner: MyGroup_group_owner;
-}
-
-export interface MyGroup {
-  group: MyGroup_group | null;
-}
-
-export interface MyGroupVariables {
-  id: string;
+  user: MyGroupFragment_user;
+  users: MyGroupFragment_users[] | null;
+  owner: MyGroupFragment_owner;
 }
