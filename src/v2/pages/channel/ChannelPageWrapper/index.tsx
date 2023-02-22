@@ -32,12 +32,12 @@ const ChannelPageWrapper: React.FC<{ view?: string }> = ({ view }) => {
     view: 'grid',
   }
 
-  const calcView = params.view || cookies.view || 'grid'
+  const calcView = view || params.view || cookies.view || 'grid'
   const type = query.get('type') || null
   const user = query.get('user') ? JSON.parse(query.get('user')) : null
   const fromOnboarding = Boolean(query.get('fromOnboarding'))
 
-  if (view === 'table' && is_premium) {
+  if (calcView === 'table' && is_premium) {
     return (
       <ChannelTablePage
         id={params.id}
