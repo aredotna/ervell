@@ -16,15 +16,12 @@ import { PotentiallyEditableBlockCell } from 'v2/components/ChannelTableContents
 import profileTableContentsQuery from './queries/profileTableContents'
 import {
   ConnectableTypeEnum,
+  FieldsEnum,
   SearchSorts,
   SortDirection,
+  SortOrderEnum,
+  WhatEnum,
 } from '__generated__/globalTypes'
-import {
-  ProfileTableContents,
-  ProfileTableContentsVariables,
-  ProfileTableContents_user,
-  ProfileTableContents_user_contents,
-} from '__generated__/ProfileTableContents'
 import useWindowDimensions from 'v2/hooks/useWindowDimensions'
 import { ProfileTableHeader } from './components/ProfileTableHeader'
 import LoadingRow from 'v2/components/Table/components/LoadingRow'
@@ -33,6 +30,12 @@ import { TableData } from 'v2/components/Table/lib/constants'
 import { SettingsCell } from '../ChannelTableContents/components/SettingsCell'
 import useMergeState from 'v2/hooks/useMergeState'
 import usePrevious from 'v2/hooks/usePrevious'
+import {
+  ProfileTable as ProfileTableType,
+  ProfileTableVariables,
+  ProfileTable_searches_advanced_results,
+} from '__generated__/ProfileTable'
+import { WhereEnum } from '__generated__/globalTypes'
 
 export const STANDARD_HEADERS: Array<Column<TableData>> = [
   {
@@ -108,7 +111,7 @@ const sortAndSortDirReducer: React.Reducer<SortAndSortDir, SortAndSortDir> = (
 ) => {
   if (prevState.sort === action.sort && prevState.dir === action.dir) {
     return {
-      sort: SearchSorts.UPDATED_AT,
+      sort: SortOrderEnum.UPDATED_AT,
       dir: SortDirection.DESC,
     }
   }
@@ -118,8 +121,7 @@ const sortAndSortDirReducer: React.Reducer<SortAndSortDir, SortAndSortDir> = (
 
 interface ProfileTableProps {
   loading: boolean
-  blocks: ProfileTableContents_user_contents[]
-  profile: ProfileTableContents_user
+  blocks: ProfileTable_searches_advanced_results[]
   loadMore: () => void
   hasMore: boolean
   sortAndSortDir: SortAndSortDir
@@ -136,7 +138,6 @@ interface ProfileState {
 export const ProfileTable: React.FC<ProfileTableProps> = ({
   loading,
   blocks,
-  profile,
   loadMore,
   hasMore,
   setSortAndSortDir,
@@ -147,6 +148,19 @@ export const ProfileTable: React.FC<ProfileTableProps> = ({
     const data: Array<TableData> = []
     for (let i = 0; i < blocks?.length; i++) {
       const block = blocks[i]
+
+      // break early if we don't have the correct type
+      if (
+        block?.__typename !== 'Text' &&
+        block?.__typename !== 'Image' &&
+        block?.__typename !== 'Link' &&
+        block?.__typename !== 'Embed' &&
+        block?.__typename !== 'Attachment' &&
+        block?.__typename !== 'Channel'
+      ) {
+        continue
+      }
+
       if (block?.id) {
         data.push(block)
       }
@@ -213,7 +227,6 @@ export const ProfileTable: React.FC<ProfileTableProps> = ({
       <Table {...getTableProps()}>
         <ProfileTableHeader
           headerGroups={headerGroups}
-          profile={profile}
           sortAndSortDir={sortAndSortDir}
           setSortAndSortDir={setSortAndSortDir}
           type={type}
@@ -247,16 +260,21 @@ export const ProfileTable: React.FC<ProfileTableProps> = ({
 
 interface ProfileTableQueryProps {
   id: string
+  profile_type: WhereEnum
   sort?: SearchSorts
   type?: ConnectableTypeEnum
 }
 
-const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({ id, type }) => {
+const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({
+  id,
+  type,
+  profile_type,
+}) => {
   const prevType = usePrevious(type)
 
   const [sortAndSortDir, setSortAndSortDir] = useReducer(
     sortAndSortDirReducer,
-    { sort: SearchSorts.UPDATED_AT, dir: SortDirection.DESC }
+    { sort: SortOrderEnum.UPDATED_AT, dir: SortDirection.DESC }
   )
 
   const prevSort = usePrevious(sortAndSortDir)
@@ -270,17 +288,17 @@ const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({ id, type }) => {
   const { per, page, hasMore } = state
 
   const { data, loading, fetchMore } = useQuery<
-    ProfileTableContents,
-    ProfileTableContentsVariables
+    ProfileTableType,
+    ProfileTableVariables
   >(profileTableContentsQuery, {
     variables: {
-      id,
-      sort: sortAndSortDir.sort,
-      direction: sortAndSortDir.dir,
-      type,
+      where: [{ id, facet: profile_type }],
       page,
       per,
       includeConnection: false,
+      fields: { facets: [FieldsEnum.ALL] },
+      what: { facets: [WhatEnum.ALL] },
+      order: { facet: sortAndSortDir.sort, dir: sortAndSortDir.dir },
     },
   })
 
@@ -289,12 +307,14 @@ const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({ id, type }) => {
       variables: { page: page + 1 },
     }).then(({ errors, data }) => {
       const {
-        user: {
-          contents: { length },
+        searches: {
+          advanced: { total },
         },
       } = data
 
-      const hasMore = !errors && length > 0 && length >= per
+      const length = total
+
+      const hasMore = !errors && length > 0 && page * per < length
 
       setState({
         page: page + 1,
@@ -315,8 +335,7 @@ const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({ id, type }) => {
   return (
     <ProfileTable
       loading={loading}
-      blocks={data?.user?.contents}
-      profile={data?.user}
+      blocks={data?.searches.advanced.results}
       loadMore={loadMore}
       hasMore={hasMore}
       sortAndSortDir={sortAndSortDir}

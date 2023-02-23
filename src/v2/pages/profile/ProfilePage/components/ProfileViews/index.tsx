@@ -15,6 +15,7 @@ import {
   FollowingTypeEnum,
   IndexedChannelsTypes,
   SearchSorts,
+  WhereEnum,
 } from '__generated__/globalTypes'
 import {
   ProfilePageIdentifiable,
@@ -129,9 +130,15 @@ const Table: React.FC<TableProps> = ({ identifiable, id, type }) => {
     identifiable.__typename == 'Group'
       ? identifiable.counts.channels
       : identifiable.counts.channels + identifiable.counts.blocks
+
+  const profileType = {
+    Group: WhereEnum.GROUP,
+    User: WhereEnum.USER,
+  }[identifiable.__typename]
+
   return (
     <EmptyMessageOrComponent identifiable={identifiable} count={count}>
-      <ProfileTable id={id} type={type} />
+      <ProfileTable id={id} type={type} profile_type={profileType} />
     </EmptyMessageOrComponent>
   )
 }

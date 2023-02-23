@@ -97,7 +97,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
   // one isn't supported for Groups (all, blocks).
   const typedView =
     identifiable.__typename === 'Group'
-      ? { all: 'channels', blocks: 'channels', table: 'channels' }[view] || view
+      ? { all: 'channels', blocks: 'channels' }[view] || view
       : view
 
   const scheme = identifiable.__typename === 'Group' ? 'GROUP' : 'DEFAULT'
