@@ -1,23 +1,40 @@
 import { gql } from '@apollo/client'
 
-import profileTableContentsFragment from 'v2/components/ProfileTable/fragments/profileTableContents'
+import { tableRowFragment } from 'v2/components/Table/fragments/tableRow'
 
 export default gql`
-  query ProfileTableContents(
-    $id: ID!
-    $type: ConnectableTypeEnum
+  query ProfileTable(
+    $term: Term
+    $where: [Where!]
+    $what: What
+    $fields: Fields
+    $order: Order
+    $extensions: [ExtensionsEnum!]
     $page: Int
     $per: Int
-    $sort: SearchSorts
-    $direction: SortDirection
-    $q: String
-    $seed: Int
+    $before: String
+    $after: String
     $includeConnection: Boolean!
   ) {
-    user(id: $id) {
-      __typename
-      ...ProfileTableContentsFragment
+    searches {
+      advanced(
+        term: $term
+        where: $where
+        what: $what
+        fields: $fields
+        order: $order
+        extensions: $extensions
+        per: $per
+        page: $page
+        before: $before
+        after: $after
+      ) {
+        total
+        results {
+          ...TableRowFragment
+        }
+      }
     }
   }
-  ${profileTableContentsFragment}
+  ${tableRowFragment}
 `

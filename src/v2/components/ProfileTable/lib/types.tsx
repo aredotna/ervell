@@ -1,7 +1,7 @@
-import { SearchSorts, SortDirection } from '__generated__/globalTypes'
+import { SortDirection, SortOrderEnum } from '__generated__/globalTypes'
 
 export type SortAndSortDir = {
-  sort: SearchSorts
+  sort: SortOrderEnum
   dir: SortDirection
 }
 

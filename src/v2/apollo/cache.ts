@@ -146,8 +146,23 @@ export function getCache({
             keyArgs: everythingExcept('page', 'per'),
             merge: paginationWithPageAndPer,
           },
-          searches: {
-            merge: true,
+        },
+      },
+
+      Searches: {
+        merge: true,
+        fields: {
+          advanced: {
+            keyArgs: everythingExcept('page', 'per'),
+            merge(existing, incoming) {
+              const newObject = {
+                ...existing,
+                ...incoming,
+                results: [...existing?.results, ...incoming?.results],
+              }
+
+              return newObject
+            },
           },
         },
       },
