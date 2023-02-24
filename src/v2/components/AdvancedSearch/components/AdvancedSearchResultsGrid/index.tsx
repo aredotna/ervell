@@ -83,28 +83,6 @@ export const AdvancedSearchResultsGrid: React.FC<Props> = ({
   const loadMore = useCallback(() => {
     fetchMore({
       variables: { ...state.variables, page: page + 1 },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) {
-          return prev
-        }
-        const merged = {
-          ...prev,
-          ...fetchMoreResult,
-          searches: {
-            ...prev.searches,
-            ...fetchMoreResult.searches,
-            advanced: {
-              ...prev.searches.advanced,
-              ...fetchMoreResult.searches.advanced,
-              results: [
-                ...prev.searches.advanced.results,
-                ...fetchMoreResult.searches.advanced.results,
-              ],
-            },
-          },
-        }
-        return merged
-      },
     }).then(res => {
       if (res.data.searches.advanced.results.length > 0) {
         setPage(page + 1)
