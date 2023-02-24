@@ -287,6 +287,19 @@ const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({
 
   const { per, page, hasMore } = state
 
+  const connectableTypeAsWhatEnum = {
+    [ConnectableTypeEnum.TEXT]: WhatEnum.TEXT,
+    [ConnectableTypeEnum.IMAGE]: WhatEnum.IMAGE,
+    [ConnectableTypeEnum.LINK]: WhatEnum.LINK,
+    [ConnectableTypeEnum.EMBED]: WhatEnum.MEDIA,
+    [ConnectableTypeEnum.ATTACHMENT]: WhatEnum.ATTACHMENT,
+    [ConnectableTypeEnum.CHANNEL]: WhatEnum.CHANNEL,
+  }[type]
+
+  const whatVar = connectableTypeAsWhatEnum
+    ? { facets: [connectableTypeAsWhatEnum] }
+    : undefined
+
   const { data, loading, fetchMore } = useQuery<
     ProfileTableType,
     ProfileTableVariables
@@ -297,7 +310,7 @@ const ProfileTableQuery: React.FC<ProfileTableQueryProps> = ({
       per,
       includeConnection: false,
       fields: { facets: [FieldsEnum.ALL] },
-      what: { facets: [WhatEnum.ALL] },
+      what: whatVar,
       order: { facet: sortAndSortDir.sort, dir: sortAndSortDir.dir },
     },
   })
