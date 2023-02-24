@@ -8,12 +8,11 @@ import SortArrows from 'v2/components/UI/SortArrows'
 
 import {
   ConnectableTypeEnum,
-  SearchSorts,
   SortDirection,
+  SortOrderEnum,
 } from '__generated__/globalTypes'
 import { ColumnIds, SortAndSortDir } from '../../lib/types'
 import { columnIdsToSorts } from '../../lib/constants'
-import { ProfileTableContents_user } from '__generated__/ProfileTableContents'
 import { TableData } from 'v2/components/Table/lib/constants'
 import { ProfileFilter } from '../ProfileFilter'
 
@@ -78,7 +77,6 @@ const SettingsAddTH = styled(TH)`
 
 interface ProfileTableHeaderProps {
   headerGroups: HeaderGroup<TableData>[]
-  profile: ProfileTableContents_user
   sortAndSortDir: SortAndSortDir
   setSortAndSortDir: React.Dispatch<SortAndSortDir>
   type?: ConnectableTypeEnum
@@ -112,7 +110,7 @@ export const ProfileTableHeader: React.FC<ProfileTableHeaderProps> = ({
                 )
               }
 
-              const columnSortType: SearchSorts | undefined =
+              const columnSortType: SortOrderEnum | undefined =
                 columnIdsToSorts[column.id]
 
               let sortArrowState: 'off' | 'up' | 'down' | undefined

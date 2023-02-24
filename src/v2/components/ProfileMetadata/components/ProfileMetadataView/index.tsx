@@ -75,33 +75,33 @@ export const ProfileMetadataView: React.FC<ProfileMetadataViewProps> = ({
           >
             Blocks
           </CookieLinkUnlessCurrent>
-
-          {me.is_premium && (
-            <LinkContainer>
-              <CookieLinkUnlessCurrent
-                name="view"
-                value="table"
-                prefix={`Profile`}
-                to={tableLink}
-                isActive={isViewActive('table')}
-              >
-                Table
-              </CookieLinkUnlessCurrent>
-              <QuestionMarkOverlay />
-            </LinkContainer>
-          )}
-
-          {!me.is_premium && (
-            <LinkContainer>
-              <Link to="/pricing">
-                <Text color={'state.premium'} f={2}>
-                  Table
-                </Text>
-              </Link>
-              <QuestionMarkOverlay />
-            </LinkContainer>
-          )}
         </>
+      )}
+
+      {me.is_premium && (
+        <LinkContainer>
+          <CookieLinkUnlessCurrent
+            name="view"
+            value="table"
+            prefix={`Profile`}
+            to={tableLink}
+            isActive={isViewActive('table')}
+          >
+            Table
+          </CookieLinkUnlessCurrent>
+          <QuestionMarkOverlay />
+        </LinkContainer>
+      )}
+
+      {!me.is_premium && (
+        <LinkContainer>
+          <Link to="/pricing">
+            <Text color={'state.premium'} f={2}>
+              Table
+            </Text>
+          </Link>
+          <QuestionMarkOverlay />
+        </LinkContainer>
       )}
 
       <CookieLinkUnlessCurrent

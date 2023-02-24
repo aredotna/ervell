@@ -9,7 +9,12 @@ import { SupportedPlanEnum } from "./globalTypes";
 // GraphQL mutation operation: SubscribeToPremiumForUsers
 // ====================================================
 
-export interface SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer_default_credit_card {
+export interface SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer_default_payment_method {
+  __typename: "PaymentMethod";
+  id: string | null;
+}
+
+export interface SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer_payment_methods_card {
   __typename: "CreditCard";
   id: string | null;
   brand: string | null;
@@ -18,20 +23,17 @@ export interface SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_cu
   exp_month: string | null;
 }
 
-export interface SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer_credit_cards {
-  __typename: "CreditCard";
+export interface SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer_payment_methods {
+  __typename: "PaymentMethod";
   id: string | null;
-  brand: string | null;
-  last4: string | null;
-  exp_year: string | null;
-  exp_month: string | null;
+  card: SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer_payment_methods_card | null;
 }
 
 export interface SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer {
   __typename: "Customer";
   id: number;
-  default_credit_card: SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer_default_credit_card | null;
-  credit_cards: SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer_credit_cards[] | null;
+  default_payment_method: SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer_default_payment_method | null;
+  payment_methods: SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer_payment_methods[] | null;
 }
 
 export interface SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me {
