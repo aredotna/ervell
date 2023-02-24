@@ -155,34 +155,17 @@ export function getCache({
           advanced: {
             keyArgs: everythingExcept('page', 'per'),
             merge(existing, incoming) {
-              console.log('advanced merge', { existing, incoming })
-
               const newObject = {
                 ...existing,
                 ...incoming,
                 results: [...existing?.results, ...incoming?.results],
               }
 
-              console.log({ newObject })
-
               return newObject
             },
           },
         },
       },
-
-      // AdvancedResult: {
-      //   merge: true,
-      //   fields: {
-      //     results: {
-      //       merge(existing = [], incoming: any) {
-      //         console.log({ existing, incoming })
-
-      //         return [ ...existing, ...incoming ]
-      //       }
-      //     }
-      //   }
-      // },
 
       Channel: {
         fields: {
