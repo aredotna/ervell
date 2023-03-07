@@ -18,9 +18,9 @@ export const connectableContextMenuConnectableFragment = gql`
     }
     ... on Block {
       can {
-        mute
         remove: manage
         manage
+        mute
       }
     }
 
