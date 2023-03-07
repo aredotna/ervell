@@ -18,31 +18,16 @@ export interface ProfileTable_searches_advanced_results_Attachment_user {
   name: string;
 }
 
-export interface ProfileTable_searches_advanced_results_Attachment_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
-}
-
 export interface ProfileTable_searches_advanced_results_Attachment_connection {
   __typename: "Connection";
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: ProfileTable_searches_advanced_results_Attachment_connection_can | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Attachment_counts {
   __typename: "BlockCounts";
   public_channels: number | null;
-}
-
-export interface ProfileTable_searches_advanced_results_Attachment_can {
-  __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Attachment_source {
@@ -63,7 +48,6 @@ export interface ProfileTable_searches_advanced_results_Attachment {
    */
   connection: ProfileTable_searches_advanced_results_Attachment_connection | null;
   counts: ProfileTable_searches_advanced_results_Attachment_counts | null;
-  can: ProfileTable_searches_advanced_results_Attachment_can | null;
   file_url: string | null;
   image_url: string | null;
   href: string | null;
@@ -75,32 +59,17 @@ export interface ProfileTable_searches_advanced_results_Channel_user {
   name: string;
 }
 
-export interface ProfileTable_searches_advanced_results_Channel_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
-}
-
 export interface ProfileTable_searches_advanced_results_Channel_connection {
   __typename: "Connection";
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: ProfileTable_searches_advanced_results_Channel_connection_can | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Channel_counts {
   __typename: "ChannelCounts";
   connected_to_channels: number | null;
   contents: number | null;
-}
-
-export interface ProfileTable_searches_advanced_results_Channel_can {
-  __typename: "ChannelCan";
-  update: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Channel {
@@ -117,7 +86,6 @@ export interface ProfileTable_searches_advanced_results_Channel {
   visibility: string;
   href: string | null;
   counts: ProfileTable_searches_advanced_results_Channel_counts | null;
-  can: ProfileTable_searches_advanced_results_Channel_can | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Embed_user {
@@ -125,31 +93,16 @@ export interface ProfileTable_searches_advanced_results_Embed_user {
   name: string;
 }
 
-export interface ProfileTable_searches_advanced_results_Embed_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
-}
-
 export interface ProfileTable_searches_advanced_results_Embed_connection {
   __typename: "Connection";
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: ProfileTable_searches_advanced_results_Embed_connection_can | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Embed_counts {
   __typename: "BlockCounts";
   public_channels: number | null;
-}
-
-export interface ProfileTable_searches_advanced_results_Embed_can {
-  __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Embed_source {
@@ -170,7 +123,6 @@ export interface ProfileTable_searches_advanced_results_Embed {
    */
   connection: ProfileTable_searches_advanced_results_Embed_connection | null;
   counts: ProfileTable_searches_advanced_results_Embed_counts | null;
-  can: ProfileTable_searches_advanced_results_Embed_can | null;
   embed_html: string | null;
   image_url: string | null;
   href: string | null;
@@ -182,31 +134,16 @@ export interface ProfileTable_searches_advanced_results_Image_user {
   name: string;
 }
 
-export interface ProfileTable_searches_advanced_results_Image_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
-}
-
 export interface ProfileTable_searches_advanced_results_Image_connection {
   __typename: "Connection";
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: ProfileTable_searches_advanced_results_Image_connection_can | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Image_counts {
   __typename: "BlockCounts";
   public_channels: number | null;
-}
-
-export interface ProfileTable_searches_advanced_results_Image_can {
-  __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Image_source {
@@ -227,7 +164,6 @@ export interface ProfileTable_searches_advanced_results_Image {
    */
   connection: ProfileTable_searches_advanced_results_Image_connection | null;
   counts: ProfileTable_searches_advanced_results_Image_counts | null;
-  can: ProfileTable_searches_advanced_results_Image_can | null;
   image_url: string | null;
   href: string | null;
   /**
@@ -242,31 +178,16 @@ export interface ProfileTable_searches_advanced_results_Link_user {
   name: string;
 }
 
-export interface ProfileTable_searches_advanced_results_Link_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
-}
-
 export interface ProfileTable_searches_advanced_results_Link_connection {
   __typename: "Connection";
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: ProfileTable_searches_advanced_results_Link_connection_can | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Link_counts {
   __typename: "BlockCounts";
   public_channels: number | null;
-}
-
-export interface ProfileTable_searches_advanced_results_Link_can {
-  __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Link_source {
@@ -287,7 +208,6 @@ export interface ProfileTable_searches_advanced_results_Link {
    */
   connection: ProfileTable_searches_advanced_results_Link_connection | null;
   counts: ProfileTable_searches_advanced_results_Link_counts | null;
-  can: ProfileTable_searches_advanced_results_Link_can | null;
   image_url: string | null;
   href: string | null;
   source: ProfileTable_searches_advanced_results_Link_source | null;
@@ -298,31 +218,16 @@ export interface ProfileTable_searches_advanced_results_PendingBlock_user {
   name: string;
 }
 
-export interface ProfileTable_searches_advanced_results_PendingBlock_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
-}
-
 export interface ProfileTable_searches_advanced_results_PendingBlock_connection {
   __typename: "Connection";
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: ProfileTable_searches_advanced_results_PendingBlock_connection_can | null;
 }
 
 export interface ProfileTable_searches_advanced_results_PendingBlock_counts {
   __typename: "BlockCounts";
   public_channels: number | null;
-}
-
-export interface ProfileTable_searches_advanced_results_PendingBlock_can {
-  __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
 }
 
 export interface ProfileTable_searches_advanced_results_PendingBlock {
@@ -338,7 +243,6 @@ export interface ProfileTable_searches_advanced_results_PendingBlock {
   connection: ProfileTable_searches_advanced_results_PendingBlock_connection | null;
   href: string | null;
   counts: ProfileTable_searches_advanced_results_PendingBlock_counts | null;
-  can: ProfileTable_searches_advanced_results_PendingBlock_can | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Text_user {
@@ -346,31 +250,16 @@ export interface ProfileTable_searches_advanced_results_Text_user {
   name: string;
 }
 
-export interface ProfileTable_searches_advanced_results_Text_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
-}
-
 export interface ProfileTable_searches_advanced_results_Text_connection {
   __typename: "Connection";
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: ProfileTable_searches_advanced_results_Text_connection_can | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Text_counts {
   __typename: "BlockCounts";
   public_channels: number | null;
-}
-
-export interface ProfileTable_searches_advanced_results_Text_can {
-  __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
 }
 
 export interface ProfileTable_searches_advanced_results_Text_source {
@@ -390,7 +279,6 @@ export interface ProfileTable_searches_advanced_results_Text {
    */
   connection: ProfileTable_searches_advanced_results_Text_connection | null;
   counts: ProfileTable_searches_advanced_results_Text_counts | null;
-  can: ProfileTable_searches_advanced_results_Text_can | null;
   content: string;
   html: string;
   /**

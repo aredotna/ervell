@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 
 import Icons from 'v2/components/UI/Icons'
 import Text from 'v2/components/UI/Text'
@@ -15,6 +15,11 @@ import {
   updateBlockCellMutation as updateBlockCellMutationType,
   updateBlockCellMutationVariables,
 } from '__generated__/updateBlockCellMutation'
+import {
+  VerifyEditableBlock,
+  VerifyEditableBlockVariables,
+} from '__generated__/VerifyEditableBlock'
+import verifyEditable from './query/verifyEditable'
 
 type EditableCellMode =
   | 'resting'
@@ -82,8 +87,17 @@ const PotentiallyEditableBlockCellNonNull = ({
 }: {
   value: { block: ChannelTableContentsSet_channel_blokks; attr: 'title' }
 }): JSX.Element => {
+  const { data } = useQuery<VerifyEditableBlock, VerifyEditableBlockVariables>(
+    verifyEditable,
+    {
+      variables: { id: block.id.toString() },
+      ssr: false,
+    }
+  )
+
   const value = block[attr]
-  const editable = block.__typename !== 'Channel' && block?.can?.manage
+  const editable =
+    data?.blokk.__typename !== 'Channel' && data?.blokk?.can?.manage
   const [mode, setMode] = useState<EditableCellMode>(
     editable ? 'editable' : 'resting'
   )

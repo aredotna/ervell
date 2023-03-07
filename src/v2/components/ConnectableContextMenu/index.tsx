@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import { ConnectableContextMenuChannel as ConnectableContextMenuChannelData } from '__generated__/ConnectableContextMenuChannel'
 
@@ -7,6 +8,8 @@ import { ConnectableContextMenuRemoveConnection } from 'v2/components/Connectabl
 import { ConnectableContextMenuMuteBlock } from 'v2/components/ConnectableContextMenu/components/ConnectableContextMenuMuteBlock'
 import { ConnectableContextMenuReorderConnections } from 'v2/components/ConnectableContextMenu/components/ConnectableContextMenuReorderConnections'
 import { BoxProps } from '../UI/Box'
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
+
 import { useQuery } from '@apollo/client'
 import {
   BlokkContextMenu,
@@ -20,6 +23,12 @@ import {
   ChannelContextMenuVariables,
 } from '__generated__/ChannelContextMenu'
 import { channelContextMenu } from './queries/channelContextMenu'
+
+const Loader = styled(LoadingIndicator).attrs({
+  f: 3,
+  px: 8,
+  py: 4,
+})``
 
 interface Props {
   channel: ConnectableContextMenuChannelData
@@ -91,7 +100,7 @@ const BlockContextMenu: React.FC<Props & BlockContextMenuContentsProps> = ({
     },
   })
 
-  if (loading) return <></>
+  if (loading) return <Loader />
   if (error) return <></>
 
   const connectable = data?.blokk
@@ -125,7 +134,7 @@ const ChannelContextMenu: React.FC<Props & ChannelContextMenuContentsProps> = ({
     },
   })
 
-  if (loading) return <></>
+  if (loading) return <Loader />
   if (error) return <></>
 
   const connectable = data?.channel

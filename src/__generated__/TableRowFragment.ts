@@ -12,23 +12,9 @@ export interface TableRowFragment_PendingBlock_counts {
   public_channels: number | null;
 }
 
-export interface TableRowFragment_PendingBlock_can {
-  __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
-}
-
 export interface TableRowFragment_PendingBlock_user {
   __typename: "User";
   name: string;
-}
-
-export interface TableRowFragment_PendingBlock_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
 }
 
 export interface TableRowFragment_PendingBlock_connection {
@@ -36,7 +22,6 @@ export interface TableRowFragment_PendingBlock_connection {
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: TableRowFragment_PendingBlock_connection_can | null;
 }
 
 export interface TableRowFragment_PendingBlock {
@@ -46,7 +31,6 @@ export interface TableRowFragment_PendingBlock {
   updated_at: string | null;
   href: string | null;
   counts: TableRowFragment_PendingBlock_counts | null;
-  can: TableRowFragment_PendingBlock_can | null;
   title: string;
   user: TableRowFragment_PendingBlock_user | null;
   /**
@@ -60,13 +44,6 @@ export interface TableRowFragment_Attachment_counts {
   public_channels: number | null;
 }
 
-export interface TableRowFragment_Attachment_can {
-  __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
-}
-
 export interface TableRowFragment_Attachment_source {
   __typename: "ConnectableSource";
   url: string | null;
@@ -78,19 +55,11 @@ export interface TableRowFragment_Attachment_user {
   name: string;
 }
 
-export interface TableRowFragment_Attachment_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
-}
-
 export interface TableRowFragment_Attachment_connection {
   __typename: "Connection";
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: TableRowFragment_Attachment_connection_can | null;
 }
 
 export interface TableRowFragment_Attachment {
@@ -99,7 +68,6 @@ export interface TableRowFragment_Attachment {
   created_at: string | null;
   updated_at: string | null;
   counts: TableRowFragment_Attachment_counts | null;
-  can: TableRowFragment_Attachment_can | null;
   file_url: string | null;
   image_url: string | null;
   href: string | null;
@@ -117,13 +85,6 @@ export interface TableRowFragment_Embed_counts {
   public_channels: number | null;
 }
 
-export interface TableRowFragment_Embed_can {
-  __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
-}
-
 export interface TableRowFragment_Embed_source {
   __typename: "ConnectableSource";
   url: string | null;
@@ -135,19 +96,11 @@ export interface TableRowFragment_Embed_user {
   name: string;
 }
 
-export interface TableRowFragment_Embed_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
-}
-
 export interface TableRowFragment_Embed_connection {
   __typename: "Connection";
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: TableRowFragment_Embed_connection_can | null;
 }
 
 export interface TableRowFragment_Embed {
@@ -156,7 +109,6 @@ export interface TableRowFragment_Embed {
   created_at: string | null;
   updated_at: string | null;
   counts: TableRowFragment_Embed_counts | null;
-  can: TableRowFragment_Embed_can | null;
   embed_html: string | null;
   image_url: string | null;
   href: string | null;
@@ -174,13 +126,6 @@ export interface TableRowFragment_Image_counts {
   public_channels: number | null;
 }
 
-export interface TableRowFragment_Image_can {
-  __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
-}
-
 export interface TableRowFragment_Image_source {
   __typename: "ConnectableSource";
   url: string | null;
@@ -192,19 +137,11 @@ export interface TableRowFragment_Image_user {
   name: string;
 }
 
-export interface TableRowFragment_Image_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
-}
-
 export interface TableRowFragment_Image_connection {
   __typename: "Connection";
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: TableRowFragment_Image_connection_can | null;
 }
 
 export interface TableRowFragment_Image {
@@ -213,7 +150,6 @@ export interface TableRowFragment_Image {
   created_at: string | null;
   updated_at: string | null;
   counts: TableRowFragment_Image_counts | null;
-  can: TableRowFragment_Image_can | null;
   image_url: string | null;
   href: string | null;
   /**
@@ -234,13 +170,6 @@ export interface TableRowFragment_Link_counts {
   public_channels: number | null;
 }
 
-export interface TableRowFragment_Link_can {
-  __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
-}
-
 export interface TableRowFragment_Link_source {
   __typename: "ConnectableSource";
   url: string | null;
@@ -252,19 +181,11 @@ export interface TableRowFragment_Link_user {
   name: string;
 }
 
-export interface TableRowFragment_Link_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
-}
-
 export interface TableRowFragment_Link_connection {
   __typename: "Connection";
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: TableRowFragment_Link_connection_can | null;
 }
 
 export interface TableRowFragment_Link {
@@ -273,7 +194,6 @@ export interface TableRowFragment_Link {
   created_at: string | null;
   updated_at: string | null;
   counts: TableRowFragment_Link_counts | null;
-  can: TableRowFragment_Link_can | null;
   image_url: string | null;
   href: string | null;
   source: TableRowFragment_Link_source | null;
@@ -290,13 +210,6 @@ export interface TableRowFragment_Text_counts {
   public_channels: number | null;
 }
 
-export interface TableRowFragment_Text_can {
-  __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
-}
-
 export interface TableRowFragment_Text_source {
   __typename: "ConnectableSource";
   url: string | null;
@@ -307,19 +220,11 @@ export interface TableRowFragment_Text_user {
   name: string;
 }
 
-export interface TableRowFragment_Text_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
-}
-
 export interface TableRowFragment_Text_connection {
   __typename: "Connection";
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: TableRowFragment_Text_connection_can | null;
 }
 
 export interface TableRowFragment_Text {
@@ -328,7 +233,6 @@ export interface TableRowFragment_Text {
   created_at: string | null;
   updated_at: string | null;
   counts: TableRowFragment_Text_counts | null;
-  can: TableRowFragment_Text_can | null;
   content: string;
   html: string;
   /**
@@ -351,23 +255,9 @@ export interface TableRowFragment_Channel_counts {
   contents: number | null;
 }
 
-export interface TableRowFragment_Channel_can {
-  __typename: "ChannelCan";
-  update: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
-}
-
 export interface TableRowFragment_Channel_user {
   __typename: "User";
   name: string;
-}
-
-export interface TableRowFragment_Channel_connection_can {
-  __typename: "ConnectionCan";
-  manage: boolean | null;
-  remove: boolean | null;
-  destroy: boolean | null;
 }
 
 export interface TableRowFragment_Channel_connection {
@@ -375,7 +265,6 @@ export interface TableRowFragment_Channel_connection {
   id: number;
   created_at: string | null;
   selected: boolean;
-  can: TableRowFragment_Channel_connection_can | null;
 }
 
 export interface TableRowFragment_Channel {
@@ -387,7 +276,6 @@ export interface TableRowFragment_Channel {
   title: string;
   href: string | null;
   counts: TableRowFragment_Channel_counts | null;
-  can: TableRowFragment_Channel_can | null;
   user: TableRowFragment_Channel_user | null;
   /**
    * Returns the outer channel if we are inside of one

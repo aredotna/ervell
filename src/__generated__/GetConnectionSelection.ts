@@ -7,10 +7,16 @@
 // GraphQL query operation: GetConnectionSelection
 // ====================================================
 
+export interface GetConnectionSelection_connection_can {
+  __typename: "ConnectionCan";
+  manage: boolean | null;
+}
+
 export interface GetConnectionSelection_connection {
   __typename: "Connection";
   id: number;
   selected: boolean;
+  can: GetConnectionSelection_connection_can | null;
 }
 
 export interface GetConnectionSelection {
