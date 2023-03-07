@@ -25,7 +25,7 @@ import {
 import { channelContextMenu } from './queries/channelContextMenu'
 
 const Loader = styled(LoadingIndicator).attrs({
-  f: 3,
+  f: 4,
   px: 8,
   py: 4,
 })``

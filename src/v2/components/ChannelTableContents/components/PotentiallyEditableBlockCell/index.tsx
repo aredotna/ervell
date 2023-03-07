@@ -75,7 +75,7 @@ const EditableInput = styled(Input)`
 export const PotentiallyEditableBlockCell: React.FC<{
   value: { block: TableData; attr: 'title' }
 }> = ({ value: { block, attr } }) => {
-  if ('isNull' in block) {
+  if ('isNull' in block || !block || !block.id) {
     return null
   }
 
@@ -90,7 +90,7 @@ const PotentiallyEditableBlockCellNonNull = ({
   const { data } = useQuery<VerifyEditableBlock, VerifyEditableBlockVariables>(
     verifyEditable,
     {
-      variables: { id: block.id.toString() },
+      variables: { id: block?.id.toString() },
       ssr: false,
     }
   )
@@ -126,7 +126,7 @@ const PotentiallyEditableBlockCellNonNull = ({
 
   const saveValue = useCallback(() => {
     updateBlockCell({
-      variables: { id: block.id.toString(), [attr]: attribute },
+      variables: { id: block?.id.toString(), [attr]: attribute },
     })
     setMode('editable')
   }, [updateBlockCell, attr, block, attribute])
