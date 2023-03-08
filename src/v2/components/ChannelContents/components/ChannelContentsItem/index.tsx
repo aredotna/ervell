@@ -68,6 +68,8 @@ interface Props {
   onItemIntersected: (index: number) => void
 }
 
+type Ev = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+
 export const ChannelContentsItem: React.FC<Props> = memo(
   ({
     channel,
@@ -80,11 +82,11 @@ export const ChannelContentsItem: React.FC<Props> = memo(
   }) => {
     const [isHovering, setHover] = useState(false)
 
-    type Ev = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
     const startHover = useCallback<Ev>(() => {
       if (isTouchDevice()) return
       setHover(true)
     }, [])
+
     const endHover = useCallback<Ev>(() => {
       if (isTouchDevice()) return
       setHover(false)

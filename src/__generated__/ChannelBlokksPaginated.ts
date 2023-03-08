@@ -19,16 +19,10 @@ export interface ChannelBlokksPaginated_channel_blokks_Attachment_connection_use
   name: string;
 }
 
-export interface ChannelBlokksPaginated_channel_blokks_Attachment_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelBlokksPaginated_channel_blokks_Attachment_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelBlokksPaginated_channel_blokks_Attachment_connection_user | null;
-  can: ChannelBlokksPaginated_channel_blokks_Attachment_connection_can | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Attachment_source {
@@ -39,13 +33,6 @@ export interface ChannelBlokksPaginated_channel_blokks_Attachment_source {
 export interface ChannelBlokksPaginated_channel_blokks_Attachment_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ChannelBlokksPaginated_channel_blokks_Attachment_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Attachment {
@@ -66,7 +53,6 @@ export interface ChannelBlokksPaginated_channel_blokks_Attachment {
   src_2x: string | null;
   src_3x: string | null;
   file_extension: string | null;
-  can: ChannelBlokksPaginated_channel_blokks_Attachment_can | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Embed_user {
@@ -81,16 +67,10 @@ export interface ChannelBlokksPaginated_channel_blokks_Embed_connection_user {
   name: string;
 }
 
-export interface ChannelBlokksPaginated_channel_blokks_Embed_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelBlokksPaginated_channel_blokks_Embed_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelBlokksPaginated_channel_blokks_Embed_connection_user | null;
-  can: ChannelBlokksPaginated_channel_blokks_Embed_connection_can | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Embed_source {
@@ -101,13 +81,6 @@ export interface ChannelBlokksPaginated_channel_blokks_Embed_source {
 export interface ChannelBlokksPaginated_channel_blokks_Embed_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ChannelBlokksPaginated_channel_blokks_Embed_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Embed {
@@ -127,7 +100,6 @@ export interface ChannelBlokksPaginated_channel_blokks_Embed {
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
-  can: ChannelBlokksPaginated_channel_blokks_Embed_can | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Image_user {
@@ -142,16 +114,10 @@ export interface ChannelBlokksPaginated_channel_blokks_Image_connection_user {
   name: string;
 }
 
-export interface ChannelBlokksPaginated_channel_blokks_Image_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelBlokksPaginated_channel_blokks_Image_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelBlokksPaginated_channel_blokks_Image_connection_user | null;
-  can: ChannelBlokksPaginated_channel_blokks_Image_connection_can | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Image_source {
@@ -168,13 +134,6 @@ export interface ChannelBlokksPaginated_channel_blokks_Image_original_dimensions
   __typename: "Dimensions";
   width: number | null;
   height: number | null;
-}
-
-export interface ChannelBlokksPaginated_channel_blokks_Image_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Image {
@@ -196,11 +155,6 @@ export interface ChannelBlokksPaginated_channel_blokks_Image {
   src_2x: string | null;
   src_3x: string | null;
   original_dimensions: ChannelBlokksPaginated_channel_blokks_Image_original_dimensions | null;
-  can: ChannelBlokksPaginated_channel_blokks_Image_can | null;
-  /**
-   * URL to find the original image on various services
-   */
-  find_original_url: string | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Link_user {
@@ -215,16 +169,10 @@ export interface ChannelBlokksPaginated_channel_blokks_Link_connection_user {
   name: string;
 }
 
-export interface ChannelBlokksPaginated_channel_blokks_Link_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelBlokksPaginated_channel_blokks_Link_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelBlokksPaginated_channel_blokks_Link_connection_user | null;
-  can: ChannelBlokksPaginated_channel_blokks_Link_connection_can | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Link_source {
@@ -235,13 +183,6 @@ export interface ChannelBlokksPaginated_channel_blokks_Link_source {
 export interface ChannelBlokksPaginated_channel_blokks_Link_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ChannelBlokksPaginated_channel_blokks_Link_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Link {
@@ -264,7 +205,6 @@ export interface ChannelBlokksPaginated_channel_blokks_Link {
   external_url: string | null;
   content: string | null;
   source_url: string | null;
-  can: ChannelBlokksPaginated_channel_blokks_Link_can | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_PendingBlock_user {
@@ -279,16 +219,10 @@ export interface ChannelBlokksPaginated_channel_blokks_PendingBlock_connection_u
   name: string;
 }
 
-export interface ChannelBlokksPaginated_channel_blokks_PendingBlock_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelBlokksPaginated_channel_blokks_PendingBlock_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelBlokksPaginated_channel_blokks_PendingBlock_connection_user | null;
-  can: ChannelBlokksPaginated_channel_blokks_PendingBlock_connection_can | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_PendingBlock_source {
@@ -299,13 +233,6 @@ export interface ChannelBlokksPaginated_channel_blokks_PendingBlock_source {
 export interface ChannelBlokksPaginated_channel_blokks_PendingBlock_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ChannelBlokksPaginated_channel_blokks_PendingBlock_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_PendingBlock {
@@ -321,7 +248,6 @@ export interface ChannelBlokksPaginated_channel_blokks_PendingBlock {
   connection: ChannelBlokksPaginated_channel_blokks_PendingBlock_connection | null;
   source: ChannelBlokksPaginated_channel_blokks_PendingBlock_source | null;
   counts: ChannelBlokksPaginated_channel_blokks_PendingBlock_counts | null;
-  can: ChannelBlokksPaginated_channel_blokks_PendingBlock_can | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Text_user {
@@ -336,16 +262,10 @@ export interface ChannelBlokksPaginated_channel_blokks_Text_connection_user {
   name: string;
 }
 
-export interface ChannelBlokksPaginated_channel_blokks_Text_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelBlokksPaginated_channel_blokks_Text_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelBlokksPaginated_channel_blokks_Text_connection_user | null;
-  can: ChannelBlokksPaginated_channel_blokks_Text_connection_can | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Text_source {
@@ -356,13 +276,6 @@ export interface ChannelBlokksPaginated_channel_blokks_Text_source {
 export interface ChannelBlokksPaginated_channel_blokks_Text_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ChannelBlokksPaginated_channel_blokks_Text_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Text {
@@ -380,7 +293,6 @@ export interface ChannelBlokksPaginated_channel_blokks_Text {
   counts: ChannelBlokksPaginated_channel_blokks_Text_counts | null;
   content: string;
   raw: string;
-  can: ChannelBlokksPaginated_channel_blokks_Text_can | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Channel_user {
@@ -395,16 +307,10 @@ export interface ChannelBlokksPaginated_channel_blokks_Channel_connection_user {
   name: string;
 }
 
-export interface ChannelBlokksPaginated_channel_blokks_Channel_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelBlokksPaginated_channel_blokks_Channel_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelBlokksPaginated_channel_blokks_Channel_connection_user | null;
-  can: ChannelBlokksPaginated_channel_blokks_Channel_connection_can | null;
 }
 
 export interface ChannelBlokksPaginated_channel_blokks_Channel_source {
@@ -432,11 +338,6 @@ export interface ChannelBlokksPaginated_channel_blokks_Channel_owner_User {
 
 export type ChannelBlokksPaginated_channel_blokks_Channel_owner = ChannelBlokksPaginated_channel_blokks_Channel_owner_Group | ChannelBlokksPaginated_channel_blokks_Channel_owner_User;
 
-export interface ChannelBlokksPaginated_channel_blokks_Channel_can {
-  __typename: "ChannelCan";
-  mute: boolean | null;
-}
-
 export interface ChannelBlokksPaginated_channel_blokks_Channel {
   __typename: "Channel";
   id: number;
@@ -454,7 +355,6 @@ export interface ChannelBlokksPaginated_channel_blokks_Channel {
   counts: ChannelBlokksPaginated_channel_blokks_Channel_counts | null;
   owner: ChannelBlokksPaginated_channel_blokks_Channel_owner;
   label: string;
-  can: ChannelBlokksPaginated_channel_blokks_Channel_can | null;
 }
 
 export type ChannelBlokksPaginated_channel_blokks = ChannelBlokksPaginated_channel_blokks_Attachment | ChannelBlokksPaginated_channel_blokks_Embed | ChannelBlokksPaginated_channel_blokks_Image | ChannelBlokksPaginated_channel_blokks_Link | ChannelBlokksPaginated_channel_blokks_PendingBlock | ChannelBlokksPaginated_channel_blokks_Text | ChannelBlokksPaginated_channel_blokks_Channel;

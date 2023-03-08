@@ -14,6 +14,8 @@ export const ConnectableContextMenuMuteBlock: React.FC<Props> = ({
   connectableId,
   connectableType,
 }) => {
+  const type = toBaseConnectableType(connectableType)?.toLowerCase()
+
   return (
     <MuteButton
       id={connectableId}
@@ -23,11 +25,11 @@ export const ConnectableContextMenuMuteBlock: React.FC<Props> = ({
         ({
           true: (
             <ContextMenu.Option iconName="Mute">
-              Unmute block
+              Unmute {type}
             </ContextMenu.Option>
           ),
           false: (
-            <ContextMenu.Option iconName="Mute">Mute block</ContextMenu.Option>
+            <ContextMenu.Option iconName="Mute">Mute {type}</ContextMenu.Option>
           ),
         }[isMuted])
       }

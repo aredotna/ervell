@@ -19,11 +19,6 @@ export const tableRowFragment = gql`
       counts {
         public_channels
       }
-      can {
-        remove: manage
-        manage
-        mute
-      }
     }
 
     ... on Channel {
@@ -33,11 +28,6 @@ export const tableRowFragment = gql`
       counts {
         connected_to_channels
         contents
-      }
-      can {
-        update: manage
-        manage
-        mute
       }
     }
 
@@ -102,11 +92,6 @@ export const tableRowFragment = gql`
         id
         created_at(relative: true)
         selected
-        can {
-          manage
-          remove: manage
-          destroy
-        }
       }
     }
   }

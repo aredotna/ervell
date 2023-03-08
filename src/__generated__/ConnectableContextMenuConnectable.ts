@@ -9,9 +9,9 @@
 
 export interface ConnectableContextMenuConnectable_Attachment_can {
   __typename: "BlockCan";
-  mute: boolean | null;
   remove: boolean | null;
   manage: boolean | null;
+  mute: boolean | null;
 }
 
 export interface ConnectableContextMenuConnectable_Attachment_connection_can {
@@ -43,9 +43,9 @@ export interface ConnectableContextMenuConnectable_Attachment {
 
 export interface ConnectableContextMenuConnectable_Embed_can {
   __typename: "BlockCan";
-  mute: boolean | null;
   remove: boolean | null;
   manage: boolean | null;
+  mute: boolean | null;
 }
 
 export interface ConnectableContextMenuConnectable_Embed_connection_can {
@@ -77,9 +77,9 @@ export interface ConnectableContextMenuConnectable_Embed {
 
 export interface ConnectableContextMenuConnectable_Image_can {
   __typename: "BlockCan";
-  mute: boolean | null;
   remove: boolean | null;
   manage: boolean | null;
+  mute: boolean | null;
 }
 
 export interface ConnectableContextMenuConnectable_Image_connection_can {
@@ -115,9 +115,9 @@ export interface ConnectableContextMenuConnectable_Image {
 
 export interface ConnectableContextMenuConnectable_Link_can {
   __typename: "BlockCan";
-  mute: boolean | null;
   remove: boolean | null;
   manage: boolean | null;
+  mute: boolean | null;
 }
 
 export interface ConnectableContextMenuConnectable_Link_connection_can {
@@ -149,9 +149,9 @@ export interface ConnectableContextMenuConnectable_Link {
 
 export interface ConnectableContextMenuConnectable_PendingBlock_can {
   __typename: "BlockCan";
-  mute: boolean | null;
   remove: boolean | null;
   manage: boolean | null;
+  mute: boolean | null;
 }
 
 export interface ConnectableContextMenuConnectable_PendingBlock_connection_can {
@@ -177,9 +177,9 @@ export interface ConnectableContextMenuConnectable_PendingBlock {
 
 export interface ConnectableContextMenuConnectable_Text_can {
   __typename: "BlockCan";
-  mute: boolean | null;
   remove: boolean | null;
   manage: boolean | null;
+  mute: boolean | null;
 }
 
 export interface ConnectableContextMenuConnectable_Text_connection_can {
