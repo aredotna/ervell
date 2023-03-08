@@ -19,16 +19,10 @@ export interface ConnectableBlokk_blokk_Attachment_connection_user {
   name: string;
 }
 
-export interface ConnectableBlokk_blokk_Attachment_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ConnectableBlokk_blokk_Attachment_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ConnectableBlokk_blokk_Attachment_connection_user | null;
-  can: ConnectableBlokk_blokk_Attachment_connection_can | null;
 }
 
 export interface ConnectableBlokk_blokk_Attachment_source {
@@ -39,13 +33,6 @@ export interface ConnectableBlokk_blokk_Attachment_source {
 export interface ConnectableBlokk_blokk_Attachment_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ConnectableBlokk_blokk_Attachment_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ConnectableBlokk_blokk_Attachment {
@@ -66,7 +53,6 @@ export interface ConnectableBlokk_blokk_Attachment {
   src_2x: string | null;
   src_3x: string | null;
   file_extension: string | null;
-  can: ConnectableBlokk_blokk_Attachment_can | null;
 }
 
 export interface ConnectableBlokk_blokk_Embed_user {
@@ -81,16 +67,10 @@ export interface ConnectableBlokk_blokk_Embed_connection_user {
   name: string;
 }
 
-export interface ConnectableBlokk_blokk_Embed_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ConnectableBlokk_blokk_Embed_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ConnectableBlokk_blokk_Embed_connection_user | null;
-  can: ConnectableBlokk_blokk_Embed_connection_can | null;
 }
 
 export interface ConnectableBlokk_blokk_Embed_source {
@@ -101,13 +81,6 @@ export interface ConnectableBlokk_blokk_Embed_source {
 export interface ConnectableBlokk_blokk_Embed_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ConnectableBlokk_blokk_Embed_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ConnectableBlokk_blokk_Embed {
@@ -127,7 +100,6 @@ export interface ConnectableBlokk_blokk_Embed {
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
-  can: ConnectableBlokk_blokk_Embed_can | null;
 }
 
 export interface ConnectableBlokk_blokk_Image_user {
@@ -142,16 +114,10 @@ export interface ConnectableBlokk_blokk_Image_connection_user {
   name: string;
 }
 
-export interface ConnectableBlokk_blokk_Image_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ConnectableBlokk_blokk_Image_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ConnectableBlokk_blokk_Image_connection_user | null;
-  can: ConnectableBlokk_blokk_Image_connection_can | null;
 }
 
 export interface ConnectableBlokk_blokk_Image_source {
@@ -168,13 +134,6 @@ export interface ConnectableBlokk_blokk_Image_original_dimensions {
   __typename: "Dimensions";
   width: number | null;
   height: number | null;
-}
-
-export interface ConnectableBlokk_blokk_Image_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ConnectableBlokk_blokk_Image {
@@ -196,11 +155,6 @@ export interface ConnectableBlokk_blokk_Image {
   src_2x: string | null;
   src_3x: string | null;
   original_dimensions: ConnectableBlokk_blokk_Image_original_dimensions | null;
-  can: ConnectableBlokk_blokk_Image_can | null;
-  /**
-   * URL to find the original image on various services
-   */
-  find_original_url: string | null;
 }
 
 export interface ConnectableBlokk_blokk_Link_user {
@@ -215,16 +169,10 @@ export interface ConnectableBlokk_blokk_Link_connection_user {
   name: string;
 }
 
-export interface ConnectableBlokk_blokk_Link_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ConnectableBlokk_blokk_Link_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ConnectableBlokk_blokk_Link_connection_user | null;
-  can: ConnectableBlokk_blokk_Link_connection_can | null;
 }
 
 export interface ConnectableBlokk_blokk_Link_source {
@@ -235,13 +183,6 @@ export interface ConnectableBlokk_blokk_Link_source {
 export interface ConnectableBlokk_blokk_Link_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ConnectableBlokk_blokk_Link_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ConnectableBlokk_blokk_Link {
@@ -264,7 +205,6 @@ export interface ConnectableBlokk_blokk_Link {
   external_url: string | null;
   content: string | null;
   source_url: string | null;
-  can: ConnectableBlokk_blokk_Link_can | null;
 }
 
 export interface ConnectableBlokk_blokk_PendingBlock_user {
@@ -279,16 +219,10 @@ export interface ConnectableBlokk_blokk_PendingBlock_connection_user {
   name: string;
 }
 
-export interface ConnectableBlokk_blokk_PendingBlock_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ConnectableBlokk_blokk_PendingBlock_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ConnectableBlokk_blokk_PendingBlock_connection_user | null;
-  can: ConnectableBlokk_blokk_PendingBlock_connection_can | null;
 }
 
 export interface ConnectableBlokk_blokk_PendingBlock_source {
@@ -299,13 +233,6 @@ export interface ConnectableBlokk_blokk_PendingBlock_source {
 export interface ConnectableBlokk_blokk_PendingBlock_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ConnectableBlokk_blokk_PendingBlock_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ConnectableBlokk_blokk_PendingBlock {
@@ -321,7 +248,6 @@ export interface ConnectableBlokk_blokk_PendingBlock {
   connection: ConnectableBlokk_blokk_PendingBlock_connection | null;
   source: ConnectableBlokk_blokk_PendingBlock_source | null;
   counts: ConnectableBlokk_blokk_PendingBlock_counts | null;
-  can: ConnectableBlokk_blokk_PendingBlock_can | null;
 }
 
 export interface ConnectableBlokk_blokk_Text_user {
@@ -336,16 +262,10 @@ export interface ConnectableBlokk_blokk_Text_connection_user {
   name: string;
 }
 
-export interface ConnectableBlokk_blokk_Text_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ConnectableBlokk_blokk_Text_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ConnectableBlokk_blokk_Text_connection_user | null;
-  can: ConnectableBlokk_blokk_Text_connection_can | null;
 }
 
 export interface ConnectableBlokk_blokk_Text_source {
@@ -356,13 +276,6 @@ export interface ConnectableBlokk_blokk_Text_source {
 export interface ConnectableBlokk_blokk_Text_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ConnectableBlokk_blokk_Text_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ConnectableBlokk_blokk_Text {
@@ -380,7 +293,6 @@ export interface ConnectableBlokk_blokk_Text {
   counts: ConnectableBlokk_blokk_Text_counts | null;
   content: string;
   raw: string;
-  can: ConnectableBlokk_blokk_Text_can | null;
 }
 
 export interface ConnectableBlokk_blokk_Channel_user {
@@ -395,16 +307,10 @@ export interface ConnectableBlokk_blokk_Channel_connection_user {
   name: string;
 }
 
-export interface ConnectableBlokk_blokk_Channel_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ConnectableBlokk_blokk_Channel_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ConnectableBlokk_blokk_Channel_connection_user | null;
-  can: ConnectableBlokk_blokk_Channel_connection_can | null;
 }
 
 export interface ConnectableBlokk_blokk_Channel_source {
@@ -432,11 +338,6 @@ export interface ConnectableBlokk_blokk_Channel_owner_User {
 
 export type ConnectableBlokk_blokk_Channel_owner = ConnectableBlokk_blokk_Channel_owner_Group | ConnectableBlokk_blokk_Channel_owner_User;
 
-export interface ConnectableBlokk_blokk_Channel_can {
-  __typename: "ChannelCan";
-  mute: boolean | null;
-}
-
 export interface ConnectableBlokk_blokk_Channel {
   __typename: "Channel";
   id: number;
@@ -454,7 +355,6 @@ export interface ConnectableBlokk_blokk_Channel {
   counts: ConnectableBlokk_blokk_Channel_counts | null;
   owner: ConnectableBlokk_blokk_Channel_owner;
   label: string;
-  can: ConnectableBlokk_blokk_Channel_can | null;
 }
 
 export type ConnectableBlokk_blokk = ConnectableBlokk_blokk_Attachment | ConnectableBlokk_blokk_Embed | ConnectableBlokk_blokk_Image | ConnectableBlokk_blokk_Link | ConnectableBlokk_blokk_PendingBlock | ConnectableBlokk_blokk_Text | ConnectableBlokk_blokk_Channel;

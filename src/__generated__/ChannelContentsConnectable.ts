@@ -19,16 +19,10 @@ export interface ChannelContentsConnectable_Attachment_connection_user {
   name: string;
 }
 
-export interface ChannelContentsConnectable_Attachment_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelContentsConnectable_Attachment_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsConnectable_Attachment_connection_user | null;
-  can: ChannelContentsConnectable_Attachment_connection_can | null;
 }
 
 export interface ChannelContentsConnectable_Attachment_source {
@@ -39,13 +33,6 @@ export interface ChannelContentsConnectable_Attachment_source {
 export interface ChannelContentsConnectable_Attachment_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ChannelContentsConnectable_Attachment_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ChannelContentsConnectable_Attachment {
@@ -66,7 +53,6 @@ export interface ChannelContentsConnectable_Attachment {
   src_2x: string | null;
   src_3x: string | null;
   file_extension: string | null;
-  can: ChannelContentsConnectable_Attachment_can | null;
 }
 
 export interface ChannelContentsConnectable_Embed_user {
@@ -81,16 +67,10 @@ export interface ChannelContentsConnectable_Embed_connection_user {
   name: string;
 }
 
-export interface ChannelContentsConnectable_Embed_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelContentsConnectable_Embed_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsConnectable_Embed_connection_user | null;
-  can: ChannelContentsConnectable_Embed_connection_can | null;
 }
 
 export interface ChannelContentsConnectable_Embed_source {
@@ -101,13 +81,6 @@ export interface ChannelContentsConnectable_Embed_source {
 export interface ChannelContentsConnectable_Embed_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ChannelContentsConnectable_Embed_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ChannelContentsConnectable_Embed {
@@ -127,7 +100,6 @@ export interface ChannelContentsConnectable_Embed {
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
-  can: ChannelContentsConnectable_Embed_can | null;
 }
 
 export interface ChannelContentsConnectable_Image_user {
@@ -142,16 +114,10 @@ export interface ChannelContentsConnectable_Image_connection_user {
   name: string;
 }
 
-export interface ChannelContentsConnectable_Image_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelContentsConnectable_Image_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsConnectable_Image_connection_user | null;
-  can: ChannelContentsConnectable_Image_connection_can | null;
 }
 
 export interface ChannelContentsConnectable_Image_source {
@@ -168,13 +134,6 @@ export interface ChannelContentsConnectable_Image_original_dimensions {
   __typename: "Dimensions";
   width: number | null;
   height: number | null;
-}
-
-export interface ChannelContentsConnectable_Image_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ChannelContentsConnectable_Image {
@@ -196,11 +155,6 @@ export interface ChannelContentsConnectable_Image {
   src_2x: string | null;
   src_3x: string | null;
   original_dimensions: ChannelContentsConnectable_Image_original_dimensions | null;
-  can: ChannelContentsConnectable_Image_can | null;
-  /**
-   * URL to find the original image on various services
-   */
-  find_original_url: string | null;
 }
 
 export interface ChannelContentsConnectable_Link_user {
@@ -215,16 +169,10 @@ export interface ChannelContentsConnectable_Link_connection_user {
   name: string;
 }
 
-export interface ChannelContentsConnectable_Link_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelContentsConnectable_Link_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsConnectable_Link_connection_user | null;
-  can: ChannelContentsConnectable_Link_connection_can | null;
 }
 
 export interface ChannelContentsConnectable_Link_source {
@@ -235,13 +183,6 @@ export interface ChannelContentsConnectable_Link_source {
 export interface ChannelContentsConnectable_Link_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ChannelContentsConnectable_Link_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ChannelContentsConnectable_Link {
@@ -264,7 +205,6 @@ export interface ChannelContentsConnectable_Link {
   external_url: string | null;
   content: string | null;
   source_url: string | null;
-  can: ChannelContentsConnectable_Link_can | null;
 }
 
 export interface ChannelContentsConnectable_PendingBlock_user {
@@ -279,16 +219,10 @@ export interface ChannelContentsConnectable_PendingBlock_connection_user {
   name: string;
 }
 
-export interface ChannelContentsConnectable_PendingBlock_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelContentsConnectable_PendingBlock_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsConnectable_PendingBlock_connection_user | null;
-  can: ChannelContentsConnectable_PendingBlock_connection_can | null;
 }
 
 export interface ChannelContentsConnectable_PendingBlock_source {
@@ -299,13 +233,6 @@ export interface ChannelContentsConnectable_PendingBlock_source {
 export interface ChannelContentsConnectable_PendingBlock_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ChannelContentsConnectable_PendingBlock_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ChannelContentsConnectable_PendingBlock {
@@ -321,7 +248,6 @@ export interface ChannelContentsConnectable_PendingBlock {
   connection: ChannelContentsConnectable_PendingBlock_connection | null;
   source: ChannelContentsConnectable_PendingBlock_source | null;
   counts: ChannelContentsConnectable_PendingBlock_counts | null;
-  can: ChannelContentsConnectable_PendingBlock_can | null;
 }
 
 export interface ChannelContentsConnectable_Text_user {
@@ -336,16 +262,10 @@ export interface ChannelContentsConnectable_Text_connection_user {
   name: string;
 }
 
-export interface ChannelContentsConnectable_Text_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelContentsConnectable_Text_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsConnectable_Text_connection_user | null;
-  can: ChannelContentsConnectable_Text_connection_can | null;
 }
 
 export interface ChannelContentsConnectable_Text_source {
@@ -356,13 +276,6 @@ export interface ChannelContentsConnectable_Text_source {
 export interface ChannelContentsConnectable_Text_counts {
   __typename: "BlockCounts";
   comments: number | null;
-}
-
-export interface ChannelContentsConnectable_Text_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-  manage: boolean | null;
 }
 
 export interface ChannelContentsConnectable_Text {
@@ -380,7 +293,6 @@ export interface ChannelContentsConnectable_Text {
   counts: ChannelContentsConnectable_Text_counts | null;
   content: string;
   raw: string;
-  can: ChannelContentsConnectable_Text_can | null;
 }
 
 export interface ChannelContentsConnectable_Channel_user {
@@ -395,16 +307,10 @@ export interface ChannelContentsConnectable_Channel_connection_user {
   name: string;
 }
 
-export interface ChannelContentsConnectable_Channel_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
 export interface ChannelContentsConnectable_Channel_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsConnectable_Channel_connection_user | null;
-  can: ChannelContentsConnectable_Channel_connection_can | null;
 }
 
 export interface ChannelContentsConnectable_Channel_source {
@@ -432,11 +338,6 @@ export interface ChannelContentsConnectable_Channel_owner_User {
 
 export type ChannelContentsConnectable_Channel_owner = ChannelContentsConnectable_Channel_owner_Group | ChannelContentsConnectable_Channel_owner_User;
 
-export interface ChannelContentsConnectable_Channel_can {
-  __typename: "ChannelCan";
-  mute: boolean | null;
-}
-
 export interface ChannelContentsConnectable_Channel {
   __typename: "Channel";
   id: number;
@@ -454,7 +355,6 @@ export interface ChannelContentsConnectable_Channel {
   counts: ChannelContentsConnectable_Channel_counts | null;
   owner: ChannelContentsConnectable_Channel_owner;
   label: string;
-  can: ChannelContentsConnectable_Channel_can | null;
 }
 
 export type ChannelContentsConnectable = ChannelContentsConnectable_Attachment | ChannelContentsConnectable_Embed | ChannelContentsConnectable_Image | ChannelContentsConnectable_Link | ChannelContentsConnectable_PendingBlock | ChannelContentsConnectable_Text | ChannelContentsConnectable_Channel;

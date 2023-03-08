@@ -6,6 +6,9 @@ export default gql`
       __typename
       id
       selected
+      can {
+        manage
+      }
     }
   }
 `
