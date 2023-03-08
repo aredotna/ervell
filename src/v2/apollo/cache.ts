@@ -153,14 +153,23 @@ export function getCache({
       },
 
       Searches: {
+        merge: true,
+        keyFields: [],
         fields: {
           advanced: {
-            keyArgs: everythingExcept('page', 'per'),
+            keyArgs: false,
             merge(existing, incoming) {
+              const newResults = [...existing?.results, ...incoming?.results]
+
+              // Filter out any undefined results
+              const filteredResults = newResults.filter(
+                result => result !== undefined
+              )
+
               const newObject = {
                 ...existing,
                 ...incoming,
-                results: [...existing?.results, ...incoming?.results],
+                results: filteredResults,
               }
 
               return newObject
