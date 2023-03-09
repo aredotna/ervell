@@ -220,15 +220,22 @@ export const StronglyProposePremium = props => (
   </Banner>
 )
 
-export const PricingChanges = props => (
+export const PreviouslyPremium = props => (
   <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
-    <Box>Upcoming changes to Are.na Premium on January 15th 2023. </Box>
+    <Box>
+      Did you unsubscribe from Premium because of recent pricing changes?
+      Resubscribe with the coupon code{' '}
+      <Text display="inline" font="mono" color="white">
+        REUNION
+      </Text>{' '}
+      to get the original price.
+    </Box>
     <ButtonLink
       color="state.premium"
-      href="https://www.are.na/blog/on-pricing"
+      href="https://www.are.na/settings/billing"
       target="_blank"
     >
-      Read more
+      Resubscribe
     </ButtonLink>
   </Banner>
 )
@@ -305,5 +312,5 @@ export default {
   LOGGED_OUT_EXPLORE: LoggedOutExplore,
   LOGGED_OUT_PROFILE: LoggedOutProfile,
   LOGGED_OUT_CHANNEL: LoggedOutChannel,
-  PRICING_CHANGES: PricingChanges,
+  PREVIOUSLY_PREMIUM: PreviouslyPremium,
 }

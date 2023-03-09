@@ -6,7 +6,7 @@ import FixedWrapper from 'v2/components/UI/FixedWrapper'
 const BottomBanner = ({ banner, ...rest }) => {
   if (!banner) return null
 
-  const Banner = Banners[banner]
+  const Banner = Banners.PREVIOUSLY_PREMIUM
 
   if (!Banner) {
     return <div />
