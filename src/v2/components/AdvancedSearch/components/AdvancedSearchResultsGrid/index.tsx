@@ -84,6 +84,7 @@ export const AdvancedSearchResultsGrid: React.FC<Props> = ({
     fetchMore({
       variables: { ...state.variables, page: page + 1 },
     }).then(res => {
+      console.log(`page: ${page}`, { res })
       if (res.data.searches.advanced.results.length > 0) {
         setPage(page + 1)
       }
