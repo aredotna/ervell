@@ -104,7 +104,7 @@ export const AppRoutes = () => {
         <Route path="group/:id/invite/:code" element={<AcceptInvitePage />} />
 
         {/* Confirm account */}
-        <Route path="confirm/expire" element={<ExpiredConfirmationPage />} />
+        <Route path="confirm/expired" element={<ExpiredConfirmationPage />} />
         <Route path="confirm/:token" element={<ConfirmationPage />} />
         <Route path="confirm" />
 
