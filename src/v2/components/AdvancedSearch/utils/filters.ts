@@ -11,13 +11,13 @@ import { AnyFilter } from '../AdvancedSearchContext'
 export const scopedDisabledFilters = {
   where: {
     [WhereEnum.MY]: {
-      what: [WhatEnum.USER],
+      what: [WhatEnum.USER, WhatEnum.GROUP],
     },
     [WhereEnum.USER]: {
-      what: [WhatEnum.USER],
+      what: [WhatEnum.USER, WhatEnum.GROUP],
     },
     [WhereEnum.FOLLOWING]: {
-      what: [WhatEnum.USER],
+      what: [WhatEnum.USER, WhatEnum.GROUP],
     },
   },
   what: {

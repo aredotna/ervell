@@ -13,7 +13,7 @@ describe('AdvancedSearch filters', () => {
       },
       'hello world'
     )
-    expect(disabledFilters).toEqual({ what: ['USER'] })
+    expect(disabledFilters).toEqual({ what: ['USER', 'GROUP'] })
   })
 
   it('should return an object of disabled filters when multiple filters are disabled', () => {
@@ -25,7 +25,7 @@ describe('AdvancedSearch filters', () => {
       'hello world'
     )
     expect(disabledFilters).toEqual({
-      what: ['USER'],
+      what: ['USER', 'GROUP'],
       fields: ['DOMAIN', 'URL', 'CONTENT'],
     })
   })
