@@ -43,6 +43,10 @@ const Figcaption = styled.figcaption`
   font-size: ${({ theme }) => theme.fontSizesIndexed.xs};
   margin: ${({ theme }) => `${theme.space[7]} 0`};
   color: ${({ theme }) => theme.colors.gray.base};
+
+  a {
+    text-decoration: underline;
+  }
 `
 
 const UL = styled.ul`
