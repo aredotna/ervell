@@ -55,6 +55,8 @@ const Meta = styled(Text).attrs({
   f: 4,
 })``
 
+const timeZone = 'UTC'
+
 export const BlogPost: React.FC = () => {
   const params = useParams()
   const slug = params?.id
@@ -70,7 +72,13 @@ export const BlogPost: React.FC = () => {
     return null
   }
 
-  const displayDate = DateTime.fromISO(post.displayDate).toLocaleString()
+  // Create a DateTime object from the ISO date string
+  const date = DateTime.fromISO(post.displayDate, { zone: timeZone })
+
+  // Format the date using the specified time zone
+  const displayDate = new Intl.DateTimeFormat('en-US', { timeZone }).format(
+    date.toJSDate()
+  )
 
   return (
     <ErrorBoundary>
