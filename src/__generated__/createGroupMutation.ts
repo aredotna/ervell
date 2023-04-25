@@ -10,7 +10,7 @@
 export interface createGroupMutation_create_group_group {
   __typename: "Group";
   id: number;
-  href: string | null;
+  href: string;
 }
 
 export interface createGroupMutation_create_group {

@@ -9,14 +9,14 @@
 
 export interface FullChannelMetadataActions_can {
   __typename: "ChannelCan";
-  mute: boolean | null;
-  follow: boolean | null;
+  mute: boolean;
+  follow: boolean;
 }
 
 export interface FullChannelMetadataActions {
   __typename: "Channel";
   id: number;
-  can: FullChannelMetadataActions_can | null;
-  shareable_href: string | null;
+  can: FullChannelMetadataActions_can;
+  shareable_href: string;
   shareable_title: string;
 }

@@ -11,7 +11,7 @@ export interface ChannelMetadata_owner_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
 }
 
@@ -19,7 +19,7 @@ export interface ChannelMetadata_owner_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
 }
 
@@ -27,25 +27,25 @@ export type ChannelMetadata_owner = ChannelMetadata_owner_User | ChannelMetadata
 
 export interface ChannelMetadata_counts {
   __typename: "ChannelCounts";
-  collaborators: number | null;
+  collaborators: number;
   followers: number;
 }
 
 export interface ChannelMetadata_can {
   __typename: "ChannelCan";
-  follow: boolean | null;
-  update: boolean | null;
-  destroy: boolean | null;
-  mute: boolean | null;
-  share: boolean | null;
+  follow: boolean;
+  update: boolean;
+  destroy: boolean;
+  mute: boolean;
+  share: boolean;
   manage_collaborators: boolean;
-  connect: boolean | null;
+  connect: boolean;
 }
 
 export interface ChannelMetadata_user {
   __typename: "User";
   id: number;
-  href: string | null;
+  href: string;
   name: string;
 }
 
@@ -53,7 +53,7 @@ export interface ChannelMetadata_collaborators_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
 }
 
@@ -61,31 +61,31 @@ export interface ChannelMetadata_collaborators_Group_user {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface ChannelMetadata_collaborators_Group_users {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface ChannelMetadata_collaborators_Group_can {
   __typename: "GroupCan";
-  manage: boolean | null;
-  manage_users: boolean | null;
+  manage: boolean;
+  manage_users: boolean;
 }
 
 export interface ChannelMetadata_collaborators_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   description: string | null;
   user: ChannelMetadata_collaborators_Group_user;
   users: ChannelMetadata_collaborators_Group_users[] | null;
-  can: ChannelMetadata_collaborators_Group_can | null;
+  can: ChannelMetadata_collaborators_Group_can;
   visibility: string;
   label: string;
 }
@@ -110,7 +110,7 @@ export interface ChannelMetadata_connected_to_channels {
   __typename: "Channel";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
   owner: ChannelMetadata_connected_to_channels_owner;
 }
 
@@ -126,17 +126,17 @@ export interface ChannelMetadata {
   id: number;
   title: string;
   truncatedTitle: string;
-  href: string | null;
+  href: string;
   visibility: string;
   owner: ChannelMetadata_owner;
-  counts: ChannelMetadata_counts | null;
+  counts: ChannelMetadata_counts;
   label: string;
-  can: ChannelMetadata_can | null;
-  is_muted: boolean | null;
+  can: ChannelMetadata_can;
+  is_muted: boolean;
   info: string | null;
   user: ChannelMetadata_user | null;
-  collaborators: ChannelMetadata_collaborators[] | null;
-  connected_to_channels: ChannelMetadata_connected_to_channels[] | null;
+  collaborators: ChannelMetadata_collaborators[];
+  connected_to_channels: ChannelMetadata_connected_to_channels[];
   share: ChannelMetadata_share | null;
   slug: string;
 }

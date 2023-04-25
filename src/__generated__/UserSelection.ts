@@ -13,14 +13,14 @@ export interface UserSelection_owner {
   name: string;
   hidden_email: string;
   is_premium: boolean;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }
 
 export interface UserSelection_users_can {
   __typename: "UserCan";
-  cancel_premium: boolean | null;
+  cancel_premium: boolean;
 }
 
 export interface UserSelection_users {
@@ -33,8 +33,8 @@ export interface UserSelection_users {
   is_upgradeable: boolean;
   is_approaching_either_connections_limit: boolean;
   is_exceeding_either_connections_limit: boolean;
-  can: UserSelection_users_can | null;
-  href: string | null;
+  can: UserSelection_users_can;
+  href: string;
   initials: string;
   avatar: string | null;
 }

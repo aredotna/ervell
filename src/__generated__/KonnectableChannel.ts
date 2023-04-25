@@ -9,7 +9,7 @@
 
 export interface KonnectableChannel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface KonnectableChannel_owner_Group {
@@ -30,11 +30,11 @@ export type KonnectableChannel_owner = KonnectableChannel_owner_Group | Konnecta
 export interface KonnectableChannel {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   truncatedTitle: string;
   visibility: string;
-  updated_at: string | null;
-  counts: KonnectableChannel_counts | null;
+  updated_at: string;
+  counts: KonnectableChannel_counts;
   owner: KonnectableChannel_owner;
   label: string;
 }

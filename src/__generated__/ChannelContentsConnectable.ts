@@ -21,7 +21,7 @@ export interface ChannelContentsConnectable_Attachment_connection_user {
 
 export interface ChannelContentsConnectable_Attachment_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ChannelContentsConnectable_Attachment_connection_user | null;
 }
 
@@ -38,8 +38,8 @@ export interface ChannelContentsConnectable_Attachment_counts {
 export interface ChannelContentsConnectable_Attachment {
   __typename: "Attachment";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ChannelContentsConnectable_Attachment_user | null;
   /**
@@ -69,7 +69,7 @@ export interface ChannelContentsConnectable_Embed_connection_user {
 
 export interface ChannelContentsConnectable_Embed_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ChannelContentsConnectable_Embed_connection_user | null;
 }
 
@@ -86,8 +86,8 @@ export interface ChannelContentsConnectable_Embed_counts {
 export interface ChannelContentsConnectable_Embed {
   __typename: "Embed";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ChannelContentsConnectable_Embed_user | null;
   /**
@@ -116,7 +116,7 @@ export interface ChannelContentsConnectable_Image_connection_user {
 
 export interface ChannelContentsConnectable_Image_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ChannelContentsConnectable_Image_connection_user | null;
 }
 
@@ -139,8 +139,8 @@ export interface ChannelContentsConnectable_Image_original_dimensions {
 export interface ChannelContentsConnectable_Image {
   __typename: "Image";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ChannelContentsConnectable_Image_user | null;
   /**
@@ -171,7 +171,7 @@ export interface ChannelContentsConnectable_Link_connection_user {
 
 export interface ChannelContentsConnectable_Link_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ChannelContentsConnectable_Link_connection_user | null;
 }
 
@@ -188,8 +188,8 @@ export interface ChannelContentsConnectable_Link_counts {
 export interface ChannelContentsConnectable_Link {
   __typename: "Link";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ChannelContentsConnectable_Link_user | null;
   /**
@@ -221,7 +221,7 @@ export interface ChannelContentsConnectable_PendingBlock_connection_user {
 
 export interface ChannelContentsConnectable_PendingBlock_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ChannelContentsConnectable_PendingBlock_connection_user | null;
 }
 
@@ -238,8 +238,8 @@ export interface ChannelContentsConnectable_PendingBlock_counts {
 export interface ChannelContentsConnectable_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ChannelContentsConnectable_PendingBlock_user | null;
   /**
@@ -264,7 +264,7 @@ export interface ChannelContentsConnectable_Text_connection_user {
 
 export interface ChannelContentsConnectable_Text_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ChannelContentsConnectable_Text_connection_user | null;
 }
 
@@ -281,8 +281,8 @@ export interface ChannelContentsConnectable_Text_counts {
 export interface ChannelContentsConnectable_Text {
   __typename: "Text";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ChannelContentsConnectable_Text_user | null;
   /**
@@ -309,7 +309,7 @@ export interface ChannelContentsConnectable_Channel_connection_user {
 
 export interface ChannelContentsConnectable_Channel_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ChannelContentsConnectable_Channel_connection_user | null;
 }
 
@@ -320,7 +320,7 @@ export interface ChannelContentsConnectable_Channel_source {
 
 export interface ChannelContentsConnectable_Channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ChannelContentsConnectable_Channel_owner_Group {
@@ -341,8 +341,8 @@ export type ChannelContentsConnectable_Channel_owner = ChannelContentsConnectabl
 export interface ChannelContentsConnectable_Channel {
   __typename: "Channel";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ChannelContentsConnectable_Channel_user | null;
   /**
@@ -352,7 +352,7 @@ export interface ChannelContentsConnectable_Channel {
   source: ChannelContentsConnectable_Channel_source | null;
   truncatedTitle: string;
   visibility: string;
-  counts: ChannelContentsConnectable_Channel_counts | null;
+  counts: ChannelContentsConnectable_Channel_counts;
   owner: ChannelContentsConnectable_Channel_owner;
   label: string;
 }

@@ -9,14 +9,14 @@
 
 export interface inviteCollaborator_invite_collaborator_channel_counts {
   __typename: "ChannelCounts";
-  collaborators: number | null;
+  collaborators: number;
 }
 
 export interface inviteCollaborator_invite_collaborator_channel_collaborators_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   label: string;
@@ -26,34 +26,34 @@ export interface inviteCollaborator_invite_collaborator_channel_collaborators_Gr
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface inviteCollaborator_invite_collaborator_channel_collaborators_Group_users {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface inviteCollaborator_invite_collaborator_channel_collaborators_Group_can {
   __typename: "GroupCan";
-  manage: boolean | null;
-  manage_users: boolean | null;
+  manage: boolean;
+  manage_users: boolean;
 }
 
 export interface inviteCollaborator_invite_collaborator_channel_collaborators_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   visibility: string;
   user: inviteCollaborator_invite_collaborator_channel_collaborators_Group_user;
   description: string | null;
   users: inviteCollaborator_invite_collaborator_channel_collaborators_Group_users[] | null;
-  can: inviteCollaborator_invite_collaborator_channel_collaborators_Group_can | null;
+  can: inviteCollaborator_invite_collaborator_channel_collaborators_Group_can;
   label: string;
 }
 
@@ -63,7 +63,7 @@ export interface inviteCollaborator_invite_collaborator_channel_memberships_memb
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }
@@ -78,7 +78,7 @@ export interface inviteCollaborator_invite_collaborator_channel_memberships_memb
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   visibility: string;
@@ -89,14 +89,14 @@ export type inviteCollaborator_invite_collaborator_channel_memberships_member = 
 
 export interface inviteCollaborator_invite_collaborator_channel_memberships_can {
   __typename: "ChannelMembershipCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface inviteCollaborator_invite_collaborator_channel_memberships {
   __typename: "ChannelMembership";
   id: number;
   member: inviteCollaborator_invite_collaborator_channel_memberships_member | null;
-  can: inviteCollaborator_invite_collaborator_channel_memberships_can | null;
+  can: inviteCollaborator_invite_collaborator_channel_memberships_can;
 }
 
 export interface inviteCollaborator_invite_collaborator_channel_can {
@@ -107,10 +107,10 @@ export interface inviteCollaborator_invite_collaborator_channel_can {
 export interface inviteCollaborator_invite_collaborator_channel {
   __typename: "Channel";
   id: number;
-  counts: inviteCollaborator_invite_collaborator_channel_counts | null;
-  collaborators: inviteCollaborator_invite_collaborator_channel_collaborators[] | null;
-  memberships: inviteCollaborator_invite_collaborator_channel_memberships[] | null;
-  can: inviteCollaborator_invite_collaborator_channel_can | null;
+  counts: inviteCollaborator_invite_collaborator_channel_counts;
+  collaborators: inviteCollaborator_invite_collaborator_channel_collaborators[];
+  memberships: inviteCollaborator_invite_collaborator_channel_memberships[];
+  can: inviteCollaborator_invite_collaborator_channel_can;
 }
 
 export interface inviteCollaborator_invite_collaborator {

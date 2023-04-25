@@ -17,7 +17,7 @@ export interface KonnectableImage {
   __typename: "Image";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   alt_text: string | null;
   src: string | null;
   src_1x: string | null;

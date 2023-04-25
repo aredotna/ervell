@@ -11,9 +11,9 @@ import { ChannelVisibility, ContentFlag, ChannelMemberInput } from "./globalType
 
 export interface updateChannelMutation_update_channel_channel_can {
   __typename: "ChannelCan";
-  destroy: boolean | null;
-  export: boolean | null;
-  transfer: boolean | null;
+  destroy: boolean;
+  export: boolean;
+  transfer: boolean;
 }
 
 export interface updateChannelMutation_update_channel_channel_user {
@@ -50,18 +50,18 @@ export type updateChannelMutation_update_channel_channel_transfer_request_recipi
 export interface updateChannelMutation_update_channel_channel_transfer_request {
   __typename: "ChannelTransferRequest";
   recipient: updateChannelMutation_update_channel_channel_transfer_request_recipient;
-  is_recipient_member: boolean | null;
+  is_recipient_member: boolean;
 }
 
 export interface updateChannelMutation_update_channel_channel {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   title: string;
   description: string | null;
   visibility: string;
   content_flag: string | null;
-  can: updateChannelMutation_update_channel_channel_can | null;
+  can: updateChannelMutation_update_channel_channel_can;
   user: updateChannelMutation_update_channel_channel_user | null;
   owner: updateChannelMutation_update_channel_channel_owner;
   is_pending_transfer: boolean;

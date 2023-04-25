@@ -12,7 +12,7 @@ export interface BlockPageMetaTags_Channel {
   id: number;
   meta_title: string;
   meta_description: string | null;
-  canonical: string | null;
+  canonical: string;
 }
 
 export interface BlockPageMetaTags_Attachment {
@@ -20,8 +20,8 @@ export interface BlockPageMetaTags_Attachment {
   id: number;
   meta_title: string;
   meta_description: string | null;
-  canonical: string | null;
-  is_nsfw: boolean | null;
+  canonical: string;
+  is_nsfw: boolean;
   meta_image: string | null;
 }
 
@@ -30,8 +30,8 @@ export interface BlockPageMetaTags_Embed {
   id: number;
   meta_title: string;
   meta_description: string | null;
-  canonical: string | null;
-  is_nsfw: boolean | null;
+  canonical: string;
+  is_nsfw: boolean;
   meta_image: string | null;
 }
 
@@ -40,8 +40,8 @@ export interface BlockPageMetaTags_Image {
   id: number;
   meta_title: string;
   meta_description: string | null;
-  canonical: string | null;
-  is_nsfw: boolean | null;
+  canonical: string;
+  is_nsfw: boolean;
   meta_image: string | null;
 }
 
@@ -50,8 +50,8 @@ export interface BlockPageMetaTags_Link {
   id: number;
   meta_title: string;
   meta_description: string | null;
-  canonical: string | null;
-  is_nsfw: boolean | null;
+  canonical: string;
+  is_nsfw: boolean;
   meta_image: string | null;
 }
 
@@ -60,8 +60,8 @@ export interface BlockPageMetaTags_PendingBlock {
   id: number;
   meta_title: string;
   meta_description: string | null;
-  canonical: string | null;
-  is_nsfw: boolean | null;
+  canonical: string;
+  is_nsfw: boolean;
 }
 
 export type BlockPageMetaTags = BlockPageMetaTags_Channel | BlockPageMetaTags_Attachment | BlockPageMetaTags_Embed | BlockPageMetaTags_Image | BlockPageMetaTags_Link | BlockPageMetaTags_PendingBlock;

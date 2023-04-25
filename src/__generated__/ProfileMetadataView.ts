@@ -9,12 +9,12 @@
 
 export interface ProfileMetadataView_User {
   __typename: "User";
-  href: string | null;
+  href: string;
 }
 
 export interface ProfileMetadataView_Group {
   __typename: "Group";
-  href: string | null;
+  href: string;
 }
 
 export type ProfileMetadataView = ProfileMetadataView_User | ProfileMetadataView_Group;

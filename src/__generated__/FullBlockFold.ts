@@ -21,15 +21,15 @@ export interface FullBlockFold_block_Attachment_counts {
 
 export interface FullBlockFold_block_Attachment_can {
   __typename: "BlockCan";
-  manage: boolean | null;
-  comment: boolean | null;
+  manage: boolean;
+  comment: boolean;
 }
 
 export interface FullBlockFold_block_Attachment {
   __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
   id: number;
   counts: FullBlockFold_block_Attachment_counts | null;
-  can: FullBlockFold_block_Attachment_can | null;
+  can: FullBlockFold_block_Attachment_can;
 }
 
 export type FullBlockFold_block = FullBlockFold_block_Channel | FullBlockFold_block_Attachment;

@@ -9,7 +9,7 @@
 
 export interface FullChannelMetadataFold_channel_counts {
   __typename: "ChannelCounts";
-  connected_to_channels: number | null;
+  connected_to_channels: number;
 }
 
 export interface FullChannelMetadataFold_channel_connected_to_channels_owner_Group {
@@ -29,25 +29,25 @@ export type FullChannelMetadataFold_channel_connected_to_channels_owner = FullCh
 
 export interface FullChannelMetadataFold_channel_connected_to_channels_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface FullChannelMetadataFold_channel_connected_to_channels {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   visibility: string;
   title: string;
   owner: FullChannelMetadataFold_channel_connected_to_channels_owner;
-  counts: FullChannelMetadataFold_channel_connected_to_channels_counts | null;
+  counts: FullChannelMetadataFold_channel_connected_to_channels_counts;
   label: string;
 }
 
 export interface FullChannelMetadataFold_channel {
   __typename: "Channel";
   id: number;
-  counts: FullChannelMetadataFold_channel_counts | null;
-  connected_to_channels: FullChannelMetadataFold_channel_connected_to_channels[] | null;
+  counts: FullChannelMetadataFold_channel_counts;
+  connected_to_channels: FullChannelMetadataFold_channel_connected_to_channels[];
 }
 
 export interface FullChannelMetadataFold {

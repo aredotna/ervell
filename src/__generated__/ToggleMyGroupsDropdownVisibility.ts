@@ -13,7 +13,7 @@ export interface ToggleMyGroupsDropdownVisibility_set_me_flags_me_groups {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   visibility: string;
   initials: string;
   avatar: string | null;
@@ -22,7 +22,7 @@ export interface ToggleMyGroupsDropdownVisibility_set_me_flags_me_groups {
 export interface ToggleMyGroupsDropdownVisibility_set_me_flags_me {
   __typename: "Me";
   id: number;
-  is_my_groups_dropdown_hidden: boolean | null;
+  is_my_groups_dropdown_hidden: boolean;
   groups: ToggleMyGroupsDropdownVisibility_set_me_flags_me_groups[];
 }
 

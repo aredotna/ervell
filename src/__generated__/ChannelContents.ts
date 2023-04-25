@@ -9,21 +9,21 @@
 
 export interface ChannelContents_can {
   __typename: "ChannelCan";
-  add_to: boolean | null;
-  reorder_connections: boolean | null;
-  add_to_as_premium: boolean | null;
-  update: boolean | null;
+  add_to: boolean;
+  reorder_connections: boolean;
+  add_to_as_premium: boolean;
+  update: boolean;
 }
 
 export interface ChannelContents_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ChannelContents {
   __typename: "Channel";
   id: number;
-  can: ChannelContents_can | null;
-  counts: ChannelContents_counts | null;
+  can: ChannelContents_can;
+  counts: ChannelContents_counts;
   visibility: string;
 }

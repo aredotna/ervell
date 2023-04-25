@@ -23,7 +23,7 @@ export interface AdvancedSearch_searches_advanced_results_Attachment_connection_
 
 export interface AdvancedSearch_searches_advanced_results_Attachment_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: AdvancedSearch_searches_advanced_results_Attachment_connection_user | null;
 }
 
@@ -40,8 +40,8 @@ export interface AdvancedSearch_searches_advanced_results_Attachment_counts {
 export interface AdvancedSearch_searches_advanced_results_Attachment {
   __typename: "Attachment";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: AdvancedSearch_searches_advanced_results_Attachment_user | null;
   /**
@@ -71,7 +71,7 @@ export interface AdvancedSearch_searches_advanced_results_Channel_connection_use
 
 export interface AdvancedSearch_searches_advanced_results_Channel_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: AdvancedSearch_searches_advanced_results_Channel_connection_user | null;
 }
 
@@ -82,7 +82,7 @@ export interface AdvancedSearch_searches_advanced_results_Channel_source {
 
 export interface AdvancedSearch_searches_advanced_results_Channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface AdvancedSearch_searches_advanced_results_Channel_owner_Group {
@@ -103,8 +103,8 @@ export type AdvancedSearch_searches_advanced_results_Channel_owner = AdvancedSea
 export interface AdvancedSearch_searches_advanced_results_Channel {
   __typename: "Channel";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: AdvancedSearch_searches_advanced_results_Channel_user | null;
   /**
@@ -114,7 +114,7 @@ export interface AdvancedSearch_searches_advanced_results_Channel {
   source: AdvancedSearch_searches_advanced_results_Channel_source | null;
   truncatedTitle: string;
   visibility: string;
-  counts: AdvancedSearch_searches_advanced_results_Channel_counts | null;
+  counts: AdvancedSearch_searches_advanced_results_Channel_counts;
   owner: AdvancedSearch_searches_advanced_results_Channel_owner;
   label: string;
 }
@@ -133,7 +133,7 @@ export interface AdvancedSearch_searches_advanced_results_Embed_connection_user 
 
 export interface AdvancedSearch_searches_advanced_results_Embed_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: AdvancedSearch_searches_advanced_results_Embed_connection_user | null;
 }
 
@@ -150,8 +150,8 @@ export interface AdvancedSearch_searches_advanced_results_Embed_counts {
 export interface AdvancedSearch_searches_advanced_results_Embed {
   __typename: "Embed";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: AdvancedSearch_searches_advanced_results_Embed_user | null;
   /**
@@ -180,7 +180,7 @@ export interface AdvancedSearch_searches_advanced_results_Image_connection_user 
 
 export interface AdvancedSearch_searches_advanced_results_Image_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: AdvancedSearch_searches_advanced_results_Image_connection_user | null;
 }
 
@@ -203,8 +203,8 @@ export interface AdvancedSearch_searches_advanced_results_Image_original_dimensi
 export interface AdvancedSearch_searches_advanced_results_Image {
   __typename: "Image";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: AdvancedSearch_searches_advanced_results_Image_user | null;
   /**
@@ -235,7 +235,7 @@ export interface AdvancedSearch_searches_advanced_results_Link_connection_user {
 
 export interface AdvancedSearch_searches_advanced_results_Link_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: AdvancedSearch_searches_advanced_results_Link_connection_user | null;
 }
 
@@ -252,8 +252,8 @@ export interface AdvancedSearch_searches_advanced_results_Link_counts {
 export interface AdvancedSearch_searches_advanced_results_Link {
   __typename: "Link";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: AdvancedSearch_searches_advanced_results_Link_user | null;
   /**
@@ -285,7 +285,7 @@ export interface AdvancedSearch_searches_advanced_results_PendingBlock_connectio
 
 export interface AdvancedSearch_searches_advanced_results_PendingBlock_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: AdvancedSearch_searches_advanced_results_PendingBlock_connection_user | null;
 }
 
@@ -302,8 +302,8 @@ export interface AdvancedSearch_searches_advanced_results_PendingBlock_counts {
 export interface AdvancedSearch_searches_advanced_results_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: AdvancedSearch_searches_advanced_results_PendingBlock_user | null;
   /**
@@ -328,7 +328,7 @@ export interface AdvancedSearch_searches_advanced_results_Text_connection_user {
 
 export interface AdvancedSearch_searches_advanced_results_Text_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: AdvancedSearch_searches_advanced_results_Text_connection_user | null;
 }
 
@@ -345,8 +345,8 @@ export interface AdvancedSearch_searches_advanced_results_Text_counts {
 export interface AdvancedSearch_searches_advanced_results_Text {
   __typename: "Text";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: AdvancedSearch_searches_advanced_results_Text_user | null;
   /**
@@ -363,7 +363,7 @@ export interface AdvancedSearch_searches_advanced_results_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   visibility: string;
   label: string;
   initials: string;
@@ -374,7 +374,7 @@ export interface AdvancedSearch_searches_advanced_results_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
   initials: string;
   avatar: string | null;

@@ -12,7 +12,7 @@ import { ConnectableTypeEnum } from "./globalTypes";
 export interface ChannelTableTypes_channel {
   __typename: "Channel";
   id: number;
-  types: ConnectableTypeEnum[] | null;
+  types: ConnectableTypeEnum[];
 }
 
 export interface ChannelTableTypes {

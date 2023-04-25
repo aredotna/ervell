@@ -16,7 +16,7 @@ export interface ChannelTableConnectors_channel_connectors {
 export interface ChannelTableConnectors_channel {
   __typename: "Channel";
   id: number;
-  connectors: ChannelTableConnectors_channel_connectors[] | null;
+  connectors: ChannelTableConnectors_channel_connectors[];
 }
 
 export interface ChannelTableConnectors {

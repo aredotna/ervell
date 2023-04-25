@@ -11,7 +11,7 @@ export interface ChannelSearchPage_channel_owner_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
   is_indexable: boolean;
 }
@@ -20,7 +20,7 @@ export interface ChannelSearchPage_channel_owner_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
 }
 
@@ -28,7 +28,7 @@ export type ChannelSearchPage_channel_owner = ChannelSearchPage_channel_owner_Us
 
 export interface ChannelSearchPage_channel_counts {
   __typename: "ChannelCounts";
-  collaborators: number | null;
+  collaborators: number;
 }
 
 export interface ChannelSearchPage_channel {
@@ -37,14 +37,14 @@ export interface ChannelSearchPage_channel {
   title: string;
   slug: string;
   truncatedTitle: string;
-  href: string | null;
+  href: string;
   visibility: string;
   owner: ChannelSearchPage_channel_owner;
-  counts: ChannelSearchPage_channel_counts | null;
+  counts: ChannelSearchPage_channel_counts;
   label: string;
   meta_title: string;
   meta_description: string | null;
-  canonical: string | null;
+  canonical: string;
   is_nsfw: boolean;
   image_url: string | null;
 }

@@ -18,7 +18,7 @@ export interface GroupSearchResult {
   id: number;
   name: string;
   user: GroupSearchResult_user;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }

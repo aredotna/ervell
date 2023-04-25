@@ -9,7 +9,7 @@
 
 export interface ChannelMetadataConnections_can {
   __typename: "ChannelCan";
-  connect: boolean | null;
+  connect: boolean;
 }
 
 export interface ChannelMetadataConnections_connected_to_channels_owner_User {
@@ -30,13 +30,13 @@ export interface ChannelMetadataConnections_connected_to_channels {
   __typename: "Channel";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
   owner: ChannelMetadataConnections_connected_to_channels_owner;
 }
 
 export interface ChannelMetadataConnections {
   __typename: "Channel";
   id: number;
-  can: ChannelMetadataConnections_can | null;
-  connected_to_channels: ChannelMetadataConnections_connected_to_channels[] | null;
+  can: ChannelMetadataConnections_can;
+  connected_to_channels: ChannelMetadataConnections_connected_to_channels[];
 }

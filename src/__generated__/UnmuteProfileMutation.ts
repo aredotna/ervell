@@ -12,19 +12,19 @@ import { MutableTypeEnum } from "./globalTypes";
 export interface UnmuteProfileMutation_unmute_mutable_Channel {
   __typename: "Channel";
   id: number;
-  is_muted: boolean | null;
+  is_muted: boolean;
 }
 
 export interface UnmuteProfileMutation_unmute_mutable_Connectable {
   __typename: "Connectable";
   id: number;
-  is_muted: boolean | null;
+  is_muted: boolean;
 }
 
 export interface UnmuteProfileMutation_unmute_mutable_User {
   __typename: "User";
   id: number;
-  is_muted: boolean | null;
+  is_muted: boolean;
 }
 
 export type UnmuteProfileMutation_unmute_mutable = UnmuteProfileMutation_unmute_mutable_Channel | UnmuteProfileMutation_unmute_mutable_Connectable | UnmuteProfileMutation_unmute_mutable_User;

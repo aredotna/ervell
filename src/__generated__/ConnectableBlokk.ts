@@ -21,7 +21,7 @@ export interface ConnectableBlokk_blokk_Attachment_connection_user {
 
 export interface ConnectableBlokk_blokk_Attachment_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ConnectableBlokk_blokk_Attachment_connection_user | null;
 }
 
@@ -38,8 +38,8 @@ export interface ConnectableBlokk_blokk_Attachment_counts {
 export interface ConnectableBlokk_blokk_Attachment {
   __typename: "Attachment";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ConnectableBlokk_blokk_Attachment_user | null;
   /**
@@ -69,7 +69,7 @@ export interface ConnectableBlokk_blokk_Embed_connection_user {
 
 export interface ConnectableBlokk_blokk_Embed_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ConnectableBlokk_blokk_Embed_connection_user | null;
 }
 
@@ -86,8 +86,8 @@ export interface ConnectableBlokk_blokk_Embed_counts {
 export interface ConnectableBlokk_blokk_Embed {
   __typename: "Embed";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ConnectableBlokk_blokk_Embed_user | null;
   /**
@@ -116,7 +116,7 @@ export interface ConnectableBlokk_blokk_Image_connection_user {
 
 export interface ConnectableBlokk_blokk_Image_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ConnectableBlokk_blokk_Image_connection_user | null;
 }
 
@@ -139,8 +139,8 @@ export interface ConnectableBlokk_blokk_Image_original_dimensions {
 export interface ConnectableBlokk_blokk_Image {
   __typename: "Image";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ConnectableBlokk_blokk_Image_user | null;
   /**
@@ -171,7 +171,7 @@ export interface ConnectableBlokk_blokk_Link_connection_user {
 
 export interface ConnectableBlokk_blokk_Link_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ConnectableBlokk_blokk_Link_connection_user | null;
 }
 
@@ -188,8 +188,8 @@ export interface ConnectableBlokk_blokk_Link_counts {
 export interface ConnectableBlokk_blokk_Link {
   __typename: "Link";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ConnectableBlokk_blokk_Link_user | null;
   /**
@@ -221,7 +221,7 @@ export interface ConnectableBlokk_blokk_PendingBlock_connection_user {
 
 export interface ConnectableBlokk_blokk_PendingBlock_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ConnectableBlokk_blokk_PendingBlock_connection_user | null;
 }
 
@@ -238,8 +238,8 @@ export interface ConnectableBlokk_blokk_PendingBlock_counts {
 export interface ConnectableBlokk_blokk_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ConnectableBlokk_blokk_PendingBlock_user | null;
   /**
@@ -264,7 +264,7 @@ export interface ConnectableBlokk_blokk_Text_connection_user {
 
 export interface ConnectableBlokk_blokk_Text_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ConnectableBlokk_blokk_Text_connection_user | null;
 }
 
@@ -281,8 +281,8 @@ export interface ConnectableBlokk_blokk_Text_counts {
 export interface ConnectableBlokk_blokk_Text {
   __typename: "Text";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ConnectableBlokk_blokk_Text_user | null;
   /**
@@ -309,7 +309,7 @@ export interface ConnectableBlokk_blokk_Channel_connection_user {
 
 export interface ConnectableBlokk_blokk_Channel_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ConnectableBlokk_blokk_Channel_connection_user | null;
 }
 
@@ -320,7 +320,7 @@ export interface ConnectableBlokk_blokk_Channel_source {
 
 export interface ConnectableBlokk_blokk_Channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ConnectableBlokk_blokk_Channel_owner_Group {
@@ -341,8 +341,8 @@ export type ConnectableBlokk_blokk_Channel_owner = ConnectableBlokk_blokk_Channe
 export interface ConnectableBlokk_blokk_Channel {
   __typename: "Channel";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ConnectableBlokk_blokk_Channel_user | null;
   /**
@@ -352,7 +352,7 @@ export interface ConnectableBlokk_blokk_Channel {
   source: ConnectableBlokk_blokk_Channel_source | null;
   truncatedTitle: string;
   visibility: string;
-  counts: ConnectableBlokk_blokk_Channel_counts | null;
+  counts: ConnectableBlokk_blokk_Channel_counts;
   owner: ConnectableBlokk_blokk_Channel_owner;
   label: string;
 }

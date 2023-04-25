@@ -9,7 +9,7 @@
 
 export interface CancelPremiumUserSelector_can {
   __typename: "UserCan";
-  cancel_premium: boolean | null;
+  cancel_premium: boolean;
 }
 
 export interface CancelPremiumUserSelector {
@@ -19,8 +19,8 @@ export interface CancelPremiumUserSelector {
   hidden_email: string;
   is_premium: boolean;
   is_canceled: boolean;
-  can: CancelPremiumUserSelector_can | null;
-  href: string | null;
+  can: CancelPremiumUserSelector_can;
+  href: string;
   initials: string;
   avatar: string | null;
 }

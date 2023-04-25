@@ -11,7 +11,7 @@ export interface TransferChannelSearchResultsQuery_results_members_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   hidden_email: string;
   initials: string;
   avatar: string | null;
@@ -28,7 +28,7 @@ export interface TransferChannelSearchResultsQuery_results_members_Group {
   id: number;
   name: string;
   user: TransferChannelSearchResultsQuery_results_members_Group_user;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }

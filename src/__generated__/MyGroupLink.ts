@@ -11,7 +11,7 @@ export interface MyGroupLink {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   visibility: string;
   initials: string;
   avatar: string | null;

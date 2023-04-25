@@ -16,7 +16,7 @@ export interface FullBlockActions_Channel_source {
 export interface FullBlockActions_Channel {
   __typename: "Channel";
   source: FullBlockActions_Channel_source | null;
-  shareable_href: string | null;
+  shareable_href: string;
   shareable_title: string;
 }
 
@@ -28,9 +28,9 @@ export interface FullBlockActions_Image_source {
 
 export interface FullBlockActions_Image_can {
   __typename: "BlockCan";
-  mute: boolean | null;
-  potentially_edit_thumbnail: boolean | null;
-  edit_thumbnail: boolean | null;
+  mute: boolean;
+  potentially_edit_thumbnail: boolean;
+  edit_thumbnail: boolean;
 }
 
 export interface FullBlockActions_Image {
@@ -41,8 +41,8 @@ export interface FullBlockActions_Image {
   find_original_url: string | null;
   downloadable_image: string | null;
   source: FullBlockActions_Image_source | null;
-  can: FullBlockActions_Image_can | null;
-  shareable_href: string | null;
+  can: FullBlockActions_Image_can;
+  shareable_href: string;
   shareable_title: string;
 }
 
@@ -54,9 +54,9 @@ export interface FullBlockActions_Text_source {
 
 export interface FullBlockActions_Text_can {
   __typename: "BlockCan";
-  mute: boolean | null;
-  potentially_edit_thumbnail: boolean | null;
-  edit_thumbnail: boolean | null;
+  mute: boolean;
+  potentially_edit_thumbnail: boolean;
+  edit_thumbnail: boolean;
 }
 
 export interface FullBlockActions_Text {
@@ -66,8 +66,8 @@ export interface FullBlockActions_Text {
    */
   find_original_url: string | null;
   source: FullBlockActions_Text_source | null;
-  can: FullBlockActions_Text_can | null;
-  shareable_href: string | null;
+  can: FullBlockActions_Text_can;
+  shareable_href: string;
   shareable_title: string;
 }
 
@@ -79,16 +79,16 @@ export interface FullBlockActions_Attachment_source {
 
 export interface FullBlockActions_Attachment_can {
   __typename: "BlockCan";
-  mute: boolean | null;
-  potentially_edit_thumbnail: boolean | null;
-  edit_thumbnail: boolean | null;
+  mute: boolean;
+  potentially_edit_thumbnail: boolean;
+  edit_thumbnail: boolean;
 }
 
 export interface FullBlockActions_Attachment {
   __typename: "Attachment" | "Embed" | "Link" | "PendingBlock";
   source: FullBlockActions_Attachment_source | null;
-  can: FullBlockActions_Attachment_can | null;
-  shareable_href: string | null;
+  can: FullBlockActions_Attachment_can;
+  shareable_href: string;
   shareable_title: string;
 }
 

@@ -15,7 +15,7 @@ export interface DeleteGroupInvite_delete_group_invite_group_invite {
 export interface DeleteGroupInvite_delete_group_invite_group {
   __typename: "Group";
   id: number;
-  href: string | null;
+  href: string;
   invite: DeleteGroupInvite_delete_group_invite_group_invite | null;
 }
 

@@ -59,7 +59,7 @@ export interface MyHeader {
   __typename: "Me";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   customer: MyHeader_customer | null;

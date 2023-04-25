@@ -26,7 +26,7 @@ export interface KonnectableCell_Attachment_connection_user {
 
 export interface KonnectableCell_Attachment_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableCell_Attachment_connection_user | null;
 }
 
@@ -38,9 +38,9 @@ export interface KonnectableCell_Attachment_source {
 export interface KonnectableCell_Attachment {
   __typename: "Attachment";
   id: number;
-  href: string | null;
+  href: string;
   counts: KonnectableCell_Attachment_counts | null;
-  updated_at: string | null;
+  updated_at: string;
   title: string;
   user: KonnectableCell_Attachment_user | null;
   /**
@@ -74,7 +74,7 @@ export interface KonnectableCell_Embed_connection_user {
 
 export interface KonnectableCell_Embed_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableCell_Embed_connection_user | null;
 }
 
@@ -86,9 +86,9 @@ export interface KonnectableCell_Embed_source {
 export interface KonnectableCell_Embed {
   __typename: "Embed";
   id: number;
-  href: string | null;
+  href: string;
   counts: KonnectableCell_Embed_counts | null;
-  updated_at: string | null;
+  updated_at: string;
   title: string;
   user: KonnectableCell_Embed_user | null;
   /**
@@ -121,7 +121,7 @@ export interface KonnectableCell_Image_connection_user {
 
 export interface KonnectableCell_Image_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableCell_Image_connection_user | null;
 }
 
@@ -139,9 +139,9 @@ export interface KonnectableCell_Image_source {
 export interface KonnectableCell_Image {
   __typename: "Image";
   id: number;
-  href: string | null;
+  href: string;
   counts: KonnectableCell_Image_counts | null;
-  updated_at: string | null;
+  updated_at: string;
   title: string;
   user: KonnectableCell_Image_user | null;
   /**
@@ -176,7 +176,7 @@ export interface KonnectableCell_Link_connection_user {
 
 export interface KonnectableCell_Link_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableCell_Link_connection_user | null;
 }
 
@@ -188,9 +188,9 @@ export interface KonnectableCell_Link_source {
 export interface KonnectableCell_Link {
   __typename: "Link";
   id: number;
-  href: string | null;
+  href: string;
   counts: KonnectableCell_Link_counts | null;
-  updated_at: string | null;
+  updated_at: string;
   title: string;
   user: KonnectableCell_Link_user | null;
   /**
@@ -226,7 +226,7 @@ export interface KonnectableCell_PendingBlock_connection_user {
 
 export interface KonnectableCell_PendingBlock_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableCell_PendingBlock_connection_user | null;
 }
 
@@ -238,9 +238,9 @@ export interface KonnectableCell_PendingBlock_source {
 export interface KonnectableCell_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  href: string | null;
+  href: string;
   counts: KonnectableCell_PendingBlock_counts | null;
-  updated_at: string | null;
+  updated_at: string;
   title: string;
   user: KonnectableCell_PendingBlock_user | null;
   /**
@@ -269,7 +269,7 @@ export interface KonnectableCell_Text_connection_user {
 
 export interface KonnectableCell_Text_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableCell_Text_connection_user | null;
 }
 
@@ -281,9 +281,9 @@ export interface KonnectableCell_Text_source {
 export interface KonnectableCell_Text {
   __typename: "Text";
   id: number;
-  href: string | null;
+  href: string;
   counts: KonnectableCell_Text_counts | null;
-  updated_at: string | null;
+  updated_at: string;
   title: string;
   user: KonnectableCell_Text_user | null;
   /**
@@ -309,13 +309,13 @@ export interface KonnectableCell_Channel_connection_user {
 
 export interface KonnectableCell_Channel_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableCell_Channel_connection_user | null;
 }
 
 export interface KonnectableCell_Channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface KonnectableCell_Channel_owner_Group {
@@ -341,8 +341,8 @@ export interface KonnectableCell_Channel_source {
 export interface KonnectableCell_Channel {
   __typename: "Channel";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: KonnectableCell_Channel_user | null;
   /**
@@ -351,7 +351,7 @@ export interface KonnectableCell_Channel {
   connection: KonnectableCell_Channel_connection | null;
   truncatedTitle: string;
   visibility: string;
-  counts: KonnectableCell_Channel_counts | null;
+  counts: KonnectableCell_Channel_counts;
   owner: KonnectableCell_Channel_owner;
   label: string;
   source: KonnectableCell_Channel_source | null;

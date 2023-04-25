@@ -9,13 +9,13 @@
 
 export interface AdvancedSearchChannelCount_channel_counts {
   __typename: "ChannelCounts";
-  blocks: number | null;
+  blocks: number;
 }
 
 export interface AdvancedSearchChannelCount_channel {
   __typename: "Channel";
   id: number;
-  counts: AdvancedSearchChannelCount_channel_counts | null;
+  counts: AdvancedSearchChannelCount_channel_counts;
 }
 
 export interface AdvancedSearchChannelCount {

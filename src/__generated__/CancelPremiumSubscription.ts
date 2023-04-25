@@ -58,7 +58,7 @@ export interface CancelPremiumSubscription_cancel_premium_subscription_me_custom
   can_select_lifetime: boolean;
   is_beneficiary: boolean;
   plan: CancelPremiumSubscription_cancel_premium_subscription_me_customer_plan | null;
-  updated_at: string | null;
+  updated_at: string;
   default_payment_method: CancelPremiumSubscription_cancel_premium_subscription_me_customer_default_payment_method | null;
   patron: CancelPremiumSubscription_cancel_premium_subscription_me_customer_patron | null;
   current_period_end_at: string | null;

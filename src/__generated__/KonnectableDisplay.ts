@@ -21,14 +21,14 @@ export interface KonnectableDisplay_PendingBlock_connection_user {
 
 export interface KonnectableDisplay_PendingBlock_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableDisplay_PendingBlock_connection_user | null;
 }
 
 export interface KonnectableDisplay_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  updated_at: string | null;
+  updated_at: string;
   title: string;
   user: KonnectableDisplay_PendingBlock_user | null;
   /**
@@ -39,7 +39,7 @@ export interface KonnectableDisplay_PendingBlock {
 
 export interface KonnectableDisplay_Channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface KonnectableDisplay_Channel_owner_Group {
@@ -71,18 +71,18 @@ export interface KonnectableDisplay_Channel_connection_user {
 
 export interface KonnectableDisplay_Channel_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableDisplay_Channel_connection_user | null;
 }
 
 export interface KonnectableDisplay_Channel {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   truncatedTitle: string;
   visibility: string;
-  updated_at: string | null;
-  counts: KonnectableDisplay_Channel_counts | null;
+  updated_at: string;
+  counts: KonnectableDisplay_Channel_counts;
   owner: KonnectableDisplay_Channel_owner;
   label: string;
   title: string;
@@ -107,7 +107,7 @@ export interface KonnectableDisplay_Text_connection_user {
 
 export interface KonnectableDisplay_Text_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableDisplay_Text_connection_user | null;
 }
 
@@ -115,10 +115,10 @@ export interface KonnectableDisplay_Text {
   __typename: "Text";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   content: string;
   raw: string;
-  updated_at: string | null;
+  updated_at: string;
   user: KonnectableDisplay_Text_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -146,7 +146,7 @@ export interface KonnectableDisplay_Image_connection_user {
 
 export interface KonnectableDisplay_Image_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableDisplay_Image_connection_user | null;
 }
 
@@ -154,14 +154,14 @@ export interface KonnectableDisplay_Image {
   __typename: "Image";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   alt_text: string | null;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
   original_dimensions: KonnectableDisplay_Image_original_dimensions | null;
-  updated_at: string | null;
+  updated_at: string;
   user: KonnectableDisplay_Image_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -183,14 +183,14 @@ export interface KonnectableDisplay_Link_connection_user {
 
 export interface KonnectableDisplay_Link_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableDisplay_Link_connection_user | null;
 }
 
 export interface KonnectableDisplay_Link {
   __typename: "Link";
   id: number;
-  href: string | null;
+  href: string;
   title: string;
   src: string | null;
   src_1x: string | null;
@@ -198,7 +198,7 @@ export interface KonnectableDisplay_Link {
   src_3x: string | null;
   external_url: string | null;
   content: string | null;
-  updated_at: string | null;
+  updated_at: string;
   user: KonnectableDisplay_Link_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -221,7 +221,7 @@ export interface KonnectableDisplay_Embed_connection_user {
 
 export interface KonnectableDisplay_Embed_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableDisplay_Embed_connection_user | null;
 }
 
@@ -229,12 +229,12 @@ export interface KonnectableDisplay_Embed {
   __typename: "Embed";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
-  updated_at: string | null;
+  updated_at: string;
   user: KonnectableDisplay_Embed_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -256,7 +256,7 @@ export interface KonnectableDisplay_Attachment_connection_user {
 
 export interface KonnectableDisplay_Attachment_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: KonnectableDisplay_Attachment_connection_user | null;
 }
 
@@ -264,13 +264,13 @@ export interface KonnectableDisplay_Attachment {
   __typename: "Attachment";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
   file_extension: string | null;
-  updated_at: string | null;
+  updated_at: string;
   user: KonnectableDisplay_Attachment_user | null;
   /**
    * Returns the outer channel if we are inside of one

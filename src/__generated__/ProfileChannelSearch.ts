@@ -9,7 +9,7 @@
 
 export interface ProfileChannelSearch_Group_channels_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ProfileChannelSearch_Group_channels_owner_Group {
@@ -41,7 +41,7 @@ export interface ProfileChannelSearch_Group_channels_blokks_Attachment_connectio
 
 export interface ProfileChannelSearch_Group_channels_blokks_Attachment_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_Group_channels_blokks_Attachment_connection_user | null;
 }
 
@@ -58,8 +58,8 @@ export interface ProfileChannelSearch_Group_channels_blokks_Attachment_counts {
 export interface ProfileChannelSearch_Group_channels_blokks_Attachment {
   __typename: "Attachment";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_Group_channels_blokks_Attachment_user | null;
   /**
@@ -89,7 +89,7 @@ export interface ProfileChannelSearch_Group_channels_blokks_Embed_connection_use
 
 export interface ProfileChannelSearch_Group_channels_blokks_Embed_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_Group_channels_blokks_Embed_connection_user | null;
 }
 
@@ -106,8 +106,8 @@ export interface ProfileChannelSearch_Group_channels_blokks_Embed_counts {
 export interface ProfileChannelSearch_Group_channels_blokks_Embed {
   __typename: "Embed";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_Group_channels_blokks_Embed_user | null;
   /**
@@ -136,7 +136,7 @@ export interface ProfileChannelSearch_Group_channels_blokks_Image_connection_use
 
 export interface ProfileChannelSearch_Group_channels_blokks_Image_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_Group_channels_blokks_Image_connection_user | null;
 }
 
@@ -159,8 +159,8 @@ export interface ProfileChannelSearch_Group_channels_blokks_Image_original_dimen
 export interface ProfileChannelSearch_Group_channels_blokks_Image {
   __typename: "Image";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_Group_channels_blokks_Image_user | null;
   /**
@@ -191,7 +191,7 @@ export interface ProfileChannelSearch_Group_channels_blokks_Link_connection_user
 
 export interface ProfileChannelSearch_Group_channels_blokks_Link_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_Group_channels_blokks_Link_connection_user | null;
 }
 
@@ -208,8 +208,8 @@ export interface ProfileChannelSearch_Group_channels_blokks_Link_counts {
 export interface ProfileChannelSearch_Group_channels_blokks_Link {
   __typename: "Link";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_Group_channels_blokks_Link_user | null;
   /**
@@ -241,7 +241,7 @@ export interface ProfileChannelSearch_Group_channels_blokks_PendingBlock_connect
 
 export interface ProfileChannelSearch_Group_channels_blokks_PendingBlock_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_Group_channels_blokks_PendingBlock_connection_user | null;
 }
 
@@ -258,8 +258,8 @@ export interface ProfileChannelSearch_Group_channels_blokks_PendingBlock_counts 
 export interface ProfileChannelSearch_Group_channels_blokks_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_Group_channels_blokks_PendingBlock_user | null;
   /**
@@ -284,7 +284,7 @@ export interface ProfileChannelSearch_Group_channels_blokks_Text_connection_user
 
 export interface ProfileChannelSearch_Group_channels_blokks_Text_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_Group_channels_blokks_Text_connection_user | null;
 }
 
@@ -301,8 +301,8 @@ export interface ProfileChannelSearch_Group_channels_blokks_Text_counts {
 export interface ProfileChannelSearch_Group_channels_blokks_Text {
   __typename: "Text";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_Group_channels_blokks_Text_user | null;
   /**
@@ -329,7 +329,7 @@ export interface ProfileChannelSearch_Group_channels_blokks_Channel_connection_u
 
 export interface ProfileChannelSearch_Group_channels_blokks_Channel_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_Group_channels_blokks_Channel_connection_user | null;
 }
 
@@ -340,7 +340,7 @@ export interface ProfileChannelSearch_Group_channels_blokks_Channel_source {
 
 export interface ProfileChannelSearch_Group_channels_blokks_Channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ProfileChannelSearch_Group_channels_blokks_Channel_owner_Group {
@@ -361,8 +361,8 @@ export type ProfileChannelSearch_Group_channels_blokks_Channel_owner = ProfileCh
 export interface ProfileChannelSearch_Group_channels_blokks_Channel {
   __typename: "Channel";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_Group_channels_blokks_Channel_user | null;
   /**
@@ -372,7 +372,7 @@ export interface ProfileChannelSearch_Group_channels_blokks_Channel {
   source: ProfileChannelSearch_Group_channels_blokks_Channel_source | null;
   truncatedTitle: string;
   visibility: string;
-  counts: ProfileChannelSearch_Group_channels_blokks_Channel_counts | null;
+  counts: ProfileChannelSearch_Group_channels_blokks_Channel_counts;
   owner: ProfileChannelSearch_Group_channels_blokks_Channel_owner;
   label: string;
 }
@@ -382,14 +382,14 @@ export type ProfileChannelSearch_Group_channels_blokks = ProfileChannelSearch_Gr
 export interface ProfileChannelSearch_Group_channels {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   truncatedTitle: string;
   visibility: string;
-  updated_at: string | null;
-  counts: ProfileChannelSearch_Group_channels_counts | null;
+  updated_at: string;
+  counts: ProfileChannelSearch_Group_channels_counts;
   owner: ProfileChannelSearch_Group_channels_owner;
   label: string;
-  blokks: ProfileChannelSearch_Group_channels_blokks[] | null;
+  blokks: ProfileChannelSearch_Group_channels_blokks[];
 }
 
 export interface ProfileChannelSearch_Group_counts {
@@ -416,7 +416,7 @@ export interface ProfileChannelSearch_User_channels_Attachment {
 
 export interface ProfileChannelSearch_User_channels_Channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ProfileChannelSearch_User_channels_Channel_owner_Group {
@@ -448,7 +448,7 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Attachment_co
 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Attachment_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_Attachment_connection_user | null;
 }
 
@@ -465,8 +465,8 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Attachment_co
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Attachment {
   __typename: "Attachment";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_Attachment_user | null;
   /**
@@ -496,7 +496,7 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Embed_connect
 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Embed_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_Embed_connection_user | null;
 }
 
@@ -513,8 +513,8 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Embed_counts 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Embed {
   __typename: "Embed";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_Embed_user | null;
   /**
@@ -543,7 +543,7 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Image_connect
 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Image_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_Image_connection_user | null;
 }
 
@@ -566,8 +566,8 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Image_origina
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Image {
   __typename: "Image";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_Image_user | null;
   /**
@@ -598,7 +598,7 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Link_connecti
 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Link_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_Link_connection_user | null;
 }
 
@@ -615,8 +615,8 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Link_counts {
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Link {
   __typename: "Link";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_Link_user | null;
   /**
@@ -648,7 +648,7 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_PendingBlock_
 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_PendingBlock_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_PendingBlock_connection_user | null;
 }
 
@@ -665,8 +665,8 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_PendingBlock_
 export interface ProfileChannelSearch_User_channels_Channel_blokks_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_PendingBlock_user | null;
   /**
@@ -691,7 +691,7 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Text_connecti
 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Text_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_Text_connection_user | null;
 }
 
@@ -708,8 +708,8 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Text_counts {
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Text {
   __typename: "Text";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_Text_user | null;
   /**
@@ -736,7 +736,7 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Channel_conne
 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Channel_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_Channel_connection_user | null;
 }
 
@@ -747,7 +747,7 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Channel_sourc
 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Channel_owner_Group {
@@ -768,8 +768,8 @@ export type ProfileChannelSearch_User_channels_Channel_blokks_Channel_owner = Pr
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Channel {
   __typename: "Channel";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ProfileChannelSearch_User_channels_Channel_blokks_Channel_user | null;
   /**
@@ -779,7 +779,7 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Channel {
   source: ProfileChannelSearch_User_channels_Channel_blokks_Channel_source | null;
   truncatedTitle: string;
   visibility: string;
-  counts: ProfileChannelSearch_User_channels_Channel_blokks_Channel_counts | null;
+  counts: ProfileChannelSearch_User_channels_Channel_blokks_Channel_counts;
   owner: ProfileChannelSearch_User_channels_Channel_blokks_Channel_owner;
   label: string;
 }
@@ -789,14 +789,14 @@ export type ProfileChannelSearch_User_channels_Channel_blokks = ProfileChannelSe
 export interface ProfileChannelSearch_User_channels_Channel {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   truncatedTitle: string;
   visibility: string;
-  updated_at: string | null;
-  counts: ProfileChannelSearch_User_channels_Channel_counts | null;
+  updated_at: string;
+  counts: ProfileChannelSearch_User_channels_Channel_counts;
   owner: ProfileChannelSearch_User_channels_Channel_owner;
   label: string;
-  blokks: ProfileChannelSearch_User_channels_Channel_blokks[] | null;
+  blokks: ProfileChannelSearch_User_channels_Channel_blokks[];
 }
 
 export type ProfileChannelSearch_User_channels = ProfileChannelSearch_User_channels_Attachment | ProfileChannelSearch_User_channels_Channel;
@@ -806,7 +806,7 @@ export interface ProfileChannelSearch_User {
   id: number;
   name: string;
   counts: ProfileChannelSearch_User_counts | null;
-  channels: ProfileChannelSearch_User_channels[] | null;
+  channels: ProfileChannelSearch_User_channels[];
 }
 
 export type ProfileChannelSearch = ProfileChannelSearch_Group | ProfileChannelSearch_User;

@@ -16,7 +16,7 @@ export interface CollaboratorsList_collaborators_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
 }
 
@@ -24,31 +24,31 @@ export interface CollaboratorsList_collaborators_Group_user {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface CollaboratorsList_collaborators_Group_users {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface CollaboratorsList_collaborators_Group_can {
   __typename: "GroupCan";
-  manage: boolean | null;
-  manage_users: boolean | null;
+  manage: boolean;
+  manage_users: boolean;
 }
 
 export interface CollaboratorsList_collaborators_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   description: string | null;
   user: CollaboratorsList_collaborators_Group_user;
   users: CollaboratorsList_collaborators_Group_users[] | null;
-  can: CollaboratorsList_collaborators_Group_can | null;
+  can: CollaboratorsList_collaborators_Group_can;
   visibility: string;
   label: string;
 }
@@ -58,6 +58,6 @@ export type CollaboratorsList_collaborators = CollaboratorsList_collaborators_Us
 export interface CollaboratorsList {
   __typename: "Channel";
   id: number;
-  can: CollaboratorsList_can | null;
-  collaborators: CollaboratorsList_collaborators[] | null;
+  can: CollaboratorsList_can;
+  collaborators: CollaboratorsList_collaborators[];
 }

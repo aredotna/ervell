@@ -15,7 +15,7 @@ export interface Followable_User_counts {
 export interface Followable_User {
   __typename: "User";
   id: number;
-  is_followed: boolean | null;
+  is_followed: boolean;
   counts: Followable_User_counts | null;
 }
 
@@ -27,8 +27,8 @@ export interface Followable_Channel_counts {
 export interface Followable_Channel {
   __typename: "Channel";
   id: number;
-  is_followed: boolean | null;
-  counts: Followable_Channel_counts | null;
+  is_followed: boolean;
+  counts: Followable_Channel_counts;
 }
 
 export interface Followable_Group_counts {
@@ -39,7 +39,7 @@ export interface Followable_Group_counts {
 export interface Followable_Group {
   __typename: "Group";
   id: number;
-  is_followed: boolean | null;
+  is_followed: boolean;
   counts: Followable_Group_counts | null;
 }
 

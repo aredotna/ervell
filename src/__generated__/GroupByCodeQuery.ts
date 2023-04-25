@@ -10,7 +10,7 @@
 export interface GroupByCodeQuery_group_by_code_user {
   __typename: "User";
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface GroupByCodeQuery_group_by_code_counts {

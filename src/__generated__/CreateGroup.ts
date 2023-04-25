@@ -10,5 +10,5 @@
 export interface CreateGroup {
   __typename: "Me";
   id: number;
-  has_seen_new_group_explanation: boolean | null;
+  has_seen_new_group_explanation: boolean;
 }

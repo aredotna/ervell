@@ -9,14 +9,14 @@
 
 export interface UpdateAccountMutation_update_account_me_settings {
   __typename: "MeSettings";
-  receive_email: string | null;
-  receive_tips_emails: boolean | null;
-  receive_group_premium_emails: boolean | null;
-  receive_sunday_review_emails: boolean | null;
-  exclude_from_indexes: boolean | null;
-  receive_newsletter: boolean | null;
-  show_nsfw: boolean | null;
-  dark_mode: boolean | null;
+  receive_email: string;
+  receive_tips_emails: boolean;
+  receive_group_premium_emails: boolean;
+  receive_sunday_review_emails: boolean;
+  exclude_from_indexes: boolean;
+  receive_newsletter: boolean;
+  show_nsfw: boolean;
+  dark_mode: boolean;
 }
 
 export interface UpdateAccountMutation_update_account_me {

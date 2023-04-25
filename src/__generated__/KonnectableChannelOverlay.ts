@@ -9,12 +9,12 @@
 
 export interface KonnectableChannelOverlay_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface KonnectableChannelOverlay {
   __typename: "Channel";
   id: number;
   visibility: string;
-  counts: KonnectableChannelOverlay_counts | null;
+  counts: KonnectableChannelOverlay_counts;
 }

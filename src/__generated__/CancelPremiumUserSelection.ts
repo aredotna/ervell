@@ -9,7 +9,7 @@
 
 export interface CancelPremiumUserSelection_user_can {
   __typename: "UserCan";
-  cancel_premium: boolean | null;
+  cancel_premium: boolean;
 }
 
 export interface CancelPremiumUserSelection_user {
@@ -19,15 +19,15 @@ export interface CancelPremiumUserSelection_user {
   hidden_email: string;
   is_premium: boolean;
   is_canceled: boolean;
-  can: CancelPremiumUserSelection_user_can | null;
-  href: string | null;
+  can: CancelPremiumUserSelection_user_can;
+  href: string;
   initials: string;
   avatar: string | null;
 }
 
 export interface CancelPremiumUserSelection_users_can {
   __typename: "UserCan";
-  cancel_premium: boolean | null;
+  cancel_premium: boolean;
 }
 
 export interface CancelPremiumUserSelection_users {
@@ -37,8 +37,8 @@ export interface CancelPremiumUserSelection_users {
   hidden_email: string;
   is_premium: boolean;
   is_canceled: boolean;
-  can: CancelPremiumUserSelection_users_can | null;
-  href: string | null;
+  can: CancelPremiumUserSelection_users_can;
+  href: string;
   initials: string;
   avatar: string | null;
 }

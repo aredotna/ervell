@@ -11,7 +11,7 @@ export interface MyGroupLinks_groups {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   visibility: string;
   initials: string;
   avatar: string | null;
@@ -20,6 +20,6 @@ export interface MyGroupLinks_groups {
 export interface MyGroupLinks {
   __typename: "Me";
   id: number;
-  is_my_groups_dropdown_hidden: boolean | null;
+  is_my_groups_dropdown_hidden: boolean;
   groups: MyGroupLinks_groups[];
 }

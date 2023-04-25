@@ -11,14 +11,14 @@ import { MemberTypes } from "./globalTypes";
 
 export interface addChannelMemberMutation_add_channel_members_channel_counts {
   __typename: "ChannelCounts";
-  collaborators: number | null;
+  collaborators: number;
 }
 
 export interface addChannelMemberMutation_add_channel_members_channel_collaborators_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   label: string;
@@ -28,34 +28,34 @@ export interface addChannelMemberMutation_add_channel_members_channel_collaborat
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface addChannelMemberMutation_add_channel_members_channel_collaborators_Group_users {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface addChannelMemberMutation_add_channel_members_channel_collaborators_Group_can {
   __typename: "GroupCan";
-  manage: boolean | null;
-  manage_users: boolean | null;
+  manage: boolean;
+  manage_users: boolean;
 }
 
 export interface addChannelMemberMutation_add_channel_members_channel_collaborators_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   visibility: string;
   user: addChannelMemberMutation_add_channel_members_channel_collaborators_Group_user;
   description: string | null;
   users: addChannelMemberMutation_add_channel_members_channel_collaborators_Group_users[] | null;
-  can: addChannelMemberMutation_add_channel_members_channel_collaborators_Group_can | null;
+  can: addChannelMemberMutation_add_channel_members_channel_collaborators_Group_can;
   label: string;
 }
 
@@ -65,7 +65,7 @@ export interface addChannelMemberMutation_add_channel_members_channel_membership
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }
@@ -80,7 +80,7 @@ export interface addChannelMemberMutation_add_channel_members_channel_membership
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   visibility: string;
@@ -91,14 +91,14 @@ export type addChannelMemberMutation_add_channel_members_channel_memberships_mem
 
 export interface addChannelMemberMutation_add_channel_members_channel_memberships_can {
   __typename: "ChannelMembershipCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface addChannelMemberMutation_add_channel_members_channel_memberships {
   __typename: "ChannelMembership";
   id: number;
   member: addChannelMemberMutation_add_channel_members_channel_memberships_member | null;
-  can: addChannelMemberMutation_add_channel_members_channel_memberships_can | null;
+  can: addChannelMemberMutation_add_channel_members_channel_memberships_can;
 }
 
 export interface addChannelMemberMutation_add_channel_members_channel_can {
@@ -109,10 +109,10 @@ export interface addChannelMemberMutation_add_channel_members_channel_can {
 export interface addChannelMemberMutation_add_channel_members_channel {
   __typename: "Channel";
   id: number;
-  counts: addChannelMemberMutation_add_channel_members_channel_counts | null;
-  collaborators: addChannelMemberMutation_add_channel_members_channel_collaborators[] | null;
-  memberships: addChannelMemberMutation_add_channel_members_channel_memberships[] | null;
-  can: addChannelMemberMutation_add_channel_members_channel_can | null;
+  counts: addChannelMemberMutation_add_channel_members_channel_counts;
+  collaborators: addChannelMemberMutation_add_channel_members_channel_collaborators[];
+  memberships: addChannelMemberMutation_add_channel_members_channel_memberships[];
+  can: addChannelMemberMutation_add_channel_members_channel_can;
 }
 
 export interface addChannelMemberMutation_add_channel_members {

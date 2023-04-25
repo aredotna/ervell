@@ -21,14 +21,14 @@ export interface AdvancedQuickSearch_searches_advanced_results_User {
   __typename: "User";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface AdvancedQuickSearch_searches_advanced_results_Group {
   __typename: "Group";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
   visibility: string;
 }
 
@@ -57,7 +57,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_Channel {
   __typename: "Channel";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
   visibility: string;
   owner: AdvancedQuickSearch_searches_advanced_results_Channel_owner;
   title: string;
@@ -74,7 +74,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_Attachment {
   __typename: "Attachment";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   user: AdvancedQuickSearch_searches_advanced_results_Attachment_user | null;
   src: string | null;
 }
@@ -89,7 +89,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_PendingBlock {
   __typename: "PendingBlock";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   user: AdvancedQuickSearch_searches_advanced_results_PendingBlock_user | null;
 }
 
@@ -103,7 +103,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_Embed {
   __typename: "Embed";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   user: AdvancedQuickSearch_searches_advanced_results_Embed_user | null;
   src: string | null;
 }
@@ -118,7 +118,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_Image {
   __typename: "Image";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   user: AdvancedQuickSearch_searches_advanced_results_Image_user | null;
   src: string | null;
 }
@@ -133,7 +133,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_Link {
   __typename: "Link";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   user: AdvancedQuickSearch_searches_advanced_results_Link_user | null;
   src: string | null;
 }
@@ -148,7 +148,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_Text {
   __typename: "Text";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   user: AdvancedQuickSearch_searches_advanced_results_Text_user | null;
   content: string;
 }

@@ -7,97 +7,80 @@
 // GraphQL fragment: FullBlockConnections
 // ====================================================
 
-export interface FullBlockConnections_Channel_current_user_channels_owner_Group {
+export interface FullBlockConnections_Channel_current_user_channels_channel_owner_Group {
   __typename: "Group";
   id: number;
   name: string;
   visibility: string;
 }
 
-export interface FullBlockConnections_Channel_current_user_channels_owner_User {
+export interface FullBlockConnections_Channel_current_user_channels_channel_owner_User {
   __typename: "User";
   id: number;
   name: string;
 }
 
-export type FullBlockConnections_Channel_current_user_channels_owner = FullBlockConnections_Channel_current_user_channels_owner_Group | FullBlockConnections_Channel_current_user_channels_owner_User;
+export type FullBlockConnections_Channel_current_user_channels_channel_owner = FullBlockConnections_Channel_current_user_channels_channel_owner_Group | FullBlockConnections_Channel_current_user_channels_channel_owner_User;
 
-export interface FullBlockConnections_Channel_current_user_channels_counts {
+export interface FullBlockConnections_Channel_current_user_channels_channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
+}
+
+export interface FullBlockConnections_Channel_current_user_channels_channel {
+  __typename: "Channel";
+  id: number;
+  href: string;
+  visibility: string;
+  title: string;
+  owner: FullBlockConnections_Channel_current_user_channels_channel_owner;
+  counts: FullBlockConnections_Channel_current_user_channels_channel_counts;
+  label: string;
 }
 
 export interface FullBlockConnections_Channel_current_user_channels {
-  __typename: "Channel";
+  __typename: "Connection";
   id: number;
-  href: string | null;
-  visibility: string;
-  title: string;
-  owner: FullBlockConnections_Channel_current_user_channels_owner;
-  counts: FullBlockConnections_Channel_current_user_channels_counts | null;
-  label: string;
+  created_at: string;
+  channel: FullBlockConnections_Channel_current_user_channels_channel;
 }
 
-export interface FullBlockConnections_Channel_public_channels_owner_Group {
+export interface FullBlockConnections_Channel_public_channels_channel_owner_Group {
   __typename: "Group";
   id: number;
   name: string;
   visibility: string;
 }
 
-export interface FullBlockConnections_Channel_public_channels_owner_User {
+export interface FullBlockConnections_Channel_public_channels_channel_owner_User {
   __typename: "User";
   id: number;
   name: string;
 }
 
-export type FullBlockConnections_Channel_public_channels_owner = FullBlockConnections_Channel_public_channels_owner_Group | FullBlockConnections_Channel_public_channels_owner_User;
+export type FullBlockConnections_Channel_public_channels_channel_owner = FullBlockConnections_Channel_public_channels_channel_owner_Group | FullBlockConnections_Channel_public_channels_channel_owner_User;
 
-export interface FullBlockConnections_Channel_public_channels_counts {
+export interface FullBlockConnections_Channel_public_channels_channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
+}
+
+export interface FullBlockConnections_Channel_public_channels_channel {
+  __typename: "Channel";
+  id: number;
+  href: string;
+  visibility: string;
+  title: string;
+  owner: FullBlockConnections_Channel_public_channels_channel_owner;
+  counts: FullBlockConnections_Channel_public_channels_channel_counts;
+  label: string;
 }
 
 export interface FullBlockConnections_Channel_public_channels {
-  __typename: "Channel";
+  __typename: "Connection";
   id: number;
-  href: string | null;
-  visibility: string;
-  title: string;
-  owner: FullBlockConnections_Channel_public_channels_owner;
-  counts: FullBlockConnections_Channel_public_channels_counts | null;
-  label: string;
-}
-
-export interface FullBlockConnections_Channel_private_channels_owner_Group {
-  __typename: "Group";
-  id: number;
-  name: string;
-  visibility: string;
-}
-
-export interface FullBlockConnections_Channel_private_channels_owner_User {
-  __typename: "User";
-  id: number;
-  name: string;
-}
-
-export type FullBlockConnections_Channel_private_channels_owner = FullBlockConnections_Channel_private_channels_owner_Group | FullBlockConnections_Channel_private_channels_owner_User;
-
-export interface FullBlockConnections_Channel_private_channels_counts {
-  __typename: "ChannelCounts";
-  contents: number | null;
-}
-
-export interface FullBlockConnections_Channel_private_channels {
-  __typename: "Channel";
-  id: number;
-  href: string | null;
-  visibility: string;
-  title: string;
-  owner: FullBlockConnections_Channel_private_channels_owner;
-  counts: FullBlockConnections_Channel_private_channels_counts | null;
-  label: string;
+  created_at: string;
+  channel: FullBlockConnections_Channel_public_channels_channel;
 }
 
 export interface FullBlockConnections_Channel_source {
@@ -110,7 +93,6 @@ export interface FullBlockConnections_Channel {
   id: number;
   current_user_channels: FullBlockConnections_Channel_current_user_channels[] | null;
   public_channels: FullBlockConnections_Channel_public_channels[] | null;
-  private_channels: FullBlockConnections_Channel_private_channels[] | null;
   source: FullBlockConnections_Channel_source | null;
 }
 
@@ -122,97 +104,80 @@ export interface FullBlockConnections_Attachment_counts {
   channels_with_same_source: number | null;
 }
 
-export interface FullBlockConnections_Attachment_current_user_channels_owner_Group {
+export interface FullBlockConnections_Attachment_current_user_channels_channel_owner_Group {
   __typename: "Group";
   id: number;
   name: string;
   visibility: string;
 }
 
-export interface FullBlockConnections_Attachment_current_user_channels_owner_User {
+export interface FullBlockConnections_Attachment_current_user_channels_channel_owner_User {
   __typename: "User";
   id: number;
   name: string;
 }
 
-export type FullBlockConnections_Attachment_current_user_channels_owner = FullBlockConnections_Attachment_current_user_channels_owner_Group | FullBlockConnections_Attachment_current_user_channels_owner_User;
+export type FullBlockConnections_Attachment_current_user_channels_channel_owner = FullBlockConnections_Attachment_current_user_channels_channel_owner_Group | FullBlockConnections_Attachment_current_user_channels_channel_owner_User;
 
-export interface FullBlockConnections_Attachment_current_user_channels_counts {
+export interface FullBlockConnections_Attachment_current_user_channels_channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
+}
+
+export interface FullBlockConnections_Attachment_current_user_channels_channel {
+  __typename: "Channel";
+  id: number;
+  href: string;
+  visibility: string;
+  title: string;
+  owner: FullBlockConnections_Attachment_current_user_channels_channel_owner;
+  counts: FullBlockConnections_Attachment_current_user_channels_channel_counts;
+  label: string;
 }
 
 export interface FullBlockConnections_Attachment_current_user_channels {
-  __typename: "Channel";
+  __typename: "Connection";
   id: number;
-  href: string | null;
-  visibility: string;
-  title: string;
-  owner: FullBlockConnections_Attachment_current_user_channels_owner;
-  counts: FullBlockConnections_Attachment_current_user_channels_counts | null;
-  label: string;
+  created_at: string;
+  channel: FullBlockConnections_Attachment_current_user_channels_channel;
 }
 
-export interface FullBlockConnections_Attachment_public_channels_owner_Group {
+export interface FullBlockConnections_Attachment_public_channels_channel_owner_Group {
   __typename: "Group";
   id: number;
   name: string;
   visibility: string;
 }
 
-export interface FullBlockConnections_Attachment_public_channels_owner_User {
+export interface FullBlockConnections_Attachment_public_channels_channel_owner_User {
   __typename: "User";
   id: number;
   name: string;
 }
 
-export type FullBlockConnections_Attachment_public_channels_owner = FullBlockConnections_Attachment_public_channels_owner_Group | FullBlockConnections_Attachment_public_channels_owner_User;
+export type FullBlockConnections_Attachment_public_channels_channel_owner = FullBlockConnections_Attachment_public_channels_channel_owner_Group | FullBlockConnections_Attachment_public_channels_channel_owner_User;
 
-export interface FullBlockConnections_Attachment_public_channels_counts {
+export interface FullBlockConnections_Attachment_public_channels_channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
+}
+
+export interface FullBlockConnections_Attachment_public_channels_channel {
+  __typename: "Channel";
+  id: number;
+  href: string;
+  visibility: string;
+  title: string;
+  owner: FullBlockConnections_Attachment_public_channels_channel_owner;
+  counts: FullBlockConnections_Attachment_public_channels_channel_counts;
+  label: string;
 }
 
 export interface FullBlockConnections_Attachment_public_channels {
-  __typename: "Channel";
+  __typename: "Connection";
   id: number;
-  href: string | null;
-  visibility: string;
-  title: string;
-  owner: FullBlockConnections_Attachment_public_channels_owner;
-  counts: FullBlockConnections_Attachment_public_channels_counts | null;
-  label: string;
-}
-
-export interface FullBlockConnections_Attachment_private_channels_owner_Group {
-  __typename: "Group";
-  id: number;
-  name: string;
-  visibility: string;
-}
-
-export interface FullBlockConnections_Attachment_private_channels_owner_User {
-  __typename: "User";
-  id: number;
-  name: string;
-}
-
-export type FullBlockConnections_Attachment_private_channels_owner = FullBlockConnections_Attachment_private_channels_owner_Group | FullBlockConnections_Attachment_private_channels_owner_User;
-
-export interface FullBlockConnections_Attachment_private_channels_counts {
-  __typename: "ChannelCounts";
-  contents: number | null;
-}
-
-export interface FullBlockConnections_Attachment_private_channels {
-  __typename: "Channel";
-  id: number;
-  href: string | null;
-  visibility: string;
-  title: string;
-  owner: FullBlockConnections_Attachment_private_channels_owner;
-  counts: FullBlockConnections_Attachment_private_channels_counts | null;
-  label: string;
+  created_at: string;
+  channel: FullBlockConnections_Attachment_public_channels_channel;
 }
 
 export interface FullBlockConnections_Attachment_source {
@@ -237,17 +202,17 @@ export type FullBlockConnections_Attachment_channels_with_same_source_owner = Fu
 
 export interface FullBlockConnections_Attachment_channels_with_same_source_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface FullBlockConnections_Attachment_channels_with_same_source {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   visibility: string;
   title: string;
   owner: FullBlockConnections_Attachment_channels_with_same_source_owner;
-  counts: FullBlockConnections_Attachment_channels_with_same_source_counts | null;
+  counts: FullBlockConnections_Attachment_channels_with_same_source_counts;
   label: string;
 }
 
@@ -257,9 +222,8 @@ export interface FullBlockConnections_Attachment {
   counts: FullBlockConnections_Attachment_counts | null;
   current_user_channels: FullBlockConnections_Attachment_current_user_channels[] | null;
   public_channels: FullBlockConnections_Attachment_public_channels[] | null;
-  private_channels: FullBlockConnections_Attachment_private_channels[] | null;
   source: FullBlockConnections_Attachment_source | null;
-  channels_with_same_source: FullBlockConnections_Attachment_channels_with_same_source[] | null;
+  channels_with_same_source: FullBlockConnections_Attachment_channels_with_same_source[];
 }
 
 export type FullBlockConnections = FullBlockConnections_Channel | FullBlockConnections_Attachment;

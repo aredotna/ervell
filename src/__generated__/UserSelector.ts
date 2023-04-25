@@ -9,7 +9,7 @@
 
 export interface UserSelector_can {
   __typename: "UserCan";
-  cancel_premium: boolean | null;
+  cancel_premium: boolean;
 }
 
 export interface UserSelector {
@@ -22,8 +22,8 @@ export interface UserSelector {
   is_upgradeable: boolean;
   is_approaching_either_connections_limit: boolean;
   is_exceeding_either_connections_limit: boolean;
-  can: UserSelector_can | null;
-  href: string | null;
+  can: UserSelector_can;
+  href: string;
   initials: string;
   avatar: string | null;
 }
