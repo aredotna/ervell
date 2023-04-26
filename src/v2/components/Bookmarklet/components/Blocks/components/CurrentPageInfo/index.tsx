@@ -1,3 +1,4 @@
+import { unescape } from 'lodash'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -57,11 +58,7 @@ const CurrentPageInfo: React.FC<CurrentPageInfoProps> = ({
     <Text f={4}>Saving as a link:</Text>
     <Text f={4} color="gray.medium" mt={4}>
       &quot;
-      <span
-        dangerouslySetInnerHTML={{
-          __html: unescape(truncate(currentPage.title, 30)),
-        }}
-      />
+      {unescape(truncate(currentPage.title, 30))}
       &quot;
     </Text>
 

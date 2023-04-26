@@ -9,6 +9,7 @@ import NewChannelForm from 'v2/components/NewChannelForm'
 import ManageGroup from 'v2/components/ManageGroup'
 import { EmptyProfile } from '__generated__/EmptyProfile'
 import { useSearchParams } from 'v2/hooks/useSearchParams'
+import { unescape } from 'lodash'
 
 const Copy = styled(Text)`
   text-align: center;
@@ -66,13 +67,13 @@ export const ProfileEmptyMessage: React.FC<ProfileEmptyMessageProps> = ({
       {/* Profile is the current user's */}
       {isMine && !isGroup && (
         <div>
-          <Box
-            dangerouslySetInnerHTML={{
-              __html: isOwn
+          <Box>
+            {unescape(
+              isOwn
                 ? 'Your profile doesn&#39;t have any content yet.'
-                : 'You aren&#39;t a collaborator on anyone else&#39;s channels yet.',
-            }}
-          />
+                : 'You aren&#39;t a collaborator on anyone else&#39;s channels yet.'
+            )}
+          </Box>
           {isOwn && (
             <Button
               f={[3, 3, 5]}
@@ -123,13 +124,13 @@ export const ProfileEmptyMessage: React.FC<ProfileEmptyMessageProps> = ({
       {/* Profile is not associated with the current user */}
       {!isMine && identifiable.__typename == 'User' && (
         <div>
-          <Box
-            dangerouslySetInnerHTML={{
-              __html: isOwn
+          <Box>
+            {unescape(
+              isOwn
                 ? `${identifiable.name} doesn&#39;t have any public content yet.`
-                : `${identifiable.name} is not collaborating with anyone yet.`,
-            }}
-          />
+                : `${identifiable.name} is not collaborating with anyone yet.`
+            )}
+          </Box>
           <Box mt={5}>Follow them to get updates in your feed.</Box>
         </div>
       )}

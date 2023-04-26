@@ -10,6 +10,7 @@ import useSerializedMe from 'v2/hooks/useSerializedMe'
 import { useQuery } from '@apollo/client'
 import { PlansQuery } from './queries/plansQuery'
 import { Plans } from '__generated__/Plans'
+import { unescape } from 'lodash'
 
 const Table = styled(Box).attrs({ mb: 8 })`
   display: flex;
@@ -203,7 +204,7 @@ const PricingTable: React.FC = () => {
       <Cell>
         <PlanTitle color="state.supporter">Premium Supporter</PlanTitle>
         <PlanPrice>{supporterYearlyPrice} / year</PlanPrice>
-        <PlanSubPrice dangerouslySetInnerHTML={{ __html: '&nbsp;' }} />
+        <PlanSubPrice>{unescape('&nbsp;')}</PlanSubPrice>
         <GroupButton href={supporterLink}>{supporterButtonCopy}</GroupButton>
         <Features>
           <FeatureList>

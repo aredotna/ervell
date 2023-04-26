@@ -18,6 +18,7 @@ import { FullBlock } from '__generated__/FullBlock'
 import { ToggleConnectionExpanded } from 'v2/components/ToggleConnectionExpanded'
 import { SansSerifText } from 'v2/components/UI/SansSerifText'
 import { ProfileTableContents_user_contents } from '__generated__/ProfileTableContents'
+import { unescape } from 'lodash'
 
 interface ExpandedBlockMetadataProps {
   block:
@@ -45,16 +46,14 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
         {!block?.title ? (
           <Text color="gray.medium">—</Text>
         ) : (
-          <span dangerouslySetInnerHTML={{ __html: title || block.title }} />
+          <span>{unescape(title || block.title)}</span>
         )}
       </Text>
 
       {block?.description && (
-        <SansSerifText
-          isSmall
-          color={'gray.bold'}
-          dangerouslySetInnerHTML={{ __html: block.description }}
-        />
+        <SansSerifText isSmall color={'gray.bold'}>
+          {unescape(block.description)}
+        </SansSerifText>
       )}
 
       <Header mt={4} mb={5}></Header>
@@ -92,15 +91,16 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
                 href={block.source.url}
                 rel="nofollow noopener noreferrer"
                 target="_blank"
-                dangerouslySetInnerHTML={{
-                  __html: block.source.title
+              >
+                {unescape(
+                  block.source.title
                     ? `Source: <strong>${truncate(
                         block.source.title,
                         40
                       )}</strong>`
-                    : 'Source',
-                }}
-              />
+                    : 'Source'
+                )}
+              </a>
             </>
           )}
         </Text>

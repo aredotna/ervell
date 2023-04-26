@@ -7,6 +7,7 @@ import { EmbeddedChannelHeader as EmbeddedChannelHeaderData } from '__generated_
 import Box from 'v2/components/UI/Box'
 import _Text from 'v2/components/UI/Text'
 import Icons from 'v2/components/UI/Icons'
+import { unescape } from 'lodash'
 
 const Container = styled(Box).attrs({
   borderBottom: '1px solid',
@@ -60,7 +61,7 @@ export const EmbeddedChannelHeader: React.FC<Props> = ({ channel }) => {
 
         <Text color={`channel.${channel.visibility}`}>
           <a href={channel.href} target="_blank">
-            <span dangerouslySetInnerHTML={{ __html: channel.title }} />
+            <span>{unescape(channel.title)}</span>
           </a>
         </Text>
       </Metadata>

@@ -7,6 +7,7 @@ import FeedObjectLink from 'v2/components/FeedGroups/components/FeedGroupSentenc
 import BorderedLock from 'v2/components/UI/BorderedLock'
 
 import { FeedGroupSentence as FeedGroupSentenceType } from '__generated__/FeedGroupSentence'
+import { unescape } from 'lodash'
 
 const RelativeTime = styled(Text).attrs({
   f: [1],
@@ -68,13 +69,7 @@ export const FeedGroupSentence: React.FC<FeedGroupSentenceProps> = ({
         {action === 'commented' && item?.__typename === 'Comment' && (
           <span>
             <Label>
-              {' said '}
-              “
-              <a
-                href={item.href}
-                dangerouslySetInnerHTML={{ __html: item.body }}
-              />
-              ”
+              {' said '}“<a href={item.href}>{unescape(item.body)}</a>”
             </Label>
           </span>
         )}

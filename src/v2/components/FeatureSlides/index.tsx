@@ -5,6 +5,7 @@ import Carousel from 'v2/components/Carousel'
 import Text from 'v2/components/UI/Text/index'
 import { FONT_SIZES } from 'v2/styles/text'
 import slides from './slides.js'
+import { unescape } from 'lodash'
 
 const MOBILE_BREAKPOINT = 1024
 
@@ -121,7 +122,7 @@ export const DescriptiveCarousel: React.FC<DescriptiveCarouselProps> = ({
               ) : (
                 <Headline>{slide.headline}</Headline>
               )}
-              <Copy dangerouslySetInnerHTML={{ __html: slide.copy }} />
+              <Copy>{unescape(slide.copy)}</Copy>
             </Inner>
           </Slide>
         ))}

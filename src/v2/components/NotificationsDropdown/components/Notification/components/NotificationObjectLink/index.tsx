@@ -7,6 +7,7 @@ import BorderedLock from 'v2/components/UI/BorderedLock'
 
 import { NotificationObject } from '__generated__/NotificationObject'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
+import { unescape } from 'lodash'
 
 interface NotificationObjectLinkProps {
   obj: NotificationObject
@@ -47,7 +48,7 @@ const NotificationObjectLink: React.FC<NotificationObjectLinkProps> = ({
       {...rest}
     >
       <Link to={href} state={state}>
-        <span dangerouslySetInnerHTML={{ __html: truncate(title, 40) }} />
+        <span>{unescape(truncate(title, 40))}</span>
 
         {visibility === 'private' && (
           <React.Fragment>

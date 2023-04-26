@@ -8,6 +8,7 @@ import Icons from 'v2/components/UI/Icons'
 
 import { TableData } from '../../../ChannelTableContents/lib/types'
 import isHexColor from 'v2/util/isHexColor'
+import { unescape } from 'lodash'
 
 const TextContainer = styled(Box).attrs({
   px: 5,
@@ -92,12 +93,9 @@ export const ContentCell = ({
         >
           {isColor && <Box width="100%" height="100%" />}
           {!isColor && (
-            <Text
-              f={1}
-              dangerouslySetInnerHTML={{ __html: html }}
-              color="gray.bold"
-              overflowEllipsis
-            />
+            <Text f={1} color="gray.bold" overflowEllipsis>
+              {unescape(html)}
+            </Text>
           )}
         </TextContainer>
       )

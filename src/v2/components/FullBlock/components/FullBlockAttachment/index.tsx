@@ -7,6 +7,7 @@ import Text from 'v2/components/UI/Text'
 import Badge from 'v2/components/UI/Badge'
 
 import { FullBlockAttachment_Attachment } from '__generated__/FullBlockAttachment'
+import { unescape } from 'lodash'
 
 const Player = styled.audio`
   &::-webkit-media-controls-panel {
@@ -82,9 +83,7 @@ export const FullBlockAttachment: React.FC<FullBlockAttachmentProps> = ({
           lineHeight={2}
           color={{ DEFAULT: 'gray.base', FULLSCREEN: 'gray.hint' }[layout]}
         >
-          <span
-            dangerouslySetInnerHTML={{ __html: `Download ${block.title}` }}
-          />
+          <span>{unescape(`Download ${block.title}`)}</span>
         </Text>
 
         <Box my={3} display="flex" alignItems="center" justifyContent="center">

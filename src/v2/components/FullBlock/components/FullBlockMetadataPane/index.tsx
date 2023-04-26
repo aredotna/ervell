@@ -23,6 +23,7 @@ import { LinkViewMode, OnLinkViewModeChange } from 'v2/components/FullBlock'
 import { SansSerifText } from 'v2/components/UI/SansSerifText'
 import { FlagContent } from 'v2/components/FlagContent'
 import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
+import { unescape } from 'lodash'
 
 const Flag = styled(FlagContent)`
   cursor: pointer;
@@ -93,7 +94,7 @@ export default class FullBlockMetadataPane extends PureComponent<
           {!this.canManage && !block.title ? (
             <Text color="gray.medium">—</Text>
           ) : (
-            <span dangerouslySetInnerHTML={{ __html: block.title }} />
+            <span>{unescape(block.title)}</span>
           )}
         </Text>
 
@@ -168,15 +169,11 @@ export default class FullBlockMetadataPane extends PureComponent<
                   href={block.source.url}
                   rel="nofollow noopener noreferrer"
                   target="_blank"
-                  dangerouslySetInnerHTML={{
-                    __html: block.source.title
-                      ? `Source: <strong>${truncate(
-                          block.source.title,
-                          40
-                        )}</strong>`
-                      : 'Source',
-                  }}
-                />
+                >
+                  {block.source.title
+                    ? `Source: ${unescape(truncate(block.source.title, 40))}`
+                    : 'Source'}
+                </a>
               </>
             )}
           </Text>

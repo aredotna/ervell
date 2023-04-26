@@ -171,10 +171,7 @@ export const SecondaryUserBreadcrumb: React.FC<SecondaryBreadcrumbProps> = ({
       <CrumbContainer>
         <FirstCrumb>OR</FirstCrumb>
         <Crumb>
-          <A
-            href={data.user.href}
-            dangerouslySetInnerHTML={{ __html: data.user.name }}
-          />
+          <A href={data.user.href}>{unescape(data.user.name)}</A>
         </Crumb>
       </CrumbContainer>
     )
@@ -183,7 +180,7 @@ export const SecondaryUserBreadcrumb: React.FC<SecondaryBreadcrumbProps> = ({
   return (
     <CrumbContainer>
       <Crumb>
-        <A href={data.user.href} dangerouslySetInnerHTML={{ __html: label }} />
+        <A href={data.user.href}>{unescape(label)}</A>
       </Crumb>
     </CrumbContainer>
   )

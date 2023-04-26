@@ -22,6 +22,7 @@ import Modal from 'v2/components/UI/Modal'
 import { CompactChannel as Channel } from '__generated__/CompactChannel'
 import compactChannel from './fragments/compactChannel'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
+import { unescape } from 'lodash'
 
 const Primary = styled.div`
   ${overflowEllipsis}
@@ -143,7 +144,7 @@ const CompactChannelComponent: React.FC<CompactChannelProps> = ({
       onMouseLeave={handleMouseOut}
     >
       <Primary>
-        <Label f={4} dangerouslySetInnerHTML={{ __html: channel.title }} />
+        <Label f={4}>{unescape(channel.title)}</Label>
 
         {channel.visibility === 'private' && <BorderedLock mr={3} />}
 
