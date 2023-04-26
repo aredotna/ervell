@@ -46,12 +46,7 @@ const ConnectionsGroupedByMonth: React.FC<ConnectionsGroupedByMonthProps> = ({
     <>
       {Object.keys(connectionsByMonth).map(month => (
         <Box key={month} mt={7}>
-          <Text
-            f={1}
-            color="gray.medium"
-            textAlign="center"
-            textTransform="uppercase"
-          >
+          <Text f={0} color="gray.medium" textAlign="left">
             {month}
           </Text>
 
