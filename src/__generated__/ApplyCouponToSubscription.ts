@@ -60,7 +60,7 @@ export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_custo
   can_select_lifetime: boolean;
   is_beneficiary: boolean;
   plan: ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_plan | null;
-  updated_at: string | null;
+  updated_at: string;
   default_payment_method: ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_default_payment_method | null;
   patron: ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_patron | null;
   current_period_end_at: string | null;

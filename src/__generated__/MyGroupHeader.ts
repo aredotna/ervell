@@ -9,7 +9,7 @@
 
 export interface MyGroupHeader_user_can {
   __typename: "UserCan";
-  cancel_premium: boolean | null;
+  cancel_premium: boolean;
 }
 
 export interface MyGroupHeader_user {
@@ -19,15 +19,15 @@ export interface MyGroupHeader_user {
   hidden_email: string;
   is_premium: boolean;
   is_canceled: boolean;
-  can: MyGroupHeader_user_can | null;
-  href: string | null;
+  can: MyGroupHeader_user_can;
+  href: string;
   initials: string;
   avatar: string | null;
 }
 
 export interface MyGroupHeader_users_can {
   __typename: "UserCan";
-  cancel_premium: boolean | null;
+  cancel_premium: boolean;
 }
 
 export interface MyGroupHeader_users {
@@ -37,8 +37,8 @@ export interface MyGroupHeader_users {
   hidden_email: string;
   is_premium: boolean;
   is_canceled: boolean;
-  can: MyGroupHeader_users_can | null;
-  href: string | null;
+  can: MyGroupHeader_users_can;
+  href: string;
   initials: string;
   avatar: string | null;
 }
@@ -47,7 +47,7 @@ export interface MyGroupHeader {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   user: MyGroupHeader_user;

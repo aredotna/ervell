@@ -9,28 +9,28 @@
 
 export interface ChannelContextMenu_channel_connection_can {
   __typename: "ConnectionCan";
-  destroy: boolean | null;
+  destroy: boolean;
 }
 
 export interface ChannelContextMenu_channel_connection {
   __typename: "Connection";
-  can: ChannelContextMenu_channel_connection_can | null;
+  can: ChannelContextMenu_channel_connection_can;
 }
 
 export interface ChannelContextMenu_channel_can {
   __typename: "ChannelCan";
-  mute: boolean | null;
+  mute: boolean;
 }
 
 export interface ChannelContextMenu_channel {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   /**
    * Returns the outer channel if we are inside of one
    */
   connection: ChannelContextMenu_channel_connection | null;
-  can: ChannelContextMenu_channel_can | null;
+  can: ChannelContextMenu_channel_can;
 }
 
 export interface ChannelContextMenu {

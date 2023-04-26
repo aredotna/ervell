@@ -16,7 +16,7 @@ export interface ChannelContext_channel_skeleton {
 export interface ChannelContext_channel {
   __typename: "Channel";
   id: number;
-  skeleton: ChannelContext_channel_skeleton[] | null;
+  skeleton: ChannelContext_channel_skeleton[];
 }
 
 export interface ChannelContext {

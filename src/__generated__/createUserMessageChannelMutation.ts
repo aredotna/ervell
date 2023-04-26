@@ -9,7 +9,7 @@
 
 export interface createUserMessageChannelMutation_create_user_message_channel_channel {
   __typename: "Channel";
-  href: string | null;
+  href: string;
 }
 
 export interface createUserMessageChannelMutation_create_user_message_channel {

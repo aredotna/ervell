@@ -15,7 +15,7 @@ export interface CreateGroupInvite_create_group_invite_group_invite {
 export interface CreateGroupInvite_create_group_invite_group {
   __typename: "Group";
   id: number;
-  href: string | null;
+  href: string;
   invite: CreateGroupInvite_create_group_invite_group_invite | null;
 }
 

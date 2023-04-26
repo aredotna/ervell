@@ -11,7 +11,7 @@ export interface IdentifiableCell_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
   initials: string;
   avatar: string | null;
@@ -21,7 +21,7 @@ export interface IdentifiableCell_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   visibility: string;
   label: string;
   initials: string;

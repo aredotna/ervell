@@ -17,20 +17,26 @@ export default gql`
       }
     }
     ... on ConnectableInterface {
-      current_user_channels {
+      current_user_channels: connections(filter: OWN) {
         __typename
         id
-        ...CompactChannel
+        created_at(format: "%B %Y")
+        channel {
+          ...CompactChannel
+        }
       }
-      public_channels(page: $page, per: $per) {
+      public_channels: connections(
+        page: $page
+        per: $per
+        direction: ASC
+        filter: EXCLUDE_OWN
+      ) {
         __typename
         id
-        ...CompactChannel
-      }
-      private_channels: private_accessible_channels(page: $page, per: $per) {
-        __typename
-        id
-        ...CompactChannel
+        created_at(format: "%B %Y")
+        channel {
+          ...CompactChannel
+        }
       }
       source {
         url

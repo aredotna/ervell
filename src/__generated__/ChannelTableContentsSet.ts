@@ -11,14 +11,14 @@ import { Sorts, SortDirection, ConnectableTypeEnum } from "./globalTypes";
 
 export interface ChannelTableContentsSet_channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
-  blocks: number | null;
-  channels: number | null;
+  contents: number;
+  blocks: number;
+  channels: number;
 }
 
 export interface ChannelTableContentsSet_channel_can {
   __typename: "ChannelCan";
-  update: boolean | null;
+  update: boolean;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_PendingBlock_user {
@@ -29,7 +29,7 @@ export interface ChannelTableContentsSet_channel_blokks_PendingBlock_user {
 export interface ChannelTableContentsSet_channel_blokks_PendingBlock_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
@@ -41,15 +41,15 @@ export interface ChannelTableContentsSet_channel_blokks_PendingBlock_counts {
 export interface ChannelTableContentsSet_channel_blokks_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ChannelTableContentsSet_channel_blokks_PendingBlock_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
   connection: ChannelTableContentsSet_channel_blokks_PendingBlock_connection | null;
-  href: string | null;
+  href: string;
   counts: ChannelTableContentsSet_channel_blokks_PendingBlock_counts | null;
 }
 
@@ -61,7 +61,7 @@ export interface ChannelTableContentsSet_channel_blokks_Attachment_user {
 export interface ChannelTableContentsSet_channel_blokks_Attachment_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
@@ -79,8 +79,8 @@ export interface ChannelTableContentsSet_channel_blokks_Attachment_source {
 export interface ChannelTableContentsSet_channel_blokks_Attachment {
   __typename: "Attachment";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ChannelTableContentsSet_channel_blokks_Attachment_user | null;
   /**
@@ -90,7 +90,7 @@ export interface ChannelTableContentsSet_channel_blokks_Attachment {
   counts: ChannelTableContentsSet_channel_blokks_Attachment_counts | null;
   file_url: string | null;
   image_url: string | null;
-  href: string | null;
+  href: string;
   source: ChannelTableContentsSet_channel_blokks_Attachment_source | null;
 }
 
@@ -102,7 +102,7 @@ export interface ChannelTableContentsSet_channel_blokks_Embed_user {
 export interface ChannelTableContentsSet_channel_blokks_Embed_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
@@ -120,8 +120,8 @@ export interface ChannelTableContentsSet_channel_blokks_Embed_source {
 export interface ChannelTableContentsSet_channel_blokks_Embed {
   __typename: "Embed";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ChannelTableContentsSet_channel_blokks_Embed_user | null;
   /**
@@ -131,7 +131,7 @@ export interface ChannelTableContentsSet_channel_blokks_Embed {
   counts: ChannelTableContentsSet_channel_blokks_Embed_counts | null;
   embed_html: string | null;
   image_url: string | null;
-  href: string | null;
+  href: string;
   source: ChannelTableContentsSet_channel_blokks_Embed_source | null;
 }
 
@@ -143,7 +143,7 @@ export interface ChannelTableContentsSet_channel_blokks_Image_user {
 export interface ChannelTableContentsSet_channel_blokks_Image_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
@@ -161,8 +161,8 @@ export interface ChannelTableContentsSet_channel_blokks_Image_source {
 export interface ChannelTableContentsSet_channel_blokks_Image {
   __typename: "Image";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ChannelTableContentsSet_channel_blokks_Image_user | null;
   /**
@@ -171,7 +171,7 @@ export interface ChannelTableContentsSet_channel_blokks_Image {
   connection: ChannelTableContentsSet_channel_blokks_Image_connection | null;
   counts: ChannelTableContentsSet_channel_blokks_Image_counts | null;
   image_url: string | null;
-  href: string | null;
+  href: string;
   /**
    * URL to find the original image on various services
    */
@@ -187,7 +187,7 @@ export interface ChannelTableContentsSet_channel_blokks_Link_user {
 export interface ChannelTableContentsSet_channel_blokks_Link_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
@@ -205,8 +205,8 @@ export interface ChannelTableContentsSet_channel_blokks_Link_source {
 export interface ChannelTableContentsSet_channel_blokks_Link {
   __typename: "Link";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ChannelTableContentsSet_channel_blokks_Link_user | null;
   /**
@@ -215,7 +215,7 @@ export interface ChannelTableContentsSet_channel_blokks_Link {
   connection: ChannelTableContentsSet_channel_blokks_Link_connection | null;
   counts: ChannelTableContentsSet_channel_blokks_Link_counts | null;
   image_url: string | null;
-  href: string | null;
+  href: string;
   source: ChannelTableContentsSet_channel_blokks_Link_source | null;
 }
 
@@ -227,7 +227,7 @@ export interface ChannelTableContentsSet_channel_blokks_Text_user {
 export interface ChannelTableContentsSet_channel_blokks_Text_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
@@ -244,8 +244,8 @@ export interface ChannelTableContentsSet_channel_blokks_Text_source {
 export interface ChannelTableContentsSet_channel_blokks_Text {
   __typename: "Text";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ChannelTableContentsSet_channel_blokks_Text_user | null;
   /**
@@ -259,7 +259,7 @@ export interface ChannelTableContentsSet_channel_blokks_Text {
    * URL to find the original image on various services
    */
   find_original_url: string | null;
-  href: string | null;
+  href: string;
   source: ChannelTableContentsSet_channel_blokks_Text_source | null;
 }
 
@@ -271,21 +271,21 @@ export interface ChannelTableContentsSet_channel_blokks_Channel_user {
 export interface ChannelTableContentsSet_channel_blokks_Channel_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Channel_counts {
   __typename: "ChannelCounts";
-  connected_to_channels: number | null;
-  contents: number | null;
+  connected_to_channels: number;
+  contents: number;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Channel {
   __typename: "Channel";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ChannelTableContentsSet_channel_blokks_Channel_user | null;
   /**
@@ -293,8 +293,8 @@ export interface ChannelTableContentsSet_channel_blokks_Channel {
    */
   connection: ChannelTableContentsSet_channel_blokks_Channel_connection | null;
   visibility: string;
-  href: string | null;
-  counts: ChannelTableContentsSet_channel_blokks_Channel_counts | null;
+  href: string;
+  counts: ChannelTableContentsSet_channel_blokks_Channel_counts;
 }
 
 export type ChannelTableContentsSet_channel_blokks = ChannelTableContentsSet_channel_blokks_PendingBlock | ChannelTableContentsSet_channel_blokks_Attachment | ChannelTableContentsSet_channel_blokks_Embed | ChannelTableContentsSet_channel_blokks_Image | ChannelTableContentsSet_channel_blokks_Link | ChannelTableContentsSet_channel_blokks_Text | ChannelTableContentsSet_channel_blokks_Channel;
@@ -302,9 +302,9 @@ export type ChannelTableContentsSet_channel_blokks = ChannelTableContentsSet_cha
 export interface ChannelTableContentsSet_channel {
   __typename: "Channel";
   id: number;
-  counts: ChannelTableContentsSet_channel_counts | null;
-  can: ChannelTableContentsSet_channel_can | null;
-  blokks: ChannelTableContentsSet_channel_blokks[] | null;
+  counts: ChannelTableContentsSet_channel_counts;
+  can: ChannelTableContentsSet_channel_can;
+  blokks: ChannelTableContentsSet_channel_blokks[];
 }
 
 export interface ChannelTableContentsSet {

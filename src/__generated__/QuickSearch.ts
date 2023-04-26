@@ -11,14 +11,14 @@ export interface QuickSearch_searches_results_User {
   __typename: "User";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface QuickSearch_searches_results_Group {
   __typename: "Group";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
   visibility: string;
 }
 
@@ -41,7 +41,7 @@ export interface QuickSearch_searches_results_Channel {
   __typename: "Channel";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
   visibility: string;
   owner: QuickSearch_searches_results_Channel_owner;
 }

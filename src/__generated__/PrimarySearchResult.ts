@@ -11,14 +11,14 @@ export interface PrimarySearchResult_User {
   __typename: "User";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface PrimarySearchResult_Group {
   __typename: "Group";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
   visibility: string;
 }
 
@@ -41,7 +41,7 @@ export interface PrimarySearchResult_Channel {
   __typename: "Channel";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
   visibility: string;
   owner: PrimarySearchResult_Channel_owner;
 }

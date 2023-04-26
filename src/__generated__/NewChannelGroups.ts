@@ -12,7 +12,7 @@ export interface NewChannelGroups_groups {
   id: number;
   name: string;
   visibility: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }
@@ -21,7 +21,7 @@ export interface NewChannelGroups {
   __typename: "Me";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   groups: NewChannelGroups_groups[];

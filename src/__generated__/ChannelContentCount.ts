@@ -11,13 +11,13 @@ import { ConnectableTypeEnum } from "./globalTypes";
 
 export interface ChannelContentCount_channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ChannelContentCount_channel {
   __typename: "Channel";
   id: number;
-  counts: ChannelContentCount_channel_counts | null;
+  counts: ChannelContentCount_channel_counts;
 }
 
 export interface ChannelContentCount {

@@ -9,14 +9,14 @@
 
 export interface GetConnectionSelection_connection_can {
   __typename: "ConnectionCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface GetConnectionSelection_connection {
   __typename: "Connection";
   id: number;
   selected: boolean;
-  can: GetConnectionSelection_connection_can | null;
+  can: GetConnectionSelection_connection_can;
 }
 
 export interface GetConnectionSelection {

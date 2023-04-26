@@ -14,13 +14,13 @@ export interface VerifyEditableBlock_blokk_Channel {
 
 export interface VerifyEditableBlock_blokk_Attachment_can {
   __typename: "BlockCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface VerifyEditableBlock_blokk_Attachment {
   __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
   id: number;
-  can: VerifyEditableBlock_blokk_Attachment_can | null;
+  can: VerifyEditableBlock_blokk_Attachment_can;
 }
 
 export type VerifyEditableBlock_blokk = VerifyEditableBlock_blokk_Channel | VerifyEditableBlock_blokk_Attachment;

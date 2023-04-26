@@ -9,16 +9,16 @@
 
 export interface ProfilePage_identity_identifiable_Group_can {
   __typename: "GroupCan";
-  update: boolean | null;
-  follow: boolean | null;
-  manage: boolean | null;
-  manage_users: boolean | null;
+  update: boolean;
+  follow: boolean;
+  manage: boolean;
+  manage_users: boolean;
 }
 
 export interface ProfilePage_identity_identifiable_Group_user {
   __typename: "User";
   name: string;
-  href: string | null;
+  href: string;
   id: number;
   label: string;
 }
@@ -33,17 +33,17 @@ export interface ProfilePage_identity_identifiable_Group_users {
   __typename: "User";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface ProfilePage_identity_identifiable_Group {
   __typename: "Group";
   id: number;
   avatar: string | null;
-  can: ProfilePage_identity_identifiable_Group_can | null;
+  can: ProfilePage_identity_identifiable_Group_can;
   name: string;
   label: string;
-  href: string | null;
+  href: string;
   visibility: string;
   /**
    * Are *any* users in the group upgradeable to Premium?
@@ -53,18 +53,18 @@ export interface ProfilePage_identity_identifiable_Group {
   user: ProfilePage_identity_identifiable_Group_user;
   counts: ProfilePage_identity_identifiable_Group_counts | null;
   users: ProfilePage_identity_identifiable_Group_users[] | null;
-  is_current_user_a_member: boolean | null;
-  is_current_user_the_owner: boolean | null;
+  is_current_user_a_member: boolean;
+  is_current_user_the_owner: boolean;
   title: string;
   description: string | null;
-  canonical: string | null;
+  canonical: string;
 }
 
 export interface ProfilePage_identity_identifiable_User_can {
   __typename: "UserCan";
-  follow: boolean | null;
-  manage: boolean | null;
-  message: boolean | null;
+  follow: boolean;
+  manage: boolean;
+  message: boolean;
 }
 
 export interface ProfilePage_identity_identifiable_User_counts {
@@ -83,17 +83,17 @@ export interface ProfilePage_identity_identifiable_User {
   __typename: "User";
   name: string;
   label: string;
-  href: string | null;
+  href: string;
   badge: string | null;
   custom_badge: string | null;
   id: number;
-  can: ProfilePage_identity_identifiable_User_can | null;
+  can: ProfilePage_identity_identifiable_User_can;
   about: string | null;
   counts: ProfilePage_identity_identifiable_User_counts | null;
-  is_me: boolean | null;
+  is_me: boolean;
   title: string;
   description: string | null;
-  canonical: string | null;
+  canonical: string;
   is_indexable: boolean;
 }
 

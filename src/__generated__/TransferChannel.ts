@@ -9,7 +9,7 @@
 
 export interface TransferChannel_can {
   __typename: "ChannelCan";
-  transfer: boolean | null;
+  transfer: boolean;
 }
 
 export interface TransferChannel_transfer_request_recipient_User {
@@ -29,13 +29,13 @@ export type TransferChannel_transfer_request_recipient = TransferChannel_transfe
 export interface TransferChannel_transfer_request {
   __typename: "ChannelTransferRequest";
   recipient: TransferChannel_transfer_request_recipient;
-  is_recipient_member: boolean | null;
+  is_recipient_member: boolean;
 }
 
 export interface TransferChannel {
   __typename: "Channel";
   id: number;
-  can: TransferChannel_can | null;
+  can: TransferChannel_can;
   is_pending_transfer: boolean;
   transfer_request: TransferChannel_transfer_request | null;
   visibility: string;

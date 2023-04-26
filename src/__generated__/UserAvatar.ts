@@ -9,7 +9,7 @@
 
 export interface UserAvatar {
   __typename: "Invitee" | "Me" | "User";
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }

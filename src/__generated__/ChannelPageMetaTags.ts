@@ -23,7 +23,7 @@ export interface ChannelPageMetaTags {
   id: number;
   meta_title: string;
   meta_description: string | null;
-  canonical: string | null;
+  canonical: string;
   is_nsfw: boolean;
   image_url: string | null;
   visibility: string;

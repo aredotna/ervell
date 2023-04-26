@@ -60,7 +60,7 @@ export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_o
   can_select_lifetime: boolean;
   is_beneficiary: boolean;
   plan: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_plan | null;
-  updated_at: string | null;
+  updated_at: string;
   default_payment_method: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_default_payment_method | null;
   patron: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_patron | null;
   current_period_end_at: string | null;

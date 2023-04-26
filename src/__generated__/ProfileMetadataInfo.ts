@@ -16,7 +16,7 @@ export interface ProfileMetadataInfo_User_counts {
 
 export interface ProfileMetadataInfo_User {
   __typename: "User";
-  href: string | null;
+  href: string;
   about: string | null;
   counts: ProfileMetadataInfo_User_counts | null;
 }
@@ -24,7 +24,7 @@ export interface ProfileMetadataInfo_User {
 export interface ProfileMetadataInfo_Group_user {
   __typename: "User";
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface ProfileMetadataInfo_Group_counts {
@@ -34,7 +34,7 @@ export interface ProfileMetadataInfo_Group_counts {
 
 export interface ProfileMetadataInfo_Group {
   __typename: "Group";
-  href: string | null;
+  href: string;
   about: string | null;
   user: ProfileMetadataInfo_Group_user;
   counts: ProfileMetadataInfo_Group_counts | null;

@@ -22,7 +22,7 @@ export interface AdvancedQuickSearchResultBlock_Attachment {
   __typename: "Attachment";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   user: AdvancedQuickSearchResultBlock_Attachment_user | null;
   src: string | null;
 }
@@ -37,7 +37,7 @@ export interface AdvancedQuickSearchResultBlock_Channel {
   __typename: "Channel" | "PendingBlock";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   user: AdvancedQuickSearchResultBlock_Channel_user | null;
 }
 
@@ -51,7 +51,7 @@ export interface AdvancedQuickSearchResultBlock_Embed {
   __typename: "Embed";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   user: AdvancedQuickSearchResultBlock_Embed_user | null;
   src: string | null;
 }
@@ -66,7 +66,7 @@ export interface AdvancedQuickSearchResultBlock_Image {
   __typename: "Image";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   user: AdvancedQuickSearchResultBlock_Image_user | null;
   src: string | null;
 }
@@ -81,7 +81,7 @@ export interface AdvancedQuickSearchResultBlock_Link {
   __typename: "Link";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   user: AdvancedQuickSearchResultBlock_Link_user | null;
   src: string | null;
 }
@@ -96,7 +96,7 @@ export interface AdvancedQuickSearchResultBlock_Text {
   __typename: "Text";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   user: AdvancedQuickSearchResultBlock_Text_user | null;
   content: string;
 }

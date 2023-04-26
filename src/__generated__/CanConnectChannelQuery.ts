@@ -9,13 +9,13 @@
 
 export interface CanConnectChannelQuery_connectable_can {
   __typename: "ChannelCan";
-  connect: boolean | null;
+  connect: boolean;
 }
 
 export interface CanConnectChannelQuery_connectable {
   __typename: "Channel";
   id: number;
-  can: CanConnectChannelQuery_connectable_can | null;
+  can: CanConnectChannelQuery_connectable_can;
 }
 
 export interface CanConnectChannelQuery {

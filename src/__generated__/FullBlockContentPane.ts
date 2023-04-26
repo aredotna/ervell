@@ -23,7 +23,7 @@ export interface FullBlockContentPane_Image {
 
 export interface FullBlockContentPane_Text_can {
   __typename: "BlockCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface FullBlockContentPane_Text {
@@ -31,7 +31,7 @@ export interface FullBlockContentPane_Text {
   id: number;
   content: string;
   raw: string;
-  can: FullBlockContentPane_Text_can | null;
+  can: FullBlockContentPane_Text_can;
 }
 
 export interface FullBlockContentPane_Link_source {

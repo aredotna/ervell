@@ -9,7 +9,7 @@
 
 export interface UpdateNewsletterSettingsMutation_update_account_me_settings {
   __typename: "MeSettings";
-  receive_editorial_emails: boolean | null;
+  receive_editorial_emails: boolean;
 }
 
 export interface UpdateNewsletterSettingsMutation_update_account_me {

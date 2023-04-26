@@ -11,7 +11,7 @@ export interface UserDropdown_me_groups {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   visibility: string;
   initials: string;
   avatar: string | null;
@@ -21,11 +21,11 @@ export interface UserDropdown_me {
   __typename: "Me";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   is_premium: boolean;
   is_confirmed: boolean;
-  created_at: string | null;
-  is_my_groups_dropdown_hidden: boolean | null;
+  created_at: string;
+  is_my_groups_dropdown_hidden: boolean;
   groups: UserDropdown_me_groups[];
 }
 

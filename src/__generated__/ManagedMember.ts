@@ -11,7 +11,7 @@ export interface ManagedMember_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }
@@ -26,7 +26,7 @@ export interface ManagedMember_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   visibility: string;

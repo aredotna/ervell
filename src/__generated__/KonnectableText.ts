@@ -11,7 +11,7 @@ export interface KonnectableText {
   __typename: "Text";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   content: string;
   raw: string;
 }

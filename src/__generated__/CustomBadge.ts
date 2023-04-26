@@ -9,7 +9,7 @@
 
 export interface CustomBadge_can {
   __typename: "UserCan";
-  set_custom_badge: boolean | null;
+  set_custom_badge: boolean;
 }
 
 export interface CustomBadge {
@@ -17,5 +17,5 @@ export interface CustomBadge {
   id: number;
   custom_badge: string | null;
   badge: string | null;
-  can: CustomBadge_can | null;
+  can: CustomBadge_can;
 }

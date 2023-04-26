@@ -9,24 +9,24 @@
 
 export interface CanConnectBlockQuery_connectable_Attachment_can {
   __typename: "BlockCan";
-  connect: boolean | null;
+  connect: boolean;
 }
 
 export interface CanConnectBlockQuery_connectable_Attachment {
   __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
   id: number;
-  can: CanConnectBlockQuery_connectable_Attachment_can | null;
+  can: CanConnectBlockQuery_connectable_Attachment_can;
 }
 
 export interface CanConnectBlockQuery_connectable_Channel_can {
   __typename: "ChannelCan";
-  connect: boolean | null;
+  connect: boolean;
 }
 
 export interface CanConnectBlockQuery_connectable_Channel {
   __typename: "Channel";
   id: number;
-  can: CanConnectBlockQuery_connectable_Channel_can | null;
+  can: CanConnectBlockQuery_connectable_Channel_can;
 }
 
 export type CanConnectBlockQuery_connectable = CanConnectBlockQuery_connectable_Attachment | CanConnectBlockQuery_connectable_Channel;

@@ -9,12 +9,12 @@
 
 export interface AddBlock_can {
   __typename: "ChannelCan";
-  add_to: boolean | null;
-  add_to_as_premium: boolean | null;
+  add_to: boolean;
+  add_to_as_premium: boolean;
 }
 
 export interface AddBlock {
   __typename: "Channel";
-  can: AddBlock_can | null;
+  can: AddBlock_can;
   visibility: string;
 }

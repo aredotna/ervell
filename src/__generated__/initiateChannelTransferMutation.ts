@@ -11,7 +11,7 @@ import { ChannelOwnerTypeEnum } from "./globalTypes";
 
 export interface initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_can {
   __typename: "ChannelCan";
-  transfer: boolean | null;
+  transfer: boolean;
 }
 
 export interface initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_transfer_request_recipient_User {
@@ -31,13 +31,13 @@ export type initiateChannelTransferMutation_initiate_channel_transfer_channel_tr
 export interface initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_transfer_request {
   __typename: "ChannelTransferRequest";
   recipient: initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_transfer_request_recipient;
-  is_recipient_member: boolean | null;
+  is_recipient_member: boolean;
 }
 
 export interface initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel {
   __typename: "Channel";
   id: number;
-  can: initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_can | null;
+  can: initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_can;
   is_pending_transfer: boolean;
   transfer_request: initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_transfer_request | null;
   visibility: string;

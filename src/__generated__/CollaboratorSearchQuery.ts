@@ -13,7 +13,7 @@ export interface CollaboratorSearchQuery_results_collaborators_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   hidden_email: string;
   initials: string;
   avatar: string | null;
@@ -29,7 +29,7 @@ export interface CollaboratorSearchQuery_results_collaborators_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   visibility: string;

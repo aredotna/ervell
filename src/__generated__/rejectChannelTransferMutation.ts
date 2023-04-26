@@ -11,7 +11,7 @@ export interface rejectChannelTransferMutation_reject_channel_transfer_channel {
   __typename: "Channel";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
 }
 
 export interface rejectChannelTransferMutation_reject_channel_transfer {

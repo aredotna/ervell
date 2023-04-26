@@ -12,7 +12,7 @@ import { ConfirmedStatus } from "./globalTypes";
 export interface confirmAccountMutation_confirm_account_user {
   __typename: "Me";
   id: number;
-  href: string | null;
+  href: string;
 }
 
 export interface confirmAccountMutation_confirm_account {

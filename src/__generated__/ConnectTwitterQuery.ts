@@ -11,7 +11,7 @@ export interface ConnectTwitterQuery_me_authenticated_service_contacts {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }

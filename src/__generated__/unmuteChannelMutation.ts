@@ -10,7 +10,7 @@
 export interface unmuteChannelMutation_unmute_channel_channel {
   __typename: "Channel";
   id: number;
-  is_muted: boolean | null;
+  is_muted: boolean;
 }
 
 export interface unmuteChannelMutation_unmute_channel {

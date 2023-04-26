@@ -11,19 +11,19 @@ export interface FullBlockComment_user {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FullBlockComment_can {
   __typename: "CommentCan";
-  destroy: boolean | null;
+  destroy: boolean;
 }
 
 export interface FullBlockComment {
   __typename: "Comment";
   id: number;
   body: string | null;
-  created_at: string | null;
+  created_at: string;
   user: FullBlockComment_user | null;
-  can: FullBlockComment_can | null;
+  can: FullBlockComment_can;
 }

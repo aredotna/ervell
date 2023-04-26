@@ -11,7 +11,7 @@ export interface ProfileGroups_groups {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   visibility: string;
   label: string;
   initials: string;
@@ -21,5 +21,5 @@ export interface ProfileGroups_groups {
 export interface ProfileGroups {
   __typename: "User";
   id: number;
-  groups: ProfileGroups_groups[] | null;
+  groups: ProfileGroups_groups[];
 }

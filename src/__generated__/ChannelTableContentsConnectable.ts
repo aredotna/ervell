@@ -25,7 +25,7 @@ export interface ChannelTableContentsConnectable_Attachment_user {
 
 export interface ChannelTableContentsConnectable_Attachment_connection_can {
   __typename: "ConnectionCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface ChannelTableContentsConnectable_Attachment_connection_user {
@@ -38,8 +38,8 @@ export interface ChannelTableContentsConnectable_Attachment_connection {
   position: number;
   selected: boolean;
   id: number;
-  created_at: string | null;
-  can: ChannelTableContentsConnectable_Attachment_connection_can | null;
+  created_at: string;
+  can: ChannelTableContentsConnectable_Attachment_connection_can;
   user: ChannelTableContentsConnectable_Attachment_connection_user | null;
 }
 
@@ -47,8 +47,8 @@ export interface ChannelTableContentsConnectable_Attachment {
   __typename: "Attachment";
   id: number;
   counts: ChannelTableContentsConnectable_Attachment_counts | null;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   file_url: string | null;
   image_url: string | null;
   source: ChannelTableContentsConnectable_Attachment_source | null;
@@ -78,7 +78,7 @@ export interface ChannelTableContentsConnectable_Embed_user {
 
 export interface ChannelTableContentsConnectable_Embed_connection_can {
   __typename: "ConnectionCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface ChannelTableContentsConnectable_Embed_connection_user {
@@ -91,8 +91,8 @@ export interface ChannelTableContentsConnectable_Embed_connection {
   position: number;
   selected: boolean;
   id: number;
-  created_at: string | null;
-  can: ChannelTableContentsConnectable_Embed_connection_can | null;
+  created_at: string;
+  can: ChannelTableContentsConnectable_Embed_connection_can;
   user: ChannelTableContentsConnectable_Embed_connection_user | null;
 }
 
@@ -100,8 +100,8 @@ export interface ChannelTableContentsConnectable_Embed {
   __typename: "Embed";
   id: number;
   counts: ChannelTableContentsConnectable_Embed_counts | null;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   embed_html: string | null;
   image_url: string | null;
   source: ChannelTableContentsConnectable_Embed_source | null;
@@ -131,7 +131,7 @@ export interface ChannelTableContentsConnectable_Image_user {
 
 export interface ChannelTableContentsConnectable_Image_connection_can {
   __typename: "ConnectionCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface ChannelTableContentsConnectable_Image_connection_user {
@@ -144,8 +144,8 @@ export interface ChannelTableContentsConnectable_Image_connection {
   position: number;
   selected: boolean;
   id: number;
-  created_at: string | null;
-  can: ChannelTableContentsConnectable_Image_connection_can | null;
+  created_at: string;
+  can: ChannelTableContentsConnectable_Image_connection_can;
   user: ChannelTableContentsConnectable_Image_connection_user | null;
 }
 
@@ -153,8 +153,8 @@ export interface ChannelTableContentsConnectable_Image {
   __typename: "Image";
   id: number;
   counts: ChannelTableContentsConnectable_Image_counts | null;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   image_url: string | null;
   source: ChannelTableContentsConnectable_Image_source | null;
   title: string;
@@ -183,7 +183,7 @@ export interface ChannelTableContentsConnectable_Link_user {
 
 export interface ChannelTableContentsConnectable_Link_connection_can {
   __typename: "ConnectionCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface ChannelTableContentsConnectable_Link_connection_user {
@@ -196,8 +196,8 @@ export interface ChannelTableContentsConnectable_Link_connection {
   position: number;
   selected: boolean;
   id: number;
-  created_at: string | null;
-  can: ChannelTableContentsConnectable_Link_connection_can | null;
+  created_at: string;
+  can: ChannelTableContentsConnectable_Link_connection_can;
   user: ChannelTableContentsConnectable_Link_connection_user | null;
 }
 
@@ -205,8 +205,8 @@ export interface ChannelTableContentsConnectable_Link {
   __typename: "Link";
   id: number;
   counts: ChannelTableContentsConnectable_Link_counts | null;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   image_url: string | null;
   source: ChannelTableContentsConnectable_Link_source | null;
   title: string;
@@ -229,7 +229,7 @@ export interface ChannelTableContentsConnectable_PendingBlock_user {
 
 export interface ChannelTableContentsConnectable_PendingBlock_connection_can {
   __typename: "ConnectionCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface ChannelTableContentsConnectable_PendingBlock_connection_user {
@@ -242,8 +242,8 @@ export interface ChannelTableContentsConnectable_PendingBlock_connection {
   position: number;
   selected: boolean;
   id: number;
-  created_at: string | null;
-  can: ChannelTableContentsConnectable_PendingBlock_connection_can | null;
+  created_at: string;
+  can: ChannelTableContentsConnectable_PendingBlock_connection_can;
   user: ChannelTableContentsConnectable_PendingBlock_connection_user | null;
 }
 
@@ -251,8 +251,8 @@ export interface ChannelTableContentsConnectable_PendingBlock {
   __typename: "PendingBlock";
   id: number;
   counts: ChannelTableContentsConnectable_PendingBlock_counts | null;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ChannelTableContentsConnectable_PendingBlock_user | null;
   /**
@@ -273,7 +273,7 @@ export interface ChannelTableContentsConnectable_Text_user {
 
 export interface ChannelTableContentsConnectable_Text_connection_can {
   __typename: "ConnectionCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface ChannelTableContentsConnectable_Text_connection_user {
@@ -286,8 +286,8 @@ export interface ChannelTableContentsConnectable_Text_connection {
   position: number;
   selected: boolean;
   id: number;
-  created_at: string | null;
-  can: ChannelTableContentsConnectable_Text_connection_can | null;
+  created_at: string;
+  can: ChannelTableContentsConnectable_Text_connection_can;
   user: ChannelTableContentsConnectable_Text_connection_user | null;
 }
 
@@ -295,8 +295,8 @@ export interface ChannelTableContentsConnectable_Text {
   __typename: "Text";
   id: number;
   counts: ChannelTableContentsConnectable_Text_counts | null;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   content: string;
   html: string;
   title: string;
@@ -309,8 +309,8 @@ export interface ChannelTableContentsConnectable_Text {
 
 export interface ChannelTableContentsConnectable_Channel_counts {
   __typename: "ChannelCounts";
-  connected_to_channels: number | null;
-  contents: number | null;
+  connected_to_channels: number;
+  contents: number;
 }
 
 export interface ChannelTableContentsConnectable_Channel_user {
@@ -320,7 +320,7 @@ export interface ChannelTableContentsConnectable_Channel_user {
 
 export interface ChannelTableContentsConnectable_Channel_connection_can {
   __typename: "ConnectionCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface ChannelTableContentsConnectable_Channel_connection_user {
@@ -333,8 +333,8 @@ export interface ChannelTableContentsConnectable_Channel_connection {
   position: number;
   selected: boolean;
   id: number;
-  created_at: string | null;
-  can: ChannelTableContentsConnectable_Channel_connection_can | null;
+  created_at: string;
+  can: ChannelTableContentsConnectable_Channel_connection_can;
   user: ChannelTableContentsConnectable_Channel_connection_user | null;
 }
 
@@ -343,9 +343,9 @@ export interface ChannelTableContentsConnectable_Channel {
   id: number;
   visibility: string;
   title: string;
-  counts: ChannelTableContentsConnectable_Channel_counts | null;
-  created_at: string | null;
-  updated_at: string | null;
+  counts: ChannelTableContentsConnectable_Channel_counts;
+  created_at: string;
+  updated_at: string;
   user: ChannelTableContentsConnectable_Channel_user | null;
   /**
    * Returns the outer channel if we are inside of one

@@ -11,7 +11,7 @@ export interface GroupProfileFollowers_followers {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
   initials: string;
   avatar: string | null;

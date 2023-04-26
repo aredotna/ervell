@@ -27,8 +27,8 @@ export interface CommunityAPIContents_channel {
   __typename: "Channel";
   id: number;
   added_to_at: string | null;
-  href: string | null;
-  blokks: CommunityAPIContents_channel_blokks[] | null;
+  href: string;
+  blokks: CommunityAPIContents_channel_blokks[];
 }
 
 export interface CommunityAPIContents {
