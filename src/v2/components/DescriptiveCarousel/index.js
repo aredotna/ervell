@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import Carousel from 'v2/components/Carousel'
+import { unescape } from 'lodash'
 
 const MOBILE_BREAKPOINT = 1024
 
@@ -108,7 +109,7 @@ class DescriptiveCarousel extends Component {
               ) : (
                 <Headline>{slide.headline}</Headline>
               )}
-              <Copy dangerouslySetInnerHTML={{ __html: slide.copy }} />
+              <Copy>{unescape(slide.copy)}</Copy>
             </Inner>
           </Slide>
         ))}

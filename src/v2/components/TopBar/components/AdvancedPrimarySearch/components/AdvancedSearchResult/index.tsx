@@ -16,6 +16,7 @@ import AdvancedSearchReturnLabel from 'v2/components/TopBar/components/AdvancedP
 import { AdvancedQuickSearchResult } from '__generated__/AdvancedQuickSearchResult'
 import { AdvancedSearchResultBlock } from '../AdvancedSearchResultBlock'
 import constants from 'v2/styles/constants'
+import { unescape } from 'lodash'
 
 const Label = styled(Text).attrs({
   f: [2, 3, 4],
@@ -158,11 +159,7 @@ export const AdvancedSearchResult: React.FC<AdvancedSearchResultProps &
                   : 'gray.base'
               }
             >
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: result.label,
-                }}
-              />
+              <span>{unescape(result.label)}</span>
 
               {(result.__typename === 'Channel' ||
                 result.__typename === 'Group') &&

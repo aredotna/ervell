@@ -12,6 +12,7 @@ import { ActionButtons } from '../ExpandedActionButtons'
 
 import { ChannelTableContentsSet_channel_blokks_Channel } from '__generated__/ChannelTableContentsSet'
 import { ProfileTableContents_user_contents_Channel } from '__generated__/ProfileTableContents'
+import { unescape } from 'lodash'
 
 const Row = styled.tr`
   border-color: transparent;
@@ -101,13 +102,9 @@ export const ExpandedChannelRow = forwardRef<
       <Cell visibility={channel.visibility} colSpan={columnLength - 3}>
         <CollapseArea onClick={onMinimize} />
         <Box p={4}>
-          <Text
-            color={`channel.${channel.visibility}`}
-            f={5}
-            dangerouslySetInnerHTML={{
-              __html: unescape(truncate(channel.title, 90)),
-            }}
-          />
+          <Text color={`channel.${channel.visibility}`} f={5}>
+            {unescape(truncate(channel.title, 90))}
+          </Text>
         </Box>
         <Box>
           <ExpandedChannelRowContents id={channel.id} />

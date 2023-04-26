@@ -7,6 +7,7 @@ import Icons from 'v2/components/UI/Icons'
 import constants from 'v2/styles/constants'
 import Text from 'v2/components/UI/Text'
 import { TopSignupLoginButtons } from 'v2/components/TopSignupLoginButtons'
+import { unescape } from 'lodash'
 
 const Container = styled(Box)`
   display: flex;
@@ -112,12 +113,9 @@ export const TopMenu: React.FC = () => {
             }
 
             return (
-              <Item
-                key={index}
-                selected={selected}
-                onClick={handleClick}
-                dangerouslySetInnerHTML={{ __html: id }}
-              />
+              <Item key={index} selected={selected} onClick={handleClick}>
+                {unescape(id)}
+              </Item>
             )
           })}
         </MenuContainer>

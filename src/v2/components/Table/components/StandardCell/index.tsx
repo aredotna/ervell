@@ -1,3 +1,4 @@
+import { unescape } from 'lodash'
 import React from 'react'
 import styled from 'styled-components'
 import Text from 'v2/components/UI/Text'
@@ -19,12 +20,9 @@ export const StandardCell: React.FC<StandardCellProps> = ({
 
   return (
     <Inner>
-      <Text
-        f={1}
-        color={color}
-        overflowEllipsis
-        dangerouslySetInnerHTML={{ __html: value }}
-      />
+      <Text f={1} color={color} overflowEllipsis>
+        {unescape(value.toString())}
+      </Text>
     </Inner>
   )
 }

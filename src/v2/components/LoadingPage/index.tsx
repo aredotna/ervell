@@ -6,6 +6,7 @@ import HeaderMetadataContainer from 'v2/components/UI/HeaderMetadata/HeaderMetad
 import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
 import Grid from 'v2/components/UI/Grid'
 import Pocket from 'v2/components/UI/Pocket'
+import { unescape } from 'lodash'
 
 export interface Breadcrumbs {
   crumbs: Breadcrumb[]
@@ -34,10 +35,9 @@ const LoadingPageBreadCrumb: React.FC = () => {
       <StickyBreadcrumbPath>
         {() =>
           breadcrumbs.crumbs.map((breadcrumb, index) => (
-            <Crumb
-              key={`breadcrumb-${index}`}
-              dangerouslySetInnerHTML={{ __html: breadcrumb.label }}
-            />
+            <Crumb key={`breadcrumb-${index}`}>
+              {unescape(breadcrumb.label)}
+            </Crumb>
           ))
         }
       </StickyBreadcrumbPath>
