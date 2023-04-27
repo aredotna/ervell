@@ -129,7 +129,9 @@ export const FullBlockConnections: React.FC<FullBlockConnectionsProps> = ({
     block: { current_user_channels, public_channels, counts, source },
   } = data
 
-  const total = loading ? 0 : public_channels.length
+  const total = loading
+    ? 0
+    : public_channels.length + current_user_channels.length
   const length = loading
     ? 0
     : counts.private_channels +

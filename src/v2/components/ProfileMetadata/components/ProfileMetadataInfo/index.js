@@ -11,7 +11,6 @@ import Pocket from 'v2/components/UI/Pocket'
 import { Expandable } from 'v2/components/UI/ExpandableSet'
 
 import WithLoginStatus from 'v2/hocs/WithLoginStatus'
-import { unescape } from 'lodash'
 
 const BlockLink = styled(Link)`
   display: inline-block;
@@ -57,7 +56,11 @@ class ProfileMetadataInfo extends Component {
         }
       >
         <Expandable>
-          <InfoLine>{unescape(identifiable.about || '—')}</InfoLine>
+          <InfoLine>
+            <span
+              dangerouslySetInnerHTML={{ __html: identifiable.about || '–' }}
+            />
+          </InfoLine>
         </Expandable>
 
         {identifiable.__typename === 'Group' && (
