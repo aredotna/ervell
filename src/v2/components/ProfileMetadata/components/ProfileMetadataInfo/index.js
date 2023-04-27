@@ -11,7 +11,6 @@ import Pocket from 'v2/components/UI/Pocket'
 import { Expandable } from 'v2/components/UI/ExpandableSet'
 
 import WithLoginStatus from 'v2/hocs/WithLoginStatus'
-import { unescape } from 'lodash'
 
 const BlockLink = styled(Link)`
   display: inline-block;
