@@ -28,7 +28,7 @@ export default gql`
       public_channels: connections(
         page: $page
         per: $per
-        direction: ASC
+        direction: DESC
         filter: EXCLUDE_OWN
       ) {
         __typename
