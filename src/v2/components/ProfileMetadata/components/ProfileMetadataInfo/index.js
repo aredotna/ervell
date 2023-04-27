@@ -57,7 +57,11 @@ class ProfileMetadataInfo extends Component {
         }
       >
         <Expandable>
-          <InfoLine>{unescape(identifiable.about || '—')}</InfoLine>
+          <InfoLine>
+            <span
+              dangerouslySetInnerHTML={{ __html: identifiable.about || '–' }}
+            />
+          </InfoLine>
         </Expandable>
 
         {identifiable.__typename === 'Group' && (
