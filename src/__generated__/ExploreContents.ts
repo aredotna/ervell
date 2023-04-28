@@ -23,7 +23,7 @@ export interface ExploreContents_contents_Attachment_connection_user {
 
 export interface ExploreContents_contents_Attachment_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ExploreContents_contents_Attachment_connection_user | null;
 }
 
@@ -40,8 +40,8 @@ export interface ExploreContents_contents_Attachment_counts {
 export interface ExploreContents_contents_Attachment {
   __typename: "Attachment";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ExploreContents_contents_Attachment_user | null;
   /**
@@ -71,7 +71,7 @@ export interface ExploreContents_contents_Embed_connection_user {
 
 export interface ExploreContents_contents_Embed_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ExploreContents_contents_Embed_connection_user | null;
 }
 
@@ -88,8 +88,8 @@ export interface ExploreContents_contents_Embed_counts {
 export interface ExploreContents_contents_Embed {
   __typename: "Embed";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ExploreContents_contents_Embed_user | null;
   /**
@@ -118,7 +118,7 @@ export interface ExploreContents_contents_Image_connection_user {
 
 export interface ExploreContents_contents_Image_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ExploreContents_contents_Image_connection_user | null;
 }
 
@@ -141,8 +141,8 @@ export interface ExploreContents_contents_Image_original_dimensions {
 export interface ExploreContents_contents_Image {
   __typename: "Image";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ExploreContents_contents_Image_user | null;
   /**
@@ -173,7 +173,7 @@ export interface ExploreContents_contents_Link_connection_user {
 
 export interface ExploreContents_contents_Link_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ExploreContents_contents_Link_connection_user | null;
 }
 
@@ -190,8 +190,8 @@ export interface ExploreContents_contents_Link_counts {
 export interface ExploreContents_contents_Link {
   __typename: "Link";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ExploreContents_contents_Link_user | null;
   /**
@@ -223,7 +223,7 @@ export interface ExploreContents_contents_PendingBlock_connection_user {
 
 export interface ExploreContents_contents_PendingBlock_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ExploreContents_contents_PendingBlock_connection_user | null;
 }
 
@@ -240,8 +240,8 @@ export interface ExploreContents_contents_PendingBlock_counts {
 export interface ExploreContents_contents_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ExploreContents_contents_PendingBlock_user | null;
   /**
@@ -266,7 +266,7 @@ export interface ExploreContents_contents_Text_connection_user {
 
 export interface ExploreContents_contents_Text_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ExploreContents_contents_Text_connection_user | null;
 }
 
@@ -283,8 +283,8 @@ export interface ExploreContents_contents_Text_counts {
 export interface ExploreContents_contents_Text {
   __typename: "Text";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ExploreContents_contents_Text_user | null;
   /**
@@ -311,7 +311,7 @@ export interface ExploreContents_contents_Channel_connection_user {
 
 export interface ExploreContents_contents_Channel_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ExploreContents_contents_Channel_connection_user | null;
 }
 
@@ -322,7 +322,7 @@ export interface ExploreContents_contents_Channel_source {
 
 export interface ExploreContents_contents_Channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ExploreContents_contents_Channel_owner_Group {
@@ -343,8 +343,8 @@ export type ExploreContents_contents_Channel_owner = ExploreContents_contents_Ch
 export interface ExploreContents_contents_Channel {
   __typename: "Channel";
   id: number;
-  href: string | null;
-  updated_at: string | null;
+  href: string;
+  updated_at: string;
   title: string;
   user: ExploreContents_contents_Channel_user | null;
   /**
@@ -354,7 +354,7 @@ export interface ExploreContents_contents_Channel {
   source: ExploreContents_contents_Channel_source | null;
   truncatedTitle: string;
   visibility: string;
-  counts: ExploreContents_contents_Channel_counts | null;
+  counts: ExploreContents_contents_Channel_counts;
   owner: ExploreContents_contents_Channel_owner;
   label: string;
 }
@@ -362,7 +362,7 @@ export interface ExploreContents_contents_Channel {
 export type ExploreContents_contents = ExploreContents_contents_Attachment | ExploreContents_contents_Embed | ExploreContents_contents_Image | ExploreContents_contents_Link | ExploreContents_contents_PendingBlock | ExploreContents_contents_Text | ExploreContents_contents_Channel;
 
 export interface ExploreContents {
-  contents: ExploreContents_contents[] | null;
+  contents: ExploreContents_contents[];
 }
 
 export interface ExploreContentsVariables {

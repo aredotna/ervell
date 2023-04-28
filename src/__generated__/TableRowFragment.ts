@@ -20,16 +20,16 @@ export interface TableRowFragment_PendingBlock_user {
 export interface TableRowFragment_PendingBlock_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
 export interface TableRowFragment_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
-  href: string | null;
+  created_at: string;
+  updated_at: string;
+  href: string;
   counts: TableRowFragment_PendingBlock_counts | null;
   title: string;
   user: TableRowFragment_PendingBlock_user | null;
@@ -58,19 +58,19 @@ export interface TableRowFragment_Attachment_user {
 export interface TableRowFragment_Attachment_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
 export interface TableRowFragment_Attachment {
   __typename: "Attachment";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   counts: TableRowFragment_Attachment_counts | null;
   file_url: string | null;
   image_url: string | null;
-  href: string | null;
+  href: string;
   source: TableRowFragment_Attachment_source | null;
   title: string;
   user: TableRowFragment_Attachment_user | null;
@@ -99,19 +99,19 @@ export interface TableRowFragment_Embed_user {
 export interface TableRowFragment_Embed_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
 export interface TableRowFragment_Embed {
   __typename: "Embed";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   counts: TableRowFragment_Embed_counts | null;
   embed_html: string | null;
   image_url: string | null;
-  href: string | null;
+  href: string;
   source: TableRowFragment_Embed_source | null;
   title: string;
   user: TableRowFragment_Embed_user | null;
@@ -140,18 +140,18 @@ export interface TableRowFragment_Image_user {
 export interface TableRowFragment_Image_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
 export interface TableRowFragment_Image {
   __typename: "Image";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   counts: TableRowFragment_Image_counts | null;
   image_url: string | null;
-  href: string | null;
+  href: string;
   /**
    * URL to find the original image on various services
    */
@@ -184,18 +184,18 @@ export interface TableRowFragment_Link_user {
 export interface TableRowFragment_Link_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
 export interface TableRowFragment_Link {
   __typename: "Link";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   counts: TableRowFragment_Link_counts | null;
   image_url: string | null;
-  href: string | null;
+  href: string;
   source: TableRowFragment_Link_source | null;
   title: string;
   user: TableRowFragment_Link_user | null;
@@ -223,15 +223,15 @@ export interface TableRowFragment_Text_user {
 export interface TableRowFragment_Text_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
 export interface TableRowFragment_Text {
   __typename: "Text";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   counts: TableRowFragment_Text_counts | null;
   content: string;
   html: string;
@@ -239,7 +239,7 @@ export interface TableRowFragment_Text {
    * URL to find the original image on various services
    */
   find_original_url: string | null;
-  href: string | null;
+  href: string;
   source: TableRowFragment_Text_source | null;
   title: string;
   user: TableRowFragment_Text_user | null;
@@ -251,8 +251,8 @@ export interface TableRowFragment_Text {
 
 export interface TableRowFragment_Channel_counts {
   __typename: "ChannelCounts";
-  connected_to_channels: number | null;
-  contents: number | null;
+  connected_to_channels: number;
+  contents: number;
 }
 
 export interface TableRowFragment_Channel_user {
@@ -263,19 +263,19 @@ export interface TableRowFragment_Channel_user {
 export interface TableRowFragment_Channel_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
 export interface TableRowFragment_Channel {
   __typename: "Channel";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   visibility: string;
   title: string;
-  href: string | null;
-  counts: TableRowFragment_Channel_counts | null;
+  href: string;
+  counts: TableRowFragment_Channel_counts;
   user: TableRowFragment_Channel_user | null;
   /**
    * Returns the outer channel if we are inside of one

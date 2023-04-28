@@ -24,17 +24,17 @@ export type ProfileChannelIndex_User_channels_index_channels_owner = ProfileChan
 
 export interface ProfileChannelIndex_User_channels_index_channels_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ProfileChannelIndex_User_channels_index_channels {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   visibility: string;
   title: string;
   owner: ProfileChannelIndex_User_channels_index_channels_owner;
-  counts: ProfileChannelIndex_User_channels_index_channels_counts | null;
+  counts: ProfileChannelIndex_User_channels_index_channels_counts;
   label: string;
 }
 
@@ -47,12 +47,12 @@ export interface ProfileChannelIndex_User_channels_index {
 export interface ProfileChannelIndex_User {
   __typename: "User";
   id: number;
-  is_me: boolean | null;
+  is_me: boolean;
   name: string;
   /**
    * Special channel field that eager loads all the owner and does not do pagination
    */
-  channels_index: ProfileChannelIndex_User_channels_index[] | null;
+  channels_index: ProfileChannelIndex_User_channels_index[];
 }
 
 export interface ProfileChannelIndex_Group_channels_index_channels_owner_Group {
@@ -72,17 +72,17 @@ export type ProfileChannelIndex_Group_channels_index_channels_owner = ProfileCha
 
 export interface ProfileChannelIndex_Group_channels_index_channels_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ProfileChannelIndex_Group_channels_index_channels {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   visibility: string;
   title: string;
   owner: ProfileChannelIndex_Group_channels_index_channels_owner;
-  counts: ProfileChannelIndex_Group_channels_index_channels_counts | null;
+  counts: ProfileChannelIndex_Group_channels_index_channels_counts;
   label: string;
 }
 
@@ -95,7 +95,7 @@ export interface ProfileChannelIndex_Group_channels_index {
 export interface ProfileChannelIndex_Group {
   __typename: "Group";
   id: number;
-  is_current_user_a_member: boolean | null;
+  is_current_user_a_member: boolean;
   name: string;
   /**
    * Special channel field that eager loads all the owner and does not do pagination

@@ -9,13 +9,13 @@
 
 export interface PrimarySearchChannelCount_channel_counts {
   __typename: "ChannelCounts";
-  blocks: number | null;
+  blocks: number;
 }
 
 export interface PrimarySearchChannelCount_channel {
   __typename: "Channel";
   id: number;
-  counts: PrimarySearchChannelCount_channel_counts | null;
+  counts: PrimarySearchChannelCount_channel_counts;
 }
 
 export interface PrimarySearchChannelCount {

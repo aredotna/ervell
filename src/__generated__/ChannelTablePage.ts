@@ -11,7 +11,7 @@ export interface ChannelTablePage_channel_owner_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
   is_indexable: boolean;
 }
@@ -20,7 +20,7 @@ export interface ChannelTablePage_channel_owner_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
 }
 
@@ -28,28 +28,28 @@ export type ChannelTablePage_channel_owner = ChannelTablePage_channel_owner_User
 
 export interface ChannelTablePage_channel_counts {
   __typename: "ChannelCounts";
-  collaborators: number | null;
+  collaborators: number;
   followers: number;
-  contents: number | null;
+  contents: number;
 }
 
 export interface ChannelTablePage_channel_can {
   __typename: "ChannelCan";
-  follow: boolean | null;
-  update: boolean | null;
-  destroy: boolean | null;
-  mute: boolean | null;
-  share: boolean | null;
+  follow: boolean;
+  update: boolean;
+  destroy: boolean;
+  mute: boolean;
+  share: boolean;
   manage_collaborators: boolean;
-  connect: boolean | null;
-  add_to: boolean | null;
-  add_to_as_premium: boolean | null;
+  connect: boolean;
+  add_to: boolean;
+  add_to_as_premium: boolean;
 }
 
 export interface ChannelTablePage_channel_user {
   __typename: "User";
   id: number;
-  href: string | null;
+  href: string;
   name: string;
 }
 
@@ -57,7 +57,7 @@ export interface ChannelTablePage_channel_collaborators_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
 }
 
@@ -65,31 +65,31 @@ export interface ChannelTablePage_channel_collaborators_Group_user {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface ChannelTablePage_channel_collaborators_Group_users {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface ChannelTablePage_channel_collaborators_Group_can {
   __typename: "GroupCan";
-  manage: boolean | null;
-  manage_users: boolean | null;
+  manage: boolean;
+  manage_users: boolean;
 }
 
 export interface ChannelTablePage_channel_collaborators_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   description: string | null;
   user: ChannelTablePage_channel_collaborators_Group_user;
   users: ChannelTablePage_channel_collaborators_Group_users[] | null;
-  can: ChannelTablePage_channel_collaborators_Group_can | null;
+  can: ChannelTablePage_channel_collaborators_Group_can;
   visibility: string;
   label: string;
 }
@@ -114,7 +114,7 @@ export interface ChannelTablePage_channel_connected_to_channels {
   __typename: "Channel";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
   owner: ChannelTablePage_channel_connected_to_channels_owner;
 }
 
@@ -130,22 +130,22 @@ export interface ChannelTablePage_channel {
   id: number;
   title: string;
   truncatedTitle: string;
-  href: string | null;
+  href: string;
   visibility: string;
   owner: ChannelTablePage_channel_owner;
-  counts: ChannelTablePage_channel_counts | null;
+  counts: ChannelTablePage_channel_counts;
   label: string;
-  can: ChannelTablePage_channel_can | null;
-  is_muted: boolean | null;
+  can: ChannelTablePage_channel_can;
+  is_muted: boolean;
   info: string | null;
   user: ChannelTablePage_channel_user | null;
-  collaborators: ChannelTablePage_channel_collaborators[] | null;
-  connected_to_channels: ChannelTablePage_channel_connected_to_channels[] | null;
+  collaborators: ChannelTablePage_channel_collaborators[];
+  connected_to_channels: ChannelTablePage_channel_connected_to_channels[];
   share: ChannelTablePage_channel_share | null;
   slug: string;
   meta_title: string;
   meta_description: string | null;
-  canonical: string | null;
+  canonical: string;
   is_nsfw: boolean;
   image_url: string | null;
 }

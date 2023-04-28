@@ -24,16 +24,16 @@ export type CompactChannel_owner = CompactChannel_owner_Group | CompactChannel_o
 
 export interface CompactChannel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface CompactChannel {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   visibility: string;
   title: string;
   owner: CompactChannel_owner;
-  counts: CompactChannel_counts | null;
+  counts: CompactChannel_counts;
   label: string;
 }

@@ -11,7 +11,7 @@ export interface acceptChannelTransferMutation_accept_channel_transfer_channel_t
   __typename: "Channel";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
 }
 
 export interface acceptChannelTransferMutation_accept_channel_transfer_channel_transfer_request {

@@ -11,14 +11,14 @@ export interface EmbeddedChannelHeader_owner_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface EmbeddedChannelHeader_owner_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export type EmbeddedChannelHeader_owner = EmbeddedChannelHeader_owner_User | EmbeddedChannelHeader_owner_Group;
@@ -28,7 +28,7 @@ export interface EmbeddedChannelHeader {
   id: number;
   title: string;
   truncatedTitle: string;
-  href: string | null;
+  href: string;
   visibility: string;
   owner: EmbeddedChannelHeader_owner;
 }

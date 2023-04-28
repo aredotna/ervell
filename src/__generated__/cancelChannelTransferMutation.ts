@@ -9,7 +9,7 @@
 
 export interface cancelChannelTransferMutation_cancel_channel_transfer_channel_can {
   __typename: "ChannelCan";
-  transfer: boolean | null;
+  transfer: boolean;
 }
 
 export interface cancelChannelTransferMutation_cancel_channel_transfer_channel_transfer_request_recipient_User {
@@ -29,13 +29,13 @@ export type cancelChannelTransferMutation_cancel_channel_transfer_channel_transf
 export interface cancelChannelTransferMutation_cancel_channel_transfer_channel_transfer_request {
   __typename: "ChannelTransferRequest";
   recipient: cancelChannelTransferMutation_cancel_channel_transfer_channel_transfer_request_recipient;
-  is_recipient_member: boolean | null;
+  is_recipient_member: boolean;
 }
 
 export interface cancelChannelTransferMutation_cancel_channel_transfer_channel {
   __typename: "Channel";
   id: number;
-  can: cancelChannelTransferMutation_cancel_channel_transfer_channel_can | null;
+  can: cancelChannelTransferMutation_cancel_channel_transfer_channel_can;
   is_pending_transfer: boolean;
   transfer_request: cancelChannelTransferMutation_cancel_channel_transfer_channel_transfer_request | null;
   visibility: string;

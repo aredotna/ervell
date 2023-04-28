@@ -87,7 +87,7 @@ export interface Billing_customer {
   can_select_lifetime: boolean;
   is_beneficiary: boolean;
   plan: Billing_customer_plan | null;
-  updated_at: string | null;
+  updated_at: string;
   default_payment_method: Billing_customer_default_payment_method | null;
   patron: Billing_customer_patron | null;
   current_period_end_at: string | null;
@@ -111,7 +111,7 @@ export interface Billing {
   customer: Billing_customer | null;
   counts: Billing_counts | null;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }

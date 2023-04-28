@@ -10,5 +10,5 @@
 export interface MuteChannelButton {
   __typename: "Channel";
   id: number;
-  is_muted: boolean | null;
+  is_muted: boolean;
 }

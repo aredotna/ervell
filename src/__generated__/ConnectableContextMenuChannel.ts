@@ -9,11 +9,11 @@
 
 export interface ConnectableContextMenuChannel_can {
   __typename: "ChannelCan";
-  update: boolean | null;
+  update: boolean;
 }
 
 export interface ConnectableContextMenuChannel {
   __typename: "Channel";
   id: number;
-  can: ConnectableContextMenuChannel_can | null;
+  can: ConnectableContextMenuChannel_can;
 }

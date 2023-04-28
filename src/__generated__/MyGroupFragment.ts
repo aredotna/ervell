@@ -28,7 +28,7 @@ export interface MyGroupFragment_subscription {
 
 export interface MyGroupFragment_user_can {
   __typename: "UserCan";
-  cancel_premium: boolean | null;
+  cancel_premium: boolean;
 }
 
 export interface MyGroupFragment_user {
@@ -38,15 +38,15 @@ export interface MyGroupFragment_user {
   hidden_email: string;
   is_premium: boolean;
   is_canceled: boolean;
-  can: MyGroupFragment_user_can | null;
-  href: string | null;
+  can: MyGroupFragment_user_can;
+  href: string;
   initials: string;
   avatar: string | null;
 }
 
 export interface MyGroupFragment_users_can {
   __typename: "UserCan";
-  cancel_premium: boolean | null;
+  cancel_premium: boolean;
 }
 
 export interface MyGroupFragment_users {
@@ -56,8 +56,8 @@ export interface MyGroupFragment_users {
   hidden_email: string;
   is_premium: boolean;
   is_canceled: boolean;
-  can: MyGroupFragment_users_can | null;
-  href: string | null;
+  can: MyGroupFragment_users_can;
+  href: string;
   initials: string;
   avatar: string | null;
   is_upgradeable: boolean;
@@ -71,7 +71,7 @@ export interface MyGroupFragment_owner {
   name: string;
   hidden_email: string;
   is_premium: boolean;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }
@@ -89,7 +89,7 @@ export interface MyGroupFragment {
   is_upgradeable: boolean | null;
   subscription: MyGroupFragment_subscription | null;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   user: MyGroupFragment_user;

@@ -12,6 +12,7 @@ import BorderedLock from 'v2/components/UI/BorderedLock'
 
 import { SelectableChannel as Channel } from '__generated__/SelectableChannel'
 import { OnConnectionSelectionType } from 'v2/components/ConnectionSelectionList'
+import { unescape } from 'lodash'
 
 const Separator = styled.div`
   display: inline-block;
@@ -192,10 +193,9 @@ export const SelectableChannel: React.FC<SelectableChannelProps> = ({
 
         <Separator />
 
-        <ColoredChannelSpan
-          visibility={visibility}
-          dangerouslySetInnerHTML={{ __html: title }}
-        />
+        <ColoredChannelSpan visibility={visibility}>
+          {unescape(title)}
+        </ColoredChannelSpan>
       </HoverableInner>
 
       {visibility === 'private' && (

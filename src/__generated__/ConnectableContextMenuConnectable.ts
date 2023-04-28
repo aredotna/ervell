@@ -9,19 +9,19 @@
 
 export interface ConnectableContextMenuConnectable_Attachment_can {
   __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
+  remove: boolean;
+  manage: boolean;
+  mute: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_Attachment_connection_can {
   __typename: "ConnectionCan";
-  destroy: boolean | null;
+  destroy: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_Attachment_connection {
   __typename: "Connection";
-  can: ConnectableContextMenuConnectable_Attachment_connection_can | null;
+  can: ConnectableContextMenuConnectable_Attachment_connection_can;
 }
 
 export interface ConnectableContextMenuConnectable_Attachment_source {
@@ -32,8 +32,8 @@ export interface ConnectableContextMenuConnectable_Attachment_source {
 export interface ConnectableContextMenuConnectable_Attachment {
   __typename: "Attachment";
   id: number;
-  can: ConnectableContextMenuConnectable_Attachment_can | null;
-  href: string | null;
+  can: ConnectableContextMenuConnectable_Attachment_can;
+  href: string;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -43,19 +43,19 @@ export interface ConnectableContextMenuConnectable_Attachment {
 
 export interface ConnectableContextMenuConnectable_Embed_can {
   __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
+  remove: boolean;
+  manage: boolean;
+  mute: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_Embed_connection_can {
   __typename: "ConnectionCan";
-  destroy: boolean | null;
+  destroy: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_Embed_connection {
   __typename: "Connection";
-  can: ConnectableContextMenuConnectable_Embed_connection_can | null;
+  can: ConnectableContextMenuConnectable_Embed_connection_can;
 }
 
 export interface ConnectableContextMenuConnectable_Embed_source {
@@ -66,8 +66,8 @@ export interface ConnectableContextMenuConnectable_Embed_source {
 export interface ConnectableContextMenuConnectable_Embed {
   __typename: "Embed";
   id: number;
-  can: ConnectableContextMenuConnectable_Embed_can | null;
-  href: string | null;
+  can: ConnectableContextMenuConnectable_Embed_can;
+  href: string;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -77,19 +77,19 @@ export interface ConnectableContextMenuConnectable_Embed {
 
 export interface ConnectableContextMenuConnectable_Image_can {
   __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
+  remove: boolean;
+  manage: boolean;
+  mute: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_Image_connection_can {
   __typename: "ConnectionCan";
-  destroy: boolean | null;
+  destroy: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_Image_connection {
   __typename: "Connection";
-  can: ConnectableContextMenuConnectable_Image_connection_can | null;
+  can: ConnectableContextMenuConnectable_Image_connection_can;
 }
 
 export interface ConnectableContextMenuConnectable_Image_source {
@@ -100,8 +100,8 @@ export interface ConnectableContextMenuConnectable_Image_source {
 export interface ConnectableContextMenuConnectable_Image {
   __typename: "Image";
   id: number;
-  can: ConnectableContextMenuConnectable_Image_can | null;
-  href: string | null;
+  can: ConnectableContextMenuConnectable_Image_can;
+  href: string;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -115,19 +115,19 @@ export interface ConnectableContextMenuConnectable_Image {
 
 export interface ConnectableContextMenuConnectable_Link_can {
   __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
+  remove: boolean;
+  manage: boolean;
+  mute: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_Link_connection_can {
   __typename: "ConnectionCan";
-  destroy: boolean | null;
+  destroy: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_Link_connection {
   __typename: "Connection";
-  can: ConnectableContextMenuConnectable_Link_connection_can | null;
+  can: ConnectableContextMenuConnectable_Link_connection_can;
 }
 
 export interface ConnectableContextMenuConnectable_Link_source {
@@ -138,8 +138,8 @@ export interface ConnectableContextMenuConnectable_Link_source {
 export interface ConnectableContextMenuConnectable_Link {
   __typename: "Link";
   id: number;
-  can: ConnectableContextMenuConnectable_Link_can | null;
-  href: string | null;
+  can: ConnectableContextMenuConnectable_Link_can;
+  href: string;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -149,26 +149,26 @@ export interface ConnectableContextMenuConnectable_Link {
 
 export interface ConnectableContextMenuConnectable_PendingBlock_can {
   __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
+  remove: boolean;
+  manage: boolean;
+  mute: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_PendingBlock_connection_can {
   __typename: "ConnectionCan";
-  destroy: boolean | null;
+  destroy: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_PendingBlock_connection {
   __typename: "Connection";
-  can: ConnectableContextMenuConnectable_PendingBlock_connection_can | null;
+  can: ConnectableContextMenuConnectable_PendingBlock_connection_can;
 }
 
 export interface ConnectableContextMenuConnectable_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  can: ConnectableContextMenuConnectable_PendingBlock_can | null;
-  href: string | null;
+  can: ConnectableContextMenuConnectable_PendingBlock_can;
+  href: string;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -177,19 +177,19 @@ export interface ConnectableContextMenuConnectable_PendingBlock {
 
 export interface ConnectableContextMenuConnectable_Text_can {
   __typename: "BlockCan";
-  remove: boolean | null;
-  manage: boolean | null;
-  mute: boolean | null;
+  remove: boolean;
+  manage: boolean;
+  mute: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_Text_connection_can {
   __typename: "ConnectionCan";
-  destroy: boolean | null;
+  destroy: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_Text_connection {
   __typename: "Connection";
-  can: ConnectableContextMenuConnectable_Text_connection_can | null;
+  can: ConnectableContextMenuConnectable_Text_connection_can;
 }
 
 export interface ConnectableContextMenuConnectable_Text_source {
@@ -200,8 +200,8 @@ export interface ConnectableContextMenuConnectable_Text_source {
 export interface ConnectableContextMenuConnectable_Text {
   __typename: "Text";
   id: number;
-  can: ConnectableContextMenuConnectable_Text_can | null;
-  href: string | null;
+  can: ConnectableContextMenuConnectable_Text_can;
+  href: string;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -211,28 +211,28 @@ export interface ConnectableContextMenuConnectable_Text {
 
 export interface ConnectableContextMenuConnectable_Channel_connection_can {
   __typename: "ConnectionCan";
-  destroy: boolean | null;
+  destroy: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_Channel_connection {
   __typename: "Connection";
-  can: ConnectableContextMenuConnectable_Channel_connection_can | null;
+  can: ConnectableContextMenuConnectable_Channel_connection_can;
 }
 
 export interface ConnectableContextMenuConnectable_Channel_can {
   __typename: "ChannelCan";
-  mute: boolean | null;
+  mute: boolean;
 }
 
 export interface ConnectableContextMenuConnectable_Channel {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   /**
    * Returns the outer channel if we are inside of one
    */
   connection: ConnectableContextMenuConnectable_Channel_connection | null;
-  can: ConnectableContextMenuConnectable_Channel_can | null;
+  can: ConnectableContextMenuConnectable_Channel_can;
 }
 
 export type ConnectableContextMenuConnectable = ConnectableContextMenuConnectable_Attachment | ConnectableContextMenuConnectable_Embed | ConnectableContextMenuConnectable_Image | ConnectableContextMenuConnectable_Link | ConnectableContextMenuConnectable_PendingBlock | ConnectableContextMenuConnectable_Text | ConnectableContextMenuConnectable_Channel;

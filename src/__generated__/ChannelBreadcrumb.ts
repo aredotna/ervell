@@ -11,7 +11,7 @@ export interface ChannelBreadcrumb_owner_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
 }
 
@@ -19,7 +19,7 @@ export interface ChannelBreadcrumb_owner_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
 }
 
@@ -27,7 +27,7 @@ export type ChannelBreadcrumb_owner = ChannelBreadcrumb_owner_User | ChannelBrea
 
 export interface ChannelBreadcrumb_counts {
   __typename: "ChannelCounts";
-  collaborators: number | null;
+  collaborators: number;
 }
 
 export interface ChannelBreadcrumb {
@@ -35,9 +35,9 @@ export interface ChannelBreadcrumb {
   id: number;
   title: string;
   truncatedTitle: string;
-  href: string | null;
+  href: string;
   visibility: string;
   owner: ChannelBreadcrumb_owner;
-  counts: ChannelBreadcrumb_counts | null;
+  counts: ChannelBreadcrumb_counts;
   label: string;
 }

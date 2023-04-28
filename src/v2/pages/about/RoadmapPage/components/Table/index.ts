@@ -24,21 +24,6 @@ export const TableSection = styled(Box).attrs({
   `}
 `
 
-export const Table = styled(Box)`
-  display: flex;
-  flex-direction: row;
-
-  ${constants.media.small`
-    align-items: center;
-    flex-direction: column;
-  `}
-
-  ${constants.media.mobile`
-    align-items: center;
-    flex-direction: column;
-  `}
-`
-
 export const Column = styled(Box).attrs({})`
   border: 1px solid ${x => x.theme.colors.gray.light};
   width: 15em;
@@ -58,6 +43,22 @@ export const Column = styled(Box).attrs({})`
   ${BaseText} {
     margin: 0;
   }
+`
+
+export const Table = styled(Box)`
+  display: flex;
+  flex-direction: row;
+
+  ${constants.media.small`
+    align-items: center;
+    flex-direction: column;
+    width: auto;
+  `}
+
+  ${constants.media.mobile`
+    align-items: center;
+    flex-direction: column;
+  `}
 `
 
 export const LightColumn = styled(Column)`

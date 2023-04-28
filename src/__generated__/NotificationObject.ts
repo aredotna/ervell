@@ -25,7 +25,7 @@ export interface NotificationObject_Channel {
   __typename: "Channel";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
   visibility: string;
   owner: NotificationObject_Channel_owner;
 }
@@ -34,64 +34,64 @@ export interface NotificationObject_Connectable {
   __typename: "Connectable";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface NotificationObject_Attachment {
   __typename: "Attachment";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface NotificationObject_Embed {
   __typename: "Embed";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface NotificationObject_Text {
   __typename: "Text";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface NotificationObject_Image {
   __typename: "Image";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface NotificationObject_Link {
   __typename: "Link";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface NotificationObject_User {
   __typename: "User";
   id: number;
   label: string;
-  href: string | null;
-  is_me: boolean | null;
+  href: string;
+  is_me: boolean;
 }
 
 export interface NotificationObject_Comment {
   __typename: "Comment";
   id: number;
   body: string | null;
-  href: string | null;
+  href: string;
 }
 
 export interface NotificationObject_Group {
   __typename: "Group";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export type NotificationObject = NotificationObject_Channel | NotificationObject_Connectable | NotificationObject_Attachment | NotificationObject_Embed | NotificationObject_Text | NotificationObject_Image | NotificationObject_Link | NotificationObject_User | NotificationObject_Comment | NotificationObject_Group;

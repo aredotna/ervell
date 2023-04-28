@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link as RouterLink, LinkProps } from 'react-router-dom'
+import { unescape } from 'lodash'
 
 const Container = styled.div``
 
@@ -26,12 +27,9 @@ export const LinksList: React.FC<LinksListProps> = ({ links, ...rest }) => {
         const href = link.href ? link.href : link
         return (
           <span key={`Link-${link.label}-${link.id}`}>
-            <Link
-              to={href}
-              state={link.state}
-              length={link.label.length}
-              dangerouslySetInnerHTML={{ __html: link.label }}
-            />
+            <Link to={href} state={link.state} length={link.label.length}>
+              {unescape(link.label)}
+            </Link>
 
             {i !== links.length - 1 && ', '}
             {i === links.length - 2 && 'and '}

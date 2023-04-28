@@ -10,7 +10,7 @@
 export interface CreateGroupModal_me {
   __typename: "Me";
   id: number;
-  has_seen_new_group_explanation: boolean | null;
+  has_seen_new_group_explanation: boolean;
 }
 
 export interface CreateGroupModal {

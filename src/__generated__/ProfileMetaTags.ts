@@ -12,8 +12,8 @@ export interface ProfileMetaTags_User {
   title: string;
   name: string;
   description: string | null;
-  href: string | null;
-  canonical: string | null;
+  href: string;
+  canonical: string;
   is_indexable: boolean;
 }
 
@@ -22,8 +22,8 @@ export interface ProfileMetaTags_Group {
   title: string;
   name: string;
   description: string | null;
-  canonical: string | null;
-  href: string | null;
+  canonical: string;
+  href: string;
 }
 
 export type ProfileMetaTags = ProfileMetaTags_User | ProfileMetaTags_Group;

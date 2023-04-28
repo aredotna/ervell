@@ -12,7 +12,7 @@ export interface FeedQuery_me_feed_groups_user {
   id: number;
   label: string;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_owner_User {
@@ -20,14 +20,14 @@ export interface FeedQuery_me_feed_groups_owner_User {
   id: number;
   label: string;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_owner_Group {
   __typename: "Group";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
   name: string;
 }
 
@@ -51,7 +51,7 @@ export interface FeedQuery_me_feed_groups_item_Channel {
   __typename: "Channel";
   id: number;
   truncatedTitle: string;
-  href: string | null;
+  href: string;
   visibility: string;
   label: string;
   owner: FeedQuery_me_feed_groups_item_Channel_owner;
@@ -62,56 +62,56 @@ export interface FeedQuery_me_feed_groups_item_User {
   id: number;
   label: string;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_item_Connectable {
   __typename: "Connectable";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_item_Attachment {
   __typename: "Attachment";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_item_Embed {
   __typename: "Embed";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_item_Text {
   __typename: "Text";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_item_Image {
   __typename: "Image";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_item_Link {
   __typename: "Link";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_item_Comment {
   __typename: "Comment";
   id: number;
   body: string | null;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_item_Group {
@@ -119,7 +119,7 @@ export interface FeedQuery_me_feed_groups_item_Group {
   id: number;
   label: string;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export type FeedQuery_me_feed_groups_item = FeedQuery_me_feed_groups_item_Channel | FeedQuery_me_feed_groups_item_User | FeedQuery_me_feed_groups_item_Connectable | FeedQuery_me_feed_groups_item_Attachment | FeedQuery_me_feed_groups_item_Embed | FeedQuery_me_feed_groups_item_Text | FeedQuery_me_feed_groups_item_Image | FeedQuery_me_feed_groups_item_Link | FeedQuery_me_feed_groups_item_Comment | FeedQuery_me_feed_groups_item_Group;
@@ -142,7 +142,7 @@ export interface FeedQuery_me_feed_groups_target_Channel {
   __typename: "Channel";
   id: number;
   truncatedTitle: string;
-  href: string | null;
+  href: string;
   visibility: string;
   label: string;
   owner: FeedQuery_me_feed_groups_target_Channel_owner;
@@ -153,56 +153,56 @@ export interface FeedQuery_me_feed_groups_target_User {
   id: number;
   label: string;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_target_Connectable {
   __typename: "Connectable";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_target_Attachment {
   __typename: "Attachment";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_target_Embed {
   __typename: "Embed";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_target_Text {
   __typename: "Text";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_target_Image {
   __typename: "Image";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_target_Link {
   __typename: "Link";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_target_Comment {
   __typename: "Comment";
   id: number;
   body: string | null;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedQuery_me_feed_groups_target_Group {
@@ -210,7 +210,7 @@ export interface FeedQuery_me_feed_groups_target_Group {
   id: number;
   label: string;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export type FeedQuery_me_feed_groups_target = FeedQuery_me_feed_groups_target_Channel | FeedQuery_me_feed_groups_target_User | FeedQuery_me_feed_groups_target_Connectable | FeedQuery_me_feed_groups_target_Attachment | FeedQuery_me_feed_groups_target_Embed | FeedQuery_me_feed_groups_target_Text | FeedQuery_me_feed_groups_target_Image | FeedQuery_me_feed_groups_target_Link | FeedQuery_me_feed_groups_target_Comment | FeedQuery_me_feed_groups_target_Group;
@@ -238,7 +238,7 @@ export interface FeedQuery_me_feed_groups_objects_Attachment_connection_user {
 
 export interface FeedQuery_me_feed_groups_objects_Attachment_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: FeedQuery_me_feed_groups_objects_Attachment_connection_user | null;
 }
 
@@ -249,7 +249,7 @@ export interface FeedQuery_me_feed_groups_objects_Attachment_source {
 
 export interface FeedQuery_me_feed_groups_objects_Attachment {
   __typename: "Attachment";
-  href: string | null;
+  href: string;
   counts: FeedQuery_me_feed_groups_objects_Attachment_counts | null;
   id: number;
   title: string;
@@ -258,7 +258,7 @@ export interface FeedQuery_me_feed_groups_objects_Attachment {
   src_2x: string | null;
   src_3x: string | null;
   file_extension: string | null;
-  updated_at: string | null;
+  updated_at: string;
   user: FeedQuery_me_feed_groups_objects_Attachment_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -269,7 +269,7 @@ export interface FeedQuery_me_feed_groups_objects_Attachment {
 
 export interface FeedQuery_me_feed_groups_objects_Channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface FeedQuery_me_feed_groups_objects_Channel_owner_Group {
@@ -301,7 +301,7 @@ export interface FeedQuery_me_feed_groups_objects_Channel_connection_user {
 
 export interface FeedQuery_me_feed_groups_objects_Channel_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: FeedQuery_me_feed_groups_objects_Channel_connection_user | null;
 }
 
@@ -312,12 +312,12 @@ export interface FeedQuery_me_feed_groups_objects_Channel_source {
 
 export interface FeedQuery_me_feed_groups_objects_Channel {
   __typename: "Channel";
-  href: string | null;
+  href: string;
   id: number;
   truncatedTitle: string;
   visibility: string;
-  updated_at: string | null;
-  counts: FeedQuery_me_feed_groups_objects_Channel_counts | null;
+  updated_at: string;
+  counts: FeedQuery_me_feed_groups_objects_Channel_counts;
   owner: FeedQuery_me_feed_groups_objects_Channel_owner;
   label: string;
   title: string;
@@ -348,7 +348,7 @@ export interface FeedQuery_me_feed_groups_objects_Embed_connection_user {
 
 export interface FeedQuery_me_feed_groups_objects_Embed_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: FeedQuery_me_feed_groups_objects_Embed_connection_user | null;
 }
 
@@ -359,7 +359,7 @@ export interface FeedQuery_me_feed_groups_objects_Embed_source {
 
 export interface FeedQuery_me_feed_groups_objects_Embed {
   __typename: "Embed";
-  href: string | null;
+  href: string;
   counts: FeedQuery_me_feed_groups_objects_Embed_counts | null;
   id: number;
   title: string;
@@ -367,7 +367,7 @@ export interface FeedQuery_me_feed_groups_objects_Embed {
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
-  updated_at: string | null;
+  updated_at: string;
   user: FeedQuery_me_feed_groups_objects_Embed_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -401,7 +401,7 @@ export interface FeedQuery_me_feed_groups_objects_Image_connection_user {
 
 export interface FeedQuery_me_feed_groups_objects_Image_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: FeedQuery_me_feed_groups_objects_Image_connection_user | null;
 }
 
@@ -412,7 +412,7 @@ export interface FeedQuery_me_feed_groups_objects_Image_source {
 
 export interface FeedQuery_me_feed_groups_objects_Image {
   __typename: "Image";
-  href: string | null;
+  href: string;
   counts: FeedQuery_me_feed_groups_objects_Image_counts | null;
   id: number;
   title: string;
@@ -422,7 +422,7 @@ export interface FeedQuery_me_feed_groups_objects_Image {
   src_2x: string | null;
   src_3x: string | null;
   original_dimensions: FeedQuery_me_feed_groups_objects_Image_original_dimensions | null;
-  updated_at: string | null;
+  updated_at: string;
   user: FeedQuery_me_feed_groups_objects_Image_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -450,7 +450,7 @@ export interface FeedQuery_me_feed_groups_objects_Link_connection_user {
 
 export interface FeedQuery_me_feed_groups_objects_Link_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: FeedQuery_me_feed_groups_objects_Link_connection_user | null;
 }
 
@@ -461,7 +461,7 @@ export interface FeedQuery_me_feed_groups_objects_Link_source {
 
 export interface FeedQuery_me_feed_groups_objects_Link {
   __typename: "Link";
-  href: string | null;
+  href: string;
   counts: FeedQuery_me_feed_groups_objects_Link_counts | null;
   title: string;
   src: string | null;
@@ -470,7 +470,7 @@ export interface FeedQuery_me_feed_groups_objects_Link {
   src_3x: string | null;
   external_url: string | null;
   content: string | null;
-  updated_at: string | null;
+  updated_at: string;
   user: FeedQuery_me_feed_groups_objects_Link_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -500,7 +500,7 @@ export interface FeedQuery_me_feed_groups_objects_Text_connection_user {
 
 export interface FeedQuery_me_feed_groups_objects_Text_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: FeedQuery_me_feed_groups_objects_Text_connection_user | null;
 }
 
@@ -511,13 +511,13 @@ export interface FeedQuery_me_feed_groups_objects_Text_source {
 
 export interface FeedQuery_me_feed_groups_objects_Text {
   __typename: "Text";
-  href: string | null;
+  href: string;
   counts: FeedQuery_me_feed_groups_objects_Text_counts | null;
   id: number;
   title: string;
   content: string;
   raw: string;
-  updated_at: string | null;
+  updated_at: string;
   user: FeedQuery_me_feed_groups_objects_Text_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -530,7 +530,7 @@ export interface FeedQuery_me_feed_groups_objects_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   visibility: string;
   label: string;
   initials: string;
@@ -541,7 +541,7 @@ export interface FeedQuery_me_feed_groups_objects_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
   initials: string;
   avatar: string | null;
@@ -564,7 +564,7 @@ export interface FeedQuery_me_feed_groups {
   target_phrase: string;
   created_at: string | null;
   is_private: boolean;
-  objects: FeedQuery_me_feed_groups_objects[] | null;
+  objects: FeedQuery_me_feed_groups_objects[];
 }
 
 export interface FeedQuery_me_feed {

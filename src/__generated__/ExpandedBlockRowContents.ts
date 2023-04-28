@@ -10,32 +10,32 @@
 export interface ExpandedBlockRowContents_block_Channel {
   __typename: "Channel" | "PendingBlock";
   id: number;
-  created_at_unix_time: string | null;
-  created_at_timestamp: string | null;
-  created_at: string | null;
-  updated_at: string | null;
-  updated_at_timestamp: string | null;
+  created_at_unix_time: string;
+  created_at_timestamp: string;
+  created_at: string;
+  updated_at: string;
+  updated_at_timestamp: string;
 }
 
 export interface ExpandedBlockRowContents_block_Text {
   __typename: "Text";
   id: number;
-  created_at_unix_time: string | null;
-  created_at_timestamp: string | null;
-  created_at: string | null;
-  updated_at: string | null;
-  updated_at_timestamp: string | null;
+  created_at_unix_time: string;
+  created_at_timestamp: string;
+  created_at: string;
+  updated_at: string;
+  updated_at_timestamp: string;
   content: string;
 }
 
 export interface ExpandedBlockRowContents_block_Image {
   __typename: "Image";
   id: number;
-  created_at_unix_time: string | null;
-  created_at_timestamp: string | null;
-  created_at: string | null;
-  updated_at: string | null;
-  updated_at_timestamp: string | null;
+  created_at_unix_time: string;
+  created_at_timestamp: string;
+  created_at: string;
+  updated_at: string;
+  updated_at_timestamp: string;
   thumb_url: string | null;
   image_url: string | null;
   original_image_url: string | null;
@@ -44,11 +44,11 @@ export interface ExpandedBlockRowContents_block_Image {
 export interface ExpandedBlockRowContents_block_Attachment {
   __typename: "Attachment";
   id: number;
-  created_at_unix_time: string | null;
-  created_at_timestamp: string | null;
-  created_at: string | null;
-  updated_at: string | null;
-  updated_at_timestamp: string | null;
+  created_at_unix_time: string;
+  created_at_timestamp: string;
+  created_at: string;
+  updated_at: string;
+  updated_at_timestamp: string;
   title: string;
   file_extension: string | null;
   file_url: string | null;
@@ -62,11 +62,11 @@ export interface ExpandedBlockRowContents_block_Attachment {
 export interface ExpandedBlockRowContents_block_Embed {
   __typename: "Embed";
   id: number;
-  created_at_unix_time: string | null;
-  created_at_timestamp: string | null;
-  created_at: string | null;
-  updated_at: string | null;
-  updated_at_timestamp: string | null;
+  created_at_unix_time: string;
+  created_at_timestamp: string;
+  created_at: string;
+  updated_at: string;
+  updated_at_timestamp: string;
   title: string;
   embed_html: string | null;
   embed_width: number | null;
@@ -84,11 +84,11 @@ export interface ExpandedBlockRowContents_block_Link_source {
 export interface ExpandedBlockRowContents_block_Link {
   __typename: "Link";
   id: number;
-  created_at_unix_time: string | null;
-  created_at_timestamp: string | null;
-  created_at: string | null;
-  updated_at: string | null;
-  updated_at_timestamp: string | null;
+  created_at_unix_time: string;
+  created_at_timestamp: string;
+  created_at: string;
+  updated_at: string;
+  updated_at_timestamp: string;
   title: string;
   source_url: string | null;
   image_url: string | null;

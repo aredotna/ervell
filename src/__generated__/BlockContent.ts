@@ -25,7 +25,7 @@ export interface BlockContent_blokk_Image {
 
 export interface BlockContent_blokk_Text_can {
   __typename: "BlockCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface BlockContent_blokk_Text {
@@ -34,7 +34,7 @@ export interface BlockContent_blokk_Text {
   title: string;
   content: string;
   raw: string;
-  can: BlockContent_blokk_Text_can | null;
+  can: BlockContent_blokk_Text_can;
 }
 
 export interface BlockContent_blokk_Link_source {

@@ -16,7 +16,7 @@ export interface ChannelCollaboratorsQuery_channel_collaborators_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
 }
 
@@ -24,31 +24,31 @@ export interface ChannelCollaboratorsQuery_channel_collaborators_Group_user {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface ChannelCollaboratorsQuery_channel_collaborators_Group_users {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface ChannelCollaboratorsQuery_channel_collaborators_Group_can {
   __typename: "GroupCan";
-  manage: boolean | null;
-  manage_users: boolean | null;
+  manage: boolean;
+  manage_users: boolean;
 }
 
 export interface ChannelCollaboratorsQuery_channel_collaborators_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   description: string | null;
   user: ChannelCollaboratorsQuery_channel_collaborators_Group_user;
   users: ChannelCollaboratorsQuery_channel_collaborators_Group_users[] | null;
-  can: ChannelCollaboratorsQuery_channel_collaborators_Group_can | null;
+  can: ChannelCollaboratorsQuery_channel_collaborators_Group_can;
   visibility: string;
   label: string;
 }
@@ -58,8 +58,8 @@ export type ChannelCollaboratorsQuery_channel_collaborators = ChannelCollaborato
 export interface ChannelCollaboratorsQuery_channel {
   __typename: "Channel";
   id: number;
-  can: ChannelCollaboratorsQuery_channel_can | null;
-  collaborators: ChannelCollaboratorsQuery_channel_collaborators[] | null;
+  can: ChannelCollaboratorsQuery_channel_can;
+  collaborators: ChannelCollaboratorsQuery_channel_collaborators[];
 }
 
 export interface ChannelCollaboratorsQuery {

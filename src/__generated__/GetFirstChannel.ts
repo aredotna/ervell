@@ -9,7 +9,7 @@
 
 export interface GetFirstChannel_me_channels {
   __typename: "Channel";
-  href: string | null;
+  href: string;
 }
 
 export interface GetFirstChannel_me {

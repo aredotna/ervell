@@ -11,28 +11,28 @@ export interface FullChannelMetadata_channel_user {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FullChannelMetadata_channel_can {
   __typename: "ChannelCan";
-  mute: boolean | null;
-  follow: boolean | null;
+  mute: boolean;
+  follow: boolean;
 }
 
 export interface FullChannelMetadata_channel {
   __typename: "Channel";
-  created_at_unix_time: string | null;
-  created_at_timestamp: string | null;
-  created_at: string | null;
-  updated_at: string | null;
-  updated_at_timestamp: string | null;
+  created_at_unix_time: string;
+  created_at_timestamp: string;
+  created_at: string;
+  updated_at: string;
+  updated_at_timestamp: string;
   title: string;
   description: string | null;
   user: FullChannelMetadata_channel_user | null;
   id: number;
-  can: FullChannelMetadata_channel_can | null;
-  shareable_href: string | null;
+  can: FullChannelMetadata_channel_can;
+  shareable_href: string;
   shareable_title: string;
 }
 

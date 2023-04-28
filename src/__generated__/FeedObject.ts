@@ -25,7 +25,7 @@ export interface FeedObject_Channel {
   __typename: "Channel";
   id: number;
   truncatedTitle: string;
-  href: string | null;
+  href: string;
   visibility: string;
   label: string;
   owner: FeedObject_Channel_owner;
@@ -36,56 +36,56 @@ export interface FeedObject_User {
   id: number;
   label: string;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedObject_Connectable {
   __typename: "Connectable";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedObject_Attachment {
   __typename: "Attachment";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedObject_Embed {
   __typename: "Embed";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedObject_Text {
   __typename: "Text";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedObject_Image {
   __typename: "Image";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedObject_Link {
   __typename: "Link";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedObject_Comment {
   __typename: "Comment";
   id: number;
   body: string | null;
-  href: string | null;
+  href: string;
 }
 
 export interface FeedObject_Group {
@@ -93,7 +93,7 @@ export interface FeedObject_Group {
   id: number;
   label: string;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export type FeedObject = FeedObject_Channel | FeedObject_User | FeedObject_Connectable | FeedObject_Attachment | FeedObject_Embed | FeedObject_Text | FeedObject_Image | FeedObject_Link | FeedObject_Comment | FeedObject_Group;

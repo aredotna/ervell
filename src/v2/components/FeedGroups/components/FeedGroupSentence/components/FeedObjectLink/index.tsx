@@ -6,6 +6,7 @@ import Text from 'v2/components/UI/Text'
 
 import { FeedObject } from '__generated__/FeedObject'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
+import { unescape } from 'lodash'
 
 const Span = styled.span``
 
@@ -45,12 +46,9 @@ const FeedObjectLink: React.FC<FeedObjectLinkProps> = ({
       color={visibility ? `channel.${visibility}` : 'gray.base'}
       {...rest}
     >
-      <Tag
-        to={href}
-        state={state}
-        aria-label={`Feed link to ${title}`}
-        dangerouslySetInnerHTML={{ __html: title }}
-      />
+      <Tag to={href} state={state} aria-label={`Feed link to ${title}`}>
+        {unescape(title)}
+      </Tag>
     </Word>
   )
 }

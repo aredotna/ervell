@@ -19,7 +19,7 @@ export interface SettingsPage_me {
   is_premium: boolean;
   is_supporter: boolean;
   is_investor: boolean;
-  has_had_recent_birthday: boolean;
+  has_had_recent_birthday: boolean | null;
   groups: SettingsPage_me_groups[];
 }
 

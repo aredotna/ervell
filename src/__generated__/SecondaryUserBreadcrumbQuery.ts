@@ -12,7 +12,7 @@ export interface SecondaryUserBreadcrumbQuery_user {
   id: number;
   name: string;
   slug: string | null;
-  href: string | null;
+  href: string;
 }
 
 export interface SecondaryUserBreadcrumbQuery {

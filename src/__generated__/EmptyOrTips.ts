@@ -10,14 +10,14 @@
 export interface EmptyOrTips_User {
   __typename: "User";
   id: number;
-  is_me: boolean | null;
+  is_me: boolean;
 }
 
 export interface EmptyOrTips_Group {
   __typename: "Group";
   id: number;
-  is_current_user_a_member: boolean | null;
-  is_current_user_the_owner: boolean | null;
+  is_current_user_a_member: boolean;
+  is_current_user_the_owner: boolean;
 }
 
 export type EmptyOrTips = EmptyOrTips_User | EmptyOrTips_Group;

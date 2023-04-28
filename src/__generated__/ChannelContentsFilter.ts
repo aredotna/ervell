@@ -9,14 +9,14 @@
 
 export interface ChannelContentsFilter_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
-  blocks: number | null;
-  channels: number | null;
+  contents: number;
+  blocks: number;
+  channels: number;
 }
 
 export interface ChannelContentsFilter {
   __typename: "Channel";
   id: number;
   title: string;
-  counts: ChannelContentsFilter_counts | null;
+  counts: ChannelContentsFilter_counts;
 }

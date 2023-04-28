@@ -9,15 +9,15 @@
 
 export interface ChannelMetadataActions_can {
   __typename: "ChannelCan";
-  follow: boolean | null;
-  update: boolean | null;
-  destroy: boolean | null;
-  mute: boolean | null;
+  follow: boolean;
+  update: boolean;
+  destroy: boolean;
+  mute: boolean;
 }
 
 export interface ChannelMetadataActions {
   __typename: "Channel";
   id: number;
-  can: ChannelMetadataActions_can | null;
-  is_muted: boolean | null;
+  can: ChannelMetadataActions_can;
+  is_muted: boolean;
 }

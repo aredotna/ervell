@@ -9,14 +9,14 @@
 
 export interface EmbeddedChannelContents_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface EmbeddedChannelContents_contents_PendingBlock {
   __typename: "PendingBlock";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
 }
 
 export interface EmbeddedChannelContents_contents_Text {
@@ -24,7 +24,7 @@ export interface EmbeddedChannelContents_contents_Text {
   id: number;
   preview_content: string;
   title: string;
-  href: string | null;
+  href: string;
 }
 
 export interface EmbeddedChannelContents_contents_Image {
@@ -32,7 +32,7 @@ export interface EmbeddedChannelContents_contents_Image {
   id: number;
   preview_image_url: string | null;
   title: string;
-  href: string | null;
+  href: string;
 }
 
 export interface EmbeddedChannelContents_contents_Link {
@@ -40,7 +40,7 @@ export interface EmbeddedChannelContents_contents_Link {
   id: number;
   preview_image_url: string | null;
   title: string;
-  href: string | null;
+  href: string;
 }
 
 export interface EmbeddedChannelContents_contents_Attachment {
@@ -49,7 +49,7 @@ export interface EmbeddedChannelContents_contents_Attachment {
   preview_image_url: string | null;
   file_extension: string | null;
   title: string;
-  href: string | null;
+  href: string;
 }
 
 export interface EmbeddedChannelContents_contents_Embed {
@@ -57,7 +57,7 @@ export interface EmbeddedChannelContents_contents_Embed {
   id: number;
   preview_image_url: string | null;
   title: string;
-  href: string | null;
+  href: string;
 }
 
 export interface EmbeddedChannelContents_contents_Channel_owner_User {
@@ -81,7 +81,7 @@ export interface EmbeddedChannelContents_contents_Channel {
   visibility: string;
   owner: EmbeddedChannelContents_contents_Channel_owner;
   title: string;
-  href: string | null;
+  href: string;
 }
 
 export type EmbeddedChannelContents_contents = EmbeddedChannelContents_contents_PendingBlock | EmbeddedChannelContents_contents_Text | EmbeddedChannelContents_contents_Image | EmbeddedChannelContents_contents_Link | EmbeddedChannelContents_contents_Attachment | EmbeddedChannelContents_contents_Embed | EmbeddedChannelContents_contents_Channel;
@@ -89,7 +89,7 @@ export type EmbeddedChannelContents_contents = EmbeddedChannelContents_contents_
 export interface EmbeddedChannelContents {
   __typename: "Channel";
   id: number;
-  href: string | null;
-  counts: EmbeddedChannelContents_counts | null;
-  contents: EmbeddedChannelContents_contents[] | null;
+  href: string;
+  counts: EmbeddedChannelContents_counts;
+  contents: EmbeddedChannelContents_contents[];
 }

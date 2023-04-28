@@ -20,6 +20,7 @@ import {
   VerifyEditableBlockVariables,
 } from '__generated__/VerifyEditableBlock'
 import verifyEditable from './query/verifyEditable'
+import { unescape } from 'lodash'
 
 type EditableCellMode =
   | 'resting'
@@ -156,12 +157,9 @@ const PotentiallyEditableBlockCellNonNull = ({
 
   return (
     <Inner mode={mode}>
-      <Text
-        f={1}
-        overflowEllipsis
-        dangerouslySetInnerHTML={{ __html: attribute }}
-        pr={mode === 'editable' ? 7 : 0}
-      />
+      <Text f={1} overflowEllipsis pr={mode === 'editable' ? 7 : 0}>
+        {unescape(attribute)}
+      </Text>
 
       <Box />
 

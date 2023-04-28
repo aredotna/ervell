@@ -11,7 +11,7 @@ export interface PendingGroupUser {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   hidden_email: string;
   initials: string;
   avatar: string | null;

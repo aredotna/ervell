@@ -16,28 +16,28 @@ export interface CreateComment_create_comment_comment_commentable_comments_user 
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface CreateComment_create_comment_comment_commentable_comments_can {
   __typename: "CommentCan";
-  destroy: boolean | null;
+  destroy: boolean;
 }
 
 export interface CreateComment_create_comment_comment_commentable_comments {
   __typename: "Comment";
   id: number;
   body: string | null;
-  created_at: string | null;
+  created_at: string;
   user: CreateComment_create_comment_comment_commentable_comments_user | null;
-  can: CreateComment_create_comment_comment_commentable_comments_can | null;
+  can: CreateComment_create_comment_comment_commentable_comments_can;
 }
 
 export interface CreateComment_create_comment_comment_commentable {
   __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
   id: number;
   counts: CreateComment_create_comment_comment_commentable_counts | null;
-  comments: CreateComment_create_comment_comment_commentable_comments[] | null;
+  comments: CreateComment_create_comment_comment_commentable_comments[];
 }
 
 export interface CreateComment_create_comment_comment {

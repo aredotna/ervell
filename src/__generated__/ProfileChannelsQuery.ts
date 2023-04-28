@@ -11,7 +11,7 @@ import { ChannelsSort } from "./globalTypes";
 
 export interface ProfileChannelsQuery_identity_identifiable_Group_channels_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ProfileChannelsQuery_identity_identifiable_Group_channels_owner_Group {
@@ -32,11 +32,11 @@ export type ProfileChannelsQuery_identity_identifiable_Group_channels_owner = Pr
 export interface ProfileChannelsQuery_identity_identifiable_Group_channels {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   truncatedTitle: string;
   visibility: string;
-  updated_at: string | null;
-  counts: ProfileChannelsQuery_identity_identifiable_Group_channels_counts | null;
+  updated_at: string;
+  counts: ProfileChannelsQuery_identity_identifiable_Group_channels_counts;
   owner: ProfileChannelsQuery_identity_identifiable_Group_channels_owner;
   label: string;
 }
@@ -61,7 +61,7 @@ export interface ProfileChannelsQuery_identity_identifiable_User_counts {
 
 export interface ProfileChannelsQuery_identity_identifiable_User_channels_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ProfileChannelsQuery_identity_identifiable_User_channels_owner_Group {
@@ -82,11 +82,11 @@ export type ProfileChannelsQuery_identity_identifiable_User_channels_owner = Pro
 export interface ProfileChannelsQuery_identity_identifiable_User_channels {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   truncatedTitle: string;
   visibility: string;
-  updated_at: string | null;
-  counts: ProfileChannelsQuery_identity_identifiable_User_channels_counts | null;
+  updated_at: string;
+  counts: ProfileChannelsQuery_identity_identifiable_User_channels_counts;
   owner: ProfileChannelsQuery_identity_identifiable_User_channels_owner;
   label: string;
 }

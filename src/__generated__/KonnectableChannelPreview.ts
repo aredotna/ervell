@@ -70,7 +70,7 @@ export type KonnectableChannelPreview_channel_preview_connectables = Konnectable
 export interface KonnectableChannelPreview_channel {
   __typename: "Channel";
   id: number;
-  preview_connectables: KonnectableChannelPreview_channel_preview_connectables[] | null;
+  preview_connectables: KonnectableChannelPreview_channel_preview_connectables[];
 }
 
 export interface KonnectableChannelPreview {

@@ -13,7 +13,7 @@ export interface GroupOwner {
   name: string;
   hidden_email: string;
   is_premium: boolean;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }

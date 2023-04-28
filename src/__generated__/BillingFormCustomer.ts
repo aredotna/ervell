@@ -53,7 +53,7 @@ export interface BillingFormCustomer_credit_cards {
 export interface BillingFormCustomer {
   __typename: "Customer";
   id: number;
-  updated_at: string | null;
+  updated_at: string;
   is_lifetime: boolean;
   plan: BillingFormCustomer_plan | null;
   default_payment_method: BillingFormCustomer_default_payment_method | null;

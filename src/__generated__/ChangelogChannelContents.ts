@@ -10,16 +10,16 @@
 export interface ChangelogChannelContents_channel_blokks_Attachment {
   __typename: "Attachment" | "Channel" | "Embed" | "Image" | "Link" | "PendingBlock";
   id: number;
-  created_at: string | null;
-  href: string | null;
+  created_at: string;
+  href: string;
   title: string;
 }
 
 export interface ChangelogChannelContents_channel_blokks_Text {
   __typename: "Text";
   id: number;
-  created_at: string | null;
-  href: string | null;
+  created_at: string;
+  href: string;
   title: string;
   content: string;
   raw: string;
@@ -31,8 +31,8 @@ export interface ChangelogChannelContents_channel {
   __typename: "Channel";
   id: number;
   added_to_at: string | null;
-  href: string | null;
-  blokks: ChangelogChannelContents_channel_blokks[] | null;
+  href: string;
+  blokks: ChangelogChannelContents_channel_blokks[];
 }
 
 export interface ChangelogChannelContents {

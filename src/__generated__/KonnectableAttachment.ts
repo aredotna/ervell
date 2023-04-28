@@ -11,7 +11,7 @@ export interface KonnectableAttachment {
   __typename: "Attachment";
   id: number;
   title: string;
-  href: string | null;
+  href: string;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;

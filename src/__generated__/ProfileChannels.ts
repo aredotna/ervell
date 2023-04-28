@@ -9,7 +9,7 @@
 
 export interface ProfileChannels_Group_channels_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ProfileChannels_Group_channels_owner_Group {
@@ -30,11 +30,11 @@ export type ProfileChannels_Group_channels_owner = ProfileChannels_Group_channel
 export interface ProfileChannels_Group_channels {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   truncatedTitle: string;
   visibility: string;
-  updated_at: string | null;
-  counts: ProfileChannels_Group_channels_counts | null;
+  updated_at: string;
+  counts: ProfileChannels_Group_channels_counts;
   owner: ProfileChannels_Group_channels_owner;
   label: string;
 }
@@ -59,7 +59,7 @@ export interface ProfileChannels_User_counts {
 
 export interface ProfileChannels_User_channels_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ProfileChannels_User_channels_owner_Group {
@@ -80,11 +80,11 @@ export type ProfileChannels_User_channels_owner = ProfileChannels_User_channels_
 export interface ProfileChannels_User_channels {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   truncatedTitle: string;
   visibility: string;
-  updated_at: string | null;
-  counts: ProfileChannels_User_channels_counts | null;
+  updated_at: string;
+  counts: ProfileChannels_User_channels_counts;
   owner: ProfileChannels_User_channels_owner;
   label: string;
 }

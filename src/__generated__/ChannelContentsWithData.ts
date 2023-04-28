@@ -9,22 +9,22 @@
 
 export interface ChannelContentsWithData_channel_can {
   __typename: "ChannelCan";
-  add_to: boolean | null;
-  reorder_connections: boolean | null;
-  add_to_as_premium: boolean | null;
-  update: boolean | null;
+  add_to: boolean;
+  reorder_connections: boolean;
+  add_to_as_premium: boolean;
+  update: boolean;
 }
 
 export interface ChannelContentsWithData_channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ChannelContentsWithData_channel {
   __typename: "Channel";
   id: number;
-  can: ChannelContentsWithData_channel_can | null;
-  counts: ChannelContentsWithData_channel_counts | null;
+  can: ChannelContentsWithData_channel_can;
+  counts: ChannelContentsWithData_channel_counts;
   visibility: string;
 }
 

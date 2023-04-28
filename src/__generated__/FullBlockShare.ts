@@ -9,6 +9,6 @@
 
 export interface FullBlockShare {
   __typename: "Attachment" | "Channel" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
-  shareable_href: string | null;
+  shareable_href: string;
   shareable_title: string;
 }

@@ -9,7 +9,7 @@
 
 export interface FullBlockText_can {
   __typename: "BlockCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface FullBlockText {
@@ -17,5 +17,5 @@ export interface FullBlockText {
   id: number;
   content: string;
   raw: string;
-  can: FullBlockText_can | null;
+  can: FullBlockText_can;
 }

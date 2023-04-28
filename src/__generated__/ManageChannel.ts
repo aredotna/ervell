@@ -9,9 +9,9 @@
 
 export interface ManageChannel_can {
   __typename: "ChannelCan";
-  destroy: boolean | null;
-  export: boolean | null;
-  transfer: boolean | null;
+  destroy: boolean;
+  export: boolean;
+  transfer: boolean;
 }
 
 export interface ManageChannel_user {
@@ -48,18 +48,18 @@ export type ManageChannel_transfer_request_recipient = ManageChannel_transfer_re
 export interface ManageChannel_transfer_request {
   __typename: "ChannelTransferRequest";
   recipient: ManageChannel_transfer_request_recipient;
-  is_recipient_member: boolean | null;
+  is_recipient_member: boolean;
 }
 
 export interface ManageChannel {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   title: string;
   description: string | null;
   visibility: string;
   content_flag: string | null;
-  can: ManageChannel_can | null;
+  can: ManageChannel_can;
   user: ManageChannel_user | null;
   owner: ManageChannel_owner;
   is_pending_transfer: boolean;

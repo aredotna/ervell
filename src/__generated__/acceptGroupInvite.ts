@@ -10,7 +10,7 @@
 export interface acceptGroupInvite_accept_group_invite_group {
   __typename: "Group";
   id: number;
-  href: string | null;
+  href: string;
 }
 
 export interface acceptGroupInvite_accept_group_invite {

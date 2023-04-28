@@ -116,6 +116,10 @@ const BigTable = styled(Table)`
   ${Cell} {
     max-height: calc(${constants.blockWidth} * 1.25);
   }
+
+  ${constants.media.small`
+    width: auto
+  `}
 `
 
 const ContributeButton = styled(Button).attrs({

@@ -21,7 +21,7 @@ export interface ProfileTable_searches_advanced_results_Attachment_user {
 export interface ProfileTable_searches_advanced_results_Attachment_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
@@ -39,8 +39,8 @@ export interface ProfileTable_searches_advanced_results_Attachment_source {
 export interface ProfileTable_searches_advanced_results_Attachment {
   __typename: "Attachment";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ProfileTable_searches_advanced_results_Attachment_user | null;
   /**
@@ -50,7 +50,7 @@ export interface ProfileTable_searches_advanced_results_Attachment {
   counts: ProfileTable_searches_advanced_results_Attachment_counts | null;
   file_url: string | null;
   image_url: string | null;
-  href: string | null;
+  href: string;
   source: ProfileTable_searches_advanced_results_Attachment_source | null;
 }
 
@@ -62,21 +62,21 @@ export interface ProfileTable_searches_advanced_results_Channel_user {
 export interface ProfileTable_searches_advanced_results_Channel_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
 export interface ProfileTable_searches_advanced_results_Channel_counts {
   __typename: "ChannelCounts";
-  connected_to_channels: number | null;
-  contents: number | null;
+  connected_to_channels: number;
+  contents: number;
 }
 
 export interface ProfileTable_searches_advanced_results_Channel {
   __typename: "Channel";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ProfileTable_searches_advanced_results_Channel_user | null;
   /**
@@ -84,8 +84,8 @@ export interface ProfileTable_searches_advanced_results_Channel {
    */
   connection: ProfileTable_searches_advanced_results_Channel_connection | null;
   visibility: string;
-  href: string | null;
-  counts: ProfileTable_searches_advanced_results_Channel_counts | null;
+  href: string;
+  counts: ProfileTable_searches_advanced_results_Channel_counts;
 }
 
 export interface ProfileTable_searches_advanced_results_Embed_user {
@@ -96,7 +96,7 @@ export interface ProfileTable_searches_advanced_results_Embed_user {
 export interface ProfileTable_searches_advanced_results_Embed_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
@@ -114,8 +114,8 @@ export interface ProfileTable_searches_advanced_results_Embed_source {
 export interface ProfileTable_searches_advanced_results_Embed {
   __typename: "Embed";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ProfileTable_searches_advanced_results_Embed_user | null;
   /**
@@ -125,7 +125,7 @@ export interface ProfileTable_searches_advanced_results_Embed {
   counts: ProfileTable_searches_advanced_results_Embed_counts | null;
   embed_html: string | null;
   image_url: string | null;
-  href: string | null;
+  href: string;
   source: ProfileTable_searches_advanced_results_Embed_source | null;
 }
 
@@ -137,7 +137,7 @@ export interface ProfileTable_searches_advanced_results_Image_user {
 export interface ProfileTable_searches_advanced_results_Image_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
@@ -155,8 +155,8 @@ export interface ProfileTable_searches_advanced_results_Image_source {
 export interface ProfileTable_searches_advanced_results_Image {
   __typename: "Image";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ProfileTable_searches_advanced_results_Image_user | null;
   /**
@@ -165,7 +165,7 @@ export interface ProfileTable_searches_advanced_results_Image {
   connection: ProfileTable_searches_advanced_results_Image_connection | null;
   counts: ProfileTable_searches_advanced_results_Image_counts | null;
   image_url: string | null;
-  href: string | null;
+  href: string;
   /**
    * URL to find the original image on various services
    */
@@ -181,7 +181,7 @@ export interface ProfileTable_searches_advanced_results_Link_user {
 export interface ProfileTable_searches_advanced_results_Link_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
@@ -199,8 +199,8 @@ export interface ProfileTable_searches_advanced_results_Link_source {
 export interface ProfileTable_searches_advanced_results_Link {
   __typename: "Link";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ProfileTable_searches_advanced_results_Link_user | null;
   /**
@@ -209,7 +209,7 @@ export interface ProfileTable_searches_advanced_results_Link {
   connection: ProfileTable_searches_advanced_results_Link_connection | null;
   counts: ProfileTable_searches_advanced_results_Link_counts | null;
   image_url: string | null;
-  href: string | null;
+  href: string;
   source: ProfileTable_searches_advanced_results_Link_source | null;
 }
 
@@ -221,7 +221,7 @@ export interface ProfileTable_searches_advanced_results_PendingBlock_user {
 export interface ProfileTable_searches_advanced_results_PendingBlock_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
@@ -233,15 +233,15 @@ export interface ProfileTable_searches_advanced_results_PendingBlock_counts {
 export interface ProfileTable_searches_advanced_results_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ProfileTable_searches_advanced_results_PendingBlock_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
   connection: ProfileTable_searches_advanced_results_PendingBlock_connection | null;
-  href: string | null;
+  href: string;
   counts: ProfileTable_searches_advanced_results_PendingBlock_counts | null;
 }
 
@@ -253,7 +253,7 @@ export interface ProfileTable_searches_advanced_results_Text_user {
 export interface ProfileTable_searches_advanced_results_Text_connection {
   __typename: "Connection";
   id: number;
-  created_at: string | null;
+  created_at: string;
   selected: boolean;
 }
 
@@ -270,8 +270,8 @@ export interface ProfileTable_searches_advanced_results_Text_source {
 export interface ProfileTable_searches_advanced_results_Text {
   __typename: "Text";
   id: number;
-  created_at: string | null;
-  updated_at: string | null;
+  created_at: string;
+  updated_at: string;
   title: string;
   user: ProfileTable_searches_advanced_results_Text_user | null;
   /**
@@ -285,7 +285,7 @@ export interface ProfileTable_searches_advanced_results_Text {
    * URL to find the original image on various services
    */
   find_original_url: string | null;
-  href: string | null;
+  href: string;
   source: ProfileTable_searches_advanced_results_Text_source | null;
 }
 

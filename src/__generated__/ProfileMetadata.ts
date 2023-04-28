@@ -9,16 +9,16 @@
 
 export interface ProfileMetadata_Group_can {
   __typename: "GroupCan";
-  update: boolean | null;
-  follow: boolean | null;
-  manage: boolean | null;
-  manage_users: boolean | null;
+  update: boolean;
+  follow: boolean;
+  manage: boolean;
+  manage_users: boolean;
 }
 
 export interface ProfileMetadata_Group_user {
   __typename: "User";
   name: string;
-  href: string | null;
+  href: string;
   id: number;
   label: string;
 }
@@ -32,17 +32,17 @@ export interface ProfileMetadata_Group_users {
   __typename: "User";
   id: number;
   label: string;
-  href: string | null;
+  href: string;
 }
 
 export interface ProfileMetadata_Group {
   __typename: "Group";
   id: number;
   avatar: string | null;
-  can: ProfileMetadata_Group_can | null;
+  can: ProfileMetadata_Group_can;
   name: string;
   label: string;
-  href: string | null;
+  href: string;
   visibility: string;
   /**
    * Are *any* users in the group upgradeable to Premium?
@@ -56,9 +56,9 @@ export interface ProfileMetadata_Group {
 
 export interface ProfileMetadata_User_can {
   __typename: "UserCan";
-  follow: boolean | null;
-  manage: boolean | null;
-  message: boolean | null;
+  follow: boolean;
+  manage: boolean;
+  message: boolean;
 }
 
 export interface ProfileMetadata_User_counts {
@@ -75,11 +75,11 @@ export interface ProfileMetadata_User {
   __typename: "User";
   name: string;
   label: string;
-  href: string | null;
+  href: string;
   badge: string | null;
   custom_badge: string | null;
   id: number;
-  can: ProfileMetadata_User_can | null;
+  can: ProfileMetadata_User_can;
   about: string | null;
   counts: ProfileMetadata_User_counts | null;
 }

@@ -11,7 +11,7 @@ export interface ProfileFollowing_following_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   visibility: string;
   label: string;
   initials: string;
@@ -22,7 +22,7 @@ export interface ProfileFollowing_following_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
   initials: string;
   avatar: string | null;
@@ -30,7 +30,7 @@ export interface ProfileFollowing_following_User {
 
 export interface ProfileFollowing_following_Channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface ProfileFollowing_following_Channel_owner_Group {
@@ -62,7 +62,7 @@ export interface ProfileFollowing_following_Channel_connection_user {
 
 export interface ProfileFollowing_following_Channel_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: ProfileFollowing_following_Channel_connection_user | null;
 }
 
@@ -74,11 +74,11 @@ export interface ProfileFollowing_following_Channel_source {
 export interface ProfileFollowing_following_Channel {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   truncatedTitle: string;
   visibility: string;
-  updated_at: string | null;
-  counts: ProfileFollowing_following_Channel_counts | null;
+  updated_at: string;
+  counts: ProfileFollowing_following_Channel_counts;
   owner: ProfileFollowing_following_Channel_owner;
   label: string;
   title: string;

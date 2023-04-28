@@ -13,6 +13,7 @@ import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 import { AdaptibleLink } from 'v2/components/UI/AdaptibleLink'
 import { PrimarySearchIcon } from '../PrimarySearchIcon'
 import { PrimarySearchCount } from '../PrimarySearchCount'
+import { unescape } from 'lodash'
 
 const Label = styled(Text)`
   font-weight: bold;
@@ -111,11 +112,7 @@ export const PrimarySearchResult: React.FC<PrimarySearchResultProps &
                   : 'gray.base'
               }
             >
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: result.label,
-                }}
-              />
+              <span>{unescape(result.label)}</span>
 
               {(result.__typename === 'Channel' ||
                 result.__typename === 'Group') &&

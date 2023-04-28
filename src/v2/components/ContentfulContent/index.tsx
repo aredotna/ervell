@@ -10,7 +10,7 @@ import HorizontalRule from 'v2/components/UI/HorizontalRule'
 import Text, { TextProps } from '../UI/Text'
 import { CustomerCount } from '../CustomerCount'
 import { PremiumRevenue } from '../PremiumRevenue'
-import { isEmpty } from 'lodash'
+import { isEmpty, unescape } from 'lodash'
 
 export const BaseText = styled(Text).attrs({
   my: 6,
@@ -123,9 +123,7 @@ export const optionsWithEmbeds = (
               ]}
             />
             {block.description && (
-              <Figcaption
-                dangerouslySetInnerHTML={{ __html: block.description }}
-              />
+              <Figcaption>{unescape(block.description)}</Figcaption>
             )}
           </Figure>
         )

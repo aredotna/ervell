@@ -88,16 +88,8 @@ export const ChannelBreadcrumb: React.FC<ChannelBreadcrumbProps> = ({
             >
               {
                 {
-                  resting: (
-                    <span dangerouslySetInnerHTML={{ __html: channel.title }} />
-                  ),
-                  stuck: (
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: channel.truncatedTitle,
-                      }}
-                    />
-                  ),
+                  resting: <span>{unescape(channel.title)}</span>,
+                  stuck: <span>{unescape(channel.truncatedTitle)}</span>,
                 }[mode]
               }
             </ColoredChannelLink>

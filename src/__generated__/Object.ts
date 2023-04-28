@@ -30,7 +30,7 @@ export interface Object_Attachment_connection_user {
 
 export interface Object_Attachment_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: Object_Attachment_connection_user | null;
 }
 
@@ -41,7 +41,7 @@ export interface Object_Attachment_source {
 
 export interface Object_Attachment {
   __typename: "Attachment";
-  href: string | null;
+  href: string;
   counts: Object_Attachment_counts | null;
   id: number;
   title: string;
@@ -50,7 +50,7 @@ export interface Object_Attachment {
   src_2x: string | null;
   src_3x: string | null;
   file_extension: string | null;
-  updated_at: string | null;
+  updated_at: string;
   user: Object_Attachment_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -61,7 +61,7 @@ export interface Object_Attachment {
 
 export interface Object_Channel_counts {
   __typename: "ChannelCounts";
-  contents: number | null;
+  contents: number;
 }
 
 export interface Object_Channel_owner_Group {
@@ -93,7 +93,7 @@ export interface Object_Channel_connection_user {
 
 export interface Object_Channel_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: Object_Channel_connection_user | null;
 }
 
@@ -104,12 +104,12 @@ export interface Object_Channel_source {
 
 export interface Object_Channel {
   __typename: "Channel";
-  href: string | null;
+  href: string;
   id: number;
   truncatedTitle: string;
   visibility: string;
-  updated_at: string | null;
-  counts: Object_Channel_counts | null;
+  updated_at: string;
+  counts: Object_Channel_counts;
   owner: Object_Channel_owner;
   label: string;
   title: string;
@@ -140,7 +140,7 @@ export interface Object_Embed_connection_user {
 
 export interface Object_Embed_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: Object_Embed_connection_user | null;
 }
 
@@ -151,7 +151,7 @@ export interface Object_Embed_source {
 
 export interface Object_Embed {
   __typename: "Embed";
-  href: string | null;
+  href: string;
   counts: Object_Embed_counts | null;
   id: number;
   title: string;
@@ -159,7 +159,7 @@ export interface Object_Embed {
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
-  updated_at: string | null;
+  updated_at: string;
   user: Object_Embed_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -193,7 +193,7 @@ export interface Object_Image_connection_user {
 
 export interface Object_Image_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: Object_Image_connection_user | null;
 }
 
@@ -204,7 +204,7 @@ export interface Object_Image_source {
 
 export interface Object_Image {
   __typename: "Image";
-  href: string | null;
+  href: string;
   counts: Object_Image_counts | null;
   id: number;
   title: string;
@@ -214,7 +214,7 @@ export interface Object_Image {
   src_2x: string | null;
   src_3x: string | null;
   original_dimensions: Object_Image_original_dimensions | null;
-  updated_at: string | null;
+  updated_at: string;
   user: Object_Image_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -242,7 +242,7 @@ export interface Object_Link_connection_user {
 
 export interface Object_Link_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: Object_Link_connection_user | null;
 }
 
@@ -253,7 +253,7 @@ export interface Object_Link_source {
 
 export interface Object_Link {
   __typename: "Link";
-  href: string | null;
+  href: string;
   counts: Object_Link_counts | null;
   title: string;
   src: string | null;
@@ -262,7 +262,7 @@ export interface Object_Link {
   src_3x: string | null;
   external_url: string | null;
   content: string | null;
-  updated_at: string | null;
+  updated_at: string;
   user: Object_Link_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -292,7 +292,7 @@ export interface Object_Text_connection_user {
 
 export interface Object_Text_connection {
   __typename: "Connection";
-  created_at: string | null;
+  created_at: string;
   user: Object_Text_connection_user | null;
 }
 
@@ -303,13 +303,13 @@ export interface Object_Text_source {
 
 export interface Object_Text {
   __typename: "Text";
-  href: string | null;
+  href: string;
   counts: Object_Text_counts | null;
   id: number;
   title: string;
   content: string;
   raw: string;
-  updated_at: string | null;
+  updated_at: string;
   user: Object_Text_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -322,7 +322,7 @@ export interface Object_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   visibility: string;
   label: string;
   initials: string;
@@ -333,7 +333,7 @@ export interface Object_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   label: string;
   initials: string;
   avatar: string | null;

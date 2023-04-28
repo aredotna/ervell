@@ -11,7 +11,7 @@ export interface ManageUsers_owner {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }
@@ -20,21 +20,21 @@ export interface ManageUsers_memberships_member {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }
 
 export interface ManageUsers_memberships_can {
   __typename: "GroupMembershipCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface ManageUsers_memberships {
   __typename: "GroupMembership";
   id: number;
   member: ManageUsers_memberships_member | null;
-  can: ManageUsers_memberships_can | null;
+  can: ManageUsers_memberships_can;
 }
 
 export interface ManageUsers {

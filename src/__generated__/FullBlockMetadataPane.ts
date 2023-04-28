@@ -11,7 +11,7 @@ export interface FullBlockMetadataPane_Channel_user {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FullBlockMetadataPane_Channel_source {
@@ -22,16 +22,16 @@ export interface FullBlockMetadataPane_Channel_source {
 
 export interface FullBlockMetadataPane_Channel {
   __typename: "Channel";
-  created_at_unix_time: string | null;
-  created_at_timestamp: string | null;
-  created_at: string | null;
-  updated_at: string | null;
-  updated_at_timestamp: string | null;
+  created_at_unix_time: string;
+  created_at_timestamp: string;
+  created_at: string;
+  updated_at: string;
+  updated_at_timestamp: string;
   title: string;
   description: string | null;
   user: FullBlockMetadataPane_Channel_user | null;
   source: FullBlockMetadataPane_Channel_source | null;
-  shareable_href: string | null;
+  shareable_href: string;
   shareable_title: string;
   id: number;
   editable_title: string;
@@ -42,16 +42,16 @@ export interface FullBlockMetadataPane_Attachment_user {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FullBlockMetadataPane_Attachment_can {
   __typename: "BlockCan";
-  manage: boolean | null;
-  comment: boolean | null;
-  mute: boolean | null;
-  potentially_edit_thumbnail: boolean | null;
-  edit_thumbnail: boolean | null;
+  manage: boolean;
+  comment: boolean;
+  mute: boolean;
+  potentially_edit_thumbnail: boolean;
+  edit_thumbnail: boolean;
 }
 
 export interface FullBlockMetadataPane_Attachment_source {
@@ -62,17 +62,17 @@ export interface FullBlockMetadataPane_Attachment_source {
 
 export interface FullBlockMetadataPane_Attachment {
   __typename: "Attachment" | "Embed" | "Link" | "PendingBlock";
-  created_at_unix_time: string | null;
-  created_at_timestamp: string | null;
-  created_at: string | null;
-  updated_at: string | null;
-  updated_at_timestamp: string | null;
+  created_at_unix_time: string;
+  created_at_timestamp: string;
+  created_at: string;
+  updated_at: string;
+  updated_at_timestamp: string;
   title: string;
   description: string | null;
   user: FullBlockMetadataPane_Attachment_user | null;
-  can: FullBlockMetadataPane_Attachment_can | null;
+  can: FullBlockMetadataPane_Attachment_can;
   source: FullBlockMetadataPane_Attachment_source | null;
-  shareable_href: string | null;
+  shareable_href: string;
   shareable_title: string;
   id: number;
   editable_title: string;
@@ -83,16 +83,16 @@ export interface FullBlockMetadataPane_Image_user {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FullBlockMetadataPane_Image_can {
   __typename: "BlockCan";
-  manage: boolean | null;
-  comment: boolean | null;
-  mute: boolean | null;
-  potentially_edit_thumbnail: boolean | null;
-  edit_thumbnail: boolean | null;
+  manage: boolean;
+  comment: boolean;
+  mute: boolean;
+  potentially_edit_thumbnail: boolean;
+  edit_thumbnail: boolean;
 }
 
 export interface FullBlockMetadataPane_Image_source {
@@ -103,17 +103,17 @@ export interface FullBlockMetadataPane_Image_source {
 
 export interface FullBlockMetadataPane_Image {
   __typename: "Image";
-  created_at_unix_time: string | null;
-  created_at_timestamp: string | null;
-  created_at: string | null;
-  updated_at: string | null;
-  updated_at_timestamp: string | null;
+  created_at_unix_time: string;
+  created_at_timestamp: string;
+  created_at: string;
+  updated_at: string;
+  updated_at_timestamp: string;
   title: string;
   description: string | null;
   user: FullBlockMetadataPane_Image_user | null;
-  can: FullBlockMetadataPane_Image_can | null;
+  can: FullBlockMetadataPane_Image_can;
   source: FullBlockMetadataPane_Image_source | null;
-  shareable_href: string | null;
+  shareable_href: string;
   shareable_title: string;
   /**
    * URL to find the original image on various services
@@ -130,16 +130,16 @@ export interface FullBlockMetadataPane_Text_user {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface FullBlockMetadataPane_Text_can {
   __typename: "BlockCan";
-  manage: boolean | null;
-  comment: boolean | null;
-  mute: boolean | null;
-  potentially_edit_thumbnail: boolean | null;
-  edit_thumbnail: boolean | null;
+  manage: boolean;
+  comment: boolean;
+  mute: boolean;
+  potentially_edit_thumbnail: boolean;
+  edit_thumbnail: boolean;
 }
 
 export interface FullBlockMetadataPane_Text_source {
@@ -150,17 +150,17 @@ export interface FullBlockMetadataPane_Text_source {
 
 export interface FullBlockMetadataPane_Text {
   __typename: "Text";
-  created_at_unix_time: string | null;
-  created_at_timestamp: string | null;
-  created_at: string | null;
-  updated_at: string | null;
-  updated_at_timestamp: string | null;
+  created_at_unix_time: string;
+  created_at_timestamp: string;
+  created_at: string;
+  updated_at: string;
+  updated_at_timestamp: string;
   title: string;
   description: string | null;
   user: FullBlockMetadataPane_Text_user | null;
-  can: FullBlockMetadataPane_Text_can | null;
+  can: FullBlockMetadataPane_Text_can;
   source: FullBlockMetadataPane_Text_source | null;
-  shareable_href: string | null;
+  shareable_href: string;
   shareable_title: string;
   /**
    * URL to find the original image on various services

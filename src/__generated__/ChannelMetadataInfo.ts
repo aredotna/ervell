@@ -14,23 +14,23 @@ export interface ChannelMetadataInfo_counts {
 
 export interface ChannelMetadataInfo_can {
   __typename: "ChannelCan";
-  share: boolean | null;
+  share: boolean;
 }
 
 export interface ChannelMetadataInfo_user {
   __typename: "User";
   id: number;
-  href: string | null;
+  href: string;
   name: string;
 }
 
 export interface ChannelMetadataInfo {
   __typename: "Channel";
   id: number;
-  href: string | null;
+  href: string;
   visibility: string;
   info: string | null;
-  counts: ChannelMetadataInfo_counts | null;
-  can: ChannelMetadataInfo_can | null;
+  counts: ChannelMetadataInfo_counts;
+  can: ChannelMetadataInfo_can;
   user: ChannelMetadataInfo_user | null;
 }

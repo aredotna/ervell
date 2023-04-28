@@ -11,6 +11,7 @@ import Text from 'v2/components/UI/Text'
 import Count from 'v2/components/UI/Count'
 import Badge from 'v2/components/UI/Badge'
 import BorderedLock from 'v2/components/UI/BorderedLock'
+import { unescape } from 'lodash'
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -36,7 +37,7 @@ interface Props {
 export const KonnectableChannel: React.FC<Props> = ({ channel, ...rest }) => (
   <Container visibility={channel.visibility} {...rest}>
     <Text f={6} mx={4} pt={6} breakWord textAlign="center">
-      <span dangerouslySetInnerHTML={{ __html: channel.truncatedTitle }} />
+      <span>{unescape(channel.truncatedTitle)}</span>
 
       {channel.visibility === 'private' && (
         <BorderedLock ml={3} position="relative" top="-0.125rem" />

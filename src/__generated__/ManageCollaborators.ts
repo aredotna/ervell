@@ -9,14 +9,14 @@
 
 export interface ManageCollaborators_counts {
   __typename: "ChannelCounts";
-  collaborators: number | null;
+  collaborators: number;
 }
 
 export interface ManageCollaborators_collaborators_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   label: string;
@@ -26,34 +26,34 @@ export interface ManageCollaborators_collaborators_Group_user {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface ManageCollaborators_collaborators_Group_users {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
 }
 
 export interface ManageCollaborators_collaborators_Group_can {
   __typename: "GroupCan";
-  manage: boolean | null;
-  manage_users: boolean | null;
+  manage: boolean;
+  manage_users: boolean;
 }
 
 export interface ManageCollaborators_collaborators_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   visibility: string;
   user: ManageCollaborators_collaborators_Group_user;
   description: string | null;
   users: ManageCollaborators_collaborators_Group_users[] | null;
-  can: ManageCollaborators_collaborators_Group_can | null;
+  can: ManageCollaborators_collaborators_Group_can;
   label: string;
 }
 
@@ -63,7 +63,7 @@ export interface ManageCollaborators_memberships_member_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }
@@ -78,7 +78,7 @@ export interface ManageCollaborators_memberships_member_Group {
   __typename: "Group";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
   visibility: string;
@@ -89,14 +89,14 @@ export type ManageCollaborators_memberships_member = ManageCollaborators_members
 
 export interface ManageCollaborators_memberships_can {
   __typename: "ChannelMembershipCan";
-  manage: boolean | null;
+  manage: boolean;
 }
 
 export interface ManageCollaborators_memberships {
   __typename: "ChannelMembership";
   id: number;
   member: ManageCollaborators_memberships_member | null;
-  can: ManageCollaborators_memberships_can | null;
+  can: ManageCollaborators_memberships_can;
 }
 
 export interface ManageCollaborators_can {
@@ -107,8 +107,8 @@ export interface ManageCollaborators_can {
 export interface ManageCollaborators {
   __typename: "Channel";
   id: number;
-  counts: ManageCollaborators_counts | null;
-  collaborators: ManageCollaborators_collaborators[] | null;
-  memberships: ManageCollaborators_memberships[] | null;
-  can: ManageCollaborators_can | null;
+  counts: ManageCollaborators_counts;
+  collaborators: ManageCollaborators_collaborators[];
+  memberships: ManageCollaborators_memberships[];
+  can: ManageCollaborators_can;
 }

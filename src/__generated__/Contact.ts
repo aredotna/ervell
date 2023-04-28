@@ -10,7 +10,7 @@
 export interface Contact_Invitee {
   __typename: "Invitee" | "Me";
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }
@@ -19,7 +19,7 @@ export interface Contact_User {
   __typename: "User";
   id: number;
   name: string;
-  href: string | null;
+  href: string;
   initials: string;
   avatar: string | null;
 }
