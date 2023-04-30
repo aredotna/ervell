@@ -6,7 +6,6 @@ import Text from 'v2/components/UI/Text'
 import FullBlockCommentDeleteButton from 'v2/components/FullBlock/components/FullBlockCommentDeleteButton'
 
 import fullBlockCommentFragment from 'v2/components/FullBlock/components/FullBlockComment/fragments/fullBlockComment'
-import { unescape } from 'lodash'
 
 export default class FullBlockComment extends PureComponent {
   static propTypes = {
