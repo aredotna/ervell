@@ -41,9 +41,12 @@ export default class FullBlockComment extends PureComponent {
         </Box>
 
         <Box mb={5} pb={5} borderBottom="1px solid" borderColor="gray.hint">
-          <Text f={3} lineHeight={2} boldLinks>
-            {unescape(comment.body)}
-          </Text>
+          <Text
+            f={3}
+            lineHeight={2}
+            boldLinks
+            dangerouslySetInnerHTML={{ __html: comment.body }}
+          />
         </Box>
       </Box>
     )
