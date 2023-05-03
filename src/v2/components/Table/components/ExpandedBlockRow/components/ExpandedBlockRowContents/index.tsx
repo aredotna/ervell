@@ -60,9 +60,11 @@ export const ExpandedBlockRowContents: React.FC<ExpandedBlockRowContentsProps> =
     return (
       <TextContainer bg={isColor ? block.content : undefined}>
         {!isColor && (
-          <SansSerifText color={'gray.block'} isSmall>
-            {unescape(block.html)}
-          </SansSerifText>
+          <SansSerifText
+            color={'gray.block'}
+            isSmall
+            dangerouslySetInnerHTML={{ __html: block.html }}
+          />
         )}
       </TextContainer>
     )
