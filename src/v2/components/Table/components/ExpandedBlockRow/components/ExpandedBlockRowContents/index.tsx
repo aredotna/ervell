@@ -17,7 +17,6 @@ import {
   ExpandedBlockRowContentsVariables,
 } from '__generated__/ExpandedBlockRowContents'
 import { ProfileTableContents_user_contents } from '__generated__/ProfileTableContents'
-import { unescape } from 'lodash'
 
 const TextContainer = styled(Box)`
   padding: ${x => x.theme.space[4]};
@@ -60,9 +59,11 @@ export const ExpandedBlockRowContents: React.FC<ExpandedBlockRowContentsProps> =
     return (
       <TextContainer bg={isColor ? block.content : undefined}>
         {!isColor && (
-          <SansSerifText color={'gray.block'} isSmall>
-            {unescape(block.html)}
-          </SansSerifText>
+          <SansSerifText
+            color={'gray.block'}
+            isSmall
+            dangerouslySetInnerHTML={{ __html: block.html }}
+          />
         )}
       </TextContainer>
     )
