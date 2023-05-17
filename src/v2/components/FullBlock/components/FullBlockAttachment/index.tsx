@@ -49,8 +49,6 @@ export const FullBlockAttachment: React.FC<FullBlockAttachmentProps> = ({
   block,
   layout = 'DEFAULT',
 }) => {
-  console.log({ block })
-
   return (
     <Box
       display="flex"
