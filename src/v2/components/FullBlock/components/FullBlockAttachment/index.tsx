@@ -23,6 +23,23 @@ const SvgPreview = styled.img`
   margin: auto;
 `
 
+const VideoContainer = styled(Box).attrs({
+  p: 6,
+})`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const VideoPlayer = styled.video`
+  display: block;
+  max-width: 95%;
+  max-height: 95%;
+  object-fit: scale-down;
+  margin: auto;
+`
+
 interface FullBlockAttachmentProps {
   block: FullBlockAttachment_Attachment
   layout?: 'DEFAULT' | 'FULLSCREEN'
@@ -45,7 +62,7 @@ export const FullBlockAttachment: React.FC<FullBlockAttachmentProps> = ({
       bg={{ DEFAULT: 'gray.hint', FULLSCREEN: 'gray.bold' }[layout]}
     >
       {block.file_content_type === 'application/pdf' && (
-        <Box flex="1" width="100%">
+        <Box flex="1" width="100%" maxHeight="100%">
           <iframe
             src={block.file_url}
             width="100%"
@@ -59,6 +76,12 @@ export const FullBlockAttachment: React.FC<FullBlockAttachmentProps> = ({
         <Box display="flex" flex="1">
           <SvgPreview src={block.file_url} alt={block.title} />
         </Box>
+      )}
+
+      {block.file_content_type === 'video/mp4' && (
+        <VideoContainer>
+          <VideoPlayer src={block.file_url} controls title={block.title} />
+        </VideoContainer>
       )}
 
       {block.file_content_type === 'audio/mpeg' && (
