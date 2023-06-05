@@ -123,7 +123,9 @@ export const optionsWithEmbeds = (
               ]}
             />
             {block.description && (
-              <Figcaption>{unescape(block.description)}</Figcaption>
+              <Figcaption
+                dangerouslySetInnerHTML={{ __html: block.description }}
+              />
             )}
           </Figure>
         )
