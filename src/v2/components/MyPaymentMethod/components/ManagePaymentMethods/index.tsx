@@ -17,7 +17,13 @@ export const ManagePaymentMethods: React.FC<ManagePaymentMethodsProps> = ({
 }) => {
   const { default_payment_method, payment_methods } = customer
 
-  if (!default_payment_method) return null
+  if (!default_payment_method) {
+    return (
+      <Text f={3} color="gray.medium">
+        You have no saved payment methods.
+      </Text>
+    )
+  }
 
   return (
     <RadioOptions
