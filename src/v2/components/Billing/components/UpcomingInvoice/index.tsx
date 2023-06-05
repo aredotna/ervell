@@ -8,6 +8,9 @@ import { MyPaymentMethodWrapper } from 'v2/components/MyPaymentMethod'
 import Box from 'v2/components/UI/Box'
 import Modal from 'v2/components/UI/Modal'
 import Text from 'v2/components/UI/Text'
+import ButtonGroup from 'v2/components/UI/ButtonGroup'
+import GenericButton from 'v2/components/UI/GenericButton'
+
 import { centsToDollarsAndCents } from 'v2/pages/about/PricingPage/components/PricingTable'
 import { CreateCustomerPortalSession } from '__generated__/CreateCustomerPortalSession'
 import { UpcomingInvoice as Customer } from '__generated__/UpcomingInvoice'
@@ -101,11 +104,7 @@ export const UpcomingInvoice: React.FC<UpcomingInvoiceProps> = props => {
             </span>
           )}
           {upcoming_invoice.next_payment_attempt_at &&
-            ` on ${upcoming_invoice.next_payment_attempt_at}`}{' '}
-          —{' '}
-          <Link onClick={handlePortalLink} mt={6}>
-            View invoices
-          </Link>
+            ` on ${upcoming_invoice.next_payment_attempt_at}`}
         </>
       </Text>
 
@@ -117,8 +116,7 @@ export const UpcomingInvoice: React.FC<UpcomingInvoiceProps> = props => {
               {capitalize(customer.default_payment_method?.card?.brand)} ****
               **** **** {customer.default_payment_method.card.last4} (expires{' '}
               {customer.default_payment_method.card.exp_month}/
-              {customer.default_payment_method.card.exp_year}) —{' '}
-              <Link onClick={openCreditCardModal}>Update default card</Link>
+              {customer.default_payment_method.card.exp_year})
             </Text>
           </>
         )}
@@ -132,6 +130,22 @@ export const UpcomingInvoice: React.FC<UpcomingInvoiceProps> = props => {
           <Link onClick={openBillingAddressModal}>Update address</Link>
         </Text>
       )}
+
+      <Box ml="auto" mt={7}>
+        <ButtonGroup f={1}>
+          <GenericButton onClick={openCreditCardModal}>
+            Update credit card
+          </GenericButton>
+
+          <GenericButton onClick={openBillingAddressModal}>
+            Update billing address
+          </GenericButton>
+
+          <GenericButton onClick={handlePortalLink}>
+            View invoices
+          </GenericButton>
+        </ButtonGroup>
+      </Box>
     </Box>
   )
 }
