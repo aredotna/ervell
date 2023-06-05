@@ -13,7 +13,7 @@ export interface Object_Comment {
 
 export interface Object_Attachment_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface Object_Attachment_user {
@@ -42,7 +42,7 @@ export interface Object_Attachment_source {
 export interface Object_Attachment {
   __typename: "Attachment";
   href: string;
-  counts: Object_Attachment_counts | null;
+  counts: Object_Attachment_counts;
   id: number;
   title: string;
   src: string | null;
@@ -123,7 +123,7 @@ export interface Object_Channel {
 
 export interface Object_Embed_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface Object_Embed_user {
@@ -152,7 +152,7 @@ export interface Object_Embed_source {
 export interface Object_Embed {
   __typename: "Embed";
   href: string;
-  counts: Object_Embed_counts | null;
+  counts: Object_Embed_counts;
   id: number;
   title: string;
   src: string | null;
@@ -170,7 +170,7 @@ export interface Object_Embed {
 
 export interface Object_Image_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface Object_Image_original_dimensions {
@@ -205,7 +205,7 @@ export interface Object_Image_source {
 export interface Object_Image {
   __typename: "Image";
   href: string;
-  counts: Object_Image_counts | null;
+  counts: Object_Image_counts;
   id: number;
   title: string;
   alt_text: string | null;
@@ -225,7 +225,7 @@ export interface Object_Image {
 
 export interface Object_Link_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface Object_Link_user {
@@ -254,7 +254,7 @@ export interface Object_Link_source {
 export interface Object_Link {
   __typename: "Link";
   href: string;
-  counts: Object_Link_counts | null;
+  counts: Object_Link_counts;
   title: string;
   src: string | null;
   src_1x: string | null;
@@ -275,7 +275,7 @@ export interface Object_Link {
 
 export interface Object_Text_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface Object_Text_user {
@@ -304,7 +304,7 @@ export interface Object_Text_source {
 export interface Object_Text {
   __typename: "Text";
   href: string;
-  counts: Object_Text_counts | null;
+  counts: Object_Text_counts;
   id: number;
   title: string;
   content: string;

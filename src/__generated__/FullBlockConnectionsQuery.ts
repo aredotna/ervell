@@ -179,10 +179,10 @@ export interface FullBlockConnectionsQuery_block_Attachment_source {
 
 export interface FullBlockConnectionsQuery_block_Attachment_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
-  current_user_channels: number | null;
-  private_channels: number | null;
-  channels_with_same_source: number | null;
+  public_channels: number;
+  current_user_channels: number;
+  private_channels: number;
+  channels_with_same_source: number;
 }
 
 export interface FullBlockConnectionsQuery_block_Attachment_channels_with_same_source_owner_Group {
@@ -222,7 +222,7 @@ export interface FullBlockConnectionsQuery_block_Attachment {
   current_user_channels: FullBlockConnectionsQuery_block_Attachment_current_user_channels[] | null;
   public_channels: FullBlockConnectionsQuery_block_Attachment_public_channels[] | null;
   source: FullBlockConnectionsQuery_block_Attachment_source | null;
-  counts: FullBlockConnectionsQuery_block_Attachment_counts | null;
+  counts: FullBlockConnectionsQuery_block_Attachment_counts;
   channels_with_same_source: FullBlockConnectionsQuery_block_Attachment_channels_with_same_source[];
 }
 

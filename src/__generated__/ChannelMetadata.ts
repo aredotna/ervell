@@ -84,7 +84,7 @@ export interface ChannelMetadata_collaborators_Group {
   href: string;
   description: string | null;
   user: ChannelMetadata_collaborators_Group_user;
-  users: ChannelMetadata_collaborators_Group_users[] | null;
+  users: ChannelMetadata_collaborators_Group_users[];
   can: ChannelMetadata_collaborators_Group_can;
   visibility: string;
   label: string;

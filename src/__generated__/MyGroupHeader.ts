@@ -51,5 +51,5 @@ export interface MyGroupHeader {
   initials: string;
   avatar: string | null;
   user: MyGroupHeader_user;
-  users: MyGroupHeader_users[] | null;
+  users: MyGroupHeader_users[];
 }

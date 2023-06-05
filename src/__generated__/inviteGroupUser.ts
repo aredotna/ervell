@@ -59,7 +59,7 @@ export interface inviteGroupUser_invite_group_users_group {
   invite: inviteGroupUser_invite_group_users_group_invite | null;
   can: inviteGroupUser_invite_group_users_group_can;
   owner: inviteGroupUser_invite_group_users_group_owner;
-  memberships: inviteGroupUser_invite_group_users_group_memberships[] | null;
+  memberships: inviteGroupUser_invite_group_users_group_memberships[];
 }
 
 export interface inviteGroupUser_invite_group_users {

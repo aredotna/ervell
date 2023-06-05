@@ -26,7 +26,7 @@ export interface ProfilePage_identity_identifiable_Group_user {
 export interface ProfilePage_identity_identifiable_Group_counts {
   __typename: "GroupCounts";
   followers: number;
-  channels: number | null;
+  channels: number;
 }
 
 export interface ProfilePage_identity_identifiable_Group_users {
@@ -48,11 +48,11 @@ export interface ProfilePage_identity_identifiable_Group {
   /**
    * Are *any* users in the group upgradeable to Premium?
    */
-  is_upgradeable: boolean | null;
+  is_upgradeable: boolean;
   about: string | null;
   user: ProfilePage_identity_identifiable_Group_user;
-  counts: ProfilePage_identity_identifiable_Group_counts | null;
-  users: ProfilePage_identity_identifiable_Group_users[] | null;
+  counts: ProfilePage_identity_identifiable_Group_counts;
+  users: ProfilePage_identity_identifiable_Group_users[];
   is_current_user_a_member: boolean;
   is_current_user_the_owner: boolean;
   title: string;
@@ -71,12 +71,12 @@ export interface ProfilePage_identity_identifiable_User_counts {
   __typename: "UserCounts";
   followers: number;
   following: number;
-  groups: number | null;
+  groups: number;
   following_channels: number;
   following_users: number;
   following_groups: number;
-  channels: number | null;
-  blocks: number | null;
+  channels: number;
+  blocks: number;
 }
 
 export interface ProfilePage_identity_identifiable_User {
@@ -89,7 +89,7 @@ export interface ProfilePage_identity_identifiable_User {
   id: number;
   can: ProfilePage_identity_identifiable_User_can;
   about: string | null;
-  counts: ProfilePage_identity_identifiable_User_counts | null;
+  counts: ProfilePage_identity_identifiable_User_counts;
   is_me: boolean;
   title: string;
   description: string | null;

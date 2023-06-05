@@ -90,7 +90,7 @@ export interface ChannelPage_channel_collaborators_Group {
   href: string;
   description: string | null;
   user: ChannelPage_channel_collaborators_Group_user;
-  users: ChannelPage_channel_collaborators_Group_users[] | null;
+  users: ChannelPage_channel_collaborators_Group_users[];
   can: ChannelPage_channel_collaborators_Group_can;
   visibility: string;
   label: string;

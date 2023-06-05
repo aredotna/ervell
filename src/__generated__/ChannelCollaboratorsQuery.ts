@@ -47,7 +47,7 @@ export interface ChannelCollaboratorsQuery_channel_collaborators_Group {
   href: string;
   description: string | null;
   user: ChannelCollaboratorsQuery_channel_collaborators_Group_user;
-  users: ChannelCollaboratorsQuery_channel_collaborators_Group_users[] | null;
+  users: ChannelCollaboratorsQuery_channel_collaborators_Group_users[];
   can: ChannelCollaboratorsQuery_channel_collaborators_Group_can;
   visibility: string;
   label: string;

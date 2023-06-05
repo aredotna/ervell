@@ -100,7 +100,7 @@ export interface ProfileChannelIndex_Group {
   /**
    * Special channel field that eager loads all the owner and does not do pagination
    */
-  channels_index: ProfileChannelIndex_Group_channels_index[] | null;
+  channels_index: ProfileChannelIndex_Group_channels_index[];
 }
 
 export type ProfileChannelIndex = ProfileChannelIndex_User | ProfileChannelIndex_Group;

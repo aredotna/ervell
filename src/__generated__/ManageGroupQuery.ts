@@ -59,7 +59,7 @@ export interface ManageGroupQuery_group {
   invite: ManageGroupQuery_group_invite | null;
   can: ManageGroupQuery_group_can;
   owner: ManageGroupQuery_group_owner;
-  memberships: ManageGroupQuery_group_memberships[] | null;
+  memberships: ManageGroupQuery_group_memberships[];
 }
 
 export interface ManageGroupQuery {

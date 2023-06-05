@@ -52,7 +52,7 @@ export interface inviteCollaborator_invite_collaborator_channel_collaborators_Gr
   visibility: string;
   user: inviteCollaborator_invite_collaborator_channel_collaborators_Group_user;
   description: string | null;
-  users: inviteCollaborator_invite_collaborator_channel_collaborators_Group_users[] | null;
+  users: inviteCollaborator_invite_collaborator_channel_collaborators_Group_users[];
   can: inviteCollaborator_invite_collaborator_channel_collaborators_Group_can;
   label: string;
 }

@@ -9,14 +9,14 @@
 
 export interface AdvancedSearchGroupCount_group_counts {
   __typename: "GroupCounts";
-  channels: number | null;
-  users: number | null;
+  channels: number;
+  users: number;
 }
 
 export interface AdvancedSearchGroupCount_group {
   __typename: "Group";
   id: number;
-  counts: AdvancedSearchGroupCount_group_counts | null;
+  counts: AdvancedSearchGroupCount_group_counts;
 }
 
 export interface AdvancedSearchGroupCount {

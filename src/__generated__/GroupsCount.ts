@@ -9,11 +9,11 @@
 
 export interface GroupsCount_counts {
   __typename: "MeCounts";
-  groups: number | null;
+  groups: number;
 }
 
 export interface GroupsCount {
   __typename: "Me";
   id: number;
-  counts: GroupsCount_counts | null;
+  counts: GroupsCount_counts;
 }

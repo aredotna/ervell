@@ -27,7 +27,7 @@ export interface ProfileTable_searches_advanced_results_Attachment_connection {
 
 export interface ProfileTable_searches_advanced_results_Attachment_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ProfileTable_searches_advanced_results_Attachment_source {
@@ -47,7 +47,7 @@ export interface ProfileTable_searches_advanced_results_Attachment {
    * Returns the outer channel if we are inside of one
    */
   connection: ProfileTable_searches_advanced_results_Attachment_connection | null;
-  counts: ProfileTable_searches_advanced_results_Attachment_counts | null;
+  counts: ProfileTable_searches_advanced_results_Attachment_counts;
   file_url: string | null;
   image_url: string | null;
   href: string;
@@ -102,7 +102,7 @@ export interface ProfileTable_searches_advanced_results_Embed_connection {
 
 export interface ProfileTable_searches_advanced_results_Embed_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ProfileTable_searches_advanced_results_Embed_source {
@@ -122,7 +122,7 @@ export interface ProfileTable_searches_advanced_results_Embed {
    * Returns the outer channel if we are inside of one
    */
   connection: ProfileTable_searches_advanced_results_Embed_connection | null;
-  counts: ProfileTable_searches_advanced_results_Embed_counts | null;
+  counts: ProfileTable_searches_advanced_results_Embed_counts;
   embed_html: string | null;
   image_url: string | null;
   href: string;
@@ -143,7 +143,7 @@ export interface ProfileTable_searches_advanced_results_Image_connection {
 
 export interface ProfileTable_searches_advanced_results_Image_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ProfileTable_searches_advanced_results_Image_source {
@@ -163,7 +163,7 @@ export interface ProfileTable_searches_advanced_results_Image {
    * Returns the outer channel if we are inside of one
    */
   connection: ProfileTable_searches_advanced_results_Image_connection | null;
-  counts: ProfileTable_searches_advanced_results_Image_counts | null;
+  counts: ProfileTable_searches_advanced_results_Image_counts;
   image_url: string | null;
   href: string;
   /**
@@ -187,7 +187,7 @@ export interface ProfileTable_searches_advanced_results_Link_connection {
 
 export interface ProfileTable_searches_advanced_results_Link_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ProfileTable_searches_advanced_results_Link_source {
@@ -207,7 +207,7 @@ export interface ProfileTable_searches_advanced_results_Link {
    * Returns the outer channel if we are inside of one
    */
   connection: ProfileTable_searches_advanced_results_Link_connection | null;
-  counts: ProfileTable_searches_advanced_results_Link_counts | null;
+  counts: ProfileTable_searches_advanced_results_Link_counts;
   image_url: string | null;
   href: string;
   source: ProfileTable_searches_advanced_results_Link_source | null;
@@ -227,7 +227,7 @@ export interface ProfileTable_searches_advanced_results_PendingBlock_connection 
 
 export interface ProfileTable_searches_advanced_results_PendingBlock_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ProfileTable_searches_advanced_results_PendingBlock {
@@ -242,7 +242,7 @@ export interface ProfileTable_searches_advanced_results_PendingBlock {
    */
   connection: ProfileTable_searches_advanced_results_PendingBlock_connection | null;
   href: string;
-  counts: ProfileTable_searches_advanced_results_PendingBlock_counts | null;
+  counts: ProfileTable_searches_advanced_results_PendingBlock_counts;
 }
 
 export interface ProfileTable_searches_advanced_results_Text_user {
@@ -259,7 +259,7 @@ export interface ProfileTable_searches_advanced_results_Text_connection {
 
 export interface ProfileTable_searches_advanced_results_Text_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ProfileTable_searches_advanced_results_Text_source {
@@ -278,7 +278,7 @@ export interface ProfileTable_searches_advanced_results_Text {
    * Returns the outer channel if we are inside of one
    */
   connection: ProfileTable_searches_advanced_results_Text_connection | null;
-  counts: ProfileTable_searches_advanced_results_Text_counts | null;
+  counts: ProfileTable_searches_advanced_results_Text_counts;
   content: string;
   html: string;
   /**

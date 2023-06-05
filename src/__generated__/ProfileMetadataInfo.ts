@@ -11,14 +11,14 @@ export interface ProfileMetadataInfo_User_counts {
   __typename: "UserCounts";
   followers: number;
   following: number;
-  groups: number | null;
+  groups: number;
 }
 
 export interface ProfileMetadataInfo_User {
   __typename: "User";
   href: string;
   about: string | null;
-  counts: ProfileMetadataInfo_User_counts | null;
+  counts: ProfileMetadataInfo_User_counts;
 }
 
 export interface ProfileMetadataInfo_Group_user {
@@ -37,7 +37,7 @@ export interface ProfileMetadataInfo_Group {
   href: string;
   about: string | null;
   user: ProfileMetadataInfo_Group_user;
-  counts: ProfileMetadataInfo_Group_counts | null;
+  counts: ProfileMetadataInfo_Group_counts;
 }
 
 export type ProfileMetadataInfo = ProfileMetadataInfo_User | ProfileMetadataInfo_Group;

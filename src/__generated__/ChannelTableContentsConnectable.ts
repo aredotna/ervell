@@ -9,7 +9,7 @@
 
 export interface ChannelTableContentsConnectable_Attachment_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ChannelTableContentsConnectable_Attachment_source {
@@ -46,7 +46,7 @@ export interface ChannelTableContentsConnectable_Attachment_connection {
 export interface ChannelTableContentsConnectable_Attachment {
   __typename: "Attachment";
   id: number;
-  counts: ChannelTableContentsConnectable_Attachment_counts | null;
+  counts: ChannelTableContentsConnectable_Attachment_counts;
   created_at: string;
   updated_at: string;
   file_url: string | null;
@@ -62,7 +62,7 @@ export interface ChannelTableContentsConnectable_Attachment {
 
 export interface ChannelTableContentsConnectable_Embed_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ChannelTableContentsConnectable_Embed_source {
@@ -99,7 +99,7 @@ export interface ChannelTableContentsConnectable_Embed_connection {
 export interface ChannelTableContentsConnectable_Embed {
   __typename: "Embed";
   id: number;
-  counts: ChannelTableContentsConnectable_Embed_counts | null;
+  counts: ChannelTableContentsConnectable_Embed_counts;
   created_at: string;
   updated_at: string;
   embed_html: string | null;
@@ -115,7 +115,7 @@ export interface ChannelTableContentsConnectable_Embed {
 
 export interface ChannelTableContentsConnectable_Image_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ChannelTableContentsConnectable_Image_source {
@@ -152,7 +152,7 @@ export interface ChannelTableContentsConnectable_Image_connection {
 export interface ChannelTableContentsConnectable_Image {
   __typename: "Image";
   id: number;
-  counts: ChannelTableContentsConnectable_Image_counts | null;
+  counts: ChannelTableContentsConnectable_Image_counts;
   created_at: string;
   updated_at: string;
   image_url: string | null;
@@ -167,7 +167,7 @@ export interface ChannelTableContentsConnectable_Image {
 
 export interface ChannelTableContentsConnectable_Link_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ChannelTableContentsConnectable_Link_source {
@@ -204,7 +204,7 @@ export interface ChannelTableContentsConnectable_Link_connection {
 export interface ChannelTableContentsConnectable_Link {
   __typename: "Link";
   id: number;
-  counts: ChannelTableContentsConnectable_Link_counts | null;
+  counts: ChannelTableContentsConnectable_Link_counts;
   created_at: string;
   updated_at: string;
   image_url: string | null;
@@ -219,7 +219,7 @@ export interface ChannelTableContentsConnectable_Link {
 
 export interface ChannelTableContentsConnectable_PendingBlock_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ChannelTableContentsConnectable_PendingBlock_user {
@@ -250,7 +250,7 @@ export interface ChannelTableContentsConnectable_PendingBlock_connection {
 export interface ChannelTableContentsConnectable_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  counts: ChannelTableContentsConnectable_PendingBlock_counts | null;
+  counts: ChannelTableContentsConnectable_PendingBlock_counts;
   created_at: string;
   updated_at: string;
   title: string;
@@ -263,7 +263,7 @@ export interface ChannelTableContentsConnectable_PendingBlock {
 
 export interface ChannelTableContentsConnectable_Text_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ChannelTableContentsConnectable_Text_user {
@@ -294,7 +294,7 @@ export interface ChannelTableContentsConnectable_Text_connection {
 export interface ChannelTableContentsConnectable_Text {
   __typename: "Text";
   id: number;
-  counts: ChannelTableContentsConnectable_Text_counts | null;
+  counts: ChannelTableContentsConnectable_Text_counts;
   created_at: string;
   updated_at: string;
   content: string;

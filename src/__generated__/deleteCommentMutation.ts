@@ -9,7 +9,7 @@
 
 export interface deleteCommentMutation_delete_comment_commentable_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface deleteCommentMutation_delete_comment_commentable_comments_user {
@@ -36,7 +36,7 @@ export interface deleteCommentMutation_delete_comment_commentable_comments {
 export interface deleteCommentMutation_delete_comment_commentable {
   __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
   id: number;
-  counts: deleteCommentMutation_delete_comment_commentable_counts | null;
+  counts: deleteCommentMutation_delete_comment_commentable_counts;
   comments: deleteCommentMutation_delete_comment_commentable_comments[];
 }
 

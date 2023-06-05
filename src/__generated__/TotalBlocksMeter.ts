@@ -9,12 +9,12 @@
 
 export interface TotalBlocksMeter_counts {
   __typename: "MeCounts";
-  connections: number | null;
+  connections: number;
 }
 
 export interface TotalBlocksMeter {
   __typename: "Me";
   id: number;
-  counts: TotalBlocksMeter_counts | null;
+  counts: TotalBlocksMeter_counts;
   non_premium_connections_limit: number | null;
 }

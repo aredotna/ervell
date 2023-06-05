@@ -59,5 +59,5 @@ export interface ManageGroup {
   invite: ManageGroup_invite | null;
   can: ManageGroup_can;
   owner: ManageGroup_owner;
-  memberships: ManageGroup_memberships[] | null;
+  memberships: ManageGroup_memberships[];
 }

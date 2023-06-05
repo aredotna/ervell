@@ -59,7 +59,7 @@ export interface updateGroupMutation_update_group_group {
   invite: updateGroupMutation_update_group_group_invite | null;
   can: updateGroupMutation_update_group_group_can;
   owner: updateGroupMutation_update_group_group_owner;
-  memberships: updateGroupMutation_update_group_group_memberships[] | null;
+  memberships: updateGroupMutation_update_group_group_memberships[];
 }
 
 export interface updateGroupMutation_update_group {
