@@ -220,15 +220,14 @@ export const StronglyProposePremium = props => (
   </Banner>
 )
 
-export const AnnualSubmissionReminder = props => (
-  <Banner bg="state.supporter" color="white" iconName="Exclaim" {...props}>
-    <Box>Submit your pitch for the 2024 Are.na Annual</Box>
-    <ButtonLink
-      color="state.supporter"
-      href="https://www.are.na/blog/open-call-for-pitches-for-the-2024-are-na-annual"
-      target="_blank"
-    >
-      Learn more
+export const PastDue = props => (
+  <Banner bg="state.alert" color="white" iconName="Exclaim" {...props}>
+    <Box>
+      Looks like your last payment didn't go through. Update your payment info
+      to keep your Premium status.
+    </Box>
+    <ButtonLink href="/settings/billing" target="_blank">
+      Update payment info
     </ButtonLink>
   </Banner>
 )
@@ -326,5 +325,5 @@ export default {
   LOGGED_OUT_PROFILE: LoggedOutProfile,
   LOGGED_OUT_CHANNEL: LoggedOutChannel,
   PREVIOUSLY_PREMIUM: PreviouslyPremium,
-  ANNUAL_SUBMISSION_2023: AnnualSubmissionReminder,
+  PAST_DUE: PastDue,
 }

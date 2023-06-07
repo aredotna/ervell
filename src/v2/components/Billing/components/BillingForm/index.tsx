@@ -416,7 +416,8 @@ const BillingForm: React.FC<BillingFormProps> = ({
                   : {
                       resting: 'Save changes',
                       processing: 'Processing...',
-                      error: 'Error',
+                      error:
+                        'Error. Please contact help@are.na for assistance.',
                     }[mode] || 'Save changes'}
               </GenericButton>
 
