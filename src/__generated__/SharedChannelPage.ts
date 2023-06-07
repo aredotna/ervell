@@ -89,7 +89,7 @@ export interface SharedChannelPage_channel_collaborators_Group {
   href: string;
   description: string | null;
   user: SharedChannelPage_channel_collaborators_Group_user;
-  users: SharedChannelPage_channel_collaborators_Group_users[] | null;
+  users: SharedChannelPage_channel_collaborators_Group_users[];
   can: SharedChannelPage_channel_collaborators_Group_can;
   visibility: string;
   label: string;

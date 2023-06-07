@@ -47,11 +47,11 @@ export interface ProfileMetadata_Group {
   /**
    * Are *any* users in the group upgradeable to Premium?
    */
-  is_upgradeable: boolean | null;
+  is_upgradeable: boolean;
   about: string | null;
   user: ProfileMetadata_Group_user;
-  counts: ProfileMetadata_Group_counts | null;
-  users: ProfileMetadata_Group_users[] | null;
+  counts: ProfileMetadata_Group_counts;
+  users: ProfileMetadata_Group_users[];
 }
 
 export interface ProfileMetadata_User_can {
@@ -65,7 +65,7 @@ export interface ProfileMetadata_User_counts {
   __typename: "UserCounts";
   followers: number;
   following: number;
-  groups: number | null;
+  groups: number;
   following_channels: number;
   following_users: number;
   following_groups: number;
@@ -81,7 +81,7 @@ export interface ProfileMetadata_User {
   id: number;
   can: ProfileMetadata_User_can;
   about: string | null;
-  counts: ProfileMetadata_User_counts | null;
+  counts: ProfileMetadata_User_counts;
 }
 
 export type ProfileMetadata = ProfileMetadata_Group | ProfileMetadata_User;

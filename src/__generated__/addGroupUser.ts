@@ -59,7 +59,7 @@ export interface addGroupUser_add_group_users_group {
   invite: addGroupUser_add_group_users_group_invite | null;
   can: addGroupUser_add_group_users_group_can;
   owner: addGroupUser_add_group_users_group_owner;
-  memberships: addGroupUser_add_group_users_group_memberships[] | null;
+  memberships: addGroupUser_add_group_users_group_memberships[];
 }
 
 export interface addGroupUser_add_group_users {

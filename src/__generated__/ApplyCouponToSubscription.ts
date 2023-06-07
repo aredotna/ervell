@@ -70,7 +70,7 @@ export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_custo
 
 export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_counts {
   __typename: "MeCounts";
-  connections: number | null;
+  connections: number;
 }
 
 export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me {
@@ -79,7 +79,7 @@ export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me {
   non_premium_private_connections_limit: number | null;
   non_premium_connections_limit: number | null;
   customer: ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer | null;
-  counts: ApplyCouponToSubscription_apply_coupon_to_subscription_me_counts | null;
+  counts: ApplyCouponToSubscription_apply_coupon_to_subscription_me_counts;
 }
 
 export interface ApplyCouponToSubscription_apply_coupon_to_subscription_upcoming_customer_invoice {

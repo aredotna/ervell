@@ -34,7 +34,7 @@ export interface ProfileGroupUserList_Group {
   __typename: "Group";
   id: number;
   user: ProfileGroupUserList_Group_user;
-  users: ProfileGroupUserList_Group_users[] | null;
+  users: ProfileGroupUserList_Group_users[];
   can: ProfileGroupUserList_Group_can;
 }
 

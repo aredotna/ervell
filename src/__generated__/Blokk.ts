@@ -32,7 +32,7 @@ export interface Blokk_blokk_Attachment_source {
 
 export interface Blokk_blokk_Attachment_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface Blokk_blokk_Attachment {
@@ -47,7 +47,7 @@ export interface Blokk_blokk_Attachment {
    */
   connection: Blokk_blokk_Attachment_connection | null;
   source: Blokk_blokk_Attachment_source | null;
-  counts: Blokk_blokk_Attachment_counts | null;
+  counts: Blokk_blokk_Attachment_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -80,7 +80,7 @@ export interface Blokk_blokk_Embed_source {
 
 export interface Blokk_blokk_Embed_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface Blokk_blokk_Embed {
@@ -95,7 +95,7 @@ export interface Blokk_blokk_Embed {
    */
   connection: Blokk_blokk_Embed_connection | null;
   source: Blokk_blokk_Embed_source | null;
-  counts: Blokk_blokk_Embed_counts | null;
+  counts: Blokk_blokk_Embed_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -127,7 +127,7 @@ export interface Blokk_blokk_Image_source {
 
 export interface Blokk_blokk_Image_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface Blokk_blokk_Image_original_dimensions {
@@ -148,7 +148,7 @@ export interface Blokk_blokk_Image {
    */
   connection: Blokk_blokk_Image_connection | null;
   source: Blokk_blokk_Image_source | null;
-  counts: Blokk_blokk_Image_counts | null;
+  counts: Blokk_blokk_Image_counts;
   alt_text: string | null;
   src: string | null;
   src_1x: string | null;
@@ -182,7 +182,7 @@ export interface Blokk_blokk_Link_source {
 
 export interface Blokk_blokk_Link_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface Blokk_blokk_Link {
@@ -197,7 +197,7 @@ export interface Blokk_blokk_Link {
    */
   connection: Blokk_blokk_Link_connection | null;
   source: Blokk_blokk_Link_source | null;
-  counts: Blokk_blokk_Link_counts | null;
+  counts: Blokk_blokk_Link_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -232,7 +232,7 @@ export interface Blokk_blokk_PendingBlock_source {
 
 export interface Blokk_blokk_PendingBlock_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface Blokk_blokk_PendingBlock {
@@ -247,7 +247,7 @@ export interface Blokk_blokk_PendingBlock {
    */
   connection: Blokk_blokk_PendingBlock_connection | null;
   source: Blokk_blokk_PendingBlock_source | null;
-  counts: Blokk_blokk_PendingBlock_counts | null;
+  counts: Blokk_blokk_PendingBlock_counts;
 }
 
 export interface Blokk_blokk_Text_user {
@@ -275,7 +275,7 @@ export interface Blokk_blokk_Text_source {
 
 export interface Blokk_blokk_Text_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface Blokk_blokk_Text {
@@ -290,7 +290,7 @@ export interface Blokk_blokk_Text {
    */
   connection: Blokk_blokk_Text_connection | null;
   source: Blokk_blokk_Text_source | null;
-  counts: Blokk_blokk_Text_counts | null;
+  counts: Blokk_blokk_Text_counts;
   content: string;
   raw: string;
 }

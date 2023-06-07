@@ -48,5 +48,5 @@ export interface CancelPremiumUserSelection {
   id: number;
   name: string;
   user: CancelPremiumUserSelection_user;
-  users: CancelPremiumUserSelection_users[] | null;
+  users: CancelPremiumUserSelection_users[];
 }

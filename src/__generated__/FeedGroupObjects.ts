@@ -13,7 +13,7 @@ export interface FeedGroupObjects_objects_Comment {
 
 export interface FeedGroupObjects_objects_Attachment_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface FeedGroupObjects_objects_Attachment_user {
@@ -42,7 +42,7 @@ export interface FeedGroupObjects_objects_Attachment_source {
 export interface FeedGroupObjects_objects_Attachment {
   __typename: "Attachment";
   href: string;
-  counts: FeedGroupObjects_objects_Attachment_counts | null;
+  counts: FeedGroupObjects_objects_Attachment_counts;
   id: number;
   title: string;
   src: string | null;
@@ -123,7 +123,7 @@ export interface FeedGroupObjects_objects_Channel {
 
 export interface FeedGroupObjects_objects_Embed_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface FeedGroupObjects_objects_Embed_user {
@@ -152,7 +152,7 @@ export interface FeedGroupObjects_objects_Embed_source {
 export interface FeedGroupObjects_objects_Embed {
   __typename: "Embed";
   href: string;
-  counts: FeedGroupObjects_objects_Embed_counts | null;
+  counts: FeedGroupObjects_objects_Embed_counts;
   id: number;
   title: string;
   src: string | null;
@@ -170,7 +170,7 @@ export interface FeedGroupObjects_objects_Embed {
 
 export interface FeedGroupObjects_objects_Image_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface FeedGroupObjects_objects_Image_original_dimensions {
@@ -205,7 +205,7 @@ export interface FeedGroupObjects_objects_Image_source {
 export interface FeedGroupObjects_objects_Image {
   __typename: "Image";
   href: string;
-  counts: FeedGroupObjects_objects_Image_counts | null;
+  counts: FeedGroupObjects_objects_Image_counts;
   id: number;
   title: string;
   alt_text: string | null;
@@ -225,7 +225,7 @@ export interface FeedGroupObjects_objects_Image {
 
 export interface FeedGroupObjects_objects_Link_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface FeedGroupObjects_objects_Link_user {
@@ -254,7 +254,7 @@ export interface FeedGroupObjects_objects_Link_source {
 export interface FeedGroupObjects_objects_Link {
   __typename: "Link";
   href: string;
-  counts: FeedGroupObjects_objects_Link_counts | null;
+  counts: FeedGroupObjects_objects_Link_counts;
   title: string;
   src: string | null;
   src_1x: string | null;
@@ -275,7 +275,7 @@ export interface FeedGroupObjects_objects_Link {
 
 export interface FeedGroupObjects_objects_Text_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface FeedGroupObjects_objects_Text_user {
@@ -304,7 +304,7 @@ export interface FeedGroupObjects_objects_Text_source {
 export interface FeedGroupObjects_objects_Text {
   __typename: "Text";
   href: string;
-  counts: FeedGroupObjects_objects_Text_counts | null;
+  counts: FeedGroupObjects_objects_Text_counts;
   id: number;
   title: string;
   content: string;

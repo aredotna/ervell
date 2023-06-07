@@ -24,7 +24,7 @@ export interface PlanSelection_customer {
 
 export interface PlanSelection_counts {
   __typename: "MeCounts";
-  connections: number | null;
+  connections: number;
 }
 
 export interface PlanSelection {
@@ -33,5 +33,5 @@ export interface PlanSelection {
   non_premium_connections_limit: number | null;
   customer: PlanSelection_customer | null;
   id: number;
-  counts: PlanSelection_counts | null;
+  counts: PlanSelection_counts;
 }

@@ -221,14 +221,14 @@ export interface NotificationsQuery_me_feed {
 
 export interface NotificationsQuery_me_counts {
   __typename: "MeCounts";
-  notifications: number | null;
+  notifications: number;
 }
 
 export interface NotificationsQuery_me {
   __typename: "Me";
   id: number;
   feed: NotificationsQuery_me_feed | null;
-  counts: NotificationsQuery_me_counts | null;
+  counts: NotificationsQuery_me_counts;
 }
 
 export interface NotificationsQuery {

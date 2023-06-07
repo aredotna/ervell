@@ -82,18 +82,18 @@ export interface MyGroup_group {
   /**
    * Is *every* user in the group Premium?
    */
-  is_premium: boolean | null;
+  is_premium: boolean;
   /**
    * Are *any* users in the group upgradeable to Premium?
    */
-  is_upgradeable: boolean | null;
+  is_upgradeable: boolean;
   subscription: MyGroup_group_subscription | null;
   name: string;
   href: string;
   initials: string;
   avatar: string | null;
   user: MyGroup_group_user;
-  users: MyGroup_group_users[] | null;
+  users: MyGroup_group_users[];
   owner: MyGroup_group_owner;
 }
 

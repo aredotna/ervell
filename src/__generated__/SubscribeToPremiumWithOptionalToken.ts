@@ -70,7 +70,7 @@ export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_o
 
 export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_counts {
   __typename: "MeCounts";
-  connections: number | null;
+  connections: number;
 }
 
 export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me {
@@ -79,7 +79,7 @@ export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_o
   non_premium_private_connections_limit: number | null;
   non_premium_connections_limit: number | null;
   customer: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer | null;
-  counts: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_counts | null;
+  counts: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_counts;
 }
 
 export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token {

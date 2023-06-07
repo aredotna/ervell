@@ -36,5 +36,5 @@ export interface UpgradeCTA {
   __typename: "Group";
   id: number;
   subscription: UpgradeCTA_subscription | null;
-  users: UpgradeCTA_users[] | null;
+  users: UpgradeCTA_users[];
 }

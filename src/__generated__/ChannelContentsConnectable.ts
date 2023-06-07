@@ -32,7 +32,7 @@ export interface ChannelContentsConnectable_Attachment_source {
 
 export interface ChannelContentsConnectable_Attachment_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ChannelContentsConnectable_Attachment {
@@ -47,7 +47,7 @@ export interface ChannelContentsConnectable_Attachment {
    */
   connection: ChannelContentsConnectable_Attachment_connection | null;
   source: ChannelContentsConnectable_Attachment_source | null;
-  counts: ChannelContentsConnectable_Attachment_counts | null;
+  counts: ChannelContentsConnectable_Attachment_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -80,7 +80,7 @@ export interface ChannelContentsConnectable_Embed_source {
 
 export interface ChannelContentsConnectable_Embed_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ChannelContentsConnectable_Embed {
@@ -95,7 +95,7 @@ export interface ChannelContentsConnectable_Embed {
    */
   connection: ChannelContentsConnectable_Embed_connection | null;
   source: ChannelContentsConnectable_Embed_source | null;
-  counts: ChannelContentsConnectable_Embed_counts | null;
+  counts: ChannelContentsConnectable_Embed_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -127,7 +127,7 @@ export interface ChannelContentsConnectable_Image_source {
 
 export interface ChannelContentsConnectable_Image_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ChannelContentsConnectable_Image_original_dimensions {
@@ -148,7 +148,7 @@ export interface ChannelContentsConnectable_Image {
    */
   connection: ChannelContentsConnectable_Image_connection | null;
   source: ChannelContentsConnectable_Image_source | null;
-  counts: ChannelContentsConnectable_Image_counts | null;
+  counts: ChannelContentsConnectable_Image_counts;
   alt_text: string | null;
   src: string | null;
   src_1x: string | null;
@@ -182,7 +182,7 @@ export interface ChannelContentsConnectable_Link_source {
 
 export interface ChannelContentsConnectable_Link_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ChannelContentsConnectable_Link {
@@ -197,7 +197,7 @@ export interface ChannelContentsConnectable_Link {
    */
   connection: ChannelContentsConnectable_Link_connection | null;
   source: ChannelContentsConnectable_Link_source | null;
-  counts: ChannelContentsConnectable_Link_counts | null;
+  counts: ChannelContentsConnectable_Link_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -232,7 +232,7 @@ export interface ChannelContentsConnectable_PendingBlock_source {
 
 export interface ChannelContentsConnectable_PendingBlock_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ChannelContentsConnectable_PendingBlock {
@@ -247,7 +247,7 @@ export interface ChannelContentsConnectable_PendingBlock {
    */
   connection: ChannelContentsConnectable_PendingBlock_connection | null;
   source: ChannelContentsConnectable_PendingBlock_source | null;
-  counts: ChannelContentsConnectable_PendingBlock_counts | null;
+  counts: ChannelContentsConnectable_PendingBlock_counts;
 }
 
 export interface ChannelContentsConnectable_Text_user {
@@ -275,7 +275,7 @@ export interface ChannelContentsConnectable_Text_source {
 
 export interface ChannelContentsConnectable_Text_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ChannelContentsConnectable_Text {
@@ -290,7 +290,7 @@ export interface ChannelContentsConnectable_Text {
    */
   connection: ChannelContentsConnectable_Text_connection | null;
   source: ChannelContentsConnectable_Text_source | null;
-  counts: ChannelContentsConnectable_Text_counts | null;
+  counts: ChannelContentsConnectable_Text_counts;
   content: string;
   raw: string;
 }

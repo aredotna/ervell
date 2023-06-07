@@ -42,7 +42,7 @@ export interface CollaboratorLink_Group {
   href: string;
   description: string | null;
   user: CollaboratorLink_Group_user;
-  users: CollaboratorLink_Group_users[] | null;
+  users: CollaboratorLink_Group_users[];
   can: CollaboratorLink_Group_can;
   visibility: string;
   label: string;

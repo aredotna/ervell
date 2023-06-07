@@ -20,6 +20,6 @@ export interface FollowerCountCheck_twitter_authentication {
 export interface FollowerCountCheck {
   __typename: "Me";
   id: number;
-  counts: FollowerCountCheck_counts | null;
+  counts: FollowerCountCheck_counts;
   twitter_authentication: FollowerCountCheck_twitter_authentication | null;
 }

@@ -14,7 +14,7 @@ export interface FullBlockChannelsAlsoIn_Channel {
 
 export interface FullBlockChannelsAlsoIn_Attachment_counts {
   __typename: "BlockCounts";
-  channels_with_same_source: number | null;
+  channels_with_same_source: number;
 }
 
 export interface FullBlockChannelsAlsoIn_Attachment_channels_with_same_source_owner_Group {
@@ -51,7 +51,7 @@ export interface FullBlockChannelsAlsoIn_Attachment_channels_with_same_source {
 export interface FullBlockChannelsAlsoIn_Attachment {
   __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
   id: number;
-  counts: FullBlockChannelsAlsoIn_Attachment_counts | null;
+  counts: FullBlockChannelsAlsoIn_Attachment_counts;
   channels_with_same_source: FullBlockChannelsAlsoIn_Attachment_channels_with_same_source[];
 }
 

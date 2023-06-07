@@ -21,7 +21,7 @@ export interface ProfileTableContentsFragment_contents_PendingBlock_connection {
 
 export interface ProfileTableContentsFragment_contents_PendingBlock_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ProfileTableContentsFragment_contents_PendingBlock {
@@ -36,7 +36,7 @@ export interface ProfileTableContentsFragment_contents_PendingBlock {
    */
   connection: ProfileTableContentsFragment_contents_PendingBlock_connection | null;
   href: string;
-  counts: ProfileTableContentsFragment_contents_PendingBlock_counts | null;
+  counts: ProfileTableContentsFragment_contents_PendingBlock_counts;
 }
 
 export interface ProfileTableContentsFragment_contents_Attachment_user {
@@ -53,7 +53,7 @@ export interface ProfileTableContentsFragment_contents_Attachment_connection {
 
 export interface ProfileTableContentsFragment_contents_Attachment_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ProfileTableContentsFragment_contents_Attachment_source {
@@ -73,7 +73,7 @@ export interface ProfileTableContentsFragment_contents_Attachment {
    * Returns the outer channel if we are inside of one
    */
   connection: ProfileTableContentsFragment_contents_Attachment_connection | null;
-  counts: ProfileTableContentsFragment_contents_Attachment_counts | null;
+  counts: ProfileTableContentsFragment_contents_Attachment_counts;
   file_url: string | null;
   image_url: string | null;
   href: string;
@@ -94,7 +94,7 @@ export interface ProfileTableContentsFragment_contents_Embed_connection {
 
 export interface ProfileTableContentsFragment_contents_Embed_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ProfileTableContentsFragment_contents_Embed_source {
@@ -114,7 +114,7 @@ export interface ProfileTableContentsFragment_contents_Embed {
    * Returns the outer channel if we are inside of one
    */
   connection: ProfileTableContentsFragment_contents_Embed_connection | null;
-  counts: ProfileTableContentsFragment_contents_Embed_counts | null;
+  counts: ProfileTableContentsFragment_contents_Embed_counts;
   embed_html: string | null;
   image_url: string | null;
   href: string;
@@ -135,7 +135,7 @@ export interface ProfileTableContentsFragment_contents_Image_connection {
 
 export interface ProfileTableContentsFragment_contents_Image_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ProfileTableContentsFragment_contents_Image_source {
@@ -155,7 +155,7 @@ export interface ProfileTableContentsFragment_contents_Image {
    * Returns the outer channel if we are inside of one
    */
   connection: ProfileTableContentsFragment_contents_Image_connection | null;
-  counts: ProfileTableContentsFragment_contents_Image_counts | null;
+  counts: ProfileTableContentsFragment_contents_Image_counts;
   image_url: string | null;
   href: string;
   /**
@@ -179,7 +179,7 @@ export interface ProfileTableContentsFragment_contents_Link_connection {
 
 export interface ProfileTableContentsFragment_contents_Link_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ProfileTableContentsFragment_contents_Link_source {
@@ -199,7 +199,7 @@ export interface ProfileTableContentsFragment_contents_Link {
    * Returns the outer channel if we are inside of one
    */
   connection: ProfileTableContentsFragment_contents_Link_connection | null;
-  counts: ProfileTableContentsFragment_contents_Link_counts | null;
+  counts: ProfileTableContentsFragment_contents_Link_counts;
   image_url: string | null;
   href: string;
   source: ProfileTableContentsFragment_contents_Link_source | null;
@@ -219,7 +219,7 @@ export interface ProfileTableContentsFragment_contents_Text_connection {
 
 export interface ProfileTableContentsFragment_contents_Text_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ProfileTableContentsFragment_contents_Text_source {
@@ -238,7 +238,7 @@ export interface ProfileTableContentsFragment_contents_Text {
    * Returns the outer channel if we are inside of one
    */
   connection: ProfileTableContentsFragment_contents_Text_connection | null;
-  counts: ProfileTableContentsFragment_contents_Text_counts | null;
+  counts: ProfileTableContentsFragment_contents_Text_counts;
   content: string;
   html: string;
   /**

@@ -52,7 +52,7 @@ export interface ManageCollaboratorsQuery_channel_collaborators_Group {
   visibility: string;
   user: ManageCollaboratorsQuery_channel_collaborators_Group_user;
   description: string | null;
-  users: ManageCollaboratorsQuery_channel_collaborators_Group_users[] | null;
+  users: ManageCollaboratorsQuery_channel_collaborators_Group_users[];
   can: ManageCollaboratorsQuery_channel_collaborators_Group_can;
   label: string;
 }

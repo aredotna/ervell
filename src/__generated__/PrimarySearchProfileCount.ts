@@ -9,14 +9,14 @@
 
 export interface PrimarySearchProfileCount_user_counts {
   __typename: "UserCounts";
-  channels: number | null;
-  blocks: number | null;
+  channels: number;
+  blocks: number;
 }
 
 export interface PrimarySearchProfileCount_user {
   __typename: "User";
   id: number;
-  counts: PrimarySearchProfileCount_user_counts | null;
+  counts: PrimarySearchProfileCount_user_counts;
 }
 
 export interface PrimarySearchProfileCount {

@@ -14,7 +14,7 @@ export interface FullBlockCommentsQuery_block_Channel {
 
 export interface FullBlockCommentsQuery_block_Attachment_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface FullBlockCommentsQuery_block_Attachment_comments_user {
@@ -41,7 +41,7 @@ export interface FullBlockCommentsQuery_block_Attachment_comments {
 export interface FullBlockCommentsQuery_block_Attachment {
   __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
   id: number;
-  counts: FullBlockCommentsQuery_block_Attachment_counts | null;
+  counts: FullBlockCommentsQuery_block_Attachment_counts;
   comments: FullBlockCommentsQuery_block_Attachment_comments[];
 }
 

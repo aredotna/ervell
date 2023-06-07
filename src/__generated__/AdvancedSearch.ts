@@ -34,7 +34,7 @@ export interface AdvancedSearch_searches_advanced_results_Attachment_source {
 
 export interface AdvancedSearch_searches_advanced_results_Attachment_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface AdvancedSearch_searches_advanced_results_Attachment {
@@ -49,7 +49,7 @@ export interface AdvancedSearch_searches_advanced_results_Attachment {
    */
   connection: AdvancedSearch_searches_advanced_results_Attachment_connection | null;
   source: AdvancedSearch_searches_advanced_results_Attachment_source | null;
-  counts: AdvancedSearch_searches_advanced_results_Attachment_counts | null;
+  counts: AdvancedSearch_searches_advanced_results_Attachment_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -144,7 +144,7 @@ export interface AdvancedSearch_searches_advanced_results_Embed_source {
 
 export interface AdvancedSearch_searches_advanced_results_Embed_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface AdvancedSearch_searches_advanced_results_Embed {
@@ -159,7 +159,7 @@ export interface AdvancedSearch_searches_advanced_results_Embed {
    */
   connection: AdvancedSearch_searches_advanced_results_Embed_connection | null;
   source: AdvancedSearch_searches_advanced_results_Embed_source | null;
-  counts: AdvancedSearch_searches_advanced_results_Embed_counts | null;
+  counts: AdvancedSearch_searches_advanced_results_Embed_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -191,7 +191,7 @@ export interface AdvancedSearch_searches_advanced_results_Image_source {
 
 export interface AdvancedSearch_searches_advanced_results_Image_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface AdvancedSearch_searches_advanced_results_Image_original_dimensions {
@@ -212,7 +212,7 @@ export interface AdvancedSearch_searches_advanced_results_Image {
    */
   connection: AdvancedSearch_searches_advanced_results_Image_connection | null;
   source: AdvancedSearch_searches_advanced_results_Image_source | null;
-  counts: AdvancedSearch_searches_advanced_results_Image_counts | null;
+  counts: AdvancedSearch_searches_advanced_results_Image_counts;
   alt_text: string | null;
   src: string | null;
   src_1x: string | null;
@@ -246,7 +246,7 @@ export interface AdvancedSearch_searches_advanced_results_Link_source {
 
 export interface AdvancedSearch_searches_advanced_results_Link_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface AdvancedSearch_searches_advanced_results_Link {
@@ -261,7 +261,7 @@ export interface AdvancedSearch_searches_advanced_results_Link {
    */
   connection: AdvancedSearch_searches_advanced_results_Link_connection | null;
   source: AdvancedSearch_searches_advanced_results_Link_source | null;
-  counts: AdvancedSearch_searches_advanced_results_Link_counts | null;
+  counts: AdvancedSearch_searches_advanced_results_Link_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -296,7 +296,7 @@ export interface AdvancedSearch_searches_advanced_results_PendingBlock_source {
 
 export interface AdvancedSearch_searches_advanced_results_PendingBlock_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface AdvancedSearch_searches_advanced_results_PendingBlock {
@@ -311,7 +311,7 @@ export interface AdvancedSearch_searches_advanced_results_PendingBlock {
    */
   connection: AdvancedSearch_searches_advanced_results_PendingBlock_connection | null;
   source: AdvancedSearch_searches_advanced_results_PendingBlock_source | null;
-  counts: AdvancedSearch_searches_advanced_results_PendingBlock_counts | null;
+  counts: AdvancedSearch_searches_advanced_results_PendingBlock_counts;
 }
 
 export interface AdvancedSearch_searches_advanced_results_Text_user {
@@ -339,7 +339,7 @@ export interface AdvancedSearch_searches_advanced_results_Text_source {
 
 export interface AdvancedSearch_searches_advanced_results_Text_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface AdvancedSearch_searches_advanced_results_Text {
@@ -354,7 +354,7 @@ export interface AdvancedSearch_searches_advanced_results_Text {
    */
   connection: AdvancedSearch_searches_advanced_results_Text_connection | null;
   source: AdvancedSearch_searches_advanced_results_Text_source | null;
-  counts: AdvancedSearch_searches_advanced_results_Text_counts | null;
+  counts: AdvancedSearch_searches_advanced_results_Text_counts;
   content: string;
   raw: string;
 }

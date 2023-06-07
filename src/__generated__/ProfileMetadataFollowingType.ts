@@ -20,7 +20,7 @@ export interface ProfileMetadataFollowingType_User_counts {
 
 export interface ProfileMetadataFollowingType_User {
   __typename: "User";
-  counts: ProfileMetadataFollowingType_User_counts | null;
+  counts: ProfileMetadataFollowingType_User_counts;
 }
 
 export type ProfileMetadataFollowingType = ProfileMetadataFollowingType_Group | ProfileMetadataFollowingType_User;

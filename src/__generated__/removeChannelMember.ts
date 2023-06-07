@@ -54,7 +54,7 @@ export interface removeChannelMember_remove_channel_members_channel_collaborator
   visibility: string;
   user: removeChannelMember_remove_channel_members_channel_collaborators_Group_user;
   description: string | null;
-  users: removeChannelMember_remove_channel_members_channel_collaborators_Group_users[] | null;
+  users: removeChannelMember_remove_channel_members_channel_collaborators_Group_users[];
   can: removeChannelMember_remove_channel_members_channel_collaborators_Group_can;
   label: string;
 }

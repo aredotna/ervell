@@ -68,7 +68,7 @@ export interface BillingForm_customer {
 
 export interface BillingForm_counts {
   __typename: "MeCounts";
-  connections: number | null;
+  connections: number;
 }
 
 export interface BillingForm {
@@ -77,5 +77,5 @@ export interface BillingForm {
   non_premium_private_connections_limit: number | null;
   non_premium_connections_limit: number | null;
   customer: BillingForm_customer | null;
-  counts: BillingForm_counts | null;
+  counts: BillingForm_counts;
 }

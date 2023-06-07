@@ -41,20 +41,20 @@ export interface ProfileChannels_Group_channels {
 
 export interface ProfileChannels_Group_counts {
   __typename: "GroupCounts";
-  channels: number | null;
+  channels: number;
 }
 
 export interface ProfileChannels_Group {
   __typename: "Group";
   id: number;
   name: string;
-  channels: ProfileChannels_Group_channels[] | null;
-  counts: ProfileChannels_Group_counts | null;
+  channels: ProfileChannels_Group_channels[];
+  counts: ProfileChannels_Group_counts;
 }
 
 export interface ProfileChannels_User_counts {
   __typename: "UserCounts";
-  channels: number | null;
+  channels: number;
 }
 
 export interface ProfileChannels_User_channels_counts {
@@ -93,7 +93,7 @@ export interface ProfileChannels_User {
   __typename: "User";
   id: number;
   name: string;
-  counts: ProfileChannels_User_counts | null;
+  counts: ProfileChannels_User_counts;
   channels: ProfileChannels_User_channels[] | null;
 }
 

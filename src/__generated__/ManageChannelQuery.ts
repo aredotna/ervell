@@ -68,13 +68,13 @@ export interface ManageChannelQuery_channel {
 
 export interface ManageChannelQuery_me_counts {
   __typename: "MeCounts";
-  groups: number | null;
+  groups: number;
 }
 
 export interface ManageChannelQuery_me {
   __typename: "Me";
   id: number;
-  counts: ManageChannelQuery_me_counts | null;
+  counts: ManageChannelQuery_me_counts;
 }
 
 export interface ManageChannelQuery {

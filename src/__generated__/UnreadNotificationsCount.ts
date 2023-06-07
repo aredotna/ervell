@@ -9,11 +9,11 @@
 
 export interface UnreadNotificationsCount_counts {
   __typename: "MeCounts";
-  notifications: number | null;
+  notifications: number;
 }
 
 export interface UnreadNotificationsCount {
   __typename: "Me";
   id: number;
-  counts: UnreadNotificationsCount_counts | null;
+  counts: UnreadNotificationsCount_counts;
 }

@@ -9,7 +9,7 @@
 
 export interface CreateComment_create_comment_comment_commentable_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface CreateComment_create_comment_comment_commentable_comments_user {
@@ -36,7 +36,7 @@ export interface CreateComment_create_comment_comment_commentable_comments {
 export interface CreateComment_create_comment_comment_commentable {
   __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
   id: number;
-  counts: CreateComment_create_comment_comment_commentable_counts | null;
+  counts: CreateComment_create_comment_comment_commentable_counts;
   comments: CreateComment_create_comment_comment_commentable_comments[];
 }
 

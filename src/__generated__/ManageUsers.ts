@@ -42,5 +42,5 @@ export interface ManageUsers {
   id: number;
   name: string;
   owner: ManageUsers_owner;
-  memberships: ManageUsers_memberships[] | null;
+  memberships: ManageUsers_memberships[];
 }

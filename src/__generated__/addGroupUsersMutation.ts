@@ -15,7 +15,7 @@ export interface addGroupUsersMutation_add_group_users_group_users {
 export interface addGroupUsersMutation_add_group_users_group {
   __typename: "Group";
   id: number;
-  users: addGroupUsersMutation_add_group_users_group_users[] | null;
+  users: addGroupUsersMutation_add_group_users_group_users[];
 }
 
 export interface addGroupUsersMutation_add_group_users {

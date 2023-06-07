@@ -9,7 +9,7 @@
 
 export interface TableRowFragment_PendingBlock_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface TableRowFragment_PendingBlock_user {
@@ -30,7 +30,7 @@ export interface TableRowFragment_PendingBlock {
   created_at: string;
   updated_at: string;
   href: string;
-  counts: TableRowFragment_PendingBlock_counts | null;
+  counts: TableRowFragment_PendingBlock_counts;
   title: string;
   user: TableRowFragment_PendingBlock_user | null;
   /**
@@ -41,7 +41,7 @@ export interface TableRowFragment_PendingBlock {
 
 export interface TableRowFragment_Attachment_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface TableRowFragment_Attachment_source {
@@ -67,7 +67,7 @@ export interface TableRowFragment_Attachment {
   id: number;
   created_at: string;
   updated_at: string;
-  counts: TableRowFragment_Attachment_counts | null;
+  counts: TableRowFragment_Attachment_counts;
   file_url: string | null;
   image_url: string | null;
   href: string;
@@ -82,7 +82,7 @@ export interface TableRowFragment_Attachment {
 
 export interface TableRowFragment_Embed_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface TableRowFragment_Embed_source {
@@ -108,7 +108,7 @@ export interface TableRowFragment_Embed {
   id: number;
   created_at: string;
   updated_at: string;
-  counts: TableRowFragment_Embed_counts | null;
+  counts: TableRowFragment_Embed_counts;
   embed_html: string | null;
   image_url: string | null;
   href: string;
@@ -123,7 +123,7 @@ export interface TableRowFragment_Embed {
 
 export interface TableRowFragment_Image_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface TableRowFragment_Image_source {
@@ -149,7 +149,7 @@ export interface TableRowFragment_Image {
   id: number;
   created_at: string;
   updated_at: string;
-  counts: TableRowFragment_Image_counts | null;
+  counts: TableRowFragment_Image_counts;
   image_url: string | null;
   href: string;
   /**
@@ -167,7 +167,7 @@ export interface TableRowFragment_Image {
 
 export interface TableRowFragment_Link_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface TableRowFragment_Link_source {
@@ -193,7 +193,7 @@ export interface TableRowFragment_Link {
   id: number;
   created_at: string;
   updated_at: string;
-  counts: TableRowFragment_Link_counts | null;
+  counts: TableRowFragment_Link_counts;
   image_url: string | null;
   href: string;
   source: TableRowFragment_Link_source | null;
@@ -207,7 +207,7 @@ export interface TableRowFragment_Link {
 
 export interface TableRowFragment_Text_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface TableRowFragment_Text_source {
@@ -232,7 +232,7 @@ export interface TableRowFragment_Text {
   id: number;
   created_at: string;
   updated_at: string;
-  counts: TableRowFragment_Text_counts | null;
+  counts: TableRowFragment_Text_counts;
   content: string;
   html: string;
   /**

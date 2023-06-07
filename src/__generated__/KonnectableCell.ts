@@ -9,7 +9,7 @@
 
 export interface KonnectableCell_Attachment_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface KonnectableCell_Attachment_user {
@@ -39,7 +39,7 @@ export interface KonnectableCell_Attachment {
   __typename: "Attachment";
   id: number;
   href: string;
-  counts: KonnectableCell_Attachment_counts | null;
+  counts: KonnectableCell_Attachment_counts;
   updated_at: string;
   title: string;
   user: KonnectableCell_Attachment_user | null;
@@ -57,7 +57,7 @@ export interface KonnectableCell_Attachment {
 
 export interface KonnectableCell_Embed_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface KonnectableCell_Embed_user {
@@ -87,7 +87,7 @@ export interface KonnectableCell_Embed {
   __typename: "Embed";
   id: number;
   href: string;
-  counts: KonnectableCell_Embed_counts | null;
+  counts: KonnectableCell_Embed_counts;
   updated_at: string;
   title: string;
   user: KonnectableCell_Embed_user | null;
@@ -104,7 +104,7 @@ export interface KonnectableCell_Embed {
 
 export interface KonnectableCell_Image_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface KonnectableCell_Image_user {
@@ -140,7 +140,7 @@ export interface KonnectableCell_Image {
   __typename: "Image";
   id: number;
   href: string;
-  counts: KonnectableCell_Image_counts | null;
+  counts: KonnectableCell_Image_counts;
   updated_at: string;
   title: string;
   user: KonnectableCell_Image_user | null;
@@ -159,7 +159,7 @@ export interface KonnectableCell_Image {
 
 export interface KonnectableCell_Link_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface KonnectableCell_Link_user {
@@ -189,7 +189,7 @@ export interface KonnectableCell_Link {
   __typename: "Link";
   id: number;
   href: string;
-  counts: KonnectableCell_Link_counts | null;
+  counts: KonnectableCell_Link_counts;
   updated_at: string;
   title: string;
   user: KonnectableCell_Link_user | null;
@@ -209,7 +209,7 @@ export interface KonnectableCell_Link {
 
 export interface KonnectableCell_PendingBlock_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface KonnectableCell_PendingBlock_user {
@@ -239,7 +239,7 @@ export interface KonnectableCell_PendingBlock {
   __typename: "PendingBlock";
   id: number;
   href: string;
-  counts: KonnectableCell_PendingBlock_counts | null;
+  counts: KonnectableCell_PendingBlock_counts;
   updated_at: string;
   title: string;
   user: KonnectableCell_PendingBlock_user | null;
@@ -252,7 +252,7 @@ export interface KonnectableCell_PendingBlock {
 
 export interface KonnectableCell_Text_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface KonnectableCell_Text_user {
@@ -282,7 +282,7 @@ export interface KonnectableCell_Text {
   __typename: "Text";
   id: number;
   href: string;
-  counts: KonnectableCell_Text_counts | null;
+  counts: KonnectableCell_Text_counts;
   updated_at: string;
   title: string;
   user: KonnectableCell_Text_user | null;

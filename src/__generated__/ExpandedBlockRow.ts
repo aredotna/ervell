@@ -23,7 +23,7 @@ export interface ExpandedBlockRow_Channel {
 
 export interface ExpandedBlockRow_Attachment_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ExpandedBlockRow_Attachment_source {
@@ -40,7 +40,7 @@ export interface ExpandedBlockRow_Attachment_user {
 export interface ExpandedBlockRow_Attachment {
   __typename: "Attachment";
   id: number;
-  counts: ExpandedBlockRow_Attachment_counts | null;
+  counts: ExpandedBlockRow_Attachment_counts;
   created_at: string;
   updated_at: string;
   file_url: string | null;
@@ -52,7 +52,7 @@ export interface ExpandedBlockRow_Attachment {
 
 export interface ExpandedBlockRow_Embed_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ExpandedBlockRow_Embed_source {
@@ -69,7 +69,7 @@ export interface ExpandedBlockRow_Embed_user {
 export interface ExpandedBlockRow_Embed {
   __typename: "Embed";
   id: number;
-  counts: ExpandedBlockRow_Embed_counts | null;
+  counts: ExpandedBlockRow_Embed_counts;
   created_at: string;
   updated_at: string;
   embed_html: string | null;
@@ -81,7 +81,7 @@ export interface ExpandedBlockRow_Embed {
 
 export interface ExpandedBlockRow_Image_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ExpandedBlockRow_Image_source {
@@ -98,7 +98,7 @@ export interface ExpandedBlockRow_Image_user {
 export interface ExpandedBlockRow_Image {
   __typename: "Image";
   id: number;
-  counts: ExpandedBlockRow_Image_counts | null;
+  counts: ExpandedBlockRow_Image_counts;
   created_at: string;
   updated_at: string;
   image_url: string | null;
@@ -109,7 +109,7 @@ export interface ExpandedBlockRow_Image {
 
 export interface ExpandedBlockRow_Link_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ExpandedBlockRow_Link_source {
@@ -126,7 +126,7 @@ export interface ExpandedBlockRow_Link_user {
 export interface ExpandedBlockRow_Link {
   __typename: "Link";
   id: number;
-  counts: ExpandedBlockRow_Link_counts | null;
+  counts: ExpandedBlockRow_Link_counts;
   created_at: string;
   updated_at: string;
   image_url: string | null;
@@ -138,7 +138,7 @@ export interface ExpandedBlockRow_Link {
 
 export interface ExpandedBlockRow_PendingBlock_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ExpandedBlockRow_PendingBlock_user {
@@ -149,7 +149,7 @@ export interface ExpandedBlockRow_PendingBlock_user {
 export interface ExpandedBlockRow_PendingBlock {
   __typename: "PendingBlock";
   id: number;
-  counts: ExpandedBlockRow_PendingBlock_counts | null;
+  counts: ExpandedBlockRow_PendingBlock_counts;
   created_at: string;
   updated_at: string;
   title: string;
@@ -158,7 +158,7 @@ export interface ExpandedBlockRow_PendingBlock {
 
 export interface ExpandedBlockRow_Text_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ExpandedBlockRow_Text_user {
@@ -169,7 +169,7 @@ export interface ExpandedBlockRow_Text_user {
 export interface ExpandedBlockRow_Text {
   __typename: "Text";
   id: number;
-  counts: ExpandedBlockRow_Text_counts | null;
+  counts: ExpandedBlockRow_Text_counts;
   created_at: string;
   updated_at: string;
   content: string;
