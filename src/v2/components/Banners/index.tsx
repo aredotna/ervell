@@ -210,7 +210,7 @@ export const PremiumSupporter = props => (
 
 export const StronglyProposePremium = props => (
   <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
-    You’ve run out of free blocks.
+    You&apos;ve run out of free blocks.
     <ButtonLink color="white" href="/settings/billing">
       Upgrade
     </ButtonLink>
@@ -223,8 +223,8 @@ export const StronglyProposePremium = props => (
 export const PastDue = props => (
   <Banner bg="state.alert" color="white" iconName="Exclaim" {...props}>
     <Box>
-      Looks like your last payment didn't go through. Update your payment info
-      to keep your Premium status.
+      Looks like your last payment didn&apos;t go through. Update your payment
+      info to keep your Premium status.
     </Box>
     <ButtonLink href="/settings/billing" target="_blank">
       Update payment info
