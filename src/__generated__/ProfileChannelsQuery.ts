@@ -43,20 +43,20 @@ export interface ProfileChannelsQuery_identity_identifiable_Group_channels {
 
 export interface ProfileChannelsQuery_identity_identifiable_Group_counts {
   __typename: "GroupCounts";
-  channels: number | null;
+  channels: number;
 }
 
 export interface ProfileChannelsQuery_identity_identifiable_Group {
   __typename: "Group";
   id: number;
   name: string;
-  channels: ProfileChannelsQuery_identity_identifiable_Group_channels[] | null;
-  counts: ProfileChannelsQuery_identity_identifiable_Group_counts | null;
+  channels: ProfileChannelsQuery_identity_identifiable_Group_channels[];
+  counts: ProfileChannelsQuery_identity_identifiable_Group_counts;
 }
 
 export interface ProfileChannelsQuery_identity_identifiable_User_counts {
   __typename: "UserCounts";
-  channels: number | null;
+  channels: number;
 }
 
 export interface ProfileChannelsQuery_identity_identifiable_User_channels_counts {
@@ -95,7 +95,7 @@ export interface ProfileChannelsQuery_identity_identifiable_User {
   __typename: "User";
   id: number;
   name: string;
-  counts: ProfileChannelsQuery_identity_identifiable_User_counts | null;
+  counts: ProfileChannelsQuery_identity_identifiable_User_counts;
   channels: ProfileChannelsQuery_identity_identifiable_User_channels[] | null;
 }
 

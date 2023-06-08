@@ -18,7 +18,7 @@ export interface FollowMutation_follow_followable_User {
   __typename: "User";
   id: number;
   is_followed: boolean;
-  counts: FollowMutation_follow_followable_User_counts | null;
+  counts: FollowMutation_follow_followable_User_counts;
 }
 
 export interface FollowMutation_follow_followable_Channel_counts {
@@ -42,7 +42,7 @@ export interface FollowMutation_follow_followable_Group {
   __typename: "Group";
   id: number;
   is_followed: boolean;
-  counts: FollowMutation_follow_followable_Group_counts | null;
+  counts: FollowMutation_follow_followable_Group_counts;
 }
 
 export type FollowMutation_follow_followable = FollowMutation_follow_followable_User | FollowMutation_follow_followable_Channel | FollowMutation_follow_followable_Group;

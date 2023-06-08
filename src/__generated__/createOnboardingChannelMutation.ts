@@ -86,7 +86,7 @@ export interface createOnboardingChannelMutation_create_channel_channel_collabor
   href: string;
   description: string | null;
   user: createOnboardingChannelMutation_create_channel_channel_collaborators_Group_user;
-  users: createOnboardingChannelMutation_create_channel_channel_collaborators_Group_users[] | null;
+  users: createOnboardingChannelMutation_create_channel_channel_collaborators_Group_users[];
   can: createOnboardingChannelMutation_create_channel_channel_collaborators_Group_can;
   visibility: string;
   label: string;

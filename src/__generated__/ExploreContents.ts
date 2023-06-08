@@ -34,7 +34,7 @@ export interface ExploreContents_contents_Attachment_source {
 
 export interface ExploreContents_contents_Attachment_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ExploreContents_contents_Attachment {
@@ -49,7 +49,7 @@ export interface ExploreContents_contents_Attachment {
    */
   connection: ExploreContents_contents_Attachment_connection | null;
   source: ExploreContents_contents_Attachment_source | null;
-  counts: ExploreContents_contents_Attachment_counts | null;
+  counts: ExploreContents_contents_Attachment_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -82,7 +82,7 @@ export interface ExploreContents_contents_Embed_source {
 
 export interface ExploreContents_contents_Embed_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ExploreContents_contents_Embed {
@@ -97,7 +97,7 @@ export interface ExploreContents_contents_Embed {
    */
   connection: ExploreContents_contents_Embed_connection | null;
   source: ExploreContents_contents_Embed_source | null;
-  counts: ExploreContents_contents_Embed_counts | null;
+  counts: ExploreContents_contents_Embed_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -129,7 +129,7 @@ export interface ExploreContents_contents_Image_source {
 
 export interface ExploreContents_contents_Image_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ExploreContents_contents_Image_original_dimensions {
@@ -150,7 +150,7 @@ export interface ExploreContents_contents_Image {
    */
   connection: ExploreContents_contents_Image_connection | null;
   source: ExploreContents_contents_Image_source | null;
-  counts: ExploreContents_contents_Image_counts | null;
+  counts: ExploreContents_contents_Image_counts;
   alt_text: string | null;
   src: string | null;
   src_1x: string | null;
@@ -184,7 +184,7 @@ export interface ExploreContents_contents_Link_source {
 
 export interface ExploreContents_contents_Link_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ExploreContents_contents_Link {
@@ -199,7 +199,7 @@ export interface ExploreContents_contents_Link {
    */
   connection: ExploreContents_contents_Link_connection | null;
   source: ExploreContents_contents_Link_source | null;
-  counts: ExploreContents_contents_Link_counts | null;
+  counts: ExploreContents_contents_Link_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -234,7 +234,7 @@ export interface ExploreContents_contents_PendingBlock_source {
 
 export interface ExploreContents_contents_PendingBlock_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ExploreContents_contents_PendingBlock {
@@ -249,7 +249,7 @@ export interface ExploreContents_contents_PendingBlock {
    */
   connection: ExploreContents_contents_PendingBlock_connection | null;
   source: ExploreContents_contents_PendingBlock_source | null;
-  counts: ExploreContents_contents_PendingBlock_counts | null;
+  counts: ExploreContents_contents_PendingBlock_counts;
 }
 
 export interface ExploreContents_contents_Text_user {
@@ -277,7 +277,7 @@ export interface ExploreContents_contents_Text_source {
 
 export interface ExploreContents_contents_Text_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ExploreContents_contents_Text {
@@ -292,7 +292,7 @@ export interface ExploreContents_contents_Text {
    */
   connection: ExploreContents_contents_Text_connection | null;
   source: ExploreContents_contents_Text_source | null;
-  counts: ExploreContents_contents_Text_counts | null;
+  counts: ExploreContents_contents_Text_counts;
   content: string;
   raw: string;
 }

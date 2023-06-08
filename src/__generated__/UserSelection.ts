@@ -54,6 +54,6 @@ export interface UserSelection {
   __typename: "Group";
   name: string;
   owner: UserSelection_owner;
-  users: UserSelection_users[] | null;
+  users: UserSelection_users[];
   subscription: UserSelection_subscription | null;
 }

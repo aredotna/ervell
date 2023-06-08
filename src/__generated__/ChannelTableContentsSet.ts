@@ -35,7 +35,7 @@ export interface ChannelTableContentsSet_channel_blokks_PendingBlock_connection 
 
 export interface ChannelTableContentsSet_channel_blokks_PendingBlock_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_PendingBlock {
@@ -50,7 +50,7 @@ export interface ChannelTableContentsSet_channel_blokks_PendingBlock {
    */
   connection: ChannelTableContentsSet_channel_blokks_PendingBlock_connection | null;
   href: string;
-  counts: ChannelTableContentsSet_channel_blokks_PendingBlock_counts | null;
+  counts: ChannelTableContentsSet_channel_blokks_PendingBlock_counts;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Attachment_user {
@@ -67,7 +67,7 @@ export interface ChannelTableContentsSet_channel_blokks_Attachment_connection {
 
 export interface ChannelTableContentsSet_channel_blokks_Attachment_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Attachment_source {
@@ -87,7 +87,7 @@ export interface ChannelTableContentsSet_channel_blokks_Attachment {
    * Returns the outer channel if we are inside of one
    */
   connection: ChannelTableContentsSet_channel_blokks_Attachment_connection | null;
-  counts: ChannelTableContentsSet_channel_blokks_Attachment_counts | null;
+  counts: ChannelTableContentsSet_channel_blokks_Attachment_counts;
   file_url: string | null;
   image_url: string | null;
   href: string;
@@ -108,7 +108,7 @@ export interface ChannelTableContentsSet_channel_blokks_Embed_connection {
 
 export interface ChannelTableContentsSet_channel_blokks_Embed_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Embed_source {
@@ -128,7 +128,7 @@ export interface ChannelTableContentsSet_channel_blokks_Embed {
    * Returns the outer channel if we are inside of one
    */
   connection: ChannelTableContentsSet_channel_blokks_Embed_connection | null;
-  counts: ChannelTableContentsSet_channel_blokks_Embed_counts | null;
+  counts: ChannelTableContentsSet_channel_blokks_Embed_counts;
   embed_html: string | null;
   image_url: string | null;
   href: string;
@@ -149,7 +149,7 @@ export interface ChannelTableContentsSet_channel_blokks_Image_connection {
 
 export interface ChannelTableContentsSet_channel_blokks_Image_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Image_source {
@@ -169,7 +169,7 @@ export interface ChannelTableContentsSet_channel_blokks_Image {
    * Returns the outer channel if we are inside of one
    */
   connection: ChannelTableContentsSet_channel_blokks_Image_connection | null;
-  counts: ChannelTableContentsSet_channel_blokks_Image_counts | null;
+  counts: ChannelTableContentsSet_channel_blokks_Image_counts;
   image_url: string | null;
   href: string;
   /**
@@ -193,7 +193,7 @@ export interface ChannelTableContentsSet_channel_blokks_Link_connection {
 
 export interface ChannelTableContentsSet_channel_blokks_Link_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Link_source {
@@ -213,7 +213,7 @@ export interface ChannelTableContentsSet_channel_blokks_Link {
    * Returns the outer channel if we are inside of one
    */
   connection: ChannelTableContentsSet_channel_blokks_Link_connection | null;
-  counts: ChannelTableContentsSet_channel_blokks_Link_counts | null;
+  counts: ChannelTableContentsSet_channel_blokks_Link_counts;
   image_url: string | null;
   href: string;
   source: ChannelTableContentsSet_channel_blokks_Link_source | null;
@@ -233,7 +233,7 @@ export interface ChannelTableContentsSet_channel_blokks_Text_connection {
 
 export interface ChannelTableContentsSet_channel_blokks_Text_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
+  public_channels: number;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Text_source {
@@ -252,7 +252,7 @@ export interface ChannelTableContentsSet_channel_blokks_Text {
    * Returns the outer channel if we are inside of one
    */
   connection: ChannelTableContentsSet_channel_blokks_Text_connection | null;
-  counts: ChannelTableContentsSet_channel_blokks_Text_counts | null;
+  counts: ChannelTableContentsSet_channel_blokks_Text_counts;
   content: string;
   html: string;
   /**

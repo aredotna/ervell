@@ -16,7 +16,7 @@ export interface Followable_User {
   __typename: "User";
   id: number;
   is_followed: boolean;
-  counts: Followable_User_counts | null;
+  counts: Followable_User_counts;
 }
 
 export interface Followable_Channel_counts {
@@ -40,7 +40,7 @@ export interface Followable_Group {
   __typename: "Group";
   id: number;
   is_followed: boolean;
-  counts: Followable_Group_counts | null;
+  counts: Followable_Group_counts;
 }
 
 export type Followable = Followable_User | Followable_Channel | Followable_Group;

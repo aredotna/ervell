@@ -47,7 +47,7 @@ export interface CollaboratorsList_collaborators_Group {
   href: string;
   description: string | null;
   user: CollaboratorsList_collaborators_Group_user;
-  users: CollaboratorsList_collaborators_Group_users[] | null;
+  users: CollaboratorsList_collaborators_Group_users[];
   can: CollaboratorsList_collaborators_Group_can;
   visibility: string;
   label: string;

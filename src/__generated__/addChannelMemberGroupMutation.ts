@@ -54,7 +54,7 @@ export interface addChannelMemberGroupMutation_add_channel_members_channel_colla
   visibility: string;
   user: addChannelMemberGroupMutation_add_channel_members_channel_collaborators_Group_user;
   description: string | null;
-  users: addChannelMemberGroupMutation_add_channel_members_channel_collaborators_Group_users[] | null;
+  users: addChannelMemberGroupMutation_add_channel_members_channel_collaborators_Group_users[];
   can: addChannelMemberGroupMutation_add_channel_members_channel_collaborators_Group_can;
   label: string;
 }

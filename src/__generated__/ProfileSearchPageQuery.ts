@@ -47,11 +47,11 @@ export interface ProfileSearchPageQuery_identity_identifiable_Group {
   /**
    * Are *any* users in the group upgradeable to Premium?
    */
-  is_upgradeable: boolean | null;
+  is_upgradeable: boolean;
   about: string | null;
   user: ProfileSearchPageQuery_identity_identifiable_Group_user;
-  counts: ProfileSearchPageQuery_identity_identifiable_Group_counts | null;
-  users: ProfileSearchPageQuery_identity_identifiable_Group_users[] | null;
+  counts: ProfileSearchPageQuery_identity_identifiable_Group_counts;
+  users: ProfileSearchPageQuery_identity_identifiable_Group_users[];
   title: string;
   description: string | null;
   canonical: string;
@@ -68,7 +68,7 @@ export interface ProfileSearchPageQuery_identity_identifiable_User_counts {
   __typename: "UserCounts";
   followers: number;
   following: number;
-  groups: number | null;
+  groups: number;
   following_channels: number;
   following_users: number;
   following_groups: number;
@@ -84,7 +84,7 @@ export interface ProfileSearchPageQuery_identity_identifiable_User {
   id: number;
   can: ProfileSearchPageQuery_identity_identifiable_User_can;
   about: string | null;
-  counts: ProfileSearchPageQuery_identity_identifiable_User_counts | null;
+  counts: ProfileSearchPageQuery_identity_identifiable_User_counts;
   title: string;
   description: string | null;
   canonical: string;

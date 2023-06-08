@@ -11,14 +11,14 @@ import { BannerEnum } from "./globalTypes";
 
 export interface GlobalNavElements_me_counts {
   __typename: "MeCounts";
-  notifications: number | null;
+  notifications: number;
 }
 
 export interface GlobalNavElements_me {
   __typename: "Me";
   id: number;
   banner: BannerEnum | null;
-  counts: GlobalNavElements_me_counts | null;
+  counts: GlobalNavElements_me_counts;
 }
 
 export interface GlobalNavElements {

@@ -85,7 +85,7 @@ export interface ChannelFollowersPage_channel_collaborators_Group {
   href: string;
   description: string | null;
   user: ChannelFollowersPage_channel_collaborators_Group_user;
-  users: ChannelFollowersPage_channel_collaborators_Group_users[] | null;
+  users: ChannelFollowersPage_channel_collaborators_Group_users[];
   can: ChannelFollowersPage_channel_collaborators_Group_can;
   visibility: string;
   label: string;

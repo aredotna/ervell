@@ -88,7 +88,7 @@ export interface ChannelTablePage_channel_collaborators_Group {
   href: string;
   description: string | null;
   user: ChannelTablePage_channel_collaborators_Group_user;
-  users: ChannelTablePage_channel_collaborators_Group_users[] | null;
+  users: ChannelTablePage_channel_collaborators_Group_users[];
   can: ChannelTablePage_channel_collaborators_Group_can;
   visibility: string;
   label: string;

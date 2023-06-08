@@ -36,5 +36,5 @@ export interface UpgradeSelection {
   __typename: "Group";
   id: number;
   subscription: UpgradeSelection_subscription | null;
-  users: UpgradeSelection_users[] | null;
+  users: UpgradeSelection_users[];
 }

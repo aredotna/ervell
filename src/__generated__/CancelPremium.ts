@@ -68,7 +68,7 @@ export interface CancelPremium_cancel_premium_subscription_me_customer {
 
 export interface CancelPremium_cancel_premium_subscription_me_counts {
   __typename: "MeCounts";
-  connections: number | null;
+  connections: number;
 }
 
 export interface CancelPremium_cancel_premium_subscription_me {
@@ -77,7 +77,7 @@ export interface CancelPremium_cancel_premium_subscription_me {
   non_premium_private_connections_limit: number | null;
   non_premium_connections_limit: number | null;
   customer: CancelPremium_cancel_premium_subscription_me_customer | null;
-  counts: CancelPremium_cancel_premium_subscription_me_counts | null;
+  counts: CancelPremium_cancel_premium_subscription_me_counts;
 }
 
 export interface CancelPremium_cancel_premium_subscription {

@@ -38,7 +38,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Attach
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_Attachment_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_Attachment {
@@ -53,7 +53,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Attach
    */
   connection: ProfileContentsQuery_identity_identifiable_User_contents_Attachment_connection | null;
   source: ProfileContentsQuery_identity_identifiable_User_contents_Attachment_source | null;
-  counts: ProfileContentsQuery_identity_identifiable_User_contents_Attachment_counts | null;
+  counts: ProfileContentsQuery_identity_identifiable_User_contents_Attachment_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -86,7 +86,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Embed_
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_Embed_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_Embed {
@@ -101,7 +101,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Embed 
    */
   connection: ProfileContentsQuery_identity_identifiable_User_contents_Embed_connection | null;
   source: ProfileContentsQuery_identity_identifiable_User_contents_Embed_source | null;
-  counts: ProfileContentsQuery_identity_identifiable_User_contents_Embed_counts | null;
+  counts: ProfileContentsQuery_identity_identifiable_User_contents_Embed_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -133,7 +133,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Image_
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_Image_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_Image_original_dimensions {
@@ -154,7 +154,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Image 
    */
   connection: ProfileContentsQuery_identity_identifiable_User_contents_Image_connection | null;
   source: ProfileContentsQuery_identity_identifiable_User_contents_Image_source | null;
-  counts: ProfileContentsQuery_identity_identifiable_User_contents_Image_counts | null;
+  counts: ProfileContentsQuery_identity_identifiable_User_contents_Image_counts;
   alt_text: string | null;
   src: string | null;
   src_1x: string | null;
@@ -188,7 +188,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Link_s
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_Link_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_Link {
@@ -203,7 +203,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Link {
    */
   connection: ProfileContentsQuery_identity_identifiable_User_contents_Link_connection | null;
   source: ProfileContentsQuery_identity_identifiable_User_contents_Link_source | null;
-  counts: ProfileContentsQuery_identity_identifiable_User_contents_Link_counts | null;
+  counts: ProfileContentsQuery_identity_identifiable_User_contents_Link_counts;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -238,7 +238,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Pendin
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_PendingBlock_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_PendingBlock {
@@ -253,7 +253,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Pendin
    */
   connection: ProfileContentsQuery_identity_identifiable_User_contents_PendingBlock_connection | null;
   source: ProfileContentsQuery_identity_identifiable_User_contents_PendingBlock_source | null;
-  counts: ProfileContentsQuery_identity_identifiable_User_contents_PendingBlock_counts | null;
+  counts: ProfileContentsQuery_identity_identifiable_User_contents_PendingBlock_counts;
 }
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_Text_user {
@@ -281,7 +281,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Text_s
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_Text_counts {
   __typename: "BlockCounts";
-  comments: number | null;
+  comments: number;
 }
 
 export interface ProfileContentsQuery_identity_identifiable_User_contents_Text {
@@ -296,7 +296,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Text {
    */
   connection: ProfileContentsQuery_identity_identifiable_User_contents_Text_connection | null;
   source: ProfileContentsQuery_identity_identifiable_User_contents_Text_source | null;
-  counts: ProfileContentsQuery_identity_identifiable_User_contents_Text_counts | null;
+  counts: ProfileContentsQuery_identity_identifiable_User_contents_Text_counts;
   content: string;
   raw: string;
 }

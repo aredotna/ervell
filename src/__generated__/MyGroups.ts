@@ -36,7 +36,7 @@ export interface MyGroups_customer {
 
 export interface MyGroups_groups_counts {
   __typename: "GroupCounts";
-  users: number | null;
+  users: number;
 }
 
 export interface MyGroups_groups_subscription_plan {
@@ -111,22 +111,22 @@ export interface MyGroups_groups_owner {
 export interface MyGroups_groups {
   __typename: "Group";
   id: number;
-  counts: MyGroups_groups_counts | null;
+  counts: MyGroups_groups_counts;
   /**
    * Is *every* user in the group Premium?
    */
-  is_premium: boolean | null;
+  is_premium: boolean;
   /**
    * Are *any* users in the group upgradeable to Premium?
    */
-  is_upgradeable: boolean | null;
+  is_upgradeable: boolean;
   subscription: MyGroups_groups_subscription | null;
   name: string;
   href: string;
   initials: string;
   avatar: string | null;
   user: MyGroups_groups_user;
-  users: MyGroups_groups_users[] | null;
+  users: MyGroups_groups_users[];
   owner: MyGroups_groups_owner;
 }
 

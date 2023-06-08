@@ -15,8 +15,8 @@ export interface GroupByCodeQuery_group_by_code_user {
 
 export interface GroupByCodeQuery_group_by_code_counts {
   __typename: "GroupCounts";
-  channels: number | null;
-  users: number | null;
+  channels: number;
+  users: number;
 }
 
 export interface GroupByCodeQuery_group_by_code {
@@ -24,7 +24,7 @@ export interface GroupByCodeQuery_group_by_code {
   id: number;
   name: string | null;
   user: GroupByCodeQuery_group_by_code_user | null;
-  counts: GroupByCodeQuery_group_by_code_counts | null;
+  counts: GroupByCodeQuery_group_by_code_counts;
 }
 
 export interface GroupByCodeQuery {

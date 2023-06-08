@@ -59,7 +59,7 @@ export interface removeGroupUser_remove_group_users_group {
   invite: removeGroupUser_remove_group_users_group_invite | null;
   can: removeGroupUser_remove_group_users_group_can;
   owner: removeGroupUser_remove_group_users_group_owner;
-  memberships: removeGroupUser_remove_group_users_group_memberships[] | null;
+  memberships: removeGroupUser_remove_group_users_group_memberships[];
 }
 
 export interface removeGroupUser_remove_group_users {

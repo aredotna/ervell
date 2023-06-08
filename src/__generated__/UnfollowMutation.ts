@@ -18,7 +18,7 @@ export interface UnfollowMutation_unfollow_followable_User {
   __typename: "User";
   id: number;
   is_followed: boolean;
-  counts: UnfollowMutation_unfollow_followable_User_counts | null;
+  counts: UnfollowMutation_unfollow_followable_User_counts;
 }
 
 export interface UnfollowMutation_unfollow_followable_Channel_counts {
@@ -42,7 +42,7 @@ export interface UnfollowMutation_unfollow_followable_Group {
   __typename: "Group";
   id: number;
   is_followed: boolean;
-  counts: UnfollowMutation_unfollow_followable_Group_counts | null;
+  counts: UnfollowMutation_unfollow_followable_Group_counts;
 }
 
 export type UnfollowMutation_unfollow_followable = UnfollowMutation_unfollow_followable_User | UnfollowMutation_unfollow_followable_Channel | UnfollowMutation_unfollow_followable_Group;

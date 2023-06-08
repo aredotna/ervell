@@ -14,9 +14,9 @@ export interface FullBlockFold_block_Channel {
 
 export interface FullBlockFold_block_Attachment_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
-  private_channels: number | null;
-  comments: number | null;
+  public_channels: number;
+  private_channels: number;
+  comments: number;
 }
 
 export interface FullBlockFold_block_Attachment_can {
@@ -28,7 +28,7 @@ export interface FullBlockFold_block_Attachment_can {
 export interface FullBlockFold_block_Attachment {
   __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
   id: number;
-  counts: FullBlockFold_block_Attachment_counts | null;
+  counts: FullBlockFold_block_Attachment_counts;
   can: FullBlockFold_block_Attachment_can;
 }
 

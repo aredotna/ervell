@@ -34,7 +34,7 @@ export interface ProfileMetadataActions_Group {
   /**
    * Are *any* users in the group upgradeable to Premium?
    */
-  is_upgradeable: boolean | null;
+  is_upgradeable: boolean;
   can: ProfileMetadataActions_Group_can;
 }
 

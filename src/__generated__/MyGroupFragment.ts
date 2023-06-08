@@ -82,17 +82,17 @@ export interface MyGroupFragment {
   /**
    * Is *every* user in the group Premium?
    */
-  is_premium: boolean | null;
+  is_premium: boolean;
   /**
    * Are *any* users in the group upgradeable to Premium?
    */
-  is_upgradeable: boolean | null;
+  is_upgradeable: boolean;
   subscription: MyGroupFragment_subscription | null;
   name: string;
   href: string;
   initials: string;
   avatar: string | null;
   user: MyGroupFragment_user;
-  users: MyGroupFragment_users[] | null;
+  users: MyGroupFragment_users[];
   owner: MyGroupFragment_owner;
 }

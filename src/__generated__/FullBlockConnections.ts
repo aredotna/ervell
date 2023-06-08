@@ -98,10 +98,10 @@ export interface FullBlockConnections_Channel {
 
 export interface FullBlockConnections_Attachment_counts {
   __typename: "BlockCounts";
-  public_channels: number | null;
-  current_user_channels: number | null;
-  private_channels: number | null;
-  channels_with_same_source: number | null;
+  public_channels: number;
+  current_user_channels: number;
+  private_channels: number;
+  channels_with_same_source: number;
 }
 
 export interface FullBlockConnections_Attachment_current_user_channels_channel_owner_Group {
@@ -219,7 +219,7 @@ export interface FullBlockConnections_Attachment_channels_with_same_source {
 export interface FullBlockConnections_Attachment {
   __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
   id: number;
-  counts: FullBlockConnections_Attachment_counts | null;
+  counts: FullBlockConnections_Attachment_counts;
   current_user_channels: FullBlockConnections_Attachment_current_user_channels[] | null;
   public_channels: FullBlockConnections_Attachment_public_channels[] | null;
   source: FullBlockConnections_Attachment_source | null;
