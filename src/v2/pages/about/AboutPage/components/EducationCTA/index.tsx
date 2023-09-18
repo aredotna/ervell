@@ -12,8 +12,8 @@ export const EducationCTA: React.FC = ({ ...rest }) => {
       </P>
 
       <P>
-        If you&#139;re a student, you can get 50% off the price of any Premium
-        plan for two years. If you&#139;re a teacher and use Are.na with your
+        If you&#39;re a student, you can get 50% off the price of any Premium
+        plan for two years. If you&#39;re a teacher and use Are.na with your
         class <a href="mailto:help@are.na">contact us</a> for assistance and
         custom discounts for your students.
       </P>
