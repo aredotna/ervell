@@ -149,6 +149,7 @@ const Perks: React.FC<PerksProps> = ({
 }) => {
   const premiumPerks = [PremiumDiscordPerk, StorePerk]
   const supporterPerks = [
+    SanderPerk,
     PremiumDiscordPerk,
     StorePerk,
     ReportPerk,
@@ -159,6 +160,7 @@ const Perks: React.FC<PerksProps> = ({
 
   if (isInvestor) {
     premiumPerks.push(ReportPerk)
+    premiumPerks.push(SanderPerk)
   }
 
   if (isPremium && hasHadRecentBirthday) {
