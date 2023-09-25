@@ -29,7 +29,7 @@ export interface KonnectableMetadata_Channel {
   __typename: "Channel" | "Embed" | "Image" | "PendingBlock" | "Text";
   updated_at: string;
   title: string;
-  user: KonnectableMetadata_Channel_user | null;
+  user: KonnectableMetadata_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -58,7 +58,7 @@ export interface KonnectableMetadata_Attachment {
   __typename: "Attachment";
   updated_at: string;
   title: string;
-  user: KonnectableMetadata_Attachment_user | null;
+  user: KonnectableMetadata_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -88,7 +88,7 @@ export interface KonnectableMetadata_Link {
   __typename: "Link";
   updated_at: string;
   title: string;
-  user: KonnectableMetadata_Link_user | null;
+  user: KonnectableMetadata_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */

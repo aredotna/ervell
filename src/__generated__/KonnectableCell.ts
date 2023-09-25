@@ -42,7 +42,7 @@ export interface KonnectableCell_Attachment {
   counts: KonnectableCell_Attachment_counts;
   updated_at: string;
   title: string;
-  user: KonnectableCell_Attachment_user | null;
+  user: KonnectableCell_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -90,7 +90,7 @@ export interface KonnectableCell_Embed {
   counts: KonnectableCell_Embed_counts;
   updated_at: string;
   title: string;
-  user: KonnectableCell_Embed_user | null;
+  user: KonnectableCell_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -143,7 +143,7 @@ export interface KonnectableCell_Image {
   counts: KonnectableCell_Image_counts;
   updated_at: string;
   title: string;
-  user: KonnectableCell_Image_user | null;
+  user: KonnectableCell_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -192,7 +192,7 @@ export interface KonnectableCell_Link {
   counts: KonnectableCell_Link_counts;
   updated_at: string;
   title: string;
-  user: KonnectableCell_Link_user | null;
+  user: KonnectableCell_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -242,7 +242,7 @@ export interface KonnectableCell_PendingBlock {
   counts: KonnectableCell_PendingBlock_counts;
   updated_at: string;
   title: string;
-  user: KonnectableCell_PendingBlock_user | null;
+  user: KonnectableCell_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -285,7 +285,7 @@ export interface KonnectableCell_Text {
   counts: KonnectableCell_Text_counts;
   updated_at: string;
   title: string;
-  user: KonnectableCell_Text_user | null;
+  user: KonnectableCell_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -344,7 +344,7 @@ export interface KonnectableCell_Channel {
   href: string;
   updated_at: string;
   title: string;
-  user: KonnectableCell_Channel_user | null;
+  user: KonnectableCell_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */

@@ -47,7 +47,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Attach
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContentsQuery_identity_identifiable_User_contents_Attachment_user | null;
+  user: ProfileContentsQuery_identity_identifiable_User_contents_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -95,7 +95,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Embed 
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContentsQuery_identity_identifiable_User_contents_Embed_user | null;
+  user: ProfileContentsQuery_identity_identifiable_User_contents_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -148,7 +148,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Image 
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContentsQuery_identity_identifiable_User_contents_Image_user | null;
+  user: ProfileContentsQuery_identity_identifiable_User_contents_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -197,7 +197,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Link {
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContentsQuery_identity_identifiable_User_contents_Link_user | null;
+  user: ProfileContentsQuery_identity_identifiable_User_contents_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -247,7 +247,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Pendin
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContentsQuery_identity_identifiable_User_contents_PendingBlock_user | null;
+  user: ProfileContentsQuery_identity_identifiable_User_contents_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -290,7 +290,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Text {
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContentsQuery_identity_identifiable_User_contents_Text_user | null;
+  user: ProfileContentsQuery_identity_identifiable_User_contents_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -350,7 +350,7 @@ export interface ProfileContentsQuery_identity_identifiable_User_contents_Channe
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContentsQuery_identity_identifiable_User_contents_Channel_user | null;
+  user: ProfileContentsQuery_identity_identifiable_User_contents_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */

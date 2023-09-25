@@ -53,7 +53,7 @@ export interface ChannelTableContentsConnectable_Attachment {
   image_url: string | null;
   source: ChannelTableContentsConnectable_Attachment_source | null;
   title: string;
-  user: ChannelTableContentsConnectable_Attachment_user | null;
+  user: ChannelTableContentsConnectable_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -106,7 +106,7 @@ export interface ChannelTableContentsConnectable_Embed {
   image_url: string | null;
   source: ChannelTableContentsConnectable_Embed_source | null;
   title: string;
-  user: ChannelTableContentsConnectable_Embed_user | null;
+  user: ChannelTableContentsConnectable_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -158,7 +158,7 @@ export interface ChannelTableContentsConnectable_Image {
   image_url: string | null;
   source: ChannelTableContentsConnectable_Image_source | null;
   title: string;
-  user: ChannelTableContentsConnectable_Image_user | null;
+  user: ChannelTableContentsConnectable_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -210,7 +210,7 @@ export interface ChannelTableContentsConnectable_Link {
   image_url: string | null;
   source: ChannelTableContentsConnectable_Link_source | null;
   title: string;
-  user: ChannelTableContentsConnectable_Link_user | null;
+  user: ChannelTableContentsConnectable_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -254,7 +254,7 @@ export interface ChannelTableContentsConnectable_PendingBlock {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ChannelTableContentsConnectable_PendingBlock_user | null;
+  user: ChannelTableContentsConnectable_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -300,7 +300,7 @@ export interface ChannelTableContentsConnectable_Text {
   content: string;
   html: string;
   title: string;
-  user: ChannelTableContentsConnectable_Text_user | null;
+  user: ChannelTableContentsConnectable_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -346,7 +346,7 @@ export interface ChannelTableContentsConnectable_Channel {
   counts: ChannelTableContentsConnectable_Channel_counts;
   created_at: string;
   updated_at: string;
-  user: ChannelTableContentsConnectable_Channel_user | null;
+  user: ChannelTableContentsConnectable_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */

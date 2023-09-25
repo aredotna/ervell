@@ -23,7 +23,7 @@ export enum BannerEnum {
 }
 
 /**
- * Possible connectables for a new connection
+ * Possible connectables for a connection
  */
 export enum BaseConnectableTypeEnum {
   BLOCK = "BLOCK",

@@ -60,7 +60,7 @@ export interface ManageChannelQuery_channel {
   visibility: string;
   content_flag: string | null;
   can: ManageChannelQuery_channel_can;
-  user: ManageChannelQuery_channel_user | null;
+  user: ManageChannelQuery_channel_user;
   owner: ManageChannelQuery_channel_owner;
   is_pending_transfer: boolean;
   transfer_request: ManageChannelQuery_channel_transfer_request | null;

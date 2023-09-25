@@ -44,7 +44,7 @@ export interface ChannelTableContentsSet_channel_blokks_PendingBlock {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ChannelTableContentsSet_channel_blokks_PendingBlock_user | null;
+  user: ChannelTableContentsSet_channel_blokks_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -82,7 +82,7 @@ export interface ChannelTableContentsSet_channel_blokks_Attachment {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ChannelTableContentsSet_channel_blokks_Attachment_user | null;
+  user: ChannelTableContentsSet_channel_blokks_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -123,7 +123,7 @@ export interface ChannelTableContentsSet_channel_blokks_Embed {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ChannelTableContentsSet_channel_blokks_Embed_user | null;
+  user: ChannelTableContentsSet_channel_blokks_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -164,7 +164,7 @@ export interface ChannelTableContentsSet_channel_blokks_Image {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ChannelTableContentsSet_channel_blokks_Image_user | null;
+  user: ChannelTableContentsSet_channel_blokks_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -208,7 +208,7 @@ export interface ChannelTableContentsSet_channel_blokks_Link {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ChannelTableContentsSet_channel_blokks_Link_user | null;
+  user: ChannelTableContentsSet_channel_blokks_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -247,7 +247,7 @@ export interface ChannelTableContentsSet_channel_blokks_Text {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ChannelTableContentsSet_channel_blokks_Text_user | null;
+  user: ChannelTableContentsSet_channel_blokks_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -287,7 +287,7 @@ export interface ChannelTableContentsSet_channel_blokks_Channel {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ChannelTableContentsSet_channel_blokks_Channel_user | null;
+  user: ChannelTableContentsSet_channel_blokks_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */

@@ -139,7 +139,7 @@ export interface SharedChannelPage_channel {
   can: SharedChannelPage_channel_can;
   is_muted: boolean;
   info: string | null;
-  user: SharedChannelPage_channel_user | null;
+  user: SharedChannelPage_channel_user;
   collaborators: SharedChannelPage_channel_collaborators[];
   connected_to_channels: SharedChannelPage_channel_connected_to_channels[];
   share: SharedChannelPage_channel_share | null;

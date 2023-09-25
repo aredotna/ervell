@@ -30,7 +30,7 @@ export interface KonnectableDisplay_PendingBlock {
   id: number;
   updated_at: string;
   title: string;
-  user: KonnectableDisplay_PendingBlock_user | null;
+  user: KonnectableDisplay_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -86,7 +86,7 @@ export interface KonnectableDisplay_Channel {
   owner: KonnectableDisplay_Channel_owner;
   label: string;
   title: string;
-  user: KonnectableDisplay_Channel_user | null;
+  user: KonnectableDisplay_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -119,7 +119,7 @@ export interface KonnectableDisplay_Text {
   content: string;
   raw: string;
   updated_at: string;
-  user: KonnectableDisplay_Text_user | null;
+  user: KonnectableDisplay_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -162,7 +162,7 @@ export interface KonnectableDisplay_Image {
   src_3x: string | null;
   original_dimensions: KonnectableDisplay_Image_original_dimensions | null;
   updated_at: string;
-  user: KonnectableDisplay_Image_user | null;
+  user: KonnectableDisplay_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -199,7 +199,7 @@ export interface KonnectableDisplay_Link {
   external_url: string | null;
   content: string | null;
   updated_at: string;
-  user: KonnectableDisplay_Link_user | null;
+  user: KonnectableDisplay_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -235,7 +235,7 @@ export interface KonnectableDisplay_Embed {
   src_2x: string | null;
   src_3x: string | null;
   updated_at: string;
-  user: KonnectableDisplay_Embed_user | null;
+  user: KonnectableDisplay_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -271,7 +271,7 @@ export interface KonnectableDisplay_Attachment {
   src_3x: string | null;
   file_extension: string | null;
   updated_at: string;
-  user: KonnectableDisplay_Attachment_user | null;
+  user: KonnectableDisplay_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */

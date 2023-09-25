@@ -140,7 +140,7 @@ export interface ChannelPage_channel {
   can: ChannelPage_channel_can;
   is_muted: boolean;
   info: string | null;
-  user: ChannelPage_channel_user | null;
+  user: ChannelPage_channel_user;
   collaborators: ChannelPage_channel_collaborators[];
   connected_to_channels: ChannelPage_channel_connected_to_channels[];
   share: ChannelPage_channel_share | null;

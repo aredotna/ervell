@@ -134,7 +134,7 @@ export interface ChannelMetadata {
   can: ChannelMetadata_can;
   is_muted: boolean;
   info: string | null;
-  user: ChannelMetadata_user | null;
+  user: ChannelMetadata_user;
   collaborators: ChannelMetadata_collaborators[];
   connected_to_channels: ChannelMetadata_connected_to_channels[];
   share: ChannelMetadata_share | null;

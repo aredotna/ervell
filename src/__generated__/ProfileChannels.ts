@@ -94,7 +94,7 @@ export interface ProfileChannels_User {
   id: number;
   name: string;
   counts: ProfileChannels_User_counts;
-  channels: ProfileChannels_User_channels[] | null;
+  channels: ProfileChannels_User_channels[];
 }
 
 export type ProfileChannels = ProfileChannels_Group | ProfileChannels_User;

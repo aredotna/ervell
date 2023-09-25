@@ -32,7 +32,7 @@ export interface TableRowFragment_PendingBlock {
   href: string;
   counts: TableRowFragment_PendingBlock_counts;
   title: string;
-  user: TableRowFragment_PendingBlock_user | null;
+  user: TableRowFragment_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -73,7 +73,7 @@ export interface TableRowFragment_Attachment {
   href: string;
   source: TableRowFragment_Attachment_source | null;
   title: string;
-  user: TableRowFragment_Attachment_user | null;
+  user: TableRowFragment_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -114,7 +114,7 @@ export interface TableRowFragment_Embed {
   href: string;
   source: TableRowFragment_Embed_source | null;
   title: string;
-  user: TableRowFragment_Embed_user | null;
+  user: TableRowFragment_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -158,7 +158,7 @@ export interface TableRowFragment_Image {
   find_original_url: string | null;
   source: TableRowFragment_Image_source | null;
   title: string;
-  user: TableRowFragment_Image_user | null;
+  user: TableRowFragment_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -198,7 +198,7 @@ export interface TableRowFragment_Link {
   href: string;
   source: TableRowFragment_Link_source | null;
   title: string;
-  user: TableRowFragment_Link_user | null;
+  user: TableRowFragment_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -242,7 +242,7 @@ export interface TableRowFragment_Text {
   href: string;
   source: TableRowFragment_Text_source | null;
   title: string;
-  user: TableRowFragment_Text_user | null;
+  user: TableRowFragment_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -276,7 +276,7 @@ export interface TableRowFragment_Channel {
   title: string;
   href: string;
   counts: TableRowFragment_Channel_counts;
-  user: TableRowFragment_Channel_user | null;
+  user: TableRowFragment_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */

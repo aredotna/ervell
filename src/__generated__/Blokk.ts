@@ -41,7 +41,7 @@ export interface Blokk_blokk_Attachment {
   href: string;
   updated_at: string;
   title: string;
-  user: Blokk_blokk_Attachment_user | null;
+  user: Blokk_blokk_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -89,7 +89,7 @@ export interface Blokk_blokk_Embed {
   href: string;
   updated_at: string;
   title: string;
-  user: Blokk_blokk_Embed_user | null;
+  user: Blokk_blokk_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -142,7 +142,7 @@ export interface Blokk_blokk_Image {
   href: string;
   updated_at: string;
   title: string;
-  user: Blokk_blokk_Image_user | null;
+  user: Blokk_blokk_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -191,7 +191,7 @@ export interface Blokk_blokk_Link {
   href: string;
   updated_at: string;
   title: string;
-  user: Blokk_blokk_Link_user | null;
+  user: Blokk_blokk_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -241,7 +241,7 @@ export interface Blokk_blokk_PendingBlock {
   href: string;
   updated_at: string;
   title: string;
-  user: Blokk_blokk_PendingBlock_user | null;
+  user: Blokk_blokk_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -284,7 +284,7 @@ export interface Blokk_blokk_Text {
   href: string;
   updated_at: string;
   title: string;
-  user: Blokk_blokk_Text_user | null;
+  user: Blokk_blokk_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -344,7 +344,7 @@ export interface Blokk_blokk_Channel {
   href: string;
   updated_at: string;
   title: string;
-  user: Blokk_blokk_Channel_user | null;
+  user: Blokk_blokk_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */

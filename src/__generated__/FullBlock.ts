@@ -31,7 +31,7 @@ export interface FullBlock_Channel {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: FullBlock_Channel_user | null;
+  user: FullBlock_Channel_user;
   source: FullBlock_Channel_source | null;
   shareable_href: string;
   shareable_title: string;
@@ -76,7 +76,7 @@ export interface FullBlock_Image {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: FullBlock_Image_user | null;
+  user: FullBlock_Image_user;
   source: FullBlock_Image_source | null;
   shareable_href: string;
   shareable_title: string;
@@ -127,7 +127,7 @@ export interface FullBlock_Text {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: FullBlock_Text_user | null;
+  user: FullBlock_Text_user;
   source: FullBlock_Text_source | null;
   shareable_href: string;
   shareable_title: string;
@@ -181,7 +181,7 @@ export interface FullBlock_Link {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: FullBlock_Link_user | null;
+  user: FullBlock_Link_user;
   shareable_href: string;
   shareable_title: string;
   editable_title: string;
@@ -229,7 +229,7 @@ export interface FullBlock_Attachment {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: FullBlock_Attachment_user | null;
+  user: FullBlock_Attachment_user;
   source: FullBlock_Attachment_source | null;
   shareable_href: string;
   shareable_title: string;
@@ -274,7 +274,7 @@ export interface FullBlock_Embed {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: FullBlock_Embed_user | null;
+  user: FullBlock_Embed_user;
   source: FullBlock_Embed_source | null;
   shareable_href: string;
   shareable_title: string;
@@ -316,7 +316,7 @@ export interface FullBlock_PendingBlock {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: FullBlock_PendingBlock_user | null;
+  user: FullBlock_PendingBlock_user;
   source: FullBlock_PendingBlock_source | null;
   shareable_href: string;
   shareable_title: string;
