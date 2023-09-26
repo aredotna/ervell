@@ -8,7 +8,7 @@ import Head from 'v2/components/UI/Head'
 
 import { FeedMetadata } from 'v2/components/FeedMetadata'
 import NoFollowingMessage from 'v2/components/Feed/components/NoFollowingMessage'
-import Feed from 'v2/components/Feed'
+import { Feed } from 'v2/components/Feed'
 
 export default class FeedPage extends Component {
   render() {

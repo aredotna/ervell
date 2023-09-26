@@ -175,6 +175,14 @@ export enum ExtensionsEnum {
 }
 
 /**
+ * Types of feeds
+ */
+export enum FeedType {
+  NOTIFICATION = "NOTIFICATION",
+  USER = "USER",
+}
+
+/**
  * defines search fields
  */
 export enum FieldsEnum {
