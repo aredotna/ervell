@@ -51,7 +51,7 @@ export interface FeedGroupObjects_objects_Attachment {
   src_3x: string | null;
   file_extension: string | null;
   updated_at: string;
-  user: FeedGroupObjects_objects_Attachment_user | null;
+  user: FeedGroupObjects_objects_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -113,7 +113,7 @@ export interface FeedGroupObjects_objects_Channel {
   owner: FeedGroupObjects_objects_Channel_owner;
   label: string;
   title: string;
-  user: FeedGroupObjects_objects_Channel_user | null;
+  user: FeedGroupObjects_objects_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -160,7 +160,7 @@ export interface FeedGroupObjects_objects_Embed {
   src_2x: string | null;
   src_3x: string | null;
   updated_at: string;
-  user: FeedGroupObjects_objects_Embed_user | null;
+  user: FeedGroupObjects_objects_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -215,7 +215,7 @@ export interface FeedGroupObjects_objects_Image {
   src_3x: string | null;
   original_dimensions: FeedGroupObjects_objects_Image_original_dimensions | null;
   updated_at: string;
-  user: FeedGroupObjects_objects_Image_user | null;
+  user: FeedGroupObjects_objects_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -263,7 +263,7 @@ export interface FeedGroupObjects_objects_Link {
   external_url: string | null;
   content: string | null;
   updated_at: string;
-  user: FeedGroupObjects_objects_Link_user | null;
+  user: FeedGroupObjects_objects_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -310,7 +310,7 @@ export interface FeedGroupObjects_objects_Text {
   content: string;
   raw: string;
   updated_at: string;
-  user: FeedGroupObjects_objects_Text_user | null;
+  user: FeedGroupObjects_objects_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */

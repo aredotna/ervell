@@ -18,7 +18,7 @@ export interface ExpandedBlockRow_Channel {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ExpandedBlockRow_Channel_user | null;
+  user: ExpandedBlockRow_Channel_user;
 }
 
 export interface ExpandedBlockRow_Attachment_counts {
@@ -47,7 +47,7 @@ export interface ExpandedBlockRow_Attachment {
   image_url: string | null;
   source: ExpandedBlockRow_Attachment_source | null;
   title: string;
-  user: ExpandedBlockRow_Attachment_user | null;
+  user: ExpandedBlockRow_Attachment_user;
 }
 
 export interface ExpandedBlockRow_Embed_counts {
@@ -76,7 +76,7 @@ export interface ExpandedBlockRow_Embed {
   image_url: string | null;
   source: ExpandedBlockRow_Embed_source | null;
   title: string;
-  user: ExpandedBlockRow_Embed_user | null;
+  user: ExpandedBlockRow_Embed_user;
 }
 
 export interface ExpandedBlockRow_Image_counts {
@@ -104,7 +104,7 @@ export interface ExpandedBlockRow_Image {
   image_url: string | null;
   source: ExpandedBlockRow_Image_source | null;
   title: string;
-  user: ExpandedBlockRow_Image_user | null;
+  user: ExpandedBlockRow_Image_user;
 }
 
 export interface ExpandedBlockRow_Link_counts {
@@ -133,7 +133,7 @@ export interface ExpandedBlockRow_Link {
   content: string | null;
   source: ExpandedBlockRow_Link_source | null;
   title: string;
-  user: ExpandedBlockRow_Link_user | null;
+  user: ExpandedBlockRow_Link_user;
 }
 
 export interface ExpandedBlockRow_PendingBlock_counts {
@@ -153,7 +153,7 @@ export interface ExpandedBlockRow_PendingBlock {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ExpandedBlockRow_PendingBlock_user | null;
+  user: ExpandedBlockRow_PendingBlock_user;
 }
 
 export interface ExpandedBlockRow_Text_counts {
@@ -175,7 +175,7 @@ export interface ExpandedBlockRow_Text {
   content: string;
   html: string;
   title: string;
-  user: ExpandedBlockRow_Text_user | null;
+  user: ExpandedBlockRow_Text_user;
 }
 
 export type ExpandedBlockRow = ExpandedBlockRow_Channel | ExpandedBlockRow_Attachment | ExpandedBlockRow_Embed | ExpandedBlockRow_Image | ExpandedBlockRow_Link | ExpandedBlockRow_PendingBlock | ExpandedBlockRow_Text;

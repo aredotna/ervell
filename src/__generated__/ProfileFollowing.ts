@@ -82,7 +82,7 @@ export interface ProfileFollowing_following_Channel {
   owner: ProfileFollowing_following_Channel_owner;
   label: string;
   title: string;
-  user: ProfileFollowing_following_Channel_user | null;
+  user: ProfileFollowing_following_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */

@@ -62,7 +62,7 @@ export interface updateChannelMutation_update_channel_channel {
   visibility: string;
   content_flag: string | null;
   can: updateChannelMutation_update_channel_channel_can;
-  user: updateChannelMutation_update_channel_channel_user | null;
+  user: updateChannelMutation_update_channel_channel_user;
   owner: updateChannelMutation_update_channel_channel_owner;
   is_pending_transfer: boolean;
   transfer_request: updateChannelMutation_update_channel_channel_transfer_request | null;

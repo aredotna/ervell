@@ -42,7 +42,7 @@ export interface ProfileTable_searches_advanced_results_Attachment {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTable_searches_advanced_results_Attachment_user | null;
+  user: ProfileTable_searches_advanced_results_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -78,7 +78,7 @@ export interface ProfileTable_searches_advanced_results_Channel {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTable_searches_advanced_results_Channel_user | null;
+  user: ProfileTable_searches_advanced_results_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -117,7 +117,7 @@ export interface ProfileTable_searches_advanced_results_Embed {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTable_searches_advanced_results_Embed_user | null;
+  user: ProfileTable_searches_advanced_results_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -158,7 +158,7 @@ export interface ProfileTable_searches_advanced_results_Image {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTable_searches_advanced_results_Image_user | null;
+  user: ProfileTable_searches_advanced_results_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -202,7 +202,7 @@ export interface ProfileTable_searches_advanced_results_Link {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTable_searches_advanced_results_Link_user | null;
+  user: ProfileTable_searches_advanced_results_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -236,7 +236,7 @@ export interface ProfileTable_searches_advanced_results_PendingBlock {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTable_searches_advanced_results_PendingBlock_user | null;
+  user: ProfileTable_searches_advanced_results_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -273,7 +273,7 @@ export interface ProfileTable_searches_advanced_results_Text {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTable_searches_advanced_results_Text_user | null;
+  user: ProfileTable_searches_advanced_results_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */

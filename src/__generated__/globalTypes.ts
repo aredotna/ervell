@@ -23,7 +23,7 @@ export enum BannerEnum {
 }
 
 /**
- * Possible connectables for a new connection
+ * Possible connectables for a connection
  */
 export enum BaseConnectableTypeEnum {
   BLOCK = "BLOCK",
@@ -172,6 +172,14 @@ export enum ExtensionsEnum {
   XLS = "XLS",
   XLSX = "XLSX",
   XLT = "XLT",
+}
+
+/**
+ * Types of feeds
+ */
+export enum FeedType {
+  NOTIFICATION = "NOTIFICATION",
+  USER = "USER",
 }
 
 /**

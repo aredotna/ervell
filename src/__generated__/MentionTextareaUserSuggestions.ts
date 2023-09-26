@@ -9,7 +9,7 @@
 
 export interface MentionTextareaUserSuggestions_suggestions_users_User {
   __typename: "User";
-  id: string | null;
+  id: string;
   label: string;
 }
 

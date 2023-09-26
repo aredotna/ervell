@@ -43,7 +43,7 @@ export interface AdvancedSearch_searches_advanced_results_Attachment {
   href: string;
   updated_at: string;
   title: string;
-  user: AdvancedSearch_searches_advanced_results_Attachment_user | null;
+  user: AdvancedSearch_searches_advanced_results_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -106,7 +106,7 @@ export interface AdvancedSearch_searches_advanced_results_Channel {
   href: string;
   updated_at: string;
   title: string;
-  user: AdvancedSearch_searches_advanced_results_Channel_user | null;
+  user: AdvancedSearch_searches_advanced_results_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -153,7 +153,7 @@ export interface AdvancedSearch_searches_advanced_results_Embed {
   href: string;
   updated_at: string;
   title: string;
-  user: AdvancedSearch_searches_advanced_results_Embed_user | null;
+  user: AdvancedSearch_searches_advanced_results_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -206,7 +206,7 @@ export interface AdvancedSearch_searches_advanced_results_Image {
   href: string;
   updated_at: string;
   title: string;
-  user: AdvancedSearch_searches_advanced_results_Image_user | null;
+  user: AdvancedSearch_searches_advanced_results_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -255,7 +255,7 @@ export interface AdvancedSearch_searches_advanced_results_Link {
   href: string;
   updated_at: string;
   title: string;
-  user: AdvancedSearch_searches_advanced_results_Link_user | null;
+  user: AdvancedSearch_searches_advanced_results_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -305,7 +305,7 @@ export interface AdvancedSearch_searches_advanced_results_PendingBlock {
   href: string;
   updated_at: string;
   title: string;
-  user: AdvancedSearch_searches_advanced_results_PendingBlock_user | null;
+  user: AdvancedSearch_searches_advanced_results_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -348,7 +348,7 @@ export interface AdvancedSearch_searches_advanced_results_Text {
   href: string;
   updated_at: string;
   title: string;
-  user: AdvancedSearch_searches_advanced_results_Text_user | null;
+  user: AdvancedSearch_searches_advanced_results_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */

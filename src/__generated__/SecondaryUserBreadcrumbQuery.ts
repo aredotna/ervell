@@ -11,7 +11,7 @@ export interface SecondaryUserBreadcrumbQuery_user {
   __typename: "User";
   id: number;
   name: string;
-  slug: string | null;
+  slug: string;
   href: string;
 }
 

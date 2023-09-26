@@ -9,7 +9,7 @@
 
 export interface OnboardingUserInfoQuery_me {
   __typename: "Me";
-  slug: string | null;
+  slug: string;
 }
 
 export interface OnboardingUserInfoQuery {

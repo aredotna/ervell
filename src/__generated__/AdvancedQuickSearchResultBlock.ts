@@ -23,7 +23,7 @@ export interface AdvancedQuickSearchResultBlock_Attachment {
   id: number;
   title: string;
   href: string;
-  user: AdvancedQuickSearchResultBlock_Attachment_user | null;
+  user: AdvancedQuickSearchResultBlock_Attachment_user;
   src: string | null;
 }
 
@@ -38,7 +38,7 @@ export interface AdvancedQuickSearchResultBlock_Channel {
   id: number;
   title: string;
   href: string;
-  user: AdvancedQuickSearchResultBlock_Channel_user | null;
+  user: AdvancedQuickSearchResultBlock_Channel_user;
 }
 
 export interface AdvancedQuickSearchResultBlock_Embed_user {
@@ -52,7 +52,7 @@ export interface AdvancedQuickSearchResultBlock_Embed {
   id: number;
   title: string;
   href: string;
-  user: AdvancedQuickSearchResultBlock_Embed_user | null;
+  user: AdvancedQuickSearchResultBlock_Embed_user;
   src: string | null;
 }
 
@@ -67,7 +67,7 @@ export interface AdvancedQuickSearchResultBlock_Image {
   id: number;
   title: string;
   href: string;
-  user: AdvancedQuickSearchResultBlock_Image_user | null;
+  user: AdvancedQuickSearchResultBlock_Image_user;
   src: string | null;
 }
 
@@ -82,7 +82,7 @@ export interface AdvancedQuickSearchResultBlock_Link {
   id: number;
   title: string;
   href: string;
-  user: AdvancedQuickSearchResultBlock_Link_user | null;
+  user: AdvancedQuickSearchResultBlock_Link_user;
   src: string | null;
 }
 
@@ -97,7 +97,7 @@ export interface AdvancedQuickSearchResultBlock_Text {
   id: number;
   title: string;
   href: string;
-  user: AdvancedQuickSearchResultBlock_Text_user | null;
+  user: AdvancedQuickSearchResultBlock_Text_user;
   content: string;
 }
 

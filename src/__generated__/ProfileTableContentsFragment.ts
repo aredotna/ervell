@@ -30,7 +30,7 @@ export interface ProfileTableContentsFragment_contents_PendingBlock {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTableContentsFragment_contents_PendingBlock_user | null;
+  user: ProfileTableContentsFragment_contents_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -68,7 +68,7 @@ export interface ProfileTableContentsFragment_contents_Attachment {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTableContentsFragment_contents_Attachment_user | null;
+  user: ProfileTableContentsFragment_contents_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -109,7 +109,7 @@ export interface ProfileTableContentsFragment_contents_Embed {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTableContentsFragment_contents_Embed_user | null;
+  user: ProfileTableContentsFragment_contents_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -150,7 +150,7 @@ export interface ProfileTableContentsFragment_contents_Image {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTableContentsFragment_contents_Image_user | null;
+  user: ProfileTableContentsFragment_contents_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -194,7 +194,7 @@ export interface ProfileTableContentsFragment_contents_Link {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTableContentsFragment_contents_Link_user | null;
+  user: ProfileTableContentsFragment_contents_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -233,7 +233,7 @@ export interface ProfileTableContentsFragment_contents_Text {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTableContentsFragment_contents_Text_user | null;
+  user: ProfileTableContentsFragment_contents_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -273,7 +273,7 @@ export interface ProfileTableContentsFragment_contents_Channel {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ProfileTableContentsFragment_contents_Channel_user | null;
+  user: ProfileTableContentsFragment_contents_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */

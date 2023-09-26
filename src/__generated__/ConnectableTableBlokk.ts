@@ -30,7 +30,7 @@ export interface ConnectableTableBlokk_blokk_PendingBlock {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ConnectableTableBlokk_blokk_PendingBlock_user | null;
+  user: ConnectableTableBlokk_blokk_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -68,7 +68,7 @@ export interface ConnectableTableBlokk_blokk_Attachment {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ConnectableTableBlokk_blokk_Attachment_user | null;
+  user: ConnectableTableBlokk_blokk_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -109,7 +109,7 @@ export interface ConnectableTableBlokk_blokk_Embed {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ConnectableTableBlokk_blokk_Embed_user | null;
+  user: ConnectableTableBlokk_blokk_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -150,7 +150,7 @@ export interface ConnectableTableBlokk_blokk_Image {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ConnectableTableBlokk_blokk_Image_user | null;
+  user: ConnectableTableBlokk_blokk_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -194,7 +194,7 @@ export interface ConnectableTableBlokk_blokk_Link {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ConnectableTableBlokk_blokk_Link_user | null;
+  user: ConnectableTableBlokk_blokk_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -233,7 +233,7 @@ export interface ConnectableTableBlokk_blokk_Text {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ConnectableTableBlokk_blokk_Text_user | null;
+  user: ConnectableTableBlokk_blokk_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -273,7 +273,7 @@ export interface ConnectableTableBlokk_blokk_Channel {
   created_at: string;
   updated_at: string;
   title: string;
-  user: ConnectableTableBlokk_blokk_Channel_user | null;
+  user: ConnectableTableBlokk_blokk_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */

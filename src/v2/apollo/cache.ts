@@ -152,6 +152,26 @@ export function getCache({
         },
       },
 
+      FeedConnection: {
+        merge: true,
+        keyFields: [],
+        fields: {
+          groups: {
+            keyArgs: false,
+            merge(existing, incoming) {
+              const newGroups = [...existing, ...incoming]
+
+              // Filter out any undefined groups
+              const filteredGroups = newGroups.filter(
+                group => group !== undefined
+              )
+
+              return filteredGroups
+            },
+          },
+        },
+      },
+
       Searches: {
         merge: true,
         keyFields: [],

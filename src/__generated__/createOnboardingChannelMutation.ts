@@ -136,7 +136,7 @@ export interface createOnboardingChannelMutation_create_channel_channel {
   can: createOnboardingChannelMutation_create_channel_channel_can;
   is_muted: boolean;
   info: string | null;
-  user: createOnboardingChannelMutation_create_channel_channel_user | null;
+  user: createOnboardingChannelMutation_create_channel_channel_user;
   collaborators: createOnboardingChannelMutation_create_channel_channel_collaborators[];
   connected_to_channels: createOnboardingChannelMutation_create_channel_channel_connected_to_channels[];
   share: createOnboardingChannelMutation_create_channel_channel_share | null;

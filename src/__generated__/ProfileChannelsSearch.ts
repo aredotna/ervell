@@ -63,7 +63,7 @@ export interface ProfileChannelsSearch_identity_identifiable_Group_channels_blok
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Attachment_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -111,7 +111,7 @@ export interface ProfileChannelsSearch_identity_identifiable_Group_channels_blok
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Embed_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -164,7 +164,7 @@ export interface ProfileChannelsSearch_identity_identifiable_Group_channels_blok
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Image_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -213,7 +213,7 @@ export interface ProfileChannelsSearch_identity_identifiable_Group_channels_blok
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Link_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -263,7 +263,7 @@ export interface ProfileChannelsSearch_identity_identifiable_Group_channels_blok
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_PendingBlock_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -306,7 +306,7 @@ export interface ProfileChannelsSearch_identity_identifiable_Group_channels_blok
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Text_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -366,7 +366,7 @@ export interface ProfileChannelsSearch_identity_identifiable_Group_channels_blok
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Channel_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -470,7 +470,7 @@ export interface ProfileChannelsSearch_identity_identifiable_User_channels_Chann
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Attachment_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -518,7 +518,7 @@ export interface ProfileChannelsSearch_identity_identifiable_User_channels_Chann
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Embed_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -571,7 +571,7 @@ export interface ProfileChannelsSearch_identity_identifiable_User_channels_Chann
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Image_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -620,7 +620,7 @@ export interface ProfileChannelsSearch_identity_identifiable_User_channels_Chann
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Link_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -670,7 +670,7 @@ export interface ProfileChannelsSearch_identity_identifiable_User_channels_Chann
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_PendingBlock_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -713,7 +713,7 @@ export interface ProfileChannelsSearch_identity_identifiable_User_channels_Chann
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Text_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -773,7 +773,7 @@ export interface ProfileChannelsSearch_identity_identifiable_User_channels_Chann
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Channel_user | null;
+  user: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */

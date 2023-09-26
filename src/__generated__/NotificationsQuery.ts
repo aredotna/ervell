@@ -208,7 +208,7 @@ export interface NotificationsQuery_me_feed_notifications {
   owner: NotificationsQuery_me_feed_notifications_owner;
   action: string;
   item: NotificationsQuery_me_feed_notifications_item;
-  item_title: string;
+  item_title: string | null;
   connector: string | null;
   target: NotificationsQuery_me_feed_notifications_target | null;
   created_at: string;

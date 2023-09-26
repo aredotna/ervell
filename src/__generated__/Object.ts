@@ -51,7 +51,7 @@ export interface Object_Attachment {
   src_3x: string | null;
   file_extension: string | null;
   updated_at: string;
-  user: Object_Attachment_user | null;
+  user: Object_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -113,7 +113,7 @@ export interface Object_Channel {
   owner: Object_Channel_owner;
   label: string;
   title: string;
-  user: Object_Channel_user | null;
+  user: Object_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -160,7 +160,7 @@ export interface Object_Embed {
   src_2x: string | null;
   src_3x: string | null;
   updated_at: string;
-  user: Object_Embed_user | null;
+  user: Object_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -215,7 +215,7 @@ export interface Object_Image {
   src_3x: string | null;
   original_dimensions: Object_Image_original_dimensions | null;
   updated_at: string;
-  user: Object_Image_user | null;
+  user: Object_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -263,7 +263,7 @@ export interface Object_Link {
   external_url: string | null;
   content: string | null;
   updated_at: string;
-  user: Object_Link_user | null;
+  user: Object_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -310,7 +310,7 @@ export interface Object_Text {
   content: string;
   raw: string;
   updated_at: string;
-  user: Object_Text_user | null;
+  user: Object_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */

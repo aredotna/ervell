@@ -135,7 +135,7 @@ export interface ChannelFollowersPage_channel {
   can: ChannelFollowersPage_channel_can;
   is_muted: boolean;
   info: string | null;
-  user: ChannelFollowersPage_channel_user | null;
+  user: ChannelFollowersPage_channel_user;
   collaborators: ChannelFollowersPage_channel_collaborators[];
   connected_to_channels: ChannelFollowersPage_channel_connected_to_channels[];
   share: ChannelFollowersPage_channel_share | null;
