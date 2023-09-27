@@ -14,6 +14,12 @@ cache = require '../../lib/cache'
     .set 'Content-Type', 'text/plain'
     .send switch NODE_ENV
       when 'production'
-        'User-agent: *'
+        '''
+        User-agent: *
+        Allow: /
+
+        User-agent: GPTBot
+        Disallow: /
+        '''
       else
         'User-agent: *\nNoindex: /'
