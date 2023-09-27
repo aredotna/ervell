@@ -108,6 +108,17 @@ const ReportPerk: React.FC<PerkProps> = () => {
   )
 }
 
+const SanderPerk: React.FC<PerkProps> = () => {
+  return (
+    <Text boldLinks>
+      Try out the newest Are.na client{' '}
+      <Text display="inline" color="state.premium">
+        <a href="https://sander.are.na">sander.are.na</a>
+      </Text>
+    </Text>
+  )
+}
+
 const PremiumDiscordPerk: React.FC<PerkProps> = ({ isSupporter }) => {
   const url = isSupporter
     ? 'https://discord.gg/WZTGRc4C5P'
@@ -138,6 +149,7 @@ const Perks: React.FC<PerksProps> = ({
 }) => {
   const premiumPerks = [PremiumDiscordPerk, StorePerk]
   const supporterPerks = [
+    SanderPerk,
     PremiumDiscordPerk,
     StorePerk,
     ReportPerk,
@@ -148,6 +160,7 @@ const Perks: React.FC<PerksProps> = ({
 
   if (isInvestor) {
     premiumPerks.push(ReportPerk)
+    premiumPerks.push(SanderPerk)
   }
 
   if (isPremium && hasHadRecentBirthday) {

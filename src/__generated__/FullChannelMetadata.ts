@@ -29,7 +29,7 @@ export interface FullChannelMetadata_channel {
   updated_at_timestamp: string;
   title: string;
   description: string | null;
-  user: FullChannelMetadata_channel_user | null;
+  user: FullChannelMetadata_channel_user;
   id: number;
   can: FullChannelMetadata_channel_can;
   shareable_href: string;

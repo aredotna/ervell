@@ -45,7 +45,7 @@ export interface ProfileContents_User_contents_Attachment {
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContents_User_contents_Attachment_user | null;
+  user: ProfileContents_User_contents_Attachment_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -93,7 +93,7 @@ export interface ProfileContents_User_contents_Embed {
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContents_User_contents_Embed_user | null;
+  user: ProfileContents_User_contents_Embed_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -146,7 +146,7 @@ export interface ProfileContents_User_contents_Image {
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContents_User_contents_Image_user | null;
+  user: ProfileContents_User_contents_Image_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -195,7 +195,7 @@ export interface ProfileContents_User_contents_Link {
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContents_User_contents_Link_user | null;
+  user: ProfileContents_User_contents_Link_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -245,7 +245,7 @@ export interface ProfileContents_User_contents_PendingBlock {
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContents_User_contents_PendingBlock_user | null;
+  user: ProfileContents_User_contents_PendingBlock_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -288,7 +288,7 @@ export interface ProfileContents_User_contents_Text {
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContents_User_contents_Text_user | null;
+  user: ProfileContents_User_contents_Text_user;
   /**
    * Returns the outer channel if we are inside of one
    */
@@ -348,7 +348,7 @@ export interface ProfileContents_User_contents_Channel {
   href: string;
   updated_at: string;
   title: string;
-  user: ProfileContents_User_contents_Channel_user | null;
+  user: ProfileContents_User_contents_Channel_user;
   /**
    * Returns the outer channel if we are inside of one
    */

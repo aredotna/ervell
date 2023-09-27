@@ -61,7 +61,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_Channel {
   visibility: string;
   owner: AdvancedQuickSearch_searches_advanced_results_Channel_owner;
   title: string;
-  user: AdvancedQuickSearch_searches_advanced_results_Channel_user | null;
+  user: AdvancedQuickSearch_searches_advanced_results_Channel_user;
 }
 
 export interface AdvancedQuickSearch_searches_advanced_results_Attachment_user {
@@ -75,7 +75,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_Attachment {
   id: number;
   title: string;
   href: string;
-  user: AdvancedQuickSearch_searches_advanced_results_Attachment_user | null;
+  user: AdvancedQuickSearch_searches_advanced_results_Attachment_user;
   src: string | null;
 }
 
@@ -90,7 +90,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_PendingBlock {
   id: number;
   title: string;
   href: string;
-  user: AdvancedQuickSearch_searches_advanced_results_PendingBlock_user | null;
+  user: AdvancedQuickSearch_searches_advanced_results_PendingBlock_user;
 }
 
 export interface AdvancedQuickSearch_searches_advanced_results_Embed_user {
@@ -104,7 +104,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_Embed {
   id: number;
   title: string;
   href: string;
-  user: AdvancedQuickSearch_searches_advanced_results_Embed_user | null;
+  user: AdvancedQuickSearch_searches_advanced_results_Embed_user;
   src: string | null;
 }
 
@@ -119,7 +119,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_Image {
   id: number;
   title: string;
   href: string;
-  user: AdvancedQuickSearch_searches_advanced_results_Image_user | null;
+  user: AdvancedQuickSearch_searches_advanced_results_Image_user;
   src: string | null;
 }
 
@@ -134,7 +134,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_Link {
   id: number;
   title: string;
   href: string;
-  user: AdvancedQuickSearch_searches_advanced_results_Link_user | null;
+  user: AdvancedQuickSearch_searches_advanced_results_Link_user;
   src: string | null;
 }
 
@@ -149,7 +149,7 @@ export interface AdvancedQuickSearch_searches_advanced_results_Text {
   id: number;
   title: string;
   href: string;
-  user: AdvancedQuickSearch_searches_advanced_results_Text_user | null;
+  user: AdvancedQuickSearch_searches_advanced_results_Text_user;
   content: string;
 }
 

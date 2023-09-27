@@ -60,7 +60,7 @@ export interface ManageChannel {
   visibility: string;
   content_flag: string | null;
   can: ManageChannel_can;
-  user: ManageChannel_user | null;
+  user: ManageChannel_user;
   owner: ManageChannel_owner;
   is_pending_transfer: boolean;
   transfer_request: ManageChannel_transfer_request | null;

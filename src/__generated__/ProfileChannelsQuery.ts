@@ -96,7 +96,7 @@ export interface ProfileChannelsQuery_identity_identifiable_User {
   id: number;
   name: string;
   counts: ProfileChannelsQuery_identity_identifiable_User_counts;
-  channels: ProfileChannelsQuery_identity_identifiable_User_channels[] | null;
+  channels: ProfileChannelsQuery_identity_identifiable_User_channels[];
 }
 
 export type ProfileChannelsQuery_identity_identifiable = ProfileChannelsQuery_identity_identifiable_Group | ProfileChannelsQuery_identity_identifiable_User;

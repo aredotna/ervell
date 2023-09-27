@@ -31,7 +31,7 @@ export interface ModalFullBlock_block_Channel {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: ModalFullBlock_block_Channel_user | null;
+  user: ModalFullBlock_block_Channel_user;
   source: ModalFullBlock_block_Channel_source | null;
   shareable_href: string;
   shareable_title: string;
@@ -72,7 +72,7 @@ export interface ModalFullBlock_block_Image {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: ModalFullBlock_block_Image_user | null;
+  user: ModalFullBlock_block_Image_user;
   source: ModalFullBlock_block_Image_source | null;
   shareable_href: string;
   shareable_title: string;
@@ -124,7 +124,7 @@ export interface ModalFullBlock_block_Text {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: ModalFullBlock_block_Text_user | null;
+  user: ModalFullBlock_block_Text_user;
   source: ModalFullBlock_block_Text_source | null;
   shareable_href: string;
   shareable_title: string;
@@ -175,7 +175,7 @@ export interface ModalFullBlock_block_Link {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: ModalFullBlock_block_Link_user | null;
+  user: ModalFullBlock_block_Link_user;
   source: ModalFullBlock_block_Link_source | null;
   shareable_href: string;
   shareable_title: string;
@@ -222,7 +222,7 @@ export interface ModalFullBlock_block_Attachment {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: ModalFullBlock_block_Attachment_user | null;
+  user: ModalFullBlock_block_Attachment_user;
   source: ModalFullBlock_block_Attachment_source | null;
   shareable_href: string;
   shareable_title: string;
@@ -271,7 +271,7 @@ export interface ModalFullBlock_block_Embed {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: ModalFullBlock_block_Embed_user | null;
+  user: ModalFullBlock_block_Embed_user;
   source: ModalFullBlock_block_Embed_source | null;
   shareable_href: string;
   shareable_title: string;
@@ -316,7 +316,7 @@ export interface ModalFullBlock_block_PendingBlock {
   updated_at: string;
   updated_at_timestamp: string;
   description: string | null;
-  user: ModalFullBlock_block_PendingBlock_user | null;
+  user: ModalFullBlock_block_PendingBlock_user;
   source: ModalFullBlock_block_PendingBlock_source | null;
   shareable_href: string;
   shareable_title: string;

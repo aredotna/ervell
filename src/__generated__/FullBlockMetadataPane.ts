@@ -29,7 +29,7 @@ export interface FullBlockMetadataPane_Channel {
   updated_at_timestamp: string;
   title: string;
   description: string | null;
-  user: FullBlockMetadataPane_Channel_user | null;
+  user: FullBlockMetadataPane_Channel_user;
   source: FullBlockMetadataPane_Channel_source | null;
   shareable_href: string;
   shareable_title: string;
@@ -69,7 +69,7 @@ export interface FullBlockMetadataPane_Attachment {
   updated_at_timestamp: string;
   title: string;
   description: string | null;
-  user: FullBlockMetadataPane_Attachment_user | null;
+  user: FullBlockMetadataPane_Attachment_user;
   can: FullBlockMetadataPane_Attachment_can;
   source: FullBlockMetadataPane_Attachment_source | null;
   shareable_href: string;
@@ -110,7 +110,7 @@ export interface FullBlockMetadataPane_Image {
   updated_at_timestamp: string;
   title: string;
   description: string | null;
-  user: FullBlockMetadataPane_Image_user | null;
+  user: FullBlockMetadataPane_Image_user;
   can: FullBlockMetadataPane_Image_can;
   source: FullBlockMetadataPane_Image_source | null;
   shareable_href: string;
@@ -157,7 +157,7 @@ export interface FullBlockMetadataPane_Text {
   updated_at_timestamp: string;
   title: string;
   description: string | null;
-  user: FullBlockMetadataPane_Text_user | null;
+  user: FullBlockMetadataPane_Text_user;
   can: FullBlockMetadataPane_Text_can;
   source: FullBlockMetadataPane_Text_source | null;
   shareable_href: string;

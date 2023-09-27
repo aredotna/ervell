@@ -3,11 +3,16 @@ import { gql } from '@apollo/client'
 import feedGroupFragment from 'v2/components/FeedGroups/fragments/group'
 
 export default gql`
-  query FeedQuery($offset: Int, $limit: Int, $type: String) {
+  query FeedConnectionQuery($start: String, $limit: Int, $type: FeedType) {
     me {
       id
       __typename
-      feed(offset: $offset, limit: $limit, type: $type) {
+      feed: feed_connection(limit: $limit, type: $type, start: $start) {
+        page_info {
+          next_cursor
+          has_next_page
+        }
+
         groups {
           ...FeedGroup
         }

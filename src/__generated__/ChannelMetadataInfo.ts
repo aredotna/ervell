@@ -32,5 +32,5 @@ export interface ChannelMetadataInfo {
   info: string | null;
   counts: ChannelMetadataInfo_counts;
   can: ChannelMetadataInfo_can;
-  user: ChannelMetadataInfo_user | null;
+  user: ChannelMetadataInfo_user;
 }

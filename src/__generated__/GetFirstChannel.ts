@@ -14,7 +14,7 @@ export interface GetFirstChannel_me_channels {
 
 export interface GetFirstChannel_me {
   __typename: "Me";
-  channels: GetFirstChannel_me_channels[] | null;
+  channels: GetFirstChannel_me_channels[];
 }
 
 export interface GetFirstChannel {

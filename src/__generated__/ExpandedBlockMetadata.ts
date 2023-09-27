@@ -31,7 +31,7 @@ export interface ExpandedBlockMetadata_block_Channel {
   title: string;
   description: string | null;
   href: string;
-  user: ExpandedBlockMetadata_block_Channel_user | null;
+  user: ExpandedBlockMetadata_block_Channel_user;
   source: ExpandedBlockMetadata_block_Channel_source | null;
   shareable_href: string;
   shareable_title: string;
@@ -72,7 +72,7 @@ export interface ExpandedBlockMetadata_block_Attachment {
   title: string;
   description: string | null;
   href: string;
-  user: ExpandedBlockMetadata_block_Attachment_user | null;
+  user: ExpandedBlockMetadata_block_Attachment_user;
   can: ExpandedBlockMetadata_block_Attachment_can;
   source: ExpandedBlockMetadata_block_Attachment_source | null;
   shareable_href: string;
@@ -114,7 +114,7 @@ export interface ExpandedBlockMetadata_block_Image {
   title: string;
   description: string | null;
   href: string;
-  user: ExpandedBlockMetadata_block_Image_user | null;
+  user: ExpandedBlockMetadata_block_Image_user;
   can: ExpandedBlockMetadata_block_Image_can;
   thumb_url: string | null;
   image_url: string | null;
@@ -165,7 +165,7 @@ export interface ExpandedBlockMetadata_block_Text {
   title: string;
   description: string | null;
   href: string;
-  user: ExpandedBlockMetadata_block_Text_user | null;
+  user: ExpandedBlockMetadata_block_Text_user;
   can: ExpandedBlockMetadata_block_Text_can;
   content: string;
   source: ExpandedBlockMetadata_block_Text_source | null;

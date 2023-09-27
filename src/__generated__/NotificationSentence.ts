@@ -208,7 +208,7 @@ export interface NotificationSentence {
   owner: NotificationSentence_owner;
   action: string;
   item: NotificationSentence_item;
-  item_title: string;
+  item_title: string | null;
   connector: string | null;
   target: NotificationSentence_target | null;
   created_at: string;
