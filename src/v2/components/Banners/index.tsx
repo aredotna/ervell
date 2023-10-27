@@ -252,6 +252,22 @@ export const PreviouslyPremium = props => (
   </Banner>
 )
 
+export const TestSander = props => (
+  <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
+    <Box>
+      Sander (our new desktop client) is ready to test. Try it out and let us
+      know what you think.
+    </Box>
+    <ButtonLink
+      color="state.premium"
+      href="https://sander.are.na"
+      target="_blank"
+    >
+      Try Sander
+    </ButtonLink>
+  </Banner>
+)
+
 interface LoggedOutExploreBlockProps {
   isLoggedIn: boolean
 }
@@ -326,4 +342,5 @@ export default {
   LOGGED_OUT_CHANNEL: LoggedOutChannel,
   PREVIOUSLY_PREMIUM: PreviouslyPremium,
   PAST_DUE: PastDue,
+  TEST_SANDER: TestSander,
 }

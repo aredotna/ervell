@@ -158,7 +158,7 @@ module.exports = (app) ->
     .use ipFilterMiddleware
     .use express.static(path.resolve __dirname, '../../public')
     .use favicon(path.resolve __dirname, '../../public/images/favicon.ico')
-    .use logger('dev')
+    .use logger('combined')
     .use bodyParser.json()
     .use multipart()
     .use bodyParser.urlencoded(extended: true)
