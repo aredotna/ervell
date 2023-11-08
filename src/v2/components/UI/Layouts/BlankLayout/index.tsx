@@ -29,6 +29,26 @@ export const BlankLayout: React.FC = ({ children }) => {
     analytics.trackPageView()
   }, [location.pathname])
 
+  // Block unauthorized extensions. This is a rather coarse change,
+  // but we could allowlist hosts if necessary.
+  useEffect(() => {
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        mutation.addedNodes.forEach(node => {
+          if (node instanceof HTMLElement && node.shadowRoot !== null) {
+            node.parentNode.removeChild(node)
+          }
+        })
+      })
+    })
+
+    observer.observe(document, { childList: true, subtree: true })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
   return (
     <PageContextProvider>
       <AdvancedSearchContextProvider>
