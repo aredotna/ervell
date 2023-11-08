@@ -139,11 +139,6 @@ export default class Page extends PureComponent {
             type="module"
             integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"
           />
-          <style>
-            {atob(
-              'W2lkXj1cNjNcNkZcNzNcNkRcNkZcNzNde2Rpc3BsYXk6bm9uZSFpbXBvcnRhbnQ7fQ=='
-            )}
-          </style>
         </body>
       </html>
     )
