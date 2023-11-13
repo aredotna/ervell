@@ -53,13 +53,6 @@ const PricingPage: React.FC = () => {
         <PricingTable />
 
         <CTAContainer>
-          <Box display="flex" alignItems="center" justifyContent="center">
-            <Icons name="QuestionCircle" size="1em" mr={4} color="gray.bold" />
-            <Text f={4} color="gray.bold" textAlign="center">
-              Upcoming changes on January 15th, 2023
-            </Text>
-          </Box>
-
           <Text f={4} color="gray.bold" textAlign="center">
             Read our{' '}
             <strong>
