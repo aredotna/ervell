@@ -35,7 +35,7 @@ export const BlankLayout: React.FC = ({ children }) => {
     const observer = new MutationObserver(mutations => {
       mutations.forEach(mutation => {
         mutation.addedNodes.forEach(node => {
-          if (node instanceof HTMLElement && node.shadowRoot !== null) {
+          if (node instanceof HTMLElement && isBlocked(node)) {
             node.parentNode.removeChild(node)
           }
         })
@@ -66,3 +66,11 @@ export const BlankLayout: React.FC = ({ children }) => {
 }
 
 export default BlankLayout
+
+const isBlocked = (node: HTMLElement) => {
+  return (
+    node.shadowRoot !== null ||
+    // Infer presence of closed shadow root
+    node.innerHTML === '<span></span>'
+  )
+}
