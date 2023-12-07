@@ -53,6 +53,18 @@ const AnnualPerk2023: React.FC<PerkProps> = () => {
   )
 }
 
+const AnnualPerk2024: React.FC<PerkProps> = () => {
+  const url = 'https://store.are.na/products/are-na-annual-2024'
+  return (
+    <Text boldLinks>
+      <Text color="state.premium" display="inline">
+        <a href={url}>Free 2024 Are.na Annual </a>
+      </Text>
+      (use code TRACINGS2024)
+    </Text>
+  )
+}
+
 const StickerPerk: React.FC<PerkProps> = () => {
   const url =
     'https://store.are.na/collections/frontpage/products/sticker-sheet-v2'
@@ -155,6 +167,7 @@ const Perks: React.FC<PerksProps> = ({
     ReportPerk,
     AnnualPerk2022,
     AnnualPerk2023,
+    AnnualPerk2024,
     StickerPerk,
   ]
 
