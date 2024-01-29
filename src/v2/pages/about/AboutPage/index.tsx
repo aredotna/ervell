@@ -5,6 +5,7 @@ import {
   ScrollingProvider,
   Section,
 } from 'v2/util/react-scroll-section'
+import sharify from 'sharify'
 
 import Box from 'v2/components/UI/Box'
 import BlankLayout from 'v2/components/UI/Layouts/BlankLayout'
@@ -33,6 +34,10 @@ import { useQuery } from '@apollo/client'
 import TeamInner from './components/Team'
 import BusinessModelAndPosition from './components/BusinessModelAndPosition'
 import { CommunityApiProjects } from './components/CommunityApiProjects'
+
+const {
+  data: { APP_URL },
+} = sharify
 
 const MaxBox = styled(Box).attrs({
   mx: 'auto',
@@ -218,11 +223,13 @@ const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
                 Are.na is &quot;Open Source by Default&quot; and we&apos;re
                 always excited to see people using the platform in new ways. You
                 can find a{' '}
-                <a href="https://www.are.na/are-na-commons/are-na-tools">
+                <a href={`${APP_URL}/are-na-commons/are-na-tools`}>
                   list of projects built with Are.na
                 </a>{' '}
                 and find more resources in the{' '}
-                <a href="https://www.are.na/are-na-commons/are-na-community-dev-lounge">
+                <a
+                  href={`${APP_URL}/are-na-commons/are-na-community-dev-lounge`}
+                >
                   Arena Community Dev Lounge
                 </a>
                 .
@@ -315,17 +322,15 @@ const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
           </P>
 
           <P>
-            <a href="https://are.na/community-guidelines">
-              Community Guidelines
-            </a>
+            <a href={`${APP_URL}/community-guidelines`}>Community Guidelines</a>
             <br />
-            <a href="https://are.na/terms">Terms of Use</a>
+            <a href={`${APP_URL}/terms`}>Terms of Use</a>
             <br />
-            <a href="https://are.na/privacy">Privacy Policy</a>
+            <a href={`${APP_URL}/privacy`}>Privacy Policy</a>
             <br />
-            <a href="https://www.are.na/share/bEAsbbB">Press Kit</a>
+            <a href={`${APP_URL}/share/bEAsbbB`}>Press Kit</a>
             <br />
-            <a href="https://are.na/terms#dmca">DMCA</a>
+            <a href={`${APP_URL}/terms#dmca`}>DMCA</a>
             <br />
           </P>
         </MaxBoxBottom>

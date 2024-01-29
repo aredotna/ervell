@@ -128,6 +128,7 @@ export const FlagContentModal: React.FC<FlagContentModalProps> = ({
       <Copy>
         Be mindful when reporting content, read our{' '}
         <a
+          // leaving this as a absolute link because if someone is this deep in, they should probably be at the main site
           href="https://www.are.na/community-guidelines"
           target="_blank"
           rel="noreferrer"
@@ -135,6 +136,7 @@ export const FlagContentModal: React.FC<FlagContentModalProps> = ({
           Community Guidelines
         </a>{' '}
         and{' '}
+        {/* // leaving this as a absolute link because if someone is this deep in, they should probably be at the main site */}
         <a href="https://www.are.na/terms" target="_blank" rel="noreferrer">
           Terms
         </a>{' '}

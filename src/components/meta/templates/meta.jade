@@ -29,9 +29,9 @@ meta(property="og:description" content="Are.na is a social platform for creative
 
 if title
   meta(name="twitter:title", content="Are.na / #{title}")
-  meta(name="twitter:url", content="https://www.are.na#{sd.CURRENT_PATH}")
+  meta(name="twitter:url", content="#{sd.APP_URL}#{sd.CURRENT_PATH}")
   meta(property="og:title" content="Are.na / #{title}")
-  meta(property="og:url" content="https://www.are.na#{sd.CURRENT_PATH}")
+  meta(property="og:url" content="#{sd.APP_URL}#{sd.CURRENT_PATH}")
 
 if blocks
   meta(name="twitter:card", content="summary_large_image")

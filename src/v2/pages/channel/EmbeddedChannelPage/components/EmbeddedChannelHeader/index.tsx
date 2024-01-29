@@ -39,6 +39,7 @@ export const EmbeddedChannelHeader: React.FC<Props> = ({ channel }) => {
     <Container>
       <Metadata>
         <Text color="gray.medium">
+          {/* This can stay an absolute link, just in case */}
           <a href="https://www.are.na" target="_blank">
             Are.na
           </a>
@@ -65,6 +66,7 @@ export const EmbeddedChannelHeader: React.FC<Props> = ({ channel }) => {
         </Text>
       </Metadata>
 
+      {/* This can stay an absolute link, just in case */}
       <a href="https://www.are.na/" target="_blank">
         <Icons name="ArenaMark" size="1.5em" color="gray.base" />
       </a>
