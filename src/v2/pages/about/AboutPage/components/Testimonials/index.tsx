@@ -5,6 +5,11 @@ import { Testimonials as TestimonialsType } from '__generated__/contentful/Testi
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import { PricingLogos } from 'v2/pages/about/PricingPage/components/PricingLogos'
+import sharify from 'sharify'
+
+const {
+  data: { APP_URL },
+} = sharify
 
 export const Testimonials: React.FC = () => {
   const { data } = useQuery<TestimonialsType>(TestimonialsQuery, {
@@ -28,13 +33,15 @@ export const Testimonials: React.FC = () => {
 
       <Text mt={6} boldLinks>
         Read more on{' '}
-        <a href="https://www.are.na/charles-broskoski/how-do-you-describe-are-na-at-a-party">
+        <a
+          href={`${APP_URL}/charles-broskoski/how-do-you-describe-are-na-at-a-party`}
+        >
           How do you describe Are.na at a party?
         </a>
       </Text>
       <Text mt={3} boldLinks>
         Browse the{' '}
-        <a href="https://www.are.na/are-na-team/are-na-press">press archives</a>
+        <a href={`${APP_URL}/are-na-team/are-na-press`}>press archives</a>
       </Text>
 
       <PricingLogos />

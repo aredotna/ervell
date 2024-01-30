@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import sharify from 'sharify'
 
 import constants from 'v2/styles/constants'
 
 import Box, { mixin } from 'v2/components/UI/Box'
 import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
 import { Subheadline, Description } from 'v2/pages/about/components/Text'
+
+const {
+  data: { APP_URL },
+} = sharify
 
 const CTA = styled(Box).attrs({
   py: 10,
@@ -65,7 +70,7 @@ export default class CaseStudiesCta extends Component {
           How are teachers and students using Are.na?
         </Subheadline>
         <CaseStudies>
-          <CaseStudy href="https://www.are.na/lucy-siyao-liu/orthographies">
+          <CaseStudy href={`${APP_URL}/lucy-siyao-liu/orthographies`}>
             <Thumb src="https://d2w9rnfcy7mm78.cloudfront.net/2988720/original_37979b237534ae7e6b18823f289e25df.png?1541428472" />
             <Title>Orthographies at MIT</Title>
             <Copy>
@@ -74,7 +79,9 @@ export default class CaseStudiesCta extends Component {
               drawing tools.
             </Copy>
           </CaseStudy>
-          <CaseStudy href="https://www.are.na/risd-experimental-publishing-studio-2018">
+          <CaseStudy
+            href={`${APP_URL}/risd-experimental-publishing-studio-2018`}
+          >
             <Thumb src="https://d2w9rnfcy7mm78.cloudfront.net/2988718/original_fd78f771f122eae79c72f0275a5a4525.png?1541428460" />
             <Title>RISD Experimental Publishing Studio</Title>
             <Copy>
@@ -82,7 +89,9 @@ export default class CaseStudiesCta extends Component {
               and technology with graphic design students at RISD.
             </Copy>
           </CaseStudy>
-          <CaseStudy href="https://www.are.na/edouard-urcades/core-studio-interaction-spring-2018">
+          <CaseStudy
+            href={`${APP_URL}/edouard-urcades/core-studio-interaction-spring-2018`}
+          >
             <Thumb src="https://d2w9rnfcy7mm78.cloudfront.net/2988719/original_f438cb5c09c9c541cb687f112cb591d0.png?1541428465" />
             <Title>Parsons Core Interaction Studio</Title>
             <Copy>
@@ -96,7 +105,7 @@ export default class CaseStudiesCta extends Component {
             f={5}
             mt={8}
             py={6}
-            href="https://www.are.na/arena-commons/teaching-on-are-na"
+            href={`${APP_URL}/arena-commons/teaching-on-are-na`}
           >
             See More Examples
           </Button>

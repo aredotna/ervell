@@ -12,7 +12,7 @@ import constants from 'v2/styles/constants'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
 
 const {
-  data: { ITUNES_LINK, ANDROID_LINK },
+  data: { ITUNES_LINK, ANDROID_LINK, APP_URL },
 } = sharify
 
 const Container = styled(Box)`
@@ -211,7 +211,7 @@ export const LoggedOutFooter: React.FC<LoggedOutFooterProps> = ({
                 <A href="/privacy">Privacy</A>
               </li>
               <li>
-                <A href="https://www.are.na/are-na-team/are-na-press">Press</A>
+                <A href={`${APP_URL}/are-na-team/are-na-press`}>Press</A>
               </li>
               <li>
                 <A href="https://store.are.na">Store</A>

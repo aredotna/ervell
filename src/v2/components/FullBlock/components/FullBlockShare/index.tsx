@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import sharify from 'sharify'
 
 import Box from 'v2/components/UI/Box'
 import CopyToClipboard from 'v2/components/UI/CopyToClipboard'
 import { FullBlockShare as FullBlockShareType } from '__generated__/FullBlockShare'
+
+const {
+  data: { APP_URL },
+} = sharify
 
 const Container = styled(Box)`
   > a {
@@ -19,7 +24,7 @@ export const FullBlockShare: React.FC<FullBlockShareProps> = ({
   connectable,
 }) => {
   const [mode, setMode] = useState<'resting' | 'active'>('resting')
-  const url = `https://www.are.na${connectable?.shareable_href}`
+  const url = `${APP_URL}${connectable?.shareable_href}`
   const text = connectable?.shareable_title
 
   const handleClick = e => {

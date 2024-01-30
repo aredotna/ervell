@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 import styled from 'styled-components'
+import sharify from 'sharify'
+
+const {
+  data: { APP_URL },
+} = sharify
 
 import constants from 'v2/styles/constants'
 
@@ -59,10 +64,9 @@ const Label = styled.div`
 `
 
 const HREFS = {
-  premium: 'https://www.are.na/pricing',
-  investor:
-    'https://www.are.na/blog/hello%20world/2018/03/21/announcing-crowdfunding-campaign.html',
-  supporter: 'https://www.are.na/roadmap',
+  premium: `${APP_URL}/pricing`,
+  investor: `${APP_URL}/blog/hello%20world/2018/03/21/announcing-crowdfunding-campaign.html`,
+  supporter: `${APP_URL}/roadmap`,
 }
 
 export default class ProfileBadge extends Component {
