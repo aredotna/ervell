@@ -1,9 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+import sharify from 'sharify'
 
 import Text from 'v2/components/UI/Text'
 import Box from 'v2/components/UI/Box'
 import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
+
+const {
+  data: { APP_URL },
+} = sharify
 
 const Container = styled(Box).attrs({
   mx: 'auto',
@@ -114,7 +119,7 @@ const ReportPerk: React.FC<PerkProps> = () => {
     <Text boldLinks>
       Find all past investor reports{' '}
       <Text display="inline" color="state.premium">
-        <a href="https://www.are.na/share/JlSzNKI">here</a>
+        <a href={`${APP_URL}/share/JlSzNKI`}>here</a>
       </Text>
     </Text>
   )

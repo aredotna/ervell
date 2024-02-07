@@ -1,6 +1,7 @@
 import React from 'react'
 import { Query } from '@apollo/client/react/components'
 import styled from 'styled-components'
+import sharify from 'sharify'
 
 import { CanUserConnect as CanUserConnectData } from '__generated__/CanUserConnect'
 
@@ -9,6 +10,10 @@ import canUserConnectQuery from 'v2/components/Bookmarklet/components/Blocks/com
 import { Box } from 'v2/components/UI/Box'
 import { Text } from 'v2/components/UI/Text'
 import { FilledButton } from 'v2/components/UI/Buttons'
+
+const {
+  data: { APP_URL },
+} = sharify
 
 const Button = styled(FilledButton).attrs({
   py: 6,
@@ -57,7 +62,7 @@ export const ConnectCTA: React.FC = () => {
               You’ve reached your limit of free blocks
             </Text>
 
-            <Button href="https://www.are.na/settings/billing" target="_blank">
+            <Button href={`${APP_URL}/settings/billing`} target="_blank">
               Register for Premium
             </Button>
           </Overlay>

@@ -57,6 +57,7 @@ export const StorageAccessCheck: React.FC = () => {
         <Message f={3} align="center">
           Download our{' '}
           <a
+            // this can stay an absolute link because it's extension-specific
             href="https://www.are.na/tools/bookmarklet"
             target="_blank"
             rel="noopener noreferrer"
@@ -68,6 +69,7 @@ export const StorageAccessCheck: React.FC = () => {
         {/* Some browsers block iframes from opening new tabs, so show the URL as well. */}
         <Message f={3} align="center" mt={6}>
           <a
+            // this can stay an absolute link because it's extension-specific
             href="https://www.are.na/tools/bookmarklet"
             target="_blank"
             rel="noopener noreferrer"

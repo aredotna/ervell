@@ -27,6 +27,6 @@
   "typescript.updateImportsOnFileMove.enabled": "prompt",
   "javascript.updateImportsOnFileMove.enabled": "prompt",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
 }

@@ -46,6 +46,7 @@ export default () => {
                 <ChannelContentsWithData channel={channel} />
 
                 <Box my={9} textAlign="center">
+                  {/* This can stay an absolute link, just in case */}
                   <a href="https://www.are.na">
                     <Icons name="ArenaMark" size={7} color="gray.medium" />
                   </a>
