@@ -17,6 +17,10 @@ const Logos = styled.img`
   width: 100%;
   margin: 3em auto 0;
   display: block;
+
+  @media (prefers-color-scheme: dark) {
+    filter: invert(1) brightness(1);
+  }
 `
 
 export const PricingLogos: React.FC = () => {
