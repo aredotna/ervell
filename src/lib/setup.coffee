@@ -59,7 +59,6 @@ checkSessionMiddleware = require './middleware/check_session'
 isInverted = require '../components/night_mode/middleware'
 { default: assetMiddleware } = require "./middleware/asset"
 { default: sharifyLocals } = require './middleware/sharifyLocals'
-{ default: ensureWWWMiddleware } = require './middleware/ensureWWW'
 { default: rateLimiterMiddleware } = require './middleware/rateLimit'
 
 cache = require './cache'
@@ -172,7 +171,6 @@ module.exports = (app) ->
     .use checkSessionMiddleware
     .use localsMiddleware
     .use ensureSSLMiddleware
-    .use ensureWWWMiddleware
     .use isInverted
     .use viewModeMiddleware
     .use sharifyLocals
